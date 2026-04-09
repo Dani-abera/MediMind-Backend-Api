@@ -1,0 +1,190 @@
+using AspNetCoreRateLimit;
+using Hangfire;
+using MediMind.Application;
+using MediMind.Domain.Common.Interfaces;
+using MediMind.Application.Features.Queue;
+using MediMind.Infrastructure;
+using MediMind.Infrastructure.Data;
+using MediMind.Infrastructure.SignalR;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
+
+// ─── Serilog Bootstrap Logger ────────────────────────────────────────────────
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+try
+{
+    Log.Information("Starting MediMind API...");
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    // ─── Serilog ─────────────────────────────────────────────────────────────
+    builder.Host.UseSerilog((ctx, services, cfg) => cfg
+        .ReadFrom.Configuration(ctx.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.File("logs/medimind-.txt", rollingInterval: RollingInterval.Day));
+
+    // ─── Application + Infrastructure ────────────────────────────────────────
+    builder.Services.AddApplication();
+    builder.Services.AddInfrastructure(builder.Configuration);
+
+    // ─── Controllers ─────────────────────────────────────────────────────────
+    builder.Services.AddControllers();
+    builder.Services.AddEndpointsApiExplorer();
+
+    // ─── Swagger / OpenAPI ────────────────────────────────────────────────────
+    builder.Services.AddSwaggerGen(options =>
+    {
+        options.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
+        {
+            Title = "MediMind API",
+            Version = "v1",
+            Description = "AI-Enhanced Hospital Appointment, Queue, and Health Monitoring System — Backend API",
+            Contact = new Microsoft.OpenApi.OpenApiContact { Name = "MediMind Team", Email = "support@medimind.et" }
+        });
+
+        // JWT Bearer support in Swagger UI
+        options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = Microsoft.OpenApi.SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = Microsoft.OpenApi.ParameterLocation.Header,
+            Description = "Enter token like: Bearer eyJhbGciOiJIUzI1NiIs..."
+        });
+        // options.AddSecurityRequirement(document => new Microsoft.OpenApi.OpenApiSecurityRequirement
+        // {
+        //     {
+        //         new Microsoft.OpenApi.OpenApiSecuritySchemeReference(new Microsoft.OpenApi.OpenApiReference { Id = "Bearer", Type = Microsoft.OpenApi.ReferenceType.SecurityScheme }),
+        //         new System.Collections.Generic.List<string>()
+        //     }
+        // });
+        
+        // Include XML comments
+        var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+        if (File.Exists(xmlPath)) options.IncludeXmlComments(xmlPath);
+    });
+
+    // ─── CORS ─────────────────────────────────────────────────────────────────
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("MediMindPolicy", policy =>
+        {
+            var allowedOrigins = builder.Configuration
+                .GetSection("Cors:AllowedOrigins")
+                .Get<string[]>() ?? ["http://localhost:3000", "http://localhost:5173"];
+
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials(); // Required for SignalR
+        });
+    });
+
+    // ─── Rate Limiting (NFR-007: 100 req/min/user) ────────────────────────────
+    builder.Services.AddMemoryCache();
+    builder.Services.Configure<AspNetCoreRateLimit.IpRateLimitOptions>(
+        builder.Configuration.GetSection("IpRateLimiting"));
+    builder.Services.AddInMemoryRateLimiting();
+    builder.Services.AddSingleton<AspNetCoreRateLimit.IRateLimitConfiguration,
+        AspNetCoreRateLimit.RateLimitConfiguration>();
+
+    // ─── Authorization Policies ───────────────────────────────────────────────
+    builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("PatientOnly", p => p.RequireClaim("user_type", "Patient"));
+        options.AddPolicy("DoctorOnly", p => p.RequireClaim("user_type", "Doctor"));
+        options.AddPolicy("AdminOnly", p => p.RequireClaim("user_type", "Admin"));
+        options.AddPolicy("SuperAdminOnly", p => p.RequireClaim("user_type", "SuperAdmin"));
+        options.AddPolicy("DoctorOrAdmin", p => p.RequireClaim("user_type", "Doctor", "Admin"));
+        options.AddPolicy("HealthcareStaff", p => p.RequireClaim("user_type", "Doctor", "Admin", "SuperAdmin"));
+    });
+
+    var app = builder.Build();
+
+    // ─── Auto-migrate Database on Startup ─────────────────────────────────────
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<MediMindDbContext>();
+        if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
+        {
+            Log.Information("Applying database migrations...");
+            await db.Database.MigrateAsync();
+            Log.Information("Migrations applied successfully.");
+        }
+    }
+
+    // ─── Middleware Pipeline ──────────────────────────────────────────────────
+    app.UseSerilogRequestLogging();
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "MediMind API v1");
+            c.RoutePrefix = string.Empty; // Swagger at root
+        });
+    }
+
+    app.UseHttpsRedirection();
+    app.UseCors("MediMindPolicy");
+    app.UseIpRateLimiting();
+
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    // Global exception handler (maps domain exceptions to correct HTTP codes)
+    app.UseExceptionHandler("/error");
+
+    app.MapControllers();
+
+    // ─── SignalR Hub Endpoint ─────────────────────────────────────────────────
+    app.MapHub<QueueHub>("/hubs/queue");
+
+    // ─── Health Check Endpoint ────────────────────────────────────────────────
+    app.MapHealthChecks("/health");
+
+    // ─── Hangfire Dashboard (admin only in production) ─────────────────────────
+    app.UseHangfireDashboard("/hangfire", new DashboardOptions
+    {
+        IsReadOnlyFunc = _ => !app.Environment.IsDevelopment()
+    });
+
+    // ─── Schedule Recurring Jobs ──────────────────────────────────────────────
+    // Daily queue generation at 06:00 AM Ethiopian time (03:00 AM UTC)
+    RecurringJob.AddOrUpdate<IQueueGenerationJob>(
+        "generate-daily-queues",
+        job => job.GenerateDailyQueuesAsync(DateOnly.FromDateTime(DateTime.UtcNow), CancellationToken.None),
+        "0 3 * * *",  // 03:00 AM UTC = 06:00 AM EAT
+        new RecurringJobOptions { TimeZone = TimeZoneInfo.Utc });
+
+    // Appointment reminders: 24h and 2h before (check every 30 minutes)
+    RecurringJob.AddOrUpdate<IAppointmentReminderJob>(
+        "send-appointment-reminders",
+        job => job.SendRemindersAsync(CancellationToken.None),
+        "*/30 * * * *"); // Every 30 minutes
+
+    Log.Information("MediMind API started successfully on {Urls}", app.Urls);
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "MediMind API terminated unexpectedly.");
+    return 1;
+}
+finally
+{
+    await Log.CloseAndFlushAsync();
+}
+
+return 0;

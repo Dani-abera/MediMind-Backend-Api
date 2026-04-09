@@ -1,0 +1,104 @@
+version: "3.9"
+
+# ─── MediMind Full Development Stack ──────────────────────────────────────────
+# Run: docker-compose up -d
+# Swagger UI: http://localhost:5000
+# Hangfire Dashboard: http://localhost:5000/hangfire
+# SignalR Hub: ws://localhost:5000/hubs/queue
+# ML Service: http://localhost:5001
+# pgAdmin: http://localhost:5050
+
+services:
+
+  # ─── PostgreSQL 16 ───────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: medimind_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: medimind_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: medimind_dev_password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d medimind_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - medimind_net
+
+  # ─── pgAdmin (Database GUI) ───────────────────────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: medimind_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@medimind.et
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - "5050:5050"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - medimind_net
+
+  # ─── .NET 10 API ─────────────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: medimind_api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=medimind_db;Username=postgres;Password=medimind_dev_password;"
+      Jwt__SecretKey: "dev-secret-key-change-this-in-production-minimum-32-chars!!"
+      Jwt__Issuer: "MediMind"
+      Jwt__Audience: "MediMind"
+      MlService__BaseUrl: "http://ml_service:5001"
+      Chapa__SecretKey: "CHASECK_TEST-your-test-key"
+      GeezsMS__ApiKey: "your-geez-sms-key"
+    ports:
+      - "5000:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs
+    networks:
+      - medimind_net
+
+  # ─── Python Flask ML Microservice ─────────────────────────────────────────────
+  ml_service:
+    build:
+      context: ./ml
+      dockerfile: Dockerfile.ml
+    container_name: medimind_ml
+    restart: unless-stopped
+    environment:
+      FLASK_ENV: development
+      MODEL_PATH: /app/models
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./ml/models:/app/models
+    networks:
+      - medimind_net
+
+volumes:
+  postgres_data:
+    name: medimind_postgres_data
+
+networks:
+  medimind_net:
+    name: medimind_network
+    driver: bridge

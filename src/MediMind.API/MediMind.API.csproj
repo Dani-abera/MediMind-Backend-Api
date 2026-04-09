@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MediMind.API</RootNamespace>
+    <UserSecretsId>medimind-api-secrets</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediMind.Application\MediMind.Application.csproj" />
+    <ProjectReference Include="..\MediMind.Infrastructure\MediMind.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OpenAPI / Swagger -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.*" />
+    <PackageReference Include="Microsoft.OpenApi" Version="2.*" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+    <!-- Rate limiting -->
+    <PackageReference Include="AspNetCoreRateLimit" Version="5.*" />
+    <!-- Serilog -->
+    <PackageReference Include="Serilog.AspNetCore" Version="8.*" />
+  </ItemGroup>
+
+</Project>

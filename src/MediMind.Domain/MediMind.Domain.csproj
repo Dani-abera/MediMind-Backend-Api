@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MediMind.Domain</RootNamespace>
+    <AssemblyName>MediMind.Domain</AssemblyName>
+    <!-- Domain has ZERO external dependencies - Pure domain logic only -->
+  </PropertyGroup>
+
+</Project>

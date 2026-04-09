@@ -1,0 +1,11 @@
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.AssemblyInfoInputs.cache
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.AssemblyInfo.cs
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.csproj.CoreCompileInputs.cache
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/bin/Debug/net10.0/MediMind.Domain.deps.json
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/bin/Debug/net10.0/MediMind.Domain.dll
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/bin/Debug/net10.0/MediMind.Domain.pdb
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.dll
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/refint/MediMind.Domain.dll
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/MediMind.Domain.pdb
+/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/Debug/net10.0/ref/MediMind.Domain.dll

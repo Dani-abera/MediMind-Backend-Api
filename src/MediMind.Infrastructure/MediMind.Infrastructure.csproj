@@ -1,0 +1,60 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>MediMind.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediMind.Domain\MediMind.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- EF Core + PostgreSQL -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.*">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.*" />
+
+    <!-- JWT Authentication -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.*" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.*" />
+
+    <!-- Background Jobs (Hangfire with PostgreSQL) -->
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.*" />
+    <PackageReference Include="Hangfire.PostgreSql" Version="1.*" />
+
+    <!-- SignalR (real-time queue updates) -->
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.*" />
+
+    <!-- Azure Blob Storage -->
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.*" />
+
+    <!-- HTTP Client for ML service + Chapa -->
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.*" />
+
+    <!-- Password hashing -->
+    <PackageReference Include="BCrypt.Net-Next" Version="4.*" />
+
+    <!-- PDF generation -->
+    <PackageReference Include="QuestPDF" Version="2024.*" />
+
+    <!-- Logging -->
+    <PackageReference Include="Serilog.AspNetCore" Version="8.*" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.*" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.*" />
+    <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
+
+    <!-- Health Checks -->
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.*" />
+    <PackageReference Include="AspNetCore.HealthChecks.Hangfire" Version="8.*" />
+
+    <!-- CQRS + Mediator -->
+    <PackageReference Include="MediatR" Version="12.*" />
+  </ItemGroup>
+
+</Project>
