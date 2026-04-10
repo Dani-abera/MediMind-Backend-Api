@@ -383,11 +383,11 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/10.0.5": {
+      "Microsoft.EntityFrameworkCore/10.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.5",
-          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.5"
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.4",
+          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.4"
         },
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.dll": {
@@ -403,7 +403,7 @@
           "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+      "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -416,7 +416,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
+      "Microsoft.EntityFrameworkCore.Analyzers/10.0.4": {
         "type": "package"
       },
       "Microsoft.EntityFrameworkCore.Relational/10.0.4": {
@@ -1079,11 +1079,12 @@
           "BCrypt.Net-Next": "4.0.0",
           "Hangfire.AspNetCore": "1.0.0",
           "Hangfire.PostgreSql": "1.0.0",
+          "MediMind.Application": "1.0.0",
           "MediMind.Domain": "1.0.0",
           "MediatR": "12.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
-          "Microsoft.EntityFrameworkCore": "10.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.0",
+          "Microsoft.EntityFrameworkCore": "10.0.4",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
           "QuestPDF": "2024.0.0",
           "Serilog.AspNetCore": "8.0.0",
           "Serilog.Sinks.Console": "6.0.0",
@@ -1592,10 +1593,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.EntityFrameworkCore/10.0.5": {
-      "sha512": "9tNBmK3EpYVGRQLiqP+bqK2m+TD0Gv//4vCzR7ZOgl4FWzCFyOpYdIVka13M4kcBdPdSJcs3wbHr3rmzOqbIMA==",
+    "Microsoft.EntityFrameworkCore/10.0.4": {
+      "sha512": "kzTsfFK2GCytp6DDTfQOmxPU4gbGdrIlP7PxrxF3ESNLtfXrC8BoUVZENBN2WORlZPAD7CVX6AYIglgkpXQooA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/10.0.5",
+      "path": "microsoft.entityframeworkcore/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1604,14 +1605,14 @@
         "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props",
         "lib/net10.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
-      "sha512": "32c58Rnm47Qvhimawf67KO9PytgPz3QoWye7Abapt0Yocw/JnzMiSNj/pRoIKyn8Jxypkv86zxKD4Q/zNTc0Ag==",
+    "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
+      "sha512": "qDcJqCfN1XYyX0ID/Hd9/kQTRvlia8S+Yuwyl9uFhBIKnOCbl9WMdGQCzbZUKbkpkfvf3P9CDdXsnxHyE3O0Aw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/10.0.5",
+      "path": "microsoft.entityframeworkcore.abstractions/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1619,21 +1620,21 @@
         "PACKAGE.md",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
-      "sha512": "ipC4u1VojgEfoIZhtbS2Sx5IluJTP/Jf1hz3yGsxGBgSukYY/CquI6rAjxn5H58CZgVn36qcuPPtNMwZ0AUzMg==",
+    "Microsoft.EntityFrameworkCore.Analyzers/10.0.4": {
+      "sha512": "pQeMHCyD3yTtCEGnHV4VsgKUvrESo3MR5mnh8sgQ1hWYmI1YFsUutDowBIxkobeWRtaRmBqQAtF7XQFW6FWuNA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/10.0.5",
+      "path": "microsoft.entityframeworkcore.analyzers/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
-        "microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },

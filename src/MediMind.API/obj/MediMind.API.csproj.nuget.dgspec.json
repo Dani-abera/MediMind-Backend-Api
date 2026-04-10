@@ -1234,6 +1234,9 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
+              "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj": {
+                "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj"
+              },
               "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj": {
                 "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj"
               }
@@ -1294,13 +1297,13 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[10.*, )"
+              "version": "[10.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.*, )"
+              "version": "[10.0.4, )"
             },
             "Microsoft.Extensions.Http": {
               "target": "Package",
@@ -1308,7 +1311,7 @@
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
-              "version": "[10.*, )"
+              "version": "[10.0.1, )"
             },
             "QuestPDF": {
               "target": "Package",

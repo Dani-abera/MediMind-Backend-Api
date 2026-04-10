@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "MaBn+mXaNd0=",
-  "success": true,
+  "dgSpecHash": "FHUq93E97RY=",
+  "success": false,
   "projectFilePath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
   "expectedPackageFiles": [
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.hangfire/8.0.1/aspnetcore.healthchecks.hangfire.8.0.1.nupkg.sha512",
@@ -43,12 +43,12 @@
     "/Users/dani/.nuget/packages/microsoft.aspnetcore.websockets/2.3.0/microsoft.aspnetcore.websockets.2.3.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.aspnetcore.webutilities/2.3.0/microsoft.aspnetcore.webutilities.2.3.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.bcl.asyncinterfaces/8.0.0/microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore/10.0.5/microsoft.entityframeworkcore.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.5/microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.5/microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore/10.0.4/microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.4/microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.4/microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.4/microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.5/microsoft.extensions.caching.abstractions.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.extensions.caching.memory/10.0.5/microsoft.extensions.caching.memory.10.0.5.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.4/microsoft.extensions.caching.abstractions.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.memory/10.0.4/microsoft.extensions.caching.memory.10.0.4.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration/10.0.5/microsoft.extensions.configuration.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.5/microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.binder/10.0.5/microsoft.extensions.configuration.binder.10.0.5.nupkg.sha512",
@@ -105,6 +105,17 @@
       "warningLevel": 1,
       "filePath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
       "libraryId": "Newtonsoft.Json",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Cycle detected. \n  MediMind.Application -> MediMind.Infrastructure -> MediMind.Application.",
+      "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
+      "filePath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
+      "libraryId": "MediMind.Application",
       "targetGraphs": [
         "net10.0"
       ]

@@ -34,6 +34,7 @@ try
     // ─── Application + Infrastructure ────────────────────────────────────────
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    
 
     // ─── Controllers ─────────────────────────────────────────────────────────
     builder.Services.AddControllers();
@@ -81,7 +82,7 @@ try
         {
             var allowedOrigins = builder.Configuration
                 .GetSection("Cors:AllowedOrigins")
-                .Get<string[]>() ?? ["http://localhost:3000", "http://localhost:5173"];
+                .Get<string[]>() ?? new[] { "http://localhost:3000", "http://localhost:5173" };
 
             policy.WithOrigins(allowedOrigins)
                   .AllowAnyMethod()

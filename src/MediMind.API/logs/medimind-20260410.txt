@@ -1,0 +1,84 @@
+2026-04-10 00:29:56.703 -07:00 [FTL] MediMind API terminated unexpectedly.
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.Open()
+   at Hangfire.PostgreSql.PostgreSqlStorage.CreateAndOpenConnection()
+   at Hangfire.PostgreSql.PostgreSqlConnection.AcquireLock(String resource, TimeSpan timeout)
+   at Hangfire.PostgreSql.PostgreSqlConnection.AcquireDistributedLock(String resource, TimeSpan timeout)
+   at Hangfire.RecurringJobExtensions.AcquireDistributedRecurringJobLock(IStorageConnection connection, String recurringJobId, TimeSpan timeout) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobExtensions.cs:line 39
+   at Hangfire.RecurringJobManager.AddOrUpdate(String recurringJobId, Job job, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJobManager.cs:line 112
+   at Hangfire.RecurringJob.AddOrUpdate[T](String recurringJobId, Expression`1 methodCall, String cronExpression, RecurringJobOptions options) in C:\projects\hangfire-525\src\Hangfire.Core\RecurringJob.cs:line 618
+   at Program.<Main>$(String[] args) in /Users/dani/Downloads/MediMind/src/MediMind.API/Program.cs:line 166
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+    File: auth.c
+    Line: 317
+    Routine: auth_failed
+2026-04-10 00:31:48.971 -07:00 [INF] MediMind API started successfully on []
+2026-04-10 00:58:17.521 -07:00 [INF] MediMind API started successfully on []
+2026-04-10 01:00:02.938 -07:00 [WRN] Failed to process the job '1': an exception occurred. Retry attempt 1 of 10 will be performed in 00:00:20.
+System.InvalidOperationException: Instances of abstract classes cannot be created.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Hangfire.AspNetCore.AspNetCoreJobActivatorScope.Resolve(Type type) in C:\projects\hangfire-525\src\Hangfire.NetCore\AspNetCore\AspNetCoreJobActivatorScope.cs:line 34
+   at Hangfire.Server.CoreBackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\CoreBackgroundJobPerformer.cs:line 60
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 133
+   at Hangfire.Server.BackgroundJobPerformer.InvokeServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 164
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 130
+   at Hangfire.Server.BackgroundJobPerformer.PerformJobWithFilters(PerformContext context, FilterCollection`1 filters) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 119
+   at Hangfire.Server.BackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 78
+   at Hangfire.Server.Worker.PerformJob(BackgroundProcessContext context, IStorageConnection connection, String jobId, BackgroundJob backgroundJob, IReadOnlyDictionary`2& customData) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 320
+2026-04-10 01:00:32.858 -07:00 [WRN] Failed to process the job '1': an exception occurred. Retry attempt 2 of 10 will be performed in 00:01:14.
+System.InvalidOperationException: Instances of abstract classes cannot be created.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Hangfire.AspNetCore.AspNetCoreJobActivatorScope.Resolve(Type type) in C:\projects\hangfire-525\src\Hangfire.NetCore\AspNetCore\AspNetCoreJobActivatorScope.cs:line 34
+   at Hangfire.Server.CoreBackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\CoreBackgroundJobPerformer.cs:line 60
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 133
+   at Hangfire.Server.BackgroundJobPerformer.InvokeServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 164
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 130
+   at Hangfire.Server.BackgroundJobPerformer.PerformJobWithFilters(PerformContext context, FilterCollection`1 filters) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 119
+   at Hangfire.Server.BackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 78
+   at Hangfire.Server.Worker.PerformJob(BackgroundProcessContext context, IStorageConnection connection, String jobId, BackgroundJob backgroundJob, IReadOnlyDictionary`2& customData) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 320
+2026-04-10 01:01:47.940 -07:00 [WRN] Failed to process the job '1': an exception occurred. Retry attempt 3 of 10 will be performed in 00:01:13.
+System.InvalidOperationException: Instances of abstract classes cannot be created.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Hangfire.AspNetCore.AspNetCoreJobActivatorScope.Resolve(Type type) in C:\projects\hangfire-525\src\Hangfire.NetCore\AspNetCore\AspNetCoreJobActivatorScope.cs:line 34
+   at Hangfire.Server.CoreBackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\CoreBackgroundJobPerformer.cs:line 60
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 133
+   at Hangfire.Server.BackgroundJobPerformer.InvokeServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 164
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 130
+   at Hangfire.Server.BackgroundJobPerformer.PerformJobWithFilters(PerformContext context, FilterCollection`1 filters) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 119
+   at Hangfire.Server.BackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 78
+   at Hangfire.Server.Worker.PerformJob(BackgroundProcessContext context, IStorageConnection connection, String jobId, BackgroundJob backgroundJob, IReadOnlyDictionary`2& customData) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 320
+2026-04-10 01:03:03.029 -07:00 [WRN] Failed to process the job '1': an exception occurred. Retry attempt 4 of 10 will be performed in 00:01:44.
+System.InvalidOperationException: Instances of abstract classes cannot be created.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Hangfire.AspNetCore.AspNetCoreJobActivatorScope.Resolve(Type type) in C:\projects\hangfire-525\src\Hangfire.NetCore\AspNetCore\AspNetCoreJobActivatorScope.cs:line 34
+   at Hangfire.Server.CoreBackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\CoreBackgroundJobPerformer.cs:line 60
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 133
+   at Hangfire.Server.BackgroundJobPerformer.InvokeServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 164
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 130
+   at Hangfire.Server.BackgroundJobPerformer.PerformJobWithFilters(PerformContext context, FilterCollection`1 filters) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 119
+   at Hangfire.Server.BackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 78
+   at Hangfire.Server.Worker.PerformJob(BackgroundProcessContext context, IStorageConnection connection, String jobId, BackgroundJob backgroundJob, IReadOnlyDictionary`2& customData) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 320
+2026-04-10 01:04:48.130 -07:00 [WRN] Failed to process the job '1': an exception occurred. Retry attempt 5 of 10 will be performed in 00:06:11.
+System.InvalidOperationException: Instances of abstract classes cannot be created.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider provider, Type instanceType, Object[] parameters)
+   at Hangfire.AspNetCore.AspNetCoreJobActivatorScope.Resolve(Type type) in C:\projects\hangfire-525\src\Hangfire.NetCore\AspNetCore\AspNetCoreJobActivatorScope.cs:line 34
+   at Hangfire.Server.CoreBackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\CoreBackgroundJobPerformer.cs:line 60
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 133
+   at Hangfire.Server.BackgroundJobPerformer.InvokeServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 164
+   at Hangfire.Server.BackgroundJobPerformer.InvokeNextServerFilter(Enumerator& enumerator, IBackgroundJobPerformer innerPerformer, PerformContext context, PerformingContext preContext) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 130
+   at Hangfire.Server.BackgroundJobPerformer.PerformJobWithFilters(PerformContext context, FilterCollection`1 filters) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 119
+   at Hangfire.Server.BackgroundJobPerformer.Perform(PerformContext context) in C:\projects\hangfire-525\src\Hangfire.Core\Server\BackgroundJobPerformer.cs:line 78
+   at Hangfire.Server.Worker.PerformJob(BackgroundProcessContext context, IStorageConnection connection, String jobId, BackgroundJob backgroundJob, IReadOnlyDictionary`2& customData) in C:\projects\hangfire-525\src\Hangfire.Core\Server\Worker.cs:line 320

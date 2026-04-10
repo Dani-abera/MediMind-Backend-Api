@@ -768,13 +768,13 @@
           "build/netstandard2.0/Microsoft.CodeCoverage.targets": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/10.0.5": {
+      "Microsoft.EntityFrameworkCore/10.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.5",
-          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.5",
-          "Microsoft.Extensions.Caching.Memory": "10.0.5",
-          "Microsoft.Extensions.Logging": "10.0.5"
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.4",
+          "Microsoft.EntityFrameworkCore.Analyzers": "10.0.4",
+          "Microsoft.Extensions.Caching.Memory": "10.0.4",
+          "Microsoft.Extensions.Logging": "10.0.4"
         },
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.dll": {
@@ -790,7 +790,7 @@
           "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+      "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
         "type": "package",
         "compile": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -803,7 +803,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
+      "Microsoft.EntityFrameworkCore.Analyzers/10.0.4": {
         "type": "package"
       },
       "Microsoft.EntityFrameworkCore.Relational/10.0.4": {
@@ -825,10 +825,10 @@
           }
         }
       },
-      "Microsoft.Extensions.Caching.Abstractions/10.0.5": {
+      "Microsoft.Extensions.Caching.Abstractions/10.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Primitives": "10.0.5"
+          "Microsoft.Extensions.Primitives": "10.0.4"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Caching.Abstractions.dll": {
@@ -844,14 +844,14 @@
           "buildTransitive/net8.0/_._": {}
         }
       },
-      "Microsoft.Extensions.Caching.Memory/10.0.5": {
+      "Microsoft.Extensions.Caching.Memory/10.0.4": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Caching.Abstractions": "10.0.5",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.5",
-          "Microsoft.Extensions.Logging.Abstractions": "10.0.5",
-          "Microsoft.Extensions.Options": "10.0.5",
-          "Microsoft.Extensions.Primitives": "10.0.5"
+          "Microsoft.Extensions.Caching.Abstractions": "10.0.4",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.4",
+          "Microsoft.Extensions.Logging.Abstractions": "10.0.4",
+          "Microsoft.Extensions.Options": "10.0.4",
+          "Microsoft.Extensions.Primitives": "10.0.4"
         },
         "compile": {
           "lib/net10.0/Microsoft.Extensions.Caching.Memory.dll": {
@@ -2231,13 +2231,14 @@
           "BCrypt.Net-Next": "4.0.0",
           "Hangfire.AspNetCore": "1.0.0",
           "Hangfire.PostgreSql": "1.0.0",
+          "MediMind.Application": "1.0.0",
           "MediMind.Domain": "1.0.0",
           "MediatR": "12.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.0",
           "Microsoft.AspNetCore.SignalR": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "10.0.0",
+          "Microsoft.EntityFrameworkCore": "10.0.4",
           "Microsoft.Extensions.Http": "10.0.0",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.0",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
           "QuestPDF": "2024.0.0",
           "Serilog.AspNetCore": "8.0.0",
           "Serilog.Sinks.Console": "6.0.0",
@@ -3117,10 +3118,10 @@
         "microsoft.codecoverage.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore/10.0.5": {
-      "sha512": "9tNBmK3EpYVGRQLiqP+bqK2m+TD0Gv//4vCzR7ZOgl4FWzCFyOpYdIVka13M4kcBdPdSJcs3wbHr3rmzOqbIMA==",
+    "Microsoft.EntityFrameworkCore/10.0.4": {
+      "sha512": "kzTsfFK2GCytp6DDTfQOmxPU4gbGdrIlP7PxrxF3ESNLtfXrC8BoUVZENBN2WORlZPAD7CVX6AYIglgkpXQooA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/10.0.5",
+      "path": "microsoft.entityframeworkcore/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3129,14 +3130,14 @@
         "buildTransitive/net10.0/Microsoft.EntityFrameworkCore.props",
         "lib/net10.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
-      "sha512": "32c58Rnm47Qvhimawf67KO9PytgPz3QoWye7Abapt0Yocw/JnzMiSNj/pRoIKyn8Jxypkv86zxKD4Q/zNTc0Ag==",
+    "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
+      "sha512": "qDcJqCfN1XYyX0ID/Hd9/kQTRvlia8S+Yuwyl9uFhBIKnOCbl9WMdGQCzbZUKbkpkfvf3P9CDdXsnxHyE3O0Aw==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/10.0.5",
+      "path": "microsoft.entityframeworkcore.abstractions/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3144,21 +3145,21 @@
         "PACKAGE.md",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/10.0.5": {
-      "sha512": "ipC4u1VojgEfoIZhtbS2Sx5IluJTP/Jf1hz3yGsxGBgSukYY/CquI6rAjxn5H58CZgVn36qcuPPtNMwZ0AUzMg==",
+    "Microsoft.EntityFrameworkCore.Analyzers/10.0.4": {
+      "sha512": "pQeMHCyD3yTtCEGnHV4VsgKUvrESo3MR5mnh8sgQ1hWYmI1YFsUutDowBIxkobeWRtaRmBqQAtF7XQFW6FWuNA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/10.0.5",
+      "path": "microsoft.entityframeworkcore.analyzers/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "docs/PACKAGE.md",
-        "microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
@@ -3177,10 +3178,10 @@
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
-    "Microsoft.Extensions.Caching.Abstractions/10.0.5": {
-      "sha512": "k/QDdQ94/0Shi0KfU+e12m73jfQo+3JpErTtgpZfsCIqkvdEEO0XIx6R+iTbN55rNPaNhOqNY4/sB+jZ8XxVPw==",
+    "Microsoft.Extensions.Caching.Abstractions/10.0.4": {
+      "sha512": "uDRooaV6N3WZ0kdlNPMB68/MdGn/in1Fs7Db7DnIm85RBTPy4P321WO+daAImiYpH5dekjNggDqy1N44WaIlMA==",
       "type": "package",
-      "path": "microsoft.extensions.caching.abstractions/10.0.5",
+      "path": "microsoft.extensions.caching.abstractions/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3201,15 +3202,15 @@
         "lib/net9.0/Microsoft.Extensions.Caching.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Abstractions.xml",
-        "microsoft.extensions.caching.abstractions.10.0.5.nupkg.sha512",
+        "microsoft.extensions.caching.abstractions.10.0.4.nupkg.sha512",
         "microsoft.extensions.caching.abstractions.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.Caching.Memory/10.0.5": {
-      "sha512": "jUEXmkBUPdOS/MP9areK/sbKhdklq9+tEhvwfxGalZVnmyLUO5rrheNNutUBtvbZ7J8ECkG7/r2KXi/IFC06cA==",
+    "Microsoft.Extensions.Caching.Memory/10.0.4": {
+      "sha512": "CLLussNUMdSbyJOu4VBF7sqskHGB/5N1EcFzrqG/HsPATN8fCRUcfp0qns1VwkxKHwxrtYCh5FKe+kM81Q1PHA==",
       "type": "package",
-      "path": "microsoft.extensions.caching.memory/10.0.5",
+      "path": "microsoft.extensions.caching.memory/10.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3230,7 +3231,7 @@
         "lib/net9.0/Microsoft.Extensions.Caching.Memory.xml",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.dll",
         "lib/netstandard2.0/Microsoft.Extensions.Caching.Memory.xml",
-        "microsoft.extensions.caching.memory.10.0.5.nupkg.sha512",
+        "microsoft.extensions.caching.memory.10.0.4.nupkg.sha512",
         "microsoft.extensions.caching.memory.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -5372,5 +5373,16 @@
         }
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Cycle detected. \n  MediMind.UnitTests -> MediMind.Application -> MediMind.Infrastructure -> MediMind.Application.",
+      "libraryId": "MediMind.Application",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

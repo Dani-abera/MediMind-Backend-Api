@@ -1,17 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "1L0YfUl8nUU=",
-  "success": true,
+  "dgSpecHash": "/FIeAdSzEOo=",
+  "success": false,
   "projectFilePath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.hangfire/8.0.1/aspnetcore.healthchecks.hangfire.8.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.npgsql/8.0.2/aspnetcore.healthchecks.npgsql.8.0.2.nupkg.sha512",
+    "/Users/dani/.nuget/packages/automapper/16.1.1/automapper.16.1.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/azure.core/1.50.0/azure.core.1.50.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/azure.storage.blobs/12.27.0/azure.storage.blobs.12.27.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/azure.storage.common/12.26.0/azure.storage.common.12.26.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/bcrypt.net-next/4.1.0/bcrypt.net-next.4.1.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/dapper/2.0.123/dapper.2.0.123.nupkg.sha512",
     "/Users/dani/.nuget/packages/dapper.aot/1.0.48/dapper.aot.1.0.48.nupkg.sha512",
+    "/Users/dani/.nuget/packages/fluentvalidation/11.12.0/fluentvalidation.11.12.0.nupkg.sha512",
+    "/Users/dani/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.12.0/fluentvalidation.dependencyinjectionextensions.11.12.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/hangfire.aspnetcore/1.8.23/hangfire.aspnetcore.1.8.23.nupkg.sha512",
     "/Users/dani/.nuget/packages/hangfire.core/1.8.23/hangfire.core.1.8.23.nupkg.sha512",
     "/Users/dani/.nuget/packages/hangfire.netcore/1.8.23/hangfire.netcore.1.8.23.nupkg.sha512",
@@ -48,19 +51,19 @@
     "/Users/dani/.nuget/packages/microsoft.codeanalysis.csharp.workspaces/5.0.0/microsoft.codeanalysis.csharp.workspaces.5.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.codeanalysis.workspaces.common/5.0.0/microsoft.codeanalysis.workspaces.common.5.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.codeanalysis.workspaces.msbuild/5.0.0/microsoft.codeanalysis.workspaces.msbuild.5.0.0.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore/10.0.5/microsoft.entityframeworkcore.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.5/microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.5/microsoft.entityframeworkcore.analyzers.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.design/10.0.5/microsoft.entityframeworkcore.design.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.5/microsoft.entityframeworkcore.relational.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.5/microsoft.extensions.caching.abstractions.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.extensions.caching.memory/10.0.5/microsoft.extensions.caching.memory.10.0.5.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore/10.0.4/microsoft.entityframeworkcore.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.abstractions/10.0.4/microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.analyzers/10.0.4/microsoft.entityframeworkcore.analyzers.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.design/10.0.4/microsoft.entityframeworkcore.design.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.4/microsoft.entityframeworkcore.relational.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.4/microsoft.extensions.caching.abstractions.10.0.4.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.memory/10.0.4/microsoft.extensions.caching.memory.10.0.4.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration/10.0.5/microsoft.extensions.configuration.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.5/microsoft.extensions.configuration.abstractions.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.binder/10.0.5/microsoft.extensions.configuration.binder.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.dependencyinjection/10.0.5/microsoft.extensions.dependencyinjection.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.5/microsoft.extensions.dependencyinjection.abstractions.10.0.5.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.extensions.dependencymodel/10.0.5/microsoft.extensions.dependencymodel.10.0.5.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.dependencymodel/10.0.4/microsoft.extensions.dependencymodel.10.0.4.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.diagnostics/10.0.5/microsoft.extensions.diagnostics.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.diagnostics.abstractions/10.0.5/microsoft.extensions.diagnostics.abstractions.10.0.5.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.diagnostics.healthchecks/8.0.0/microsoft.extensions.diagnostics.healthchecks.8.0.0.nupkg.sha512",
@@ -111,5 +114,17 @@
     "/Users/dani/.nuget/packages/system.memory.data/8.0.1/system.memory.data.8.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/system.net.websockets.websocketprotocol/5.1.0/system.net.websockets.websocketprotocol.5.1.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1108",
+      "level": "Error",
+      "message": "Cycle detected. \n  MediMind.Infrastructure -> MediMind.Application -> MediMind.Infrastructure.",
+      "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
+      "filePath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
+      "libraryId": "MediMind.Infrastructure",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    }
+  ]
 }

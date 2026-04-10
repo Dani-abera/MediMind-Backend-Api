@@ -5,6 +5,8 @@ using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Data.Repositories;
 using MediMind.Infrastructure.Services.Auth;
 using MediMind.Infrastructure.Services.ML;
+using MediMind.Infrastructure.Services.Notifications;
+using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.Payment;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -23,6 +25,7 @@ public static class DependencyInjection
         IConfiguration config)
     {
         // ─── PostgreSQL + EF Core 10 ─────────────────────────────────────────
+        
         services.AddDbContext<MediMindDbContext>(options =>
             options.UseNpgsql(
                 config.GetConnectionString("DefaultConnection"),
@@ -46,6 +49,10 @@ public static class DependencyInjection
         services.AddScoped<IHealthRecordRepository, HealthRecordRepository>();
         services.AddScoped<IHealthPredictionRepository, HealthPredictionRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        
+        services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<ISmsService, GeezSmsService>();
+        services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
 
         // ─── Auth Services ───────────────────────────────────────────────────
         services.AddScoped<ITokenService, TokenService>();
@@ -129,8 +136,12 @@ public static class DependencyInjection
         services.AddHangfireServer(options =>
         {
             options.WorkerCount = 5;
-            options.Queues = ["queue_generation", "reminders", "notifications", "default"];
+            options.Queues = new[] { "queue_generation", "reminders", "notifications", "default" };
         });
+
+        // Hangfire job implementations (so recurring jobs can be resolved via DI)
+        services.AddScoped<IAppointmentReminderJob, AppointmentReminderJob>();
+        services.AddScoped<IQueueGenerationJob, QueueGenerationJob>();
 
         // ─── Health Checks ───────────────────────────────────────────────────
         services.AddHealthChecks()

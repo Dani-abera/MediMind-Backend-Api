@@ -9,16 +9,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MediMind.Domain\MediMind.Domain.csproj" />
+    <ProjectReference Include="..\MediMind.Application\MediMind.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- EF Core + PostgreSQL -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.*" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.*">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.4">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.*" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.1" />
 
     <!-- JWT Authentication -->
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.*" />

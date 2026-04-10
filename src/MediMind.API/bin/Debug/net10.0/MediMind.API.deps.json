@@ -284,28 +284,28 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/10.0.5": {
+      "Microsoft.EntityFrameworkCore/10.0.4": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.5"
+          "Microsoft.EntityFrameworkCore.Abstractions": "10.0.4"
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.dll": {
-            "assemblyVersion": "10.0.5.0",
-            "fileVersion": "10.0.526.15411"
+            "assemblyVersion": "10.0.4.0",
+            "fileVersion": "10.0.426.12010"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+      "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-            "assemblyVersion": "10.0.5.0",
-            "fileVersion": "10.0.526.15411"
+            "assemblyVersion": "10.0.4.0",
+            "fileVersion": "10.0.426.12010"
           }
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/10.0.4": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "10.0.5"
+          "Microsoft.EntityFrameworkCore": "10.0.4"
         },
         "runtime": {
           "lib/net10.0/Microsoft.EntityFrameworkCore.Relational.dll": {
@@ -412,7 +412,7 @@
       },
       "Npgsql.EntityFrameworkCore.PostgreSQL/10.0.1": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore": "10.0.4",
           "Microsoft.EntityFrameworkCore.Relational": "10.0.4",
           "Npgsql": "10.0.2"
         },
@@ -772,7 +772,7 @@
           "MediMind.Domain": "1.0.0",
           "MediatR": "12.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.5",
-          "Microsoft.EntityFrameworkCore": "10.0.5",
+          "Microsoft.EntityFrameworkCore": "10.0.4",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
           "QuestPDF": "2024.12.3",
           "Serilog.AspNetCore": "8.0.3",
@@ -943,19 +943,19 @@
       "path": "microsoft.bcl.asyncinterfaces/8.0.0",
       "hashPath": "microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore/10.0.5": {
+    "Microsoft.EntityFrameworkCore/10.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-9tNBmK3EpYVGRQLiqP+bqK2m+TD0Gv//4vCzR7ZOgl4FWzCFyOpYdIVka13M4kcBdPdSJcs3wbHr3rmzOqbIMA==",
-      "path": "microsoft.entityframeworkcore/10.0.5",
-      "hashPath": "microsoft.entityframeworkcore.10.0.5.nupkg.sha512"
+      "sha512": "sha512-kzTsfFK2GCytp6DDTfQOmxPU4gbGdrIlP7PxrxF3ESNLtfXrC8BoUVZENBN2WORlZPAD7CVX6AYIglgkpXQooA==",
+      "path": "microsoft.entityframeworkcore/10.0.4",
+      "hashPath": "microsoft.entityframeworkcore.10.0.4.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/10.0.5": {
+    "Microsoft.EntityFrameworkCore.Abstractions/10.0.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-32c58Rnm47Qvhimawf67KO9PytgPz3QoWye7Abapt0Yocw/JnzMiSNj/pRoIKyn8Jxypkv86zxKD4Q/zNTc0Ag==",
-      "path": "microsoft.entityframeworkcore.abstractions/10.0.5",
-      "hashPath": "microsoft.entityframeworkcore.abstractions.10.0.5.nupkg.sha512"
+      "sha512": "sha512-qDcJqCfN1XYyX0ID/Hd9/kQTRvlia8S+Yuwyl9uFhBIKnOCbl9WMdGQCzbZUKbkpkfvf3P9CDdXsnxHyE3O0Aw==",
+      "path": "microsoft.entityframeworkcore.abstractions/10.0.4",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.10.0.4.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Relational/10.0.4": {
       "type": "package",
