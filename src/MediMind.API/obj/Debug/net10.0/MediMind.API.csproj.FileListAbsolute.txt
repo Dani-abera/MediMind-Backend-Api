@@ -1,11 +1,3 @@
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.csproj.AssemblyReference.cache
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/rpswa.dswa.cache.json
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.GeneratedMSBuildEditorConfig.editorconfig
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.AssemblyInfoInputs.cache
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.AssemblyInfo.cs
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.csproj.CoreCompileInputs.cache
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.MvcApplicationPartsAssemblyInfo.cs
-/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.MvcApplicationPartsAssemblyInfo.cache
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/appsettings.json
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/MediMind.API.staticwebassets.endpoints.json
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/LatoFont/Lato-Black.ttf
@@ -126,6 +118,14 @@
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/MediMind.Application.pdb
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/MediMind.Infrastructure.pdb
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/MediMind.Domain.pdb
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.csproj.AssemblyReference.cache
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/rpswa.dswa.cache.json
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.AssemblyInfoInputs.cache
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.AssemblyInfo.cs
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.csproj.CoreCompileInputs.cache
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.MvcApplicationPartsAssemblyInfo.cs
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.MvcApplicationPartsAssemblyInfo.cache
 /Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/rjimswa.dswa.cache.json
 /Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/rjsmrazor.dswa.cache.json
 /Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/rjsmcshtml.dswa.cache.json

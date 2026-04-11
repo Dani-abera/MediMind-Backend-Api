@@ -2236,7 +2236,6 @@
           "FluentValidation": "11.0.0",
           "FluentValidation.DependencyInjectionExtensions": "11.0.0",
           "MediMind.Domain": "1.0.0",
-          "MediMind.Infrastructure": "1.0.0",
           "MediatR": "12.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "10.0.0"
@@ -6176,16 +6175,5 @@
         }
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \n  MediMind.Infrastructure -> MediMind.Application -> MediMind.Infrastructure.",
-      "libraryId": "MediMind.Infrastructure",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  }
 }

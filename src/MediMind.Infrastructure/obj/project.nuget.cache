@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "/FIeAdSzEOo=",
-  "success": false,
+  "dgSpecHash": "wiUF0zWP3os=",
+  "success": true,
   "projectFilePath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.hangfire/8.0.1/aspnetcore.healthchecks.hangfire.8.0.1.nupkg.sha512",
@@ -114,17 +114,5 @@
     "/Users/dani/.nuget/packages/system.memory.data/8.0.1/system.memory.data.8.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/system.net.websockets.websocketprotocol/5.1.0/system.net.websockets.websocketprotocol.5.1.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1108",
-      "level": "Error",
-      "message": "Cycle detected. \n  MediMind.Infrastructure -> MediMind.Application -> MediMind.Infrastructure.",
-      "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
-      "filePath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
-      "libraryId": "MediMind.Infrastructure",
-      "targetGraphs": [
-        "net10.0"
-      ]
-    }
-  ]
+  "logs": []
 }

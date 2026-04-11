@@ -535,9 +535,6 @@
             "projectReferences": {
               "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj": {
                 "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj"
-              },
-              "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj": {
-                "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj"
               }
             }
           }

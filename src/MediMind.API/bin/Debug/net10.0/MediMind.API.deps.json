@@ -743,7 +743,6 @@
           "FluentValidation": "11.12.0",
           "FluentValidation.DependencyInjectionExtensions": "11.12.0",
           "MediMind.Domain": "1.0.0",
-          "MediMind.Infrastructure": "1.0.0",
           "MediatR": "12.5.0"
         },
         "runtime": {
@@ -769,6 +768,7 @@
           "BCrypt.Net-Next": "4.1.0",
           "Hangfire.AspNetCore": "1.8.23",
           "Hangfire.PostgreSql": "1.21.1",
+          "MediMind.Application": "1.0.0",
           "MediMind.Domain": "1.0.0",
           "MediatR": "12.5.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "10.0.5",

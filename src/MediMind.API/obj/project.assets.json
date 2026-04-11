@@ -1049,7 +1049,6 @@
           "FluentValidation": "11.0.0",
           "FluentValidation.DependencyInjectionExtensions": "11.0.0",
           "MediMind.Domain": "1.0.0",
-          "MediMind.Infrastructure": "1.0.0",
           "MediatR": "12.0.0"
         },
         "compile": {
