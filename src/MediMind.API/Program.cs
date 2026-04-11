@@ -1,12 +1,13 @@
 using AspNetCoreRateLimit;
 using Hangfire;
 using MediMind.Application;
-using MediMind.Domain.Common.Interfaces;
 using MediMind.Application.Features.Queue;
+using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure;
 using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Serilog;
 using Serilog.Events;
 
@@ -118,14 +119,20 @@ try
         var db = scope.ServiceProvider.GetRequiredService<MediMindDbContext>();
         if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
         {
-            Log.Information("Applying database migrations...");
-            await db.Database.MigrateAsync();
-            Log.Information("Migrations applied successfully.");
+            await db.Database.EnsureCreatedAsync();
         }
     }
 
     // ─── Middleware Pipeline ──────────────────────────────────────────────────
     app.UseSerilogRequestLogging();
+
+    var uploadsRoot = Path.Combine(app.Environment.ContentRootPath, "uploads");
+    Directory.CreateDirectory(uploadsRoot);
+    app.UseStaticFiles(new StaticFileOptions
+    {
+        FileProvider = new PhysicalFileProvider(uploadsRoot),
+        RequestPath = "/uploads"
+    });
 
     if (app.Environment.IsDevelopment())
     {

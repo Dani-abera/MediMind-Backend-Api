@@ -1,20 +1,23 @@
+using System.Net.Http.Headers;
+using System.Text;
 using Hangfire;
-using Hangfire.PostgreSql;
+using Hangfire.MemoryStorage;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Data.Repositories;
+using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.Auth;
 using MediMind.Infrastructure.Services.ML;
 using MediMind.Infrastructure.Services.Notifications;
-using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.Payment;
+using MediMind.Infrastructure.Services.Pdf;
+using MediMind.Infrastructure.Services.Storage;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 namespace MediMind.Infrastructure;
 
@@ -27,14 +30,7 @@ public static class DependencyInjection
         // ─── PostgreSQL + EF Core 10 ─────────────────────────────────────────
         
         services.AddDbContext<MediMindDbContext>(options =>
-            options.UseNpgsql(
-                config.GetConnectionString("DefaultConnection"),
-                npgsql =>
-                {
-                    npgsql.MigrationsAssembly(typeof(MediMindDbContext).Assembly.FullName);
-                    npgsql.EnableRetryOnFailure(3);
-                    npgsql.CommandTimeout(30);
-                }));
+            options.UseInMemoryDatabase("medimind"));
 
         // ─── Unit of Work ────────────────────────────────────────────────────
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<MediMindDbContext>());
@@ -53,6 +49,9 @@ public static class DependencyInjection
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
+        services.AddScoped<IEmailService, SendGridEmailService>();
+        services.AddScoped<IPdfService, PrescriptionPdfService>();
+        services.AddScoped<IStorageService, LocalUploadStorageService>();
 
         // ─── Auth Services ───────────────────────────────────────────────────
         services.AddScoped<ITokenService, TokenService>();
@@ -104,6 +103,22 @@ public static class DependencyInjection
             client.Timeout = TimeSpan.FromSeconds(30);
         });
 
+        services.AddHttpClient("GeezSMS", client =>
+        {
+            client.BaseAddress = new Uri(config["GeezsMS:BaseUrl"] ?? "https://api.geezsms.com/");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
+
+        services.AddHttpClient("SendGrid", (sp, client) =>
+        {
+            client.BaseAddress = new Uri("https://api.sendgrid.com/");
+            client.Timeout = TimeSpan.FromSeconds(30);
+            var cfg = sp.GetRequiredService<IConfiguration>();
+            var apiKey = cfg["SendGrid:ApiKey"];
+            if (!string.IsNullOrWhiteSpace(apiKey))
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        });
+
         // Chapa Payment Gateway
         services.AddHttpClient("ChapaClient", client =>
         {
@@ -131,7 +146,7 @@ public static class DependencyInjection
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseRecommendedSerializerSettings()
-            .UsePostgreSqlStorage(config.GetConnectionString("DefaultConnection")));
+            .UseMemoryStorage());
 
         services.AddHangfireServer(options =>
         {
@@ -145,7 +160,6 @@ public static class DependencyInjection
 
         // ─── Health Checks ───────────────────────────────────────────────────
         services.AddHealthChecks()
-            .AddNpgSql(config.GetConnectionString("DefaultConnection")!, name: "postgresql")
             .AddHangfire(options => { options.MinimumAvailableServers = 1; }, name: "hangfire");
 
         return services;

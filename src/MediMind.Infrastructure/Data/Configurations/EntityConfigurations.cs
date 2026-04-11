@@ -1,9 +1,77 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Text.Json;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MediMind.Infrastructure.Data.Configurations;
+
+/// <summary>
+/// JSON conversions so EF InMemory/SQLite can persist collection properties (PostgreSQL text[]/jsonb alone is not enough).
+/// </summary>
+file static class JsonCollectionMapping
+{
+    private static readonly JsonSerializerOptions Json = new();
+
+    private static readonly ValueConverter<List<string>, string> StringListConverter = new(
+        v => JsonSerializer.Serialize(v, Json),
+        v => string.IsNullOrWhiteSpace(v)
+            ? new List<string>()
+            : JsonSerializer.Deserialize<List<string>>(v, Json) ?? new List<string>());
+
+    private static readonly ValueComparer<List<string>> StringListComparer = new(
+        (a, b) => (a ?? new List<string>()).SequenceEqual(b ?? new List<string>()),
+        v => v.Aggregate(0, (h, s) => HashCode.Combine(h, s.GetHashCode(StringComparison.Ordinal))),
+        v => new List<string>(v ?? new List<string>()));
+
+    private static readonly ValueConverter<Dictionary<string, string>, string> StringDictConverter = new(
+        v => JsonSerializer.Serialize(v, Json),
+        v => string.IsNullOrWhiteSpace(v)
+            ? new Dictionary<string, string>()
+            : JsonSerializer.Deserialize<Dictionary<string, string>>(v, Json) ?? new Dictionary<string, string>());
+
+    private static readonly ValueComparer<Dictionary<string, string>> StringDictComparer = new(
+        (a, b) => JsonSerializer.Serialize(a ?? new Dictionary<string, string>(), Json) ==
+                  JsonSerializer.Serialize(b ?? new Dictionary<string, string>(), Json),
+        v => JsonSerializer.Serialize(v ?? new Dictionary<string, string>(), Json).GetHashCode(StringComparison.Ordinal),
+        v => JsonSerializer.Deserialize<Dictionary<string, string>>(
+                 JsonSerializer.Serialize(v ?? new Dictionary<string, string>(), Json), Json) ??
+             new Dictionary<string, string>());
+
+    public static void MapStringList(PropertyBuilder<List<string>> property, string columnType)
+    {
+        property.HasConversion(StringListConverter).HasColumnType(columnType);
+        property.Metadata.SetValueComparer(StringListComparer);
+    }
+
+    public static void MapStringDictionary(PropertyBuilder<Dictionary<string, string>> property, string columnType)
+    {
+        property.HasConversion(StringDictConverter).HasColumnType(columnType);
+        property.Metadata.SetValueComparer(StringDictComparer);
+    }
+
+    private static readonly ValueConverter<List<MedicationItem>, string> MedicationListConverter = new(
+        v => JsonSerializer.Serialize(v, Json),
+        v => string.IsNullOrWhiteSpace(v)
+            ? new List<MedicationItem>()
+            : JsonSerializer.Deserialize<List<MedicationItem>>(v, Json) ?? new List<MedicationItem>());
+
+    private static readonly ValueComparer<List<MedicationItem>> MedicationListComparer = new(
+        (a, b) => JsonSerializer.Serialize(a ?? new List<MedicationItem>(), Json) ==
+                  JsonSerializer.Serialize(b ?? new List<MedicationItem>(), Json),
+        v => JsonSerializer.Serialize(v ?? new List<MedicationItem>(), Json).GetHashCode(StringComparison.Ordinal),
+        v => JsonSerializer.Deserialize<List<MedicationItem>>(
+                 JsonSerializer.Serialize(v ?? new List<MedicationItem>(), Json), Json) ??
+             new List<MedicationItem>());
+
+    public static void MapMedicationItems(PropertyBuilder<List<MedicationItem>> property, string columnType)
+    {
+        property.HasConversion(MedicationListConverter).HasColumnType(columnType);
+        property.Metadata.SetValueComparer(MedicationListComparer);
+    }
+}
 
 // ─── User ─────────────────────────────────────────────────────────────────────
 
@@ -39,8 +107,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.ToTable("patients");
         builder.Property(p => p.Id).HasColumnName("patient_id");
         builder.Property(p => p.BloodType).HasConversion<string>().HasMaxLength(5);
-        builder.Property(p => p.ChronicConditions).HasColumnType("text[]");
-        builder.Property(p => p.CurrentMedications).HasColumnType("text[]");
+        JsonCollectionMapping.MapStringList(builder.Property(p => p.ChronicConditions), "text");
+        JsonCollectionMapping.MapStringList(builder.Property(p => p.CurrentMedications), "text");
 
         // Navigation
         builder.HasMany(p => p.HealthRecords).WithOne(h => h.Patient)
@@ -62,7 +130,7 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.Property(d => d.Id).HasColumnName("doctor_id");
         builder.Property(d => d.Specialization).HasMaxLength(100).IsRequired();
         builder.Property(d => d.LicenseNumber).HasMaxLength(50).IsRequired();
-        builder.Property(d => d.LanguagesSpoken).HasColumnType("text[]");
+        JsonCollectionMapping.MapStringList(builder.Property(d => d.LanguagesSpoken), "text");
 
         builder.HasIndex(d => d.LicenseNumber).IsUnique();
         builder.HasIndex(d => d.Specialization);
@@ -94,10 +162,12 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.Property(c => c.PhoneNumber).HasMaxLength(20).IsRequired();
         builder.Property(c => c.Email).HasMaxLength(255).IsRequired();
 
-        // JSON columns
-        builder.Property(c => c.WorkingHours).HasColumnType("jsonb").IsRequired();
-        builder.Property(c => c.ServicesOffered).HasColumnType("text[]").IsRequired();
-        builder.Property(c => c.Specializations).HasColumnType("text[]");
+        // JSON columns (serialized for InMemory/SQLite; jsonb when using PostgreSQL)
+        JsonCollectionMapping.MapStringDictionary(builder.Property(c => c.WorkingHours), "jsonb");
+        builder.Property(c => c.WorkingHours).IsRequired();
+        JsonCollectionMapping.MapStringList(builder.Property(c => c.ServicesOffered), "text");
+        builder.Property(c => c.ServicesOffered).IsRequired();
+        JsonCollectionMapping.MapStringList(builder.Property(c => c.Specializations), "text");
 
         builder.Property(c => c.SubscriptionStatus).HasConversion<string>().HasMaxLength(20);
         builder.Property(c => c.Latitude).HasPrecision(10, 8);
@@ -149,7 +219,8 @@ public class DoctorScheduleConfiguration : IEntityTypeConfiguration<DoctorSchedu
     {
         builder.ToTable("doctor_schedules");
         builder.HasKey(s => s.Id);
-        builder.Property(s => s.WorkingDays).HasColumnType("text[]").IsRequired();
+        JsonCollectionMapping.MapStringList(builder.Property(s => s.WorkingDays), "text");
+        builder.Property(s => s.WorkingDays).IsRequired();
         builder.Property(s => s.SlotDuration).IsRequired();
         builder.ToTable(t => t.HasCheckConstraint("ck_schedule_times", "end_time > start_time"));
         builder.ToTable(t => t.HasCheckConstraint("ck_break_times", "break_end > break_start OR break_start IS NULL"));
@@ -252,6 +323,23 @@ public class HealthRecordConfiguration : IEntityTypeConfiguration<HealthRecord>
 
 public class HealthPredictionConfiguration : IEntityTypeConfiguration<HealthPrediction>
 {
+    private static readonly ValueConverter<Dictionary<string, List<string>>, string> ContributingFactorsConverter =
+        new(
+            v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+            v => string.IsNullOrWhiteSpace(v)
+                ? new Dictionary<string, List<string>>()
+                : JsonSerializer.Deserialize<Dictionary<string, List<string>>>(v, (JsonSerializerOptions?)null)
+                  ?? new Dictionary<string, List<string>>());
+
+    private static readonly ValueComparer<Dictionary<string, List<string>>> ContributingFactorsComparer =
+        new(
+            (a, b) => JsonSerializer.Serialize(a, (JsonSerializerOptions?)null) ==
+                      JsonSerializer.Serialize(b, (JsonSerializerOptions?)null),
+            v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null).GetHashCode(),
+            v => JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
+                     JsonSerializer.Serialize(v, (JsonSerializerOptions?)null), (JsonSerializerOptions?)null)
+                 ?? new Dictionary<string, List<string>>());
+
     public void Configure(EntityTypeBuilder<HealthPrediction> builder)
     {
         builder.ToTable("health_predictions");
@@ -264,7 +352,11 @@ public class HealthPredictionConfiguration : IEntityTypeConfiguration<HealthPred
         builder.Property(h => h.DiabetesCategory).HasConversion<string>().HasMaxLength(20);
         builder.Property(h => h.HypertensionCategory).HasConversion<string>().HasMaxLength(20);
         builder.Property(h => h.CvdCategory).HasConversion<string>().HasMaxLength(20);
-        builder.Property(h => h.ContributingFactors).HasColumnType("jsonb").IsRequired();
+        var contributingFactors = builder.Property(h => h.ContributingFactors)
+            .HasConversion(ContributingFactorsConverter)
+            .HasColumnType("jsonb")
+            .IsRequired();
+        contributingFactors.Metadata.SetValueComparer(ContributingFactorsComparer);
         builder.Property(h => h.ModelVersion).HasMaxLength(20).IsRequired();
         builder.ToTable(t => t.HasCheckConstraint("ck_data_points", "data_points_used > 0"));
 
@@ -321,12 +413,9 @@ public class PrescriptionConfiguration : IEntityTypeConfiguration<Prescription>
         builder.Property(p => p.Id).HasColumnName("prescription_id");
         builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(20);
         builder.Property(p => p.PrescriptionUrl).HasMaxLength(500);
-        builder.Property(p => p.Medications)
-            .HasConversion(
-                v => System.Text.Json.JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions?)null),
-                v => System.Text.Json.JsonSerializer.Deserialize<List<MedicationItem>>(v, (System.Text.Json.JsonSerializerOptions?)null)!)
-            .HasColumnType("jsonb").IsRequired();
-        builder.Property(p => p.LabTests).HasColumnType("text[]");
+        JsonCollectionMapping.MapMedicationItems(builder.Property(p => p.Medications), "jsonb");
+        builder.Property(p => p.Medications).IsRequired();
+        JsonCollectionMapping.MapStringList(builder.Property(p => p.LabTests), "text");
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_expiry_date", "expiry_date > issue_date OR expiry_date IS NULL"));
     }
