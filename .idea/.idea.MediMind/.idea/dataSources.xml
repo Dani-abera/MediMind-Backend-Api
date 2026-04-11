@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="mediminddb@localhost" uuid="15e946b9-4a8a-48d2-bb26-763c09e8ecad">
+    <data-source source="LOCAL" name="mediminddb@localhost" uuid="3759b23b-6307-4a07-a288-486fcd0ebb42">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

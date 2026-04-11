@@ -75,6 +75,15 @@ public abstract class User : BaseEntity
         return true;
     }
 
+    /// <summary>Clears OTP fields and attempt counter after a successful auth path that bypasses <see cref="ValidateOtp"/>.</summary>
+    public void ResetOtpState()
+    {
+        OtpCode = null;
+        OtpExpiresAt = null;
+        OtpAttempts = 0;
+        UpdateTimestamp();
+    }
+
     public void Activate()
     {
         Status = UserStatus.Active;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -12,6 +11,8 @@ namespace MediMind.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // TPT + PostgreSQL: EF uses one PK name for the whole User hierarchy; constraint names must be unique per schema, so doctors/patients/healthcare_center_admins use distinct names below.
+
             migrationBuilder.CreateTable(
                 name: "healthcare_centers",
                 columns: table => new
@@ -25,9 +26,9 @@ namespace MediMind.Infrastructure.Migrations
                     region = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     phone_number = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    working_hours = table.Column<Dictionary<string, string>>(type: "jsonb", nullable: false),
-                    services_offered = table.Column<List<string>>(type: "text[]", nullable: false),
-                    specializations = table.Column<List<string>>(type: "text[]", nullable: false),
+                    working_hours = table.Column<string>(type: "jsonb", nullable: false),
+                    services_offered = table.Column<string>(type: "text", nullable: false),
+                    specializations = table.Column<string>(type: "text", nullable: false),
                     subscription_status = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     subscription_start_date = table.Column<DateOnly>(type: "date", nullable: true),
                     subscription_end_date = table.Column<DateOnly>(type: "date", nullable: true),
@@ -74,21 +75,21 @@ namespace MediMind.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "doctor",
+                name: "doctors",
                 columns: table => new
                 {
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    specialization = table.Column<string>(type: "text", nullable: false),
-                    license_number = table.Column<string>(type: "text", nullable: false),
+                    specialization = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    license_number = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     years_of_experience = table.Column<int>(type: "integer", nullable: false),
                     qualifications = table.Column<string>(type: "text", nullable: true),
-                    languages_spoken = table.Column<List<string>>(type: "text[]", nullable: false)
+                    languages_spoken = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("p_k_users", x => x.user_id);
+                    table.PrimaryKey("p_k_doctors", x => x.user_id);
                     table.ForeignKey(
-                        name: "FK_doctor_users_user_id",
+                        name: "FK_doctors_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "user_id",
@@ -96,7 +97,7 @@ namespace MediMind.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "healthcare_center_admin",
+                name: "healthcare_center_admins",
                 columns: table => new
                 {
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -107,15 +108,15 @@ namespace MediMind.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("p_k_users", x => x.user_id);
+                    table.PrimaryKey("p_k_healthcare_center_admins", x => x.user_id);
                     table.ForeignKey(
-                        name: "FK_healthcare_center_admin_users_user_id",
+                        name: "FK_healthcare_center_admins_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "f_k_healthcare_center_admin_healthcare_centers_center_id",
+                        name: "f_k_healthcare_center_admins_healthcare_centers_center_id",
                         column: x => x.center_id,
                         principalTable: "healthcare_centers",
                         principalColumn: "center_id",
@@ -123,23 +124,23 @@ namespace MediMind.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "patient",
+                name: "patients",
                 columns: table => new
                 {
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    blood_type = table.Column<int>(type: "integer", nullable: true),
+                    blood_type = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: true),
                     allergies = table.Column<string>(type: "text", nullable: true),
                     emergency_contact_name = table.Column<string>(type: "text", nullable: true),
                     emergency_contact_phone = table.Column<string>(type: "text", nullable: true),
                     medical_history = table.Column<string>(type: "text", nullable: true),
-                    chronic_conditions = table.Column<List<string>>(type: "text[]", nullable: false),
-                    current_medications = table.Column<List<string>>(type: "text[]", nullable: false)
+                    chronic_conditions = table.Column<string>(type: "text", nullable: false),
+                    current_medications = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("p_k_users", x => x.user_id);
+                    table.PrimaryKey("p_k_patients", x => x.user_id);
                     table.ForeignKey(
-                        name: "FK_patient_users_user_id",
+                        name: "FK_patients_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
                         principalColumn: "user_id",
@@ -164,9 +165,9 @@ namespace MediMind.Infrastructure.Migrations
                     table.PrimaryKey("p_k_doctor_healthcare_centers", x => x.id);
                     table.CheckConstraint("ck_consultation_fee", "consultation_fee > 0");
                     table.ForeignKey(
-                        name: "f_k_doctor_healthcare_centers_doctor_doctor_id",
+                        name: "f_k_doctor_healthcare_centers_doctors_doctor_id",
                         column: x => x.doctor_id,
-                        principalTable: "doctor",
+                        principalTable: "doctors",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -184,7 +185,7 @@ namespace MediMind.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     doctor_id = table.Column<Guid>(type: "uuid", nullable: false),
                     center_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    working_days = table.Column<List<string>>(type: "text[]", nullable: false),
+                    working_days = table.Column<string>(type: "text", nullable: false),
                     start_time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     end_time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     slot_duration = table.Column<int>(type: "integer", nullable: false),
@@ -199,11 +200,11 @@ namespace MediMind.Infrastructure.Migrations
                     table.CheckConstraint("ck_break_times", "break_end > break_start OR break_start IS NULL");
                     table.CheckConstraint("ck_schedule_times", "end_time > start_time");
                     table.ForeignKey(
-                        name: "f_k_doctor_schedules_doctor_doctor_id",
+                        name: "f_k_doctor_schedules_doctors_doctor_id",
                         column: x => x.doctor_id,
-                        principalTable: "doctor",
+                        principalTable: "doctors",
                         principalColumn: "user_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "f_k_doctor_schedules_healthcare_centers_center_id",
                         column: x => x.center_id,
@@ -244,27 +245,27 @@ namespace MediMind.Infrastructure.Migrations
                     table.PrimaryKey("p_k_appointments", x => x.appointment_id);
                     table.CheckConstraint("ck_duration_minutes", "duration_minutes IN (15, 30, 45, 60)");
                     table.ForeignKey(
-                        name: "f_k_appointments__doctor_doctor_id",
-                        column: x => x.doctor_id,
-                        principalTable: "doctor",
-                        principalColumn: "user_id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "f_k_appointments__healthcare_center_admin_approved_by_admin_id",
+                        name: "f_k_appointments__healthcare_center_admins_approved_by_admin_id",
                         column: x => x.approved_by_admin_id,
-                        principalTable: "healthcare_center_admin",
+                        principalTable: "healthcare_center_admins",
                         principalColumn: "user_id");
                     table.ForeignKey(
-                        name: "f_k_appointments__patient_patient_id",
-                        column: x => x.patient_id,
-                        principalTable: "patient",
+                        name: "f_k_appointments_doctors_doctor_id",
+                        column: x => x.doctor_id,
+                        principalTable: "doctors",
                         principalColumn: "user_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "f_k_appointments_healthcare_centers_center_id",
                         column: x => x.center_id,
                         principalTable: "healthcare_centers",
                         principalColumn: "center_id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "f_k_appointments_patients_patient_id",
+                        column: x => x.patient_id,
+                        principalTable: "patients",
+                        principalColumn: "user_id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -284,7 +285,7 @@ namespace MediMind.Infrastructure.Migrations
                     cvd_category = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     model_version = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     confidence = table.Column<decimal>(type: "numeric(5,2)", precision: 5, scale: 2, nullable: false),
-                    contributing_factors = table.Column<Dictionary<string, List<string>>>(type: "jsonb", nullable: false),
+                    contributing_factors = table.Column<string>(type: "jsonb", nullable: false),
                     recommendations = table.Column<string>(type: "text", nullable: false),
                     data_points_used = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -295,9 +296,9 @@ namespace MediMind.Infrastructure.Migrations
                     table.PrimaryKey("p_k_health_predictions", x => x.prediction_id);
                     table.CheckConstraint("ck_data_points", "data_points_used > 0");
                     table.ForeignKey(
-                        name: "f_k_health_predictions__patient_patient_id",
+                        name: "f_k_health_predictions_patients_patient_id",
                         column: x => x.patient_id,
-                        principalTable: "patient",
+                        principalTable: "patients",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -334,9 +335,9 @@ namespace MediMind.Infrastructure.Migrations
                     table.CheckConstraint("ck_systolic_bp", "systolic_bp BETWEEN 70 AND 250 OR systolic_bp IS NULL");
                     table.CheckConstraint("ck_temperature", "temperature BETWEEN 35 AND 43 OR temperature IS NULL");
                     table.ForeignKey(
-                        name: "f_k_health_records__patient_patient_id",
+                        name: "f_k_health_records_patients_patient_id",
                         column: x => x.patient_id,
-                        principalTable: "patient",
+                        principalTable: "patients",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -368,11 +369,11 @@ namespace MediMind.Infrastructure.Migrations
                         principalColumn: "appointment_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "f_k_payments_patient_patient_id",
+                        name: "f_k_payments_patients_patient_id",
                         column: x => x.patient_id,
-                        principalTable: "patient",
+                        principalTable: "patients",
                         principalColumn: "user_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -388,7 +389,7 @@ namespace MediMind.Infrastructure.Migrations
                     expiry_date = table.Column<DateOnly>(type: "date", nullable: true),
                     diagnosis = table.Column<string>(type: "text", nullable: false),
                     medications = table.Column<string>(type: "jsonb", nullable: false),
-                    lab_tests = table.Column<List<string>>(type: "text[]", nullable: false),
+                    lab_tests = table.Column<string>(type: "text", nullable: false),
                     follow_up_instructions = table.Column<string>(type: "text", nullable: true),
                     special_instructions = table.Column<string>(type: "text", nullable: true),
                     prescription_url = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: true),
@@ -408,11 +409,11 @@ namespace MediMind.Infrastructure.Migrations
                         principalColumn: "appointment_id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "f_k_prescriptions_doctor_doctor_id",
+                        name: "f_k_prescriptions_doctors_doctor_id",
                         column: x => x.doctor_id,
-                        principalTable: "doctor",
+                        principalTable: "doctors",
                         principalColumn: "user_id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "f_k_prescriptions_healthcare_centers_center_id",
                         column: x => x.center_id,
@@ -420,9 +421,9 @@ namespace MediMind.Infrastructure.Migrations
                         principalColumn: "center_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "f_k_prescriptions_patient_patient_id",
+                        name: "f_k_prescriptions_patients_patient_id",
                         column: x => x.patient_id,
-                        principalTable: "patient",
+                        principalTable: "patients",
                         principalColumn: "user_id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -595,6 +596,17 @@ namespace MediMind.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "i_x_doctors_license_number",
+                table: "doctors",
+                column: "license_number",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "i_x_doctors_specialization",
+                table: "doctors",
+                column: "specialization");
+
+            migrationBuilder.CreateIndex(
                 name: "i_x_health_prediction_records_prediction_id_record_id",
                 table: "health_prediction_records",
                 columns: new[] { "prediction_id", "record_id" },
@@ -616,8 +628,8 @@ namespace MediMind.Infrastructure.Migrations
                 columns: new[] { "patient_id", "record_date" });
 
             migrationBuilder.CreateIndex(
-                name: "i_x_healthcare_center_admin_center_id",
-                table: "healthcare_center_admin",
+                name: "i_x_healthcare_center_admins_center_id",
+                table: "healthcare_center_admins",
                 column: "center_id");
 
             migrationBuilder.CreateIndex(
@@ -771,13 +783,13 @@ namespace MediMind.Infrastructure.Migrations
                 name: "appointments");
 
             migrationBuilder.DropTable(
-                name: "doctor");
+                name: "healthcare_center_admins");
 
             migrationBuilder.DropTable(
-                name: "healthcare_center_admin");
+                name: "doctors");
 
             migrationBuilder.DropTable(
-                name: "patient");
+                name: "patients");
 
             migrationBuilder.DropTable(
                 name: "healthcare_centers");

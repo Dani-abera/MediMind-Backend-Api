@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace MediMind.Infrastructure.Data;
 
@@ -7,11 +8,16 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MediMindDb
 {
     public MediMindDbContext CreateDbContext(string[] args)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<MediMindDbContext>();
-        optionsBuilder.UseSqlite("Data Source=medimind.db");
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json")
+            .Build();
 
-        // Pass null for ICurrentUser and IMediator for design-time
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        var optionsBuilder = new DbContextOptionsBuilder<MediMindDbContext>();
+        optionsBuilder.UseNpgsql(connectionString);
+
         return new MediMindDbContext(optionsBuilder.Options, null, null);
     }
 }
-

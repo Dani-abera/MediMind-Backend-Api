@@ -48,8 +48,16 @@ public class MediMindDbContext(
             entity.SetTableName(ToSnakeCase(entity.GetTableName()!));
             foreach (var property in entity.GetProperties())
                 property.SetColumnName(ToSnakeCase(property.GetColumnName()!));
-            foreach (var key in entity.GetKeys())
-                key.SetName(ToSnakeCase(key.GetName()!));
+            // Only rename keys on hierarchy roots — TPT shares one key across types; touching it per entity would be redundant.
+            if (entity.BaseType is null)
+            {
+                foreach (var key in entity.GetKeys())
+                {
+                    var keyName = key.GetName();
+                    if (keyName is not null)
+                        key.SetName(ToSnakeCase(keyName));
+                }
+            }
             foreach (var fk in entity.GetForeignKeys())
                 fk.SetConstraintName(ToSnakeCase(fk.GetConstraintName()!));
             foreach (var index in entity.GetIndexes())

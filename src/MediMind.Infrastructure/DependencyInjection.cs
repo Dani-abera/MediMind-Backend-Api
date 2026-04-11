@@ -29,8 +29,12 @@ public static class DependencyInjection
     {
         // ─── PostgreSQL + EF Core 10 ─────────────────────────────────────────
         
+        // services.AddDbContext<MediMindDbContext>(options =>
+        //     options.UseInMemoryDatabase("medimind"));
+        
         services.AddDbContext<MediMindDbContext>(options =>
-            options.UseInMemoryDatabase("medimind"));
+            options.UseNpgsql(
+                config.GetConnectionString("DefaultConnection")));
 
         // ─── Unit of Work ────────────────────────────────────────────────────
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<MediMindDbContext>());

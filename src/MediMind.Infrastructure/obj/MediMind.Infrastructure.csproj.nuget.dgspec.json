@@ -69,7 +69,15 @@
               "target": "Package",
               "version": "[10.*, )"
             },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
             "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
+            "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[10.*, )"
             }
@@ -801,10 +809,6 @@
               "version": "[10.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.InMemory": {
-              "target": "Package",
-              "version": "[10.0.4, )"
-            },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[10.0.4, )"
             },

@@ -80,6 +80,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("users");
+        // Do not call HasName on the TPT root — EF applies one PK name to every table in the hierarchy,
+        // which breaks PostgreSQL (constraint names must be unique per schema). Per-table names come from each ToTable.
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasColumnName("user_id");
         builder.Property(u => u.Email).HasMaxLength(255).IsRequired();

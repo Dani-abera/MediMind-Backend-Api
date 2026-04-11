@@ -69,7 +69,15 @@
               "target": "Package",
               "version": "[10.*, )"
             },
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
             "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
+            "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[10.*, )"
             }

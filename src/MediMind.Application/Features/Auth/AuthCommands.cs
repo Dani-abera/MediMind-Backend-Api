@@ -1,9 +1,12 @@
 using FluentValidation;
 using MediatR;
+using MediMind.Application.Auth;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Exceptions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace MediMind.Application.Features.Auth;
 
@@ -114,7 +117,9 @@ public class VerifyOtpValidator : AbstractValidator<VerifyOtpCommand>
 public class VerifyOtpHandler(
     IUserRepository userRepository,
     ITokenService tokenService,
-    IUnitOfWork unitOfWork)
+    IUnitOfWork unitOfWork,
+    IOptions<TestOtpOptions> testOtpOptions,
+    IHostEnvironment hostEnvironment)
     : IRequestHandler<VerifyOtpCommand, AuthResult>
 {
     public async Task<AuthResult> Handle(VerifyOtpCommand request, CancellationToken ct)
@@ -122,10 +127,20 @@ public class VerifyOtpHandler(
         var user = await userRepository.GetByPhoneAsync(request.PhoneNumber, ct)
                    ?? throw new NotFoundException(nameof(User), request.PhoneNumber);
 
-        if (user.IsOtpLocked)
+        var testOtp = testOtpOptions.Value;
+        var useTestOtp = testOtp.Enabled
+                         && !hostEnvironment.IsProduction()
+                         && string.Equals(
+                             request.OtpCode.Trim(),
+                             testOtp.Code.Trim(),
+                             StringComparison.Ordinal);
+
+        if (!useTestOtp && user.IsOtpLocked)
             throw new DomainException("Too many failed attempts. Account temporarily locked for 15 minutes.");
 
-        if (!user.ValidateOtp(request.OtpCode))
+        if (useTestOtp)
+            user.ResetOtpState();
+        else if (!user.ValidateOtp(request.OtpCode))
             throw new DomainException($"Invalid verification code. Please try again.");
 
         if (user.Status == UserStatus.Pending)

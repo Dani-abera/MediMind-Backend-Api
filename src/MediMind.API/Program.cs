@@ -1,12 +1,15 @@
 using AspNetCoreRateLimit;
 using Hangfire;
 using MediMind.Application;
+using MediMind.Application.Auth;
 using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure;
 using MediMind.Infrastructure.Data;
 using MediMind.API.OpenApi;
 using MediMind.Infrastructure.SignalR;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Scalar.AspNetCore;
@@ -37,6 +40,7 @@ try
     // ─── Application + Infrastructure ────────────────────────────────────────
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.Configure<TestOtpOptions>(builder.Configuration.GetSection(TestOtpOptions.SectionName));
     
 
     // ─── Controllers ─────────────────────────────────────────────────────────
@@ -157,7 +161,27 @@ try
         job => job.SendRemindersAsync(CancellationToken.None),
         "*/30 * * * *"); // Every 30 minutes
 
-    Log.Information("MediMind API started successfully on {Urls}", app.Urls);
+    app.Lifetime.ApplicationStarted.Register(() =>
+    {
+        var server = app.Services.GetRequiredService<IServer>();
+        var addresses = server.Features.Get<IServerAddressesFeature>()?.Addresses;
+        if (addresses is { Count: > 0 })
+        {
+            Log.Information("MediMind API listening on {Urls}", string.Join(", ", addresses));
+            return;
+        }
+
+        var envUrls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS");
+        if (!string.IsNullOrWhiteSpace(envUrls))
+        {
+            Log.Information("MediMind API started (ASPNETCORE_URLS: {Urls})", envUrls);
+            return;
+        }
+
+        Log.Information(
+            "MediMind API started. URLs not bound yet in log; use launch profile URLs or set ASPNETCORE_URLS (see Properties/launchSettings.json).");
+    });
+
     await app.RunAsync();
 }
 catch (Exception ex)

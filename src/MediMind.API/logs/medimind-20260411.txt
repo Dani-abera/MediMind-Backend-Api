@@ -892,17 +892,19 @@ System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address 
 2026-04-11 01:13:52.488 -07:00 [WRN] Failed to determine the https port for redirect.
 2026-04-11 01:13:52.519 -07:00 [INF] HTTP GET /openapi/v1.json responded 404 in 33.5756 ms
 2026-04-11 01:13:57.176 -07:00 [INF] HTTP GET /openapi/v1.json responded 404 in 1.0577 ms
-2026-04-11 01:15:36.329 -07:00 [INF] MediMind API started successfully on []
-2026-04-11 01:15:51.673 -07:00 [INF] HTTP GET /scalar/v1 responded 307 in 1.3632 ms
-2026-04-11 01:15:51.821 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 87.5258 ms
-2026-04-11 01:15:52.324 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 15.4154 ms
-2026-04-11 01:15:52.347 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 21.9572 ms
-2026-04-11 01:15:52.704 -07:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 2.7114 ms
-2026-04-11 01:15:53.149 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 582.4119 ms
-2026-04-11 01:16:18.861 -07:00 [INF] HTTP GET /openapi/v1.json responded 307 in 0.5341 ms
-2026-04-11 01:16:18.908 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 39.7405 ms
-2026-04-11 01:18:28.397 -07:00 [INF] Handling RegisterPatientCommand
-2026-04-11 01:18:28.412 -07:00 [WRN] Validation failed for RegisterPatientCommand: Phone number must be in Ethiopian format: +251XXXXXXXXX; Patient must be at least 18 years old.; Password must contain at least one uppercase letter.
+2026-04-11 01:30:04.855 -07:00 [INF] Running appointment reminder job at "2026-04-11T08:30:04.8536980Z"
+2026-04-11 01:30:05.048 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 02:00:04.705 -07:00 [INF] Running appointment reminder job at "2026-04-11T09:00:04.7021080Z"
+2026-04-11 02:00:04.737 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 02:30:13.490 -07:00 [INF] Running appointment reminder job at "2026-04-11T09:30:13.4887380Z"
+2026-04-11 02:30:13.513 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 03:00:13.536 -07:00 [INF] Running appointment reminder job at "2026-04-11T10:00:13.5343020Z"
+2026-04-11 03:00:13.557 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 03:30:10.631 -07:00 [INF] Running appointment reminder job at "2026-04-11T10:30:10.6284310Z"
+2026-04-11 03:30:10.660 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 04:00:10.906 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:00:10.9044370Z"
+2026-04-11 04:00:10.927 -07:00 [INF] Appointment reminder job completed.
+rd must contain at least one uppercase letter.
 2026-04-11 01:18:28.431 -07:00 [ERR] An unhandled exception has occurred while executing the request.
 FluentValidation.ValidationException: Validation failed: 
  -- PhoneNumber: Phone number must be in Ethiopian format: +251XXXXXXXXX Severity: Error
@@ -927,3 +929,152 @@ FluentValidation.ValidationException: Validation failed:
 2026-04-11 01:19:17.862 -07:00 [WRN] SMS delivery failed to +251943034193. Status: "NotFound"
 2026-04-11 01:19:17.863 -07:00 [WRN] Slow request RegisterPatientCommand took 1597ms
 2026-04-11 01:19:17.875 -07:00 [INF] HTTP POST /api/v1/auth/register/patient responded 201 in 1623.6703 ms
+2026-04-11 01:30:07.140 -07:00 [INF] Running appointment reminder job at "2026-04-11T08:30:07.1387860Z"
+2026-04-11 01:30:07.322 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 01:31:38.990 -07:00 [INF] MediMind API started successfully on []
+2026-04-11 01:33:35.583 -07:00 [INF] MediMind API started successfully on []
+2026-04-11 01:33:35.647 -07:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-04-11 01:33:35.657 -07:00 [FTL] MediMind API terminated unexpectedly.
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Program.<Main>$(String[] args) in /Users/dani/Downloads/MediMind/src/MediMind.API/Program.cs:line 161
+2026-04-11 01:38:51.330 -07:00 [INF] MediMind API started successfully on []
+2026-04-11 01:39:22.032 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 100.9790 ms
+2026-04-11 01:39:22.970 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 9.9791 ms
+2026-04-11 01:39:22.982 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 21.5543 ms
+2026-04-11 01:39:23.489 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 181.9887 ms
+2026-04-11 01:55:32.673 -07:00 [INF] HTTP GET /scalar/ responded 200 in 49.2089 ms
+2026-04-11 01:55:33.409 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 10.4461 ms
+2026-04-11 01:55:33.416 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 6.8217 ms
+2026-04-11 01:55:33.850 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 84.9115 ms
+2026-04-11 01:55:36.211 -07:00 [INF] HTTP GET /scalar/ responded 200 in 6.3378 ms
+2026-04-11 01:55:36.225 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 2.1659 ms
+2026-04-11 01:55:36.227 -07:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 0.8781 ms
+2026-04-11 01:55:36.322 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 30.7743 ms
+2026-04-11 01:55:42.481 -07:00 [INF] HTTP GET /swagger/v1/swagger.json responded 307 in 4.5942 ms
+2026-04-11 01:55:42.498 -07:00 [INF] HTTP GET /swagger/v1/swagger.json responded 404 in 1.0598 ms
+2026-04-11 01:55:46.967 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 1.6787 ms
+2026-04-11 01:55:47.301 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 1.0483 ms
+2026-04-11 01:55:47.304 -07:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 0.5553 ms
+2026-04-11 01:55:47.570 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 16.1483 ms
+2026-04-11 02:00:07.029 -07:00 [INF] Running appointment reminder job at "2026-04-11T09:00:07.0241120Z"
+2026-04-11 02:00:07.302 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 03:44:50.234 -07:00 [FTL] MediMind API terminated unexpectedly.
+System.InvalidOperationException: Services for database providers 'Microsoft.EntityFrameworkCore.InMemory', 'Npgsql.EntityFrameworkCore.PostgreSQL' have been registered in the service provider. Only a single database provider can be registered in a service provider. If possible, ensure that Entity Framework is managing its service provider by removing the call to 'UseInternalServiceProvider'. Otherwise, consider conditionally registering the database provider, or maintaining one service provider per database provider.
+   at Microsoft.EntityFrameworkCore.Internal.DbContextServices.Initialize(IServiceProvider scopedProvider, DbContextOptions contextOptions, DbContext context)
+   at Microsoft.EntityFrameworkCore.DbContext.get_ContextServices()
+   at Microsoft.EntityFrameworkCore.DbContext.get_InternalServiceProvider()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Infrastructure.IInfrastructure<System.IServiceProvider>.get_Instance()
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService(IInfrastructure`1 accessor, Type serviceType)
+   at Microsoft.EntityFrameworkCore.Infrastructure.Internal.InfrastructureExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.AccessorExtensions.GetService[TService](IInfrastructure`1 accessor)
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.get_Dependencies()
+   at Microsoft.EntityFrameworkCore.Infrastructure.DatabaseFacade.EnsureCreatedAsync(CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in /Users/dani/Downloads/MediMind/src/MediMind.API/Program.cs:line 90
+2026-04-11 03:45:40.453 -07:00 [INF] MediMind API started successfully on []
+2026-04-11 03:45:58.750 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 101.7211 ms
+2026-04-11 03:45:58.805 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 9.2856 ms
+2026-04-11 03:45:58.818 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 9.1245 ms
+2026-04-11 03:45:59.213 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 182.6956 ms
+2026-04-11 03:54:10.286 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 100.9611 ms
+2026-04-11 03:54:11.300 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 9.3188 ms
+2026-04-11 03:54:11.303 -07:00 [INF] HTTP GET /scalar/scala2026-04-11 03:54:18.314 -07:00 [INF] HTTP GET /scalar/v1 responded 404 in 8.0493 ms
+2026-04-11 03:54:22.902 -07:00 [INF] HTT2026-04-11 03:56:26.956 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 14.4927 ms
+2026-04-11 03:56:26.984 -07:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 2.7545 ms
+2026-04-11 03:56:26.984 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 5.2917 ms
+2026-04-11 03:56:27.231 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 27.8961 ms
+2026-04-11 03:58:12.099 -07:00 [INF] Handling RegisterPatientCommand
+20262026-04-11 04:00:03.610 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:00:03.6096010Z"
+2026-04-11 04:00:04.275 -07:00 [INF] Appointment reminder job completed.
+26-04-11 03:58:14.302 -07:00 [INF] HTTP POST /api/v1/auth/register/patient responded 201 in 2417.1088 ms
+2026-04-11 03:59:13.161 -07:00 [INF] Handling VerifyOtpCommand
+2026-04-11 03:59:13.310 -07:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Invalid verification code. Please try again.
+   at MediMind.Application.Features.Auth.VerifyOtpHandler.Handle(VerifyOtpCommand request, CancellationToken ct)
+   at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediMind.Application.Common.Behaviors.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediMind.API.Controllers.AuthController.VerifyOtp(VerifyOtpCommand command, CancellationToken ct)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-11 03:59:13.335 -07:00 [INF] HTTP POST /api/v1/auth/verify-otp responded 400 in 210.3201 ms
+2026-04-11 04:00:10.896 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:00:10.8968420Z"
+2026-04-11 04:00:10.978 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 04:01:53.622 -07:00 [INF] Handling SendLoginOtpCommand
+2026-04-11 04:01:54.789 -07:00 [WRN] SMS delivery failed to +251943034193. Status: "NotFound"
+2026-04-11 04:01:54.790 -07:00 [WRN] Slow request SendLoginOtpCommand took 1167ms
+2026-04-11 04:01:54.792 -07:00 [INF] HTTP POST /api/v1/auth/login/patient/send-otp responded 200 in 1202.3704 ms
+2026-04-11 04:02:19.543 -07:00 [INF] Handling VerifyOtpCommand
+2026-04-11 04:02:19.567 -07:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Invalid verification code. Please try again.
+   at MediMind.Application.Features.Auth.VerifyOtpHandler.Handle(VerifyOtpCommand request, CancellationToken ct)
+   at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediMind.Application.Common.Behaviors.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediMind.API.Controllers.AuthController.VerifyOtp(VerifyOtpCommand command, CancellationToken ct)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-11 04:02:19.569 -07:00 [INF] HTTP POST /api/v1/auth/verify-otp responded 400 in 41.8788 ms
