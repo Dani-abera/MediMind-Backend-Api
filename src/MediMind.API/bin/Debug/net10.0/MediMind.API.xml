@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediMind.API</name>
+    </assembly>
+    <members>
+        <member name="T:MediMind.API.Controllers.HealthcareCentersController">
+            <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Search(System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <summary>
+            Search available healthcare centers.
+            No authentication required — patients browse before booking.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctors(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>Get doctors available at a specific healthcare center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Register(MediMind.Application.Features.HealthcareCenters.RegisterHealthcareCenterCommand,System.Threading.CancellationToken)">
+            <summary>Register a new healthcare center (creates first admin account too).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.RegisterDoctor(System.Guid,MediMind.API.Controllers.RegisterDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Register a doctor at this center (Admin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.ConfigureSchedule(System.Guid,System.Guid,MediMind.API.Controllers.ConfigureDoctorScheduleRequest,System.Threading.CancellationToken)">
+            <summary>Configure a doctor's schedule at this center (Admin only — FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConfiguration(System.Guid,MediMind.API.Controllers.UpdateCenterConfigurationRequest,System.Threading.CancellationToken)">
+            <summary>Update center operational configuration (Admin only — FR-030).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PaymentsController">
+            <summary>Payment processing via Chapa gateway</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Payment processing via Chapa gateway</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.InitiatePayment(MediMind.API.Controllers.InitiatePaymentRequest,System.Threading.CancellationToken)">
+            <summary>Initiate payment for an appointment (Patient only — FR-026).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Webhook(MediMind.API.Controllers.ChapaWebhookPayload,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Chapa payment webhook — verifies payment and confirms appointment.
+            IMPORTANT: This endpoint must NOT require authentication (called by Chapa servers).
+            Secured via HMAC-SHA256 signature verification (NFR-006).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.GetReceipt(System.String,System.Threading.CancellationToken)">
+            <summary>Get payment receipt (Patient only — FR-028).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.ConsultationsController">
+            <summary>WebRTC video consultation management</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ConsultationsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>WebRTC video consultation management</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ConsultationsController.StartConsultation(System.Guid,System.Threading.CancellationToken)">
+            <summary>Doctor starts video consultation (creates WebRTC room — FR-017).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ConsultationsController.JoinConsultation(System.Guid,System.Threading.CancellationToken)">
+            <summary>Patient joins video consultation (gets WebRTC room ID — FR-017).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ConsultationsController.EndConsultation(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>Doctor ends video consultation.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ConsultationsController.IssuePrescription(System.Guid,MediMind.API.Controllers.IssuePrescriptionRequest,System.Threading.CancellationToken)">
+            <summary>Issue prescription after consultation (Doctor only).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AnalyticsController">
+            <summary>Analytics dashboard for healthcare center administrators (FR-024)</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AnalyticsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Analytics dashboard for healthcare center administrators (FR-024)</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AnalyticsController.GetDashboard(System.Guid,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
+            <summary>Get today's dashboard analytics for a healthcare center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AnalyticsController.GetWeeklyTrend(System.Guid,System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Get weekly appointment trends (line chart data).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AuthController">
+            <summary>Authentication — Registration, OTP, Login, Token refresh</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.#ctor(MediatR.IMediator)">
+            <summary>Authentication — Registration, OTP, Login, Token refresh</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.RegisterPatient(MediMind.Application.Features.Auth.RegisterPatientCommand,System.Threading.CancellationToken)">
+            <summary>Register a new patient account. Sends OTP to phone number.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.VerifyOtp(MediMind.Application.Features.Auth.VerifyOtpCommand,System.Threading.CancellationToken)">
+            <summary>Verify OTP code — activates account and returns JWT tokens.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.SendPatientLoginOtp(MediMind.Application.Features.Auth.SendLoginOtpCommand,System.Threading.CancellationToken)">
+            <summary>Send OTP to phone number for patient login.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.SendDoctorLoginOtp(MediMind.Application.Features.Auth.SendDoctorLoginOtpCommand,System.Threading.CancellationToken)">
+            <summary>Send OTP to doctor using their badge/license number.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.RefreshToken(MediMind.Application.Features.Auth.RefreshTokenCommand,System.Threading.CancellationToken)">
+            <summary>Refresh access token using refresh token.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AppointmentsController">
+            <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.GetMyAppointments(System.Threading.CancellationToken)">
+            <summary>
+            Get patient's appointment history.
+            Patients can only see their own appointments (RBAC enforced).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.GetAvailableSlots(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Get available time slots for a doctor on a specific date.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.BookAppointment(MediMind.API.Controllers.BookAppointmentRequest,System.Threading.CancellationToken)">
+            <summary>Book an appointment. Patient can only book for themselves.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.ApproveAppointment(System.Guid,System.Threading.CancellationToken)">
+            <summary>Approve a pending appointment (Healthcare Center Admin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.RejectAppointment(System.Guid,MediMind.API.Controllers.RejectRequest,System.Threading.CancellationToken)">
+            <summary>Reject a pending appointment (Healthcare Center Admin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CancelAppointment(System.Guid,MediMind.API.Controllers.CancelRequest,System.Threading.CancellationToken)">
+            <summary>Cancel an appointment (Patient or Admin).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.QueueController">
+            <summary>Real-time queue management for healthcare centers</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Real-time queue management for healthcare centers</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetCenterQueue(System.Guid,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
+            <summary>Get the full queue dashboard for a healthcare center (Admin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.CallNextPatient(System.Guid,System.Threading.CancellationToken)">
+            <summary>Call next patient in queue (Admin action — triggers real-time SignalR broadcast).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.MarkNoShow(System.Guid,System.Threading.CancellationToken)">
+            <summary>Mark a patient as no-show (Admin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetMyQueueStatus(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get patient's own queue status (Patient only) — polling fallback when WebSocket unavailable.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthController">
+            <summary>Patient health monitoring — log vitals and request AI predictions</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Patient health monitoring — log vitals and request AI predictions</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthController.LogHealthData(MediMind.API.Controllers.LogHealthDataRequest,System.Threading.CancellationToken)">
+            <summary>Log daily vital signs. Patients can only log their own data.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthController.GetHealthRecords(System.Int32,System.Threading.CancellationToken)">
+            <summary>Get health records history (last N days).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthController.RequestPrediction(System.Threading.CancellationToken)">
+            <summary>
+            Request AI disease risk prediction.
+            Calls Python Flask ML microservice with patient's health data.
+            Minimum 7 days of data required; 30+ days for high confidence.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.ErrorController">
+            <summary>Global error handler — maps domain exceptions to HTTP responses.</summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindOpenApiExtensions">
+            <summary>
+            Registers OpenAPI document generation (Microsoft.AspNetCore.OpenApi) with MediMind-specific metadata.
+            Scalar consumes the generated JSON; Swashbuckle is not used.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindOpenApiDocumentTransformer">
+            <summary>
+            Rich top-level API description, contact, license, and JWT Bearer scheme for Scalar.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.OpenApi.MediMindOpenApiDocumentTransformer.#ctor(Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider)">
+            <summary>
+            Rich top-level API description, contact, license, and JWT Bearer scheme for Scalar.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindAuthOperationTransformer">
+            <summary>
+            Marks operations as requiring Bearer auth unless explicitly <see cref="T:Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute"/>.
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>

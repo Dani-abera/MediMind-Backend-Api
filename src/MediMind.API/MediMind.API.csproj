@@ -7,6 +7,8 @@
     <RootNamespace>MediMind.API</RootNamespace>
     <UserSecretsId>medimind-api-secrets</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!-- OpenAPI / Swagger -->
+    <!-- OpenAPI document generation + Scalar UI (no Swashbuckle) -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.*" />
-    <PackageReference Include="Microsoft.OpenApi" Version="2.*" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.13.22" />
     <!-- Rate limiting -->
     <PackageReference Include="AspNetCoreRateLimit" Version="5.*" />
     <!-- Serilog -->

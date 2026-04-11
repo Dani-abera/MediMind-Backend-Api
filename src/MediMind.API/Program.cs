@@ -5,9 +5,11 @@ using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure;
 using MediMind.Infrastructure.Data;
+using MediMind.API.OpenApi;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Events;
 
@@ -40,41 +42,7 @@ try
     // ─── Controllers ─────────────────────────────────────────────────────────
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
-
-    // ─── Swagger / OpenAPI ────────────────────────────────────────────────────
-    builder.Services.AddSwaggerGen(options =>
-    {
-        options.SwaggerDoc("v1", new Microsoft.OpenApi.OpenApiInfo
-        {
-            Title = "MediMind API",
-            Version = "v1",
-            Description = "AI-Enhanced Hospital Appointment, Queue, and Health Monitoring System — Backend API",
-            Contact = new Microsoft.OpenApi.OpenApiContact { Name = "MediMind Team", Email = "support@medimind.et" }
-        });
-
-        // JWT Bearer support in Swagger UI
-        options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.OpenApiSecurityScheme
-        {
-            Name = "Authorization",
-            Type = Microsoft.OpenApi.SecuritySchemeType.Http,
-            Scheme = "bearer",
-            BearerFormat = "JWT",
-            In = Microsoft.OpenApi.ParameterLocation.Header,
-            Description = "Enter token like: Bearer eyJhbGciOiJIUzI1NiIs..."
-        });
-        // options.AddSecurityRequirement(document => new Microsoft.OpenApi.OpenApiSecurityRequirement
-        // {
-        //     {
-        //         new Microsoft.OpenApi.OpenApiSecuritySchemeReference(new Microsoft.OpenApi.OpenApiReference { Id = "Bearer", Type = Microsoft.OpenApi.ReferenceType.SecurityScheme }),
-        //         new System.Collections.Generic.List<string>()
-        //     }
-        // });
-        
-        // Include XML comments
-        var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
-        var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-        if (File.Exists(xmlPath)) options.IncludeXmlComments(xmlPath);
-    });
+    builder.Services.AddMediMindOpenApi();
 
     // ─── CORS ─────────────────────────────────────────────────────────────────
     builder.Services.AddCors(options =>
@@ -134,16 +102,6 @@ try
         RequestPath = "/uploads"
     });
 
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
-        {
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "MediMind API v1");
-            c.RoutePrefix = string.Empty; // Swagger at root
-        });
-    }
-
     app.UseHttpsRedirection();
     app.UseCors("MediMindPolicy");
     app.UseIpRateLimiting();
@@ -155,6 +113,23 @@ try
     app.UseExceptionHandler("/error");
 
     app.MapControllers();
+
+    if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
+    {
+        app.MapOpenApi();
+        app.MapScalarApiReference(options =>
+        {
+            options
+                .WithTitle("MediMind API")
+                .WithTheme(ScalarTheme.Saturn)
+                .AddDocument(
+                    MediMindOpenApiExtensions.DocumentName,
+                    "MediMind API v1",
+                    $"/openapi/{MediMindOpenApiExtensions.DocumentName}.json")
+                .AddPreferredSecuritySchemes("Bearer")
+                .AddHttpAuthentication("Bearer", _ => { });
+        });
+    }
 
     // ─── SignalR Hub Endpoint ─────────────────────────────────────────────────
     app.MapHub<QueueHub>("/hubs/queue");

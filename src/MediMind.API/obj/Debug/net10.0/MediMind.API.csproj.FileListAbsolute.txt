@@ -71,9 +71,6 @@
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Serilog.Sinks.File.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Serilog.Sinks.PeriodicBatching.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Serilog.Sinks.PostgreSQL.dll
-/Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
-/Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
-/Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/System.ClientModel.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/System.IO.Hashing.dll
@@ -171,3 +168,6 @@
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Microsoft.EntityFrameworkCore.InMemory.dll
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/linux-musl-riscv64/native/libe_sqlite3.so
 /Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/linux-riscv64/native/libe_sqlite3.so
+/Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/Scalar.AspNetCore.dll
+/Users/dani/Downloads/MediMind/src/MediMind.API/bin/Debug/net10.0/MediMind.API.xml
+/Users/dani/Downloads/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.xml

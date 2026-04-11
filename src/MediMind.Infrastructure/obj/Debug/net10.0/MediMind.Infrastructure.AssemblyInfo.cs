@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediMind.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bc259c80e7a619b925ef9fd16bc83911090e8362")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+813ff8d1899bc7583481d66b5e38650287b07e20")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediMind.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediMind.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

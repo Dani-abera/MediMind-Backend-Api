@@ -7,6 +7,7 @@ using MediMind.Application.Features.Prescriptions;
 using MediMind.Application.Features.VideoConsultations;
 using MediMind.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediMind.API.Controllers;
@@ -16,6 +17,7 @@ namespace MediMind.API.Controllers;
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
+[Tags("Healthcare centers")]
 [Route("api/v1/healthcare-centers")]
 public class HealthcareCentersController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
@@ -121,6 +123,7 @@ public class HealthcareCentersController(IMediator mediator, ICurrentUser curren
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Payment processing via Chapa gateway</summary>
+[Tags("Payments")]
 [Route("api/v1/payments")]
 public class PaymentsController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
@@ -176,6 +179,7 @@ public class PaymentsController(IMediator mediator, ICurrentUser currentUser)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>WebRTC video consultation management</summary>
+[Tags("Video consultations")]
 [Route("api/v1/consultations")]
 [Authorize]
 public class ConsultationsController(IMediator mediator, ICurrentUser currentUser)
@@ -244,6 +248,7 @@ public class ConsultationsController(IMediator mediator, ICurrentUser currentUse
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Analytics dashboard for healthcare center administrators (FR-024)</summary>
+[Tags("Analytics")]
 [Route("api/v1/analytics")]
 [Authorize(Policy = "AdminOnly")]
 public class AnalyticsController(IMediator mediator, ICurrentUser currentUser)

@@ -5,6 +5,7 @@ using MediMind.Application.Features.HealthRecords;
 using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MediMind.Domain.Enums;
 
@@ -25,6 +26,7 @@ public abstract class BaseController(IMediator mediator) : ControllerBase
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Authentication — Registration, OTP, Login, Token refresh</summary>
+[Tags("Authentication")]
 [Route("api/v1/auth")]
 public class AuthController(IMediator mediator) : BaseController(mediator)
 {
@@ -91,6 +93,7 @@ public class AuthController(IMediator mediator) : BaseController(mediator)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
+[Tags("Appointments")]
 [Authorize]
 public class AppointmentsController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
@@ -188,6 +191,7 @@ public class AppointmentsController(IMediator mediator, ICurrentUser currentUser
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Real-time queue management for healthcare centers</summary>
+[Tags("Queue")]
 [Authorize]
 public class QueueController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
@@ -247,6 +251,7 @@ public class QueueController(IMediator mediator, ICurrentUser currentUser)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Patient health monitoring — log vitals and request AI predictions</summary>
+[Tags("Health records")]
 [Authorize]
 [Route("api/v1/health")]
 public class HealthController(IMediator mediator, ICurrentUser currentUser)

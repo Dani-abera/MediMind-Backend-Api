@@ -60,17 +60,13 @@
               "target": "Package",
               "version": "[10.*, )"
             },
-            "Microsoft.OpenApi": {
+            "Scalar.AspNetCore": {
               "target": "Package",
-              "version": "[2.*, )"
+              "version": "[2.13.22, )"
             },
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[8.*, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[10.1.7, )"
             }
           },
           "imports": [
