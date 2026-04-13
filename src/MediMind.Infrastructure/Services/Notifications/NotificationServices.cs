@@ -18,30 +18,54 @@ public class GeezSmsService(
     : ISmsService
 {
     private readonly string _apiKey = config["GeezsMS:ApiKey"] ?? string.Empty;
-    private readonly string _senderName = config["GeezsMS:SenderName"] ?? "MediMind";
 
     public async Task SendAsync(string phoneNumber, string message, CancellationToken ct = default)
     {
-        var client = httpClientFactory.CreateClient("GeezSMS");
-        try
+        if (string.IsNullOrWhiteSpace(_apiKey))
+            throw new InvalidOperationException("GeezsMS:ApiKey is not configured.");
+
+        var client = httpClientFactory.CreateClient();
+
+        async Task<(bool Success, string ResponseBody)> SendToGeezAsync(string phone)
         {
             var payload = new
             {
-                api_key = _apiKey,
-                from = _senderName,
-                to = phoneNumber,
-                message
+                token = _apiKey,
+                phone,
+                msg = message
             };
-            var response = await client.PostAsJsonAsync("send", payload, ct);
-            if (!response.IsSuccessStatusCode)
-                logger.LogWarning("SMS delivery failed to {Phone}. Status: {Status}",
-                    phoneNumber, response.StatusCode);
+
+            var response = await client.PostAsJsonAsync("https://api.geezsms.com/api/v1/sms/send", payload, ct);
+            var responseBody = await response.Content.ReadAsStringAsync(ct);
+            return (response.IsSuccessStatusCode, responseBody);
         }
-        catch (Exception ex)
+
+        var primary = await SendToGeezAsync(phoneNumber);
+        if (primary.Success)
         {
-            logger.LogError(ex, "SMS delivery exception for {Phone}", phoneNumber);
-            // SMS failure should not crash the application — NFR-011 Fault Tolerance
+            logger.LogInformation("SMS delivered to {Phone}.", phoneNumber);
+            return;
         }
+
+        // Some gateways reject '+' prefix and require 2519XXXXXXXX format.
+        var normalizedPhone = phoneNumber.TrimStart('+');
+        if (!string.Equals(normalizedPhone, phoneNumber, StringComparison.Ordinal))
+        {
+            var fallback = await SendToGeezAsync(normalizedPhone);
+            if (fallback.Success)
+            {
+                logger.LogInformation("SMS delivered to {Phone} using normalized number.", phoneNumber);
+                return;
+            }
+
+            logger.LogError(
+                "SMS delivery failed for {Phone}. PrimaryResponse={Primary}. FallbackResponse={Fallback}",
+                phoneNumber, primary.ResponseBody, fallback.ResponseBody);
+            throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
+        }
+
+        logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, primary.ResponseBody);
+        throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
     }
 
     public async Task SendOtpAsync(string phoneNumber, string otpCode, CancellationToken ct = default) =>

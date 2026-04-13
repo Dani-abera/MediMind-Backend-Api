@@ -5568,7 +5568,7 @@
     ]
   },
   "packageFolders": {
-    "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/41ece7a93d6e32d2ccf14fc7d8279abe/nuget": {}
+    "/Users/dani/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5576,7 +5576,7 @@
       "projectUniqueName": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
       "projectName": "MediMind.Infrastructure",
       "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
-      "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/41ece7a93d6e32d2ccf14fc7d8279abe/nuget",
+      "packagesPath": "/Users/dani/.nuget/packages/",
       "outputPath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
