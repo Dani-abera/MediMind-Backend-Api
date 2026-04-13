@@ -820,11 +820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
+      "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/MediMind.Application.csproj",
       "projectName": "MediMind.Application",
-      "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
+      "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/MediMind.Application.csproj",
       "packagesPath": "/Users/dani/.nuget/packages/",
-      "outputPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/obj/",
+      "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/dani/.nuget/NuGet/NuGet.Config"
@@ -840,8 +840,8 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
-            "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj": {
-              "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj"
+            "/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/MediMind.Domain.csproj": {
+              "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/MediMind.Domain.csproj"
             }
           }
         }

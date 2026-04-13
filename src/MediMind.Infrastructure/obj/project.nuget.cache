@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qIUjNDB5X54=",
+  "dgSpecHash": "fyHpZckNuTs=",
   "success": true,
-  "projectFilePath": "/Users/dani/Downloads/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
+  "projectFilePath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
   "expectedPackageFiles": [
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.hangfire/8.0.1/aspnetcore.healthchecks.hangfire.8.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/aspnetcore.healthchecks.npgsql/8.0.2/aspnetcore.healthchecks.npgsql.8.0.2.nupkg.sha512",

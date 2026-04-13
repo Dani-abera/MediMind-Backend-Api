@@ -3888,3 +3888,83 @@ MediMind.Domain.Exceptions.DomainException: This phone number is in use by anoth
 2026-04-13 07:21:21.830 -07:00 [INF] Handled DoctorVerifyOtpCommand in 42ms
 2026-04-13 07:21:21.831 -07:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 75.0880 ms
 2026-04-13 07:22:05.566 -07:00 [INF] HTTP GET /api/v1/Appointments/my responded 403 in 22.1627 ms
+2026-04-13 07:31:46.753 -07:00 [INF] Running appointment reminder job at "2026-04-13T14:31:46.7505280Z"
+2026-04-13 07:31:47.003 -07:00 [INF] Appointment reminder job completed.
+2026-04-13 07:38:08.030 -07:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-04-13 07:38:09.396 -07:00 [FTL] MediMind API terminated unexpectedly.
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Program.<Main>$(String[] args) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Program.cs:line 190
+2026-04-13 07:39:10.216 -07:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-13 07:39:10.239 -07:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-13 07:39:10.239 -07:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-13 07:39:13.195 -07:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.8024 ms
+2026-04-13 07:39:13.596 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 305.7903 ms
+2026-04-13 07:39:13.636 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 26.7750 ms
+2026-04-13 07:39:13.726 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 116.3482 ms
+2026-04-13 07:39:14.456 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 426.5056 ms
+2026-04-13 07:39:47.513 -07:00 [INF] Handling SearchHealthcareCentersQuery
+2026-04-13 07:39:48.101 -07:00 [INF] Handled SearchHealthcareCentersQuery in 586ms
+2026-04-13 07:39:48.171 -07:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 741.5625 ms
+2026-04-13 07:42:01.242 -07:00 [INF] Handling AdminLoginCommand
+2026-04-13 07:42:02.352 -07:00 [WRN] Slow request AdminLoginCommand took 1108ms
+2026-04-13 07:42:02.363 -07:00 [INF] HTTP POST /api/v1/admin/login responded 200 in 1296.8041 ms
+2026-04-13 07:43:00.112 -07:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-13 07:43:00.136 -07:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-13 07:43:00.136 -07:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-13 07:43:01.333 -07:00 [INF] HTTP GET /scalar/v1 responded 307 in 3.5510 ms
+2026-04-13 07:43:01.826 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 444.7528 ms
+2026-04-13 07:43:01.848 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 12.3452 ms
+2026-04-13 07:43:01.899 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 62.9753 ms
+2026-04-13 07:43:01.964 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 2.3377 ms
+2026-04-13 07:43:01.978 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 15.9078 ms
+2026-04-13 07:43:02.698 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 379.1008 ms
