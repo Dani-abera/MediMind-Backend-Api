@@ -109,7 +109,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.ToTable("patients");
         builder.Property(p => p.Id).HasColumnName("patient_id");
         builder.Property(p => p.Address).HasMaxLength(300);
-        builder.Property(p => p.BloodType).HasConversion<string>().HasMaxLength(5);
+        builder.Property(p => p.BloodType).HasConversion<string>().HasMaxLength(20);
         JsonCollectionMapping.MapStringList(builder.Property(p => p.ChronicConditions), "text");
         JsonCollectionMapping.MapStringList(builder.Property(p => p.CurrentMedications), "text");
 
@@ -205,7 +205,9 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.HasIndex(c => c.SubscriptionStatus);
 
         builder.HasMany(c => c.Admins).WithOne(a => a.Center)
-            .HasForeignKey(a => a.CenterId).OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(a => a.CenterId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(c => c.Appointments).WithOne(a => a.Center)
             .HasForeignKey(a => a.CenterId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(c => c.QueueEntries).WithOne(q => q.Center)

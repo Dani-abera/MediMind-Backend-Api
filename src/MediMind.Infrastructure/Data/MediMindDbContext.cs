@@ -49,16 +49,9 @@ public class MediMindDbContext(
             entity.SetTableName(ToSnakeCase(entity.GetTableName()!));
             foreach (var property in entity.GetProperties())
                 property.SetColumnName(ToSnakeCase(property.GetColumnName()!));
-            // Only rename keys on hierarchy roots — TPT shares one key across types; touching it per entity would be redundant.
-            if (entity.BaseType is null)
-            {
-                foreach (var key in entity.GetKeys())
-                {
-                    var keyName = key.GetName();
-                    if (keyName is not null)
-                        key.SetName(ToSnakeCase(keyName));
-                }
-            }
+            // Do not rename PK constraint names globally.
+            // In TPT hierarchies, EF can reuse one PK name across derived tables, and PostgreSQL requires
+            // constraint names to be unique in the schema.
             foreach (var fk in entity.GetForeignKeys())
                 fk.SetConstraintName(ToSnakeCase(fk.GetConstraintName()!));
             foreach (var index in entity.GetIndexes())
@@ -85,7 +78,10 @@ public class MediMindDbContext(
 
         // Dispatch domain events AFTER successful save (outbox-style)
         foreach (var domainEvent in domainEvents)
-            await mediator.Publish(domainEvent, ct);
+        {
+            if (domainEvent is INotification notification)
+                await mediator.Publish(notification, ct);
+        }
 
         return result;
     }

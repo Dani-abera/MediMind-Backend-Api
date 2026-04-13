@@ -113,13 +113,13 @@ public class Doctor : User
 /// <summary>Maps to `healthcare_center_admins` table.</summary>
 public class HealthcareCenterAdmin : User
 {
-    public Guid CenterId { get; private set; }
+    public Guid? CenterId { get; private set; }
     public string Role { get; private set; } = string.Empty;
     public string? Department { get; private set; }
     public bool IsActive { get; private set; } = true;
 
     // Navigation
-    public HealthcareCenter Center { get; private set; } = null!;
+    public HealthcareCenter? Center { get; private set; }
     public ICollection<Appointment> ApprovedAppointments { get; private set; } = [];
 
     private HealthcareCenterAdmin() { }
@@ -130,7 +130,7 @@ public class HealthcareCenterAdmin : User
         string fullName,
         DateOnly dateOfBirth,
         Gender gender,
-        Guid centerId,
+        Guid? centerId,
         string role,
         string? department = null)
         : base(email, phoneNumber, fullName, dateOfBirth, gender, UserType.Admin)
