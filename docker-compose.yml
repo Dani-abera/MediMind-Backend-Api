@@ -67,6 +67,10 @@ services:
       MlService__BaseUrl: "http://ml_service:5001"
       Chapa__SecretKey: "CHASECK_TEST-your-test-key"
       GeezsMS__ApiKey: "your-geez-sms-key"
+      # Optional: Cloudinary for prescriptions / images (omit to use local /uploads)
+      # Cloudinary__CloudName: "your-cloud-name"
+      # Cloudinary__ApiKey: "your-api-key"
+      # Cloudinary__ApiSecret: "your-api-secret"
     ports:
       - "5000:8080"
     depends_on:

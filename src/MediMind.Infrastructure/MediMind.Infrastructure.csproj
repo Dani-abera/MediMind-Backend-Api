@@ -34,8 +34,8 @@
     <!-- SignalR (real-time queue updates) -->
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.*" />
 
-    <!-- Azure Blob Storage -->
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.*" />
+    <!-- Media / document storage (prescriptions PDF, profile images) -->
+    <PackageReference Include="CloudinaryDotNet" Version="1.28.0" />
 
     <!-- HTTP Client for ML service + Chapa -->
     <PackageReference Include="Microsoft.Extensions.Http" Version="10.*" />

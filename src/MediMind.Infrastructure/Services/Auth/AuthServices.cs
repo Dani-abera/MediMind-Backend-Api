@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using MediMind.Domain.Common.Interfaces;
+using MediMind.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -12,7 +13,7 @@ namespace MediMind.Infrastructure.Services.Auth;
 
 // ─── JWT Token Service ────────────────────────────────────────────────────────
 
-public class TokenService(IConfiguration config) : ITokenService
+public class TokenService(IConfiguration config) : ITokenService, IJwtService
 {
     private readonly string _secretKey = config["Jwt:SecretKey"]
         ?? throw new InvalidOperationException("Jwt:SecretKey is not configured.");
@@ -33,6 +34,8 @@ public class TokenService(IConfiguration config) : ITokenService
             new(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new("user_type", userType),
+            new(ClaimTypes.Role, userType),
+            new(ClaimTypes.NameIdentifier, userId.ToString()),
         };
 
         if (tenantId.HasValue)
@@ -72,6 +75,15 @@ public class TokenService(IConfiguration config) : ITokenService
         var bytes = new byte[64];
         RandomNumberGenerator.Fill(bytes);
         return Convert.ToBase64String(bytes);
+    }
+}
+
+public class AuthService(ITokenService tokenService) : IAuthService
+{
+    public Task<(string AccessToken, string RefreshToken)> GenerateAuthTokensAsync(User user, CancellationToken ct = default)
+    {
+        var tokens = tokenService.GenerateTokens(user.Id, user.UserType.ToString(), null);
+        return Task.FromResult(tokens);
     }
 }
 

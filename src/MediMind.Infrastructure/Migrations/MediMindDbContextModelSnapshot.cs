@@ -560,6 +560,11 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("phone_number");
 
+                    b.Property<string>("ProfileImageUrl")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)")
+                        .HasColumnName("profile_image_url");
+
                     b.Property<string>("Region")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -622,6 +627,58 @@ namespace MediMind.Infrastructure.Migrations
 
                             t.HasCheckConstraint("ck_slot_duration", "slot_duration_minutes IN (15, 30, 45, 60)");
                         });
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.OtpVerification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
+                        .HasColumnName("code");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime>("ExpirationTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expiration_time");
+
+                    b.Property<bool>("IsUsed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_used");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("phone_number");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("purpose");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("p_k_otp_verifications");
+
+                    b.HasIndex("PhoneNumber", "Purpose", "IsUsed")
+                        .HasDatabaseName("i_x_otp_verifications_phone_number_purpose_is_used");
+
+                    b.ToTable("otp_verifications", (string)null);
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Payment", b =>
@@ -756,8 +813,8 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("patient_id");
 
                     b.Property<string>("PrescriptionUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)")
                         .HasColumnName("prescription_url");
 
                     b.Property<string>("QrCode")
@@ -916,6 +973,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("character varying(20)")
                         .HasColumnName("gender");
 
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_verified");
+
                     b.Property<DateTime?>("LastLogin")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("last_login");
@@ -945,8 +1006,8 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("phone_number");
 
                     b.Property<string>("ProfileImageUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)")
                         .HasColumnName("profile_image_url");
 
                     b.Property<string>("Status")
@@ -1102,6 +1163,12 @@ namespace MediMind.Infrastructure.Migrations
                 {
                     b.HasBaseType("MediMind.Domain.Entities.User");
 
+                    b.Property<string>("BadgeNumber")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("character varying(6)")
+                        .HasColumnName("badge_number");
+
                     b.Property<string>("LanguagesSpoken")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1126,6 +1193,10 @@ namespace MediMind.Infrastructure.Migrations
                     b.Property<int>("YearsOfExperience")
                         .HasColumnType("integer")
                         .HasColumnName("years_of_experience");
+
+                    b.HasIndex("BadgeNumber")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_doctors_badge_number");
 
                     b.HasIndex("LicenseNumber")
                         .IsUnique()
@@ -1167,6 +1238,11 @@ namespace MediMind.Infrastructure.Migrations
             modelBuilder.Entity("MediMind.Domain.Entities.Patient", b =>
                 {
                     b.HasBaseType("MediMind.Domain.Entities.User");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(300)
+                        .HasColumnType("character varying(300)")
+                        .HasColumnName("address");
 
                     b.Property<string>("Allergies")
                         .HasColumnType("text")

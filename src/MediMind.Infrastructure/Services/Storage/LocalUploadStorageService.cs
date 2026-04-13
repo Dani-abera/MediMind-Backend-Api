@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 namespace MediMind.Infrastructure.Services.Storage;
 
 /// <summary>
-/// Stores uploads under ContentRootPath/uploads for local development when Azure is not configured.
+/// Stores uploads under ContentRootPath/uploads when Cloudinary credentials are not configured.
 /// </summary>
 public sealed class LocalUploadStorageService(IHostEnvironment env) : IStorageService
 {

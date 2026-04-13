@@ -21,6 +21,7 @@ public class MediMindDbContext(
     public DbSet<User> Users => Set<User>();
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<Doctor> Doctors => Set<Doctor>();
+    public DbSet<OtpVerification> OtpVerifications => Set<OtpVerification>();
     public DbSet<HealthcareCenterAdmin> HealthcareCenterAdmins => Set<HealthcareCenterAdmin>();
     public DbSet<HealthcareCenter> HealthcareCenters => Set<HealthcareCenter>();
     public DbSet<DoctorHealthcareCenter> DoctorHealthcareCenters => Set<DoctorHealthcareCenter>();

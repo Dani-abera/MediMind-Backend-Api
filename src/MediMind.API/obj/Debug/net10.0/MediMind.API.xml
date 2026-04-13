@@ -168,6 +168,30 @@
         <member name="T:MediMind.API.Controllers.ErrorController">
             <summary>Global error handler — maps domain exceptions to HTTP responses.</summary>
         </member>
+        <member name="T:MediMind.API.Controllers.ProfileImagesController">
+            <summary>Profile / logo images for patients, doctors, admins, and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.#ctor(MediatR.IMediator)">
+            <summary>Profile / logo images for patients, doctors, admins, and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.GetMine(System.Threading.CancellationToken)">
+            <summary>Get the signed-in user's profile image URL.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.UploadMine(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload or replace the signed-in user's profile image (JPEG, PNG, WebP, GIF; max 5 MB).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteMine(System.Threading.CancellationToken)">
+            <summary>Remove the signed-in user's profile image.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.GetCenterImage(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a healthcare center's logo / profile image URL (public).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.UploadCenterImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload or replace a healthcare center's logo (center admin or super-admin).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteCenterImage(System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
+        </member>
         <member name="T:MediMind.API.OpenApi.MediMindOpenApiExtensions">
             <summary>
             Registers OpenAPI document generation (Microsoft.AspNetCore.OpenApi) with MediMind-specific metadata.

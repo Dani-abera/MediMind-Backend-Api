@@ -88,7 +88,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.PhoneNumber).HasMaxLength(20).IsRequired();
         builder.Property(u => u.FullName).HasMaxLength(100).IsRequired();
         builder.Property(u => u.PasswordHash).HasMaxLength(255).IsRequired();
-        builder.Property(u => u.ProfileImageUrl).HasMaxLength(500);
+        builder.Property(u => u.ProfileImageUrl).HasMaxLength(1024);
         builder.Property(u => u.UserType).HasConversion<string>().HasMaxLength(20);
         builder.Property(u => u.Status).HasConversion<string>().HasMaxLength(20);
         builder.Property(u => u.Gender).HasConversion<string>().HasMaxLength(20);
@@ -108,6 +108,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
     {
         builder.ToTable("patients");
         builder.Property(p => p.Id).HasColumnName("patient_id");
+        builder.Property(p => p.Address).HasMaxLength(300);
         builder.Property(p => p.BloodType).HasConversion<string>().HasMaxLength(5);
         JsonCollectionMapping.MapStringList(builder.Property(p => p.ChronicConditions), "text");
         JsonCollectionMapping.MapStringList(builder.Property(p => p.CurrentMedications), "text");
@@ -130,11 +131,13 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
     {
         builder.ToTable("doctors");
         builder.Property(d => d.Id).HasColumnName("doctor_id");
+        builder.Property(d => d.BadgeNumber).HasMaxLength(6).IsRequired();
         builder.Property(d => d.Specialization).HasMaxLength(100).IsRequired();
         builder.Property(d => d.LicenseNumber).HasMaxLength(50).IsRequired();
         JsonCollectionMapping.MapStringList(builder.Property(d => d.LanguagesSpoken), "text");
 
         builder.HasIndex(d => d.LicenseNumber).IsUnique();
+        builder.HasIndex(d => d.BadgeNumber).IsUnique();
         builder.HasIndex(d => d.Specialization);
 
         builder.HasMany(d => d.Appointments).WithOne(a => a.Doctor)
@@ -143,6 +146,21 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
             .HasForeignKey(p => p.DoctorId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(d => d.Schedules).WithOne(s => s.Doctor)
             .HasForeignKey(s => s.DoctorId).OnDelete(DeleteBehavior.Restrict);
+    }
+}
+
+public class OtpVerificationConfiguration : IEntityTypeConfiguration<OtpVerification>
+{
+    public void Configure(EntityTypeBuilder<OtpVerification> builder)
+    {
+        builder.ToTable("otp_verifications");
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.PhoneNumber).HasMaxLength(20).IsRequired();
+        builder.Property(x => x.Code).HasMaxLength(6).IsRequired();
+        builder.Property(x => x.Purpose).HasMaxLength(50).IsRequired();
+        builder.Property(x => x.ExpirationTime).IsRequired();
+        builder.Property(x => x.IsUsed).HasDefaultValue(false);
+        builder.HasIndex(x => new { x.PhoneNumber, x.Purpose, x.IsUsed });
     }
 }
 
@@ -174,6 +192,7 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.Property(c => c.SubscriptionStatus).HasConversion<string>().HasMaxLength(20);
         builder.Property(c => c.Latitude).HasPrecision(10, 8);
         builder.Property(c => c.Longitude).HasPrecision(11, 8);
+        builder.Property(c => c.ProfileImageUrl).HasMaxLength(1024);
 
         // Business rule: slot duration must be 15, 30, 45, or 60
         builder.ToTable(t => t.HasCheckConstraint(
@@ -414,7 +433,7 @@ public class PrescriptionConfiguration : IEntityTypeConfiguration<Prescription>
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).HasColumnName("prescription_id");
         builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(20);
-        builder.Property(p => p.PrescriptionUrl).HasMaxLength(500);
+        builder.Property(p => p.PrescriptionUrl).HasMaxLength(1024);
         JsonCollectionMapping.MapMedicationItems(builder.Property(p => p.Medications), "jsonb");
         builder.Property(p => p.Medications).IsRequired();
         JsonCollectionMapping.MapStringList(builder.Property(p => p.LabTests), "text");

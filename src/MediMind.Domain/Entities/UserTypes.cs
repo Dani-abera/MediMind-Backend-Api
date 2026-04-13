@@ -8,6 +8,7 @@ namespace MediMind.Domain.Entities;
 /// <summary>Maps to `patients` table — extends `users` via TPT.</summary>
 public class Patient : User
 {
+    public string? Address { get; private set; }
     public BloodType? BloodType { get; private set; }
     public string? Allergies { get; private set; }
     public string? EmergencyContactName { get; private set; }
@@ -35,6 +36,7 @@ public class Patient : User
     }
 
     public void UpdateMedicalProfile(
+        string? address,
         BloodType? bloodType,
         string? allergies,
         string? emergencyContactName,
@@ -43,6 +45,7 @@ public class Patient : User
         List<string>? chronicConditions,
         List<string>? currentMedications)
     {
+        Address = address;
         BloodType = bloodType;
         Allergies = allergies;
         EmergencyContactName = emergencyContactName;
@@ -59,6 +62,7 @@ public class Patient : User
 /// <summary>Maps to `doctors` table — extends `users` via TPT.</summary>
 public class Doctor : User
 {
+    public string BadgeNumber { get; private set; } = string.Empty;
     public string Specialization { get; private set; } = string.Empty;
     public string LicenseNumber { get; private set; } = string.Empty;
     public int YearsOfExperience { get; private set; }
@@ -80,12 +84,13 @@ public class Doctor : User
         DateOnly dateOfBirth,
         Gender gender,
         string specialization,
-        string licenseNumber,
+        string badgeNumber,
         int yearsOfExperience)
         : base(email, phoneNumber, fullName, dateOfBirth, gender, UserType.Doctor)
     {
+        BadgeNumber = badgeNumber;
         Specialization = specialization;
-        LicenseNumber = licenseNumber;
+        LicenseNumber = badgeNumber;
         YearsOfExperience = yearsOfExperience;
     }
 

@@ -10,8 +10,8 @@
         "dependencies": {
           "AspNetCore.HealthChecks.Hangfire": "8.0.1",
           "AspNetCore.HealthChecks.NpgSql": "8.0.2",
-          "Azure.Storage.Blobs": "12.27.0",
           "BCrypt.Net-Next": "4.1.0",
+          "CloudinaryDotNet": "1.28.0",
           "Hangfire.AspNetCore": "1.8.23",
           "Hangfire.MemoryStorage": "1.8.1.2",
           "Hangfire.PostgreSql": "1.21.1",
@@ -68,48 +68,22 @@
           }
         }
       },
-      "Azure.Core/1.50.0": {
-        "dependencies": {
-          "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
-          "System.ClientModel": "1.8.0",
-          "System.Memory.Data": "8.0.1"
-        },
-        "runtime": {
-          "lib/net8.0/Azure.Core.dll": {
-            "assemblyVersion": "1.50.0.0",
-            "fileVersion": "1.5000.25.55604"
-          }
-        }
-      },
-      "Azure.Storage.Blobs/12.27.0": {
-        "dependencies": {
-          "Azure.Core": "1.50.0",
-          "Azure.Storage.Common": "12.26.0"
-        },
-        "runtime": {
-          "lib/net10.0/Azure.Storage.Blobs.dll": {
-            "assemblyVersion": "12.27.0.0",
-            "fileVersion": "12.2700.26.5804"
-          }
-        }
-      },
-      "Azure.Storage.Common/12.26.0": {
-        "dependencies": {
-          "Azure.Core": "1.50.0",
-          "System.IO.Hashing": "10.0.1"
-        },
-        "runtime": {
-          "lib/net10.0/Azure.Storage.Common.dll": {
-            "assemblyVersion": "12.26.0.0",
-            "fileVersion": "12.2600.26.5804"
-          }
-        }
-      },
       "BCrypt.Net-Next/4.1.0": {
         "runtime": {
           "lib/net10.0/BCrypt.Net-Next.dll": {
             "assemblyVersion": "4.1.0.0",
             "fileVersion": "4.1.0.0"
+          }
+        }
+      },
+      "CloudinaryDotNet/1.28.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "assemblyVersion": "1.28.0.0",
+            "fileVersion": "1.28.0.0"
           }
         }
       },
@@ -297,14 +271,6 @@
       "Microsoft.AspNetCore.SignalR/1.2.9": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Connections": "1.2.0"
-        }
-      },
-      "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
-        "runtime": {
-          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
-            "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.23.53103"
-          }
         }
       },
       "Microsoft.Build.Framework/18.0.2": {
@@ -1005,17 +971,6 @@
           }
         }
       },
-      "System.ClientModel/1.8.0": {
-        "dependencies": {
-          "System.Memory.Data": "8.0.1"
-        },
-        "runtime": {
-          "lib/net9.0/System.ClientModel.dll": {
-            "assemblyVersion": "1.8.0.0",
-            "fileVersion": "1.800.25.55302"
-          }
-        }
-      },
       "System.CodeDom/6.0.0": {
         "runtime": {
           "lib/net6.0/System.CodeDom.dll": {
@@ -1096,22 +1051,6 @@
           }
         }
       },
-      "System.IO.Hashing/10.0.1": {
-        "runtime": {
-          "lib/net10.0/System.IO.Hashing.dll": {
-            "assemblyVersion": "10.0.0.1",
-            "fileVersion": "10.0.125.57005"
-          }
-        }
-      },
-      "System.Memory.Data/8.0.1": {
-        "runtime": {
-          "lib/net8.0/System.Memory.Data.dll": {
-            "assemblyVersion": "8.0.0.1",
-            "fileVersion": "8.0.1024.46610"
-          }
-        }
-      },
       "System.Net.WebSockets.WebSocketProtocol/5.1.0": {
         "runtime": {
           "lib/net6.0/System.Net.WebSockets.WebSocketProtocol.dll": {
@@ -1172,33 +1111,19 @@
       "path": "automapper/16.1.1",
       "hashPath": "automapper.16.1.1.nupkg.sha512"
     },
-    "Azure.Core/1.50.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-GBNKZEhdIbTXxedvD3R7I/yDVFX9jJJEz02kCziFSJxspSQ5RMHc3GktulJ1s7+ffXaXD7kMgrtdQTaggyInLw==",
-      "path": "azure.core/1.50.0",
-      "hashPath": "azure.core.1.50.0.nupkg.sha512"
-    },
-    "Azure.Storage.Blobs/12.27.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-zI5rg1tTtnA8T2g2/21l+1iIUdDjpEQQ0FI1BabJVEQJ1JUyTQKrc41eNabAHs0SBHprl6pu/6OqIMK9Ve+4tQ==",
-      "path": "azure.storage.blobs/12.27.0",
-      "hashPath": "azure.storage.blobs.12.27.0.nupkg.sha512"
-    },
-    "Azure.Storage.Common/12.26.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-XaT6CDcSshZb7KaCTwc6m4EouZbLBg7ciOEpsJSdJCvkNsZJQCvPKw7V5TtXno19AA1NpwtsZriYque8mzbQVg==",
-      "path": "azure.storage.common/12.26.0",
-      "hashPath": "azure.storage.common.12.26.0.nupkg.sha512"
-    },
     "BCrypt.Net-Next/4.1.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-5YT3DKllmtkyW68PjURu/V1TOe4MKiByKwsRNVcfYE1S5KuFTeozdmKzyNzolKiQF391OXCaQtINvYT3j1ERzQ==",
       "path": "bcrypt.net-next/4.1.0",
       "hashPath": "bcrypt.net-next.4.1.0.nupkg.sha512"
+    },
+    "CloudinaryDotNet/1.28.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o5Dfp5DrpF69s8qjlh4dxzXuJUCRxt7KQaweU8wMDxd1cPFONCVNZsgFQZ3v0PZDN76fLonZ5vFDjVTA3UTjCA==",
+      "path": "cloudinarydotnet/1.28.0",
+      "hashPath": "cloudinarydotnet.1.28.0.nupkg.sha512"
     },
     "Dapper/2.0.123": {
       "type": "package",
@@ -1304,13 +1229,6 @@
       "sha512": "sha512-stJwCxfcXqY982p+4dRzlK1Qv2ISrpJrVRzUWvr9PximZXBMSYFVCtOPy9LI2WsjHH/zEL4jSh3Qn2fYZomyKg==",
       "path": "microsoft.aspnetcore.signalr/1.2.9",
       "hashPath": "microsoft.aspnetcore.signalr.1.2.9.nupkg.sha512"
-    },
-    "Microsoft.Bcl.AsyncInterfaces/8.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-3WA9q9yVqJp222P3x1wYIGDAkpjAku0TMUaaQV22g6L67AI0LdOIrVS7Ht2vJfLHGSPVuqN94vIr15qn+HEkHw==",
-      "path": "microsoft.bcl.asyncinterfaces/8.0.0",
-      "hashPath": "microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512"
     },
     "Microsoft.Build.Framework/18.0.2": {
       "type": "package",
@@ -1557,13 +1475,6 @@
       "path": "serilog.sinks.postgresql/2.3.0",
       "hashPath": "serilog.sinks.postgresql.2.3.0.nupkg.sha512"
     },
-    "System.ClientModel/1.8.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-AqRzhn0v29GGGLj/Z6gKq4lGNtvPHT4nHdG5PDJh9IfVjv/nYUVmX11hwwws1vDFeIAzrvmn0dPu8IjLtu6fAw==",
-      "path": "system.clientmodel/1.8.0",
-      "hashPath": "system.clientmodel.1.8.0.nupkg.sha512"
-    },
     "System.CodeDom/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -1619,20 +1530,6 @@
       "sha512": "sha512-nKikRYheDeSaXA3wGr2otwaiRFygBa25m+hc7MEomZVIEWZvKVqd8wgP9yn+8QpLRGgw//dUs4LErGx9gtVmAA==",
       "path": "system.identitymodel.tokens.jwt/8.17.0",
       "hashPath": "system.identitymodel.tokens.jwt.8.17.0.nupkg.sha512"
-    },
-    "System.IO.Hashing/10.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Dy6ULPb2S0GmNndjKrEIpfibNsc8+FTOoZnqygtFDuyun8vWboQbfMpQtKUXpgTxokR5E4zFHETpNnGfeWY6NA==",
-      "path": "system.io.hashing/10.0.1",
-      "hashPath": "system.io.hashing.10.0.1.nupkg.sha512"
-    },
-    "System.Memory.Data/8.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-BVYuec3jV23EMRDeR7Dr1/qhx7369dZzJ9IWy2xylvb4YfXsrUxspWc4UWYid/tj4zZK58uGZqn2WQiaDMhmAg==",
-      "path": "system.memory.data/8.0.1",
-      "hashPath": "system.memory.data.8.0.1.nupkg.sha512"
     },
     "System.Net.WebSockets.WebSocketProtocol/5.1.0": {
       "type": "package",

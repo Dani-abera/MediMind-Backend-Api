@@ -81,6 +81,7 @@ try
         options.AddPolicy("SuperAdminOnly", p => p.RequireClaim("user_type", "SuperAdmin"));
         options.AddPolicy("DoctorOrAdmin", p => p.RequireClaim("user_type", "Doctor", "Admin"));
         options.AddPolicy("HealthcareStaff", p => p.RequireClaim("user_type", "Doctor", "Admin", "SuperAdmin"));
+        options.AddPolicy("AdminOrSuperAdmin", p => p.RequireClaim("user_type", "Admin", "SuperAdmin"));
     });
 
     var app = builder.Build();
@@ -89,10 +90,7 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<MediMindDbContext>();
-        if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
-        {
-            await db.Database.EnsureCreatedAsync();
-        }
+        await db.Database.MigrateAsync();
     }
 
     // ─── Middleware Pipeline ──────────────────────────────────────────────────
@@ -168,6 +166,13 @@ try
         if (addresses is { Count: > 0 })
         {
             Log.Information("MediMind API listening on {Urls}", string.Join(", ", addresses));
+            if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
+            {
+                foreach (var address in addresses)
+                {
+                    Log.Information("Scalar API reference available at {ScalarUrl}", $"{address.TrimEnd('/')}/scalar/v1");
+                }
+            }
             return;
         }
 

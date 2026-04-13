@@ -10,7 +10,7 @@
         "projectUniqueName": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
         "projectName": "MediMind.Application",
         "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/MediMind.Application.csproj",
-        "packagesPath": "/Users/dani/.nuget/packages/",
+        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/41ece7a93d6e32d2ccf14fc7d8279abe/nuget",
         "outputPath": "/Users/dani/Downloads/MediMind/src/MediMind.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -382,7 +382,7 @@
         "projectUniqueName": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj",
         "projectName": "MediMind.Domain",
         "projectPath": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/MediMind.Domain.csproj",
-        "packagesPath": "/Users/dani/.nuget/packages/",
+        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/41ece7a93d6e32d2ccf14fc7d8279abe/nuget",
         "outputPath": "/Users/dani/Downloads/MediMind/src/MediMind.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [

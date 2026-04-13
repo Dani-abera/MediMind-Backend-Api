@@ -42,10 +42,16 @@ public interface IPatientRepository : IRepository<Patient>
 
 public interface IDoctorRepository : IRepository<Doctor>
 {
+    Task<Doctor?> GetByBadgeNumberAsync(string badgeNumber, CancellationToken ct = default);
     Task<Doctor?> GetByLicenseAsync(string licenseNumber, CancellationToken ct = default);
     Task<IReadOnlyList<Doctor>> GetByCenterAsync(Guid centerId, CancellationToken ct = default);
     Task<IReadOnlyList<Doctor>> GetBySpecializationAsync(string specialization, CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
+}
+
+public interface IOtpVerificationRepository : IRepository<OtpVerification>
+{
+    Task<OtpVerification?> GetLatestActiveAsync(string phoneNumber, string purpose, CancellationToken ct = default);
 }
 
 public interface IHealthcareCenterRepository : IRepository<HealthcareCenter>

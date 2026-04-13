@@ -297,7 +297,7 @@ ASPNETCORE_ENVIRONMENT="Production"
 | Payment | Chapa Gateway | ETB payments, HMAC webhooks |
 | SMS | Geez SMS Gateway | OTP, reminders |
 | Push | Firebase FCM | Android/iOS notifications |
-| Storage | Azure Blob | Prescription PDFs |
+| Storage | Cloudinary (optional; local /uploads fallback) | Prescription PDFs, profile images |
 | Logging | Serilog | Console + File + PostgreSQL |
 | Testing | xUnit + FluentAssertions | Domain unit tests |
 | Database | PostgreSQL 15 | 16 tables, 68 indexes |

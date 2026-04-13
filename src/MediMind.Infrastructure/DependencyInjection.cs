@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace MediMind.Infrastructure;
@@ -43,6 +44,7 @@ public static class DependencyInjection
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPatientRepository, PatientRepository>();
         services.AddScoped<IDoctorRepository, DoctorRepository>();
+        services.AddScoped<IOtpVerificationRepository, OtpVerificationRepository>();
         services.AddScoped<IHealthcareCenterRepository, HealthcareCenterRepository>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
         services.AddScoped<IQueueRepository, QueueRepository>();
@@ -55,12 +57,25 @@ public static class DependencyInjection
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
         services.AddScoped<IEmailService, SendGridEmailService>();
         services.AddScoped<IPdfService, PrescriptionPdfService>();
-        services.AddScoped<IStorageService, LocalUploadStorageService>();
+
+        services.Configure<CloudinaryOptions>(config.GetSection(CloudinaryOptions.SectionName));
+        services.AddScoped<LocalUploadStorageService>();
+        services.AddScoped<IStorageService>(sp =>
+        {
+            var o = sp.GetRequiredService<IOptions<CloudinaryOptions>>().Value;
+            if (!string.IsNullOrWhiteSpace(o.CloudName)
+                && !string.IsNullOrWhiteSpace(o.ApiKey)
+                && !string.IsNullOrWhiteSpace(o.ApiSecret))
+                return ActivatorUtilities.CreateInstance<CloudinaryStorageService>(sp);
+            return sp.GetRequiredService<LocalUploadStorageService>();
+        });
 
         // ─── Auth Services ───────────────────────────────────────────────────
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IJwtService>(sp => (IJwtService)sp.GetRequiredService<ITokenService>());
+        services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IPasswordService, PasswordService>();
-        services.AddSingleton<IOtpService, OtpService>();
+        services.AddScoped<IOtpService, OtpService>();
         services.AddHttpContextAccessor();
         services.AddScoped<ICurrentUser, CurrentUser>();
 

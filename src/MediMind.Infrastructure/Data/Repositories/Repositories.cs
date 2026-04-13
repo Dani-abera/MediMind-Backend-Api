@@ -72,6 +72,11 @@ public class PatientRepository(MediMindDbContext context)
 public class DoctorRepository(MediMindDbContext context)
     : Repository<Doctor>(context), IDoctorRepository
 {
+    public async Task<Doctor?> GetByBadgeNumberAsync(string badgeNumber, CancellationToken ct = default) =>
+        await Db.Doctors
+            .Include(d => d.Schedules)
+            .FirstOrDefaultAsync(d => d.BadgeNumber == badgeNumber, ct);
+
     public async Task<Doctor?> GetByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.Doctors
             .Include(d => d.Schedules)
@@ -93,6 +98,16 @@ public class DoctorRepository(MediMindDbContext context)
 
     public async Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.Doctors.AnyAsync(d => d.LicenseNumber == licenseNumber, ct);
+}
+
+public class OtpVerificationRepository(MediMindDbContext context)
+    : Repository<OtpVerification>(context), IOtpVerificationRepository
+{
+    public async Task<OtpVerification?> GetLatestActiveAsync(string phoneNumber, string purpose, CancellationToken ct = default) =>
+        await Db.OtpVerifications
+            .Where(x => x.PhoneNumber == phoneNumber && x.Purpose == purpose && !x.IsUsed)
+            .OrderByDescending(x => x.CreatedAt)
+            .FirstOrDefaultAsync(ct);
 }
 
 // ─── Healthcare Center Repository ─────────────────────────────────────────────

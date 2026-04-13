@@ -1,3 +1,5 @@
+using MediMind.Domain.Entities;
+
 namespace MediMind.Domain.Common.Interfaces;
 
 // ─── Current User ─────────────────────────────────────────────────────────────
@@ -33,6 +35,16 @@ public interface IPasswordService
 public interface IOtpService
 {
     string GenerateOtp();  // 6-digit code
+}
+
+public interface IJwtService
+{
+    (string AccessToken, string RefreshToken) GenerateTokens(Guid userId, string role, Guid? tenantId);
+}
+
+public interface IAuthService
+{
+    Task<(string AccessToken, string RefreshToken)> GenerateAuthTokensAsync(User user, CancellationToken ct = default);
 }
 
 // ─── Notifications ────────────────────────────────────────────────────────────
@@ -123,7 +135,7 @@ public record ChapaTransactionStatus(string Status, string? TxRef, decimal? Amou
 
 public interface IStorageService
 {
-    /// <summary>Uploads file to Azure Blob Storage. Returns public URL.</summary>
+    /// <summary>Uploads a file and returns a public HTTPS URL (or app-relative URL when using local disk fallback).</summary>
     Task<string> UploadAsync(Stream fileStream, string fileName, string containerName, CancellationToken ct = default);
     Task DeleteAsync(string fileUrl, CancellationToken ct = default);
 }

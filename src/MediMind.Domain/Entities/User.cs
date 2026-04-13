@@ -20,6 +20,7 @@ public abstract class User : BaseEntity
     public string? ProfileImageUrl { get; protected set; }
     public string PasswordHash { get; protected set; } = string.Empty;
     public DateTime? LastLogin { get; protected set; }
+    public bool IsVerified { get; protected set; }
 
     // ─── OTP ─────────────────────────────────────────────────────────────────
     public string? OtpCode { get; private set; }
@@ -87,6 +88,7 @@ public abstract class User : BaseEntity
     public void Activate()
     {
         Status = UserStatus.Active;
+        IsVerified = true;
         UpdateTimestamp();
         AddDomainEvent(new UserActivatedEvent(Id));
     }
@@ -106,6 +108,20 @@ public abstract class User : BaseEntity
     public void UpdateProfile(string fullName, string? profileImageUrl)
     {
         FullName = fullName;
+        ProfileImageUrl = profileImageUrl;
+        UpdateTimestamp();
+    }
+
+    public void UpdateIdentityProfile(string fullName, DateOnly dateOfBirth, Gender gender)
+    {
+        FullName = fullName;
+        DateOfBirth = dateOfBirth;
+        Gender = gender;
+        UpdateTimestamp();
+    }
+
+    public void SetProfileImageUrl(string? profileImageUrl)
+    {
         ProfileImageUrl = profileImageUrl;
         UpdateTimestamp();
     }

@@ -904,55 +904,73 @@ System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address 
 2026-04-11 03:30:10.660 -07:00 [INF] Appointment reminder job completed.
 2026-04-11 04:00:10.906 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:00:10.9044370Z"
 2026-04-11 04:00:10.927 -07:00 [INF] Appointment reminder job completed.
-rd must contain at least one uppercase letter.
-2026-04-11 01:18:28.431 -07:00 [ERR] An unhandled exception has occurred while executing the request.
-FluentValidation.ValidationException: Validation failed: 
- -- PhoneNumber: Phone number must be in Ethiopian format: +251XXXXXXXXX Severity: Error
- -- DateOfBirth: Patient must be at least 18 years old. Severity: Error
- -- Password: Password must contain at least one uppercase letter. Severity: Error
-   at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/Downloads/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 42
-   at MediMind.Application.Common.Behaviors.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/Downloads/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 69
-   at MediMind.API.Controllers.AuthController.RegisterPatient(RegisterPatientCommand command, CancellationToken ct) in /Users/dani/Downloads/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 42
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
-   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
-2026-04-11 01:18:28.446 -07:00 [INF] HTTP POST /api/v1/auth/register/patient responded 400 in 121.1432 ms
-2026-04-11 01:19:16.259 -07:00 [INF] Handling RegisterPatientCommand
-2026-04-11 01:19:17.862 -07:00 [WRN] SMS delivery failed to +251943034193. Status: "NotFound"
-2026-04-11 01:19:17.863 -07:00 [WRN] Slow request RegisterPatientCommand took 1597ms
-2026-04-11 01:19:17.875 -07:00 [INF] HTTP POST /api/v1/auth/register/patient responded 201 in 1623.6703 ms
-2026-04-11 01:30:07.140 -07:00 [INF] Running appointment reminder job at "2026-04-11T08:30:07.1387860Z"
-2026-04-11 01:30:07.322 -07:00 [INF] Appointment reminder job completed.
-2026-04-11 01:31:38.990 -07:00 [INF] MediMind API started successfully on []
-2026-04-11 01:33:35.583 -07:00 [INF] MediMind API started successfully on []
-2026-04-11 01:33:35.647 -07:00 [ERR] Hosting failed to start
-System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address already in use.
- ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
- ---> System.Net.Sockets.SocketException (48): Address already in use
-   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
-   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
-   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
-   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
-   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
-   --- End of inner exception stack trace ---
-   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
-   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
-   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
-   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
---- End of stack trace from previous location ---
-   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
-   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
-   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+2026-04-11 04:30:07.955 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:30:07.9532790Z"
+2026-04-11 04:30:07.981 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 05:00:42.885 -07:00 [INF] Running appointment reminder job at "2026-04-11T12:00:42.8834870Z"
+2026-04-11 05:00:42.924 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 05:35:13.795 -07:00 [INF] Running appointment reminder job at "2026-04-11T12:35:13.7952690Z"
+2026-04-11 05:35:13.808 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 06:09:22.597 -07:00 [INF] Running appointment reminder job at "2026-04-11T13:09:22.5973490Z"
+2026-04-11 06:09:22.602 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 06:30:02.565 -07:00 [INF] Running appointment reminder job at "2026-04-11T13:30:02.5639860Z"
+2026-04-11 06:30:02.582 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:00:27.454 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:00:27.4547800Z"
+2026-04-11 07:00:27.472 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:30:04.341 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:30:04.3408810Z"
+2026-04-11 07:30:04.355 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 08:08:53.489 -07:00 [INF] Running appointment reminder job at "2026-04-11T15:08:53.4889690Z"
+2026-04-11 08:08:53.524 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 09:00:33.633 -07:00 [INF] Running appointment reminder job at "2026-04-11T16:00:33.6331190Z"
+2026-04-11 09:00:33.638 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 09:47:19.053 -07:00 [INF] Running appointment reminder job at "2026-04-11T16:47:19.0536110Z"
+2026-04-11 09:47:19.058 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 10:09:36.864 -07:00 [INF] Running appointment reminder job at "2026-04-11T17:09:36.8644420Z"
+2026-04-11 10:09:36.867 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 10:52:51.317 -07:00 [INF] Running appointment reminder job at "2026-04-11T17:52:51.3175420Z"
+2026-04-11 10:52:51.320 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 11:43:40.568 -07:00 [INF] Running appointment reminder job at "2026-04-11T18:43:40.5682340Z"
+2026-04-11 11:43:40.577 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 12:10:38.083 -07:00 [INF] Running appointment reminder job at "2026-04-11T19:10:38.0836050Z"
+2026-04-11 12:10:38.084 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 12:54:50.479 -07:00 [INF] Running appointment reminder job at "2026-04-11T19:54:50.4792310Z"
+2026-04-11 12:54:50.482 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 13:27:52.793 -07:00 [INF] Running appointment reminder job at "2026-04-11T20:27:52.7934310Z"
+2026-04-11 13:27:52.795 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 13:55:54.796 -07:00 [INF] Running appointment reminder job at "2026-04-11T20:55:54.7963770Z"
+2026-04-11 13:55:54.799 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 14:44:28.085 -07:00 [INF] Running appointment reminder job at "2026-04-11T21:44:28.0854030Z"
+2026-04-11 14:44:28.090 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 15:02:07.627 -07:00 [INF] Running appointment reminder job at "2026-04-11T22:02:07.6266650Z"
+2026-04-11 15:02:07.633 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 15:53:51.698 -07:00 [INF] Running appointment reminder job at "2026-04-11T22:53:51.6980810Z"
+2026-04-11 15:53:51.700 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 16:31:24.241 -07:00 [INF] Running appointment reminder job at "2026-04-11T23:31:24.2419410Z"
+2026-04-11 16:31:24.244 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 17:47:59.254 -07:00 [INF] Running appointment reminder job at "2026-04-12T00:47:59.2543150Z"
+2026-04-11 17:47:59.255 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 18:17:52.315 -07:00 [INF] Running appointment reminder job at "2026-04-12T01:17:52.3152050Z"
+2026-04-11 18:17:52.316 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 19:00:48.766 -07:00 [INF] Running appointment reminder job at "2026-04-12T02:00:48.7666440Z"
+2026-04-11 19:00:48.770 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 19:50:29.005 -07:00 [INF] Running appointment reminder job at "2026-04-12T02:50:29.0050250Z"
+2026-04-11 19:50:29.006 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 20:19:23.867 -07:00 [INF] Running appointment reminder job at "2026-04-12T03:19:23.8669980Z"
+2026-04-11 20:19:23.869 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 20:19:23.884 -07:00 [INF] QueueGenerationJob triggered for date "2026-04-11"
+2026-04-11 20:19:23.899 -07:00 [INF] Handling GenerateDailyQueuesCommand
+2026-04-11 20:19:24.095 -07:00 [INF] Handled GenerateDailyQueuesCommand in 195ms
+2026-04-11 20:19:24.097 -07:00 [INF] Generated 0 queues for 0 centers.
+2026-04-11 21:02:45.298 -07:00 [INF] Running appointment reminder job at "2026-04-12T04:02:45.2984970Z"
+2026-04-11 21:02:45.300 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 21:51:43.721 -07:00 [INF] Running appointment reminder job at "2026-04-12T04:51:43.7212430Z"
+2026-04-11 21:51:43.722 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 22:19:46.227 -07:00 [INF] Running appointment reminder job at "2026-04-12T05:19:46.2270880Z"
+2026-04-11 22:19:46.227 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 23:04:42.648 -07:00 [INF] Running appointment reminder job at "2026-04-12T06:04:42.6484990Z"
+2026-04-11 23:04:42.650 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 23:31:33.635 -07:00 [INF] Running appointment reminder job at "2026-04-12T06:31:33.6358890Z"
+2026-04-11 23:31:33.637 -07:00 [INF] Appointment reminder job completed.
+der.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
    at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
    at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
    at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
@@ -1035,9 +1053,9 @@ System.InvalidOperationException: Services for database providers 'Microsoft.Ent
 2026-04-11 03:58:12.099 -07:00 [INF] Handling RegisterPatientCommand
 20262026-04-11 04:00:03.610 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:00:03.6096010Z"
 2026-04-11 04:00:04.275 -07:00 [INF] Appointment reminder job completed.
-26-04-11 03:58:14.302 -07:00 [INF] HTTP POST /api/v1/auth/register/patient responded 201 in 2417.1088 ms
-2026-04-11 03:59:13.161 -07:00 [INF] Handling VerifyOtpCommand
-2026-04-11 03:59:13.310 -07:00 [ERR] An unhandled exception has occurred while executing the request.
+2026-04-11 04:30:15.153 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:30:15.1508640Z"
+2026-04-11 04:30:15.248 -07:00 [INF] Appointment reminder job completed.
+1 03:59:13.310 -07:00 [ERR] An unhandled exception has occurred while executing the request.
 MediMind.Domain.Exceptions.DomainException: Invalid verification code. Please try again.
    at MediMind.Application.Features.Auth.VerifyOtpHandler.Handle(VerifyOtpCommand request, CancellationToken ct)
    at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
@@ -1078,3 +1096,81 @@ MediMind.Domain.Exceptions.DomainException: Invalid verification code. Please tr
    at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
    at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
 2026-04-11 04:02:19.569 -07:00 [INF] HTTP POST /api/v1/auth/verify-otp responded 400 in 41.8788 ms
+2026-04-11 04:30:08.167 -07:00 [INF] Running appointment reminder job at "2026-04-11T11:30:08.1677060Z"
+2026-04-11 04:30:08.315 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 04:36:09.116 -07:00 [INF] Handling SearchHealthcareCentersQuery
+2026-04-11 04:36:09.376 -07:00 [INF] Handled SearchHealthcareCentersQuery in 258ms
+2026-04-11 04:36:09.411 -07:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 475.0333 ms
+2026-04-11 04:45:52.597 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 53.1105 ms
+2026-04-11 05:00:38.787 -07:00 [INF] Running appointment reminder job at "2026-04-11T12:00:38.7828620Z"
+2026-04-11 05:00:39.482 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 05:35:48.936 -07:00 [INF] Running appointment reminder job at "2026-04-11T12:35:48.9361070Z"
+2026-04-11 05:35:48.972 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 06:26:42.781 -07:00 [INF] Running appointment reminder job at "2026-04-11T13:26:42.7817510Z"
+2026-04-11 06:26:42.868 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 06:30:12.778 -07:00 [INF] Running appointment reminder job at "2026-04-11T13:30:12.7778260Z"
+2026-04-11 06:30:12.819 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:00:22.680 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:00:22.6804250Z"
+2026-04-11 07:00:22.981 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:30:14.528 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:30:14.5276940Z"
+2026-04-11 07:30:14.590 -07:00 [INF] Appointment reminder job completed.
+ent reminder job at "2026-04-11T13:09:22.7702490Z"
+2026-04-11 06:09:22.905 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 06:30:02.736 -07:00 [INF] Running appointment reminder job at "2026-04-11T13:30:02.7360410Z"
+2026-04-11 06:30:02.770 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:00:27.675 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:00:27.6724160Z"
+2026-04-11 07:00:27.750 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 07:30:04.573 -07:00 [INF] Running appointment reminder job at "2026-04-11T14:30:04.5702240Z"
+2026-04-11 07:30:04.849 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 08:08:53.674 -07:00 [INF] Running appointment reminder job at "2026-04-11T15:08:53.6721140Z"
+2026-04-11 08:08:53.878 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 09:00:33.807 -07:00 [INF] Running appointment reminder job at "2026-04-11T16:00:33.8068780Z"
+2026-04-11 09:00:33.842 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 09:47:19.230 -07:00 [INF] Running appointment reminder job at "2026-04-11T16:47:19.2298540Z"
+2026-04-11 09:47:19.282 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 10:09:37.043 -07:00 [INF] Running appointment reminder job at "2026-04-11T17:09:37.0428370Z"
+2026-04-11 10:09:37.064 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 10:52:51.503 -07:00 [INF] Running appointment reminder job at "2026-04-11T17:52:51.5033050Z"
+2026-04-11 10:52:51.549 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 11:43:40.710 -07:00 [INF] Running appointment reminder job at "2026-04-11T18:43:40.7107950Z"
+2026-04-11 11:43:40.724 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 12:10:38.230 -07:00 [INF] Running appointment reminder job at "2026-04-11T19:10:38.2303220Z"
+2026-04-11 12:10:38.268 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 12:54:50.629 -07:00 [INF] Running appointment reminder job at "2026-04-11T19:54:50.6298420Z"
+2026-04-11 12:54:50.652 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 13:27:52.939 -07:00 [INF] Running appointment reminder job at "2026-04-11T20:27:52.9397550Z"
+2026-04-11 13:27:53.042 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 13:55:54.949 -07:00 [INF] Running appointment reminder job at "2026-04-11T20:55:54.9497010Z"
+2026-04-11 13:55:54.977 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 14:44:28.243 -07:00 [INF] Running appointment reminder job at "2026-04-11T21:44:28.2432310Z"
+2026-04-11 14:44:28.305 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 15:02:07.788 -07:00 [INF] Running appointment reminder job at "2026-04-11T22:02:07.7886360Z"
+2026-04-11 15:02:07.800 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 15:53:51.864 -07:00 [INF] Running appointment reminder job at "2026-04-11T22:53:51.8644070Z"
+2026-04-11 15:53:51.913 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 16:31:24.407 -07:00 [INF] Running appointment reminder job at "2026-04-11T23:31:24.4075410Z"
+2026-04-11 16:31:24.424 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 17:47:59.417 -07:00 [INF] Running appointment reminder job at "2026-04-12T00:47:59.4172640Z"
+2026-04-11 17:47:59.461 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 18:17:52.481 -07:00 [INF] Running appointment reminder job at "2026-04-12T01:17:52.4809410Z"
+2026-04-11 18:17:52.495 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 19:00:48.932 -07:00 [INF] Running appointment reminder job at "2026-04-12T02:00:48.9322450Z"
+2026-04-11 19:00:48.970 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 19:50:29.176 -07:00 [INF] Running appointment reminder job at "2026-04-12T02:50:29.1767290Z"
+2026-04-11 19:50:29.187 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 20:19:24.032 -07:00 [INF] Running appointment reminder job at "2026-04-12T03:19:24.0324320Z"
+2026-04-11 20:19:24.044 -07:00 [INF] QueueGenerationJob triggered for date "2026-04-11"
+2026-04-11 20:19:24.064 -07:00 [INF] Handling GenerateDailyQueuesCommand
+2026-04-11 20:19:24.087 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 20:19:24.291 -07:00 [INF] Handled GenerateDailyQueuesCommand in 227ms
+2026-04-11 20:19:24.292 -07:00 [INF] Generated 0 queues for 0 centers.
+2026-04-11 21:02:45.473 -07:00 [INF] Running appointment reminder job at "2026-04-12T04:02:45.4738010Z"
+2026-04-11 21:02:45.490 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 21:51:43.895 -07:00 [INF] Running appointment reminder job at "2026-04-12T04:51:43.8948990Z"
+2026-04-11 21:51:43.921 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 22:19:46.402 -07:00 [INF] Running appointment reminder job at "2026-04-12T05:19:46.4021120Z"
+2026-04-11 22:19:46.408 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 23:04:42.826 -07:00 [INF] Running appointment reminder job at "2026-04-12T06:04:42.8261440Z"
+2026-04-11 23:04:42.865 -07:00 [INF] Appointment reminder job completed.
+2026-04-11 23:31:33.810 -07:00 [INF] Running appointment reminder job at "2026-04-12T06:31:33.8103460Z"
+2026-04-11 23:31:33.818 -07:00 [INF] Appointment reminder job completed.

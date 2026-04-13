@@ -18,6 +18,7 @@ public record HealthcareCenterDto(
     string Region,
     string PhoneNumber,
     string Email,
+    string? ProfileImageUrl,
     Dictionary<string, string> WorkingHours,
     List<string> ServicesOffered,
     List<string> Specializations,
@@ -34,7 +35,8 @@ public record DoctorSummaryDto(
     string Specialization,
     int YearsOfExperience,
     decimal ConsultationFee,
-    bool IsAvailableToday);
+    bool IsAvailableToday,
+    string? ProfileImageUrl);
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // REGISTER HEALTHCARE CENTER (Super Admin or self-registration)
@@ -366,6 +368,7 @@ public class SearchHealthcareCentersHandler(IHealthcareCenterRepository centerRe
             c.Region,
             c.PhoneNumber,
             c.Email,
+            c.ProfileImageUrl,
             c.WorkingHours,
             c.ServicesOffered,
             c.Specializations,
@@ -414,7 +417,8 @@ public class GetDoctorsByCenterHandler(IDoctorRepository doctorRepository)
                 d.Specialization,
                 d.YearsOfExperience,
                 affiliation?.ConsultationFee ?? 0,
-                isAvailableToday);
+                isAvailableToday,
+                d.ProfileImageUrl);
         }).ToList();
     }
 }
