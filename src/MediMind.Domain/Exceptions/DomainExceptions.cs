@@ -25,3 +25,15 @@ public class ForbiddenException(string message = "Access denied.") : Exception(m
 /// </summary>
 public class TenantIsolationException()
     : Exception("Cross-tenant data access is strictly prohibited.");
+
+/// <summary>
+/// Thrown when an authenticated user is not authorized for a resource.
+/// Results in HTTP 403 Forbidden.
+/// </summary>
+public class UnauthorizedException(string message = "Access denied") : Exception(message);
+
+/// <summary>
+/// Thrown when an external dependency is temporarily unavailable.
+/// Results in HTTP 503 Service Unavailable.
+/// </summary>
+public class ServiceUnavailableException(string message = "Service temporarily unavailable.") : Exception(message);

@@ -1,0 +1,18 @@
+2026-04-17 00:52:53.008 -07:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-17 00:52:53.028 -07:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-17 00:52:53.028 -07:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-17 00:52:55.007 -07:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.0909 ms
+2026-04-17 00:52:55.282 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 231.4791 ms
+2026-04-17 00:52:55.335 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 41.7080 ms
+2026-04-17 00:52:55.998 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 6.4635 ms
+2026-04-17 00:52:56.519 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 253.9095 ms
+2026-04-17 01:00:14.997 -07:00 [INF] Running appointment reminder job at "2026-04-17T08:00:14.9911990Z"
+2026-04-17 01:00:15.360 -07:00 [INF] Appointment reminder job completed.
+2026-04-17 01:30:07.078 -07:00 [INF] Running appointment reminder job at "2026-04-17T08:30:07.0749770Z"
+2026-04-17 01:30:07.436 -07:00 [INF] Appointment reminder job completed.
+2026-04-17 23:50:11.029 -07:00 [INF] QueueGenerationJob triggered for date "2026-04-17"
+2026-04-17 23:50:11.029 -07:00 [INF] Running appointment reminder job at "2026-04-18T06:50:11.0292830Z"
+2026-04-17 23:50:11.076 -07:00 [INF] Handling GenerateDailyQueuesCommand
+2026-04-17 23:50:11.156 -07:00 [INF] Appointment reminder job completed.
+2026-04-17 23:50:11.288 -07:00 [INF] Handled GenerateDailyQueuesCommand in 211ms
+2026-04-17 23:50:11.288 -07:00 [INF] Generated 0 queues for 0 centers.

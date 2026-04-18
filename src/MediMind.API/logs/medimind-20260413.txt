@@ -3968,3 +3968,64 @@ System.IO.IOException: Failed to bind to address http://127.0.0.1:5288: address 
 2026-04-13 07:43:01.964 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 2.3377 ms
 2026-04-13 07:43:01.978 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 15.9078 ms
 2026-04-13 07:43:02.698 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 379.1008 ms
+2026-04-13 21:35:37.411 -07:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-13 21:35:37.467 -07:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-13 21:35:37.468 -07:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-13 21:35:39.775 -07:00 [INF] HTTP GET /scalar/v1 responded 307 in 4.0565 ms
+2026-04-13 21:35:40.222 -07:00 [INF] HTTP GET /scalar/v1 responded 200 in 413.7595 ms
+2026-04-13 21:35:40.251 -07:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 18.9181 ms
+2026-04-13 21:35:40.294 -07:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 61.4751 ms
+2026-04-13 21:35:41.952 -07:00 [INF] HTTP GET /openapi/v1.json responded 200 in 477.5751 ms
+2026-04-13 21:45:27.142 -07:00 [INF] Handling PatientRequestOtpCommand
+2026-04-13 21:45:29.628 -07:00 [ERR] SMS delivery failed for +251943034193. PrimaryResponse={"error":true,"msg":"API Not found"}. FallbackResponse={"error":true,"msg":"API Not found"}
+2026-04-13 21:45:29.814 -07:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP via Geez SMS.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 64
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 72
+   at MediMind.Application.Features.Auth.PatientRequestOtpHandler.Handle(PatientRequestOtpCommand request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/IdentityCommands.cs:line 290
+   at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 45
+   at MediMind.Application.Common.Behaviors.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 69
+   at MediMind.API.Controllers.IdentityAuthController.RequestPatientOtp(PatientRequestOtpCommand command, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/IdentityControllers.cs:line 82
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-13 21:45:29.921 -07:00 [ERR] HTTP POST /api/v1/auth/patient/request-otp responded 500 in 3295.9223 ms
+2026-04-13 21:45:46.148 -07:00 [INF] Handling PatientRequestOtpCommand
+2026-04-13 21:45:46.798 -07:00 [ERR] SMS delivery failed for +251943034196. PrimaryResponse={"error":true,"msg":"API Not found"}. FallbackResponse={"error":true,"msg":"API Not found"}
+2026-04-13 21:45:46.810 -07:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP via Geez SMS.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 64
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 72
+   at MediMind.Application.Features.Auth.PatientRequestOtpHandler.Handle(PatientRequestOtpCommand request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/IdentityCommands.cs:line 290
+   at MediMind.Application.Common.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 45
+   at MediMind.Application.Common.Behaviors.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Common/Behaviors/PipelineBehaviors.cs:line 69
+   at MediMind.API.Controllers.IdentityAuthController.RequestPatientOtp(PatientRequestOtpCommand command, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/IdentityControllers.cs:line 82
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-13 21:45:46.815 -07:00 [ERR] HTTP POST /api/v1/auth/patient/request-otp responded 500 in 697.6528 ms
+2026-04-13 21:46:38.562 -07:00 [INF] Handling PatientVerifyOtpCommand
+2026-04-13 21:46:39.720 -07:00 [WRN] Slow request PatientVerifyOtpCommand took 1155ms
+2026-04-13 21:46:39.731 -07:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 1229.4269 ms
+2026-04-13 22:00:08.355 -07:00 [INF] Running appointment reminder job at "2026-04-14T05:00:08.3510700Z"
+2026-04-13 22:00:08.830 -07:00 [INF] Appointment reminder job completed.
+2026-04-13 22:30:08.629 -07:00 [INF] Running appointment reminder job at "2026-04-14T05:30:08.6242660Z"
+2026-04-13 22:30:09.004 -07:00 [INF] Appointment reminder job completed.
+2026-04-13 23:00:08.901 -07:00 [INF] Running appointment reminder job at "2026-04-14T06:00:08.8973560Z"
+2026-04-13 23:00:09.190 -07:00 [INF] Appointment reminder job completed.
+2026-04-13 23:30:09.214 -07:00 [INF] Running appointment reminder job at "2026-04-14T06:30:09.2111880Z"
+2026-04-13 23:30:09.680 -07:00 [INF] Appointment reminder job completed.

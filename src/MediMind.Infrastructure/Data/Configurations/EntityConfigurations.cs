@@ -322,23 +322,32 @@ public class HealthRecordConfiguration : IEntityTypeConfiguration<HealthRecord>
         builder.ToTable("health_records");
         builder.HasKey(h => h.Id);
         builder.Property(h => h.Id).HasColumnName("record_id");
+        builder.Property(h => h.RecordDate).IsRequired();
+        builder.Property(h => h.RecordTime).HasDefaultValueSql("CURRENT_TIME");
         builder.Property(h => h.GlucoseLevel).HasPrecision(5, 2);
         builder.Property(h => h.Weight).HasPrecision(5, 2);
         builder.Property(h => h.Height).HasPrecision(5, 2);
         builder.Property(h => h.Temperature).HasPrecision(4, 2);
         builder.Property(h => h.RecordedBy).HasMaxLength(50).HasDefaultValue("patient");
+        builder.Property(h => h.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
 
         // Domain invariants as DB constraints
         builder.ToTable(t => t.HasCheckConstraint("ck_systolic_bp", "systolic_bp BETWEEN 70 AND 250 OR systolic_bp IS NULL"));
         builder.ToTable(t => t.HasCheckConstraint("ck_diastolic_bp", "diastolic_bp BETWEEN 40 AND 150 OR diastolic_bp IS NULL"));
         builder.ToTable(t => t.HasCheckConstraint("ck_bp_relation", "systolic_bp > diastolic_bp OR systolic_bp IS NULL OR diastolic_bp IS NULL"));
         builder.ToTable(t => t.HasCheckConstraint("ck_glucose", "glucose_level BETWEEN 30 AND 600 OR glucose_level IS NULL"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_weight", "weight BETWEEN 20 AND 300 OR weight IS NULL"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_height", "height BETWEEN 50 AND 250 OR height IS NULL"));
         builder.ToTable(t => t.HasCheckConstraint("ck_temperature", "temperature BETWEEN 35 AND 43 OR temperature IS NULL"));
         builder.ToTable(t => t.HasCheckConstraint("ck_heart_rate", "heart_rate BETWEEN 30 AND 250 OR heart_rate IS NULL"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_oxygen_saturation", "oxygen_saturation BETWEEN 70 AND 100 OR oxygen_saturation IS NULL"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_respiratory_rate", "respiratory_rate BETWEEN 8 AND 60 OR respiratory_rate IS NULL"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_recorded_by", "recorded_by IN ('patient', 'doctor')"));
 
         builder.Ignore(h => h.Bmi); // Computed property — not stored in DB
 
-        builder.HasIndex(h => new { h.PatientId, h.RecordDate });
+        builder.HasIndex(h => new { h.PatientId, h.RecordDate })
+            .IsDescending(false, true);
     }
 }
 
@@ -381,9 +390,12 @@ public class HealthPredictionConfiguration : IEntityTypeConfiguration<HealthPred
             .IsRequired();
         contributingFactors.Metadata.SetValueComparer(ContributingFactorsComparer);
         builder.Property(h => h.ModelVersion).HasMaxLength(20).IsRequired();
+        builder.Property(h => h.Recommendations).IsRequired();
+        builder.Property(h => h.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
         builder.ToTable(t => t.HasCheckConstraint("ck_data_points", "data_points_used > 0"));
 
-        builder.HasIndex(h => new { h.PatientId, h.PredictionDate });
+        builder.HasIndex(h => new { h.PatientId, h.PredictionDate })
+            .IsDescending(false, true);
 
         builder.HasMany(h => h.PredictionRecords).WithOne(r => r.Prediction)
             .HasForeignKey(r => r.PredictionId).OnDelete(DeleteBehavior.Cascade);
@@ -395,8 +407,11 @@ public class HealthPredictionRecordConfiguration : IEntityTypeConfiguration<Heal
     public void Configure(EntityTypeBuilder<HealthPredictionRecord> builder)
     {
         builder.ToTable("health_prediction_records");
-        builder.HasKey(r => new { r.PredictionId, r.RecordId });
+        builder.HasKey(r => r.Id);
+        builder.Property(r => r.Id).HasColumnName("id");
         builder.HasIndex(r => new { r.PredictionId, r.RecordId }).IsUnique();
+        builder.HasOne(r => r.Prediction).WithMany(p => p.PredictionRecords)
+            .HasForeignKey(r => r.PredictionId).OnDelete(DeleteBehavior.Cascade);
         builder.HasOne(r => r.Record).WithMany()
             .HasForeignKey(r => r.RecordId).OnDelete(DeleteBehavior.Cascade);
     }

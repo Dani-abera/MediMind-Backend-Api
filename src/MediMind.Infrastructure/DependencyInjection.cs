@@ -2,11 +2,13 @@ using System.Net.Http.Headers;
 using System.Text;
 using Hangfire;
 using Hangfire.MemoryStorage;
+using MediMind.Application.Features.HealthPredictions;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Data.Repositories;
 using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.Auth;
+using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.Infrastructure.Services.ML;
 using MediMind.Infrastructure.Services.Notifications;
 using MediMind.Infrastructure.Services.Payment;
@@ -115,11 +117,12 @@ public static class DependencyInjection
 
         // ─── HTTP Clients ────────────────────────────────────────────────────
 
-        // Python Flask ML Service
+        // Python Flask ML Service (legacy named client + new typed client consumes same settings)
+        services.Configure<MlServiceOptions>(config.GetSection(MlServiceOptions.SectionName));
         services.AddHttpClient("MlService", client =>
         {
             client.BaseAddress = new Uri(config["MlService:BaseUrl"] ?? "http://localhost:5001");
-            client.Timeout = TimeSpan.FromSeconds(30);
+            client.Timeout = TimeSpan.FromSeconds(config.GetValue("MlService:TimeoutSeconds", 30));
         });
 
         services.AddHttpClient("GeezSMS", client =>

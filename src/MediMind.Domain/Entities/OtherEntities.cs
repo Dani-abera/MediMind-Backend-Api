@@ -162,9 +162,11 @@ public class DoctorSchedule : BaseEntity
 /// </summary>
 public class HealthRecord : BaseEntity
 {
+    // Compatibility alias for API contract language ("RecordId")
+    public Guid RecordId => Id;
     public Guid PatientId { get; private set; }
     public DateOnly RecordDate { get; private set; }
-    public TimeOnly RecordTime { get; private set; }
+    public TimeOnly RecordTime { get; private set; } = TimeOnly.FromDateTime(DateTime.UtcNow);
 
     // Vitals — ranges from DB schema CHECK constraints
     public int? SystolicBp { get; private set; }        // 70–250 mmHg
@@ -177,7 +179,7 @@ public class HealthRecord : BaseEntity
     public int? OxygenSaturation { get; private set; }  // 70–100 %
     public int? RespiratoryRate { get; private set; }   // 8–60 bpm
     public string? Notes { get; private set; }
-    public string RecordedBy { get; private set; } = "patient"; // patient | doctor | nurse
+    public string RecordedBy { get; private set; } = "patient"; // patient | doctor
 
     // Computed
     public decimal? Bmi => (Weight.HasValue && Height.HasValue && Height > 0)
@@ -192,7 +194,7 @@ public class HealthRecord : BaseEntity
     public static HealthRecord Create(
         Guid patientId,
         DateOnly recordDate,
-        TimeOnly recordTime,
+        TimeOnly? recordTime,
         int? systolicBp, int? diastolicBp,
         decimal? glucoseLevel, decimal? weight, decimal? height,
         decimal? temperature, int? heartRate,
@@ -217,7 +219,7 @@ public class HealthRecord : BaseEntity
         {
             PatientId = patientId,
             RecordDate = recordDate,
-            RecordTime = recordTime,
+            RecordTime = recordTime ?? TimeOnly.FromDateTime(DateTime.UtcNow),
             SystolicBp = systolicBp,
             DiastolicBp = diastolicBp,
             GlucoseLevel = glucoseLevel,
@@ -231,6 +233,37 @@ public class HealthRecord : BaseEntity
             RecordedBy = recordedBy
         };
     }
+
+    public void UpdateVitals(
+        DateOnly recordDate,
+        TimeOnly? recordTime,
+        int? systolicBp,
+        int? diastolicBp,
+        decimal? glucoseLevel,
+        decimal? weight,
+        decimal? height,
+        decimal? temperature,
+        int? heartRate,
+        int? oxygenSaturation,
+        int? respiratoryRate,
+        string? notes,
+        string recordedBy)
+    {
+        RecordDate = recordDate;
+        RecordTime = recordTime ?? RecordTime;
+        SystolicBp = systolicBp;
+        DiastolicBp = diastolicBp;
+        GlucoseLevel = glucoseLevel;
+        Weight = weight;
+        Height = height;
+        Temperature = temperature;
+        HeartRate = heartRate;
+        OxygenSaturation = oxygenSaturation;
+        RespiratoryRate = respiratoryRate;
+        Notes = notes;
+        RecordedBy = recordedBy;
+        UpdateTimestamp();
+    }
 }
 
 // ─── Health Prediction ────────────────────────────────────────────────────────
@@ -238,6 +271,7 @@ public class HealthRecord : BaseEntity
 /// <summary>Maps to `health_predictions` table. AI-generated risk assessments.</summary>
 public class HealthPrediction : BaseEntity
 {
+    public Guid PredictionId => Id;
     public Guid PatientId { get; private set; }
     public DateOnly PredictionDate { get; private set; }
     public TimeOnly PredictionTime { get; private set; }
@@ -298,6 +332,7 @@ public class HealthPrediction : BaseEntity
 /// <summary>Junction: HealthPrediction ↔ HealthRecord (many-to-many).</summary>
 public class HealthPredictionRecord
 {
+    public Guid Id { get; private set; } = Guid.NewGuid();
     public Guid PredictionId { get; private set; }
     public Guid RecordId { get; private set; }
     public HealthPrediction Prediction { get; private set; } = null!;

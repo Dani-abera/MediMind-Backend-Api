@@ -2,16 +2,21 @@ using AspNetCoreRateLimit;
 using Hangfire;
 using MediMind.Application;
 using MediMind.Application.Auth;
+using MediMind.Application.Features.HealthRecords;
+using MediMind.Application.Features.HealthPredictions;
 using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure;
 using MediMind.Infrastructure.Data;
+using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.API.OpenApi;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Polly;
+using Polly.Extensions.Http;
 using Scalar.AspNetCore;
 using Serilog;
 using Serilog.Events;
@@ -40,6 +45,24 @@ try
     // ─── Application + Infrastructure ────────────────────────────────────────
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    // Explicit registration for health records service (also discoverable from Program.cs).
+    builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
+    builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));
+    builder.Services
+        .AddHttpClient<IMlServiceClient, MlServiceClient>((sp, client) =>
+        {
+            var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<MlServiceOptions>>().Value;
+            client.BaseAddress = new Uri(options.BaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
+        })
+        .AddPolicyHandler(HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .Or<HttpRequestException>()
+            .WaitAndRetryAsync(2, _ => TimeSpan.FromSeconds(1)))
+        .AddPolicyHandler(HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .Or<HttpRequestException>()
+            .CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
     builder.Services.Configure<TestOtpOptions>(builder.Configuration.GetSection(TestOtpOptions.SectionName));
     
 

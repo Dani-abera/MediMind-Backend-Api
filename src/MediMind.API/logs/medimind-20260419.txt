@@ -1,0 +1,2 @@
+2026-04-19 00:00:02.363 -07:00 [INF] Running appointment reminder job at "2026-04-19T07:00:02.3636840Z"
+2026-04-19 00:00:02.748 -07:00 [INF] Appointment reminder job completed.

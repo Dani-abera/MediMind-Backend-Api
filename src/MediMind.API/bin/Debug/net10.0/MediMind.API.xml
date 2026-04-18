@@ -4,6 +4,11 @@
         <name>MediMind.API</name>
     </assembly>
     <members>
+        <member name="T:MediMind.API.Attributes.RequireRoleAttribute">
+            <summary>
+            Declarative role requirement attribute that maps to JWT role claims.
+            </summary>
+        </member>
         <member name="T:MediMind.API.Controllers.HealthcareCentersController">
             <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
         </member>
@@ -167,6 +172,56 @@
         </member>
         <member name="T:MediMind.API.Controllers.ErrorController">
             <summary>Global error handler — maps domain exceptions to HTTP responses.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthRecordsController">
+            <summary>
+            Health records API for patient vitals tracking and trend analysis.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.#ctor(MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Health records API for patient vitals tracking and trend analysis.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Create(MediMind.Application.Features.HealthRecords.CreateHealthRecordDto)">
+            <summary>
+            Create a new health record for the authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetMy(System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32)">
+            <summary>
+            Get the authenticated patient's records with pagination and date filters.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetById(System.Guid)">
+            <summary>
+            Get a specific health record by record ID.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Update(System.Guid,MediMind.Application.Features.HealthRecords.UpdateHealthRecordDto)">
+            <summary>
+            Update an existing health record for the authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Delete(System.Guid)">
+            <summary>
+            Delete a health record for the authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetTrends(System.Int32)">
+            <summary>
+            Get trend statistics for the authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetLatest(System.Nullable{System.Guid})">
+            <summary>
+            Get latest health record for the target patient by role-sensitive access.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetCount">
+            <summary>
+            Get total record count and prediction readiness (>= 7 records).
+            </summary>
         </member>
         <member name="T:MediMind.API.Controllers.ProfileImagesController">
             <summary>Profile / logo images for patients, doctors, admins, and healthcare centers.</summary>

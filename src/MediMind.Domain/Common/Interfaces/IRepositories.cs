@@ -87,12 +87,29 @@ public interface IHealthRecordRepository : IRepository<HealthRecord>
     Task<IReadOnlyList<HealthRecord>> GetByPatientAsync(Guid patientId, int days = 30, CancellationToken ct = default);
     Task<HealthRecord?> GetLatestByPatientAsync(Guid patientId, CancellationToken ct = default);
     Task<int> CountByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task<HealthRecord?> GetByIdAsync(Guid recordId, Guid patientId);
+    Task<IEnumerable<HealthRecord>> GetByPatientIdAsync(
+        Guid patientId,
+        DateOnly? startDate,
+        DateOnly? endDate,
+        int page,
+        int pageSize);
+    Task<HealthRecord> CreateAsync(HealthRecord record);
+    Task<HealthRecord?> UpdateAsync(HealthRecord record);
+    Task<bool> DeleteAsync(Guid recordId, Guid patientId);
+    Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days);
+    Task<int> GetRecordCountAsync(Guid patientId);
+    Task<HealthRecord?> GetLatestAsync(Guid patientId);
+    Task<IEnumerable<HealthRecord>> GetAllForPredictionAsync(Guid patientId);
 }
 
 public interface IHealthPredictionRepository : IRepository<HealthPrediction>
 {
-    Task<HealthPrediction?> GetLatestByPatientAsync(Guid patientId, CancellationToken ct = default);
-    Task<IReadOnlyList<HealthPrediction>> GetHistoryByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task<HealthPrediction?> GetByIdAsync(Guid predictionId, Guid patientId);
+    Task<IEnumerable<HealthPrediction>> GetByPatientIdAsync(Guid patientId, int page, int pageSize);
+    Task<HealthPrediction?> GetLatestAsync(Guid patientId);
+    Task<HealthPrediction> CreateAsync(HealthPrediction prediction, IEnumerable<Guid> healthRecordIds);
+    Task<IEnumerable<HealthPrediction>> GetHistoryAsync(Guid patientId, int count);
 }
 
 public interface IPaymentRepository : IRepository<Payment>

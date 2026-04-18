@@ -268,6 +268,121 @@ public class HealthRecordRepository(MediMindDbContext context)
 
     public async Task<int> CountByPatientAsync(Guid patientId, CancellationToken ct = default) =>
         await Db.HealthRecords.CountAsync(h => h.PatientId == patientId, ct);
+
+    public async Task<HealthRecord?> GetByIdAsync(Guid recordId, Guid patientId) =>
+        await Db.HealthRecords
+            .AsNoTracking()
+            .FirstOrDefaultAsync(h => h.Id == recordId && h.PatientId == patientId);
+
+    public async Task<IEnumerable<HealthRecord>> GetByPatientIdAsync(
+        Guid patientId,
+        DateOnly? startDate,
+        DateOnly? endDate,
+        int page,
+        int pageSize)
+    {
+        var query = Db.HealthRecords
+            .AsNoTracking()
+            .Where(h => h.PatientId == patientId);
+
+        if (startDate.HasValue)
+            query = query.Where(h => h.RecordDate >= startDate.Value);
+        if (endDate.HasValue)
+            query = query.Where(h => h.RecordDate <= endDate.Value);
+
+        return await query
+            .OrderByDescending(h => h.RecordDate)
+            .ThenByDescending(h => h.RecordTime)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
+    public async Task<HealthRecord> CreateAsync(HealthRecord record)
+    {
+        await Db.HealthRecords.AddAsync(record);
+        await Db.SaveChangesAsync();
+        return record;
+    }
+
+    public async Task<HealthRecord?> UpdateAsync(HealthRecord record)
+    {
+        var exists = await Db.HealthRecords.AnyAsync(x => x.Id == record.Id && x.PatientId == record.PatientId);
+        if (!exists)
+            return null;
+
+        Db.HealthRecords.Update(record);
+        await Db.SaveChangesAsync();
+        return record;
+    }
+
+    public async Task<bool> DeleteAsync(Guid recordId, Guid patientId)
+    {
+        var record = await Db.HealthRecords.FirstOrDefaultAsync(h => h.Id == recordId && h.PatientId == patientId);
+        if (record is null)
+            return false;
+
+        Db.HealthRecords.Remove(record);
+        await Db.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days)
+    {
+        var since = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-days));
+        var records = await Db.HealthRecords
+            .AsNoTracking()
+            .Where(h => h.PatientId == patientId && h.RecordDate >= since)
+            .OrderBy(h => h.RecordDate)
+            .ThenBy(h => h.RecordTime)
+            .ToListAsync();
+
+        var half = records.Count / 2;
+        var firstHalfSystolic = records.Take(half).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).ToList();
+        var secondHalfSystolic = records.Skip(half).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).ToList();
+
+        var firstAvg = firstHalfSystolic.Count > 0 ? firstHalfSystolic.Average() : (double?)null;
+        var secondAvg = secondHalfSystolic.Count > 0 ? secondHalfSystolic.Average() : (double?)null;
+
+        var trend = "Stable";
+        if (firstAvg.HasValue && secondAvg.HasValue)
+        {
+            if (secondAvg.Value < firstAvg.Value - 5)
+                trend = "Improving";
+            else if (secondAvg.Value > firstAvg.Value + 5)
+                trend = "Worsening";
+        }
+
+        return new HealthTrendDto(
+            $"Last {days} Days",
+            records.Where(x => x.SystolicBp.HasValue).Select(x => (double?)x.SystolicBp!.Value).Average(),
+            records.Where(x => x.DiastolicBp.HasValue).Select(x => (double?)x.DiastolicBp!.Value).Average(),
+            records.Where(x => x.GlucoseLevel.HasValue).Select(x => (double?)x.GlucoseLevel!.Value).Average(),
+            records.Where(x => x.Weight.HasValue).Select(x => (double?)x.Weight!.Value).Average(),
+            records.Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp).Min(),
+            records.Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp).Max(),
+            records.Count,
+            trend);
+    }
+
+    public async Task<int> GetRecordCountAsync(Guid patientId) =>
+        await Db.HealthRecords.AsNoTracking().CountAsync(x => x.PatientId == patientId);
+
+    public async Task<HealthRecord?> GetLatestAsync(Guid patientId) =>
+        await Db.HealthRecords
+            .AsNoTracking()
+            .Where(h => h.PatientId == patientId)
+            .OrderByDescending(h => h.RecordDate)
+            .ThenByDescending(h => h.RecordTime)
+            .FirstOrDefaultAsync();
+
+    public async Task<IEnumerable<HealthRecord>> GetAllForPredictionAsync(Guid patientId) =>
+        await Db.HealthRecords
+            .AsNoTracking()
+            .Where(h => h.PatientId == patientId)
+            .OrderBy(h => h.RecordDate)
+            .ThenBy(h => h.RecordTime)
+            .ToListAsync();
 }
 
 // ─── Health Prediction Repository ────────────────────────────────────────────
@@ -275,18 +390,62 @@ public class HealthRecordRepository(MediMindDbContext context)
 public class HealthPredictionRepository(MediMindDbContext context)
     : Repository<HealthPrediction>(context), IHealthPredictionRepository
 {
-    public async Task<HealthPrediction?> GetLatestByPatientAsync(Guid patientId, CancellationToken ct = default) =>
+    public async Task<HealthPrediction?> GetByIdAsync(Guid predictionId, Guid patientId) =>
         await Db.HealthPredictions
+            .AsNoTracking()
+            .FirstOrDefaultAsync(h => h.Id == predictionId && h.PatientId == patientId);
+
+    public async Task<IEnumerable<HealthPrediction>> GetByPatientIdAsync(Guid patientId, int page, int pageSize) =>
+        await Db.HealthPredictions
+            .AsNoTracking()
             .Where(h => h.PatientId == patientId)
             .OrderByDescending(h => h.PredictionDate).ThenByDescending(h => h.PredictionTime)
-            .FirstOrDefaultAsync(ct);
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
 
-    public async Task<IReadOnlyList<HealthPrediction>> GetHistoryByPatientAsync(
-        Guid patientId, CancellationToken ct = default) =>
+    public async Task<HealthPrediction?> GetLatestAsync(Guid patientId) =>
         await Db.HealthPredictions
+            .AsNoTracking()
             .Where(h => h.PatientId == patientId)
             .OrderByDescending(h => h.PredictionDate)
-            .ToListAsync(ct);
+            .ThenByDescending(h => h.PredictionTime)
+            .FirstOrDefaultAsync();
+
+    public async Task<HealthPrediction> CreateAsync(HealthPrediction prediction, IEnumerable<Guid> healthRecordIds)
+    {
+        await Db.Database.BeginTransactionAsync();
+        try
+        {
+            await Db.HealthPredictions.AddAsync(prediction);
+            await Db.SaveChangesAsync();
+
+            var links = healthRecordIds
+                .Distinct()
+                .Select(recordId => new HealthPredictionRecord(prediction.Id, recordId))
+                .ToList();
+
+            await Db.HealthPredictionRecords.AddRangeAsync(links);
+            await Db.SaveChangesAsync();
+            await Db.Database.CommitTransactionAsync();
+
+            return prediction;
+        }
+        catch
+        {
+            await Db.Database.RollbackTransactionAsync();
+            throw;
+        }
+    }
+
+    public async Task<IEnumerable<HealthPrediction>> GetHistoryAsync(Guid patientId, int count) =>
+        await Db.HealthPredictions
+            .AsNoTracking()
+            .Where(h => h.PatientId == patientId)
+            .OrderByDescending(h => h.PredictionDate)
+            .ThenByDescending(h => h.PredictionTime)
+            .Take(count)
+            .ToListAsync();
 }
 
 // ─── Payment Repository ───────────────────────────────────────────────────────

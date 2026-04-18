@@ -1,3 +1,4 @@
+using AutoMapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,12 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(assembly);
 
         // AutoMapper — all profiles from this assembly
-       // services.AddAutoMapper(assembly);
+        services.AddAutoMapper(_ => { }, assembly);
+
+        // Health records application service
+        services.AddScoped<Features.HealthRecords.IHealthRecordService, Features.HealthRecords.HealthRecordService>();
+        services.AddScoped<Features.HealthPredictions.IHealthPredictionService, Features.HealthPredictions.HealthPredictionService>();
+        services.AddScoped<Features.HealthPredictions.IHealthFeatureEngineeringService, Features.HealthPredictions.HealthFeatureEngineeringService>();
 
         return services;
     }

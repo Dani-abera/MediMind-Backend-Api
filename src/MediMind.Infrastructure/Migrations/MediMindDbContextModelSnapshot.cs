@@ -387,8 +387,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("record_id");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
 
                     b.Property<int?>("DiastolicBp")
                         .HasColumnType("integer")
@@ -425,8 +427,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("record_date");
 
                     b.Property<TimeOnly>("RecordTime")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("time without time zone")
-                        .HasColumnName("record_time");
+                        .HasColumnName("record_time")
+                        .HasDefaultValueSql("CURRENT_TIME");
 
                     b.Property<string>("RecordedBy")
                         .IsRequired()
@@ -461,6 +465,7 @@ namespace MediMind.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId", "RecordDate")
+                        .IsDescending(false, true)
                         .HasDatabaseName("i_x_health_records_patient_id_record_date");
 
                     b.ToTable("health_records", null, t =>
@@ -473,9 +478,19 @@ namespace MediMind.Infrastructure.Migrations
 
                             t.HasCheckConstraint("ck_heart_rate", "heart_rate BETWEEN 30 AND 250 OR heart_rate IS NULL");
 
+                            t.HasCheckConstraint("ck_height", "height BETWEEN 50 AND 250 OR height IS NULL");
+
+                            t.HasCheckConstraint("ck_oxygen_saturation", "oxygen_saturation BETWEEN 70 AND 100 OR oxygen_saturation IS NULL");
+
+                            t.HasCheckConstraint("ck_recorded_by", "recorded_by IN ('patient', 'doctor')");
+
+                            t.HasCheckConstraint("ck_respiratory_rate", "respiratory_rate BETWEEN 8 AND 60 OR respiratory_rate IS NULL");
+
                             t.HasCheckConstraint("ck_systolic_bp", "systolic_bp BETWEEN 70 AND 250 OR systolic_bp IS NULL");
 
                             t.HasCheckConstraint("ck_temperature", "temperature BETWEEN 35 AND 43 OR temperature IS NULL");
+
+                            t.HasCheckConstraint("ck_weight", "weight BETWEEN 20 AND 300 OR weight IS NULL");
                         });
                 });
 
