@@ -75,6 +75,9 @@ public interface INotificationService
 {
     Task SendPushAsync(Guid userId, string title, string body, object? data = null);
     Task SendSmsAsync(string phoneNumber, string message);
+    Task SendQueueUpdateToPatientAsync(Guid patientId, object status);
+    Task BroadcastQueueRefreshAsync(Guid centerId, object dashboard);
+    Task BroadcastQueueEventAsync(Guid centerId, string eventName, object payload);
 }
 
 // ─── ML Service Client ────────────────────────────────────────────────────────

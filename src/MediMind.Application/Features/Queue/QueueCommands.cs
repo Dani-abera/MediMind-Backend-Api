@@ -7,7 +7,7 @@ namespace MediMind.Application.Features.Queue;
 
 // ─── DTOs ─────────────────────────────────────────────────────────────────────
 
-public record QueueEntryDto(
+public record LegacyQueueEntryDto(
     Guid QueueId,
     Guid AppointmentId,
     Guid PatientId,
@@ -19,7 +19,7 @@ public record QueueEntryDto(
     DateOnly QueueDate,
     DateTime? CalledTime);
 
-public record PatientQueueStatusDto(
+public record LegacyPatientQueueStatusDto(
     string QueueNumber,
     int Position,
     int EstimatedWaitMinutes,
@@ -119,7 +119,7 @@ public class GenerateDailyQueuesHandler(
 // CALL NEXT PATIENT (Admin action)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-public record CallNextPatientCommand(Guid CenterId, Guid AdminId) : IRequest<QueueEntryDto>;
+public record CallNextPatientCommand(Guid CenterId, Guid AdminId) : IRequest<LegacyQueueEntryDto>;
 
 public class CallNextPatientHandler(
     IQueueRepository queueRepository,
@@ -128,9 +128,9 @@ public class CallNextPatientHandler(
     ISmsService smsService,
     IQueueHubService queueHub,
     IUnitOfWork unitOfWork)
-    : IRequestHandler<CallNextPatientCommand, QueueEntryDto>
+    : IRequestHandler<CallNextPatientCommand, LegacyQueueEntryDto>
 {
-    public async Task<QueueEntryDto> Handle(CallNextPatientCommand request, CancellationToken ct)
+    public async Task<LegacyQueueEntryDto> Handle(CallNextPatientCommand request, CancellationToken ct)
     {
         // Get next patient with status "Waiting" — ordered by position
         var next = await queueRepository.GetNextWaitingAsync(request.CenterId, ct)
@@ -165,7 +165,7 @@ public class CallNextPatientHandler(
 
         await Task.WhenAll(pushTask, broadcastTask);
 
-        return new QueueEntryDto(
+        return new LegacyQueueEntryDto(
             next.Id,
             next.AppointmentId,
             patientId,
@@ -219,18 +219,18 @@ public class MarkNoShowHandler(
 // GET QUEUE STATUS (Patient — real-time polling fallback)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-public record GetPatientQueueStatusQuery(Guid AppointmentId, Guid PatientId) : IRequest<PatientQueueStatusDto>;
+public record GetPatientQueueStatusQuery(Guid AppointmentId, Guid PatientId) : IRequest<LegacyPatientQueueStatusDto>;
 
 public class GetPatientQueueStatusHandler(IQueueRepository queueRepository)
-    : IRequestHandler<GetPatientQueueStatusQuery, PatientQueueStatusDto>
+    : IRequestHandler<GetPatientQueueStatusQuery, LegacyPatientQueueStatusDto>
 {
-    public async Task<PatientQueueStatusDto> Handle(
+    public async Task<LegacyPatientQueueStatusDto> Handle(
         GetPatientQueueStatusQuery request, CancellationToken ct)
     {
         var entry = await queueRepository.GetByAppointmentAsync(request.AppointmentId, ct);
 
         if (entry is null)
-            return new PatientQueueStatusDto(
+            return new LegacyPatientQueueStatusDto(
                 "N/A", 0, 0, "NotInQueue",
                 "Queue information unavailable. Please check in at reception.");
 
@@ -244,7 +244,7 @@ public class GetPatientQueueStatusHandler(IQueueRepository queueRepository)
             _ => "Status unknown."
         };
 
-        return new PatientQueueStatusDto(
+        return new LegacyPatientQueueStatusDto(
             entry.QueueNumber,
             entry.Position,
             entry.EstimatedWaitTimeMinutes,
@@ -257,17 +257,17 @@ public class GetPatientQueueStatusHandler(IQueueRepository queueRepository)
 // GET CENTER QUEUE DASHBOARD (Admin)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-public record GetCenterQueueQuery(Guid CenterId, DateOnly Date) : IRequest<IReadOnlyList<QueueEntryDto>>;
+public record GetCenterQueueQuery(Guid CenterId, DateOnly Date) : IRequest<IReadOnlyList<LegacyQueueEntryDto>>;
 
 public class GetCenterQueueHandler(IQueueRepository queueRepository)
-    : IRequestHandler<GetCenterQueueQuery, IReadOnlyList<QueueEntryDto>>
+    : IRequestHandler<GetCenterQueueQuery, IReadOnlyList<LegacyQueueEntryDto>>
 {
-    public async Task<IReadOnlyList<QueueEntryDto>> Handle(
+    public async Task<IReadOnlyList<LegacyQueueEntryDto>> Handle(
         GetCenterQueueQuery request, CancellationToken ct)
     {
         var entries = await queueRepository.GetByCenterAndDateAsync(request.CenterId, request.Date, ct);
 
-        return entries.Select(e => new QueueEntryDto(
+        return entries.Select(e => new LegacyQueueEntryDto(
             e.Id,
             e.AppointmentId,
             e.Appointment?.PatientId ?? Guid.Empty,

@@ -34,6 +34,7 @@ public static class DependencyInjection
         services.AddScoped<Features.Appointments.IAppointmentAvailabilityService, Features.Appointments.AppointmentAvailabilityService>();
         services.AddScoped<Features.Appointments.IBookingValidationService, Features.Appointments.BookingValidationService>();
         services.AddScoped<Features.Appointments.IAppointmentService, Features.Appointments.AppointmentService>();
+        services.AddScoped<Features.Queue.IQueueService, Features.Queue.QueueService>();
 
         return services;
     }

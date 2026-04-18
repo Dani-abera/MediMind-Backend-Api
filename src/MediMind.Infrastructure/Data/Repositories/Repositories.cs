@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
+using Npgsql;
 
 namespace MediMind.Infrastructure.Data.Repositories;
 
@@ -377,6 +378,108 @@ public class DoctorScheduleRepository(MediMindDbContext context)
 public class QueueRepository(MediMindDbContext context)
     : Repository<QueueEntry>(context), IQueueRepository
 {
+    public async Task<QueueEntry?> GetByAppointmentIdAsync(Guid appointmentId) =>
+        await Db.QueueEntries
+            .Include(q => q.Appointment).ThenInclude(a => a.Patient)
+            .Include(q => q.Appointment).ThenInclude(a => a.Doctor)
+            .Include(q => q.Appointment).ThenInclude(a => a.Center)
+            .FirstOrDefaultAsync(q => q.AppointmentId == appointmentId);
+
+    public async Task<QueueEntry?> GetByIdAsync(Guid queueId) =>
+        await Db.QueueEntries
+            .Include(q => q.Appointment).ThenInclude(a => a.Patient)
+            .Include(q => q.Appointment).ThenInclude(a => a.Doctor)
+            .Include(q => q.Appointment).ThenInclude(a => a.Center)
+            .FirstOrDefaultAsync(q => q.Id == queueId);
+
+    public async Task<IEnumerable<QueueEntry>> GetCenterQueueAsync(Guid centerId, DateOnly date) =>
+        await Db.QueueEntries
+            .Where(q => q.CenterId == centerId && q.QueueDate == date)
+            .Include(q => q.Appointment).ThenInclude(a => a.Patient)
+            .Include(q => q.Appointment).ThenInclude(a => a.Doctor)
+            .Include(q => q.Appointment).ThenInclude(a => a.Center)
+            .OrderBy(q => q.Position)
+            .ToListAsync();
+
+    public async Task<QueueEntry?> GetNextWaitingAsync(Guid centerId, DateOnly date) =>
+        await Db.QueueEntries
+            .Where(q => q.CenterId == centerId &&
+                        q.QueueDate == date &&
+                        q.Status == QueueStatus.Waiting)
+            .Include(q => q.Appointment).ThenInclude(a => a.Patient)
+            .Include(q => q.Appointment).ThenInclude(a => a.Doctor)
+            .Include(q => q.Appointment).ThenInclude(a => a.Center)
+            .OrderBy(q => q.Position)
+            .FirstOrDefaultAsync();
+
+    public async Task<QueueEntry> CreateAsync(QueueEntry entry)
+    {
+        await Db.QueueEntries.AddAsync(entry);
+        return entry;
+    }
+
+    public async Task<QueueEntry?> UpdateStatusAsync(Guid queueId, QueueStatus status)
+    {
+        var queue = await Db.QueueEntries.FirstOrDefaultAsync(q => q.Id == queueId);
+        if (queue is null)
+            return null;
+
+        switch (status)
+        {
+            case QueueStatus.Called:
+                queue.CallPatient();
+                break;
+            case QueueStatus.InConsultation:
+                queue.StartConsultation();
+                break;
+            case QueueStatus.Completed:
+                queue.CompleteConsultation();
+                break;
+            case QueueStatus.Missed:
+                queue.MarkMissed();
+                break;
+            default:
+                break;
+        }
+
+        return queue;
+    }
+
+    public async Task RecalculatePositionsAsync(Guid centerId, DateOnly date)
+    {
+        var centerParam = new Npgsql.NpgsqlParameter("centerId", centerId);
+        var dateParam = new Npgsql.NpgsqlParameter("queueDate", date);
+        await Db.Database.ExecuteSqlRawAsync(
+            \"\"\"\n            UPDATE queue SET position = rn.new_position\n            FROM (\n              SELECT queue_id, ROW_NUMBER() OVER (ORDER BY position) as new_position\n              FROM queue\n              WHERE center_id = @centerId AND queue_date = @queueDate\n              AND status IN ('Waiting', 'Called')\n            ) rn\n            WHERE queue.queue_id = rn.queue_id;\n            \"\"\", centerParam, dateParam);
+
+        var center = await Db.HealthcareCenters.FirstOrDefaultAsync(c => c.Id == centerId);
+        var slot = center?.SlotDurationMinutes ?? 30;
+        var active = await Db.QueueEntries
+            .Where(q => q.CenterId == centerId && q.QueueDate == date && (q.Status == QueueStatus.Waiting || q.Status == QueueStatus.Called))
+            .OrderBy(q => q.Position)
+            .ToListAsync();
+        for (var i = 0; i < active.Count; i++)
+            active[i].UpdatePosition(i + 1, slot);
+    }
+
+    public async Task<int> GetCurrentPositionAsync(Guid appointmentId) =>
+        await Db.QueueEntries
+            .Where(q => q.AppointmentId == appointmentId)
+            .Select(q => q.Position)
+            .FirstOrDefaultAsync();
+
+    public async Task<int> GetEstimatedWaitAsync(Guid appointmentId) =>
+        await Db.QueueEntries
+            .Where(q => q.AppointmentId == appointmentId)
+            .Select(q => q.EstimatedWaitTimeMinutes)
+            .FirstOrDefaultAsync();
+
+    public async Task BulkCreateAsync(IEnumerable<QueueEntry> entries) =>
+        await Db.QueueEntries.AddRangeAsync(entries);
+
+    public async Task<bool> ExistsForDateAsync(Guid centerId, DateOnly date) =>
+        await Db.QueueEntries.AnyAsync(q => q.CenterId == centerId && q.QueueDate == date);
+
     public async Task<IReadOnlyList<QueueEntry>> GetByCenterAndDateAsync(
         Guid centerId, DateOnly date, CancellationToken ct = default) =>
         await Db.QueueEntries
@@ -402,16 +505,7 @@ public class QueueRepository(MediMindDbContext context)
 
     public async Task UpdatePositionsAsync(Guid centerId, DateOnly date, CancellationToken ct = default)
     {
-        // Recalculate positions for all waiting patients in this center's queue
-        var waitingEntries = await Db.QueueEntries
-            .Where(q => q.CenterId == centerId && q.QueueDate == date && q.Status == QueueStatus.Waiting)
-            .OrderBy(q => q.Position)
-            .ToListAsync(ct);
-
-        for (int i = 0; i < waitingEntries.Count; i++)
-            waitingEntries[i].UpdatePosition(i + 1, 30); // Default 30 min slot
-
-        Db.QueueEntries.UpdateRange(waitingEntries);
+        await RecalculatePositionsAsync(centerId, date);
     }
 }
 

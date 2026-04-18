@@ -192,15 +192,16 @@ public class LegacyAppointmentsController(IMediator mediator, ICurrentUser curre
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Real-time queue management for healthcare centers</summary>
-[Tags("Queue")]
+[Tags("Queue (Legacy)")]
 [Authorize]
-public class QueueController(IMediator mediator, ICurrentUser currentUser)
+[Route("api/v1/legacy-queue")]
+public class LegacyQueueController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
 {
     /// <summary>Get the full queue dashboard for a healthcare center (Admin only).</summary>
     [HttpGet("centers/{centerId}")]
     [Authorize(Policy = "AdminOnly")]
-    [ProducesResponseType(typeof(IReadOnlyList<QueueEntryDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(IReadOnlyList<LegacyQueueEntryDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetCenterQueue(
         Guid centerId, [FromQuery] DateOnly? date, CancellationToken ct)
     {
@@ -215,7 +216,7 @@ public class QueueController(IMediator mediator, ICurrentUser currentUser)
     /// <summary>Call next patient in queue (Admin action — triggers real-time SignalR broadcast).</summary>
     [HttpPost("centers/{centerId}/call-next")]
     [Authorize(Policy = "AdminOnly")]
-    [ProducesResponseType(typeof(QueueEntryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(LegacyQueueEntryDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> CallNextPatient(Guid centerId, CancellationToken ct)
     {
         if (currentUser.TenantId != centerId) return Forbid();
@@ -239,7 +240,7 @@ public class QueueController(IMediator mediator, ICurrentUser currentUser)
     /// <summary>Get patient's own queue status (Patient only) — polling fallback when WebSocket unavailable.</summary>
     [HttpGet("my-status/{appointmentId}")]
     [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(PatientQueueStatusDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(LegacyPatientQueueStatusDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMyQueueStatus(Guid appointmentId, CancellationToken ct)
     {
         var query = new GetPatientQueueStatusQuery(appointmentId, currentUser.UserId);

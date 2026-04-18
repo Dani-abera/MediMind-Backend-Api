@@ -1,4 +1,6 @@
 using MediMind.Domain.Common.Interfaces;
+using MediMind.Infrastructure.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -65,17 +67,39 @@ public class AppointmentReminderService(
 /// Bridge adapter for current push/SMS services.
 /// </summary>
 public class NotificationServiceAdapter(
-    IPushNotificationService pushNotificationService,
-    ISmsService smsService) : INotificationService
+    IHubContext<QueueHub> hubContext,
+    ILogger<NotificationServiceAdapter> logger) : INotificationService
 {
-    public async Task SendPushAsync(Guid userId, string title, string body, object? data = null)
+    public Task SendPushAsync(Guid userId, string title, string body, object? data = null)
     {
-        var payload = data as Dictionary<string, string>;
-        await pushNotificationService.SendToUserAsync(userId, title, body, payload);
+        logger.LogInformation("Push stub: user={UserId} title={Title} body={Body}", userId, title, body);
+        return Task.CompletedTask;
     }
 
-    public async Task SendSmsAsync(string phoneNumber, string message)
+    public Task SendSmsAsync(string phoneNumber, string message)
     {
-        await smsService.SendAsync(phoneNumber, message);
+        logger.LogInformation("SMS stub: phone={PhoneNumber} message={Message}", phoneNumber, message);
+        return Task.CompletedTask;
+    }
+
+    public async Task SendQueueUpdateToPatientAsync(Guid patientId, object status)
+    {
+        await hubContext.Clients
+            .Group($"patient_{patientId}")
+            .SendAsync("QueuePositionUpdated", status);
+    }
+
+    public async Task BroadcastQueueRefreshAsync(Guid centerId, object dashboard)
+    {
+        await hubContext.Clients
+            .Group($"center_{centerId}")
+            .SendAsync("QueueRefreshed", dashboard);
+    }
+
+    public async Task BroadcastQueueEventAsync(Guid centerId, string eventName, object payload)
+    {
+        await hubContext.Clients
+            .Group($"center_{centerId}")
+            .SendAsync(eventName, payload);
     }
 }

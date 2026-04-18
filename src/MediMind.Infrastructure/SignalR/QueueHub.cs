@@ -1,4 +1,3 @@
-using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
@@ -6,74 +5,58 @@ using Microsoft.Extensions.Logging;
 namespace MediMind.Infrastructure.SignalR;
 
 /// <summary>
-/// SignalR Hub — provides WebSocket real-time queue updates.
-/// Clients join a group by centerId to receive queue broadcasts.
-/// NFR-003: Queue position updates every 30 seconds.
+/// SignalR hub for real-time queue updates.
 /// </summary>
 [Authorize]
 public class QueueHub(ILogger<QueueHub> logger) : Hub
 {
-    // Group naming convention: "queue_{centerId}"
-    private static string CenterGroup(Guid centerId) => $"queue_{centerId}";
-    // Patient-specific group: "patient_{userId}"
-    private static string PatientGroup(Guid userId) => $"patient_{userId}";
-
-    public override async Task OnConnectedAsync()
+    /// <summary>
+    /// Joins center admin/staff queue group.
+    /// </summary>
+    public async Task JoinCenterGroup(string centerId)
     {
-        logger.LogInformation("Client connected: {ConnectionId}", Context.ConnectionId);
-        await base.OnConnectedAsync();
+        if (!Guid.TryParse(centerId, out var parsed))
+            throw new HubException("Invalid center id.");
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"center_{parsed}");
+        logger.LogDebug("Connection {ConnectionId} joined center group {CenterId}", Context.ConnectionId, parsed);
     }
 
-    public override async Task OnDisconnectedAsync(Exception? exception)
+    /// <summary>
+    /// Joins authenticated patient group using JWT subject.
+    /// </summary>
+    public async Task JoinPatientGroup()
     {
-        logger.LogInformation("Client disconnected: {ConnectionId}", Context.ConnectionId);
-        await base.OnDisconnectedAsync(exception);
+        var userId = Context.UserIdentifier ??
+                     Context.User?.FindFirst("sub")?.Value ??
+                     Context.User?.FindFirst("user_id")?.Value;
+
+        if (!Guid.TryParse(userId, out var parsed))
+            throw new HubException("Unable to resolve patient id from token.");
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"patient_{parsed}");
     }
 
-    /// <summary>Healthcare center admin joins center's queue group.</summary>
-    public async Task JoinCenterQueue(string centerId)
+    /// <summary>
+    /// Joins doctor queue group scoped to center.
+    /// </summary>
+    public async Task JoinDoctorGroup(string centerId)
     {
-        if (Guid.TryParse(centerId, out _))
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, CenterGroup(Guid.Parse(centerId)));
-            logger.LogDebug("Connection {ConnectionId} joined center group {CenterId}",
-                Context.ConnectionId, centerId);
-        }
+        var userId = Context.UserIdentifier ??
+                     Context.User?.FindFirst("sub")?.Value ??
+                     Context.User?.FindFirst("user_id")?.Value;
+
+        if (!Guid.TryParse(userId, out var doctorId) || !Guid.TryParse(centerId, out var parsedCenterId))
+            throw new HubException("Invalid doctor or center id.");
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, $"doctor_{doctorId}_{parsedCenterId}");
     }
 
-    /// <summary>Patient joins their personal notification group.</summary>
-    public async Task JoinPatientGroup(string userId)
+    /// <summary>
+    /// Leaves any named group.
+    /// </summary>
+    public async Task LeaveGroup(string groupName)
     {
-        if (Guid.TryParse(userId, out _))
-            await Groups.AddToGroupAsync(Context.ConnectionId, PatientGroup(Guid.Parse(userId)));
-    }
-
-    public async Task LeaveCenterQueue(string centerId)
-    {
-        if (Guid.TryParse(centerId, out _))
-            await Groups.RemoveFromGroupAsync(Context.ConnectionId, CenterGroup(Guid.Parse(centerId)));
-    }
-}
-
-/// <summary>
-/// Service that broadcasts queue updates via SignalR from application layer.
-/// Injected into command handlers via IQueueHubService interface.
-/// </summary>
-public class QueueHubService(IHubContext<QueueHub> hubContext) : IQueueHubService
-{
-    public async Task BroadcastQueueUpdateAsync(Guid centerId, object queueData, CancellationToken ct = default)
-    {
-        // Broadcast to ALL clients in the center's group
-        await hubContext.Clients
-            .Group($"queue_{centerId}")
-            .SendAsync("QueueUpdated", queueData, ct);
-    }
-
-    public async Task NotifyPatientAsync(Guid patientId, string eventName, object data, CancellationToken ct = default)
-    {
-        // Send to specific patient's group
-        await hubContext.Clients
-            .Group($"patient_{patientId}")
-            .SendAsync(eventName, data, ct);
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
     }
 }

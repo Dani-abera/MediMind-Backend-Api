@@ -8,6 +8,7 @@ using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure;
 using MediMind.Infrastructure.Data;
+using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.API.OpenApi;
 using MediMind.Infrastructure.SignalR;
@@ -47,6 +48,11 @@ try
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
     builder.Services.AddHostedService<AppointmentReminderService>();
+    builder.Services.AddHostedService<DailyQueueGenerationService>();
+    builder.Services.AddSignalR(options =>
+    {
+        options.EnableDetailedErrors = true;
+    });
     // Explicit registration for health records service (also discoverable from Program.cs).
     builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
     builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));

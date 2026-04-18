@@ -94,6 +94,18 @@ public interface IDoctorScheduleRepository : IRepository<DoctorSchedule>
 
 public interface IQueueRepository : IRepository<QueueEntry>
 {
+    Task<QueueEntry?> GetByAppointmentIdAsync(Guid appointmentId);
+    Task<QueueEntry?> GetByIdAsync(Guid queueId);
+    Task<IEnumerable<QueueEntry>> GetCenterQueueAsync(Guid centerId, DateOnly date);
+    Task<QueueEntry?> GetNextWaitingAsync(Guid centerId, DateOnly date);
+    Task<QueueEntry> CreateAsync(QueueEntry entry);
+    Task<QueueEntry?> UpdateStatusAsync(Guid queueId, QueueStatus status);
+    Task RecalculatePositionsAsync(Guid centerId, DateOnly date);
+    Task<int> GetCurrentPositionAsync(Guid appointmentId);
+    Task<int> GetEstimatedWaitAsync(Guid appointmentId);
+    Task BulkCreateAsync(IEnumerable<QueueEntry> entries);
+    Task<bool> ExistsForDateAsync(Guid centerId, DateOnly date);
+
     Task<IReadOnlyList<QueueEntry>> GetByCenterAndDateAsync(Guid centerId, DateOnly date, CancellationToken ct = default);
     Task<QueueEntry?> GetNextWaitingAsync(Guid centerId, CancellationToken ct = default);
     Task<QueueEntry?> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
