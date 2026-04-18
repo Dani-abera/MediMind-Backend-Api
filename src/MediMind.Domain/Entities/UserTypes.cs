@@ -22,6 +22,11 @@ public class Patient : User
     public ICollection<HealthPrediction> HealthPredictions { get; private set; } = [];
     public ICollection<Appointment> Appointments { get; private set; } = [];
     public ICollection<Payment> Payments { get; private set; } = [];
+    public IEnumerable<HealthcareCenter> EnrolledCenters =>
+        Appointments
+            .Where(a => a.Center is not null)
+            .Select(a => a.Center)
+            .DistinctBy(c => c.Id);
 
     private Patient() { }
 
@@ -143,6 +148,12 @@ public class HealthcareCenterAdmin : User
     public void Deactivate()
     {
         IsActive = false;
+        UpdateTimestamp();
+    }
+
+    public void AssignCenter(Guid centerId)
+    {
+        CenterId = centerId;
         UpdateTimestamp();
     }
 }

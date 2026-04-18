@@ -280,3 +280,6 @@
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.pdb
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/obj/Debug/net10.0/MediMind.API.genruntimeconfig.cache
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/obj/Debug/net10.0/ref/MediMind.API.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/CsvHelper.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/Polly.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/Polly.Extensions.Http.dll

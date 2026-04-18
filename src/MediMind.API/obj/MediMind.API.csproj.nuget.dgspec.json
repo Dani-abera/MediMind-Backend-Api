@@ -10,7 +10,7 @@
         "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.API/MediMind.API.csproj",
         "projectName": "MediMind.API",
         "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.API/MediMind.API.csproj",
-        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget",
+        "packagesPath": "/Users/dani/.nuget/packages/",
         "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.API/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -55,6 +55,10 @@
             "AspNetCoreRateLimit": {
               "target": "Package",
               "version": "[5.*, )"
+            },
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[33.*, )"
             },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
@@ -520,7 +524,7 @@
         "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/MediMind.Application.csproj",
         "projectName": "MediMind.Application",
         "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/MediMind.Application.csproj",
-        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget",
+        "packagesPath": "/Users/dani/.nuget/packages/",
         "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -892,7 +896,7 @@
         "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/MediMind.Domain.csproj",
         "projectName": "MediMind.Domain",
         "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/MediMind.Domain.csproj",
-        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget",
+        "packagesPath": "/Users/dani/.nuget/packages/",
         "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
@@ -1226,7 +1230,7 @@
         "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
         "projectName": "MediMind.Infrastructure",
         "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
-        "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget",
+        "packagesPath": "/Users/dani/.nuget/packages/",
         "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [

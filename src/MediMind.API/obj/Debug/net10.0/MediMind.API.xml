@@ -9,31 +9,31 @@
             Declarative role requirement attribute that maps to JWT role claims.
             </summary>
         </member>
-        <member name="T:MediMind.API.Controllers.HealthcareCentersController">
+        <member name="T:MediMind.API.Controllers.LegacyHealthcareCentersController">
             <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Search(System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.Search(System.String,System.String,System.String,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Search available healthcare centers.
             No authentication required — patients browse before booking.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctors(System.Guid,System.String,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.GetDoctors(System.Guid,System.String,System.Threading.CancellationToken)">
             <summary>Get doctors available at a specific healthcare center.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Register(MediMind.Application.Features.HealthcareCenters.RegisterHealthcareCenterCommand,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.Register(MediMind.Application.Features.HealthcareCenters.RegisterHealthcareCenterCommand,System.Threading.CancellationToken)">
             <summary>Register a new healthcare center (creates first admin account too).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.RegisterDoctor(System.Guid,MediMind.API.Controllers.RegisterDoctorRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.RegisterDoctor(System.Guid,MediMind.API.Controllers.RegisterDoctorRequest,System.Threading.CancellationToken)">
             <summary>Register a doctor at this center (Admin only).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.ConfigureSchedule(System.Guid,System.Guid,MediMind.API.Controllers.ConfigureDoctorScheduleRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.ConfigureSchedule(System.Guid,System.Guid,MediMind.API.Controllers.ConfigureDoctorScheduleRequest,System.Threading.CancellationToken)">
             <summary>Configure a doctor's schedule at this center (Admin only — FR-021).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConfiguration(System.Guid,MediMind.API.Controllers.UpdateCenterConfigurationRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.UpdateConfiguration(System.Guid,MediMind.API.Controllers.UpdateCenterConfigurationRequest,System.Threading.CancellationToken)">
             <summary>Update center operational configuration (Admin only — FR-030).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.PaymentsController">
@@ -85,6 +85,61 @@
         <member name="M:MediMind.API.Controllers.AnalyticsController.GetWeeklyTrend(System.Guid,System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
             <summary>Get weekly appointment trends (line chart data).</summary>
         </member>
+        <member name="T:MediMind.API.Controllers.AppointmentsController">
+            <summary>
+            Appointment management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediMind.Application.Features.Appointments.IAppointmentService,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Appointment management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Book(MediMind.Application.Features.Appointments.CreateAppointmentDto)">
+            <summary>
+            Books a new appointment.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Get(System.Nullable{MediMind.Domain.Enums.AppointmentStatus},System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32)">
+            <summary>
+            Gets scoped appointments for current user role.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.GetById(System.Guid)">
+            <summary>
+            Gets appointment details.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Cancel(System.Guid,MediMind.Application.Features.Appointments.CancelAppointmentDto)">
+            <summary>
+            Cancels appointment by patient/admin.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Reschedule(System.Guid,MediMind.Application.Features.Appointments.RescheduleAppointmentDto)">
+            <summary>
+            Reschedules patient appointment.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Approve(System.Guid)">
+            <summary>
+            Approves pending appointment.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Reject(System.Guid,MediMind.Application.Features.Appointments.ApproveRejectDto)">
+            <summary>
+            Rejects pending appointment.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Availability(System.Guid,System.Guid,System.DateOnly)">
+            <summary>
+            Returns available slots for doctor/date.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.AvailableDates(System.Guid,System.Guid,System.Int32)">
+            <summary>
+            Returns available dates for doctor/center.
+            </summary>
+        </member>
         <member name="T:MediMind.API.Controllers.AuthController">
             <summary>Authentication — Registration, OTP, Login, Token refresh</summary>
         </member>
@@ -106,49 +161,49 @@
         <member name="M:MediMind.API.Controllers.AuthController.RefreshToken(MediMind.Application.Features.Auth.RefreshTokenCommand,System.Threading.CancellationToken)">
             <summary>Refresh access token using refresh token.</summary>
         </member>
-        <member name="T:MediMind.API.Controllers.AppointmentsController">
+        <member name="T:MediMind.API.Controllers.LegacyAppointmentsController">
             <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.GetMyAppointments(System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.GetMyAppointments(System.Threading.CancellationToken)">
             <summary>
             Get patient's appointment history.
             Patients can only see their own appointments (RBAC enforced).
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.GetAvailableSlots(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.GetAvailableSlots(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
             <summary>Get available time slots for a doctor on a specific date.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.BookAppointment(MediMind.API.Controllers.BookAppointmentRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.BookAppointment(MediMind.API.Controllers.BookAppointmentRequest,System.Threading.CancellationToken)">
             <summary>Book an appointment. Patient can only book for themselves.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.ApproveAppointment(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.ApproveAppointment(System.Guid,System.Threading.CancellationToken)">
             <summary>Approve a pending appointment (Healthcare Center Admin only).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.RejectAppointment(System.Guid,MediMind.API.Controllers.RejectRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.RejectAppointment(System.Guid,MediMind.API.Controllers.RejectRequest,System.Threading.CancellationToken)">
             <summary>Reject a pending appointment (Healthcare Center Admin only).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.CancelAppointment(System.Guid,MediMind.API.Controllers.CancelRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyAppointmentsController.CancelAppointment(System.Guid,MediMind.API.Controllers.CancelRequest,System.Threading.CancellationToken)">
             <summary>Cancel an appointment (Patient or Admin).</summary>
         </member>
-        <member name="T:MediMind.API.Controllers.QueueController">
+        <member name="T:MediMind.API.Controllers.LegacyQueueController">
             <summary>Real-time queue management for healthcare centers</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.LegacyQueueController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>Real-time queue management for healthcare centers</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.GetCenterQueue(System.Guid,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyQueueController.GetCenterQueue(System.Guid,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
             <summary>Get the full queue dashboard for a healthcare center (Admin only).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.CallNextPatient(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyQueueController.CallNextPatient(System.Guid,System.Threading.CancellationToken)">
             <summary>Call next patient in queue (Admin action — triggers real-time SignalR broadcast).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.MarkNoShow(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyQueueController.MarkNoShow(System.Guid,System.Threading.CancellationToken)">
             <summary>Mark a patient as no-show (Admin only).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.GetMyQueueStatus(System.Guid,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyQueueController.GetMyQueueStatus(System.Guid,System.Threading.CancellationToken)">
             <summary>Get patient's own queue status (Patient only) — polling fallback when WebSocket unavailable.</summary>
         </member>
         <member name="T:MediMind.API.Controllers.HealthController">
@@ -172,6 +227,86 @@
         </member>
         <member name="T:MediMind.API.Controllers.ErrorController">
             <summary>Global error handler — maps domain exceptions to HTTP responses.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.DoctorSchedulesController">
+            <summary>
+            Doctor schedule management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Doctor schedule management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Upsert(MediMind.API.Controllers.UpsertDoctorScheduleDto)">
+            <summary>
+            Creates or updates doctor schedule.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Get(System.Guid,System.Guid)">
+            <summary>
+            Gets doctor schedule by doctor and center.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Delete(System.Guid)">
+            <summary>
+            Deletes doctor schedule.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.DoctorsController">
+            <summary>
+            Doctor profile and availability endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorRepository,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService)">
+            <summary>
+            Doctor profile and availability endpoints.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthcareCentersController">
+            <summary>
+            Healthcare center management and analytics endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediMind.Application.Features.CenterManagement.IHealthcareCenterService,MediMind.Application.Features.CenterManagement.IAnalyticsService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Healthcare center management and analytics endpoints.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthPredictionsController">
+            <summary>
+            AI health prediction APIs powered by external ML service.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.#ctor(MediMind.Application.Features.HealthPredictions.IHealthPredictionService,MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            AI health prediction APIs powered by external ML service.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.RequestPrediction">
+            <summary>
+            Requests a new AI prediction for the authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetHistory(System.Int32,System.Int32)">
+            <summary>
+            Gets paginated prediction history for authenticated patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetLatest(System.Nullable{System.Guid})">
+            <summary>
+            Gets latest prediction by role-aware access.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetById(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Gets a specific prediction by identifier with role-aware access.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetStatus">
+            <summary>
+            Gets prediction readiness status for authenticated patient.
+            </summary>
         </member>
         <member name="T:MediMind.API.Controllers.HealthRecordsController">
             <summary>
@@ -246,6 +381,71 @@
         </member>
         <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteCenterImage(System.Guid,System.Threading.CancellationToken)">
             <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.QueueController">
+            <summary>
+            Queue management endpoints with SignalR-backed updates.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediMind.Application.Features.Queue.IQueueService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Queue management endpoints with SignalR-backed updates.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetStatus(System.Guid)">
+            <summary>
+            Gets patient queue status for appointment.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetCenterDashboard(System.Guid,System.Nullable{System.DateOnly})">
+            <summary>
+            Gets admin queue dashboard for center and date.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.CallNext(MediMind.API.Controllers.CallNextRequest)">
+            <summary>
+            Calls next waiting patient.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Arrived(System.Guid)">
+            <summary>
+            Marks patient arrived.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Complete(System.Guid)">
+            <summary>
+            Marks consultation complete.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.NoShow(System.Guid)">
+            <summary>
+            Marks no-show.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Emergency(MediMind.API.Controllers.EmergencyInsertRequest)">
+            <summary>
+            Inserts emergency patient into first queue position.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Generate(System.Guid,System.Nullable{System.DateOnly})">
+            <summary>
+            Manually triggers queue generation for center and date.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Middleware.TenantValidationMiddleware">
+            <summary>
+            Validates admin tenant access to healthcare center scoped routes.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Middleware.TenantValidationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Validates admin tenant access to healthcare center scoped routes.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Executes middleware validation.
+            </summary>
         </member>
         <member name="T:MediMind.API.OpenApi.MediMindOpenApiExtensions">
             <summary>

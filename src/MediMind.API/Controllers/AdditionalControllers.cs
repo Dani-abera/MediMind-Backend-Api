@@ -18,8 +18,8 @@ namespace MediMind.API.Controllers;
 
 /// <summary>Healthcare center management — Registration, Doctors, Configuration</summary>
 [Tags("Healthcare centers")]
-[Route("api/v1/healthcare-centers")]
-public class HealthcareCentersController(IMediator mediator, ICurrentUser currentUser)
+[Route("api/v1/legacy-healthcare-centers")]
+public class LegacyHealthcareCentersController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
 {
     /// <summary>

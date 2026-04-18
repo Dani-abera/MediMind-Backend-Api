@@ -11,6 +11,7 @@ using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.API.OpenApi;
+using MediMind.API.Middleware;
 using MediMind.Infrastructure.SignalR;
 using MediMind.Infrastructure.Services.Notifications;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -62,15 +63,7 @@ try
             var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<MlServiceOptions>>().Value;
             client.BaseAddress = new Uri(options.BaseUrl);
             client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
-        })
-        .AddPolicyHandler(HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .Or<HttpRequestException>()
-            .WaitAndRetryAsync(2, _ => TimeSpan.FromSeconds(1)))
-        .AddPolicyHandler(HttpPolicyExtensions
-            .HandleTransientHttpError()
-            .Or<HttpRequestException>()
-            .CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+        });
     builder.Services.Configure<TestOtpOptions>(builder.Configuration.GetSection(TestOtpOptions.SectionName));
     
 
@@ -140,6 +133,7 @@ try
     app.UseIpRateLimiting();
 
     app.UseAuthentication();
+    app.UseMiddleware<TenantValidationMiddleware>();
     app.UseAuthorization();
 
     // Global exception handler (maps domain exceptions to correct HTTP codes)

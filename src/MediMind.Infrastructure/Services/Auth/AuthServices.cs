@@ -39,7 +39,10 @@ public class TokenService(IConfiguration config) : ITokenService, IJwtService
         };
 
         if (tenantId.HasValue)
+        {
             claims.Add(new Claim("tenant_id", tenantId.Value.ToString()));
+            claims.Add(new Claim("center_id", tenantId.Value.ToString()));
+        }
 
         var accessToken = new JwtSecurityToken(
             issuer: _issuer,
@@ -82,7 +85,10 @@ public class AuthService(ITokenService tokenService) : IAuthService
 {
     public Task<(string AccessToken, string RefreshToken)> GenerateAuthTokensAsync(User user, CancellationToken ct = default)
     {
-        var tokens = tokenService.GenerateTokens(user.Id, user.UserType.ToString(), null);
+        var tenantId = user is HealthcareCenterAdmin admin && admin.CenterId.HasValue
+            ? admin.CenterId.Value
+            : (Guid?)null;
+        var tokens = tokenService.GenerateTokens(user.Id, user.UserType.ToString(), tenantId);
         return Task.FromResult(tokens);
     }
 }

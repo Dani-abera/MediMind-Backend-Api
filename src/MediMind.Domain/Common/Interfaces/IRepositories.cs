@@ -42,9 +42,14 @@ public interface IPatientRepository : IRepository<Patient>
 
 public interface IDoctorRepository : IRepository<Doctor>
 {
+    Task<Doctor?> GetByIdAsync(Guid doctorId);
     Task<Doctor?> GetByBadgeNumberAsync(string badgeNumber, CancellationToken ct = default);
     Task<Doctor?> GetByLicenseAsync(string licenseNumber, CancellationToken ct = default);
+    Task<PagedResult<Doctor>> SearchAsync(DoctorSearchDto search);
     Task<IReadOnlyList<Doctor>> GetByCenterAsync(Guid centerId, CancellationToken ct = default);
+    Task<IEnumerable<Doctor>> GetByCenterAsync(Guid centerId);
+    Task<Doctor?> GetWithScheduleAsync(Guid doctorId, Guid centerId);
+    Task<IEnumerable<Guid>> GetCenterIdsAsync(Guid doctorId);
     Task<IReadOnlyList<Doctor>> GetBySpecializationAsync(string specialization, CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
 }
@@ -56,7 +61,16 @@ public interface IOtpVerificationRepository : IRepository<OtpVerification>
 
 public interface IHealthcareCenterRepository : IRepository<HealthcareCenter>
 {
+    Task<HealthcareCenter?> GetByIdAsync(Guid centerId);
     Task<HealthcareCenter?> GetByLicenseAsync(string licenseNumber, CancellationToken ct = default);
+    Task<HealthcareCenter?> GetByLicenseAsync(string licenseNumber);
+    Task<PagedResult<HealthcareCenter>> SearchAsync(CenterSearchDto search);
+    Task<HealthcareCenter> CreateAsync(HealthcareCenter center);
+    Task<HealthcareCenter?> UpdateAsync(HealthcareCenter center);
+    Task<bool> UpdateConfigurationAsync(Guid centerId, CenterConfigurationDto config);
+    Task<IEnumerable<DoctorHealthcareCenter>> GetDoctorsAsync(Guid centerId);
+    Task<bool> AddDoctorAsync(DoctorHealthcareCenter relation);
+    Task<bool> RemoveDoctorAsync(Guid doctorId, Guid centerId);
     Task<IReadOnlyList<HealthcareCenter>> GetActiveSubscriptionsAsync(CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
     Task<HealthcareCenter?> GetWithAdminsAsync(Guid centerId, CancellationToken ct = default);
@@ -155,5 +169,27 @@ public record AppointmentFilterDto(
     DateOnly? StartDate,
     DateOnly? EndDate,
     Guid? DoctorId,
+    int Page = 1,
+    int PageSize = 20);
+
+public record CenterSearchDto(
+    string? City,
+    string? Specialization,
+    string? Name,
+    int Page = 1,
+    int PageSize = 20);
+
+public record CenterConfigurationDto(
+    int SlotDurationMinutes,
+    int AdvanceBookingDays,
+    int CancellationHours,
+    bool AutoApproveAppointments,
+    object? WorkingHours = null);
+
+public record DoctorSearchDto(
+    Guid? CenterId,
+    string? Specialization,
+    string? Name,
+    DateOnly? AvailableOnDate,
     int Page = 1,
     int PageSize = 20);

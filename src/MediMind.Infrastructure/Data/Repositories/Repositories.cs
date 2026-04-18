@@ -73,6 +73,12 @@ public class PatientRepository(MediMindDbContext context)
 public class DoctorRepository(MediMindDbContext context)
     : Repository<Doctor>(context), IDoctorRepository
 {
+    public async Task<Doctor?> GetByIdAsync(Guid doctorId) =>
+        await Db.Doctors
+            .Include(d => d.Schedules)
+            .Include(d => d.DoctorHealthcareCenters).ThenInclude(x => x.Center)
+            .FirstOrDefaultAsync(d => d.Id == doctorId);
+
     public async Task<Doctor?> GetByBadgeNumberAsync(string badgeNumber, CancellationToken ct = default) =>
         await Db.Doctors
             .Include(d => d.Schedules)
@@ -90,6 +96,22 @@ public class DoctorRepository(MediMindDbContext context)
             .Include(d => d.DoctorHealthcareCenters.Where(dhc => dhc.CenterId == centerId))
             .ToListAsync(ct);
 
+    public async Task<IEnumerable<Doctor>> GetByCenterAsync(Guid centerId) =>
+        await GetByCenterAsync(centerId, default);
+
+    public async Task<Doctor?> GetWithScheduleAsync(Guid doctorId, Guid centerId) =>
+        await Db.Doctors
+            .Include(d => d.Schedules.Where(s => s.CenterId == centerId))
+            .Include(d => d.DoctorHealthcareCenters.Where(x => x.CenterId == centerId))
+            .FirstOrDefaultAsync(d => d.Id == doctorId);
+
+    public async Task<IEnumerable<Guid>> GetCenterIdsAsync(Guid doctorId) =>
+        await Db.DoctorHealthcareCenters
+            .Where(x => x.DoctorId == doctorId && x.IsActive)
+            .Select(x => x.CenterId)
+            .Distinct()
+            .ToListAsync();
+
     public async Task<IReadOnlyList<Doctor>> GetBySpecializationAsync(
         string specialization, CancellationToken ct = default) =>
         await Db.Doctors
@@ -99,6 +121,32 @@ public class DoctorRepository(MediMindDbContext context)
 
     public async Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.Doctors.AnyAsync(d => d.LicenseNumber == licenseNumber, ct);
+
+    public async Task<PagedResult<Doctor>> SearchAsync(DoctorSearchDto search)
+    {
+        var query = Db.Doctors
+            .Include(d => d.Schedules)
+            .Include(d => d.DoctorHealthcareCenters).ThenInclude(x => x.Center)
+            .AsQueryable();
+
+        if (search.CenterId.HasValue)
+            query = query.Where(d => d.DoctorHealthcareCenters.Any(x => x.CenterId == search.CenterId.Value && x.IsActive));
+        if (!string.IsNullOrWhiteSpace(search.Specialization))
+            query = query.Where(d => d.Specialization.ToLower().Contains(search.Specialization.ToLower()));
+        if (!string.IsNullOrWhiteSpace(search.Name))
+            query = query.Where(d => d.FullName.ToLower().Contains(search.Name.ToLower()));
+
+        var page = Math.Max(search.Page, 1);
+        var pageSize = Math.Clamp(search.PageSize, 1, 100);
+        var total = await query.CountAsync();
+        var items = await query
+            .OrderBy(d => d.FullName)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<Doctor>(items, page, pageSize, total);
+    }
 }
 
 public class OtpVerificationRepository(MediMindDbContext context)
@@ -116,6 +164,95 @@ public class OtpVerificationRepository(MediMindDbContext context)
 public class HealthcareCenterRepository(MediMindDbContext context)
     : Repository<HealthcareCenter>(context), IHealthcareCenterRepository
 {
+    public async Task<HealthcareCenter?> GetByIdAsync(Guid centerId) =>
+        await Db.HealthcareCenters
+            .Include(c => c.Admins)
+            .Include(c => c.DoctorHealthcareCenters).ThenInclude(x => x.Doctor)
+            .FirstOrDefaultAsync(c => c.Id == centerId);
+
+    public async Task<HealthcareCenter?> GetByLicenseAsync(string licenseNumber) =>
+        await Db.HealthcareCenters.FirstOrDefaultAsync(c => c.LicenseNumber == licenseNumber);
+
+    public async Task<PagedResult<HealthcareCenter>> SearchAsync(CenterSearchDto search)
+    {
+        var query = Db.HealthcareCenters
+            .Include(c => c.DoctorHealthcareCenters)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(search.City))
+            query = query.Where(c => c.City.ToLower().Contains(search.City.ToLower()));
+        if (!string.IsNullOrWhiteSpace(search.Specialization))
+            query = query.Where(c => c.Specializations.Any(s => s.ToLower().Contains(search.Specialization.ToLower())));
+        if (!string.IsNullOrWhiteSpace(search.Name))
+            query = query.Where(c => c.CenterName.ToLower().Contains(search.Name.ToLower()));
+
+        var page = Math.Max(search.Page, 1);
+        var pageSize = Math.Clamp(search.PageSize, 1, 100);
+        var total = await query.CountAsync();
+        var items = await query
+            .OrderBy(c => c.CenterName)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<HealthcareCenter>(items, page, pageSize, total);
+    }
+
+    public async Task<HealthcareCenter> CreateAsync(HealthcareCenter center)
+    {
+        await Db.HealthcareCenters.AddAsync(center);
+        return center;
+    }
+
+    public async Task<HealthcareCenter?> UpdateAsync(HealthcareCenter center)
+    {
+        var exists = await Db.HealthcareCenters.AnyAsync(c => c.Id == center.Id);
+        if (!exists) return null;
+        Db.HealthcareCenters.Update(center);
+        return center;
+    }
+
+    public async Task<bool> UpdateConfigurationAsync(Guid centerId, CenterConfigurationDto config)
+    {
+        var center = await Db.HealthcareCenters.FirstOrDefaultAsync(c => c.Id == centerId);
+        if (center is null)
+            return false;
+
+        center.UpdateConfiguration(
+            config.SlotDurationMinutes,
+            config.AdvanceBookingDays,
+            config.CancellationHours,
+            config.AutoApproveAppointments);
+        return true;
+    }
+
+    public async Task<IEnumerable<DoctorHealthcareCenter>> GetDoctorsAsync(Guid centerId) =>
+        await Db.DoctorHealthcareCenters
+            .Where(x => x.CenterId == centerId)
+            .Include(x => x.Doctor)
+            .ToListAsync();
+
+    public async Task<bool> AddDoctorAsync(DoctorHealthcareCenter relation)
+    {
+        var exists = await Db.DoctorHealthcareCenters.AnyAsync(x => x.DoctorId == relation.DoctorId && x.CenterId == relation.CenterId && x.IsActive);
+        if (exists)
+            return false;
+
+        await Db.DoctorHealthcareCenters.AddAsync(relation);
+        return true;
+    }
+
+    public async Task<bool> RemoveDoctorAsync(Guid doctorId, Guid centerId)
+    {
+        var relation = await Db.DoctorHealthcareCenters
+            .FirstOrDefaultAsync(x => x.DoctorId == doctorId && x.CenterId == centerId && x.IsActive);
+        if (relation is null)
+            return false;
+
+        relation.Deactivate();
+        return true;
+    }
+
     public async Task<HealthcareCenter?> GetByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.HealthcareCenters.FirstOrDefaultAsync(c => c.LicenseNumber == licenseNumber, ct);
 
@@ -450,7 +587,16 @@ public class QueueRepository(MediMindDbContext context)
         var centerParam = new Npgsql.NpgsqlParameter("centerId", centerId);
         var dateParam = new Npgsql.NpgsqlParameter("queueDate", date);
         await Db.Database.ExecuteSqlRawAsync(
-            \"\"\"\n            UPDATE queue SET position = rn.new_position\n            FROM (\n              SELECT queue_id, ROW_NUMBER() OVER (ORDER BY position) as new_position\n              FROM queue\n              WHERE center_id = @centerId AND queue_date = @queueDate\n              AND status IN ('Waiting', 'Called')\n            ) rn\n            WHERE queue.queue_id = rn.queue_id;\n            \"\"\", centerParam, dateParam);
+            """
+            UPDATE queue SET position = rn.new_position
+            FROM (
+              SELECT queue_id, ROW_NUMBER() OVER (ORDER BY position) as new_position
+              FROM queue
+              WHERE center_id = @centerId AND queue_date = @queueDate
+              AND status IN ('Waiting', 'Called')
+            ) rn
+            WHERE queue.queue_id = rn.queue_id;
+            """, centerParam, dateParam);
 
         var center = await Db.HealthcareCenters.FirstOrDefaultAsync(c => c.Id == centerId);
         var slot = center?.SlotDurationMinutes ?? 30;
