@@ -1278,7 +1278,8 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.6",
           "Microsoft.Extensions.Hosting.Abstractions": "10.0.6",
           "Microsoft.Extensions.Logging.Abstractions": "10.0.6",
-          "Microsoft.Extensions.Options": "10.0.6"
+          "Microsoft.Extensions.Options": "10.0.6",
+          "QuestPDF": "2024.12.3"
         },
         "runtime": {
           "MediMind.Application.dll": {

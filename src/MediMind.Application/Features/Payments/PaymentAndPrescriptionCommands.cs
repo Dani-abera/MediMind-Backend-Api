@@ -19,7 +19,7 @@ public record PaymentDto(
     string PaymentMethod,
     string Status,
     string? ChapaTransactionId,
-    DateTime PaymentDate);
+    DateTime? PaymentDate);
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // INITIATE PAYMENT (FR-026)
@@ -39,7 +39,7 @@ public record InitiatePaymentResult(
 public class InitiatePaymentHandler(
     IAppointmentRepository appointmentRepository,
     IPaymentRepository paymentRepository,
-    IPaymentService paymentService,
+    MediMind.Domain.Common.Interfaces.IPaymentService paymentService,
     IUnitOfWork unitOfWork)
     : IRequestHandler<InitiatePaymentCommand, InitiatePaymentResult>
 {
@@ -108,7 +108,7 @@ public record VerifyPaymentWebhookCommand(
 
 public class VerifyPaymentWebhookHandler(
     IPaymentRepository paymentRepository,
-    IPaymentService paymentService,
+    MediMind.Domain.Common.Interfaces.IPaymentService paymentService,
     IPushNotificationService pushService,
     IUnitOfWork unitOfWork)
     : IRequestHandler<VerifyPaymentWebhookCommand, Unit>

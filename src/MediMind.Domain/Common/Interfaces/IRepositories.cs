@@ -159,7 +159,17 @@ public interface IHealthPredictionRepository : IRepository<HealthPrediction>
 
 public interface IPaymentRepository : IRepository<Payment>
 {
-    Task<Payment?> GetByRefAsync(string paymentRef, CancellationToken ct = default);
+    Task<Payment?> GetByIdAsync(Guid paymentId);
+    Task<Payment?> GetByRefAsync(string paymentRef);
+    Task<Payment?> GetByRefAsync(string paymentRef, CancellationToken ct);
+    Task<Payment?> GetByAppointmentIdAsync(Guid appointmentId);
+    Task<Payment> CreateAsync(Payment payment);
+    Task<Payment?> UpdateStatusAsync(Guid paymentId, PaymentStatus status, string? chapaTransactionId);
+    Task<IEnumerable<Payment>> GetByPatientAsync(Guid patientId, int page, int pageSize);
+    Task<IEnumerable<Payment>> GetByCenterAsync(Guid centerId, int page, int pageSize);
+    Task<decimal> GetTotalRevenueAsync(Guid centerId, DateOnly startDate, DateOnly endDate);
+    Task<Payment?> UpdateAsync(Payment payment);
+
     Task<bool> ExistsByRefAsync(string paymentRef, CancellationToken ct = default);
     Task<IReadOnlyList<Payment>> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
 }

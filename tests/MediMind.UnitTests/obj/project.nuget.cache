@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WhkDMXzzsxI=",
+  "dgSpecHash": "MQ0G5clco9M=",
   "success": true,
   "projectFilePath": "/Users/dani/RiderProjects/MediMind/tests/MediMind.UnitTests/MediMind.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,7 @@
     "/Users/dani/.nuget/packages/microsoft.testplatform.testhost/17.14.1/microsoft.testplatform.testhost.17.14.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/dani/.nuget/packages/nsubstitute/5.3.0/nsubstitute.5.3.0.nupkg.sha512",
+    "/Users/dani/.nuget/packages/questpdf/2024.12.3/questpdf.2024.12.3.nupkg.sha512",
     "/Users/dani/.nuget/packages/system.configuration.configurationmanager/4.4.0/system.configuration.configurationmanager.4.4.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/system.diagnostics.eventlog/6.0.0/system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/system.security.cryptography.protecteddata/4.4.0/system.security.cryptography.protecteddata.4.4.0.nupkg.sha512",

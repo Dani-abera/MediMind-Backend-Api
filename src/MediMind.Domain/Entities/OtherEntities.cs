@@ -492,14 +492,18 @@ public class VideoConsultationParticipant : BaseEntity
 
 public class Payment : BaseEntity
 {
+    public Guid PaymentId => Id;
     public Guid AppointmentId { get; private set; }
     public Guid PatientId { get; private set; }
     public string PaymentRef { get; private set; } = string.Empty;
     public decimal Amount { get; private set; }
-    public DateTime PaymentDate { get; private set; }
-    public PaymentMethod PaymentMethod { get; private set; }
+    public DateTime? PaymentDate { get; private set; }
+    public string PaymentMethod { get; private set; } = "Mobile Money";
     public PaymentStatus Status { get; private set; } = PaymentStatus.Pending;
     public string? ChapaTransactionId { get; private set; }
+    public string? ChapaCheckoutUrl { get; private set; }
+    public DateTime? WebhookReceivedAt { get; private set; }
+    public string? ReceiptUrl { get; private set; }
 
     // Navigation
     public Appointment Appointment { get; private set; } = null!;
@@ -507,26 +511,42 @@ public class Payment : BaseEntity
 
     private Payment() { }
 
-    public static Payment Initiate(Guid appointmentId, Guid patientId, decimal amount, PaymentMethod method)
+    public static Payment Initiate(
+        Guid appointmentId,
+        Guid patientId,
+        decimal amount,
+        string paymentMethod,
+        string? paymentRef = null)
     {
         if (amount <= 0)
             throw new DomainException("Payment amount must be greater than 0 ETB.");
+        if (string.IsNullOrWhiteSpace(paymentMethod))
+            throw new DomainException("Payment method is required.");
 
         return new Payment
         {
             AppointmentId = appointmentId,
             PatientId = patientId,
-            PaymentRef = $"PAY{DateTime.UtcNow:yyyyMMddHHmmss}{Guid.NewGuid().ToString("N")[..6].ToUpper()}",
+            PaymentRef = paymentRef ?? $"PAY{DateTime.UtcNow:yyyyMMddHHmmssfff}",
             Amount = amount,
-            PaymentDate = DateTime.UtcNow,
-            PaymentMethod = method,
+            PaymentMethod = paymentMethod,
             Status = PaymentStatus.Pending
         };
     }
 
-    public void Complete(string chapaTransactionId)
+    public static Payment Initiate(Guid appointmentId, Guid patientId, decimal amount, PaymentMethod method) =>
+        Initiate(appointmentId, patientId, amount, method switch
+        {
+            MediMind.Domain.Enums.PaymentMethod.MobileMoney => "Mobile Money",
+            MediMind.Domain.Enums.PaymentMethod.Card => "Card",
+            MediMind.Domain.Enums.PaymentMethod.Cash => "Cash",
+            _ => "Mobile Money"
+        });
+
+    public void Complete(string? chapaTransactionId)
     {
         Status = PaymentStatus.Completed;
+        PaymentDate = DateTime.UtcNow;
         ChapaTransactionId = chapaTransactionId;
         UpdateTimestamp();
     }
@@ -542,6 +562,24 @@ public class Payment : BaseEntity
         if (Status != PaymentStatus.Completed)
             throw new DomainException("Only completed payments can be refunded.");
         Status = PaymentStatus.Refunded;
+        UpdateTimestamp();
+    }
+
+    public void SetCheckoutUrl(string? checkoutUrl)
+    {
+        ChapaCheckoutUrl = checkoutUrl;
+        UpdateTimestamp();
+    }
+
+    public void MarkWebhookReceived()
+    {
+        WebhookReceivedAt = DateTime.UtcNow;
+        UpdateTimestamp();
+    }
+
+    public void SetReceiptUrl(string receiptUrl)
+    {
+        ReceiptUrl = receiptUrl;
         UpdateTimestamp();
     }
 }

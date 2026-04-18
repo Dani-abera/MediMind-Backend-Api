@@ -37,3 +37,8 @@ public class UnauthorizedException(string message = "Access denied") : Exception
 /// Results in HTTP 503 Service Unavailable.
 /// </summary>
 public class ServiceUnavailableException(string message = "Service temporarily unavailable.") : Exception(message);
+
+/// <summary>
+/// Thrown when a payment gateway or payment flow step fails.
+/// </summary>
+public class PaymentException(string message) : Exception(message);

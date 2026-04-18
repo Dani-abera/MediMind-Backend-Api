@@ -104,6 +104,7 @@ try
         options.AddPolicy("AdminOnly", p => p.RequireClaim("user_type", "Admin"));
         options.AddPolicy("SuperAdminOnly", p => p.RequireClaim("user_type", "SuperAdmin"));
         options.AddPolicy("DoctorOrAdmin", p => p.RequireClaim("user_type", "Doctor", "Admin"));
+        options.AddPolicy("PatientOrAdmin", p => p.RequireClaim("user_type", "Patient", "Admin"));
         options.AddPolicy("HealthcareStaff", p => p.RequireClaim("user_type", "Doctor", "Admin", "SuperAdmin"));
         options.AddPolicy("AdminOrSuperAdmin", p => p.RequireClaim("user_type", "Admin", "SuperAdmin"));
     });
@@ -131,6 +132,7 @@ try
     app.UseHttpsRedirection();
     app.UseCors("MediMindPolicy");
     app.UseIpRateLimiting();
+    app.UseMiddleware<ChapaWebhookSecurityMiddleware>();
 
     app.UseAuthentication();
     app.UseMiddleware<TenantValidationMiddleware>();

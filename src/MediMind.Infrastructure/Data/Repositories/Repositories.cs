@@ -863,6 +863,87 @@ public class HealthPredictionRepository(MediMindDbContext context)
 public class PaymentRepository(MediMindDbContext context)
     : Repository<Payment>(context), IPaymentRepository
 {
+    public async Task<Payment?> GetByIdAsync(Guid paymentId) =>
+        await Db.Payments
+            .Include(p => p.Appointment)
+                .ThenInclude(a => a.Doctor)
+            .Include(p => p.Appointment)
+                .ThenInclude(a => a.Center)
+            .Include(p => p.Patient)
+            .FirstOrDefaultAsync(p => p.Id == paymentId);
+
+    public async Task<Payment?> GetByRefAsync(string paymentRef) =>
+        await Db.Payments.FirstOrDefaultAsync(p => p.PaymentRef == paymentRef);
+
+    public async Task<Payment?> GetByAppointmentIdAsync(Guid appointmentId) =>
+        await Db.Payments
+            .OrderByDescending(p => p.CreatedAt)
+            .FirstOrDefaultAsync(p => p.AppointmentId == appointmentId);
+
+    public async Task<Payment> CreateAsync(Payment payment)
+    {
+        await Db.Payments.AddAsync(payment);
+        return payment;
+    }
+
+    public async Task<Payment?> UpdateStatusAsync(Guid paymentId, PaymentStatus status, string? chapaTransactionId)
+    {
+        var payment = await Db.Payments.FirstOrDefaultAsync(p => p.Id == paymentId);
+        if (payment is null)
+            return null;
+
+        if (status == PaymentStatus.Completed)
+            payment.Complete(chapaTransactionId);
+        else if (status == PaymentStatus.Failed)
+            payment.MarkFailed();
+        else if (status == PaymentStatus.Refunded)
+            payment.Refund();
+
+        return payment;
+    }
+
+    public async Task<IEnumerable<Payment>> GetByPatientAsync(Guid patientId, int page, int pageSize) =>
+        await Db.Payments
+            .AsNoTracking()
+            .Where(p => p.PatientId == patientId)
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))
+            .Take(Math.Max(pageSize, 1))
+            .ToListAsync();
+
+    public async Task<IEnumerable<Payment>> GetByCenterAsync(Guid centerId, int page, int pageSize) =>
+        await Db.Payments
+            .AsNoTracking()
+            .Include(p => p.Appointment)
+            .Where(p => p.Appointment.CenterId == centerId)
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))
+            .Take(Math.Max(pageSize, 1))
+            .ToListAsync();
+
+    public async Task<decimal> GetTotalRevenueAsync(Guid centerId, DateOnly startDate, DateOnly endDate)
+    {
+        var from = startDate.ToDateTime(TimeOnly.MinValue);
+        var toExclusive = endDate.ToDateTime(TimeOnly.MaxValue);
+
+        return await Db.Payments
+            .AsNoTracking()
+            .Include(p => p.Appointment)
+            .Where(p =>
+                p.Appointment.CenterId == centerId &&
+                p.Status == PaymentStatus.Completed &&
+                p.PaymentDate.HasValue &&
+                p.PaymentDate >= from &&
+                p.PaymentDate <= toExclusive)
+            .SumAsync(p => p.Amount);
+    }
+
+    public async Task<Payment?> UpdateAsync(Payment payment)
+    {
+        Db.Payments.Update(payment);
+        return await Task.FromResult(payment);
+    }
+
     public async Task<Payment?> GetByRefAsync(string paymentRef, CancellationToken ct = default) =>
         await Db.Payments.FirstOrDefaultAsync(p => p.PaymentRef == paymentRef, ct);
 

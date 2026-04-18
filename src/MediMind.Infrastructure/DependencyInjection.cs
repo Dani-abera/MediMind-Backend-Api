@@ -3,6 +3,7 @@ using System.Text;
 using Hangfire;
 using Hangfire.MemoryStorage;
 using MediMind.Application.Features.HealthPredictions;
+using MediMind.Application.Features.Payments;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Data.Repositories;
@@ -143,18 +144,20 @@ public static class DependencyInjection
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
         });
 
-        // Chapa Payment Gateway
-        services.AddHttpClient("ChapaClient", client =>
+        services.Configure<ChapaOptions>(config.GetSection(ChapaOptions.SectionName));
+        services.AddHttpClient<IChapaClient, ChapaClient>((sp, client) =>
         {
-            client.BaseAddress = new Uri("https://api.chapa.co/");
-            client.DefaultRequestHeaders.Add("Authorization",
-                $"Bearer {config["Chapa:SecretKey"]}");
+            var options = sp.GetRequiredService<IOptions<ChapaOptions>>().Value;
+            client.BaseAddress = new Uri("https://api.chapa.co/v1/");
             client.Timeout = TimeSpan.FromSeconds(30);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         });
 
         // ─── External Services ───────────────────────────────────────────────
         services.AddScoped<IMlPredictionService, MlPredictionService>();
-        services.AddScoped<IPaymentService, ChapaPaymentService>();
+        services.AddScoped<MediMind.Domain.Common.Interfaces.IPaymentService, ChapaPaymentService>();
+        services.AddScoped<IChapaWebhookValidator, ChapaWebhookValidator>();
+        services.AddScoped<IChapaConfiguration, ChapaConfigurationAdapter>();
         services.AddScoped<IQueueHubService, QueueHubService>();
 
         // ─── SignalR (real-time queue updates) ───────────────────────────────

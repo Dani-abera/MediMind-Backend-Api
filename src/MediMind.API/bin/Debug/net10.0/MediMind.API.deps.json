@@ -704,7 +704,8 @@
           "FluentValidation": "11.12.0",
           "FluentValidation.DependencyInjectionExtensions": "11.12.0",
           "MediMind.Domain": "1.0.0",
-          "MediatR": "12.5.0"
+          "MediatR": "12.5.0",
+          "QuestPDF": "2024.12.3"
         },
         "runtime": {
           "MediMind.Application.dll": {

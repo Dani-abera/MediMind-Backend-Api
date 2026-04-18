@@ -2172,7 +2172,8 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "10.0.0",
           "Microsoft.Extensions.Hosting.Abstractions": "10.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "10.0.0",
-          "Microsoft.Extensions.Options": "10.0.0"
+          "Microsoft.Extensions.Options": "10.0.0",
+          "QuestPDF": "2024.0.0"
         },
         "compile": {
           "bin/placeholder/MediMind.Application.dll": {}
@@ -5568,7 +5569,7 @@
     ]
   },
   "packageFolders": {
-    "/Users/dani/.nuget/packages/": {}
+    "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget": {}
   },
   "project": {
     "version": "1.0.0",
@@ -5576,7 +5577,7 @@
       "projectUniqueName": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
       "projectName": "MediMind.Infrastructure",
       "projectPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
-      "packagesPath": "/Users/dani/.nuget/packages/",
+      "packagesPath": "/var/folders/8r/5rfd_zc93lq3hg060m1r90j40000gn/T/cursor-sandbox-cache/1463636b298fd3d7e8c91b65ab8d6dab/nuget",
       "outputPath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [

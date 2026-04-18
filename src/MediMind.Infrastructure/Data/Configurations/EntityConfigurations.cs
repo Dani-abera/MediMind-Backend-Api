@@ -434,12 +434,18 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.Id).HasColumnName("payment_id");
         builder.Property(p => p.PaymentRef).HasMaxLength(100).IsRequired();
         builder.Property(p => p.Amount).HasPrecision(10, 2).IsRequired();
-        builder.Property(p => p.PaymentMethod).HasConversion<string>().HasMaxLength(50);
+        builder.Property(p => p.PaymentMethod).HasMaxLength(50);
         builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(20);
         builder.Property(p => p.ChapaTransactionId).HasMaxLength(100);
+        builder.Property(p => p.ChapaCheckoutUrl).HasMaxLength(2000);
+        builder.Property(p => p.ReceiptUrl).HasMaxLength(2000);
+        builder.Property(p => p.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
         builder.ToTable(t => t.HasCheckConstraint("ck_payment_amount", "amount > 0"));
 
         builder.HasIndex(p => p.PaymentRef).IsUnique();
+        builder.HasIndex(p => p.ChapaTransactionId)
+            .IsUnique()
+            .HasFilter("chapa_transaction_id IS NOT NULL");
         builder.HasIndex(p => p.AppointmentId);
         builder.HasIndex(p => p.PatientId);
         builder.HasIndex(p => p.Status);

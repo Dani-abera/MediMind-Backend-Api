@@ -37,6 +37,7 @@ public static class DependencyInjection
         services.AddScoped<Features.Queue.IQueueService, Features.Queue.QueueService>();
         services.AddScoped<Features.CenterManagement.IHealthcareCenterService, Features.CenterManagement.HealthcareCenterService>();
         services.AddScoped<Features.CenterManagement.IAnalyticsService, Features.CenterManagement.AnalyticsService>();
+        services.AddScoped<Features.Payments.IPaymentService, Features.Payments.PaymentService>();
 
         return services;
     }

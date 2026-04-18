@@ -36,23 +36,23 @@
         <member name="M:MediMind.API.Controllers.LegacyHealthcareCentersController.UpdateConfiguration(System.Guid,MediMind.API.Controllers.UpdateCenterConfigurationRequest,System.Threading.CancellationToken)">
             <summary>Update center operational configuration (Admin only — FR-030).</summary>
         </member>
-        <member name="T:MediMind.API.Controllers.PaymentsController">
+        <member name="T:MediMind.API.Controllers.LegacyPaymentsController">
             <summary>Payment processing via Chapa gateway</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.PaymentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.LegacyPaymentsController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>Payment processing via Chapa gateway</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.PaymentsController.InitiatePayment(MediMind.API.Controllers.InitiatePaymentRequest,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyPaymentsController.InitiatePayment(MediMind.API.Controllers.LegacyInitiatePaymentRequest,System.Threading.CancellationToken)">
             <summary>Initiate payment for an appointment (Patient only — FR-026).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.PaymentsController.Webhook(MediMind.API.Controllers.ChapaWebhookPayload,System.String,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyPaymentsController.Webhook(MediMind.API.Controllers.ChapaWebhookPayload,System.String,System.Threading.CancellationToken)">
             <summary>
             Chapa payment webhook — verifies payment and confirms appointment.
             IMPORTANT: This endpoint must NOT require authentication (called by Chapa servers).
             Secured via HMAC-SHA256 signature verification (NFR-006).
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.PaymentsController.GetReceipt(System.String,System.Threading.CancellationToken)">
+        <member name="M:MediMind.API.Controllers.LegacyPaymentsController.GetReceipt(System.String,System.Threading.CancellationToken)">
             <summary>Get payment receipt (Patient only — FR-028).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.ConsultationsController">

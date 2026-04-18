@@ -124,8 +124,8 @@ public class LegacyHealthcareCentersController(IMediator mediator, ICurrentUser 
 
 /// <summary>Payment processing via Chapa gateway</summary>
 [Tags("Payments")]
-[Route("api/v1/payments")]
-public class PaymentsController(IMediator mediator, ICurrentUser currentUser)
+[Route("api/v1/legacy-payments")]
+public class LegacyPaymentsController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
 {
     /// <summary>Initiate payment for an appointment (Patient only — FR-026).</summary>
@@ -133,7 +133,7 @@ public class PaymentsController(IMediator mediator, ICurrentUser currentUser)
     [Authorize(Policy = "PatientOnly")]
     [ProducesResponseType(typeof(InitiatePaymentResult), StatusCodes.Status200OK)]
     public async Task<IActionResult> InitiatePayment(
-        [FromBody] InitiatePaymentRequest request, CancellationToken ct)
+        [FromBody] LegacyInitiatePaymentRequest request, CancellationToken ct)
     {
         var command = new InitiatePaymentCommand(
             request.AppointmentId,
@@ -300,7 +300,7 @@ public record UpdateCenterConfigurationRequest(
     int SlotDurationMinutes, int AdvanceBookingDays,
     int CancellationHours, bool AutoApproveAppointments);
 
-public record InitiatePaymentRequest(Guid AppointmentId, PaymentMethod PaymentMethod);
+public record LegacyInitiatePaymentRequest(Guid AppointmentId, PaymentMethod PaymentMethod);
 
 public record ChapaWebhookPayload(
     string TxRef,

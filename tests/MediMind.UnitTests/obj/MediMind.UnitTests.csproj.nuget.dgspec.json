@@ -80,6 +80,10 @@
             "Microsoft.Extensions.Options": {
               "target": "Package",
               "version": "[10.*, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2024.*, )"
             }
           },
           "imports": [

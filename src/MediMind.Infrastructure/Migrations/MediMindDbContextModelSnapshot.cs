@@ -50,8 +50,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("approved_by_admin_id");
 
                     b.Property<DateTime>("BookingDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("booking_date");
+                        .HasColumnName("booking_date")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
 
                     b.Property<string>("CancellationReason")
                         .HasColumnType("text")
@@ -95,6 +97,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("notes");
 
+                    b.Property<Guid?>("OriginalAppointmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("original_appointment_id");
+
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uuid")
                         .HasColumnName("patient_id");
@@ -103,6 +109,20 @@ namespace MediMind.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("reason_for_visit");
+
+                    b.Property<DateTime?>("Reminder24hSentAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("reminder24h_sent_at");
+
+                    b.Property<DateTime?>("Reminder2hSentAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("reminder2h_sent_at");
+
+                    b.Property<int>("RescheduleCount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0)
+                        .HasColumnName("reschedule_count");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -141,6 +161,8 @@ namespace MediMind.Infrastructure.Migrations
 
                     b.ToTable("appointments", null, t =>
                         {
+                            t.HasCheckConstraint("ck_appointment_date_not_past", "appointment_date >= CURRENT_DATE");
+
                             t.HasCheckConstraint("ck_duration_minutes", "duration_minutes IN (15, 30, 45, 60)");
                         });
                 });
@@ -279,8 +301,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnName("contributing_factors");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
 
                     b.Property<string>("CvdCategory")
                         .IsRequired()
@@ -349,6 +373,7 @@ namespace MediMind.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId", "PredictionDate")
+                        .IsDescending(false, true)
                         .HasDatabaseName("i_x_health_predictions_patient_id_prediction_date");
 
                     b.ToTable("health_predictions", null, t =>
@@ -359,6 +384,11 @@ namespace MediMind.Infrastructure.Migrations
 
             modelBuilder.Entity("MediMind.Domain.Entities.HealthPredictionRecord", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
                     b.Property<Guid>("PredictionId")
                         .HasColumnType("uuid")
                         .HasColumnName("prediction_id");
@@ -367,7 +397,7 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("record_id");
 
-                    b.HasKey("PredictionId", "RecordId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RecordId")
                         .HasDatabaseName("i_x_health_prediction_records_record_id");
@@ -563,6 +593,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("numeric(11,8)")
                         .HasColumnName("longitude");
 
+                    b.Property<Guid?>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -622,6 +656,9 @@ namespace MediMind.Infrastructure.Migrations
                     b.HasIndex("LicenseNumber")
                         .IsUnique()
                         .HasDatabaseName("i_x_healthcare_centers_license_number");
+
+                    b.HasIndex("PatientId")
+                        .HasDatabaseName("i_x_healthcare_centers_patient_id");
 
                     b.HasIndex("SubscriptionStatus")
                         .HasDatabaseName("i_x_healthcare_centers_subscription_status");
@@ -704,20 +741,27 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("appointment_id");
 
+                    b.Property<string>("ChapaCheckoutUrl")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("chapa_checkout_url");
+
                     b.Property<string>("ChapaTransactionId")
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("chapa_transaction_id");
 
                     b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
 
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uuid")
                         .HasColumnName("patient_id");
 
-                    b.Property<DateTime>("PaymentDate")
+                    b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("payment_date");
 
@@ -733,6 +777,11 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("character varying(100)")
                         .HasColumnName("payment_ref");
 
+                    b.Property<string>("ReceiptUrl")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("receipt_url");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -743,10 +792,19 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
+                    b.Property<DateTime?>("WebhookReceivedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("webhook_received_at");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppointmentId")
                         .HasDatabaseName("i_x_payments_appointment_id");
+
+                    b.HasIndex("ChapaTransactionId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_payments_chapa_transaction_id")
+                        .HasFilter("chapa_transaction_id IS NOT NULL");
 
                     b.HasIndex("PatientId")
                         .HasDatabaseName("i_x_payments_patient_id");
@@ -1403,6 +1461,14 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.HealthcareCenter", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Patient", null)
+                        .WithMany("EnrolledCenters")
+                        .HasForeignKey("PatientId")
+                        .HasConstraintName("f_k_healthcare_centers_patients_patient_id");
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.Payment", b =>
                 {
                     b.HasOne("MediMind.Domain.Entities.Appointment", "Appointment")
@@ -1594,6 +1660,8 @@ namespace MediMind.Infrastructure.Migrations
             modelBuilder.Entity("MediMind.Domain.Entities.Patient", b =>
                 {
                     b.Navigation("Appointments");
+
+                    b.Navigation("EnrolledCenters");
 
                     b.Navigation("HealthPredictions");
 
