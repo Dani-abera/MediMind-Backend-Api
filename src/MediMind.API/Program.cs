@@ -11,6 +11,7 @@ using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.API.OpenApi;
 using MediMind.Infrastructure.SignalR;
+using MediMind.Infrastructure.Services.Notifications;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,7 @@ try
     // ─── Application + Infrastructure ────────────────────────────────────────
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddHostedService<AppointmentReminderService>();
     // Explicit registration for health records service (also discoverable from Program.cs).
     builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
     builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));

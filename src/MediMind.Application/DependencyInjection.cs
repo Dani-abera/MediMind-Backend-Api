@@ -31,6 +31,9 @@ public static class DependencyInjection
         services.AddScoped<Features.HealthRecords.IHealthRecordService, Features.HealthRecords.HealthRecordService>();
         services.AddScoped<Features.HealthPredictions.IHealthPredictionService, Features.HealthPredictions.HealthPredictionService>();
         services.AddScoped<Features.HealthPredictions.IHealthFeatureEngineeringService, Features.HealthPredictions.HealthFeatureEngineeringService>();
+        services.AddScoped<Features.Appointments.IAppointmentAvailabilityService, Features.Appointments.AppointmentAvailabilityService>();
+        services.AddScoped<Features.Appointments.IBookingValidationService, Features.Appointments.BookingValidationService>();
+        services.AddScoped<Features.Appointments.IAppointmentService, Features.Appointments.AppointmentService>();
 
         return services;
     }

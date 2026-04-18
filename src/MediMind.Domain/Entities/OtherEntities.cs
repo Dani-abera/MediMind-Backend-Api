@@ -82,6 +82,7 @@ public class QueueEntry : BaseEntity
 /// <summary>Maps to `doctor_schedules` table. One schedule per doctor per center.</summary>
 public class DoctorSchedule : BaseEntity
 {
+    public Guid ScheduleId => Id;
     public Guid DoctorId { get; private set; }
     public Guid CenterId { get; private set; }
     public List<string> WorkingDays { get; private set; } = [];   // ["Monday", "Tuesday", ...]

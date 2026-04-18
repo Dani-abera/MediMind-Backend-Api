@@ -1,4 +1,5 @@
 using MediMind.Domain.Common;
+using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Events;
 using MediMind.Domain.Exceptions;
@@ -12,6 +13,7 @@ namespace MediMind.Domain.Entities;
 /// </summary>
 public class Appointment : BaseEntity
 {
+    public Guid AppointmentId => Id;
     public Guid PatientId { get; private set; }
     public Guid DoctorId { get; private set; }
     public Guid CenterId { get; private set; }     // == tenant_id
@@ -36,6 +38,10 @@ public class Appointment : BaseEntity
     public DateTime? CheckInTime { get; private set; }
     public DateTime? CheckOutTime { get; private set; }
     public string? Notes { get; private set; }
+    public int RescheduleCount { get; private set; }
+    public Guid? OriginalAppointmentId { get; private set; }
+    public DateTime? Reminder24hSentAt { get; private set; }
+    public DateTime? Reminder2hSentAt { get; private set; }
 
     // Navigation
     public Patient Patient { get; private set; } = null!;
@@ -191,4 +197,53 @@ public class Appointment : BaseEntity
         AppointmentDate.ToDateTime(AppointmentTime) > DateTime.UtcNow.AddHours(minimumHoursNotice);
 
     public bool IsFuture => AppointmentDate.ToDateTime(AppointmentTime) > DateTime.UtcNow;
+
+    public bool CanReschedule => Status == AppointmentStatus.Confirmed && RescheduleCount < 1;
+
+    public void IncrementRescheduleCount()
+    {
+        RescheduleCount++;
+        UpdateTimestamp();
+    }
+
+    public void LinkToOriginal(Guid originalAppointmentId)
+    {
+        OriginalAppointmentId = originalAppointmentId;
+        UpdateTimestamp();
+    }
+
+    public void MarkReminderSent(ReminderType reminderType)
+    {
+        if (reminderType == ReminderType.TwentyFourHours)
+            Reminder24hSentAt = DateTime.UtcNow;
+        else
+            Reminder2hSentAt = DateTime.UtcNow;
+        UpdateTimestamp();
+    }
+
+    public void UpdateStatus(AppointmentStatus status, Guid updatedBy)
+    {
+        switch (status)
+        {
+            case AppointmentStatus.Confirmed:
+                Approve(updatedBy);
+                break;
+            case AppointmentStatus.Cancelled:
+                Cancel(updatedBy, "Status updated", 0);
+                break;
+            case AppointmentStatus.InProgress:
+                MarkInProgress();
+                break;
+            case AppointmentStatus.Completed:
+                MarkCompleted();
+                break;
+            case AppointmentStatus.NoShow:
+                MarkNoShow();
+                break;
+            default:
+                Status = status;
+                UpdateTimestamp();
+                break;
+        }
+    }
 }

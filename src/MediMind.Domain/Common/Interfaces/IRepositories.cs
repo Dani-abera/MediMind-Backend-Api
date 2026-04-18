@@ -64,6 +64,17 @@ public interface IHealthcareCenterRepository : IRepository<HealthcareCenter>
 
 public interface IAppointmentRepository : IRepository<Appointment>
 {
+    Task<Appointment?> GetByIdAsync(Guid appointmentId);
+    Task<Appointment?> GetByIdForPatientAsync(Guid appointmentId, Guid patientId);
+    Task<PagedResult<Appointment>> GetByPatientAsync(Guid patientId, AppointmentFilterDto filter);
+    Task<PagedResult<Appointment>> GetByCenterAsync(Guid centerId, AppointmentFilterDto filter);
+    Task<PagedResult<Appointment>> GetByDoctorAsync(Guid doctorId, Guid centerId, AppointmentFilterDto filter);
+    Task<Appointment> CreateAsync(Appointment appointment);
+    Task<Appointment?> UpdateStatusAsync(Guid appointmentId, AppointmentStatus status, Guid updatedBy);
+    Task<bool> HasConflictAsync(Guid doctorId, Guid centerId, DateOnly date, TimeOnly time, Guid? excludeAppointmentId = null);
+    Task<int> GetRescheduleCountAsync(Guid appointmentId);
+    Task<IEnumerable<Appointment>> GetUpcomingForReminderAsync(DateTime reminderTime, ReminderType type);
+
     Task<bool> IsSlotAvailableAsync(Guid doctorId, Guid centerId, DateOnly date, TimeOnly time, CancellationToken ct = default);
     Task<IReadOnlyList<Appointment>> GetByPatientAsync(Guid patientId, CancellationToken ct = default);
     Task<IReadOnlyList<Appointment>> GetByDoctorAndDateAsync(Guid doctorId, DateOnly date, CancellationToken ct = default);
@@ -71,6 +82,14 @@ public interface IAppointmentRepository : IRepository<Appointment>
     Task<IReadOnlyList<Appointment>> GetPendingByCenterAsync(Guid centerId, CancellationToken ct = default);
     Task<IReadOnlyList<Appointment>> GetConfirmedForQueueGenerationAsync(DateOnly date, CancellationToken ct = default);
     Task<bool> PatientHasAppointmentTodayAsync(Guid patientId, Guid doctorId, DateOnly date, CancellationToken ct = default);
+}
+
+public interface IDoctorScheduleRepository : IRepository<DoctorSchedule>
+{
+    Task<DoctorSchedule?> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId);
+    Task<DoctorSchedule> CreateAsync(DoctorSchedule schedule);
+    Task<DoctorSchedule?> UpdateAsync(DoctorSchedule schedule);
+    Task<bool> DeleteAsync(Guid scheduleId);
 }
 
 public interface IQueueRepository : IRepository<QueueEntry>
@@ -118,3 +137,11 @@ public interface IPaymentRepository : IRepository<Payment>
     Task<bool> ExistsByRefAsync(string paymentRef, CancellationToken ct = default);
     Task<IReadOnlyList<Payment>> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
 }
+
+public record AppointmentFilterDto(
+    AppointmentStatus? Status,
+    DateOnly? StartDate,
+    DateOnly? EndDate,
+    Guid? DoctorId,
+    int Page = 1,
+    int PageSize = 20);

@@ -139,6 +139,112 @@ public class HealthcareCenterRepository(MediMindDbContext context)
 public class AppointmentRepository(MediMindDbContext context)
     : Repository<Appointment>(context), IAppointmentRepository
 {
+    public async Task<Appointment?> GetByIdAsync(Guid appointmentId) =>
+        await Db.Appointments
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Include(a => a.QueueEntry)
+            .FirstOrDefaultAsync(a => a.Id == appointmentId);
+
+    public async Task<Appointment?> GetByIdForPatientAsync(Guid appointmentId, Guid patientId) =>
+        await Db.Appointments
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Include(a => a.QueueEntry)
+            .FirstOrDefaultAsync(a => a.Id == appointmentId && a.PatientId == patientId);
+
+    public async Task<PagedResult<Appointment>> GetByPatientAsync(Guid patientId, AppointmentFilterDto filter)
+    {
+        var query = Db.Appointments
+            .Where(a => a.PatientId == patientId)
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Include(a => a.QueueEntry)
+            .AsQueryable();
+        query = ApplyFilter(query, filter);
+        return await BuildPagedResult(query, filter);
+    }
+
+    public async Task<PagedResult<Appointment>> GetByCenterAsync(Guid centerId, AppointmentFilterDto filter)
+    {
+        var query = Db.Appointments
+            .Where(a => a.CenterId == centerId)
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Include(a => a.QueueEntry)
+            .AsQueryable();
+        query = ApplyFilter(query, filter);
+        return await BuildPagedResult(query, filter);
+    }
+
+    public async Task<PagedResult<Appointment>> GetByDoctorAsync(Guid doctorId, Guid centerId, AppointmentFilterDto filter)
+    {
+        var query = Db.Appointments
+            .Where(a => a.DoctorId == doctorId && a.CenterId == centerId)
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Include(a => a.QueueEntry)
+            .AsQueryable();
+        query = ApplyFilter(query, filter);
+        return await BuildPagedResult(query, filter);
+    }
+
+    public async Task<Appointment> CreateAsync(Appointment appointment)
+    {
+        await Db.Appointments.AddAsync(appointment);
+        await Db.SaveChangesAsync();
+        return appointment;
+    }
+
+    public async Task<Appointment?> UpdateStatusAsync(Guid appointmentId, AppointmentStatus status, Guid updatedBy)
+    {
+        var appointment = await Db.Appointments.FirstOrDefaultAsync(a => a.Id == appointmentId);
+        if (appointment is null)
+            return null;
+
+        appointment.UpdateStatus(status, updatedBy);
+        await Db.SaveChangesAsync();
+        return appointment;
+    }
+
+    public async Task<bool> HasConflictAsync(Guid doctorId, Guid centerId, DateOnly date, TimeOnly time, Guid? excludeAppointmentId = null) =>
+        await Db.Appointments.AnyAsync(a =>
+            a.DoctorId == doctorId &&
+            a.CenterId == centerId &&
+            a.AppointmentDate == date &&
+            a.AppointmentTime == time &&
+            a.Status != AppointmentStatus.Cancelled &&
+            (!excludeAppointmentId.HasValue || a.Id != excludeAppointmentId.Value));
+
+    public async Task<int> GetRescheduleCountAsync(Guid appointmentId) =>
+        await Db.Appointments
+            .Where(a => a.Id == appointmentId)
+            .Select(a => a.RescheduleCount)
+            .FirstOrDefaultAsync();
+
+    public async Task<IEnumerable<Appointment>> GetUpcomingForReminderAsync(DateTime reminderTime, ReminderType type)
+    {
+        var lower = reminderTime.AddMinutes(-5);
+        var upper = reminderTime.AddMinutes(5);
+
+        return await Db.Appointments
+            .Include(a => a.Patient)
+            .Include(a => a.Doctor)
+            .Include(a => a.Center)
+            .Where(a => a.Status == AppointmentStatus.Confirmed)
+            .Where(a => a.AppointmentDate.ToDateTime(a.AppointmentTime) >= lower &&
+                        a.AppointmentDate.ToDateTime(a.AppointmentTime) <= upper)
+            .Where(a => type == ReminderType.TwentyFourHours
+                ? a.Reminder24hSentAt == null
+                : a.Reminder2hSentAt == null)
+            .ToListAsync();
+    }
+
     public async Task<bool> IsSlotAvailableAsync(
         Guid doctorId, Guid centerId, DateOnly date, TimeOnly time, CancellationToken ct = default) =>
         !await Db.Appointments.AnyAsync(a =>
@@ -200,6 +306,70 @@ public class AppointmentRepository(MediMindDbContext context)
             a.DoctorId == doctorId &&
             a.AppointmentDate == date &&
             a.Status != AppointmentStatus.Cancelled, ct);
+
+    private static IQueryable<Appointment> ApplyFilter(IQueryable<Appointment> query, AppointmentFilterDto filter)
+    {
+        if (filter.Status.HasValue)
+            query = query.Where(a => a.Status == filter.Status.Value);
+        if (filter.StartDate.HasValue)
+            query = query.Where(a => a.AppointmentDate >= filter.StartDate.Value);
+        if (filter.EndDate.HasValue)
+            query = query.Where(a => a.AppointmentDate <= filter.EndDate.Value);
+        if (filter.DoctorId.HasValue)
+            query = query.Where(a => a.DoctorId == filter.DoctorId.Value);
+
+        return query;
+    }
+
+    private static async Task<PagedResult<Appointment>> BuildPagedResult(IQueryable<Appointment> query, AppointmentFilterDto filter)
+    {
+        var page = Math.Max(filter.Page, 1);
+        var pageSize = Math.Clamp(filter.PageSize, 1, 100);
+        var total = await query.CountAsync();
+        var items = await query
+            .OrderByDescending(a => a.AppointmentDate)
+            .ThenByDescending(a => a.AppointmentTime)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+        return new PagedResult<Appointment>(items, page, pageSize, total);
+    }
+}
+
+public class DoctorScheduleRepository(MediMindDbContext context)
+    : Repository<DoctorSchedule>(context), IDoctorScheduleRepository
+{
+    public async Task<DoctorSchedule?> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId) =>
+        await Db.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.CenterId == centerId);
+
+    public async Task<DoctorSchedule> CreateAsync(DoctorSchedule schedule)
+    {
+        await Db.DoctorSchedules.AddAsync(schedule);
+        await Db.SaveChangesAsync();
+        return schedule;
+    }
+
+    public async Task<DoctorSchedule?> UpdateAsync(DoctorSchedule schedule)
+    {
+        var existing = await Db.DoctorSchedules.FirstOrDefaultAsync(s => s.Id == schedule.Id);
+        if (existing is null)
+            return null;
+
+        Db.DoctorSchedules.Update(schedule);
+        await Db.SaveChangesAsync();
+        return schedule;
+    }
+
+    public async Task<bool> DeleteAsync(Guid scheduleId)
+    {
+        var schedule = await Db.DoctorSchedules.FirstOrDefaultAsync(s => s.Id == scheduleId);
+        if (schedule is null)
+            return false;
+
+        Db.DoctorSchedules.Remove(schedule);
+        await Db.SaveChangesAsync();
+        return true;
+    }
 }
 
 // ─── Queue Repository ─────────────────────────────────────────────────────────

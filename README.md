@@ -152,12 +152,16 @@ POST /api/v1/auth/refresh-token          — Refresh JWT
 
 ### Appointments
 ```
-GET    /api/v1/appointments/my                   — My appointments (Patient)
-GET    /api/v1/appointments/doctors/{id}/slots   — Available time slots
-POST   /api/v1/appointments                      — Book appointment (Patient)
-PATCH  /api/v1/appointments/{id}/approve         — Approve (Admin)
-PATCH  /api/v1/appointments/{id}/reject          — Reject with reason (Admin)
-PATCH  /api/v1/appointments/{id}/cancel          — Cancel (Patient/Admin)
+POST   /api/v1/appointments                    — Book appointment (Patient)
+GET    /api/v1/appointments                    — List appointments (Patient/Doctor/Admin)
+GET    /api/v1/appointments/{id}               — Appointment detail (scoped)
+POST   /api/v1/appointments/{id}/cancel        — Cancel (Patient/Admin)
+POST   /api/v1/appointments/{id}/reschedule    — Reschedule (Patient)
+POST   /api/v1/appointments/{id}/approve       — Approve (Admin)
+POST   /api/v1/appointments/{id}/reject        — Reject (Admin)
+GET    /api/v1/appointments/availability       — Available slots for date
+GET    /api/v1/appointments/available-dates    — Dates with at least one slot
+GET    /api/v1/legacy-appointments/my          — Legacy endpoint (kept for compatibility)
 ```
 
 ### Queue (Real-Time)
@@ -177,6 +181,22 @@ Events: QueueUpdated, PatientCalled
 POST /api/v1/health/records              — Log vital signs
 GET  /api/v1/health/records?days=30      — Health history
 POST /api/v1/health/predictions/request  — Request AI prediction
+```
+
+### Health Predictions (New Service-Based)
+```
+POST /api/v1/health-predictions/request  — Request ML prediction (Patient)
+GET  /api/v1/health-predictions          — Paginated prediction history
+GET  /api/v1/health-predictions/latest   — Latest prediction (Patient/Doctor scoped)
+GET  /api/v1/health-predictions/{id}     — Prediction details
+GET  /api/v1/health-predictions/status   — Prediction readiness status
+```
+
+### Doctor Schedules
+```
+POST   /api/v1/doctor-schedules                      — Create/Update (Admin)
+GET    /api/v1/doctor-schedules/{doctorId}/{centerId} — Get schedule
+DELETE /api/v1/doctor-schedules/{id}                — Delete schedule (Admin)
 ```
 
 ### Healthcare Centers
@@ -250,6 +270,61 @@ if (currentUser.TenantId != request.CenterId)
 | `SendAppointmentReminders` | Every 30 minutes | 24h + 2h reminders (SMS + Push) |
 
 Dashboard: `http://localhost:5000/hangfire`
+
+---
+
+## Appointment Management Implementation
+
+### 1) Availability Engine
+- `AppointmentAvailabilityService` loads doctor schedule by `(doctorId, centerId)`.
+- Validates `WorkingDays` includes requested day, then generates slots from `StartTime` to `EndTime`.
+- Excludes slots inside `BreakStart`–`BreakEnd`.
+- Marks booked slots unavailable using non-cancelled appointments for same doctor/date/center.
+- Removes past slots for today using UTC time.
+- Supports `GetAvailableDatesAsync` by scanning forward and selecting dates with at least one available slot.
+
+### 2) Booking Validation
+- `BookingValidationService` enforces:
+  - date must be today or future
+  - date within center `AdvanceBookingDays`
+  - for same-day booking, at least 2 hours ahead
+  - one appointment per patient/doctor/day (non-cancelled)
+  - selected slot is still available
+- User-facing validation messages are aligned with product text for time and slot conflicts.
+
+### 3) Booking / Approval / Cancel / Reschedule
+- `AppointmentService.BookAppointmentAsync`:
+  - validates rules
+  - starts transaction
+  - re-checks conflict atomically
+  - creates `Pending` appointment (or `Confirmed` when center auto-approves)
+  - commits, then triggers fire-and-forget notifications
+- `CancelAppointmentAsync`:
+  - verifies ownership/authority by role
+  - allows only `Pending`/`Confirmed`
+  - enforces cancellation window for confirmed appointments
+- `RescheduleAppointmentAsync`:
+  - max 1 reschedule
+  - cancels old appointment for history
+  - creates new linked appointment via `OriginalAppointmentId`
+- `ApproveAppointmentAsync`:
+  - validates admin-center scope + `Pending` status
+  - confirms and optionally creates queue record
+
+### 4) Reminder Automation
+- `AppointmentReminderService` runs every 5 minutes as hosted service.
+- Sends:
+  - 24h reminder (`SMS + push`) for confirmed appointments in ±5m window
+  - 2h reminder (`push`) for confirmed appointments in ±5m window
+- Tracks delivery with:
+  - `Reminder24hSentAt`
+  - `Reminder2hSentAt`
+- Uses `INotificationService` abstraction to isolate transport providers.
+
+### 5) Concurrency Strategy
+- Booking re-checks slot conflicts inside transaction boundary to prevent race conditions.
+- Infrastructure note: can be upgraded to strict pessimistic locking with `SELECT ... FOR UPDATE`
+  on candidate slot rows for high contention environments.
 
 ---
 

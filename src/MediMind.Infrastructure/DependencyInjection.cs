@@ -49,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IOtpVerificationRepository, OtpVerificationRepository>();
         services.AddScoped<IHealthcareCenterRepository, HealthcareCenterRepository>();
         services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         services.AddScoped<IQueueRepository, QueueRepository>();
         services.AddScoped<IHealthRecordRepository, HealthRecordRepository>();
         services.AddScoped<IHealthPredictionRepository, HealthPredictionRepository>();
@@ -58,6 +59,7 @@ public static class DependencyInjection
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
         services.AddScoped<IEmailService, SendGridEmailService>();
+        services.AddScoped<INotificationService, NotificationServiceAdapter>();
         services.AddScoped<IPdfService, PrescriptionPdfService>();
 
         services.Configure<CloudinaryOptions>(config.GetSection(CloudinaryOptions.SectionName));

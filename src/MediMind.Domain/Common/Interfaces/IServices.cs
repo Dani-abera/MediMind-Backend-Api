@@ -71,6 +71,12 @@ public interface IEmailService
     Task SendDoctorInvitationAsync(string to, string doctorName, string centerName, string invitationLink, CancellationToken ct = default);
 }
 
+public interface INotificationService
+{
+    Task SendPushAsync(Guid userId, string title, string body, object? data = null);
+    Task SendSmsAsync(string phoneNumber, string message);
+}
+
 // ─── ML Service Client ────────────────────────────────────────────────────────
 
 public interface IMlPredictionService

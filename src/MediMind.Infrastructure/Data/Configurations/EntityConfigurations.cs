@@ -265,8 +265,14 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(a => a.Status).HasConversion<string>().HasMaxLength(20);
         builder.Property(a => a.ReasonForVisit).IsRequired();
         builder.Property(a => a.DurationMinutes).HasDefaultValue(30);
+        builder.Property(a => a.BookingDate).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+        builder.Property(a => a.RescheduleCount).HasDefaultValue(0);
+        builder.Property(a => a.Reminder24hSentAt);
+        builder.Property(a => a.Reminder2hSentAt);
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_duration_minutes", "duration_minutes IN (15, 30, 45, 60)"));
+        builder.ToTable(t => t.HasCheckConstraint(
+            "ck_appointment_date_not_past", "appointment_date >= CURRENT_DATE"));
 
         // THE most critical unique constraint: prevent double-booking
         builder.HasIndex(a => new { a.DoctorId, a.CenterId, a.AppointmentDate, a.AppointmentTime })

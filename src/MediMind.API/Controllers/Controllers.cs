@@ -93,9 +93,10 @@ public class AuthController(IMediator mediator) : BaseController(mediator)
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
-[Tags("Appointments")]
+[Tags("Appointments (Legacy)")]
 [Authorize]
-public class AppointmentsController(IMediator mediator, ICurrentUser currentUser)
+[Route("api/v1/legacy-appointments")]
+public class LegacyAppointmentsController(IMediator mediator, ICurrentUser currentUser)
     : BaseController(mediator)
 {
     /// <summary>
