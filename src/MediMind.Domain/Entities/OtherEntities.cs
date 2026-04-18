@@ -419,9 +419,10 @@ public record MedicationItem(string Name, string Dosage, string Frequency, strin
 
 public class VideoConsultation : BaseEntity
 {
+    public Guid ConsultationId => Id;
     public Guid AppointmentId { get; private set; }  // Unique — 1:0..1 with Appointment
     public string RoomId { get; private set; } = string.Empty;
-    public ConsultationStatus Status { get; private set; } = ConsultationStatus.Scheduled;
+    public VideoConsultationStatus Status { get; private set; } = VideoConsultationStatus.Scheduled;
     public DateTime? StartTime { get; private set; }
     public DateTime? EndTime { get; private set; }
     public int? DurationMinutes { get; private set; }
@@ -444,18 +445,33 @@ public class VideoConsultation : BaseEntity
 
     public void Start()
     {
-        Status = ConsultationStatus.InProgress;
-        StartTime = DateTime.UtcNow;
+        Status = VideoConsultationStatus.InProgress;
+        StartTime ??= DateTime.UtcNow;
         UpdateTimestamp();
     }
 
     public void End(string? videoQuality = null)
     {
-        Status = ConsultationStatus.Completed;
-        EndTime = DateTime.UtcNow;
+        Status = VideoConsultationStatus.Completed;
+        EndTime ??= DateTime.UtcNow;
         VideoQuality = videoQuality;
         if (StartTime.HasValue)
             DurationMinutes = (int)(EndTime.Value - StartTime.Value).TotalMinutes;
+        UpdateTimestamp();
+    }
+
+    public void Cancel()
+    {
+        Status = VideoConsultationStatus.Cancelled;
+        EndTime = DateTime.UtcNow;
+        if (StartTime.HasValue)
+            DurationMinutes = (int)(EndTime.Value - StartTime.Value).TotalMinutes;
+        UpdateTimestamp();
+    }
+
+    public void ReportQuality(string? quality)
+    {
+        VideoQuality = quality;
         UpdateTimestamp();
     }
 }
@@ -485,6 +501,70 @@ public class VideoConsultationParticipant : BaseEntity
     {
         LeftAt = DateTime.UtcNow;
         UpdateTimestamp();
+    }
+
+    public bool MatchesUser(Guid userId) =>
+        (PatientId.HasValue && PatientId.Value == userId) ||
+        (DoctorId.HasValue && DoctorId.Value == userId);
+}
+
+public class ChatMessage : BaseEntity
+{
+    public Guid MessageId => Id;
+    public Guid ConsultationId { get; private set; }
+    public Guid SenderId { get; private set; }
+    public string SenderType { get; private set; } = string.Empty;
+    public string Content { get; private set; } = string.Empty;
+    public DateTime SentAt { get; private set; } = DateTime.UtcNow;
+    public bool IsRead { get; private set; }
+
+    public VideoConsultation Consultation { get; private set; } = null!;
+
+    private ChatMessage() { }
+
+    public ChatMessage(Guid consultationId, Guid senderId, string senderType, string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+            throw new DomainException("Message content cannot be empty.");
+        if (content.Length > 2000)
+            throw new DomainException("Message content exceeds 2000 characters.");
+
+        ConsultationId = consultationId;
+        SenderId = senderId;
+        SenderType = senderType;
+        Content = content.Trim();
+        SentAt = DateTime.UtcNow;
+        IsRead = false;
+    }
+
+    public void MarkRead()
+    {
+        IsRead = true;
+        UpdateTimestamp();
+    }
+}
+
+public class VideoQualityMetric : BaseEntity
+{
+    public Guid ConsultationId { get; private set; }
+    public Guid UserId { get; private set; }
+    public int BandwidthKbps { get; private set; }
+    public int PacketsLost { get; private set; }
+    public int FrameRate { get; private set; }
+    public DateTime ReportedAt { get; private set; } = DateTime.UtcNow;
+
+    public VideoConsultation Consultation { get; private set; } = null!;
+
+    private VideoQualityMetric() { }
+
+    public VideoQualityMetric(Guid consultationId, Guid userId, int bandwidthKbps, int packetsLost, int frameRate)
+    {
+        ConsultationId = consultationId;
+        UserId = userId;
+        BandwidthKbps = bandwidthKbps;
+        PacketsLost = packetsLost;
+        FrameRate = frameRate;
+        ReportedAt = DateTime.UtcNow;
     }
 }
 

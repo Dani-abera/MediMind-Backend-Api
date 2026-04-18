@@ -954,3 +954,87 @@ public class PaymentRepository(MediMindDbContext context)
         Guid appointmentId, CancellationToken ct = default) =>
         await Db.Payments.Where(p => p.AppointmentId == appointmentId).ToListAsync(ct);
 }
+
+public class VideoConsultationRepository(MediMindDbContext context)
+    : Repository<VideoConsultation>(context), IVideoConsultationRepository
+{
+    public async Task<VideoConsultation?> GetByIdAsync(Guid consultationId) =>
+        await Db.VideoConsultations
+            .Include(v => v.Appointment).ThenInclude(a => a.Patient)
+            .Include(v => v.Appointment).ThenInclude(a => a.Doctor)
+            .Include(v => v.Participants)
+            .FirstOrDefaultAsync(v => v.Id == consultationId);
+
+    public async Task<VideoConsultation?> GetByAppointmentIdAsync(Guid appointmentId) =>
+        await Db.VideoConsultations
+            .Include(v => v.Appointment).ThenInclude(a => a.Patient)
+            .Include(v => v.Appointment).ThenInclude(a => a.Doctor)
+            .Include(v => v.Participants)
+            .FirstOrDefaultAsync(v => v.AppointmentId == appointmentId);
+
+    public async Task<VideoConsultation?> GetByRoomIdAsync(string roomId) =>
+        await Db.VideoConsultations
+            .Include(v => v.Appointment).ThenInclude(a => a.Patient)
+            .Include(v => v.Appointment).ThenInclude(a => a.Doctor)
+            .Include(v => v.Participants)
+            .FirstOrDefaultAsync(v => v.RoomId == roomId);
+
+    public async Task<VideoConsultation> CreateAsync(VideoConsultation consultation)
+    {
+        await Db.VideoConsultations.AddAsync(consultation);
+        return consultation;
+    }
+
+    public async Task<VideoConsultation?> UpdateStatusAsync(Guid consultationId, VideoConsultationStatus status)
+    {
+        var consultation = await Db.VideoConsultations.FirstOrDefaultAsync(v => v.Id == consultationId);
+        if (consultation is null)
+            return null;
+
+        if (status == VideoConsultationStatus.InProgress)
+            consultation.Start();
+        else if (status == VideoConsultationStatus.Completed)
+            consultation.End();
+        else if (status == VideoConsultationStatus.Cancelled)
+            consultation.Cancel();
+
+        return consultation;
+    }
+
+    public async Task<VideoConsultationParticipant> AddParticipantAsync(VideoConsultationParticipant participant)
+    {
+        await Db.VideoConsultationParticipants.AddAsync(participant);
+        return participant;
+    }
+
+    public async Task UpdateParticipantLeftAsync(Guid consultationId, Guid userId)
+    {
+        var participant = await Db.VideoConsultationParticipants
+            .Where(p => p.ConsultationId == consultationId)
+            .OrderByDescending(p => p.JoinedAt)
+            .FirstOrDefaultAsync(p =>
+                (p.PatientId.HasValue && p.PatientId.Value == userId) ||
+                (p.DoctorId.HasValue && p.DoctorId.Value == userId));
+        participant?.Leave();
+    }
+
+    public async Task<IEnumerable<ChatMessage>> GetChatHistoryAsync(Guid consultationId, int page = 1, int pageSize = 50) =>
+        await Db.ChatMessages
+            .AsNoTracking()
+            .Where(m => m.ConsultationId == consultationId)
+            .OrderByDescending(m => m.SentAt)
+            .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))
+            .Take(Math.Max(pageSize, 1))
+            .ToListAsync();
+
+    public async Task<ChatMessage> SaveMessageAsync(ChatMessage message)
+    {
+        await Db.ChatMessages.AddAsync(message);
+        return message;
+    }
+
+    public async Task SaveQualityMetricAsync(VideoQualityMetric metric)
+    {
+        await Db.VideoQualityMetrics.AddAsync(metric);
+    }
+}

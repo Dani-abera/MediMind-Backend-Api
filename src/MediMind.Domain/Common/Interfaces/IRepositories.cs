@@ -174,6 +174,20 @@ public interface IPaymentRepository : IRepository<Payment>
     Task<IReadOnlyList<Payment>> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
 }
 
+public interface IVideoConsultationRepository : IRepository<VideoConsultation>
+{
+    Task<VideoConsultation?> GetByIdAsync(Guid consultationId);
+    Task<VideoConsultation?> GetByAppointmentIdAsync(Guid appointmentId);
+    Task<VideoConsultation?> GetByRoomIdAsync(string roomId);
+    Task<VideoConsultation> CreateAsync(VideoConsultation consultation);
+    Task<VideoConsultation?> UpdateStatusAsync(Guid consultationId, VideoConsultationStatus status);
+    Task<VideoConsultationParticipant> AddParticipantAsync(VideoConsultationParticipant participant);
+    Task UpdateParticipantLeftAsync(Guid consultationId, Guid userId);
+    Task<IEnumerable<ChatMessage>> GetChatHistoryAsync(Guid consultationId, int page = 1, int pageSize = 50);
+    Task<ChatMessage> SaveMessageAsync(ChatMessage message);
+    Task SaveQualityMetricAsync(VideoQualityMetric metric);
+}
+
 public record AppointmentFilterDto(
     AppointmentStatus? Status,
     DateOnly? StartDate,

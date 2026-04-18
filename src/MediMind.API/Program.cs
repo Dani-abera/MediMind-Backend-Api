@@ -81,10 +81,20 @@ try
                 .GetSection("Cors:AllowedOrigins")
                 .Get<string[]>() ?? new[] { "http://localhost:3000", "http://localhost:5173" };
 
-            policy.WithOrigins(allowedOrigins)
-                  .AllowAnyMethod()
-                  .AllowAnyHeader()
-                  .AllowCredentials(); // Required for SignalR
+            if (builder.Environment.IsDevelopment())
+            {
+                policy.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }
+            else
+            {
+                policy.WithOrigins(allowedOrigins)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }
         });
     });
 
@@ -101,6 +111,7 @@ try
     {
         options.AddPolicy("PatientOnly", p => p.RequireClaim("user_type", "Patient"));
         options.AddPolicy("DoctorOnly", p => p.RequireClaim("user_type", "Doctor"));
+        options.AddPolicy("PatientOrDoctor", p => p.RequireClaim("user_type", "Patient", "Doctor"));
         options.AddPolicy("AdminOnly", p => p.RequireClaim("user_type", "Admin"));
         options.AddPolicy("SuperAdminOnly", p => p.RequireClaim("user_type", "SuperAdmin"));
         options.AddPolicy("DoctorOrAdmin", p => p.RequireClaim("user_type", "Doctor", "Admin"));
@@ -162,6 +173,7 @@ try
 
     // ─── SignalR Hub Endpoint ─────────────────────────────────────────────────
     app.MapHub<QueueHub>("/hubs/queue");
+    app.MapHub<VideoConsultationHub>("/hubs/video");
 
     // ─── Health Check Endpoint ────────────────────────────────────────────────
     app.MapHealthChecks("/health");

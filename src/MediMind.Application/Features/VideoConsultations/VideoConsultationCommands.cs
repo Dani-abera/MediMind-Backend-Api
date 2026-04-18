@@ -108,7 +108,7 @@ public class JoinVideoConsultationHandler(
         var consultation = appointment.VideoConsultation
                            ?? throw new DomainException("Video consultation has not been started yet. Please wait for your doctor.");
 
-        if (consultation.Status != ConsultationStatus.InProgress)
+        if (consultation.Status != VideoConsultationStatus.InProgress)
             throw new DomainException("Video consultation is not currently active.");
 
         // Record participant join

@@ -86,6 +86,14 @@ public enum ConsultationStatus
     Cancelled
 }
 
+public enum VideoConsultationStatus
+{
+    Scheduled,
+    InProgress,
+    Completed,
+    Cancelled
+}
+
 // ─── Payment ─────────────────────────────────────────────────────────────────
 
 public enum PaymentStatus

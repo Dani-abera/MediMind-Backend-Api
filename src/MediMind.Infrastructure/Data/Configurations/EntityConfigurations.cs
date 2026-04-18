@@ -491,6 +491,10 @@ public class VideoConsultationConfiguration : IEntityTypeConfiguration<VideoCons
 
         builder.HasMany(v => v.Participants).WithOne()
             .HasForeignKey(p => p.ConsultationId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany<ChatMessage>().WithOne(m => m.Consultation)
+            .HasForeignKey(m => m.ConsultationId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasMany<VideoQualityMetric>().WithOne(m => m.Consultation)
+            .HasForeignKey(m => m.ConsultationId).OnDelete(DeleteBehavior.Cascade);
     }
 }
 
@@ -507,5 +511,31 @@ public class VideoConsultationParticipantConfiguration
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_left_after_joined",
             "left_at > joined_at OR left_at IS NULL"));
+    }
+}
+
+public class ChatMessageConfiguration : IEntityTypeConfiguration<ChatMessage>
+{
+    public void Configure(EntityTypeBuilder<ChatMessage> builder)
+    {
+        builder.ToTable("chat_messages");
+        builder.HasKey(m => m.Id);
+        builder.Property(m => m.Id).HasColumnName("message_id");
+        builder.Property(m => m.SenderType).HasMaxLength(20).IsRequired();
+        builder.Property(m => m.Content).HasMaxLength(2000).IsRequired();
+        builder.Property(m => m.SentAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+        builder.Property(m => m.IsRead).HasDefaultValue(false);
+        builder.HasIndex(m => new { m.ConsultationId, m.SentAt }).IsDescending(false, true);
+    }
+}
+
+public class VideoQualityMetricConfiguration : IEntityTypeConfiguration<VideoQualityMetric>
+{
+    public void Configure(EntityTypeBuilder<VideoQualityMetric> builder)
+    {
+        builder.ToTable("video_quality_metrics");
+        builder.HasKey(m => m.Id);
+        builder.Property(m => m.ReportedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+        builder.HasIndex(m => new { m.ConsultationId, m.ReportedAt });
     }
 }

@@ -218,10 +218,18 @@ GET  /api/v1/payments/{ref}/receipt      — Get receipt
 
 ### Video Consultations
 ```
-POST /api/v1/consultations/{apptId}/start         — Doctor starts call
-POST /api/v1/consultations/{apptId}/join          — Patient joins
-POST /api/v1/consultations/{apptId}/end           — Doctor ends call
-POST /api/v1/consultations/{apptId}/prescriptions — Issue prescription
+POST /api/v1/video-consultations/initiate              — Doctor initiates consultation session
+POST /api/v1/video-consultations/{id}/join             — Patient/Doctor joins consultation
+POST /api/v1/video-consultations/{id}/end              — Doctor/Admin ends consultation
+GET  /api/v1/video-consultations/{id}                  — Consultation details
+GET  /api/v1/video-consultations/{id}/chat             — Chat history (paged)
+GET  /api/v1/video-consultations/appointment/{apptId}  — Resolve consultation by appointment
+POST /api/v1/video-consultations/{id}/quality-report   — Report bandwidth/packet-loss/fps
+
+# SignalR WebSocket for WebRTC signaling + chat
+ws://localhost:5000/hubs/video?access_token=<JWT>
+Hub methods: JoinConsultationRoom, LeaveConsultationRoom, SendOffer, SendAnswer, SendIceCandidate, SendChatMessage
+Server events: UserJoined, UserLeft, ReceiveOffer, ReceiveAnswer, ReceiveIceCandidate, ReceiveChatMessage, ConsultationEnded, QualityAlert
 ```
 
 ### Analytics
@@ -325,6 +333,38 @@ Dashboard: `http://localhost:5000/hangfire`
 - Booking re-checks slot conflicts inside transaction boundary to prevent race conditions.
 - Infrastructure note: can be upgraded to strict pessimistic locking with `SELECT ... FOR UPDATE`
   on candidate slot rows for high contention environments.
+
+---
+
+## Telemedicine (WebRTC + SignalR) Implementation
+
+### 1) Data Model
+- `video_consultations` stores room session lifecycle (`Scheduled`, `InProgress`, `Completed`, `Cancelled`) and timing metadata.
+- `video_consultation_participants` tracks doctor/patient join and leave timestamps with DB checks enforcing valid identity shape.
+- `chat_messages` persists in-call text chat (content max length 2000, sent time, read flag) and is indexed by `(consultation_id, sent_at DESC)`.
+- `video_quality_metrics` stores bandwidth, packet loss, and frame rate reports for operational monitoring.
+
+### 2) Signaling Flow
+- Clients connect to `/hubs/video` using JWT query token.
+- Both patient and doctor call `JoinConsultationRoom(consultationId)` before exchanging SDP/ICE.
+- WebRTC SDP offer/answer and ICE candidates are forwarded peer-to-peer by connection ID via SignalR methods.
+- Chat is persisted through application service and then broadcast to room participants for consistency.
+
+### 3) Consultation Lifecycle
+- `InitiateConsultationAsync` verifies appointment + doctor ownership, creates room ID, and pushes join notification to patient.
+- `JoinConsultationAsync` validates participant identity against appointment and transitions status to `InProgress` on first join.
+- `EndConsultationAsync` marks consultation complete, computes duration, marks participant leave, and emits `ConsultationEnded`.
+- When ended by doctor, appointment is also transitioned to `Completed` (when currently `InProgress`).
+
+### 4) Quality Monitoring
+- API endpoint `/api/v1/video-consultations/{id}/quality-report` accepts client metrics.
+- Bandwidth below `500 kbps` triggers real-time `QualityAlert` event recommending audio-only mode.
+- Metrics are persisted in `video_quality_metrics` for later analytics and incident review.
+
+### 5) CORS & Environments
+- Development mode allows dynamic origins for local Flutter/React websocket testing.
+- Non-development environments use explicit origins from `Cors:AllowedOrigins`.
+- SignalR websocket auth uses bearer token from `access_token` query parameter.
 
 ---
 

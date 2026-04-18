@@ -4,6 +4,7 @@ using Hangfire;
 using Hangfire.MemoryStorage;
 using MediMind.Application.Features.HealthPredictions;
 using MediMind.Application.Features.Payments;
+using MediMind.Application.Features.VideoConsultations;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Data.Repositories;
@@ -55,6 +56,7 @@ public static class DependencyInjection
         services.AddScoped<IHealthRecordRepository, HealthRecordRepository>();
         services.AddScoped<IHealthPredictionRepository, HealthPredictionRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
+        services.AddScoped<IVideoConsultationRepository, VideoConsultationRepository>();
         
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         services.AddScoped<ISmsService, GeezSmsService>();
@@ -159,6 +161,7 @@ public static class DependencyInjection
         services.AddScoped<IChapaWebhookValidator, ChapaWebhookValidator>();
         services.AddScoped<IChapaConfiguration, ChapaConfigurationAdapter>();
         services.AddScoped<IQueueHubService, QueueHubService>();
+        services.AddScoped<IVideoConsultationHubNotifier, VideoConsultationHubNotifier>();
 
         // ─── SignalR (real-time queue updates) ───────────────────────────────
         services.AddSignalR(options =>
