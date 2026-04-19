@@ -37,6 +37,9 @@ public class MediMindDbContext(
     public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
     public DbSet<VideoQualityMetric> VideoQualityMetrics => Set<VideoQualityMetric>();
     public DbSet<Payment> Payments => Set<Payment>();
+    public DbSet<UserDeviceToken> UserDeviceTokens => Set<UserDeviceToken>();
+    public DbSet<NotificationLog> NotificationLogs => Set<NotificationLog>();
+    public DbSet<MedicationReminder> MedicationReminders => Set<MedicationReminder>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

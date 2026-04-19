@@ -48,7 +48,9 @@ try
     // ─── Application + Infrastructure ────────────────────────────────────────
     builder.Services.AddApplication();
     builder.Services.AddInfrastructure(builder.Configuration);
+    FirebaseBootstrap.Initialize(builder.Configuration);
     builder.Services.AddHostedService<AppointmentReminderService>();
+    builder.Services.AddHostedService<MedicationReminderHostedService>();
     builder.Services.AddHostedService<DailyQueueGenerationService>();
     builder.Services.AddSignalR(options =>
     {
@@ -140,6 +142,20 @@ try
         RequestPath = "/uploads"
     });
 
+    var storageRoot = Path.Combine(
+        app.Environment.ContentRootPath,
+        (app.Configuration["Storage:PrescriptionPdfPath"] ?? "storage/prescriptions/").TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+    var storageParent = Path.GetDirectoryName(storageRoot.TrimEnd(Path.DirectorySeparatorChar));
+    if (storageParent is not null)
+    {
+        Directory.CreateDirectory(storageRoot);
+        app.UseStaticFiles(new StaticFileOptions
+        {
+            FileProvider = new PhysicalFileProvider(storageParent),
+            RequestPath = "/storage"
+        });
+    }
+
     app.UseHttpsRedirection();
     app.UseCors("MediMindPolicy");
     app.UseIpRateLimiting();
@@ -153,6 +169,18 @@ try
     app.UseExceptionHandler("/error");
 
     app.MapControllers();
+
+    // Example — development-only minimal API (alternative to NotificationsController.TestPush):
+    // if (app.Environment.IsDevelopment())
+    // {
+    //     app.MapPost("/api/v1/notifications/test-push-minimal",
+    //             async (Guid userId, string title, string body, INotificationService notifications, CancellationToken ct) =>
+    //         {
+    //             await notifications.SendPushAsync(userId, title, body, null, ct);
+    //             return Results.NoContent();
+    //         })
+    //         .RequireAuthorization("SuperAdminOnly");
+    // }
 
     if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Staging"))
     {

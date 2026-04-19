@@ -1038,3 +1038,192 @@ public class VideoConsultationRepository(MediMindDbContext context)
         await Db.VideoQualityMetrics.AddAsync(metric);
     }
 }
+
+// ─── Prescriptions ────────────────────────────────────────────────────────────
+
+public class PrescriptionRepository(MediMindDbContext context)
+    : IPrescriptionRepository
+{
+    private readonly MediMindDbContext _db = context;
+
+    public async Task<Prescription?> GetByIdAsync(Guid prescriptionId, CancellationToken ct = default) =>
+        await _db.Prescriptions.AsNoTracking().FirstOrDefaultAsync(p => p.Id == prescriptionId, ct);
+
+    public async Task<Prescription?> GetByIdWithDetailsAsync(Guid prescriptionId, CancellationToken ct = default) =>
+        await _db.Prescriptions
+            .AsNoTracking()
+            .Include(p => p.Patient)
+            .Include(p => p.Doctor)
+            .Include(p => p.Center)
+            .Include(p => p.Appointment)
+            .FirstOrDefaultAsync(p => p.Id == prescriptionId, ct);
+
+    public async Task<Prescription?> GetByIdForUpdateAsync(Guid prescriptionId, CancellationToken ct = default) =>
+        await _db.Prescriptions
+            .Include(p => p.Patient)
+            .Include(p => p.Doctor)
+            .Include(p => p.Center)
+            .Include(p => p.Appointment)
+            .FirstOrDefaultAsync(p => p.Id == prescriptionId, ct);
+
+    public async Task<IReadOnlyList<Prescription>> GetByPatientAsync(
+        Guid patientId, int page, int pageSize, CancellationToken ct = default)
+    {
+        var p = Math.Max(page, 1);
+        var s = Math.Clamp(pageSize, 1, 100);
+        return await _db.Prescriptions
+            .AsNoTracking()
+            .Include(x => x.Doctor)
+            .Include(x => x.Center)
+            .Where(x => x.PatientId == patientId)
+            .OrderByDescending(x => x.IssueDate)
+            .ThenByDescending(x => x.CreatedAt)
+            .Skip((p - 1) * s)
+            .Take(s)
+            .ToListAsync(ct);
+    }
+
+    public async Task<IReadOnlyList<Prescription>> GetByDoctorAsync(
+        Guid doctorId, int page, int pageSize, CancellationToken ct = default)
+    {
+        var p = Math.Max(page, 1);
+        var s = Math.Clamp(pageSize, 1, 100);
+        return await _db.Prescriptions
+            .AsNoTracking()
+            .Include(x => x.Patient)
+            .Include(x => x.Center)
+            .Where(x => x.DoctorId == doctorId)
+            .OrderByDescending(x => x.IssueDate)
+            .ThenByDescending(x => x.CreatedAt)
+            .Skip((p - 1) * s)
+            .Take(s)
+            .ToListAsync(ct);
+    }
+
+    public async Task<Prescription?> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default) =>
+        await _db.Prescriptions
+            .Include(p => p.Patient)
+            .Include(p => p.Doctor)
+            .Include(p => p.Center)
+            .FirstOrDefaultAsync(p => p.AppointmentId == appointmentId, ct);
+
+    public async Task<Prescription> CreateAsync(Prescription prescription, CancellationToken ct = default)
+    {
+        await _db.Prescriptions.AddAsync(prescription, ct);
+        return prescription;
+    }
+
+    public async Task<Prescription?> UpdateStatusAsync(Guid prescriptionId, PrescriptionStatus status, CancellationToken ct = default)
+    {
+        var entity = await _db.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescriptionId, ct);
+        if (entity is null)
+            return null;
+        entity.SetStatus(status);
+        return entity;
+    }
+
+    public async Task<Prescription?> UpdatePdfUrlAsync(Guid prescriptionId, string url, CancellationToken ct = default)
+    {
+        var entity = await _db.Prescriptions.FirstOrDefaultAsync(p => p.Id == prescriptionId, ct);
+        if (entity is null)
+            return null;
+        entity.SetPrescriptionUrl(url);
+        return entity;
+    }
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+public class UserDeviceTokenRepository(MediMindDbContext context)
+    : IUserDeviceTokenRepository
+{
+    private readonly MediMindDbContext _db = context;
+
+    public async Task<IReadOnlyList<UserDeviceToken>> GetActiveTokensForUserAsync(Guid userId, CancellationToken ct = default) =>
+        await _db.UserDeviceTokens
+            .AsNoTracking()
+            .Where(t => t.UserId == userId && t.IsActive)
+            .ToListAsync(ct);
+
+    public async Task<UserDeviceToken?> FindByUserAndTokenAsync(Guid userId, string fcmToken, CancellationToken ct = default) =>
+        await _db.UserDeviceTokens
+            .FirstOrDefaultAsync(t => t.UserId == userId && t.FcmToken == fcmToken, ct);
+
+    public async Task UpsertAsync(UserDeviceToken token, CancellationToken ct = default)
+    {
+        var existing = await _db.UserDeviceTokens
+            .FirstOrDefaultAsync(t => t.UserId == token.UserId && t.FcmToken == token.FcmToken, ct);
+
+        if (existing is null)
+        {
+            await _db.UserDeviceTokens.AddAsync(token, ct);
+            return;
+        }
+
+        existing.Reactivate(token.DevicePlatform, token.DeviceModel);
+    }
+
+    public async Task DeactivateAsync(Guid userId, string fcmToken, CancellationToken ct = default)
+    {
+        var entity = await _db.UserDeviceTokens
+            .FirstOrDefaultAsync(t => t.UserId == userId && t.FcmToken == fcmToken, ct);
+        entity?.Deactivate();
+    }
+
+    public async Task DeactivateTokenStringAsync(string fcmToken, CancellationToken ct = default)
+    {
+        var list = await _db.UserDeviceTokens
+            .Where(t => t.FcmToken == fcmToken && t.IsActive)
+            .ToListAsync(ct);
+        foreach (var t in list)
+            t.Deactivate();
+    }
+}
+
+public class NotificationLogRepository(MediMindDbContext context)
+    : INotificationLogRepository
+{
+    private readonly MediMindDbContext _db = context;
+
+    public async Task AddAsync(NotificationLog log, CancellationToken ct = default) =>
+        await _db.NotificationLogs.AddAsync(log, ct);
+
+    public async Task<IReadOnlyList<NotificationLog>> GetRecentForUserAsync(Guid userId, int take, CancellationToken ct = default) =>
+        await _db.NotificationLogs
+            .AsNoTracking()
+            .Where(n => n.UserId == userId)
+            .OrderByDescending(n => n.SentAt)
+            .Take(Math.Clamp(take, 1, 200))
+            .ToListAsync(ct);
+}
+
+public class MedicationReminderRepository(MediMindDbContext context)
+    : IMedicationReminderRepository
+{
+    private readonly MediMindDbContext _db = context;
+
+    public async Task<MedicationReminder?> GetByIdAsync(Guid id, Guid patientId, CancellationToken ct = default) =>
+        await _db.MedicationReminders
+            .FirstOrDefaultAsync(r => r.Id == id && r.PatientId == patientId, ct);
+
+    public async Task<IReadOnlyList<MedicationReminder>> GetByPatientAsync(Guid patientId, CancellationToken ct = default) =>
+        await _db.MedicationReminders
+            .Where(r => r.PatientId == patientId)
+            .OrderByDescending(r => r.CreatedAt)
+            .ToListAsync(ct);
+
+    public async Task<IReadOnlyList<MedicationReminder>> GetAllActiveAsync(CancellationToken ct = default) =>
+        await _db.MedicationReminders
+            .AsNoTracking()
+            .Where(r => r.IsActive)
+            .ToListAsync(ct);
+
+    public async Task AddAsync(MedicationReminder reminder, CancellationToken ct = default) =>
+        await _db.MedicationReminders.AddAsync(reminder, ct);
+
+    public Task DeleteAsync(MedicationReminder reminder, CancellationToken ct = default)
+    {
+        _db.MedicationReminders.Remove(reminder);
+        return Task.CompletedTask;
+    }
+}

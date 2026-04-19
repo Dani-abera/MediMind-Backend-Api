@@ -39,6 +39,7 @@ public static class DependencyInjection
         services.AddScoped<Features.CenterManagement.IAnalyticsService, Features.CenterManagement.AnalyticsService>();
         services.AddScoped<Features.Payments.IPaymentService, Features.Payments.PaymentService>();
         services.AddScoped<Features.VideoConsultations.IVideoConsultationService, Features.VideoConsultations.VideoConsultationService>();
+        services.AddScoped<Features.Prescriptions.IPrescriptionService, Features.Prescriptions.PrescriptionService>();
 
         return services;
     }

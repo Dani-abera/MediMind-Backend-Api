@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
@@ -69,7 +70,11 @@ public class QueueService(
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
 
         var msg = $"You're next! Please proceed to consultation room at {center.CenterName}";
-        await notificationService.SendPushAsync(appointment.PatientId, "Queue Update", msg, new { queueId = next.Id });
+        await notificationService.SendPushAsync(
+            appointment.PatientId,
+            "Queue Update",
+            msg,
+            new Dictionary<string, string> { ["queueId"] = next.Id.ToString() });
         if (!string.IsNullOrWhiteSpace(appointment.Patient.PhoneNumber))
             await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, msg);
 

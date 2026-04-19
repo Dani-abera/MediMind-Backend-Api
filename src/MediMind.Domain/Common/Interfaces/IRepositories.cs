@@ -188,6 +188,43 @@ public interface IVideoConsultationRepository : IRepository<VideoConsultation>
     Task SaveQualityMetricAsync(VideoQualityMetric metric);
 }
 
+public interface IPrescriptionRepository
+{
+    Task<Prescription?> GetByIdAsync(Guid prescriptionId, CancellationToken ct = default);
+    Task<Prescription?> GetByIdWithDetailsAsync(Guid prescriptionId, CancellationToken ct = default);
+    Task<Prescription?> GetByIdForUpdateAsync(Guid prescriptionId, CancellationToken ct = default);
+    Task<IReadOnlyList<Prescription>> GetByPatientAsync(Guid patientId, int page, int pageSize, CancellationToken ct = default);
+    Task<IReadOnlyList<Prescription>> GetByDoctorAsync(Guid doctorId, int page, int pageSize, CancellationToken ct = default);
+    Task<Prescription?> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
+    Task<Prescription> CreateAsync(Prescription prescription, CancellationToken ct = default);
+    Task<Prescription?> UpdateStatusAsync(Guid prescriptionId, PrescriptionStatus status, CancellationToken ct = default);
+    Task<Prescription?> UpdatePdfUrlAsync(Guid prescriptionId, string url, CancellationToken ct = default);
+}
+
+public interface IUserDeviceTokenRepository
+{
+    Task<IReadOnlyList<UserDeviceToken>> GetActiveTokensForUserAsync(Guid userId, CancellationToken ct = default);
+    Task<UserDeviceToken?> FindByUserAndTokenAsync(Guid userId, string fcmToken, CancellationToken ct = default);
+    Task UpsertAsync(UserDeviceToken token, CancellationToken ct = default);
+    Task DeactivateAsync(Guid userId, string fcmToken, CancellationToken ct = default);
+    Task DeactivateTokenStringAsync(string fcmToken, CancellationToken ct = default);
+}
+
+public interface INotificationLogRepository
+{
+    Task AddAsync(NotificationLog log, CancellationToken ct = default);
+    Task<IReadOnlyList<NotificationLog>> GetRecentForUserAsync(Guid userId, int take, CancellationToken ct = default);
+}
+
+public interface IMedicationReminderRepository
+{
+    Task<MedicationReminder?> GetByIdAsync(Guid id, Guid patientId, CancellationToken ct = default);
+    Task<IReadOnlyList<MedicationReminder>> GetByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task<IReadOnlyList<MedicationReminder>> GetAllActiveAsync(CancellationToken ct = default);
+    Task AddAsync(MedicationReminder reminder, CancellationToken ct = default);
+    Task DeleteAsync(MedicationReminder reminder, CancellationToken ct = default);
+}
+
 public record AppointmentFilterDto(
     AppointmentStatus? Status,
     DateOnly? StartDate,

@@ -12,61 +12,42 @@ namespace MediMind.Infrastructure.Services.Notifications;
 /// Used for: OTP verification, appointment reminders, queue notifications.
 /// </summary>
 public class GeezSmsService(
-    IHttpClientFactory httpClientFactory,
-    IConfiguration config,
+    GeezSmsClient geezSmsClient,
     ILogger<GeezSmsService> logger)
     : ISmsService
 {
-    private readonly string _apiKey = config["GeezsMS:ApiKey"] ?? string.Empty;
-
     public async Task SendAsync(string phoneNumber, string message, CancellationToken ct = default)
     {
-        if (string.IsNullOrWhiteSpace(_apiKey))
-            throw new InvalidOperationException("GeezsMS:ApiKey is not configured.");
-
-        var client = httpClientFactory.CreateClient();
-
-        async Task<(bool Success, string ResponseBody)> SendToGeezAsync(string phone)
-        {
-            var payload = new
-            {
-                token = _apiKey,
-                phone,
-                msg = message
-            };
-
-            var response = await client.PostAsJsonAsync("https://api.geezsms.com/api/v1/sms/send", payload, ct);
-            var responseBody = await response.Content.ReadAsStringAsync(ct);
-            return (response.IsSuccessStatusCode, responseBody);
-        }
-
-        var primary = await SendToGeezAsync(phoneNumber);
-        if (primary.Success)
+        var response = await geezSmsClient.SendSmsAsync(phoneNumber, message, ct);
+        if (response is not null && IsHttpSuccess(response))
         {
             logger.LogInformation("SMS delivered to {Phone}.", phoneNumber);
             return;
         }
 
         // Some gateways reject '+' prefix and require 2519XXXXXXXX format.
-        var normalizedPhone = phoneNumber.TrimStart('+');
-        if (!string.Equals(normalizedPhone, phoneNumber, StringComparison.Ordinal))
+        var stripped = EthiopiaPhone.Normalize(phoneNumber).TrimStart('+');
+        if (!string.Equals(stripped, phoneNumber.Trim(), StringComparison.Ordinal))
         {
-            var fallback = await SendToGeezAsync(normalizedPhone);
-            if (fallback.Success)
+            var fallback = await geezSmsClient.SendSmsAsync(stripped, message, ct);
+            if (fallback is not null && IsHttpSuccess(fallback))
             {
-                logger.LogInformation("SMS delivered to {Phone} using normalized number.", phoneNumber);
+                logger.LogInformation("SMS delivered to {Phone} using stripped prefix.", phoneNumber);
                 return;
             }
 
             logger.LogError(
-                "SMS delivery failed for {Phone}. PrimaryResponse={Primary}. FallbackResponse={Fallback}",
-                phoneNumber, primary.ResponseBody, fallback.ResponseBody);
+                "SMS delivery failed for {Phone}. Primary={Primary}. Fallback={Fallback}",
+                phoneNumber, response?.ResponseMsg, fallback?.ResponseMsg);
             throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
         }
 
-        logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, primary.ResponseBody);
+        logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, response?.ResponseMsg);
         throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
     }
+
+    private static bool IsHttpSuccess(GeezSendResponse r) =>
+        r.Status is 200 or 1 || string.IsNullOrWhiteSpace(r.ResponseMsg);
 
     public async Task SendOtpAsync(string phoneNumber, string otpCode, CancellationToken ct = default) =>
         await SendAsync(phoneNumber,
@@ -85,16 +66,13 @@ public class GeezSmsService(
 
 /// <summary>
 /// Sends push notifications via Firebase Cloud Messaging (FCM).
-/// Free tier sufficient for 10,000 users.
 /// </summary>
 public class FirebasePushNotificationService(
-    ILogger<FirebasePushNotificationService> logger,
-    IConfiguration config)
+    IUserDeviceTokenRepository userDeviceTokenRepository,
+    FcmClient fcmClient,
+    ILogger<FirebasePushNotificationService> logger)
     : IPushNotificationService
 {
-    // In production, use FirebaseAdmin SDK
-    // Here we demonstrate the interface contract
-
     public async Task SendAsync(
         string deviceToken,
         string title,
@@ -102,25 +80,8 @@ public class FirebasePushNotificationService(
         Dictionary<string, string>? data = null,
         CancellationToken ct = default)
     {
-        logger.LogInformation(
-            "Sending push notification to token ending ...{Token}: {Title}",
-            deviceToken.Length > 8 ? deviceToken[^8..] : deviceToken,
-            title);
-
-        // TODO: Implement with FirebaseAdmin:
-        // var message = new FirebaseAdmin.Messaging.Message()
-        // {
-        //     Token = deviceToken,
-        //     Notification = new FirebaseAdmin.Messaging.Notification { Title = title, Body = body },
-        //     Data = data,
-        //     Android = new FirebaseAdmin.Messaging.AndroidConfig
-        //     {
-        //         Priority = FirebaseAdmin.Messaging.Priority.High
-        //     }
-        // };
-        // await FirebaseMessaging.DefaultInstance.SendAsync(message, ct);
-
-        await Task.CompletedTask;
+        var payload = new NotificationPayload(title, body, data, null, "high", null);
+        await fcmClient.SendToTokenAsync(deviceToken, payload, userIdForDeactivation: null, ct);
     }
 
     public async Task SendToUserAsync(
@@ -130,10 +91,19 @@ public class FirebasePushNotificationService(
         Dictionary<string, string>? data = null,
         CancellationToken ct = default)
     {
-        // In production: look up device token(s) for this userId from a DeviceTokens table
-        // Then send to each registered device for this user
-        logger.LogInformation("Push notification to user {UserId}: {Title}", userId, title);
-        await Task.CompletedTask;
+        var tokens = await userDeviceTokenRepository.GetActiveTokensForUserAsync(userId, ct);
+        if (tokens.Count == 0)
+        {
+            logger.LogInformation("No FCM tokens for user {UserId}; push skipped.", userId);
+            return;
+        }
+
+        var payload = new NotificationPayload(title, body, data, null, "high", null);
+        await fcmClient.SendToMultipleTokensAsync(
+            userId,
+            tokens.Select(t => t.FcmToken).ToList(),
+            payload,
+            ct);
     }
 }
 

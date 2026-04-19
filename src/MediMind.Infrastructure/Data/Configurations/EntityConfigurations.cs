@@ -122,6 +122,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
             .HasForeignKey(a => a.PatientId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(p => p.Payments).WithOne(p => p.Patient)
             .HasForeignKey(p => p.PatientId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasMany(p => p.MedicationReminders).WithOne(r => r.Patient)
+            .HasForeignKey(r => r.PatientId).OnDelete(DeleteBehavior.Cascade);
     }
 }
 
@@ -468,6 +470,17 @@ public class PrescriptionConfiguration : IEntityTypeConfiguration<Prescription>
         JsonCollectionMapping.MapStringList(builder.Property(p => p.LabTests), "text");
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_expiry_date", "expiry_date > issue_date OR expiry_date IS NULL"));
+
+        builder.HasIndex(p => p.AppointmentId).IsUnique();
+
+        builder.HasOne(p => p.Appointment).WithMany(a => a.Prescriptions)
+            .HasForeignKey(p => p.AppointmentId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(p => p.Patient).WithMany(pt => pt.Prescriptions)
+            .HasForeignKey(p => p.PatientId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(p => p.Doctor).WithMany(d => d.Prescriptions)
+            .HasForeignKey(p => p.DoctorId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(p => p.Center).WithMany()
+            .HasForeignKey(p => p.CenterId).OnDelete(DeleteBehavior.Restrict);
     }
 }
 
@@ -537,5 +550,65 @@ public class VideoQualityMetricConfiguration : IEntityTypeConfiguration<VideoQua
         builder.HasKey(m => m.Id);
         builder.Property(m => m.ReportedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
         builder.HasIndex(m => new { m.ConsultationId, m.ReportedAt });
+    }
+}
+
+public class UserDeviceTokenConfiguration : IEntityTypeConfiguration<UserDeviceToken>
+{
+    public void Configure(EntityTypeBuilder<UserDeviceToken> builder)
+    {
+        builder.ToTable("user_device_tokens");
+        builder.HasKey(t => t.Id);
+        builder.Property(t => t.Id).HasColumnName("token_id");
+        builder.Property(t => t.FcmToken).HasMaxLength(512).IsRequired();
+        builder.Property(t => t.DevicePlatform).HasMaxLength(20).IsRequired();
+        builder.Property(t => t.DeviceModel).HasMaxLength(200);
+        builder.Property(t => t.RegisteredAt).IsRequired();
+        builder.Property(t => t.LastUsedAt).IsRequired();
+        builder.Property(t => t.IsActive).HasDefaultValue(true);
+
+        builder.HasOne(t => t.User).WithMany()
+            .HasForeignKey(t => t.UserId).OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasIndex(t => new { t.UserId, t.IsActive });
+        builder.HasIndex(t => new { t.UserId, t.FcmToken }).IsUnique();
+    }
+}
+
+public class NotificationLogConfiguration : IEntityTypeConfiguration<NotificationLog>
+{
+    public void Configure(EntityTypeBuilder<NotificationLog> builder)
+    {
+        builder.ToTable("notification_logs");
+        builder.HasKey(n => n.Id);
+        builder.Property(n => n.Id).HasColumnName("log_id");
+        builder.Property(n => n.PhoneNumber).HasMaxLength(20);
+        builder.Property(n => n.NotificationType).HasMaxLength(80).IsRequired();
+        builder.Property(n => n.Channel).HasMaxLength(20).IsRequired();
+        builder.Property(n => n.Title).HasMaxLength(200);
+        builder.Property(n => n.Body).HasMaxLength(4000).IsRequired();
+        builder.Property(n => n.Status).HasMaxLength(20).IsRequired();
+        builder.Property(n => n.ExternalReference).HasMaxLength(512);
+        builder.Property(n => n.ErrorMessage).HasMaxLength(2000);
+        builder.Property(n => n.SentAt).IsRequired();
+
+        builder.HasIndex(n => new { n.UserId, n.SentAt });
+    }
+}
+
+public class MedicationReminderConfiguration : IEntityTypeConfiguration<MedicationReminder>
+{
+    public void Configure(EntityTypeBuilder<MedicationReminder> builder)
+    {
+        builder.ToTable("medication_reminders");
+        builder.HasKey(r => r.Id);
+        builder.Property(r => r.Id).HasColumnName("reminder_id");
+        builder.Property(r => r.MedicationName).HasMaxLength(200).IsRequired();
+        builder.Property(r => r.Dosage).HasMaxLength(200).IsRequired();
+        builder.Property(r => r.Frequency).HasMaxLength(20).IsRequired();
+        builder.Property(r => r.ReminderTimes).HasColumnType("text").IsRequired();
+        builder.Property(r => r.IsActive).HasDefaultValue(true);
+
+        builder.HasIndex(r => new { r.PatientId, r.IsActive });
     }
 }

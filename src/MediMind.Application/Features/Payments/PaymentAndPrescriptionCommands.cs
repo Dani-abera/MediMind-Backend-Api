@@ -191,7 +191,12 @@ namespace MediMind.Application.Features.Prescriptions
         string? QrCode,
         string Status);
 
-    public record MedicationItemDto(string Name, string Dosage, string Frequency, string Duration);
+    public record MedicationItemDto(
+        string Name,
+        string Dosage,
+        string Frequency,
+        string Duration,
+        string? Instructions = null);
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ISSUE PRESCRIPTION (Doctor only)
@@ -222,84 +227,53 @@ namespace MediMind.Application.Features.Prescriptions
                 m.RuleFor(x => x.Dosage).NotEmpty().MaximumLength(100);
                 m.RuleFor(x => x.Frequency).NotEmpty().MaximumLength(100);
                 m.RuleFor(x => x.Duration).NotEmpty().MaximumLength(100);
+                m.RuleFor(x => x.Instructions).MaximumLength(500).When(x => x.Instructions is not null);
             });
         }
     }
 
-    public class IssuePrescriptionHandler(
-        IAppointmentRepository appointmentRepository,
-        IRepository<Prescription> prescriptionRepository,
-        IPdfService pdfService,
-        IStorageService storageService,
-        IUnitOfWork unitOfWork)
+    public class IssuePrescriptionHandler(IPrescriptionService prescriptionService)
         : IRequestHandler<IssuePrescriptionCommand, PrescriptionDto>
     {
         public async Task<PrescriptionDto> Handle(IssuePrescriptionCommand request, CancellationToken ct)
         {
-            var appointment = await appointmentRepository.GetByIdAsync(request.AppointmentId, ct)
-                              ?? throw new NotFoundException(nameof(Appointment), request.AppointmentId);
-
-            // Only the assigned doctor can issue prescriptions
-            if (appointment.DoctorId != request.DoctorId)
-                throw new ForbiddenException("You can only issue prescriptions for your own appointments.");
-
-            if (appointment.Status != AppointmentStatus.Completed &&
-                appointment.Status != AppointmentStatus.InProgress)
-                throw new DomainException(
-                    "Prescriptions can only be issued for in-progress or completed appointments.");
-
-            var medications = request.Medications
-                .Select(m => new MedicationItem(m.Name, m.Dosage, m.Frequency, m.Duration))
-                .ToList();
-
-            var prescription = Prescription.Issue(
-                request.AppointmentId,
-                appointment.PatientId,
+            var created = await prescriptionService.CreatePrescriptionAsync(
+                new CreatePrescriptionDto(
+                    request.AppointmentId,
+                    request.Diagnosis,
+                    request.Medications
+                        .Select(m => new MedicationDto(
+                            m.Name,
+                            m.Dosage,
+                            m.Frequency,
+                            m.Duration,
+                            m.Instructions))
+                        .ToList(),
+                    request.LabTests,
+                    request.FollowUpInstructions,
+                    request.SpecialInstructions,
+                    request.ExpiryDate),
                 request.DoctorId,
-                appointment.CenterId,
-                request.Diagnosis,
-                medications,
-                request.LabTests,
-                request.FollowUpInstructions,
-                request.SpecialInstructions,
-                request.ExpiryDate);
-
-            await prescriptionRepository.AddAsync(prescription, ct);
-            await unitOfWork.SaveChangesAsync(ct);
-
-            // Generate PDF and QR code asynchronously
-            try
-            {
-                var pdfBytes = await pdfService.GeneratePrescriptionPdfAsync(prescription.Id, ct);
-                using var pdfStream = new MemoryStream(pdfBytes);
-                var fileName = $"prescriptions/{prescription.Id}.pdf";
-                var pdfUrl = await storageService.UploadAsync(pdfStream, fileName, "prescriptions", ct);
-                var qrCode = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(prescription.Id.ToString()));
-                prescription.SetDocumentUrl(pdfUrl, qrCode);
-                await unitOfWork.SaveChangesAsync(ct);
-            }
-            catch
-            {
-                // PDF generation failure should not block prescription issuance
-            }
+                ct);
 
             return new PrescriptionDto(
-                prescription.Id,
-                prescription.AppointmentId,
-                appointment.Doctor?.FullName ?? string.Empty,
-                appointment.Patient?.FullName ?? string.Empty,
-                appointment.Center?.CenterName ?? string.Empty,
-                prescription.IssueDate,
-                prescription.ExpiryDate,
-                prescription.Diagnosis,
-                prescription.Medications.Select(m =>
-                    new MedicationItemDto(m.Name, m.Dosage, m.Frequency, m.Duration)).ToList(),
-                prescription.LabTests,
-                prescription.FollowUpInstructions,
-                prescription.SpecialInstructions,
-                prescription.PrescriptionUrl,
-                prescription.QrCode,
-                prescription.Status.ToString());
+                created.PrescriptionId,
+                created.AppointmentId,
+                created.DoctorName,
+                created.PatientName,
+                created.CenterName,
+                created.IssueDate,
+                created.ExpiryDate,
+                created.Diagnosis,
+                created.Medications
+                    .Select(m => new MedicationItemDto(m.Name, m.Dosage, m.Frequency, m.Duration, m.Instructions))
+                    .ToList(),
+                created.LabTests ?? [],
+                created.FollowUpInstructions,
+                created.SpecialInstructions,
+                created.PdfUrl,
+                created.QrCodeBase64,
+                created.Status);
         }
     }
 }

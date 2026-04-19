@@ -21,7 +21,9 @@ public class Patient : User
     public ICollection<HealthRecord> HealthRecords { get; private set; } = [];
     public ICollection<HealthPrediction> HealthPredictions { get; private set; } = [];
     public ICollection<Appointment> Appointments { get; private set; } = [];
+    public ICollection<Prescription> Prescriptions { get; private set; } = [];
     public ICollection<Payment> Payments { get; private set; } = [];
+    public ICollection<MedicationReminder> MedicationReminders { get; private set; } = [];
     public IEnumerable<HealthcareCenter> EnrolledCenters =>
         Appointments
             .Where(a => a.Center is not null)

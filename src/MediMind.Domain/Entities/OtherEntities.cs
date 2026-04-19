@@ -383,13 +383,17 @@ public class Prescription : BaseEntity
         List<string>? labTests = null, string? followUpInstructions = null,
         string? specialInstructions = null, DateOnly? expiryDate = null)
     {
+        var issueDate = DateOnly.FromDateTime(DateTime.UtcNow);
+        if (expiryDate.HasValue && expiryDate.Value <= issueDate)
+            throw new DomainException("Expiry date must be after the issue date.");
+
         return new Prescription
         {
             AppointmentId = appointmentId,
             PatientId = patientId,
             DoctorId = doctorId,
             CenterId = centerId,
-            IssueDate = DateOnly.FromDateTime(DateTime.UtcNow),
+            IssueDate = issueDate,
             ExpiryDate = expiryDate,
             Diagnosis = diagnosis,
             Medications = medications,
@@ -406,14 +410,44 @@ public class Prescription : BaseEntity
         UpdateTimestamp();
     }
 
+    public void SetPrescriptionUrl(string url)
+    {
+        PrescriptionUrl = url;
+        UpdateTimestamp();
+    }
+
+    public void SetQrCode(string qrCodeDataUrl)
+    {
+        QrCode = qrCodeDataUrl;
+        UpdateTimestamp();
+    }
+
     public void MarkDispensed()
     {
         Status = PrescriptionStatus.Dispensed;
         UpdateTimestamp();
     }
+
+    public void MarkCancelled()
+    {
+        Status = PrescriptionStatus.Cancelled;
+        UpdateTimestamp();
+    }
+
+    public void SetStatus(PrescriptionStatus status)
+    {
+        Status = status;
+        UpdateTimestamp();
+    }
 }
 
-public record MedicationItem(string Name, string Dosage, string Frequency, string Duration);
+/// <summary>Serialized to JSON in <see cref="Prescription.Medications"/>.</summary>
+public record MedicationItem(
+    string Name,
+    string Dosage,
+    string Frequency,
+    string Duration,
+    string? Instructions = null);
 
 // ─── Video Consultation ───────────────────────────────────────────────────────
 

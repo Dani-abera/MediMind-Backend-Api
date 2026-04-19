@@ -73,8 +73,19 @@ public interface IEmailService
 
 public interface INotificationService
 {
-    Task SendPushAsync(Guid userId, string title, string body, object? data = null);
-    Task SendSmsAsync(string phoneNumber, string message);
+    Task SendPushAsync(Guid userId, string title, string body, Dictionary<string, string>? data = null, CancellationToken ct = default);
+    Task SendSmsAsync(string phoneNumber, string message, CancellationToken ct = default);
+    Task SendBothAsync(
+        Guid userId,
+        string phoneNumber,
+        string title,
+        string body,
+        string smsMessage,
+        Dictionary<string, string>? data = null,
+        CancellationToken ct = default);
+    Task SendToMultipleUsersAsync(IEnumerable<Guid> userIds, string title, string body, CancellationToken ct = default);
+    Task RegisterDeviceTokenAsync(Guid userId, string fcmToken, string platform, string? deviceModel, CancellationToken ct = default);
+    Task DeregisterDeviceTokenAsync(Guid userId, string fcmToken, CancellationToken ct = default);
     Task SendQueueUpdateToPatientAsync(Guid patientId, object status);
     Task BroadcastQueueRefreshAsync(Guid centerId, object dashboard);
     Task BroadcastQueueEventAsync(Guid centerId, string eventName, object payload);
@@ -153,7 +164,36 @@ public interface IStorageService
 
 public interface IPdfService
 {
+    /// <summary>Loads prescription and related entities from the database.</summary>
     Task<byte[]> GeneratePrescriptionPdfAsync(Guid prescriptionId, CancellationToken ct = default);
+
+    /// <summary>Builds a prescription PDF from in-memory entities (used for consistent layout + QR).</summary>
+    Task<byte[]> GeneratePrescriptionPdfAsync(
+        Prescription prescription,
+        Patient patient,
+        Doctor doctor,
+        HealthcareCenter center,
+        string qrCodeDataUrl,
+        CancellationToken ct = default);
+}
+
+// ─── QR (prescription verification) ────────────────────────────────────────────
+
+public interface IQrCodeService
+{
+    string ComputeVerificationRef(Guid prescriptionId, DateOnly issueDate);
+    /// <summary>URL-safe Base64 of the verification JSON payload.</summary>
+    string BuildQrPayloadString(Guid prescriptionId, DateOnly issueDate);
+    string GenerateQrCodeBase64(string qrTextContent);
+    bool VerifyQrToken(Guid prescriptionId, DateOnly issueDate, string token);
+}
+
+// ─── Prescription PDF file storage (local disk / future blob) ─────────────────
+
+public interface IPrescriptionFileStorage
+{
+    Task<string> SavePrescriptionPdfAsync(Guid prescriptionId, byte[] pdfBytes, CancellationToken ct = default);
+    Task<byte[]?> GetPrescriptionPdfAsync(Guid prescriptionId, CancellationToken ct = default);
 }
 
 // ─── Real-Time (SignalR) ──────────────────────────────────────────────────────

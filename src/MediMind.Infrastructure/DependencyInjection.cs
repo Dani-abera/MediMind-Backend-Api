@@ -15,6 +15,7 @@ using MediMind.Infrastructure.Services.ML;
 using MediMind.Infrastructure.Services.Notifications;
 using MediMind.Infrastructure.Services.Payment;
 using MediMind.Infrastructure.Services.Pdf;
+using MediMind.Infrastructure.Services.Prescriptions;
 using MediMind.Infrastructure.Services.Storage;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -57,13 +58,41 @@ public static class DependencyInjection
         services.AddScoped<IHealthPredictionRepository, HealthPredictionRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
         services.AddScoped<IVideoConsultationRepository, VideoConsultationRepository>();
+        services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
         
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+        services.Configure<PrescriptionStorageOptions>(config.GetSection(PrescriptionStorageOptions.SectionName));
+        services.Configure<PrescriptionVerificationOptions>(config.GetSection(PrescriptionVerificationOptions.SectionName));
+
+        services.Configure<GeezSmsOptions>(o =>
+        {
+            var s = config.GetSection(GeezSmsOptions.SectionName);
+            o.ApiKey = s["ApiKey"] ?? config["GeezsMS:ApiKey"] ?? string.Empty;
+            o.SenderId = s["SenderId"] ?? "MediMind";
+            o.BaseUrl = s["BaseUrl"] ?? "https://api.geezsms.com/api/v1";
+        });
+
+        services.AddHttpClient<GeezSmsClient>((sp, client) =>
+        {
+            var o = sp.GetRequiredService<IOptions<GeezSmsOptions>>().Value;
+            var baseUrl = string.IsNullOrWhiteSpace(o.BaseUrl) ? "https://api.geezsms.com/api/v1" : o.BaseUrl.TrimEnd('/');
+            client.BaseAddress = new Uri(baseUrl + "/");
+            client.Timeout = TimeSpan.FromSeconds(30);
+        });
+
+        services.AddScoped<FcmClient>();
+        services.AddScoped<IUserDeviceTokenRepository, UserDeviceTokenRepository>();
+        services.AddScoped<INotificationLogRepository, NotificationLogRepository>();
+        services.AddScoped<IMedicationReminderRepository, MedicationReminderRepository>();
+
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
         services.AddScoped<IEmailService, SendGridEmailService>();
-        services.AddScoped<INotificationService, NotificationServiceAdapter>();
+        services.AddScoped<INotificationService, MediMindNotificationService>();
         services.AddScoped<IPdfService, PrescriptionPdfService>();
+        services.AddScoped<IQrCodeService, QrCodeService>();
+        services.AddScoped<IPrescriptionFileStorage, PrescriptionLocalFileStorage>();
 
         services.Configure<CloudinaryOptions>(config.GetSection(CloudinaryOptions.SectionName));
         services.AddScoped<LocalUploadStorageService>();
@@ -128,12 +157,6 @@ public static class DependencyInjection
         {
             client.BaseAddress = new Uri(config["MlService:BaseUrl"] ?? "http://localhost:5001");
             client.Timeout = TimeSpan.FromSeconds(config.GetValue("MlService:TimeoutSeconds", 30));
-        });
-
-        services.AddHttpClient("GeezSMS", client =>
-        {
-            client.BaseAddress = new Uri(config["GeezsMS:BaseUrl"] ?? "https://api.geezsms.com/");
-            client.Timeout = TimeSpan.FromSeconds(30);
         });
 
         services.AddHttpClient("SendGrid", (sp, client) =>

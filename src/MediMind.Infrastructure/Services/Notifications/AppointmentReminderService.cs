@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using MediMind.Domain.Common.Interfaces;
-using MediMind.Infrastructure.SignalR;
-using Microsoft.AspNetCore.SignalR;
+using MediMind.Domain.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -47,7 +47,11 @@ public class AppointmentReminderService(
         {
             var message = $"Reminder: Your appointment with Dr. {appointment.Doctor.FullName} at {appointment.Center.CenterName} is tomorrow at {appointment.AppointmentTime:HH\\:mm}. Reply to reschedule.";
             await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, message);
-            await notificationService.SendPushAsync(appointment.PatientId, "Appointment reminder", message, new { appointmentId = appointment.Id });
+            await notificationService.SendPushAsync(
+                appointment.PatientId,
+                "Appointment reminder",
+                message,
+                new Dictionary<string, string> { ["appointmentId"] = appointment.Id.ToString() });
             appointment.MarkReminderSent(ReminderType.TwentyFourHours);
         }
 
@@ -55,51 +59,14 @@ public class AppointmentReminderService(
         foreach (var appointment in reminders2h)
         {
             var body = $"Reminder: Appointment with Dr. {appointment.Doctor.FullName} at {appointment.Center.CenterName} in about 2 hours.";
-            await notificationService.SendPushAsync(appointment.PatientId, "Appointment in 2 hours", body, new { appointmentId = appointment.Id });
+            await notificationService.SendPushAsync(
+                appointment.PatientId,
+                "Appointment in 2 hours",
+                body,
+                new Dictionary<string, string> { ["appointmentId"] = appointment.Id.ToString() });
             appointment.MarkReminderSent(ReminderType.TwoHours);
         }
 
         await dbContext.SaveChangesAsync(ct);
-    }
-}
-
-/// <summary>
-/// Bridge adapter for current push/SMS services.
-/// </summary>
-public class NotificationServiceAdapter(
-    IHubContext<QueueHub> hubContext,
-    ILogger<NotificationServiceAdapter> logger) : INotificationService
-{
-    public Task SendPushAsync(Guid userId, string title, string body, object? data = null)
-    {
-        logger.LogInformation("Push stub: user={UserId} title={Title} body={Body}", userId, title, body);
-        return Task.CompletedTask;
-    }
-
-    public Task SendSmsAsync(string phoneNumber, string message)
-    {
-        logger.LogInformation("SMS stub: phone={PhoneNumber} message={Message}", phoneNumber, message);
-        return Task.CompletedTask;
-    }
-
-    public async Task SendQueueUpdateToPatientAsync(Guid patientId, object status)
-    {
-        await hubContext.Clients
-            .Group($"patient_{patientId}")
-            .SendAsync("QueuePositionUpdated", status);
-    }
-
-    public async Task BroadcastQueueRefreshAsync(Guid centerId, object dashboard)
-    {
-        await hubContext.Clients
-            .Group($"center_{centerId}")
-            .SendAsync("QueueRefreshed", dashboard);
-    }
-
-    public async Task BroadcastQueueEventAsync(Guid centerId, string eventName, object payload)
-    {
-        await hubContext.Clients
-            .Group($"center_{centerId}")
-            .SendAsync(eventName, payload);
     }
 }

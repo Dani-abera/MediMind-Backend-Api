@@ -358,6 +358,40 @@
             Get total record count and prediction readiness (>= 7 records).
             </summary>
         </member>
+        <member name="T:MediMind.API.Controllers.NotificationsController">
+            <summary>Device tokens and notification history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.#ctor(MediMind.Domain.Common.Interfaces.INotificationService,MediMind.Domain.Common.Interfaces.INotificationLogRepository,MediMind.Domain.Common.Interfaces.ICurrentUser,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>Device tokens and notification history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.RegisterDevice(MediMind.API.Controllers.RegisterDeviceTokenRequest,System.Threading.CancellationToken)">
+            <summary>Register or refresh an FCM device token for the current user.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.DeregisterDevice(MediMind.API.Controllers.DeregisterDeviceTokenRequest,System.Threading.CancellationToken)">
+            <summary>Deactivate a device token for the current user.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.History(System.Threading.CancellationToken)">
+            <summary>Last 50 notification log entries for the signed-in patient.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.TestPush(MediMind.API.Controllers.TestPushRequest,System.Threading.CancellationToken)">
+            <summary>
+            Development-only: send a test push to any user by id (SuperAdmin).
+            Alternative: in <c>Program.cs</c>, when the host environment is Development,
+            <c>app.MapPost("/api/v1/notifications/test-push-alt", ...).RequireAuthorization("SuperAdminOnly");</c>
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.MedicationRemindersController">
+            <summary>Patient medication reminder schedules.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.#ctor(MediMind.Domain.Common.Interfaces.IMedicationReminderRepository,MediMind.Domain.Common.Interfaces.IUnitOfWork,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Patient medication reminder schedules.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PrescriptionsController">
+            <summary>Digital prescriptions — PDF, QR verification, dispensing.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.#ctor(MediMind.Application.Features.Prescriptions.IPrescriptionService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Digital prescriptions — PDF, QR verification, dispensing.</summary>
+        </member>
         <member name="T:MediMind.API.Controllers.ProfileImagesController">
             <summary>Profile / logo images for patients, doctors, admins, and healthcare centers.</summary>
         </member>
