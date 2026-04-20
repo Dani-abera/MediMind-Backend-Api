@@ -181,8 +181,8 @@ public static class DependencyInjection
         // ─── External Services ───────────────────────────────────────────────
         services.AddScoped<IMlPredictionService, MlPredictionService>();
         services.AddScoped<MediMind.Domain.Common.Interfaces.IPaymentService, ChapaPaymentService>();
-        services.AddScoped<IChapaWebhookValidator, ChapaWebhookValidator>();
-        services.AddScoped<IChapaConfiguration, ChapaConfigurationAdapter>();
+        services.AddSingleton<IChapaWebhookValidator, ChapaWebhookValidator>();
+        services.AddSingleton<IChapaConfiguration, ChapaConfigurationAdapter>();
         services.AddScoped<IQueueHubService, QueueHubService>();
         services.AddScoped<IVideoConsultationHubNotifier, VideoConsultationHubNotifier>();
 

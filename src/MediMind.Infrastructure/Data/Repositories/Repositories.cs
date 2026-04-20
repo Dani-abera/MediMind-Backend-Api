@@ -367,8 +367,8 @@ public class AppointmentRepository(MediMindDbContext context)
 
     public async Task<IEnumerable<Appointment>> GetUpcomingForReminderAsync(DateTime reminderTime, ReminderType type)
     {
-        var lower = reminderTime.AddMinutes(-5);
-        var upper = reminderTime.AddMinutes(5);
+        var lower = DateTime.SpecifyKind(reminderTime.AddMinutes(-5), DateTimeKind.Unspecified);
+        var upper = DateTime.SpecifyKind(reminderTime.AddMinutes(5), DateTimeKind.Unspecified);
 
         return await Db.Appointments
             .Include(a => a.Patient)

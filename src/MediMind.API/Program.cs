@@ -70,7 +70,18 @@ try
     
 
     // ─── Controllers ─────────────────────────────────────────────────────────
-    builder.Services.AddControllers();
+    builder.Services.AddControllers()
+        .AddJsonOptions(o =>
+        {
+            o.JsonSerializerOptions.MaxDepth = 128;
+            o.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        });
+    // OpenAPI schema generator uses the minimal-API JsonOptions, not MVC's
+    builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(o =>
+    {
+        o.SerializerOptions.MaxDepth = 128;
+        o.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMediMindOpenApi();
 
