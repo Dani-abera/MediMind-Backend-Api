@@ -294,3 +294,4 @@
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/System.Management.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/win/lib/net7.0/System.Management.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/QRCoder.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/firebase-service-account.json

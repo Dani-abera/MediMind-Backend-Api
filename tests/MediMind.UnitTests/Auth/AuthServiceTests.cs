@@ -189,7 +189,7 @@ public class AdminAuthServiceTests
         new(_users, _doctors, _passwords, _authService, _currentUser, _uow, _auditLogger);
 
     [Fact]
-    public async Task Register_WhenEmailTaken_ThrowsDomainException()
+    public async Task Regiser_WhenEmailTaken_ThrowsDomainException()
     {
         _users.ExistsByEmailAsync(Arg.Any<string>(), Arg.Any<CancellationToken>()).Returns(true);
         var svc = BuildService();

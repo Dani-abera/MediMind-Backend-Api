@@ -728,3 +728,16 @@ System.InvalidOperationException: Failed to deliver SMS OTP.
 2026-04-22 12:33:41.893 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
 2026-04-22 12:33:41.895 +03:00 [INF] SMS delivered to 251943034193.
 2026-04-22 12:33:41.926 +03:00 [INF] HTTP POST /api/v1/auth/admin/doctors responded 201 in 2002.1882 ms
+2026-04-22 13:00:13.642 +03:00 [INF] Running appointment reminder job at "2026-04-22T10:00:13.6394140Z"
+2026-04-22 13:00:13.710 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 13:10:12.200 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 13:10:12.653 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 13:10:12.654 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 13:10:12.654 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 13:10:13.829 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 3.1668 ms
+2026-04-22 13:10:14.063 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 208.7570 ms
+2026-04-22 13:10:14.080 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 7.1523 ms
+2026-04-22 13:10:14.103 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 30.2538 ms
+2026-04-22 13:10:40.292 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 25311.1465 ms
+2026-04-22 13:35:01.452 +03:00 [INF] Running appointment reminder job at "2026-04-22T10:35:01.4512520Z"
+2026-04-22 13:35:01.801 +03:00 [INF] Appointment reminder job completed.
