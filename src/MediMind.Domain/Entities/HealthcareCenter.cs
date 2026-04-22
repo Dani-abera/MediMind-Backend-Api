@@ -25,9 +25,14 @@ public class HealthcareCenter : BaseEntity
     public List<string> Specializations { get; private set; } = [];
 
     // Subscription
-    public SubscriptionStatus SubscriptionStatus { get; private set; } = SubscriptionStatus.Trial;
+    public SubscriptionStatus SubscriptionStatus { get; private set; } = SubscriptionStatus.PendingApproval;
     public DateOnly? SubscriptionStartDate { get; private set; }
     public DateOnly? SubscriptionEndDate { get; private set; }
+    public string? RejectionReason { get; private set; }
+
+    // Soft-delete (GDPR NFR-009)
+    public bool IsDeleted { get; private set; }
+    public DateTime? DeletedAt { get; private set; }
 
     // Configuration — customizable per tenant
     public int SlotDurationMinutes { get; private set; } = 30;
@@ -48,6 +53,7 @@ public class HealthcareCenter : BaseEntity
     public ICollection<Appointment> Appointments { get; private set; } = [];
     public ICollection<QueueEntry> QueueEntries { get; private set; } = [];
     public ICollection<DoctorSchedule> DoctorSchedules { get; private set; } = [];
+    public ICollection<SubscriptionHistory> SubscriptionHistories { get; private set; } = [];
 
     private HealthcareCenter() { }
 
@@ -93,6 +99,49 @@ public class HealthcareCenter : BaseEntity
         UpdateTimestamp();
     }
 
+    public void ApproveTrial()
+    {
+        SubscriptionStatus = SubscriptionStatus.Trial;
+        SubscriptionStartDate = DateOnly.FromDateTime(DateTime.UtcNow);
+        RejectionReason = null;
+        UpdateTimestamp();
+    }
+
+    public void ApproveSubscription(DateOnly startDate, DateOnly endDate)
+    {
+        SubscriptionStatus = SubscriptionStatus.Active;
+        SubscriptionStartDate = startDate;
+        SubscriptionEndDate = endDate;
+        RejectionReason = null;
+        UpdateTimestamp();
+    }
+
+    public void Reject(string reason)
+    {
+        SubscriptionStatus = SubscriptionStatus.Rejected;
+        RejectionReason = reason;
+        UpdateTimestamp();
+    }
+
+    public void Suspend(string reason)
+    {
+        SubscriptionStatus = SubscriptionStatus.Suspended;
+        UpdateTimestamp();
+    }
+
+    public void Reactivate()
+    {
+        SubscriptionStatus = SubscriptionStatus.Active;
+        UpdateTimestamp();
+    }
+
+    public void SoftDelete()
+    {
+        IsDeleted = true;
+        DeletedAt = DateTime.UtcNow;
+        UpdateTimestamp();
+    }
+
     public void ActivateSubscription(DateOnly startDate, DateOnly endDate)
     {
         SubscriptionStatus = SubscriptionStatus.Active;
@@ -117,6 +166,50 @@ public class HealthcareCenter : BaseEntity
     public bool IsSubscriptionActive =>
         SubscriptionStatus == SubscriptionStatus.Active &&
         SubscriptionEndDate >= DateOnly.FromDateTime(DateTime.UtcNow);
+}
+
+// ─── Subscription History ────────────────────────────────────────────────────
+
+/// <summary>Append-only log of subscription state transitions for a center.</summary>
+public class SubscriptionHistory : BaseEntity
+{
+    public Guid CenterId { get; private set; }
+    public SubscriptionStatus OldStatus { get; private set; }
+    public SubscriptionStatus NewStatus { get; private set; }
+    public string? Plan { get; private set; }
+    public DateOnly? StartDate { get; private set; }
+    public DateOnly? EndDate { get; private set; }
+    public string? Notes { get; private set; }
+    public Guid ChangedBy { get; private set; }
+    public DateTime ChangedAt { get; private set; }
+
+    public HealthcareCenter Center { get; private set; } = null!;
+
+    private SubscriptionHistory() { }
+
+    public static SubscriptionHistory Create(
+        Guid centerId,
+        SubscriptionStatus oldStatus,
+        SubscriptionStatus newStatus,
+        Guid changedBy,
+        string? plan = null,
+        DateOnly? startDate = null,
+        DateOnly? endDate = null,
+        string? notes = null)
+    {
+        return new SubscriptionHistory
+        {
+            CenterId = centerId,
+            OldStatus = oldStatus,
+            NewStatus = newStatus,
+            ChangedBy = changedBy,
+            Plan = plan,
+            StartDate = startDate,
+            EndDate = endDate,
+            Notes = notes,
+            ChangedAt = DateTime.UtcNow
+        };
+    }
 }
 
 // ─── Junction: Doctor ↔ HealthcareCenter ─────────────────────────────────────

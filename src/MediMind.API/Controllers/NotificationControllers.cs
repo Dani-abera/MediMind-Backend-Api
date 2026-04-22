@@ -10,8 +10,7 @@ namespace MediMind.API.Controllers;
 // NOTIFICATIONS (FCM + history)
 // ═══════════════════════════════════════════════════════════════════════════════
 
-/// <summary>Device tokens and notification history.</summary>
-[Tags("Notifications v1")]
+/// <summary>FCM device token registration and in-app notification history.</summary>
 [Authorize]
 [Route("api/v1/notifications")]
 [ApiController]
@@ -21,7 +20,8 @@ public class NotificationsController(
     ICurrentUser currentUser,
     IWebHostEnvironment environment) : ControllerBase
 {
-    /// <summary>Register or refresh an FCM device token for the current user.</summary>
+    /// <summary>Register or refresh an FCM device token for push notifications (FR-070).</summary>
+    [Tags("Patient — Notifications")]
     [HttpPost("device-token")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> RegisterDevice([FromBody] RegisterDeviceTokenRequest request, CancellationToken ct)
@@ -35,7 +35,8 @@ public class NotificationsController(
         return NoContent();
     }
 
-    /// <summary>Deactivate a device token for the current user.</summary>
+    /// <summary>Deactivate an FCM device token (FR-070).</summary>
+    [Tags("Patient — Notifications")]
     [HttpDelete("device-token")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeregisterDevice([FromBody] DeregisterDeviceTokenRequest request, CancellationToken ct)
@@ -44,7 +45,8 @@ public class NotificationsController(
         return NoContent();
     }
 
-    /// <summary>Last 50 notification log entries for the signed-in patient.</summary>
+    /// <summary>List the last 50 notification log entries for the signed-in patient (FR-071).</summary>
+    [Tags("Patient — Notifications")]
     [HttpGet("history")]
     [Authorize(Policy = "PatientOnly")]
     [ProducesResponseType(typeof(IReadOnlyList<NotificationHistoryItemDto>), StatusCodes.Status200OK)]
@@ -63,10 +65,10 @@ public class NotificationsController(
     }
 
     /// <summary>
-    /// Development-only: send a test push to any user by id (SuperAdmin).
-    /// Alternative: in <c>Program.cs</c>, when the host environment is Development,
-    /// <c>app.MapPost("/api/v1/notifications/test-push-alt", ...).RequireAuthorization("SuperAdminOnly");</c>
+    /// Development-only: send a test push notification to any user (SuperAdmin).
+    /// Only available in the Development environment.
     /// </summary>
+    [Tags("System")]
     [HttpPost("test-push")]
     [Authorize(Policy = "SuperAdminOnly")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -80,6 +82,14 @@ public class NotificationsController(
         return NoContent();
     }
 }
+
+public record MedicationReminderDto(
+    Guid Id,
+    string MedicationName,
+    string Dosage,
+    string Frequency,
+    string ReminderTimes,
+    bool IsActive);
 
 public record RegisterDeviceTokenRequest(string FcmToken, string Platform, string? DeviceModel);
 
@@ -101,7 +111,7 @@ public record NotificationHistoryItemDto(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 /// <summary>Patient medication reminder schedules.</summary>
-[Tags("Medication reminders")]
+[Tags("Patient — Medication Reminders")]
 [Authorize(Policy = "PatientOnly")]
 [Route("api/v1/medication-reminders")]
 [ApiController]
@@ -122,6 +132,7 @@ public class MedicationRemindersController(
         string Frequency,
         string[] ReminderTimes);
 
+    /// <summary>Create a new medication reminder schedule for the authenticated patient (FR-080).</summary>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateMedicationReminderRequest request, CancellationToken ct)
@@ -139,11 +150,17 @@ public class MedicationRemindersController(
         return CreatedAtAction(nameof(GetMine), new { id = entity.Id }, new { id = entity.Id });
     }
 
+    /// <summary>List all medication reminders for the authenticated patient (FR-081).</summary>
     [HttpGet]
-    [ProducesResponseType(typeof(IReadOnlyList<MedicationReminder>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMine(CancellationToken ct) =>
-        Ok(await reminderRepository.GetByPatientAsync(currentUser.UserId, ct));
+    [ProducesResponseType(typeof(IReadOnlyList<MedicationReminderDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetMine(CancellationToken ct)
+    {
+        var items = await reminderRepository.GetByPatientAsync(currentUser.UserId, ct);
+        return Ok(items.Select(r => new MedicationReminderDto(
+            r.Id, r.MedicationName, r.Dosage, r.Frequency, r.ReminderTimes, r.IsActive)));
+    }
 
+    /// <summary>Update an existing medication reminder (FR-082).</summary>
     [HttpPut("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -162,6 +179,7 @@ public class MedicationRemindersController(
         return NoContent();
     }
 
+    /// <summary>Delete a medication reminder (FR-083).</summary>
     [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -176,6 +194,7 @@ public class MedicationRemindersController(
         return NoContent();
     }
 
+    /// <summary>Toggle a medication reminder active/inactive (FR-084).</summary>
     [HttpPatch("{id:guid}/toggle")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

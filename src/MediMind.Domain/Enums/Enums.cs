@@ -29,10 +29,12 @@ public enum Gender
 
 public enum SubscriptionStatus
 {
+    PendingApproval,
     Trial,
     Active,
     Suspended,
-    Expired
+    Expired,
+    Rejected
 }
 
 public enum SlotDurationMinutes

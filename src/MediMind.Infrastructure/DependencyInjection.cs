@@ -16,6 +16,8 @@ using MediMind.Infrastructure.Services.Notifications;
 using MediMind.Infrastructure.Services.Payment;
 using MediMind.Infrastructure.Services.Pdf;
 using MediMind.Infrastructure.Services.Prescriptions;
+using MediMind.Infrastructure.Services.Audit;
+using MediMind.Infrastructure.Services.SuperAdmin;
 using MediMind.Infrastructure.Services.Storage;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -34,10 +36,6 @@ public static class DependencyInjection
         IConfiguration config)
     {
         // ─── PostgreSQL + EF Core 10 ─────────────────────────────────────────
-        
-        // services.AddDbContext<MediMindDbContext>(options =>
-        //     options.UseInMemoryDatabase("medimind"));
-        
         services.AddDbContext<MediMindDbContext>(options =>
             options.UseNpgsql(
                 config.GetConnectionString("DefaultConnection")));
@@ -85,6 +83,15 @@ public static class DependencyInjection
         services.AddScoped<IUserDeviceTokenRepository, UserDeviceTokenRepository>();
         services.AddScoped<INotificationLogRepository, NotificationLogRepository>();
         services.AddScoped<IMedicationReminderRepository, MedicationReminderRepository>();
+        services.AddScoped<IPatientMedicalHistoryRepository, PatientMedicalHistoryRepository>();
+        services.AddScoped<IEmergencyContactRepository, EmergencyContactRepository>();
+        services.AddScoped<IHealthRecordAttachmentRepository, HealthRecordAttachmentRepository>();
+        services.AddScoped<IReviewRepository, ReviewRepository>();
+        services.AddScoped<IFavoriteRepository, FavoriteRepository>();
+        services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
+        services.AddScoped<IPrescriptionTemplateRepository, PrescriptionTemplateRepository>();
+        services.AddScoped<IAppointmentNoteRepository, AppointmentNoteRepository>();
+        services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
@@ -183,6 +190,8 @@ public static class DependencyInjection
         services.AddScoped<MediMind.Domain.Common.Interfaces.IPaymentService, ChapaPaymentService>();
         services.AddSingleton<IChapaWebhookValidator, ChapaWebhookValidator>();
         services.AddSingleton<IChapaConfiguration, ChapaConfigurationAdapter>();
+        services.AddScoped<Application.Features.Admin.IAuditLogger, Services.Audit.AuditLoggerService>();
+        services.AddHostedService<SuperAdminSeeder>();
         services.AddScoped<IQueueHubService, QueueHubService>();
         services.AddScoped<IVideoConsultationHubNotifier, VideoConsultationHubNotifier>();
 

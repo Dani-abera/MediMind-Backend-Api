@@ -32,6 +32,8 @@ public interface IUserRepository : IRepository<User>
     Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default);
     Task<bool> ExistsByEmailAsync(string email, CancellationToken ct = default);
     Task<bool> ExistsByPhoneAsync(string phone, CancellationToken ct = default);
+    Task<PagedResult<User>> SearchAsync(SuperAdminUserQueryDto query, CancellationToken ct = default);
+    Task<bool> ExistsByEmailAsync(string email);
 }
 
 public interface IPatientRepository : IRepository<Patient>
@@ -52,6 +54,8 @@ public interface IDoctorRepository : IRepository<Doctor>
     Task<IEnumerable<Guid>> GetCenterIdsAsync(Guid doctorId);
     Task<IReadOnlyList<Doctor>> GetBySpecializationAsync(string specialization, CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
+    Task<PagedResult<Doctor>> GetAllAsync(SuperAdminDoctorQueryDto query, CancellationToken ct = default);
+    Task<IReadOnlyList<Doctor>> GetUnverifiedAsync(CancellationToken ct = default);
 }
 
 public interface IOtpVerificationRepository : IRepository<OtpVerification>
@@ -74,6 +78,10 @@ public interface IHealthcareCenterRepository : IRepository<HealthcareCenter>
     Task<IReadOnlyList<HealthcareCenter>> GetActiveSubscriptionsAsync(CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
     Task<HealthcareCenter?> GetWithAdminsAsync(Guid centerId, CancellationToken ct = default);
+    Task<PagedResult<HealthcareCenter>> GetAllAsync(SuperAdminCenterQueryDto query, CancellationToken ct = default);
+    Task<IReadOnlyList<HealthcareCenter>> GetPendingApprovalAsync(CancellationToken ct = default);
+    Task AddSubscriptionHistoryAsync(SubscriptionHistory history, CancellationToken ct = default);
+    Task<IReadOnlyList<SubscriptionHistory>> GetSubscriptionHistoryAsync(Guid centerId, CancellationToken ct = default);
 }
 
 public interface IAppointmentRepository : IRepository<Appointment>
@@ -214,6 +222,7 @@ public interface INotificationLogRepository
 {
     Task AddAsync(NotificationLog log, CancellationToken ct = default);
     Task<IReadOnlyList<NotificationLog>> GetRecentForUserAsync(Guid userId, int take, CancellationToken ct = default);
+    Task<int> GetUnreadCountAsync(Guid userId, CancellationToken ct = default);
 }
 
 public interface IMedicationReminderRepository
@@ -223,6 +232,85 @@ public interface IMedicationReminderRepository
     Task<IReadOnlyList<MedicationReminder>> GetAllActiveAsync(CancellationToken ct = default);
     Task AddAsync(MedicationReminder reminder, CancellationToken ct = default);
     Task DeleteAsync(MedicationReminder reminder, CancellationToken ct = default);
+}
+
+public interface IPatientMedicalHistoryRepository
+{
+    Task<PatientMedicalHistory?> GetByPatientIdAsync(Guid patientId, CancellationToken ct = default);
+    Task AddAsync(PatientMedicalHistory history, CancellationToken ct = default);
+    Task UpdateAsync(PatientMedicalHistory history, CancellationToken ct = default);
+}
+
+public interface IEmergencyContactRepository
+{
+    Task<IReadOnlyList<EmergencyContact>> GetByPatientIdAsync(Guid patientId, CancellationToken ct = default);
+    Task<EmergencyContact?> GetByIdAsync(Guid contactId, Guid patientId, CancellationToken ct = default);
+    Task<int> CountByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task AddAsync(EmergencyContact contact, CancellationToken ct = default);
+    Task DeleteAsync(EmergencyContact contact, CancellationToken ct = default);
+    Task ClearPrimaryAsync(Guid patientId, CancellationToken ct = default);
+}
+
+public interface IHealthRecordAttachmentRepository
+{
+    Task<IReadOnlyList<HealthRecordAttachment>> GetByRecordIdAsync(Guid healthRecordId, CancellationToken ct = default);
+    Task<HealthRecordAttachment?> GetByIdAsync(Guid attachmentId, Guid healthRecordId, CancellationToken ct = default);
+    Task AddAsync(HealthRecordAttachment attachment, CancellationToken ct = default);
+    Task DeleteAsync(HealthRecordAttachment attachment, CancellationToken ct = default);
+}
+
+public interface IReviewRepository
+{
+    Task<IReadOnlyList<Review>> GetByDoctorIdAsync(Guid doctorId, int limit = 10, CancellationToken ct = default);
+    Task<IReadOnlyList<Review>> GetByCenterIdAsync(Guid centerId, int limit = 10, CancellationToken ct = default);
+    Task<bool> ExistsForAppointmentAsync(Guid appointmentId, bool isDoctor, CancellationToken ct = default);
+    Task AddAsync(Review review, CancellationToken ct = default);
+    Task<double> GetAverageRatingForDoctorAsync(Guid doctorId, CancellationToken ct = default);
+    Task<double> GetAverageRatingForCenterAsync(Guid centerId, CancellationToken ct = default);
+    Task<int> GetReviewCountForDoctorAsync(Guid doctorId, CancellationToken ct = default);
+    Task<int> GetReviewCountForCenterAsync(Guid centerId, CancellationToken ct = default);
+}
+
+public interface IFavoriteRepository
+{
+    Task<IReadOnlyList<Favorite>> GetDoctorFavoritesByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task<IReadOnlyList<Favorite>> GetCenterFavoritesByPatientAsync(Guid patientId, CancellationToken ct = default);
+    Task<bool> IsDoctorFavoriteAsync(Guid patientId, Guid doctorId, CancellationToken ct = default);
+    Task<bool> IsCenterFavoriteAsync(Guid patientId, Guid centerId, CancellationToken ct = default);
+    Task<Favorite?> GetDoctorFavoriteAsync(Guid patientId, Guid doctorId, CancellationToken ct = default);
+    Task<Favorite?> GetCenterFavoriteAsync(Guid patientId, Guid centerId, CancellationToken ct = default);
+    Task AddAsync(Favorite favorite, CancellationToken ct = default);
+    Task DeleteAsync(Favorite favorite, CancellationToken ct = default);
+}
+
+public interface INotificationPreferenceRepository
+{
+    Task<NotificationPreference?> GetByUserIdAsync(Guid userId, CancellationToken ct = default);
+    Task AddAsync(NotificationPreference preference, CancellationToken ct = default);
+    Task UpdateAsync(NotificationPreference preference, CancellationToken ct = default);
+}
+
+public interface IPrescriptionTemplateRepository
+{
+    Task<PrescriptionTemplate?> GetByIdAsync(Guid templateId, Guid doctorId, CancellationToken ct = default);
+    Task<IReadOnlyList<PrescriptionTemplate>> GetByDoctorAsync(Guid doctorId, CancellationToken ct = default);
+    Task<PrescriptionTemplate> CreateAsync(PrescriptionTemplate template, CancellationToken ct = default);
+    Task<PrescriptionTemplate?> UpdateAsync(PrescriptionTemplate template, CancellationToken ct = default);
+    Task<bool> DeleteAsync(Guid templateId, Guid doctorId, CancellationToken ct = default);
+}
+
+public interface IAppointmentNoteRepository
+{
+    Task<AppointmentNote?> GetByAppointmentAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default);
+    Task<AppointmentNote> CreateAsync(AppointmentNote note, CancellationToken ct = default);
+    Task<AppointmentNote?> UpdateAsync(AppointmentNote note, CancellationToken ct = default);
+}
+
+public interface IAuditLogRepository
+{
+    Task AppendAsync(AuditLog entry, CancellationToken ct = default);
+    Task<PagedResult<AuditLog>> QueryAsync(Guid centerId, AuditLogFilterDto filter, CancellationToken ct = default);
+    Task<PagedResult<AuditLog>> QueryGlobalAsync(AuditLogFilterDto filter, CancellationToken ct = default);
 }
 
 public record AppointmentFilterDto(
@@ -252,5 +340,34 @@ public record DoctorSearchDto(
     string? Specialization,
     string? Name,
     DateOnly? AvailableOnDate,
+    int Page = 1,
+    int PageSize = 20);
+
+public record AuditLogFilterDto(
+    DateOnly? StartDate,
+    DateOnly? EndDate,
+    Guid? UserId,
+    string? Action,
+    int Page = 1,
+    int PageSize = 50);
+
+public record SuperAdminCenterQueryDto(
+    string? Name,
+    string? City,
+    SubscriptionStatus? Status,
+    int Page = 1,
+    int PageSize = 20);
+
+public record SuperAdminDoctorQueryDto(
+    string? Name,
+    string? Specialization,
+    bool? LicenseVerified,
+    int Page = 1,
+    int PageSize = 20);
+
+public record SuperAdminUserQueryDto(
+    string? Search,
+    UserType? UserType,
+    UserStatus? Status,
     int Page = 1,
     int PageSize = 20);

@@ -136,6 +136,7 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.Property(d => d.BadgeNumber).HasMaxLength(6).IsRequired();
         builder.Property(d => d.Specialization).HasMaxLength(100).IsRequired();
         builder.Property(d => d.LicenseNumber).HasMaxLength(50).IsRequired();
+        builder.Property(d => d.Biography).HasMaxLength(2000);
         JsonCollectionMapping.MapStringList(builder.Property(d => d.LanguagesSpoken), "text");
 
         builder.HasIndex(d => d.LicenseNumber).IsUnique();
@@ -233,6 +234,15 @@ public class DoctorHealthcareCenterConfiguration : IEntityTypeConfiguration<Doct
             .HasForeignKey(d => d.DoctorId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(d => d.Center).WithMany(c => c.DoctorHealthcareCenters)
             .HasForeignKey(d => d.CenterId).OnDelete(DeleteBehavior.Restrict);
+    }
+}
+
+public class SuperAdminUserConfiguration : IEntityTypeConfiguration<SuperAdminUser>
+{
+    public void Configure(EntityTypeBuilder<SuperAdminUser> builder)
+    {
+        builder.ToTable("super_admins");
+        builder.Property(s => s.Id).HasColumnName("super_admin_id");
     }
 }
 
@@ -591,8 +601,10 @@ public class NotificationLogConfiguration : IEntityTypeConfiguration<Notificatio
         builder.Property(n => n.ExternalReference).HasMaxLength(512);
         builder.Property(n => n.ErrorMessage).HasMaxLength(2000);
         builder.Property(n => n.SentAt).IsRequired();
+        builder.Property(n => n.IsRead).HasDefaultValue(false);
 
         builder.HasIndex(n => new { n.UserId, n.SentAt });
+        builder.HasIndex(n => new { n.UserId, n.IsRead });
     }
 }
 
@@ -610,5 +622,190 @@ public class MedicationReminderConfiguration : IEntityTypeConfiguration<Medicati
         builder.Property(r => r.IsActive).HasDefaultValue(true);
 
         builder.HasIndex(r => new { r.PatientId, r.IsActive });
+    }
+}
+
+// ─── Patient Medical History ──────────────────────────────────────────────────
+
+public class PatientMedicalHistoryConfiguration : IEntityTypeConfiguration<PatientMedicalHistory>
+{
+    public void Configure(EntityTypeBuilder<PatientMedicalHistory> builder)
+    {
+        builder.ToTable("patient_medical_histories");
+        builder.HasKey(h => h.Id);
+        builder.Property(h => h.Id).HasColumnName("history_id");
+        builder.Property(h => h.ChronicConditions).HasColumnType("text").HasDefaultValue("[]").IsRequired();
+        builder.Property(h => h.Allergies).HasColumnType("text").HasDefaultValue("[]").IsRequired();
+        builder.Property(h => h.CurrentMedications).HasColumnType("text").HasDefaultValue("[]").IsRequired();
+        builder.Property(h => h.FamilyHistory).HasColumnType("text").HasDefaultValue("{}").IsRequired();
+        builder.Property(h => h.BloodType).HasMaxLength(5);
+        builder.Property(h => h.AlcoholConsumption).HasMaxLength(20);
+
+        builder.HasIndex(h => h.PatientId).IsUnique();
+
+        builder.HasOne(h => h.Patient).WithOne(p => p.StructuredMedicalHistory)
+            .HasForeignKey<PatientMedicalHistory>(h => h.PatientId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+// ─── Emergency Contact ────────────────────────────────────────────────────────
+
+public class EmergencyContactConfiguration : IEntityTypeConfiguration<EmergencyContact>
+{
+    public void Configure(EntityTypeBuilder<EmergencyContact> builder)
+    {
+        builder.ToTable("emergency_contacts");
+        builder.HasKey(c => c.Id);
+        builder.Property(c => c.Id).HasColumnName("contact_id");
+        builder.Property(c => c.FullName).HasMaxLength(100).IsRequired();
+        builder.Property(c => c.Relationship).HasMaxLength(20).IsRequired();
+        builder.Property(c => c.PhoneNumber).HasMaxLength(20).IsRequired();
+        builder.Property(c => c.IsPrimary).HasDefaultValue(false);
+
+        builder.HasIndex(c => new { c.PatientId, c.IsPrimary });
+
+        builder.HasOne(c => c.Patient).WithMany(p => p.EmergencyContacts)
+            .HasForeignKey(c => c.PatientId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+// ─── Health Record Attachment ─────────────────────────────────────────────────
+
+public class HealthRecordAttachmentConfiguration : IEntityTypeConfiguration<HealthRecordAttachment>
+{
+    public void Configure(EntityTypeBuilder<HealthRecordAttachment> builder)
+    {
+        builder.ToTable("health_record_attachments");
+        builder.HasKey(a => a.Id);
+        builder.Property(a => a.Id).HasColumnName("attachment_id");
+        builder.Property(a => a.FileName).HasMaxLength(255).IsRequired();
+        builder.Property(a => a.FileType).HasMaxLength(50).IsRequired();
+        builder.Property(a => a.StoragePath).HasMaxLength(2048).IsRequired();
+        builder.Property(a => a.UploadedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+        builder.ToTable(t => t.HasCheckConstraint("ck_file_size", "file_size_bytes BETWEEN 1 AND 10485760"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_file_type",
+            "file_type IN ('application/pdf', 'image/jpeg', 'image/png')"));
+
+        builder.HasIndex(a => a.HealthRecordId);
+
+        builder.HasOne(a => a.HealthRecord).WithMany(h => h.Attachments)
+            .HasForeignKey(a => a.HealthRecordId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+// ─── Review ───────────────────────────────────────────────────────────────────
+
+public class ReviewConfiguration : IEntityTypeConfiguration<Review>
+{
+    public void Configure(EntityTypeBuilder<Review> builder)
+    {
+        builder.ToTable("reviews");
+        builder.HasKey(r => r.Id);
+        builder.Property(r => r.Id).HasColumnName("review_id");
+        builder.Property(r => r.Rating).IsRequired();
+        builder.Property(r => r.Comment).HasMaxLength(1000);
+        builder.ToTable(t => t.HasCheckConstraint("ck_rating", "rating BETWEEN 1 AND 5"));
+        builder.ToTable(t => t.HasCheckConstraint("ck_review_target",
+            "(doctor_id IS NOT NULL AND center_id IS NULL) OR (doctor_id IS NULL AND center_id IS NOT NULL)"));
+
+        builder.HasIndex(r => new { r.AppointmentId, r.DoctorId })
+            .IsUnique().HasFilter("doctor_id IS NOT NULL");
+        builder.HasIndex(r => new { r.AppointmentId, r.CenterId })
+            .IsUnique().HasFilter("center_id IS NOT NULL");
+        builder.HasIndex(r => r.DoctorId).HasFilter("doctor_id IS NOT NULL");
+        builder.HasIndex(r => r.CenterId).HasFilter("center_id IS NOT NULL");
+
+        builder.HasOne(r => r.Patient).WithMany(p => p.Reviews)
+            .HasForeignKey(r => r.PatientId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(r => r.Appointment).WithMany(a => a.Reviews)
+            .HasForeignKey(r => r.AppointmentId).OnDelete(DeleteBehavior.Restrict);
+    }
+}
+
+// ─── Favorite ─────────────────────────────────────────────────────────────────
+
+public class FavoriteConfiguration : IEntityTypeConfiguration<Favorite>
+{
+    public void Configure(EntityTypeBuilder<Favorite> builder)
+    {
+        builder.ToTable("favorites");
+        builder.HasKey(f => f.Id);
+        builder.Property(f => f.Id).HasColumnName("favorite_id");
+        builder.ToTable(t => t.HasCheckConstraint("ck_favorite_target",
+            "(doctor_id IS NOT NULL AND center_id IS NULL) OR (doctor_id IS NULL AND center_id IS NOT NULL)"));
+
+        builder.HasIndex(f => new { f.PatientId, f.DoctorId })
+            .IsUnique().HasFilter("doctor_id IS NOT NULL");
+        builder.HasIndex(f => new { f.PatientId, f.CenterId })
+            .IsUnique().HasFilter("center_id IS NOT NULL");
+
+        builder.HasOne(f => f.Patient).WithMany(p => p.Favorites)
+            .HasForeignKey(f => f.PatientId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+// ─── Prescription Template ────────────────────────────────────────────────────
+
+public class PrescriptionTemplateConfiguration : IEntityTypeConfiguration<PrescriptionTemplate>
+{
+    public void Configure(EntityTypeBuilder<PrescriptionTemplate> builder)
+    {
+        builder.ToTable("prescription_templates");
+        builder.HasKey(t => t.Id);
+        builder.Property(t => t.Id).HasColumnName("template_id");
+        builder.Property(t => t.Name).HasMaxLength(200).IsRequired();
+        builder.Property(t => t.Description).HasMaxLength(1000);
+        builder.Property(t => t.Diagnosis).HasMaxLength(500);
+        builder.Property(t => t.Medications).HasColumnType("jsonb").IsRequired();
+        builder.Property(t => t.LabTests).HasColumnType("jsonb");
+        builder.Property(t => t.FollowUpInstructions).HasMaxLength(2000);
+        builder.Property(t => t.UseCount).HasDefaultValue(0);
+        builder.Property(t => t.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+        builder.HasIndex(t => new { t.DoctorId, t.Name });
+        builder.HasIndex(t => new { t.DoctorId, t.UseCount }).IsDescending(false, true);
+
+        builder.HasOne(t => t.Doctor).WithMany(d => d.PrescriptionTemplates)
+            .HasForeignKey(t => t.DoctorId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+// ─── Appointment Note ─────────────────────────────────────────────────────────
+
+public class AppointmentNoteConfiguration : IEntityTypeConfiguration<AppointmentNote>
+{
+    public void Configure(EntityTypeBuilder<AppointmentNote> builder)
+    {
+        builder.ToTable("appointment_notes");
+        builder.HasKey(n => n.Id);
+        builder.Property(n => n.Id).HasColumnName("note_id");
+        builder.Property(n => n.Content).HasMaxLength(5000).IsRequired();
+        builder.Property(n => n.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+        builder.HasIndex(n => n.AppointmentId).IsUnique();
+
+        builder.HasOne(n => n.Appointment).WithMany()
+            .HasForeignKey(n => n.AppointmentId).OnDelete(DeleteBehavior.Cascade);
+        builder.HasOne(n => n.Doctor).WithMany(d => d.AppointmentNotes)
+            .HasForeignKey(n => n.DoctorId).OnDelete(DeleteBehavior.Restrict);
+    }
+}
+
+// ─── Notification Preference ──────────────────────────────────────────────────
+
+public class NotificationPreferenceConfiguration : IEntityTypeConfiguration<NotificationPreference>
+{
+    public void Configure(EntityTypeBuilder<NotificationPreference> builder)
+    {
+        builder.ToTable("notification_preferences");
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.AppointmentRemindersPush).HasDefaultValue(true);
+        builder.Property(p => p.AppointmentRemindersSms).HasDefaultValue(true);
+        builder.Property(p => p.QueueUpdates).HasDefaultValue(true);
+        builder.Property(p => p.HealthPredictionReady).HasDefaultValue(true);
+        builder.Property(p => p.MedicationReminders).HasDefaultValue(true);
+        builder.Property(p => p.PromotionalEmails).HasDefaultValue(false);
+
+        builder.HasIndex(p => p.UserId).IsUnique();
     }
 }

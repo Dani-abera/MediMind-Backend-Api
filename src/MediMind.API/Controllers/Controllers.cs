@@ -1,13 +1,9 @@
-using MediatR;
 using MediMind.Application.Features.Auth;
-using MediMind.Application.Features.Appointments;
-using MediMind.Application.Features.HealthRecords;
-using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MediMind.Domain.Enums;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MediMind.API.Controllers;
 
@@ -16,308 +12,265 @@ namespace MediMind.API.Controllers;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces("application/json")]
-public abstract class BaseController(IMediator mediator) : ControllerBase
-{
-    protected readonly IMediator Mediator = mediator;
-}
+public abstract class BaseController : ControllerBase { }
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // AUTH CONTROLLER
 // ═══════════════════════════════════════════════════════════════════════════════
 
-/// <summary>Authentication — Registration, OTP, Login, Token refresh</summary>
-[Tags("Authentication")]
+/// <summary>Authentication — Patient, Doctor, Admin, shared token operations.</summary>
+[ApiController]
 [Route("api/v1/auth")]
-public class AuthController(IMediator mediator) : BaseController(mediator)
+public class AuthController(
+    IPatientAuthService patientAuth,
+    IDoctorAuthService doctorAuth,
+    IAdminAuthService adminAuth,
+    ITokenService tokenService,
+    IUserRepository userRepository,
+    ICurrentUser currentUser) : ControllerBase
 {
-    /// <summary>Register a new patient account. Sends OTP to phone number.</summary>
-    [HttpPost("register/patient")]
+    // ── Patient ──────────────────────────────────────────────────────────────
+
+    /// <summary>Register a new patient account (FR-001). Sends OTP to phone number.</summary>
+    [Tags("Authentication")]
+    [HttpPost("patient/register")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(RegisterResult), StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
-    public async Task<IActionResult> RegisterPatient(
-        [FromBody] RegisterPatientCommand command, CancellationToken ct)
+    public async Task<IActionResult> PatientRegister([FromBody] RegisterPatientRequest request, CancellationToken ct)
     {
-        var result = await Mediator.Send(command, ct);
-        return CreatedAtAction(nameof(RegisterPatient), result);
+        var result = await patientAuth.RegisterAsync(request, ct);
+        return CreatedAtAction(nameof(PatientRegister), result);
     }
 
-    /// <summary>Verify OTP code — activates account and returns JWT tokens.</summary>
-    [HttpPost("verify-otp")]
+    /// <summary>Request OTP for patient login (phone-based) (FR-002).</summary>
+    [Tags("Authentication")]
+    [HttpPost("patient/request-otp")]
+    [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> PatientRequestOtp([FromBody] PhoneRequest request, CancellationToken ct)
+    {
+        await patientAuth.RequestOtpAsync(request.PhoneNumber, ct);
+        return Ok(new { message = "OTP sent successfully." });
+    }
+
+    /// <summary>Verify patient OTP and return JWT access + refresh tokens (FR-002).</summary>
+    [Tags("Authentication")]
+    [HttpPost("patient/verify-otp")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> VerifyOtp([FromBody] VerifyOtpCommand command, CancellationToken ct)
+    public async Task<IActionResult> PatientVerifyOtp([FromBody] VerifyOtpRequest request, CancellationToken ct)
     {
-        var result = await Mediator.Send(command, ct);
+        var result = await patientAuth.VerifyOtpAsync(request.PhoneNumber, request.OtpCode, ct);
         return Ok(result);
     }
 
-    /// <summary>Send OTP to phone number for patient login.</summary>
-    [HttpPost("login/patient/send-otp")]
+    /// <summary>Get the authenticated patient's profile (FR-003).</summary>
+    [Tags("Patient — Profile")]
+    [HttpGet("patient/profile")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(typeof(PatientProfileDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetPatientProfile(CancellationToken ct) =>
+        Ok(await patientAuth.GetProfileAsync(ct));
+
+    /// <summary>Create or replace the authenticated patient's profile (FR-003).</summary>
+    [Tags("Patient — Profile")]
+    [HttpPost("patient/profile")]
+    [HttpPut("patient/profile")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> UpsertPatientProfile([FromBody] UpsertPatientProfileApiRequest request, CancellationToken ct)
+    {
+        await patientAuth.UpsertProfileAsync(new UpsertPatientProfileRequest(
+            request.FullName, request.DateOfBirth,
+            ParseGender(request.Gender), request.Address,
+            request.MedicalHistory, request.Allergies,
+            ParseBloodType(request.BloodType)), ct);
+        return NoContent();
+    }
+
+    /// <summary>Partially update the authenticated patient's profile fields (FR-003).</summary>
+    [Tags("Patient — Profile")]
+    [HttpPatch("patient/profile")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> PatchPatientProfile([FromBody] PatchPatientProfileApiRequest request, CancellationToken ct)
+    {
+        await patientAuth.PatchProfileAsync(new PatchPatientProfileRequest(
+            request.FullName, request.DateOfBirth,
+            ParseGenderNullable(request.Gender), request.Address,
+            request.MedicalHistory, request.Allergies,
+            ParseBloodType(request.BloodType)), ct);
+        return NoContent();
+    }
+
+    /// <summary>Permanently delete the authenticated patient's account (FR-003).</summary>
+    [Tags("Patient — Profile")]
+    [HttpDelete("patient/profile")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DeletePatientProfile(CancellationToken ct)
+    {
+        await patientAuth.DeleteAsync(ct);
+        return NoContent();
+    }
+
+    /// <summary>Change the authenticated patient's phone number after OTP verification.</summary>
+    [Tags("Patient — Profile")]
+    [HttpPost("patient/change-phone")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> ChangePhone([FromBody] ChangePhoneApiRequest request, CancellationToken ct)
+    {
+        await patientAuth.ChangePhoneAsync(
+            new Application.Features.Auth.ChangePhoneRequest(request.NewPhoneNumber, request.OtpCode), ct);
+        return NoContent();
+    }
+
+    // ── Doctor ───────────────────────────────────────────────────────────────
+
+    /// <summary>Request OTP for doctor login using badge number (FR-004).</summary>
+    [Tags("Authentication")]
+    [HttpPost("doctor/request-otp")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> SendPatientLoginOtp(
-        [FromBody] SendLoginOtpCommand command, CancellationToken ct)
+    public async Task<IActionResult> DoctorRequestOtp([FromBody] BadgeRequest request, CancellationToken ct)
     {
-        await Mediator.Send(command, ct);
+        await doctorAuth.RequestOtpAsync(request.BadgeNumber, ct);
         return Ok(new { message = "OTP sent to your registered phone number." });
     }
 
-    /// <summary>Send OTP to doctor using their badge/license number.</summary>
-    [HttpPost("login/doctor/send-otp")]
+    /// <summary>Verify doctor OTP and return JWT access + refresh tokens (FR-004).</summary>
+    [Tags("Authentication")]
+    [HttpPost("doctor/verify-otp")]
     [AllowAnonymous]
-    public async Task<IActionResult> SendDoctorLoginOtp(
-        [FromBody] SendDoctorLoginOtpCommand command, CancellationToken ct)
+    [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
+    public async Task<IActionResult> DoctorVerifyOtp([FromBody] DoctorVerifyOtpApiRequest request, CancellationToken ct)
     {
-        await Mediator.Send(command, ct);
-        return Ok(new { message = "OTP sent to your registered phone number." });
+        var result = await doctorAuth.VerifyOtpAsync(request.BadgeNumber, request.OtpCode, ct);
+        return Ok(result);
     }
 
-    /// <summary>Refresh access token using refresh token.</summary>
+    // ── Admin ────────────────────────────────────────────────────────────────
+
+    /// <summary>Register a new healthcare center admin account (FR-005).</summary>
+    [Tags("Authentication")]
+    [HttpPost("admin/register")]
+    [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    public async Task<IActionResult> AdminRegister([FromBody] AdminRegisterRequest request, CancellationToken ct)
+    {
+        var id = await adminAuth.RegisterAsync(request, ct);
+        return CreatedAtAction(nameof(AdminRegister), new { adminId = id });
+    }
+
+    /// <summary>Admin login with email and password (FR-005).</summary>
+    [Tags("Authentication")]
+    [HttpPost("admin/login")]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
+    public async Task<IActionResult> AdminLogin([FromBody] AdminLoginApiRequest request, CancellationToken ct)
+    {
+        var result = await adminAuth.LoginAsync(request.Email, request.Password, ct);
+        return Ok(result);
+    }
+
+    /// <summary>Admin creates a doctor account linked to their healthcare center (FR-006).</summary>
+    [Tags("Admin — Doctors")]
+    [HttpPost("admin/doctors")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(typeof(DoctorCreatedResult), StatusCodes.Status201Created)]
+    public async Task<IActionResult> AdminCreateDoctor([FromBody] CreateDoctorRequest request, CancellationToken ct)
+    {
+        var result = await adminAuth.CreateDoctorAsync(request, ct);
+        return CreatedAtAction(nameof(AdminCreateDoctor), result);
+    }
+
+    // ── Shared ───────────────────────────────────────────────────────────────
+
+    /// <summary>Exchange a valid refresh token for a new access + refresh token pair.</summary>
+    [Tags("Authentication")]
     [HttpPost("refresh-token")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
-    public async Task<IActionResult> RefreshToken(
-        [FromBody] RefreshTokenCommand command, CancellationToken ct)
+    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenApiRequest request, CancellationToken ct)
     {
-        var result = await Mediator.Send(command, ct);
-        return Ok(result);
-    }
-}
+        if (!tokenService.ValidateRefreshToken(request.RefreshToken, out var userId))
+            throw new Domain.Exceptions.DomainException("Session expired. Please login.");
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// APPOINTMENTS CONTROLLER
-// ═══════════════════════════════════════════════════════════════════════════════
+        var user = await userRepository.GetByIdAsync(userId, ct)
+            ?? throw new Domain.Exceptions.NotFoundException(nameof(Domain.Entities.User), userId);
 
-/// <summary>Appointment management — Book, Approve, Reject, Cancel, Query</summary>
-[Tags("Appointments (Legacy)")]
-[Authorize]
-[Route("api/v1/legacy-appointments")]
-public class LegacyAppointmentsController(IMediator mediator, ICurrentUser currentUser)
-    : BaseController(mediator)
-{
-    /// <summary>
-    /// Get patient's appointment history.
-    /// Patients can only see their own appointments (RBAC enforced).
-    /// </summary>
-    [HttpGet("my")]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(IReadOnlyList<AppointmentDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMyAppointments(CancellationToken ct)
-    {
-        var query = new GetPatientAppointmentsQuery(currentUser.UserId);
-        return Ok(await Mediator.Send(query, ct));
+        var tenantId = (user as Domain.Entities.HealthcareCenterAdmin)?.CenterId;
+        var (accessToken, refreshToken) = tokenService.GenerateTokens(user.Id, user.UserType.ToString(), tenantId);
+        return Ok(new AuthResult(accessToken, refreshToken, user.Id, user.UserType.ToString(), user.FullName));
     }
 
-    /// <summary>Get available time slots for a doctor on a specific date.</summary>
-    [HttpGet("doctors/{doctorId}/slots")]
-    [ProducesResponseType(typeof(IReadOnlyList<TimeOnly>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetAvailableSlots(
-        Guid doctorId,
-        [FromQuery] Guid centerId,
-        [FromQuery] DateOnly date,
-        CancellationToken ct)
-    {
-        var query = new GetDoctorAvailableSlotsQuery(doctorId, centerId, date);
-        return Ok(await Mediator.Send(query, ct));
-    }
-
-    /// <summary>Book an appointment. Patient can only book for themselves.</summary>
-    [HttpPost]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(BookAppointmentResult), StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status409Conflict)]
-    public async Task<IActionResult> BookAppointment(
-        [FromBody] BookAppointmentRequest request, CancellationToken ct)
-    {
-        var command = new BookAppointmentCommand(
-            currentUser.UserId,  // Patient ID from JWT — cannot book for others
-            request.DoctorId,
-            request.CenterId,
-            request.AppointmentDate,
-            request.AppointmentTime,
-            request.ReasonForVisit,
-            request.Symptoms);
-
-        var result = await Mediator.Send(command, ct);
-        return CreatedAtAction(nameof(BookAppointment), result);
-    }
-
-    /// <summary>Approve a pending appointment (Healthcare Center Admin only).</summary>
-    [HttpPatch("{appointmentId}/approve")]
-    [Authorize(Policy = "AdminOnly")]
+    /// <summary>Logout and revoke the current user's refresh token.</summary>
+    [Tags("Authentication")]
+    [HttpPost("logout")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> ApproveAppointment(Guid appointmentId, CancellationToken ct)
+    public IActionResult Logout()
     {
-        var tenantId = currentUser.TenantId
-            ?? throw new UnauthorizedAccessException("Admin must be associated with a healthcare center.");
-
-        await Mediator.Send(new ApproveAppointmentCommand(appointmentId, currentUser.UserId, tenantId), ct);
+        tokenService.RevokeRefreshToken(currentUser.UserId);
         return NoContent();
     }
 
-    /// <summary>Reject a pending appointment (Healthcare Center Admin only).</summary>
-    [HttpPatch("{appointmentId}/reject")]
-    [Authorize(Policy = "AdminOnly")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> RejectAppointment(
-        Guid appointmentId, [FromBody] RejectRequest request, CancellationToken ct)
-    {
-        var tenantId = currentUser.TenantId
-            ?? throw new UnauthorizedAccessException("Admin must be associated with a healthcare center.");
+    // ── Helpers ──────────────────────────────────────────────────────────────
 
-        await Mediator.Send(new RejectAppointmentCommand(
-            appointmentId, currentUser.UserId, tenantId, request.Reason), ct);
-        return NoContent();
+    private static Domain.Enums.Gender ParseGender(string value)
+    {
+        if (Enum.TryParse<Domain.Enums.Gender>(value, ignoreCase: true, out var g)) return g;
+        throw new Domain.Exceptions.DomainException("Invalid gender. Use Male, Female, or Other.");
     }
 
-    /// <summary>Cancel an appointment (Patient or Admin).</summary>
-    [HttpPatch("{appointmentId}/cancel")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public async Task<IActionResult> CancelAppointment(
-        Guid appointmentId, [FromBody] CancelRequest request, CancellationToken ct)
+    private static Domain.Enums.Gender? ParseGenderNullable(string? value) =>
+        string.IsNullOrWhiteSpace(value) ? null : ParseGender(value);
+
+    private static Domain.Enums.BloodType? ParseBloodType(string? value)
     {
-        await Mediator.Send(new CancelAppointmentCommand(
-            appointmentId, currentUser.UserId, request.Reason, currentUser.TenantId), ct);
-        return NoContent();
+        if (string.IsNullOrWhiteSpace(value)) return null;
+        if (Enum.TryParse<Domain.Enums.BloodType>(value, ignoreCase: true, out var b)) return b;
+        throw new Domain.Exceptions.DomainException("Invalid blood type.");
     }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// QUEUE CONTROLLER
-// ═══════════════════════════════════════════════════════════════════════════════
+// ─── API Request Records (string-typed for JSON deserialization) ──────────────
 
-/// <summary>Real-time queue management for healthcare centers</summary>
-[Tags("Queue (Legacy)")]
-[Authorize]
-[Route("api/v1/legacy-queue")]
-public class LegacyQueueController(IMediator mediator, ICurrentUser currentUser)
-    : BaseController(mediator)
-{
-    /// <summary>Get the full queue dashboard for a healthcare center (Admin only).</summary>
-    [HttpGet("centers/{centerId}")]
-    [Authorize(Policy = "AdminOnly")]
-    [ProducesResponseType(typeof(IReadOnlyList<LegacyQueueEntryDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetCenterQueue(
-        Guid centerId, [FromQuery] DateOnly? date, CancellationToken ct)
-    {
-        // Tenant isolation: admin can only see their own center's queue
-        if (currentUser.TenantId != centerId)
-            return Forbid();
+public record PhoneRequest(string PhoneNumber);
+public record BadgeRequest(string BadgeNumber);
+public record VerifyOtpRequest(string PhoneNumber, string OtpCode);
+public record DoctorVerifyOtpApiRequest(string BadgeNumber, string OtpCode);
+public record AdminLoginApiRequest(string Email, string Password);
+public record RefreshTokenApiRequest(string RefreshToken);
 
-        var query = new GetCenterQueueQuery(centerId, date ?? DateOnly.FromDateTime(DateTime.UtcNow));
-        return Ok(await Mediator.Send(query, ct));
-    }
+public record ChangePhoneApiRequest(string NewPhoneNumber, string OtpCode);
 
-    /// <summary>Call next patient in queue (Admin action — triggers real-time SignalR broadcast).</summary>
-    [HttpPost("centers/{centerId}/call-next")]
-    [Authorize(Policy = "AdminOnly")]
-    [ProducesResponseType(typeof(LegacyQueueEntryDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> CallNextPatient(Guid centerId, CancellationToken ct)
-    {
-        if (currentUser.TenantId != centerId) return Forbid();
+public record UpsertPatientProfileApiRequest(
+    string FullName,
+    DateOnly DateOfBirth,
+    string Gender,
+    string Address,
+    string? MedicalHistory,
+    string? Allergies,
+    string? BloodType);
 
-        var result = await Mediator.Send(new CallNextPatientCommand(centerId, currentUser.UserId), ct);
-        return Ok(result);
-    }
+public record PatchPatientProfileApiRequest(
+    string? FullName,
+    DateOnly? DateOfBirth,
+    string? Gender,
+    string? Address,
+    string? MedicalHistory,
+    string? Allergies,
+    string? BloodType);
 
-    /// <summary>Mark a patient as no-show (Admin only).</summary>
-    [HttpPatch("{queueEntryId}/no-show")]
-    [Authorize(Policy = "AdminOnly")]
-    public async Task<IActionResult> MarkNoShow(Guid queueEntryId, CancellationToken ct)
-    {
-        var centerId = currentUser.TenantId
-            ?? throw new UnauthorizedAccessException("Admin must be associated with a healthcare center.");
-
-        await Mediator.Send(new MarkNoShowCommand(queueEntryId, centerId), ct);
-        return NoContent();
-    }
-
-    /// <summary>Get patient's own queue status (Patient only) — polling fallback when WebSocket unavailable.</summary>
-    [HttpGet("my-status/{appointmentId}")]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(LegacyPatientQueueStatusDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetMyQueueStatus(Guid appointmentId, CancellationToken ct)
-    {
-        var query = new GetPatientQueueStatusQuery(appointmentId, currentUser.UserId);
-        return Ok(await Mediator.Send(query, ct));
-    }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// HEALTH RECORDS CONTROLLER
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/// <summary>Patient health monitoring — log vitals and request AI predictions</summary>
-[Tags("Health records")]
-[Authorize]
-[Route("api/v1/health")]
-public class HealthController(IMediator mediator, ICurrentUser currentUser)
-    : BaseController(mediator)
-{
-    /// <summary>Log daily vital signs. Patients can only log their own data.</summary>
-    [HttpPost("records")]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(HealthRecordDto), StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> LogHealthData(
-        [FromBody] LogHealthDataRequest request, CancellationToken ct)
-    {
-        var command = new LogHealthDataCommand(
-            currentUser.UserId,
-            request.RecordDate,
-            request.RecordTime ?? TimeOnly.FromDateTime(DateTime.UtcNow),
-            request.SystolicBp,
-            request.DiastolicBp,
-            request.GlucoseLevel,
-            request.Weight,
-            request.Height,
-            request.Temperature,
-            request.HeartRate,
-            request.OxygenSaturation,
-            request.RespiratoryRate,
-            request.Notes);
-
-        var result = await Mediator.Send(command, ct);
-        return CreatedAtAction(nameof(LogHealthData), result);
-    }
-
-    /// <summary>Get health records history (last N days).</summary>
-    [HttpGet("records")]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(IReadOnlyList<HealthRecordDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetHealthRecords(
-        [FromQuery] int days = 30, CancellationToken ct = default)
-    {
-        var query = new GetHealthRecordsQuery(currentUser.UserId, days);
-        return Ok(await Mediator.Send(query, ct));
-    }
-
-    /// <summary>
-    /// Request AI disease risk prediction.
-    /// Calls Python Flask ML microservice with patient's health data.
-    /// Minimum 7 days of data required; 30+ days for high confidence.
-    /// </summary>
-    [HttpPost("predictions/request")]
-    [Authorize(Policy = "PatientOnly")]
-    [ProducesResponseType(typeof(HealthPredictionDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> RequestPrediction(CancellationToken ct)
-    {
-        var result = await Mediator.Send(new RequestPredictionCommand(currentUser.UserId), ct);
-        return Ok(result);
-    }
-}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // ERROR CONTROLLER
 // ═══════════════════════════════════════════════════════════════════════════════
 
-/// <summary>Global error handler — maps domain exceptions to HTTP responses.</summary>
+/// <summary>Global error handler — maps domain exceptions to RFC 7807 ProblemDetails responses.</summary>
 [ApiExplorerSettings(IgnoreApi = true)]
 [Route("/error")]
 public class ErrorController : ControllerBase
@@ -326,7 +279,19 @@ public class ErrorController : ControllerBase
     public IActionResult HandleError()
     {
         var feature = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
-        if (feature?.Error is null) return Problem();
+        if (feature?.Error is null)
+            return Problem(statusCode: 500, title: "Internal Server Error", instance: HttpContext.Request.Path);
+
+        // Validation errors — return structured "errors" map per RFC 7807 + FluentValidation conventions
+        if (feature.Error is FluentValidation.ValidationException ve)
+        {
+            var modelState = new ModelStateDictionary();
+            foreach (var err in ve.Errors)
+                modelState.AddModelError(err.PropertyName, err.ErrorMessage);
+            return ValidationProblem(
+                modelStateDictionary: modelState,
+                instance: HttpContext.Request.Path);
+        }
 
         var (status, title) = feature.Error switch
         {
@@ -334,40 +299,15 @@ public class ErrorController : ControllerBase
             Domain.Exceptions.NotFoundException => (404, "Resource Not Found"),
             Domain.Exceptions.ForbiddenException => (403, "Access Denied"),
             Domain.Exceptions.TenantIsolationException => (403, "Tenant Isolation Violation"),
-            FluentValidation.ValidationException => (400, "Validation Failed"),
             _ => (500, "Internal Server Error")
         };
 
         return Problem(
             statusCode: status,
             title: title,
-            detail: feature.Error.Message);
+            detail: feature.Error.Message,
+            instance: HttpContext.Request.Path,
+            type: "https://tools.ietf.org/html/rfc7807");
     }
 }
 
-// ─── Request DTOs (API layer only — keeps commands clean) ─────────────────────
-
-public record BookAppointmentRequest(
-    Guid DoctorId,
-    Guid CenterId,
-    DateOnly AppointmentDate,
-    TimeOnly AppointmentTime,
-    string ReasonForVisit,
-    string? Symptoms);
-
-public record RejectRequest(string Reason);
-public record CancelRequest(string Reason);
-
-public record LogHealthDataRequest(
-    DateOnly RecordDate,
-    TimeOnly? RecordTime,
-    int? SystolicBp,
-    int? DiastolicBp,
-    decimal? GlucoseLevel,
-    decimal? Weight,
-    decimal? Height,
-    decimal? Temperature,
-    int? HeartRate,
-    int? OxygenSaturation,
-    int? RespiratoryRate,
-    string? Notes);

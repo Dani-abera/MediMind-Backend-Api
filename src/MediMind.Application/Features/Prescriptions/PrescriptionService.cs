@@ -15,7 +15,8 @@ public class PrescriptionService(
     IQrCodeService qrCodeService,
     IUnitOfWork unitOfWork,
     IServiceScopeFactory scopeFactory,
-    ILogger<PrescriptionService> logger) : IPrescriptionService
+    ILogger<PrescriptionService> logger,
+    MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IPrescriptionService
 {
     public async Task<PrescriptionResponseDto> CreatePrescriptionAsync(
         CreatePrescriptionDto dto,
@@ -59,6 +60,8 @@ public class PrescriptionService(
 
         await prescriptionRepository.CreateAsync(prescription, ct);
         await unitOfWork.SaveChangesAsync(ct);
+
+        await auditLogger.LogAsync(AuditActions.PrescriptionIssued, doctorId, "Doctor", appointment.CenterId, "Prescription", prescription.Id, null, ct);
 
         _ = GenerateAndStorePdfAsync(prescription.Id);
 
@@ -260,6 +263,7 @@ public class PrescriptionService(
 
         rx.MarkDispensed();
         await unitOfWork.SaveChangesAsync(ct);
+        await auditLogger.LogAsync(AuditActions.PrescriptionDispensed, requesterId, requesterType, rx.CenterId, "Prescription", prescriptionId, null, ct);
     }
 
     private static void EnsureCanAccess(Prescription rx, Guid requesterId, string requesterType, Guid? tenantId)
@@ -311,6 +315,30 @@ public class PrescriptionService(
         if (p.ExpiryDate is { } e)
             return e < DateOnly.FromDateTime(DateTime.UtcNow);
         return false;
+    }
+
+    public async Task RevokePrescriptionAsync(
+        Guid prescriptionId,
+        string reason,
+        Guid requesterId,
+        string requesterType,
+        Guid? tenantId,
+        CancellationToken ct = default)
+    {
+        var rx = await prescriptionRepository.GetByIdForUpdateAsync(prescriptionId, ct)
+                 ?? throw new NotFoundException(nameof(Prescription), prescriptionId);
+
+        var canDoctor = requesterType == "Doctor" && rx.DoctorId == requesterId;
+        var canAdmin = requesterType == "Admin" && tenantId == rx.CenterId;
+        if (!canDoctor && !canAdmin)
+            throw new ForbiddenException("Only the issuing doctor or center admin can revoke a prescription.");
+
+        if (rx.Status == PrescriptionStatus.Cancelled)
+            throw new DomainException("Prescription is already cancelled.");
+
+        rx.MarkCancelled();
+        await unitOfWork.SaveChangesAsync(ct);
+        await auditLogger.LogAsync(AuditActions.PrescriptionRevoked, requesterId, requesterType, rx.CenterId, "Prescription", prescriptionId, $"{{\"reason\":\"{reason}\"}}", ct);
     }
 
     private static string MaskName(string fullName)

@@ -1,4 +1,3 @@
-using FluentValidation;
 using MediMind.API.Attributes;
 using MediMind.Application.Features.HealthPredictions;
 using MediMind.Application.Features.HealthRecords;
@@ -10,20 +9,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediMind.API.Controllers;
 
 /// <summary>
-/// AI health prediction APIs powered by external ML service.
+/// AI-powered health predictions powered by the external ML microservice (FR-060–FR-064).
 /// </summary>
 [ApiController]
 [Authorize]
-[Tags("Health predictions")]
+[Tags("Patient — Predictions")]
 [Route("api/v1/health-predictions")]
 public class HealthPredictionsController(
     IHealthPredictionService healthPredictionService,
     IHealthRecordService healthRecordService,
     ICurrentUser currentUser) : ControllerBase
 {
-    /// <summary>
-    /// Requests a new AI prediction for the authenticated patient.
-    /// </summary>
+    /// <summary>Request a new AI health-risk prediction for the authenticated patient. Requires ≥ 7 health records (FR-060).</summary>
     [HttpPost("request")]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(HealthPredictionResponseDto), StatusCodes.Status202Accepted)]
@@ -36,19 +33,13 @@ public class HealthPredictionsController(
             var response = await healthPredictionService.RequestPredictionAsync(currentUser.UserId);
             return Accepted(response);
         }
-        catch (ValidationException ex)
-        {
-            return UnprocessableEntity(new { error = ex.Message });
-        }
         catch (ServiceUnavailableException ex)
         {
             return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = ex.Message });
         }
     }
 
-    /// <summary>
-    /// Gets paginated prediction history for authenticated patient.
-    /// </summary>
+    /// <summary>Get paginated AI prediction history for the authenticated patient (FR-061).</summary>
     [HttpGet]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(IEnumerable<HealthPredictionSummaryDto>), StatusCodes.Status200OK)]
@@ -60,9 +51,7 @@ public class HealthPredictionsController(
         return Ok(result);
     }
 
-    /// <summary>
-    /// Gets latest prediction by role-aware access.
-    /// </summary>
+    /// <summary>Get the most recent prediction. Patients see their own; doctors provide patientId query param (FR-062).</summary>
     [HttpGet("latest")]
     [RequireRole("Patient", "Doctor")]
     [ProducesResponseType(typeof(HealthPredictionResponseDto), StatusCodes.Status200OK)]
@@ -85,9 +74,7 @@ public class HealthPredictionsController(
         }
     }
 
-    /// <summary>
-    /// Gets a specific prediction by identifier with role-aware access.
-    /// </summary>
+    /// <summary>Get a specific prediction by ID with role-aware access (FR-063).</summary>
     [HttpGet("{id:guid}")]
     [RequireRole("Patient", "Doctor")]
     [ProducesResponseType(typeof(HealthPredictionResponseDto), StatusCodes.Status200OK)]
@@ -110,9 +97,7 @@ public class HealthPredictionsController(
         }
     }
 
-    /// <summary>
-    /// Gets prediction readiness status for authenticated patient.
-    /// </summary>
+    /// <summary>Get prediction readiness status — record count, eligibility, and last prediction date (FR-064).</summary>
     [HttpGet("status")]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(PredictionRequestStatusDto), StatusCodes.Status200OK)]

@@ -21,6 +21,7 @@ public class MediMindDbContext(
     public DbSet<User> Users => Set<User>();
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<Doctor> Doctors => Set<Doctor>();
+    public DbSet<SuperAdminUser> SuperAdmins => Set<SuperAdminUser>();
     public DbSet<OtpVerification> OtpVerifications => Set<OtpVerification>();
     public DbSet<HealthcareCenterAdmin> HealthcareCenterAdmins => Set<HealthcareCenterAdmin>();
     public DbSet<HealthcareCenter> HealthcareCenters => Set<HealthcareCenter>();
@@ -40,6 +41,16 @@ public class MediMindDbContext(
     public DbSet<UserDeviceToken> UserDeviceTokens => Set<UserDeviceToken>();
     public DbSet<NotificationLog> NotificationLogs => Set<NotificationLog>();
     public DbSet<MedicationReminder> MedicationReminders => Set<MedicationReminder>();
+    public DbSet<PatientMedicalHistory> PatientMedicalHistories => Set<PatientMedicalHistory>();
+    public DbSet<EmergencyContact> EmergencyContacts => Set<EmergencyContact>();
+    public DbSet<HealthRecordAttachment> HealthRecordAttachments => Set<HealthRecordAttachment>();
+    public DbSet<Review> Reviews => Set<Review>();
+    public DbSet<Favorite> Favorites => Set<Favorite>();
+    public DbSet<NotificationPreference> NotificationPreferences => Set<NotificationPreference>();
+    public DbSet<PrescriptionTemplate> PrescriptionTemplates => Set<PrescriptionTemplate>();
+    public DbSet<AppointmentNote> AppointmentNotes => Set<AppointmentNote>();
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public DbSet<SubscriptionHistory> SubscriptionHistories => Set<SubscriptionHistory>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -196,6 +196,7 @@ public class AppointmentReminderJob(
             To = DateOnly.FromDateTime(now.AddHours(2.25))
         };
 
+        
         // Get confirmed appointments in 24-hour window
         var appointments24h = await appointmentRepository
             .GetByCenterAndDateAsync(Guid.Empty, twentyFourHourWindow.From, ct); // Across all centers

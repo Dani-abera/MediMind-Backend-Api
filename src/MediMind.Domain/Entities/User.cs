@@ -21,6 +21,8 @@ public abstract class User : BaseEntity
     public string PasswordHash { get; protected set; } = string.Empty;
     public DateTime? LastLogin { get; protected set; }
     public bool IsVerified { get; protected set; }
+    public bool IsDeleted { get; protected set; }
+    public DateTime? DeletedAt { get; protected set; }
 
     // ─── OTP ─────────────────────────────────────────────────────────────────
     public string? OtpCode { get; private set; }
@@ -99,6 +101,19 @@ public abstract class User : BaseEntity
         UpdateTimestamp();
     }
 
+    public void Reactivate()
+    {
+        Status = UserStatus.Active;
+        UpdateTimestamp();
+    }
+
+    public void SoftDelete()
+    {
+        IsDeleted = true;
+        DeletedAt = DateTime.UtcNow;
+        UpdateTimestamp();
+    }
+
     public void RecordLogin()
     {
         LastLogin = DateTime.UtcNow;
@@ -123,6 +138,12 @@ public abstract class User : BaseEntity
     public void SetProfileImageUrl(string? profileImageUrl)
     {
         ProfileImageUrl = profileImageUrl;
+        UpdateTimestamp();
+    }
+
+    public void ChangePhone(string newPhoneNumber)
+    {
+        PhoneNumber = newPhoneNumber;
         UpdateTimestamp();
     }
 

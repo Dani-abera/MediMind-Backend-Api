@@ -49,8 +49,32 @@ public class UserRepository(MediMindDbContext context)
     public async Task<bool> ExistsByEmailAsync(string email, CancellationToken ct = default) =>
         await Db.Users.AnyAsync(u => u.Email == email.ToLowerInvariant(), ct);
 
+    public async Task<bool> ExistsByEmailAsync(string email) =>
+        await Db.Users.AnyAsync(u => u.Email == email.ToLowerInvariant());
+
     public async Task<bool> ExistsByPhoneAsync(string phone, CancellationToken ct = default) =>
         await Db.Users.AnyAsync(u => u.PhoneNumber == phone, ct);
+
+    public async Task<PagedResult<User>> SearchAsync(SuperAdminUserQueryDto query, CancellationToken ct = default)
+    {
+        var q = Db.Users.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Search))
+        {
+            var s = query.Search.ToLower();
+            q = q.Where(u => u.FullName.ToLower().Contains(s) || u.Email.ToLower().Contains(s) || u.PhoneNumber.Contains(s));
+        }
+        if (query.UserType.HasValue)
+            q = q.Where(u => u.UserType == query.UserType.Value);
+        if (query.Status.HasValue)
+            q = q.Where(u => u.Status == query.Status.Value);
+
+        var page = Math.Max(query.Page, 1);
+        var pageSize = Math.Clamp(query.PageSize, 1, 100);
+        var total = await q.CountAsync(ct);
+        var items = await q.OrderBy(u => u.FullName).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
+        return new PagedResult<User>(items, page, pageSize, total);
+    }
 }
 
 // ─── Patient Repository ───────────────────────────────────────────────────────
@@ -121,6 +145,33 @@ public class DoctorRepository(MediMindDbContext context)
 
     public async Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.Doctors.AnyAsync(d => d.LicenseNumber == licenseNumber, ct);
+
+    public async Task<PagedResult<Doctor>> GetAllAsync(SuperAdminDoctorQueryDto query, CancellationToken ct = default)
+    {
+        var q = Db.Doctors
+            .Include(d => d.DoctorHealthcareCenters).ThenInclude(x => x.Center)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            q = q.Where(d => d.FullName.ToLower().Contains(query.Name.ToLower()));
+        if (!string.IsNullOrWhiteSpace(query.Specialization))
+            q = q.Where(d => d.Specialization.ToLower().Contains(query.Specialization.ToLower()));
+        if (query.LicenseVerified.HasValue)
+            q = q.Where(d => d.LicenseVerified == query.LicenseVerified.Value);
+
+        var page = Math.Max(query.Page, 1);
+        var pageSize = Math.Clamp(query.PageSize, 1, 100);
+        var total = await q.CountAsync(ct);
+        var items = await q.OrderBy(d => d.FullName).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
+        return new PagedResult<Doctor>(items, page, pageSize, total);
+    }
+
+    public async Task<IReadOnlyList<Doctor>> GetUnverifiedAsync(CancellationToken ct = default) =>
+        await Db.Doctors
+            .Where(d => !d.LicenseVerified)
+            .Include(d => d.DoctorHealthcareCenters).ThenInclude(x => x.Center)
+            .OrderBy(d => d.CreatedAt)
+            .ToListAsync(ct);
 
     public async Task<PagedResult<Doctor>> SearchAsync(DoctorSearchDto search)
     {
@@ -270,6 +321,41 @@ public class HealthcareCenterRepository(MediMindDbContext context)
             .Include(c => c.DoctorHealthcareCenters)
                 .ThenInclude(dhc => dhc.Doctor)
             .FirstOrDefaultAsync(c => c.Id == centerId, ct);
+
+    public async Task<PagedResult<HealthcareCenter>> GetAllAsync(SuperAdminCenterQueryDto query, CancellationToken ct = default)
+    {
+        var q = Db.HealthcareCenters
+            .Include(c => c.DoctorHealthcareCenters)
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(query.Name))
+            q = q.Where(c => c.CenterName.ToLower().Contains(query.Name.ToLower()));
+        if (!string.IsNullOrWhiteSpace(query.City))
+            q = q.Where(c => c.City.ToLower().Contains(query.City.ToLower()));
+        if (query.Status.HasValue)
+            q = q.Where(c => c.SubscriptionStatus == query.Status.Value);
+
+        var page = Math.Max(query.Page, 1);
+        var pageSize = Math.Clamp(query.PageSize, 1, 100);
+        var total = await q.CountAsync(ct);
+        var items = await q.OrderBy(c => c.CenterName).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(ct);
+        return new PagedResult<HealthcareCenter>(items, page, pageSize, total);
+    }
+
+    public async Task<IReadOnlyList<HealthcareCenter>> GetPendingApprovalAsync(CancellationToken ct = default) =>
+        await Db.HealthcareCenters
+            .Where(c => c.SubscriptionStatus == SubscriptionStatus.PendingApproval && !c.IsDeleted)
+            .OrderBy(c => c.CreatedAt)
+            .ToListAsync(ct);
+
+    public async Task AddSubscriptionHistoryAsync(SubscriptionHistory history, CancellationToken ct = default) =>
+        await Db.SubscriptionHistories.AddAsync(history, ct);
+
+    public async Task<IReadOnlyList<SubscriptionHistory>> GetSubscriptionHistoryAsync(Guid centerId, CancellationToken ct = default) =>
+        await Db.SubscriptionHistories
+            .Where(h => h.CenterId == centerId)
+            .OrderByDescending(h => h.ChangedAt)
+            .ToListAsync(ct);
 }
 
 // ─── Appointment Repository ───────────────────────────────────────────────────
@@ -1190,11 +1276,13 @@ public class NotificationLogRepository(MediMindDbContext context)
 
     public async Task<IReadOnlyList<NotificationLog>> GetRecentForUserAsync(Guid userId, int take, CancellationToken ct = default) =>
         await _db.NotificationLogs
-            .AsNoTracking()
             .Where(n => n.UserId == userId)
             .OrderByDescending(n => n.SentAt)
             .Take(Math.Clamp(take, 1, 200))
             .ToListAsync(ct);
+
+    public async Task<int> GetUnreadCountAsync(Guid userId, CancellationToken ct = default) =>
+        await _db.NotificationLogs.CountAsync(n => n.UserId == userId && !n.IsRead, ct);
 }
 
 public class MedicationReminderRepository(MediMindDbContext context)
@@ -1224,6 +1312,223 @@ public class MedicationReminderRepository(MediMindDbContext context)
     public Task DeleteAsync(MedicationReminder reminder, CancellationToken ct = default)
     {
         _db.MedicationReminders.Remove(reminder);
+        return Task.CompletedTask;
+    }
+}
+
+// ─── Patient Medical History Repository ──────────────────────────────────────
+
+public class PatientMedicalHistoryRepository(MediMindDbContext context) : IPatientMedicalHistoryRepository
+{
+    public async Task<PatientMedicalHistory?> GetByPatientIdAsync(Guid patientId, CancellationToken ct = default) =>
+        await context.PatientMedicalHistories.FirstOrDefaultAsync(h => h.PatientId == patientId, ct);
+
+    public async Task AddAsync(PatientMedicalHistory history, CancellationToken ct = default) =>
+        await context.PatientMedicalHistories.AddAsync(history, ct);
+
+    public Task UpdateAsync(PatientMedicalHistory history, CancellationToken ct = default)
+    {
+        context.PatientMedicalHistories.Update(history);
+        return Task.CompletedTask;
+    }
+}
+
+// ─── Emergency Contact Repository ────────────────────────────────────────────
+
+public class EmergencyContactRepository(MediMindDbContext context) : IEmergencyContactRepository
+{
+    public async Task<IReadOnlyList<EmergencyContact>> GetByPatientIdAsync(Guid patientId, CancellationToken ct = default) =>
+        await context.EmergencyContacts.Where(c => c.PatientId == patientId).OrderByDescending(c => c.IsPrimary).ThenBy(c => c.CreatedAt).ToListAsync(ct);
+
+    public async Task<EmergencyContact?> GetByIdAsync(Guid contactId, Guid patientId, CancellationToken ct = default) =>
+        await context.EmergencyContacts.FirstOrDefaultAsync(c => c.Id == contactId && c.PatientId == patientId, ct);
+
+    public async Task<int> CountByPatientAsync(Guid patientId, CancellationToken ct = default) =>
+        await context.EmergencyContacts.CountAsync(c => c.PatientId == patientId, ct);
+
+    public async Task AddAsync(EmergencyContact contact, CancellationToken ct = default) =>
+        await context.EmergencyContacts.AddAsync(contact, ct);
+
+    public Task DeleteAsync(EmergencyContact contact, CancellationToken ct = default)
+    {
+        context.EmergencyContacts.Remove(contact);
+        return Task.CompletedTask;
+    }
+
+    public async Task ClearPrimaryAsync(Guid patientId, CancellationToken ct = default)
+    {
+        var primaries = await context.EmergencyContacts
+            .Where(c => c.PatientId == patientId && c.IsPrimary).ToListAsync(ct);
+        foreach (var c in primaries)
+            c.SetPrimary(false);
+    }
+}
+
+// ─── Health Record Attachment Repository ─────────────────────────────────────
+
+public class HealthRecordAttachmentRepository(MediMindDbContext context) : IHealthRecordAttachmentRepository
+{
+    public async Task<IReadOnlyList<HealthRecordAttachment>> GetByRecordIdAsync(Guid healthRecordId, CancellationToken ct = default) =>
+        await context.HealthRecordAttachments.Where(a => a.HealthRecordId == healthRecordId)
+            .OrderByDescending(a => a.UploadedAt).ToListAsync(ct);
+
+    public async Task<HealthRecordAttachment?> GetByIdAsync(Guid attachmentId, Guid healthRecordId, CancellationToken ct = default) =>
+        await context.HealthRecordAttachments.FirstOrDefaultAsync(a => a.Id == attachmentId && a.HealthRecordId == healthRecordId, ct);
+
+    public async Task AddAsync(HealthRecordAttachment attachment, CancellationToken ct = default) =>
+        await context.HealthRecordAttachments.AddAsync(attachment, ct);
+
+    public Task DeleteAsync(HealthRecordAttachment attachment, CancellationToken ct = default)
+    {
+        context.HealthRecordAttachments.Remove(attachment);
+        return Task.CompletedTask;
+    }
+}
+
+// ─── Review Repository ────────────────────────────────────────────────────────
+
+public class ReviewRepository(MediMindDbContext context) : IReviewRepository
+{
+    public async Task<IReadOnlyList<Review>> GetByDoctorIdAsync(Guid doctorId, int limit = 10, CancellationToken ct = default) =>
+        await context.Reviews.Where(r => r.DoctorId == doctorId)
+            .OrderByDescending(r => r.CreatedAt).Take(limit).ToListAsync(ct);
+
+    public async Task<IReadOnlyList<Review>> GetByCenterIdAsync(Guid centerId, int limit = 10, CancellationToken ct = default) =>
+        await context.Reviews.Where(r => r.CenterId == centerId)
+            .OrderByDescending(r => r.CreatedAt).Take(limit).ToListAsync(ct);
+
+    public async Task<bool> ExistsForAppointmentAsync(Guid appointmentId, bool isDoctor, CancellationToken ct = default) =>
+        isDoctor
+            ? await context.Reviews.AnyAsync(r => r.AppointmentId == appointmentId && r.DoctorId != null, ct)
+            : await context.Reviews.AnyAsync(r => r.AppointmentId == appointmentId && r.CenterId != null, ct);
+
+    public async Task AddAsync(Review review, CancellationToken ct = default) =>
+        await context.Reviews.AddAsync(review, ct);
+
+    public async Task<double> GetAverageRatingForDoctorAsync(Guid doctorId, CancellationToken ct = default)
+    {
+        var avg = await context.Reviews.Where(r => r.DoctorId == doctorId).AverageAsync(r => (double?)r.Rating, ct);
+        return avg ?? 0.0;
+    }
+
+    public async Task<double> GetAverageRatingForCenterAsync(Guid centerId, CancellationToken ct = default)
+    {
+        var avg = await context.Reviews.Where(r => r.CenterId == centerId).AverageAsync(r => (double?)r.Rating, ct);
+        return avg ?? 0.0;
+    }
+
+    public async Task<int> GetReviewCountForDoctorAsync(Guid doctorId, CancellationToken ct = default) =>
+        await context.Reviews.CountAsync(r => r.DoctorId == doctorId, ct);
+
+    public async Task<int> GetReviewCountForCenterAsync(Guid centerId, CancellationToken ct = default) =>
+        await context.Reviews.CountAsync(r => r.CenterId == centerId, ct);
+}
+
+// ─── Favorite Repository ──────────────────────────────────────────────────────
+
+public class FavoriteRepository(MediMindDbContext context) : IFavoriteRepository
+{
+    public async Task<IReadOnlyList<Favorite>> GetDoctorFavoritesByPatientAsync(Guid patientId, CancellationToken ct = default) =>
+        await context.Favorites.Where(f => f.PatientId == patientId && f.DoctorId != null)
+            .OrderByDescending(f => f.CreatedAt).ToListAsync(ct);
+
+    public async Task<IReadOnlyList<Favorite>> GetCenterFavoritesByPatientAsync(Guid patientId, CancellationToken ct = default) =>
+        await context.Favorites.Where(f => f.PatientId == patientId && f.CenterId != null)
+            .OrderByDescending(f => f.CreatedAt).ToListAsync(ct);
+
+    public async Task<bool> IsDoctorFavoriteAsync(Guid patientId, Guid doctorId, CancellationToken ct = default) =>
+        await context.Favorites.AnyAsync(f => f.PatientId == patientId && f.DoctorId == doctorId, ct);
+
+    public async Task<bool> IsCenterFavoriteAsync(Guid patientId, Guid centerId, CancellationToken ct = default) =>
+        await context.Favorites.AnyAsync(f => f.PatientId == patientId && f.CenterId == centerId, ct);
+
+    public async Task<Favorite?> GetDoctorFavoriteAsync(Guid patientId, Guid doctorId, CancellationToken ct = default) =>
+        await context.Favorites.FirstOrDefaultAsync(f => f.PatientId == patientId && f.DoctorId == doctorId, ct);
+
+    public async Task<Favorite?> GetCenterFavoriteAsync(Guid patientId, Guid centerId, CancellationToken ct = default) =>
+        await context.Favorites.FirstOrDefaultAsync(f => f.PatientId == patientId && f.CenterId == centerId, ct);
+
+    public async Task AddAsync(Favorite favorite, CancellationToken ct = default) =>
+        await context.Favorites.AddAsync(favorite, ct);
+
+    public Task DeleteAsync(Favorite favorite, CancellationToken ct = default)
+    {
+        context.Favorites.Remove(favorite);
+        return Task.CompletedTask;
+    }
+}
+
+// ─── Prescription Template Repository ────────────────────────────────────────
+
+public class PrescriptionTemplateRepository(MediMindDbContext context) : IPrescriptionTemplateRepository
+{
+    public async Task<PrescriptionTemplate?> GetByIdAsync(Guid templateId, Guid doctorId, CancellationToken ct = default) =>
+        await context.PrescriptionTemplates
+            .FirstOrDefaultAsync(t => t.Id == templateId && t.DoctorId == doctorId, ct);
+
+    public async Task<IReadOnlyList<PrescriptionTemplate>> GetByDoctorAsync(Guid doctorId, CancellationToken ct = default) =>
+        await context.PrescriptionTemplates
+            .Where(t => t.DoctorId == doctorId)
+            .OrderByDescending(t => t.UseCount)
+            .ThenByDescending(t => t.CreatedAt)
+            .ToListAsync(ct);
+
+    public async Task<PrescriptionTemplate> CreateAsync(PrescriptionTemplate template, CancellationToken ct = default)
+    {
+        await context.PrescriptionTemplates.AddAsync(template, ct);
+        return template;
+    }
+
+    public async Task<PrescriptionTemplate?> UpdateAsync(PrescriptionTemplate template, CancellationToken ct = default)
+    {
+        context.PrescriptionTemplates.Update(template);
+        return await Task.FromResult(template);
+    }
+
+    public async Task<bool> DeleteAsync(Guid templateId, Guid doctorId, CancellationToken ct = default)
+    {
+        var template = await context.PrescriptionTemplates
+            .FirstOrDefaultAsync(t => t.Id == templateId && t.DoctorId == doctorId, ct);
+        if (template is null) return false;
+        context.PrescriptionTemplates.Remove(template);
+        return true;
+    }
+}
+
+// ─── Appointment Note Repository ──────────────────────────────────────────────
+
+public class AppointmentNoteRepository(MediMindDbContext context) : IAppointmentNoteRepository
+{
+    public async Task<AppointmentNote?> GetByAppointmentAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default) =>
+        await context.AppointmentNotes
+            .FirstOrDefaultAsync(n => n.AppointmentId == appointmentId && n.DoctorId == doctorId, ct);
+
+    public async Task<AppointmentNote> CreateAsync(AppointmentNote note, CancellationToken ct = default)
+    {
+        await context.AppointmentNotes.AddAsync(note, ct);
+        return note;
+    }
+
+    public async Task<AppointmentNote?> UpdateAsync(AppointmentNote note, CancellationToken ct = default)
+    {
+        context.AppointmentNotes.Update(note);
+        return await Task.FromResult(note);
+    }
+}
+
+// ─── Notification Preference Repository ──────────────────────────────────────
+
+public class NotificationPreferenceRepository(MediMindDbContext context) : INotificationPreferenceRepository
+{
+    public async Task<NotificationPreference?> GetByUserIdAsync(Guid userId, CancellationToken ct = default) =>
+        await context.NotificationPreferences.FirstOrDefaultAsync(p => p.UserId == userId, ct);
+
+    public async Task AddAsync(NotificationPreference preference, CancellationToken ct = default) =>
+        await context.NotificationPreferences.AddAsync(preference, ct);
+
+    public Task UpdateAsync(NotificationPreference preference, CancellationToken ct = default)
+    {
+        context.NotificationPreferences.Update(preference);
         return Task.CompletedTask;
     }
 }

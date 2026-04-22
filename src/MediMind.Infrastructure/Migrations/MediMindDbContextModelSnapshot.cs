@@ -167,6 +167,130 @@ namespace MediMind.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.AppointmentNote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("note_id");
+
+                    b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("appointment_id");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(5000)
+                        .HasColumnType("character varying(5000)")
+                        .HasColumnName("content");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppointmentId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_appointment_notes_appointment_id");
+
+                    b.HasIndex("DoctorId")
+                        .HasDatabaseName("i_x_appointment_notes_doctor_id");
+
+                    b.ToTable("appointment_notes", (string)null);
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.AuditLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("log_id");
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("action");
+
+                    b.Property<Guid?>("CenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("center_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("EntityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("entity_id");
+
+                    b.Property<string>("EntityType")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("entity_type");
+
+                    b.Property<string>("IpAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("ip_address");
+
+                    b.Property<string>("Metadata")
+                        .HasColumnType("text")
+                        .HasColumnName("metadata");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("timestamp");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<string>("UserAgent")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("user_agent");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.Property<string>("UserType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("user_type");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Action")
+                        .HasDatabaseName("i_x_audit_logs_action");
+
+                    b.HasIndex("Timestamp")
+                        .HasDatabaseName("i_x_audit_logs_timestamp");
+
+                    b.HasIndex("CenterId", "Timestamp")
+                        .HasDatabaseName("i_x_audit_logs_center_id_timestamp");
+
+                    b.HasIndex("UserId", "Timestamp")
+                        .HasDatabaseName("i_x_audit_logs_user_id_timestamp");
+
+                    b.ToTable("audit_logs", (string)null);
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.ChatMessage", b =>
                 {
                     b.Property<Guid>("Id")
@@ -336,6 +460,102 @@ namespace MediMind.Infrastructure.Migrations
                             t.HasCheckConstraint("ck_break_times", "break_end > break_start OR break_start IS NULL");
 
                             t.HasCheckConstraint("ck_schedule_times", "end_time > start_time");
+                        });
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.EmergencyContact", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("full_name");
+
+                    b.Property<bool>("IsPrimary")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_primary");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("phone_number");
+
+                    b.Property<string>("Relationship")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("relationship");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId", "IsPrimary")
+                        .HasDatabaseName("i_x_emergency_contacts_patient_id_is_primary");
+
+                    b.ToTable("emergency_contacts", (string)null);
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.Favorite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("favorite_id");
+
+                    b.Property<Guid?>("CenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("center_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("DoctorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId", "CenterId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_favorites_patient_id_center_id")
+                        .HasFilter("center_id IS NOT NULL");
+
+                    b.HasIndex("PatientId", "DoctorId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_favorites_patient_id_doctor_id")
+                        .HasFilter("doctor_id IS NOT NULL");
+
+                    b.ToTable("favorites", null, t =>
+                        {
+                            t.HasCheckConstraint("ck_favorite_target", "(doctor_id IS NOT NULL AND center_id IS NULL) OR (doctor_id IS NULL AND center_id IS NOT NULL)");
                         });
                 });
 
@@ -580,6 +800,66 @@ namespace MediMind.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.HealthRecordAttachment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("attachment_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("file_name");
+
+                    b.Property<long>("FileSizeBytes")
+                        .HasColumnType("bigint")
+                        .HasColumnName("file_size_bytes");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("file_type");
+
+                    b.Property<Guid>("HealthRecordId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("health_record_id");
+
+                    b.Property<string>("StoragePath")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
+                        .HasColumnName("storage_path");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("uploaded_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HealthRecordId")
+                        .HasDatabaseName("i_x_health_record_attachments_health_record_id");
+
+                    b.ToTable("health_record_attachments", null, t =>
+                        {
+                            t.HasCheckConstraint("ck_file_size", "file_size_bytes BETWEEN 1 AND 10485760");
+
+                            t.HasCheckConstraint("ck_file_type", "file_type IN ('application/pdf', 'image/jpeg', 'image/png')");
+                        });
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.HealthcareCenter", b =>
                 {
                     b.Property<Guid>("Id")
@@ -627,11 +907,19 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
 
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("character varying(255)")
                         .HasColumnName("email");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<decimal?>("Latitude")
                         .HasPrecision(10, 8)
@@ -669,6 +957,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)")
                         .HasColumnName("region");
+
+                    b.Property<string>("RejectionReason")
+                        .HasColumnType("text")
+                        .HasColumnName("rejection_reason");
 
                     b.Property<string>("ServicesOffered")
                         .IsRequired()
@@ -819,6 +1111,12 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("character varying(512)")
                         .HasColumnName("external_reference");
 
+                    b.Property<bool>("IsRead")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("is_read");
+
                     b.Property<string>("NotificationType")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -855,10 +1153,77 @@ namespace MediMind.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId", "IsRead")
+                        .HasDatabaseName("i_x_notification_logs_user_id_is_read");
+
                     b.HasIndex("UserId", "SentAt")
                         .HasDatabaseName("i_x_notification_logs_user_id_sent_at");
 
                     b.ToTable("notification_logs", (string)null);
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.NotificationPreference", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("AppointmentRemindersPush")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("appointment_reminders_push");
+
+                    b.Property<bool>("AppointmentRemindersSms")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("appointment_reminders_sms");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<bool>("HealthPredictionReady")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("health_prediction_ready");
+
+                    b.Property<bool>("MedicationReminders")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("medication_reminders");
+
+                    b.Property<bool>("PromotionalEmails")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("promotional_emails");
+
+                    b.Property<bool>("QueueUpdates")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(true)
+                        .HasColumnName("queue_updates");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_notification_preferences_user_id");
+
+                    b.ToTable("notification_preferences", (string)null);
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.OtpVerification", b =>
@@ -910,6 +1275,76 @@ namespace MediMind.Infrastructure.Migrations
                         .HasDatabaseName("i_x_otp_verifications_phone_number_purpose_is_used");
 
                     b.ToTable("otp_verifications", (string)null);
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.PatientMedicalHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("history_id");
+
+                    b.Property<string>("AlcoholConsumption")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("alcohol_consumption");
+
+                    b.Property<string>("Allergies")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("[]")
+                        .HasColumnName("allergies");
+
+                    b.Property<string>("BloodType")
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)")
+                        .HasColumnName("blood_type");
+
+                    b.Property<string>("ChronicConditions")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("[]")
+                        .HasColumnName("chronic_conditions");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("CurrentMedications")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("[]")
+                        .HasColumnName("current_medications");
+
+                    b.Property<string>("FamilyHistory")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text")
+                        .HasDefaultValue("{}")
+                        .HasColumnName("family_history");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
+                    b.Property<bool?>("Smoker")
+                        .HasColumnType("boolean")
+                        .HasColumnName("smoker");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_patient_medical_histories_patient_id");
+
+                    b.ToTable("patient_medical_histories", (string)null);
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Payment", b =>
@@ -1107,6 +1542,75 @@ namespace MediMind.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.PrescriptionTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("template_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Diagnosis")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("diagnosis");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<string>("FollowUpInstructions")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("follow_up_instructions");
+
+                    b.Property<string>("LabTests")
+                        .HasColumnType("jsonb")
+                        .HasColumnName("lab_tests");
+
+                    b.Property<string>("Medications")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("medications");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<int>("UseCount")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0)
+                        .HasColumnName("use_count");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId", "Name")
+                        .HasDatabaseName("i_x_prescription_templates_doctor_id_name");
+
+                    b.HasIndex("DoctorId", "UseCount")
+                        .IsDescending(false, true)
+                        .HasDatabaseName("i_x_prescription_templates_doctor_id_use_count");
+
+                    b.ToTable("prescription_templates", (string)null);
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.QueueEntry", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1190,6 +1694,143 @@ namespace MediMind.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("review_id");
+
+                    b.Property<Guid>("AppointmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("appointment_id");
+
+                    b.Property<Guid?>("CenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("center_id");
+
+                    b.Property<string>("Comment")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("comment");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid?>("DoctorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("doctor_id");
+
+                    b.Property<Guid>("PatientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("patient_id");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer")
+                        .HasColumnName("rating");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CenterId")
+                        .HasDatabaseName("i_x_reviews_center_id")
+                        .HasFilter("center_id IS NOT NULL");
+
+                    b.HasIndex("DoctorId")
+                        .HasDatabaseName("i_x_reviews_doctor_id")
+                        .HasFilter("doctor_id IS NOT NULL");
+
+                    b.HasIndex("PatientId")
+                        .HasDatabaseName("i_x_reviews_patient_id");
+
+                    b.HasIndex("AppointmentId", "CenterId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_reviews_appointment_id_center_id")
+                        .HasFilter("center_id IS NOT NULL");
+
+                    b.HasIndex("AppointmentId", "DoctorId")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_reviews_appointment_id_doctor_id")
+                        .HasFilter("doctor_id IS NOT NULL");
+
+                    b.ToTable("reviews", null, t =>
+                        {
+                            t.HasCheckConstraint("ck_rating", "rating BETWEEN 1 AND 5");
+
+                            t.HasCheckConstraint("ck_review_target", "(doctor_id IS NOT NULL AND center_id IS NULL) OR (doctor_id IS NULL AND center_id IS NOT NULL)");
+                        });
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.SubscriptionHistory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("center_id");
+
+                    b.Property<DateTime>("ChangedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("changed_at");
+
+                    b.Property<Guid>("ChangedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("changed_by");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateOnly?>("EndDate")
+                        .HasColumnType("date")
+                        .HasColumnName("end_date");
+
+                    b.Property<string>("NewStatus")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("new_status");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("notes");
+
+                    b.Property<string>("OldStatus")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("old_status");
+
+                    b.Property<string>("Plan")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("plan");
+
+                    b.Property<DateOnly?>("StartDate")
+                        .HasColumnType("date")
+                        .HasColumnName("start_date");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CenterId")
+                        .HasDatabaseName("i_x_subscription_histories_center_id");
+
+                    b.HasIndex("ChangedAt")
+                        .HasDatabaseName("i_x_subscription_histories_changed_at");
+
+                    b.ToTable("subscription_histories", (string)null);
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1204,6 +1845,10 @@ namespace MediMind.Infrastructure.Migrations
                     b.Property<DateOnly>("DateOfBirth")
                         .HasColumnType("date")
                         .HasColumnName("date_of_birth");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1222,6 +1867,10 @@ namespace MediMind.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)")
                         .HasColumnName("gender");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<bool>("IsVerified")
                         .HasColumnType("boolean")
@@ -1527,6 +2176,11 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("character varying(6)")
                         .HasColumnName("badge_number");
 
+                    b.Property<string>("Biography")
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)")
+                        .HasColumnName("biography");
+
                     b.Property<string>("LanguagesSpoken")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1537,6 +2191,14 @@ namespace MediMind.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)")
                         .HasColumnName("license_number");
+
+                    b.Property<string>("LicenseVerificationNotes")
+                        .HasColumnType("text")
+                        .HasColumnName("license_verification_notes");
+
+                    b.Property<bool>("LicenseVerified")
+                        .HasColumnType("boolean")
+                        .HasColumnName("license_verified");
 
                     b.Property<string>("Qualifications")
                         .HasColumnType("text")
@@ -1633,7 +2295,21 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("medical_history");
 
+                    b.Property<Guid?>("NotificationPreferenceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("notification_preference_id");
+
+                    b.HasIndex("NotificationPreferenceId")
+                        .HasDatabaseName("i_x_patients_notification_preference_id");
+
                     b.ToTable("patients", (string)null);
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.SuperAdminUser", b =>
+                {
+                    b.HasBaseType("MediMind.Domain.Entities.User");
+
+                    b.ToTable("super_admins", (string)null);
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Appointment", b =>
@@ -1671,6 +2347,27 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.AppointmentNote", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_appointment_notes_appointments_appointment_id");
+
+                    b.HasOne("MediMind.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("AppointmentNotes")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("f_k_appointment_notes_doctors_doctor_id");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.ChatMessage", b =>
@@ -1727,6 +2424,30 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Doctor");
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.EmergencyContact", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Patient", "Patient")
+                        .WithMany("EmergencyContacts")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_emergency_contacts_patients_patient_id");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.Favorite", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Patient", "Patient")
+                        .WithMany("Favorites")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_favorites_patients_patient_id");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.HealthPrediction", b =>
                 {
                     b.HasOne("MediMind.Domain.Entities.Patient", "Patient")
@@ -1772,6 +2493,18 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.HealthRecordAttachment", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.HealthRecord", "HealthRecord")
+                        .WithMany("Attachments")
+                        .HasForeignKey("HealthRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_health_record_attachments_health_records_health_record_id");
+
+                    b.Navigation("HealthRecord");
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.HealthcareCenter", b =>
                 {
                     b.HasOne("MediMind.Domain.Entities.Patient", null)
@@ -1788,6 +2521,18 @@ namespace MediMind.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("f_k_medication_reminders_patients_patient_id");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.PatientMedicalHistory", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Patient", "Patient")
+                        .WithOne("StructuredMedicalHistory")
+                        .HasForeignKey("MediMind.Domain.Entities.PatientMedicalHistory", "PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_patient_medical_histories_patients_patient_id");
 
                     b.Navigation("Patient");
                 });
@@ -1852,6 +2597,18 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Patient");
                 });
 
+            modelBuilder.Entity("MediMind.Domain.Entities.PrescriptionTemplate", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Doctor", "Doctor")
+                        .WithMany("PrescriptionTemplates")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_prescription_templates_doctors_doctor_id");
+
+                    b.Navigation("Doctor");
+                });
+
             modelBuilder.Entity("MediMind.Domain.Entities.QueueEntry", b =>
                 {
                     b.HasOne("MediMind.Domain.Entities.Appointment", "Appointment")
@@ -1869,6 +2626,39 @@ namespace MediMind.Infrastructure.Migrations
                         .HasConstraintName("f_k_queue_healthcare_centers_center_id");
 
                     b.Navigation("Appointment");
+
+                    b.Navigation("Center");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.Review", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.Appointment", "Appointment")
+                        .WithMany("Reviews")
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("f_k_reviews_appointments_appointment_id");
+
+                    b.HasOne("MediMind.Domain.Entities.Patient", "Patient")
+                        .WithMany("Reviews")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("f_k_reviews_patients_patient_id");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.SubscriptionHistory", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.HealthcareCenter", "Center")
+                        .WithMany("SubscriptionHistories")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_subscription_histories_healthcare_centers_center_id");
 
                     b.Navigation("Center");
                 });
@@ -1952,6 +2742,22 @@ namespace MediMind.Infrastructure.Migrations
                         .HasForeignKey("MediMind.Domain.Entities.Patient", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("MediMind.Domain.Entities.NotificationPreference", "NotificationPreference")
+                        .WithMany()
+                        .HasForeignKey("NotificationPreferenceId")
+                        .HasConstraintName("f_k_patients_notification_preferences_notification_preference_id");
+
+                    b.Navigation("NotificationPreference");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.SuperAdminUser", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.User", null)
+                        .WithOne()
+                        .HasForeignKey("MediMind.Domain.Entities.SuperAdminUser", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Appointment", b =>
@@ -1962,12 +2768,19 @@ namespace MediMind.Infrastructure.Migrations
 
                     b.Navigation("QueueEntry");
 
+                    b.Navigation("Reviews");
+
                     b.Navigation("VideoConsultation");
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.HealthPrediction", b =>
                 {
                     b.Navigation("PredictionRecords");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.HealthRecord", b =>
+                {
+                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.HealthcareCenter", b =>
@@ -1981,6 +2794,8 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("DoctorSchedules");
 
                     b.Navigation("QueueEntries");
+
+                    b.Navigation("SubscriptionHistories");
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.VideoConsultation", b =>
@@ -1990,9 +2805,13 @@ namespace MediMind.Infrastructure.Migrations
 
             modelBuilder.Entity("MediMind.Domain.Entities.Doctor", b =>
                 {
+                    b.Navigation("AppointmentNotes");
+
                     b.Navigation("Appointments");
 
                     b.Navigation("DoctorHealthcareCenters");
+
+                    b.Navigation("PrescriptionTemplates");
 
                     b.Navigation("Prescriptions");
 
@@ -2008,7 +2827,11 @@ namespace MediMind.Infrastructure.Migrations
                 {
                     b.Navigation("Appointments");
 
+                    b.Navigation("EmergencyContacts");
+
                     b.Navigation("EnrolledCenters");
+
+                    b.Navigation("Favorites");
 
                     b.Navigation("HealthPredictions");
 
@@ -2019,6 +2842,10 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Payments");
 
                     b.Navigation("Prescriptions");
+
+                    b.Navigation("Reviews");
+
+                    b.Navigation("StructuredMedicalHistory");
                 });
 #pragma warning restore 612, 618
         }

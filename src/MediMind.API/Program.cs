@@ -11,6 +11,7 @@ using MediMind.Infrastructure.Data;
 using MediMind.Infrastructure.Jobs;
 using MediMind.Infrastructure.Services.HealthPredictions;
 using MediMind.API.OpenApi;
+using MediMind.API.Authorization;
 using MediMind.API.Middleware;
 using MediMind.Infrastructure.SignalR;
 using MediMind.Infrastructure.Services.Notifications;
@@ -52,10 +53,6 @@ try
     builder.Services.AddHostedService<AppointmentReminderService>();
     builder.Services.AddHostedService<MedicationReminderHostedService>();
     builder.Services.AddHostedService<DailyQueueGenerationService>();
-    builder.Services.AddSignalR(options =>
-    {
-        options.EnableDetailedErrors = true;
-    });
     // Explicit registration for health records service (also discoverable from Program.cs).
     builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
     builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));
@@ -73,13 +70,13 @@ try
     builder.Services.AddControllers()
         .AddJsonOptions(o =>
         {
-            o.JsonSerializerOptions.MaxDepth = 128;
+            o.JsonSerializerOptions.MaxDepth = 512;
             o.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
         });
     // OpenAPI schema generator uses the minimal-API JsonOptions, not MVC's
     builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(o =>
     {
-        o.SerializerOptions.MaxDepth = 128;
+        o.SerializerOptions.MaxDepth = 512;
         o.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
     builder.Services.AddEndpointsApiExplorer();
@@ -131,7 +128,14 @@ try
         options.AddPolicy("PatientOrAdmin", p => p.RequireClaim("user_type", "Patient", "Admin"));
         options.AddPolicy("HealthcareStaff", p => p.RequireClaim("user_type", "Doctor", "Admin", "SuperAdmin"));
         options.AddPolicy("AdminOrSuperAdmin", p => p.RequireClaim("user_type", "Admin", "SuperAdmin"));
+        options.AddPolicy("DoctorPatientAccess", p =>
+        {
+            p.RequireClaim("user_type", "Doctor");
+            p.AddRequirements(new DoctorPatientAccessRequirement());
+        });
     });
+    builder.Services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, DoctorPatientAccessHandler>();
+    builder.Services.AddScoped<Microsoft.AspNetCore.Authorization.IAuthorizationHandler, MediMind.API.Authorization.CenterAccessAuthorizationHandler>();
 
     var app = builder.Build();
 

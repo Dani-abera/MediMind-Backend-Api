@@ -9,19 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediMind.API.Controllers;
 
 /// <summary>
-/// Health records API for patient vitals tracking and trend analysis.
+/// Patient vitals, health records, and trend analysis (FR-050–FR-056).
 /// </summary>
 [ApiController]
 [Authorize]
-[Tags("Health records")]
+[Tags("Patient — Health Records")]
 [Route("api/v1/health-records")]
 public class HealthRecordsController(
     IHealthRecordService healthRecordService,
     ICurrentUser currentUser) : ControllerBase
 {
-    /// <summary>
-    /// Create a new health record for the authenticated patient.
-    /// </summary>
+    /// <summary>Create a new health record for the authenticated patient (FR-050).</summary>
     [HttpPost]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(HealthRecordResponseDto), StatusCodes.Status201Created)]
@@ -36,19 +34,15 @@ public class HealthRecordsController(
         }
         catch (ValidationException ex)
         {
-            if (ex.Errors.Any(e => e.ErrorMessage == "Systolic must be higher than diastolic BP"))
-                return BadRequest(new { error = "Systolic must be higher than diastolic BP" });
             return UnprocessableEntity(new { errors = ex.Errors.GroupBy(e => e.PropertyName).ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()) });
         }
-        catch (DomainException ex) when (ex.Message == "Systolic must be higher than diastolic BP")
+        catch (DomainException ex)
         {
             return BadRequest(new { error = ex.Message });
         }
     }
 
-    /// <summary>
-    /// Get the authenticated patient's records with pagination and date filters.
-    /// </summary>
+    /// <summary>List the authenticated patient's health records with pagination and date filters (FR-051).</summary>
     [HttpGet]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(PaginatedHealthRecordsDto), StatusCodes.Status200OK)]
@@ -63,14 +57,12 @@ public class HealthRecordsController(
         return Ok(result);
     }
 
-    /// <summary>
-    /// Get a specific health record by record ID.
-    /// </summary>
+    /// <summary>Get a specific health record by ID. Patients see their own; doctors see records of their patients (FR-052).</summary>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(HealthRecordResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(Guid id)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
         try
         {
@@ -85,15 +77,13 @@ public class HealthRecordsController(
         }
     }
 
-    /// <summary>
-    /// Update an existing health record for the authenticated patient.
-    /// </summary>
+    /// <summary>Update an existing health record for the authenticated patient (FR-053).</summary>
     [HttpPut("{id:guid}")]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(HealthRecordResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateHealthRecordDto dto)
+    public async Task<IActionResult> Update(Guid id, [FromBody] UpdateHealthRecordDto dto, CancellationToken ct)
     {
         try
         {
@@ -104,20 +94,16 @@ public class HealthRecordsController(
         }
         catch (ValidationException ex)
         {
-            if (ex.Errors.Any(e => e.ErrorMessage == "Systolic must be higher than diastolic BP"))
-                return BadRequest(new { error = "Systolic must be higher than diastolic BP" });
             return UnprocessableEntity(new { errors = ex.Errors.GroupBy(e => e.PropertyName).ToDictionary(g => g.Key, g => g.Select(e => e.ErrorMessage).ToArray()) });
         }
     }
 
-    /// <summary>
-    /// Delete a health record for the authenticated patient.
-    /// </summary>
+    /// <summary>Delete a health record for the authenticated patient (FR-054).</summary>
     [HttpDelete("{id:guid}")]
     [RequireRole("Patient")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
         var deleted = await healthRecordService.DeleteAsync(id, currentUser.UserId);
         if (!deleted)
@@ -125,21 +111,17 @@ public class HealthRecordsController(
         return NoContent();
     }
 
-    /// <summary>
-    /// Get trend statistics for the authenticated patient.
-    /// </summary>
+    /// <summary>Get vitals trend statistics for the authenticated patient over a rolling window (FR-055).</summary>
     [HttpGet("trends")]
     [RequireRole("Patient")]
     [ProducesResponseType(typeof(HealthTrendDto), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetTrends([FromQuery] int days = 30)
+    public async Task<IActionResult> GetTrends([FromQuery] int days = 30, CancellationToken ct = default)
     {
         var trend = await healthRecordService.GetTrendAsync(currentUser.UserId, days);
         return Ok(trend);
     }
 
-    /// <summary>
-    /// Get latest health record for the target patient by role-sensitive access.
-    /// </summary>
+    /// <summary>Get the most recent health record. Patients see their own; doctors provide patientId query param (FR-056).</summary>
     [HttpGet("latest")]
     [RequireRole(["Patient", "Doctor"])]
     [ProducesResponseType(typeof(HealthRecordResponseDto), StatusCodes.Status200OK)]
@@ -175,13 +157,11 @@ public class HealthRecordsController(
         }
     }
 
-    /// <summary>
-    /// Get total record count and prediction readiness (>= 7 records).
-    /// </summary>
+    /// <summary>Get total record count and whether the patient has enough records (≥ 7) to request an AI prediction (FR-056).</summary>
     [HttpGet("count")]
     [RequireRole("Patient")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetCount()
+    public async Task<IActionResult> GetCount(CancellationToken ct)
     {
         var count = await healthRecordService.GetCountAsync(currentUser.UserId);
         return Ok(new { count, canRequestPrediction = count >= 7 });

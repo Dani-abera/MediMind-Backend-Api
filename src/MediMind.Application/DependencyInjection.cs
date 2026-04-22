@@ -40,6 +40,33 @@ public static class DependencyInjection
         services.AddScoped<Features.Payments.IPaymentService, Features.Payments.PaymentService>();
         services.AddScoped<Features.VideoConsultations.IVideoConsultationService, Features.VideoConsultations.VideoConsultationService>();
         services.AddScoped<Features.Prescriptions.IPrescriptionService, Features.Prescriptions.PrescriptionService>();
+        services.AddScoped<Features.Auth.IPatientAuthService, Features.Auth.PatientAuthService>();
+        services.AddScoped<Features.Auth.IDoctorAuthService, Features.Auth.DoctorAuthService>();
+        services.AddScoped<Features.Auth.IAdminAuthService, Features.Auth.AdminAuthService>();
+
+        services.AddScoped<Features.MedicalHistory.IMedicalHistoryService, Features.MedicalHistory.MedicalHistoryService>();
+        services.AddScoped<Features.EmergencyContacts.IEmergencyContactService, Features.EmergencyContacts.EmergencyContactService>();
+        services.AddScoped<Features.HealthRecordAttachments.IHealthRecordAttachmentService, Features.HealthRecordAttachments.HealthRecordAttachmentService>();
+        services.AddScoped<Features.Reviews.IReviewService, Features.Reviews.ReviewService>();
+        services.AddScoped<Features.Favorites.IFavoriteService, Features.Favorites.FavoriteService>();
+        services.AddScoped<Features.NotificationPreferences.INotificationPreferenceService, Features.NotificationPreferences.NotificationPreferenceService>();
+        services.AddScoped<Features.Doctors.IDoctorProfileService, Features.Doctors.DoctorProfileService>();
+        services.AddScoped<Features.Doctors.IDoctorPatientAccessChecker, Features.Doctors.DoctorPatientAccessChecker>();
+        services.AddScoped<Features.PrescriptionTemplates.IPrescriptionTemplateService, Features.PrescriptionTemplates.PrescriptionTemplateService>();
+        services.AddScoped<Features.AppointmentNotes.IAppointmentNoteService, Features.AppointmentNotes.AppointmentNoteService>();
+
+        services.AddScoped<Features.Admin.IAdminManagementService, Features.Admin.AdminManagementService>();
+        services.AddScoped<Features.Admin.IPatientDirectoryService, Features.Admin.PatientDirectoryService>();
+        services.AddScoped<Features.Admin.ITodayDashboardService, Features.Admin.TodayDashboardService>();
+        services.AddScoped<Features.Admin.IRevenueService, Features.Admin.RevenueService>();
+        services.AddScoped<Features.Admin.IBulkOperationsService, Features.Admin.BulkOperationsService>();
+        services.AddScoped<Features.Admin.IAuditLogService, Features.Admin.AuditLogService>();
+
+        services.AddScoped<Features.SuperAdmin.ISuperAdminCenterService, Features.SuperAdmin.SuperAdminCenterService>();
+        services.AddScoped<Features.SuperAdmin.ISuperAdminSubscriptionService, Features.SuperAdmin.SuperAdminSubscriptionService>();
+        services.AddScoped<Features.SuperAdmin.ISuperAdminDoctorService, Features.SuperAdmin.SuperAdminDoctorService>();
+        services.AddScoped<Features.SuperAdmin.ISuperAdminUserService, Features.SuperAdmin.SuperAdminUserService>();
+        services.AddScoped<Features.SuperAdmin.ISuperAdminPlatformService, Features.SuperAdmin.SuperAdminPlatformService>();
 
         return services;
     }

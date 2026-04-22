@@ -5,22 +5,24 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MediMind.API.Controllers;
 
-/// <summary>Profile / logo images for patients, doctors, admins, and healthcare centers.</summary>
-[Tags("Profile images")]
+/// <summary>Profile and logo image management for users and healthcare centers.</summary>
+[ApiController]
 [Route("api/v1/profile-images")]
-public class ProfileImagesController(IMediator mediator) : BaseController(mediator)
+public class ProfileImagesController(IMediator mediator) : ControllerBase
 {
-    /// <summary>Get the signed-in user's profile image URL.</summary>
+    /// <summary>Get the signed-in user's profile image URL (FR-003).</summary>
+    [Tags("Patient — Profile", "Doctor — Profile")]
     [HttpGet("me")]
     [Authorize]
     [ProducesResponseType(typeof(ProfileImageUrlDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetMine(CancellationToken ct)
     {
-        var result = await Mediator.Send(new GetMyProfileImageQuery(), ct);
+        var result = await mediator.Send(new GetMyProfileImageQuery(), ct);
         return Ok(result);
     }
 
-    /// <summary>Upload or replace the signed-in user's profile image (JPEG, PNG, WebP, GIF; max 5 MB).</summary>
+    /// <summary>Upload or replace the signed-in user's profile image (JPEG, PNG, WebP, GIF; max 5 MB) (FR-003).</summary>
+    [Tags("Patient — Profile", "Doctor — Profile")]
     [HttpPut("me")]
     [Authorize]
     [Consumes("multipart/form-data")]
@@ -38,32 +40,35 @@ public class ProfileImagesController(IMediator mediator) : BaseController(mediat
             file.FileName,
             file.ContentType ?? "application/octet-stream",
             file.Length);
-        var result = await Mediator.Send(command, ct);
+        var result = await mediator.Send(command, ct);
         return Ok(result);
     }
 
-    /// <summary>Remove the signed-in user's profile image.</summary>
+    /// <summary>Remove the signed-in user's profile image (FR-003).</summary>
+    [Tags("Patient — Profile", "Doctor — Profile")]
     [HttpDelete("me")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> DeleteMine(CancellationToken ct)
     {
-        await Mediator.Send(new DeleteMyProfileImageCommand(), ct);
+        await mediator.Send(new DeleteMyProfileImageCommand(), ct);
         return NoContent();
     }
 
-    /// <summary>Get a healthcare center's logo / profile image URL (public).</summary>
+    /// <summary>Get a healthcare center's logo URL (public) (FR-031).</summary>
+    [Tags("Public")]
     [HttpGet("healthcare-centers/{centerId:guid}")]
     [AllowAnonymous]
     [ProducesResponseType(typeof(ProfileImageUrlDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetCenterImage(Guid centerId, CancellationToken ct)
     {
-        var result = await Mediator.Send(new GetHealthcareCenterProfileImageQuery(centerId), ct);
+        var result = await mediator.Send(new GetHealthcareCenterProfileImageQuery(centerId), ct);
         return Ok(result);
     }
 
-    /// <summary>Upload or replace a healthcare center's logo (center admin or super-admin).</summary>
+    /// <summary>Upload or replace a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
+    [Tags("Admin — Center")]
     [HttpPut("healthcare-centers/{centerId:guid}")]
     [Authorize(Policy = "AdminOrSuperAdmin")]
     [Consumes("multipart/form-data")]
@@ -83,18 +88,19 @@ public class ProfileImagesController(IMediator mediator) : BaseController(mediat
             file.FileName,
             file.ContentType ?? "application/octet-stream",
             file.Length);
-        var result = await Mediator.Send(command, ct);
+        var result = await mediator.Send(command, ct);
         return Ok(result);
     }
 
-    /// <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
+    /// <summary>Remove a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
+    [Tags("Admin — Center")]
     [HttpDelete("healthcare-centers/{centerId:guid}")]
     [Authorize(Policy = "AdminOrSuperAdmin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public async Task<IActionResult> DeleteCenterImage(Guid centerId, CancellationToken ct)
     {
-        await Mediator.Send(new DeleteHealthcareCenterProfileImageCommand(centerId), ct);
+        await mediator.Send(new DeleteHealthcareCenterProfileImageCommand(centerId), ct);
         return NoContent();
     }
 }

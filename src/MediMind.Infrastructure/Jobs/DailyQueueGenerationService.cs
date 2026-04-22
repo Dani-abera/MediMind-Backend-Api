@@ -29,7 +29,15 @@ public class DailyQueueGenerationService(
                 delay = TimeSpan.FromSeconds(1);
 
             logger.LogInformation("Daily queue generation scheduled for {NextRunLocal} ({NextRunUtc} UTC)", nextRunLocal, nextRunUtc);
-            await Task.Delay(delay, stoppingToken);
+
+            try
+            {
+                await Task.Delay(delay, stoppingToken);
+            }
+            catch (OperationCanceledException)
+            {
+                break;
+            }
 
             try
             {

@@ -73,6 +73,16 @@ public interface IAppointmentService
     /// Returns scoped appointments.
     /// </summary>
     Task<PagedResult<AppointmentResponseDto>> GetAppointmentsAsync(Guid requesterId, string requesterRole, Guid? centerId, AppointmentFilterDto filter);
+
+    /// <summary>
+    /// Returns upcoming appointments (date >= today, status Pending/Confirmed), sorted ascending.
+    /// </summary>
+    Task<IReadOnlyList<AppointmentResponseDto>> GetUpcomingAsync(Guid patientId, CancellationToken ct = default);
+
+    /// <summary>
+    /// Returns past appointments (date < today or status Completed/Cancelled/NoShow), paginated descending.
+    /// </summary>
+    Task<PagedResult<AppointmentResponseDto>> GetPastAsync(Guid patientId, int page, int pageSize, CancellationToken ct = default);
 }
 
 public class AppointmentAvailabilityService(
@@ -193,7 +203,8 @@ public class AppointmentService(
     IQueueHubService queueHubService,
     IPushNotificationService pushNotificationService,
     IUnitOfWork unitOfWork,
-    ILogger<AppointmentService> logger) : IAppointmentService
+    ILogger<AppointmentService> logger,
+    MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAppointmentService
 {
     /// <inheritdoc />
     public async Task<AppointmentResponseDto> BookAppointmentAsync(CreateAppointmentDto dto, Guid patientId)
@@ -251,6 +262,8 @@ public class AppointmentService(
             }
         });
 
+        await auditLogger.LogAsync(AuditActions.AppointmentCreated, patientId, "Patient", dto.CenterId, "Appointment", created.Id);
+
         return await BuildResponseAsync(created);
     }
 
@@ -280,6 +293,8 @@ public class AppointmentService(
 
         appointment.Cancel(requesterId, dto.CancellationReason, center.CancellationHours);
         await unitOfWork.SaveChangesAsync();
+
+        await auditLogger.LogAsync(AuditActions.AppointmentCancelled, requesterId, requesterRole, appointment.CenterId, "Appointment", appointmentId);
 
         _ = Task.Run(async () =>
         {
@@ -338,6 +353,8 @@ public class AppointmentService(
         await appointmentRepository.CreateAsync(newAppointment);
         await unitOfWork.SaveChangesAsync();
 
+        await auditLogger.LogAsync(AuditActions.AppointmentRescheduled, patientId, "Patient", newAppointment.CenterId, "Appointment", newAppointment.Id);
+
         return await BuildResponseAsync(newAppointment);
     }
 
@@ -377,6 +394,7 @@ public class AppointmentService(
             }
         });
 
+        await auditLogger.LogAsync(AuditActions.AppointmentApproved, adminId, "Admin", adminCenterId, "Appointment", appointmentId);
         return await BuildResponseAsync(appointment);
     }
 
@@ -393,6 +411,7 @@ public class AppointmentService(
 
         appointment.Reject(adminId, reason);
         await unitOfWork.SaveChangesAsync();
+        await auditLogger.LogAsync(AuditActions.AppointmentRejected, adminId, "Admin", adminCenterId, "Appointment", appointmentId);
     }
 
     /// <inheritdoc />
@@ -431,6 +450,45 @@ public class AppointmentService(
             dtos.Add(await BuildResponseAsync(appointment));
 
         return new PagedResult<AppointmentResponseDto>(dtos, result.Page, result.PageSize, result.TotalCount);
+    }
+
+    /// <inheritdoc />
+    public async Task<IReadOnlyList<AppointmentResponseDto>> GetUpcomingAsync(Guid patientId, CancellationToken ct = default)
+    {
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var upcomingStatuses = new[] { AppointmentStatus.Pending, AppointmentStatus.Confirmed };
+        var all = await appointmentRepository.GetByPatientAsync(patientId, ct);
+        var upcoming = all
+            .Where(a => a.AppointmentDate >= today && upcomingStatuses.Contains(a.Status))
+            .OrderBy(a => a.AppointmentDate).ThenBy(a => a.AppointmentTime)
+            .ToList();
+
+        var result = new List<AppointmentResponseDto>(upcoming.Count);
+        foreach (var a in upcoming)
+            result.Add(await BuildResponseAsync(a));
+        return result;
+    }
+
+    /// <inheritdoc />
+    public async Task<PagedResult<AppointmentResponseDto>> GetPastAsync(Guid patientId, int page, int pageSize, CancellationToken ct = default)
+    {
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var pastStatuses = new[] { AppointmentStatus.Completed, AppointmentStatus.Cancelled, AppointmentStatus.NoShow };
+        var all = await appointmentRepository.GetByPatientAsync(patientId, ct);
+        var past = all
+            .Where(a => a.AppointmentDate < today || pastStatuses.Contains(a.Status))
+            .OrderByDescending(a => a.AppointmentDate).ThenByDescending(a => a.AppointmentTime)
+            .ToList();
+
+        var totalCount = past.Count;
+        var boundedPage = Math.Max(page, 1);
+        var boundedSize = Math.Clamp(pageSize, 1, 100);
+        var paged = past.Skip((boundedPage - 1) * boundedSize).Take(boundedSize).ToList();
+
+        var dtos = new List<AppointmentResponseDto>(paged.Count);
+        foreach (var a in paged)
+            dtos.Add(await BuildResponseAsync(a));
+        return new PagedResult<AppointmentResponseDto>(dtos, boundedPage, boundedSize, totalCount);
     }
 
     private async Task<AppointmentResponseDto> BuildResponseAsync(Appointment appointment)

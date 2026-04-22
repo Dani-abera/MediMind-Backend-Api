@@ -52,6 +52,7 @@ public class Appointment : BaseEntity
     public VideoConsultation? VideoConsultation { get; private set; }  // Optional 1:0..1
     public ICollection<Prescription> Prescriptions { get; private set; } = [];
     public ICollection<Payment> Payments { get; private set; } = [];
+    public ICollection<Review> Reviews { get; private set; } = [];
 
     private Appointment() { }
 

@@ -9,4 +9,5 @@ public interface IPrescriptionService
     Task<PrescriptionResponseDto?> GetDetailsAsync(Guid prescriptionId, Guid requesterId, string requesterType, Guid? tenantId, CancellationToken ct = default);
     Task<PrescriptionResponseDto?> GetByAppointmentAsync(Guid appointmentId, Guid requesterId, string requesterType, CancellationToken ct = default);
     Task MarkDispensedAsync(Guid prescriptionId, Guid requesterId, string requesterType, Guid? tenantId, CancellationToken ct = default);
+    Task RevokePrescriptionAsync(Guid prescriptionId, string reason, Guid requesterId, string requesterType, Guid? tenantId, CancellationToken ct = default);
 }

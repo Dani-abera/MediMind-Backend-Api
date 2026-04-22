@@ -24,6 +24,11 @@ public class Patient : User
     public ICollection<Prescription> Prescriptions { get; private set; } = [];
     public ICollection<Payment> Payments { get; private set; } = [];
     public ICollection<MedicationReminder> MedicationReminders { get; private set; } = [];
+    public ICollection<EmergencyContact> EmergencyContacts { get; private set; } = [];
+    public ICollection<Favorite> Favorites { get; private set; } = [];
+    public ICollection<Review> Reviews { get; private set; } = [];
+    public PatientMedicalHistory? StructuredMedicalHistory { get; private set; }
+    public NotificationPreference? NotificationPreference { get; private set; }
     public IEnumerable<HealthcareCenter> EnrolledCenters =>
         Appointments
             .Where(a => a.Center is not null)
@@ -75,12 +80,17 @@ public class Doctor : User
     public int YearsOfExperience { get; private set; }
     public string? Qualifications { get; private set; }
     public List<string> LanguagesSpoken { get; private set; } = [];
+    public string? Biography { get; private set; }
+    public bool LicenseVerified { get; private set; }
+    public string? LicenseVerificationNotes { get; private set; }
 
     // Navigation
     public ICollection<DoctorHealthcareCenter> DoctorHealthcareCenters { get; private set; } = [];
     public ICollection<DoctorSchedule> Schedules { get; private set; } = [];
     public ICollection<Appointment> Appointments { get; private set; } = [];
     public ICollection<Prescription> Prescriptions { get; private set; } = [];
+    public ICollection<PrescriptionTemplate> PrescriptionTemplates { get; private set; } = [];
+    public ICollection<AppointmentNote> AppointmentNotes { get; private set; } = [];
 
     private Doctor() { }
 
@@ -112,6 +122,52 @@ public class Doctor : User
         Qualifications = qualifications;
         LanguagesSpoken = languagesSpoken ?? [];
         UpdateTimestamp();
+    }
+
+    public void UpdateProfile(
+        string? biography,
+        List<string>? languagesSpoken,
+        string? qualifications,
+        string? profileImageUrl)
+    {
+        Biography = biography;
+        LanguagesSpoken = languagesSpoken ?? LanguagesSpoken;
+        Qualifications = qualifications;
+        if (profileImageUrl is not null)
+            SetProfileImageUrl(profileImageUrl);
+        UpdateTimestamp();
+    }
+
+    public void VerifyLicense(string? notes = null)
+    {
+        LicenseVerified = true;
+        LicenseVerificationNotes = notes;
+        UpdateTimestamp();
+    }
+
+    public void UnverifyLicense(string? notes = null)
+    {
+        LicenseVerified = false;
+        LicenseVerificationNotes = notes;
+        UpdateTimestamp();
+    }
+}
+
+// ─── SuperAdmin ───────────────────────────────────────────────────────────────
+
+/// <summary>Maps to `super_admins` table — extends `users` via TPT.</summary>
+public class SuperAdminUser : User
+{
+    private SuperAdminUser() { }
+
+    public SuperAdminUser(
+        string email,
+        string phoneNumber,
+        string fullName,
+        DateOnly dateOfBirth,
+        Gender gender)
+        : base(email, phoneNumber, fullName, dateOfBirth, gender, UserType.SuperAdmin)
+    {
     }
 }
 

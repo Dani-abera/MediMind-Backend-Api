@@ -66,8 +66,15 @@ public class NotificationLog : BaseEntity
     public string? ExternalReference { get; private set; }
     public string? ErrorMessage { get; private set; }
     public DateTime SentAt { get; private set; }
+    public bool IsRead { get; private set; }
 
     private NotificationLog() { }
+
+    public void MarkRead()
+    {
+        IsRead = true;
+        UpdateTimestamp();
+    }
 
     public NotificationLog(
         Guid? userId,

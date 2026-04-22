@@ -1,3 +1,5 @@
+using System.Text.Json.Nodes;
+using MediMind.API.Attributes;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -19,6 +21,7 @@ public static class MediMindOpenApiExtensions
         services.AddOpenApi(DocumentName, options =>
         {
             options.AddOperationTransformer<MediMindAuthOperationTransformer>();
+            options.AddOperationTransformer<RoleRequiredOperationTransformer>();
             options.AddDocumentTransformer<MediMindOpenApiDocumentTransformer>();
         });
 
@@ -93,6 +96,7 @@ internal sealed class MediMindOpenApiDocumentTransformer(IAuthenticationSchemePr
 
 /// <summary>
 /// Marks operations as requiring Bearer auth unless explicitly <see cref="AllowAnonymousAttribute"/>.
+/// Adds standard 401, 403, and 500 responses.
 /// </summary>
 internal sealed class MediMindAuthOperationTransformer : IOpenApiOperationTransformer
 {
@@ -103,6 +107,16 @@ internal sealed class MediMindAuthOperationTransformer : IOpenApiOperationTransf
     {
         var descriptor = context.Description.ActionDescriptor as ControllerActionDescriptor;
         var metadata = descriptor?.EndpointMetadata ?? [];
+
+        operation.Responses ??= new OpenApiResponses();
+
+        if (!operation.Responses.ContainsKey("500"))
+        {
+            operation.Responses.Add("500", new OpenApiResponse
+            {
+                Description = "Internal server error — unexpected failure. Response body is RFC 7807 ProblemDetails."
+            });
+        }
 
         if (metadata.OfType<AllowAnonymousAttribute>().Any())
             return Task.CompletedTask;
@@ -116,7 +130,6 @@ internal sealed class MediMindAuthOperationTransformer : IOpenApiOperationTransf
             [new OpenApiSecuritySchemeReference("Bearer", context.Document)] = []
         });
 
-        operation.Responses ??= new OpenApiResponses();
         if (!operation.Responses.ContainsKey("401"))
         {
             operation.Responses.Add("401",
@@ -131,6 +144,68 @@ internal sealed class MediMindAuthOperationTransformer : IOpenApiOperationTransf
                     Description =
                         "Authenticated but forbidden: wrong **user_type** claim, missing center (**tenant**) context, or resource belongs to another center."
                 });
+        }
+
+        return Task.CompletedTask;
+    }
+}
+
+/// <summary>
+/// Adds <c>x-role-required</c> extension to each operation based on <see cref="RequireRoleAttribute"/>
+/// or <see cref="AuthorizeAttribute.Policy"/>.
+/// </summary>
+internal sealed class RoleRequiredOperationTransformer : IOpenApiOperationTransformer
+{
+    private static readonly Dictionary<string, string> PolicyToRole = new(StringComparer.OrdinalIgnoreCase)
+    {
+        ["PatientOnly"] = "Patient",
+        ["DoctorOnly"] = "Doctor",
+        ["PatientOrDoctor"] = "Patient, Doctor",
+        ["AdminOnly"] = "Admin",
+        ["SuperAdminOnly"] = "SuperAdmin",
+        ["DoctorOrAdmin"] = "Doctor, Admin",
+        ["PatientOrAdmin"] = "Patient, Admin",
+        ["HealthcareStaff"] = "Doctor, Admin, SuperAdmin",
+        ["AdminOrSuperAdmin"] = "Admin, SuperAdmin",
+    };
+
+    public Task TransformAsync(
+        OpenApiOperation operation,
+        OpenApiOperationTransformerContext context,
+        CancellationToken cancellationToken)
+    {
+        var descriptor = context.Description.ActionDescriptor as ControllerActionDescriptor;
+        var metadata = descriptor?.EndpointMetadata ?? [];
+
+        operation.Extensions ??= new Dictionary<string, IOpenApiExtension>();
+
+        if (metadata.OfType<AllowAnonymousAttribute>().Any())
+        {
+            operation.Extensions["x-role-required"] = new JsonNodeExtension(JsonValue.Create("Public")!);
+            return Task.CompletedTask;
+        }
+
+        // RequireRoleAttribute (extends AuthorizeAttribute) sets Roles directly
+        var requireRole = metadata.OfType<RequireRoleAttribute>().LastOrDefault();
+        if (requireRole?.Roles is not null)
+        {
+            operation.Extensions["x-role-required"] = new JsonNodeExtension(JsonValue.Create(requireRole.Roles)!);
+            return Task.CompletedTask;
+        }
+
+        // AuthorizeAttribute with a named policy
+        var authorize = metadata.OfType<AuthorizeAttribute>()
+            .FirstOrDefault(a => !string.IsNullOrEmpty(a.Policy));
+        if (authorize?.Policy is not null && PolicyToRole.TryGetValue(authorize.Policy, out var roleFromPolicy))
+        {
+            operation.Extensions["x-role-required"] = new JsonNodeExtension(JsonValue.Create(roleFromPolicy)!);
+            return Task.CompletedTask;
+        }
+
+        // Plain [Authorize] — any authenticated user
+        if (metadata.OfType<AuthorizeAttribute>().Any())
+        {
+            operation.Extensions["x-role-required"] = new JsonNodeExtension(JsonValue.Create("Authenticated")!);
         }
 
         return Task.CompletedTask;

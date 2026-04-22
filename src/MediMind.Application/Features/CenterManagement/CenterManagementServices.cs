@@ -1,3 +1,4 @@
+using MediMind.Application.Features.Admin;
 using MediMind.Application.Features.Appointments;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
@@ -30,7 +31,8 @@ public class HealthcareCenterService(
     IUserRepository userRepository,
     IAppointmentAvailabilityService appointmentAvailabilityService,
     ILogger<HealthcareCenterService> logger,
-    IUnitOfWork unitOfWork) : IHealthcareCenterService
+    IUnitOfWork unitOfWork,
+    IAuditLogger auditLogger) : IHealthcareCenterService
 {
     public async Task<CenterResponseDto> RegisterCenterAsync(RegisterCenterDto dto, Guid adminUserId)
     {
@@ -123,6 +125,7 @@ public class HealthcareCenterService(
 
         var center = await centerRepository.GetByIdAsync(centerId)
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        await auditLogger.LogAsync(AuditActions.CenterConfigChanged, adminId, "Admin", centerId, "HealthcareCenter", centerId);
         var response = await MapCenter(center, null);
         return response with { Warning = warning };
     }

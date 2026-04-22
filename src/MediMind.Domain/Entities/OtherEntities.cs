@@ -189,6 +189,7 @@ public class HealthRecord : BaseEntity
 
     // Navigation
     public Patient Patient { get; private set; } = null!;
+    public ICollection<HealthRecordAttachment> Attachments { get; private set; } = [];
 
     private HealthRecord() { }
 
@@ -694,6 +695,117 @@ public class Payment : BaseEntity
     public void SetReceiptUrl(string receiptUrl)
     {
         ReceiptUrl = receiptUrl;
+        UpdateTimestamp();
+    }
+}
+
+// ─── Prescription Template ────────────────────────────────────────────────────
+
+public class PrescriptionTemplate : BaseEntity
+{
+    public Guid TemplateId => Id;
+    public Guid DoctorId { get; private set; }
+    public string Name { get; private set; } = string.Empty;
+    public string? Description { get; private set; }
+    public string? Diagnosis { get; private set; }
+    // JSON — same schema as Prescription.Medications
+    public string Medications { get; private set; } = "[]";
+    public string? LabTests { get; private set; }
+    public string? FollowUpInstructions { get; private set; }
+    public int UseCount { get; private set; }
+
+    public Doctor Doctor { get; private set; } = null!;
+
+    private PrescriptionTemplate() { }
+
+    public static PrescriptionTemplate Create(
+        Guid doctorId,
+        string name,
+        string? description,
+        string? diagnosis,
+        string medications,
+        string? labTests,
+        string? followUpInstructions)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new Domain.Exceptions.DomainException("Template name is required.");
+
+        return new PrescriptionTemplate
+        {
+            DoctorId = doctorId,
+            Name = name.Trim(),
+            Description = description?.Trim(),
+            Diagnosis = diagnosis?.Trim(),
+            Medications = string.IsNullOrWhiteSpace(medications) ? "[]" : medications,
+            LabTests = labTests,
+            FollowUpInstructions = followUpInstructions
+        };
+    }
+
+    public void Update(
+        string name,
+        string? description,
+        string? diagnosis,
+        string medications,
+        string? labTests,
+        string? followUpInstructions)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new Domain.Exceptions.DomainException("Template name is required.");
+
+        Name = name.Trim();
+        Description = description?.Trim();
+        Diagnosis = diagnosis?.Trim();
+        Medications = string.IsNullOrWhiteSpace(medications) ? "[]" : medications;
+        LabTests = labTests;
+        FollowUpInstructions = followUpInstructions;
+        UpdateTimestamp();
+    }
+
+    public void IncrementUseCount()
+    {
+        UseCount++;
+        UpdateTimestamp();
+    }
+}
+
+// ─── Appointment Note ─────────────────────────────────────────────────────────
+
+public class AppointmentNote : BaseEntity
+{
+    public Guid NoteId => Id;
+    public Guid AppointmentId { get; private set; }
+    public Guid DoctorId { get; private set; }
+    public string Content { get; private set; } = string.Empty;
+
+    public Appointment Appointment { get; private set; } = null!;
+    public Doctor Doctor { get; private set; } = null!;
+
+    private AppointmentNote() { }
+
+    public static AppointmentNote Create(Guid appointmentId, Guid doctorId, string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+            throw new Domain.Exceptions.DomainException("Note content cannot be empty.");
+        if (content.Length > 5000)
+            throw new Domain.Exceptions.DomainException("Note content exceeds 5000 characters.");
+
+        return new AppointmentNote
+        {
+            AppointmentId = appointmentId,
+            DoctorId = doctorId,
+            Content = content.Trim()
+        };
+    }
+
+    public void UpdateContent(string content)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+            throw new Domain.Exceptions.DomainException("Note content cannot be empty.");
+        if (content.Length > 5000)
+            throw new Domain.Exceptions.DomainException("Note content exceeds 5000 characters.");
+
+        Content = content.Trim();
         UpdateTimestamp();
     }
 }

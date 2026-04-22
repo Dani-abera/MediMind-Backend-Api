@@ -23,15 +23,16 @@ public record UpsertDoctorScheduleDto(
 [ApiController]
 [Authorize]
 [Route("api/v1/doctor-schedules")]
-[Tags("Doctor schedules")]
+[Tags("Admin — Schedules")]
 public class DoctorSchedulesController(IDoctorScheduleRepository scheduleRepository, ICurrentUser currentUser) : ControllerBase
 {
-    /// <summary>
-    /// Creates or updates doctor schedule.
-    /// </summary>
+    /// <summary>Create or replace a doctor's weekly working schedule (FR-020).</summary>
     [HttpPost]
     [RequireRole("Admin")]
-    public async Task<IActionResult> Upsert([FromBody] UpsertDoctorScheduleDto dto)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> Upsert([FromBody] UpsertDoctorScheduleDto dto, CancellationToken ct)
     {
         if (currentUser.TenantId != dto.CenterId)
             return Forbid();
@@ -61,12 +62,13 @@ public class DoctorSchedulesController(IDoctorScheduleRepository scheduleReposit
         return Ok(new { recreated.ScheduleId });
     }
 
-    /// <summary>
-    /// Gets doctor schedule by doctor and center.
-    /// </summary>
+    /// <summary>Get a doctor's schedule for a specific center (FR-020).</summary>
     [HttpGet("{doctorId:guid}/{centerId:guid}")]
     [RequireRole("Doctor", "Admin")]
-    public async Task<IActionResult> Get(Guid doctorId, Guid centerId)
+    [ProducesResponseType(typeof(DoctorSchedule), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> Get(Guid doctorId, Guid centerId, CancellationToken ct)
     {
         if (currentUser.UserType == "Doctor" && currentUser.UserId != doctorId)
             throw new UnauthorizedException();
@@ -80,12 +82,12 @@ public class DoctorSchedulesController(IDoctorScheduleRepository scheduleReposit
         return Ok(schedule);
     }
 
-    /// <summary>
-    /// Deletes doctor schedule.
-    /// </summary>
+    /// <summary>Delete a doctor's schedule by ID (FR-020).</summary>
     [HttpDelete("{id:guid}")]
     [RequireRole("Admin")]
-    public async Task<IActionResult> Delete(Guid id)
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
         var deleted = await scheduleRepository.DeleteAsync(id);
         return deleted ? NoContent() : NotFound(new { error = "Schedule not found" });
