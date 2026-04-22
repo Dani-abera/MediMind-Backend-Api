@@ -741,3 +741,103 @@ System.InvalidOperationException: Failed to deliver SMS OTP.
 2026-04-22 13:10:40.292 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 25311.1465 ms
 2026-04-22 13:35:01.452 +03:00 [INF] Running appointment reminder job at "2026-04-22T10:35:01.4512520Z"
 2026-04-22 13:35:01.801 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 13:56:45.766 +03:00 [ERR] Failed executing DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT m.reminder_id, m.created_at, m.dosage, m.frequency, m.is_active, m.medication_name, m.patient_id, m.reminder_times, m.updated_at
+FROM medication_reminders AS m
+WHERE m.is_active
+2026-04-22 13:56:45.861 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MediMind.Infrastructure.Data.MediMindDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.PostgresException (0x80004005): 57P01: terminating connection due to administrator command
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+  Exception data:
+    Severity: FATAL
+    SqlState: 57P01
+    MessageText: terminating connection due to administrator command
+    File: postgres.c
+    Line: 3353
+    Routine: ProcessInterrupts
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.PostgresException (0x80004005): 57P01: terminating connection due to administrator command
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+  Exception data:
+    Severity: FATAL
+    SqlState: 57P01
+    MessageText: terminating connection due to administrator command
+    File: postgres.c
+    Line: 3353
+    Routine: ProcessInterrupts
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-04-22 13:56:45.875 +03:00 [ERR] Medication reminder tick failed
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.PostgresException (0x80004005): 57P01: terminating connection due to administrator command
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+  Exception data:
+    Severity: FATAL
+    SqlState: 57P01
+    MessageText: terminating connection due to administrator command
+    File: postgres.c
+    Line: 3353
+    Routine: ProcessInterrupts
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.MedicationReminderRepository.GetAllActiveAsync(CancellationToken ct)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.TickAsync(CancellationToken ct)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.ExecuteAsync(CancellationToken stoppingToken)
+2026-04-22 13:59:21.819 +03:00 [INF] ✅ SuperAdmin account seeded: superadmin@medimind.et
+2026-04-22 13:59:21.841 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 13:59:22.104 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 13:59:22.105 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 13:59:22.105 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 13:59:25.460 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 3.8068 ms
+2026-04-22 13:59:25.645 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 169.8248 ms
+2026-04-22 13:59:25.662 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 7.6873 ms
+2026-04-22 13:59:25.677 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 22.6782 ms
+2026-04-22 13:59:26.619 +03:00 [INF] HTTP GET /apple-touch-icon.png responded 404 in 0.6202 ms
+2026-04-22 13:59:26.619 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0.8883 ms
+2026-04-22 13:59:26.620 +03:00 [INF] HTTP GET /apple-touch-icon-precomposed.png responded 404 in 1.1962 ms
+2026-04-22 13:59:26.626 +03:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 0.6983 ms
+2026-04-22 13:59:50.449 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 23990.3902 ms
