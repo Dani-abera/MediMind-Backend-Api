@@ -1,3 +1,5 @@
+using MediMind.Domain.Enums;
+
 namespace MediMind.Application.Features.MedicalHistory;
 
 public record MedicalHistoryResponseDto(
@@ -8,7 +10,7 @@ public record MedicalHistoryResponseDto(
     string CurrentMedications,
     string? BloodType,
     bool? Smoker,
-    string? AlcoholConsumption,
+    AlcoholConsumptionLevel? AlcoholConsumption,
     string FamilyHistory,
     DateTime UpdatedAt);
 
@@ -18,5 +20,5 @@ public record UpsertMedicalHistoryDto(
     string CurrentMedications,
     string? BloodType,
     bool? Smoker,
-    string? AlcoholConsumption,
+    AlcoholConsumptionLevel? AlcoholConsumption,
     string FamilyHistory);

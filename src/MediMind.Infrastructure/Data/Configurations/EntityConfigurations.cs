@@ -639,7 +639,7 @@ public class PatientMedicalHistoryConfiguration : IEntityTypeConfiguration<Patie
         builder.Property(h => h.CurrentMedications).HasColumnType("text").HasDefaultValue("[]").IsRequired();
         builder.Property(h => h.FamilyHistory).HasColumnType("text").HasDefaultValue("{}").IsRequired();
         builder.Property(h => h.BloodType).HasMaxLength(5);
-        builder.Property(h => h.AlcoholConsumption).HasMaxLength(20);
+        builder.Property(h => h.AlcoholConsumption).HasConversion<string>().HasMaxLength(20);
 
         builder.HasIndex(h => h.PatientId).IsUnique();
 
@@ -658,7 +658,7 @@ public class EmergencyContactConfiguration : IEntityTypeConfiguration<EmergencyC
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Id).HasColumnName("contact_id");
         builder.Property(c => c.FullName).HasMaxLength(100).IsRequired();
-        builder.Property(c => c.Relationship).HasMaxLength(20).IsRequired();
+        builder.Property(c => c.Relationship).HasConversion<string>().HasMaxLength(20).IsRequired();
         builder.Property(c => c.PhoneNumber).HasMaxLength(20).IsRequired();
         builder.Property(c => c.IsPrimary).HasDefaultValue(false);
 

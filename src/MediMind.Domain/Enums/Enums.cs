@@ -136,3 +136,21 @@ public enum BloodType
     OPositive,
     ONegative
 }
+
+// ─── Patient Extensions ───────────────────────────────────────────────────────
+
+public enum ContactRelationship
+{
+    Spouse,
+    Parent,
+    Sibling,
+    Friend,
+    Other
+}
+
+public enum AlcoholConsumptionLevel
+{
+    None,
+    Occasional,
+    Regular
+}

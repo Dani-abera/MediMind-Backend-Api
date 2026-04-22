@@ -72,12 +72,14 @@ try
         {
             o.JsonSerializerOptions.MaxDepth = 512;
             o.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+            o.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
         });
     // OpenAPI schema generator uses the minimal-API JsonOptions, not MVC's
     builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(o =>
     {
         o.SerializerOptions.MaxDepth = 512;
         o.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+        o.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
     });
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddMediMindOpenApi();

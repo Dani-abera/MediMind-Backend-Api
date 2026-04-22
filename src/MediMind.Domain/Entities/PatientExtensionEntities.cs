@@ -1,4 +1,5 @@
 using MediMind.Domain.Common;
+using MediMind.Domain.Enums;
 
 namespace MediMind.Domain.Entities;
 
@@ -21,8 +22,7 @@ public class PatientMedicalHistory : BaseEntity
     public string? BloodType { get; private set; }
     public bool? Smoker { get; private set; }
 
-    /// <summary>None | Occasional | Regular</summary>
-    public string? AlcoholConsumption { get; private set; }
+    public AlcoholConsumptionLevel? AlcoholConsumption { get; private set; }
 
     /// <summary>JSON object of family history entries.</summary>
     public string FamilyHistory { get; private set; } = "{}";
@@ -40,7 +40,7 @@ public class PatientMedicalHistory : BaseEntity
         string currentMedications,
         string? bloodType,
         bool? smoker,
-        string? alcoholConsumption,
+        AlcoholConsumptionLevel? alcoholConsumption,
         string familyHistory)
     {
         ChronicConditions = chronicConditions;
@@ -74,8 +74,7 @@ public class EmergencyContact : BaseEntity
     public Guid PatientId { get; private set; }
     public string FullName { get; private set; } = string.Empty;
 
-    /// <summary>Spouse | Parent | Sibling | Friend | Other</summary>
-    public string Relationship { get; private set; } = string.Empty;
+    public ContactRelationship Relationship { get; private set; }
     public string PhoneNumber { get; private set; } = string.Empty;
     public bool IsPrimary { get; private set; }
 
@@ -84,7 +83,7 @@ public class EmergencyContact : BaseEntity
     private EmergencyContact() { }
 
     public static EmergencyContact Create(
-        Guid patientId, string fullName, string relationship, string phoneNumber, bool isPrimary) =>
+        Guid patientId, string fullName, ContactRelationship relationship, string phoneNumber, bool isPrimary) =>
         new()
         {
             PatientId = patientId,
@@ -94,7 +93,7 @@ public class EmergencyContact : BaseEntity
             IsPrimary = isPrimary
         };
 
-    public void Update(string fullName, string relationship, string phoneNumber)
+    public void Update(string fullName, ContactRelationship relationship, string phoneNumber)
     {
         FullName = fullName;
         Relationship = relationship;

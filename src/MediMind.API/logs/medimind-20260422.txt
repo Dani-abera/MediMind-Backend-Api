@@ -841,3 +841,260 @@ System.InvalidOperationException: An exception has been raised that is likely du
 2026-04-22 13:59:26.620 +03:00 [INF] HTTP GET /apple-touch-icon-precomposed.png responded 404 in 1.1962 ms
 2026-04-22 13:59:26.626 +03:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 0.6983 ms
 2026-04-22 13:59:50.449 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 23990.3902 ms
+2026-04-22 14:00:07.230 +03:00 [INF] Running appointment reminder job at "2026-04-22T11:00:07.2302790Z"
+2026-04-22 14:00:07.336 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 14:01:25.900 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-04-22 14:01:25.901 +03:00 [INF] SMS delivered to 251943034193.
+2026-04-22 14:01:25.920 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 2831.6013 ms
+2026-04-22 14:02:30.221 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 328.1976 ms
+2026-04-22 14:06:51.790 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-04-22 14:06:51.826 +03:00 [INF] HTTP GET /api/v1/patients/me/medical-history responded 404 in 255.4727 ms
+2026-04-22 14:08:20.837 +03:00 [ERR] Failed executing DbCommand (20ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?', @p3='?', @p4='?', @p5='?' (DbType = DateTime), @p6='?', @p7='?', @p8='?' (DbType = Guid), @p9='?' (DbType = Boolean), @p10='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO patient_medical_histories (history_id, alcohol_consumption, allergies, blood_type, chronic_conditions, created_at, current_medications, family_history, patient_id, smoker, updated_at)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-04-22 14:08:20.888 +03:00 [ERR] An exception occurred in the database while saving changes for context type 'MediMind.Infrastructure.Data.MediMindDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 22001: value too long for type character varying(20)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 22001
+    MessageText: value too long for type character varying(20)
+    File: varchar.c
+    Line: 637
+    Routine: varchar
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 22001: value too long for type character varying(20)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 22001
+    MessageText: value too long for type character varying(20)
+    File: varchar.c
+    Line: 637
+    Routine: varchar
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-04-22 14:08:21.010 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 22001: value too long for type character varying(20)
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 22001
+    MessageText: value too long for type character varying(20)
+    File: varchar.c
+    Line: 637
+    Routine: varchar
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.MediMindDbContext.SaveChangesAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Data/MediMindDbContext.cs:line 93
+   at MediMind.Application.Features.MedicalHistory.MedicalHistoryService.UpsertAsync(Guid patientId, UpsertMedicalHistoryDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/MedicalHistory/MedicalHistoryService.cs:line 43
+   at MediMind.API.Controllers.PatientMedicalHistoryController.Upsert(UpsertMedicalHistoryDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/PatientExtensionsController.cs:line 45
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 14:08:21.024 +03:00 [ERR] HTTP PUT /api/v1/patients/me/medical-history responded 500 in 368.1408 ms
+2026-04-22 14:15:19.857 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 14:15:20.254 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 14:15:20.255 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 14:15:20.255 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 14:15:24.177 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.9683 ms
+2026-04-22 14:15:24.421 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 204.9827 ms
+2026-04-22 14:15:24.445 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 10.1137 ms
+2026-04-22 14:15:24.463 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 28.4396 ms
+2026-04-22 14:15:50.774 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 25341.6347 ms
+2026-04-22 14:19:23.044 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: OTP not found or expired.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 194
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 14:19:23.073 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 400 in 334.7251 ms
+2026-04-22 14:19:44.619 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: OTP not found or expired.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 194
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 14:19:44.621 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 400 in 34.0563 ms
+2026-04-22 14:19:47.320 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: OTP not found or expired.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 194
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 14:19:47.322 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 400 in 30.0364 ms
+2026-04-22 14:19:54.440 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 350.8171 ms
+2026-04-22 14:23:11.035 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-04-22 14:23:11.082 +03:00 [INF] HTTP PUT /api/v1/patients/me/medical-history responded 400 in 226.0725 ms
+2026-04-22 14:23:28.897 +03:00 [INF] HTTP PUT /api/v1/patients/me/medical-history responded 200 in 145.2815 ms
+2026-04-22 14:24:12.598 +03:00 [INF] HTTP GET /api/v1/patients/me/medical-history responded 200 in 40.7847 ms
+2026-04-22 14:25:22.102 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 86.3268 ms
+2026-04-22 14:25:37.449 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 401 in 10.2315 ms
+2026-04-22 14:26:41.608 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+FluentValidation.ValidationException: Validation failed: 
+ -- Relationship: Relationship must be one of: Spouse, Parent, Sibling, Friend, Other. Severity: Error
+   at FluentValidation.AbstractValidator`1.RaiseValidationException(ValidationContext`1 context, ValidationResult result) in /_/src/FluentValidation/AbstractValidator.cs:line 531
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 258
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at FluentValidation.DefaultValidatorExtensions.ValidateAndThrowAsync[T](IValidator`1 validator, T instance, CancellationToken cancellationToken) in /_/src/FluentValidation/DefaultValidatorExtensions_Validate.cs:line 72
+   at MediMind.API.Controllers.EmergencyContactsController.Create(CreateEmergencyContactDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/PatientExtensionsController.cs:line 91
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 14:26:41.635 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 400 in 76.2914 ms
+2026-04-22 14:27:00.582 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 201 in 97.5476 ms
+2026-04-22 14:46:40.869 +03:00 [INF] Running appointment reminder job at "2026-04-22T11:46:40.8691010Z"
+2026-04-22 14:46:40.989 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 14:54:58.800 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 401 in 27.1874 ms
+2026-04-22 14:55:09.390 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 401 in 9.0070 ms
+2026-04-22 14:55:20.170 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 401 in 4.1690 ms
+2026-04-22 14:55:38.522 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 401 in 17.8410 ms
+2026-04-22 14:55:40.087 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 401 in 2.6601 ms
+2026-04-22 14:55:57.221 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 14:55:57.525 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 14:55:57.526 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 14:55:57.526 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 14:55:58.976 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 1.9437 ms
+2026-04-22 14:55:59.208 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 195.8919 ms
+2026-04-22 14:55:59.227 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 10.4148 ms
+2026-04-22 14:55:59.244 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 28.0352 ms
+2026-04-22 14:56:05.164 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 401 in 54.9523 ms
+2026-04-22 14:56:06.420 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 401 in 4.6990 ms
+2026-04-22 14:56:08.092 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 2.6708 ms
+2026-04-22 14:56:08.156 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 5.2140 ms
+2026-04-22 14:56:08.171 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 3.3834 ms
+2026-04-22 14:56:32.058 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 31980.6106 ms
+2026-04-22 14:56:38.822 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 30442.3530 ms
+2026-04-22 14:59:09.330 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 526.5418 ms
+2026-04-22 14:59:34.709 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-04-22 14:59:34.816 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 266.5061 ms
+2026-04-22 15:00:12.654 +03:00 [INF] Running appointment reminder job at "2026-04-22T12:00:12.6544210Z"
+2026-04-22 15:00:12.712 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 15:00:42.703 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+FluentValidation.ValidationException: Validation failed: 
+ -- Relationship: Relationship must be one of: Spouse, Parent, Sibling, Friend, Other. Severity: Error
+   at FluentValidation.AbstractValidator`1.RaiseValidationException(ValidationContext`1 context, ValidationResult result) in /_/src/FluentValidation/AbstractValidator.cs:line 531
+   at FluentValidation.AbstractValidator`1.ValidateInternalAsync(ValidationContext`1 context, Boolean useAsync, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 258
+   at FluentValidation.AbstractValidator`1.ValidateAsync(ValidationContext`1 context, CancellationToken cancellation) in /_/src/FluentValidation/AbstractValidator.cs:line 220
+   at FluentValidation.DefaultValidatorExtensions.ValidateAndThrowAsync[T](IValidator`1 validator, T instance, CancellationToken cancellationToken) in /_/src/FluentValidation/DefaultValidatorExtensions_Validate.cs:line 72
+   at MediMind.API.Controllers.EmergencyContactsController.Create(CreateEmergencyContactDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/PatientExtensionsController.cs:line 91
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 15:00:42.747 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 400 in 193.3332 ms
+2026-04-22 15:02:12.720 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 201 in 192.6620 ms
+2026-04-22 15:02:41.766 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 201 in 62.9893 ms
+2026-04-22 15:02:59.763 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 13.0065 ms
+2026-04-22 15:04:46.125 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts/baca65eb-9b50-4653-aff0-c632cf3f8e91/set-primary responded 204 in 55.5271 ms
+2026-04-22 15:05:48.011 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 39.4619 ms
+2026-04-22 15:30:11.220 +03:00 [INF] Running appointment reminder job at "2026-04-22T12:30:11.2171210Z"
+2026-04-22 15:30:11.281 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 16:00:11.409 +03:00 [INF] Running appointment reminder job at "2026-04-22T13:00:11.4025680Z"
+2026-04-22 16:00:11.474 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 16:41:43.283 +03:00 [INF] Running appointment reminder job at "2026-04-22T13:41:43.2820120Z"
+2026-04-22 16:41:43.330 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 17:05:56.573 +03:00 [INF] Running appointment reminder job at "2026-04-22T14:05:56.5736760Z"
+2026-04-22 17:05:56.607 +03:00 [INF] Appointment reminder job completed.

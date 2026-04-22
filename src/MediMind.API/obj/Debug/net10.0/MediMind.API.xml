@@ -454,7 +454,7 @@
         <member name="T:MediMind.API.Controllers.PatientMedicalHistoryController">
             <summary>Structured medical background for the authenticated patient.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.#ctor(MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.#ctor(MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,FluentValidation.IValidator{MediMind.Application.Features.MedicalHistory.UpsertMedicalHistoryDto},MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>Structured medical background for the authenticated patient.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.Get(System.Threading.CancellationToken)">

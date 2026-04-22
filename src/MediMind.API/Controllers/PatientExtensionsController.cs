@@ -22,6 +22,7 @@ namespace MediMind.API.Controllers;
 [Route("api/v1/patients/me/medical-history")]
 public class PatientMedicalHistoryController(
     IMedicalHistoryService medicalHistoryService,
+    IValidator<UpsertMedicalHistoryDto> validator,
     ICurrentUser currentUser) : ControllerBase
 {
     /// <summary>Get the authenticated patient's medical history.</summary>
@@ -42,6 +43,10 @@ public class PatientMedicalHistoryController(
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Upsert([FromBody] UpsertMedicalHistoryDto dto, CancellationToken ct)
     {
+        var validation = await validator.ValidateAsync(dto, ct);
+        if (!validation.IsValid)
+            return BadRequest(validation.Errors.Select(e => e.ErrorMessage));
+
         var result = await medicalHistoryService.UpsertAsync(currentUser.UserId, dto, ct);
         return Ok(result);
     }
