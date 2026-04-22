@@ -20,13 +20,13 @@ public class GeezSmsClient(
 
         var normalized = EthiopiaPhone.Normalize(phone);
 
-        var payload = new GeezSendRequest(normalized, message, apiKey);
+        var payload = new GeezSendRequest(normalized, message);
 
         using var request = new HttpRequestMessage(HttpMethod.Post, "sms/send")
         {
             Content = JsonContent.Create(payload)
         };
-        request.Headers.TryAddWithoutValidation("x-api-key", apiKey);
+        request.Headers.TryAddWithoutValidation("KEY", apiKey);
 
         using var response = await httpClient.SendAsync(request, ct);
         var body = await response.Content.ReadAsStringAsync(ct);
@@ -39,31 +39,29 @@ public class GeezSmsClient(
         }
         catch (Exception ex)
         {
-            logger.LogWarning(ex, "Geez SMS response could not be parsed. Body={Body}", body);
+            logger.LogWarning(ex, "SMS Ethiopia response could not be parsed. Body={Body}", body);
         }
 
         if (!response.IsSuccessStatusCode)
         {
             logger.LogError(
-                "Geez SMS HTTP {Status}. Phone={Phone} Body={Body}",
+                "SMS Ethiopia HTTP {Status}. Phone={Phone} Body={Body}",
                 response.StatusCode, normalized, body);
-            return parsed ?? new GeezSendResponse((int)response.StatusCode, body, null);
+            return parsed ?? new GeezSendResponse("error", body);
         }
 
-        // Some gateways return 200 with status != success in JSON
-        if (parsed is { Status: not 200 and not 1 })
-            logger.LogWarning("Geez SMS reported non-success status {Status}. Msg={Msg}", parsed.Status, parsed.ResponseMsg);
+        // HTTP 2xx = delivery accepted. Log raw body so we can verify the JSON shape.
+        logger.LogInformation("SMS Ethiopia accepted. Phone={Phone} Body={Body}", normalized, body);
 
-        return parsed;
+        // Normalise whatever status string the gateway returns into "success".
+        return new GeezSendResponse("success", parsed?.Message ?? body);
     }
 }
 
 public record GeezSendRequest(
-    [property: JsonPropertyName("phone")] string Phone,
-    [property: JsonPropertyName("msg")] string Msg,
-    [property: JsonPropertyName("token")] string Token);
+    [property: JsonPropertyName("msisdn")] string Msisdn,
+    [property: JsonPropertyName("text")] string Text);
 
 public record GeezSendResponse(
-    [property: JsonPropertyName("status")] int Status,
-    [property: JsonPropertyName("response_msg")] string ResponseMsg,
-    [property: JsonPropertyName("message_id")] string? MessageId);
+    [property: JsonPropertyName("status")] string Status,
+    [property: JsonPropertyName("message")] string Message);

@@ -79,13 +79,13 @@ public class MediMindNotificationService(
                 null,
                 message,
                 ok ? "Sent" : "Failed",
-                response?.MessageId,
-                ok ? null : response?.ResponseMsg,
+                null,
+                ok ? null : response?.Message,
                 ct);
 
             if (!ok)
                 throw new InvalidOperationException(
-                    $"Geez SMS send rejected: {response?.ResponseMsg ?? "unknown"}");
+                    $"SMS send rejected: {response?.Message ?? "unknown"}");
         }
         catch (InvalidOperationException)
         {
@@ -205,5 +205,5 @@ public class MediMindNotificationService(
     }
 
     private static bool IsGeezSuccess(GeezSendResponse r) =>
-        r.Status is 200 or 1 || string.IsNullOrWhiteSpace(r.ResponseMsg);
+        r.Status == "success";
 }

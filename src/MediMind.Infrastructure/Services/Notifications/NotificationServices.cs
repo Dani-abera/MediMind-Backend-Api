@@ -38,16 +38,16 @@ public class GeezSmsService(
 
             logger.LogError(
                 "SMS delivery failed for {Phone}. Primary={Primary}. Fallback={Fallback}",
-                phoneNumber, response?.ResponseMsg, fallback?.ResponseMsg);
-            throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
+                phoneNumber, response?.Message, fallback?.Message);
+            throw new InvalidOperationException("Failed to deliver SMS OTP.");
         }
 
-        logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, response?.ResponseMsg);
-        throw new InvalidOperationException("Failed to deliver SMS OTP via Geez SMS.");
+        logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, response?.Message);
+        throw new InvalidOperationException("Failed to deliver SMS OTP.");
     }
 
     private static bool IsHttpSuccess(GeezSendResponse r) =>
-        r.Status is 200 or 1 || string.IsNullOrWhiteSpace(r.ResponseMsg);
+        r.Status == "success";
 
     public async Task SendOtpAsync(string phoneNumber, string otpCode, CancellationToken ct = default) =>
         await SendAsync(phoneNumber,

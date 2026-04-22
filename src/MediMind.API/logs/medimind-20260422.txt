@@ -407,3 +407,324 @@ System.InvalidOperationException: CurrentDepth (128) is equal to or larger than 
 2026-04-22 11:37:46.658 +03:00 [ERR] Geez SMS HTTP "Unauthorized". Phone=+251943034193 Body={"timestamp":"2026-04-22T08:37:36.998+00:00","path":"/api/sms/send","status":401,"error":"Unauthorized","requestId":"1e8ab462-10847"}
 2026-04-22 11:37:46.662 +03:00 [INF] SMS delivered to 251943034193.
 2026-04-22 11:37:46.672 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 2422.5020 ms
+2026-04-22 11:49:56.478 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 11:49:56.778 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 11:49:56.779 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 11:49:56.779 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 11:49:58.379 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.0473 ms
+2026-04-22 11:49:58.560 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 164.8619 ms
+2026-04-22 11:49:58.574 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 6.5979 ms
+2026-04-22 11:49:58.593 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 25.2198 ms
+2026-04-22 11:50:22.802 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 23456.6287 ms
+2026-04-22 11:50:58.195 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-04-22 11:50:58.196 +03:00 [ERR] SMS delivery failed for 251943034193. Response=null
+2026-04-22 11:50:58.228 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 46
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 53
+   at MediMind.Application.Features.Auth.PatientAuthService.RequestOtpAsync(String phoneNumber, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 184
+   at MediMind.API.Controllers.AuthController.PatientRequestOtp(PhoneRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 11:50:58.245 +03:00 [ERR] HTTP POST /api/v1/auth/patient/request-otp responded 500 in 1851.0810 ms
+2026-04-22 11:53:36.105 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 11:53:36.516 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 11:53:36.517 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 11:53:36.517 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 11:53:37.016 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.0235 ms
+2026-04-22 11:53:37.303 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 258.6258 ms
+2026-04-22 11:53:37.331 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 20.7464 ms
+2026-04-22 11:53:37.350 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 39.1752 ms
+2026-04-22 11:54:01.512 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 23945.9451 ms
+2026-04-22 11:54:48.018 +03:00 [WRN] SMS Ethiopia reported non-success status. Message=null
+2026-04-22 11:54:48.020 +03:00 [ERR] SMS delivery failed for 251943034193. Response=null
+2026-04-22 11:54:48.057 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 46
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 53
+   at MediMind.Application.Features.Auth.PatientAuthService.RequestOtpAsync(String phoneNumber, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 184
+   at MediMind.API.Controllers.AuthController.PatientRequestOtp(PhoneRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 11:54:48.079 +03:00 [ERR] HTTP POST /api/v1/auth/patient/request-otp responded 500 in 1997.3099 ms
+2026-04-22 12:00:03.327 +03:00 [WRN] SMS Ethiopia reported non-success status. Message=null
+2026-04-22 12:00:03.328 +03:00 [ERR] SMS delivery failed for 251943034193. Response=null
+2026-04-22 12:00:03.333 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 46
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 53
+   at MediMind.Application.Features.Auth.PatientAuthService.RequestOtpAsync(String phoneNumber, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 184
+   at MediMind.API.Controllers.AuthController.PatientRequestOtp(PhoneRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 52
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:00:03.361 +03:00 [ERR] HTTP POST /api/v1/auth/patient/request-otp responded 500 in 5981.3295 ms
+2026-04-22 12:00:06.896 +03:00 [INF] Running appointment reminder job at "2026-04-22T09:00:06.8961970Z"
+2026-04-22 12:00:06.981 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 12:02:52.511 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 482.7745 ms
+2026-04-22 12:03:50.791 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 171.7309 ms
+2026-04-22 12:06:43.666 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-04-22 12:06:43.850 +03:00 [ERR] Failed executing DbCommand (36ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal), @p4='?' (DbType = Int32), @p5='?' (DbType = Decimal), @p6='?', @p7='?' (DbType = Int32), @p8='?' (DbType = Guid), @p9='?' (DbType = Date), @p10='?' (DbType = Time), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = DateTime), @p16='?' (DbType = Decimal)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO health_records (record_id, created_at, diastolic_bp, glucose_level, heart_rate, height, notes, oxygen_saturation, patient_id, record_date, record_time, recorded_by, respiratory_rate, systolic_bp, temperature, updated_at, weight)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2026-04-22 12:06:43.880 +03:00 [ERR] An exception occurred in the database while saving changes for context type 'MediMind.Infrastructure.Data.MediMindDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "health_records" violates check constraint "ck_recorded_by"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "health_records" violates check constraint "ck_recorded_by"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: health_records
+    ConstraintName: ck_recorded_by
+    File: execMain.c
+    Line: 2076
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "health_records" violates check constraint "ck_recorded_by"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "health_records" violates check constraint "ck_recorded_by"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: health_records
+    ConstraintName: ck_recorded_by
+    File: execMain.c
+    Line: 2076
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-04-22 12:06:43.890 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "health_records" violates check constraint "ck_recorded_by"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "health_records" violates check constraint "ck_recorded_by"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: health_records
+    ConstraintName: ck_recorded_by
+    File: execMain.c
+    Line: 2076
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.MediMindDbContext.SaveChangesAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Data/MediMindDbContext.cs:line 93
+   at MediMind.Infrastructure.Data.Repositories.HealthRecordRepository.CreateAsync(HealthRecord record) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 800
+   at MediMind.Application.Features.HealthRecords.HealthRecordService.CreateAsync(Guid patientId, CreateHealthRecordDto dto) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/HealthRecords/HealthRecordService.cs:line 49
+   at MediMind.API.Controllers.HealthRecordsController.Create(CreateHealthRecordDto dto) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/HealthRecordsController.cs:line 32
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:06:43.902 +03:00 [ERR] HTTP POST /api/v1/health-records responded 500 in 396.9266 ms
+2026-04-22 12:10:35.155 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Phone number already registered.
+   at MediMind.Application.Features.Auth.AdminAuthService.RegisterAsync(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 376
+   at MediMind.API.Controllers.AuthController.AdminRegister(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 163
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:10:35.162 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 400 in 105.3238 ms
+2026-04-22 12:10:55.024 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Phone number already registered.
+   at MediMind.Application.Features.Auth.AdminAuthService.RegisterAsync(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 376
+   at MediMind.API.Controllers.AuthController.AdminRegister(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 163
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:10:55.027 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 400 in 29.5377 ms
+2026-04-22 12:11:00.142 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Phone number already registered.
+   at MediMind.Application.Features.Auth.AdminAuthService.RegisterAsync(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 376
+   at MediMind.API.Controllers.AuthController.AdminRegister(AdminRegisterRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 163
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:11:00.153 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 400 in 41.4577 ms
+2026-04-22 12:11:08.989 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 201 in 273.2936 ms
+2026-04-22 12:12:20.662 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 261.8812 ms
+2026-04-22 12:14:42.725 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Phone number already registered.
+   at MediMind.Application.Features.Auth.AdminAuthService.CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 425
+   at MediMind.API.Controllers.AuthController.AdminCreateDoctor(CreateDoctorRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 185
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:14:42.732 +03:00 [INF] HTTP POST /api/v1/auth/admin/doctors responded 400 in 78.4975 ms
+2026-04-22 12:19:52.843 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Phone number already registered.
+   at MediMind.Application.Features.Auth.AdminAuthService.CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 425
+   at MediMind.API.Controllers.AuthController.AdminCreateDoctor(CreateDoctorRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 185
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:19:52.846 +03:00 [INF] HTTP POST /api/v1/auth/admin/doctors responded 400 in 38.8676 ms
+2026-04-22 12:22:04.528 +03:00 [INF] HTTP POST /api/v1/auth/admin/doctors responded 201 in 219.8808 ms
+2026-04-22 12:23:22.562 +03:00 [WRN] SMS Ethiopia reported non-success status. Message=null
+2026-04-22 12:23:22.563 +03:00 [ERR] SMS delivery failed for 251943034193. Response=null
+2026-04-22 12:23:22.567 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Failed to deliver SMS OTP.
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendAsync(String phoneNumber, String message, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 46
+   at MediMind.Infrastructure.Services.Notifications.GeezSmsService.SendOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/NotificationServices.cs:line 53
+   at MediMind.Application.Features.Auth.DoctorAuthService.RequestOtpAsync(String badgeNumber, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 322
+   at MediMind.API.Controllers.AuthController.DoctorRequestOtp(BadgeRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 139
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Logged|12_1(ControllerActionInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-04-22 12:23:22.571 +03:00 [ERR] HTTP POST /api/v1/auth/doctor/request-otp responded 500 in 2256.2245 ms
+2026-04-22 12:29:33.479 +03:00 [INF] Daily queue generation scheduled for "2026-04-23T06:00:00.0000000" ("2026-04-23T03:00:00.0000000Z" UTC)
+2026-04-22 12:29:33.730 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-22 12:29:33.731 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-22 12:29:33.731 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-22 12:29:36.639 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 2.2863 ms
+2026-04-22 12:29:36.842 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 184.7133 ms
+2026-04-22 12:29:36.858 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 8.0868 ms
+2026-04-22 12:29:36.873 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 22.9222 ms
+2026-04-22 12:29:37.710 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0.3660 ms
+2026-04-22 12:29:37.710 +03:00 [INF] HTTP GET /apple-touch-icon-precomposed.png responded 404 in 0.3953 ms
+2026-04-22 12:29:37.710 +03:00 [INF] HTTP GET /apple-touch-icon.png responded 404 in 0.3155 ms
+2026-04-22 12:30:01.864 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 24165.8578 ms
+2026-04-22 12:30:04.009 +03:00 [INF] Running appointment reminder job at "2026-04-22T09:30:04.0089960Z"
+2026-04-22 12:30:04.067 +03:00 [INF] Appointment reminder job completed.
+2026-04-22 12:31:23.879 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 471.3060 ms
+2026-04-22 12:33:41.893 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-04-22 12:33:41.895 +03:00 [INF] SMS delivered to 251943034193.
+2026-04-22 12:33:41.926 +03:00 [INF] HTTP POST /api/v1/auth/admin/doctors responded 201 in 2002.1882 ms

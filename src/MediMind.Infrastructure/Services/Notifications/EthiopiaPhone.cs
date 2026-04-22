@@ -16,20 +16,20 @@ public static class EthiopiaPhone
             return p;
 
         if (p.StartsWith("09", StringComparison.Ordinal) && p.Length >= 10)
-            return "+251" + p[1..];
+            return "251" + p[1..];
 
         if (p.StartsWith("07", StringComparison.Ordinal) && p.Length >= 10)
-            return "+251" + p[1..];
+            return "251" + p[1..];
 
         if (p.StartsWith("251", StringComparison.Ordinal))
-            return "+" + p;
+            return p;
 
         if (p.StartsWith('9') && p.Length == 9)
-            return "+251" + p;
+            return "251" + p;
 
         if (p.StartsWith('7') && p.Length == 9)
-            return "+251" + p;
+            return "251" + p;
 
-        return p.StartsWith('+') ? p : "+" + p;
+        return p;
     }
 }

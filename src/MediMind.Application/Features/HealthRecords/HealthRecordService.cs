@@ -44,7 +44,7 @@ public class HealthRecordService(
             dto.OxygenSaturation,
             dto.RespiratoryRate,
             dto.Notes,
-            dto.RecordedBy ?? "patient");
+            NormalizeRecordedBy(dto.RecordedBy));
 
         var created = await repository.CreateAsync(record);
         return mapper.Map<HealthRecordResponseDto>(created);
@@ -127,7 +127,7 @@ public class HealthRecordService(
             dto.OxygenSaturation,
             dto.RespiratoryRate,
             dto.Notes,
-            dto.RecordedBy ?? "patient");
+            NormalizeRecordedBy(dto.RecordedBy));
 
         var updated = await repository.UpdateAsync(record);
         return updated is null ? null : mapper.Map<HealthRecordResponseDto>(updated);
@@ -176,5 +176,11 @@ public class HealthRecordService(
     {
         if (requesterPatientId != targetPatientId)
             throw new UnauthorizedException();
+    }
+
+    private static string NormalizeRecordedBy(string? value)
+    {
+        var lower = value?.Trim().ToLowerInvariant();
+        return lower is "patient" or "doctor" ? lower : "patient";
     }
 }

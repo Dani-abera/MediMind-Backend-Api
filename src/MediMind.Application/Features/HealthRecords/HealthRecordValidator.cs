@@ -29,5 +29,9 @@ public class HealthRecordValidator : AbstractValidator<CreateHealthRecordDto>
         RuleFor(x => x.HeartRate).InclusiveBetween(30, 250).When(x => x.HeartRate.HasValue);
         RuleFor(x => x.OxygenSaturation).InclusiveBetween(70, 100).When(x => x.OxygenSaturation.HasValue);
         RuleFor(x => x.RespiratoryRate).InclusiveBetween(8, 60).When(x => x.RespiratoryRate.HasValue);
+
+        RuleFor(x => x.RecordedBy)
+            .Must(v => v is null || v == "patient" || v == "doctor")
+            .WithMessage("RecordedBy must be 'patient' or 'doctor'.");
     }
 }

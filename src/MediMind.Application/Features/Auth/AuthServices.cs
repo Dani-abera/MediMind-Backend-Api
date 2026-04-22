@@ -357,10 +357,12 @@ public class DoctorAuthService(
 public class AdminAuthService(
     IUserRepository userRepository,
     IDoctorRepository doctorRepository,
+    IHealthcareCenterRepository centerRepository,
     IPasswordService passwordService,
     IAuthService authService,
     ICurrentUser currentUser,
     IUnitOfWork unitOfWork,
+    ISmsService smsService,
     MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAdminAuthService
 {
     // In-memory login failure tracking (consistent with in-memory refresh token store pattern)
@@ -435,6 +437,28 @@ public class AdminAuthService(
 
         await doctorRepository.AddAsync(doctor, ct);
         await unitOfWork.SaveChangesAsync(ct);
+
+        var centerAdmin = await userRepository.GetByIdAsync(currentUser.UserId, ct) as HealthcareCenterAdmin;
+        var centerName = "MediMind";
+        if (centerAdmin?.CenterId is { } centerId)
+        {
+            var center = await centerRepository.GetByIdAsync(centerId, ct);
+            if (center is not null) centerName = center.CenterName;
+        }
+
+        try
+        {
+            await smsService.SendAsync(
+                request.PhoneNumber,
+                $"Welcome to {centerName} on MediMind, Dr. {request.FullName}! " +
+                $"Your badge number is: {badgeNumber}. Use it with OTP to log in.",
+                ct);
+        }
+        catch (Exception)
+        {
+            // SMS failure must not roll back a successful doctor creation
+        }
+
         return new DoctorCreatedResult(doctor.Id, badgeNumber, "Doctor created successfully. Use badge number for OTP login.");
     }
 
