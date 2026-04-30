@@ -1,0 +1,25 @@
+2026-04-27 20:57:16.798 +03:00 [INF] Daily queue generation scheduled for "2026-04-28T06:00:00.0000000" ("2026-04-28T03:00:00.0000000Z" UTC)
+2026-04-27 20:57:17.153 +03:00 [INF] MediMind API listening on http://localhost:5288, https://localhost:7088
+2026-04-27 20:57:17.154 +03:00 [INF] Scalar API reference available at http://localhost:5288/scalar/v1
+2026-04-27 20:57:17.154 +03:00 [INF] Scalar API reference available at https://localhost:7088/scalar/v1
+2026-04-27 20:57:19.847 +03:00 [INF] HTTP GET /scalar/v1 responded 307 in 5.8743 ms
+2026-04-27 20:57:20.054 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 189.7566 ms
+2026-04-27 20:57:20.076 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 10.4044 ms
+2026-04-27 20:57:20.095 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 28.6468 ms
+2026-04-27 20:57:21.028 +03:00 [INF] HTTP GET /apple-touch-icon-precomposed.png responded 404 in 0.3997 ms
+2026-04-27 20:57:21.028 +03:00 [INF] HTTP GET /apple-touch-icon.png responded 404 in 0.3104 ms
+2026-04-27 20:57:21.028 +03:00 [INF] HTTP GET /favicon.ico responded 404 in 0.2349 ms
+2026-04-27 20:57:21.410 +03:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 1.0188 ms
+2026-04-27 20:58:04.764 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 43754.6702 ms
+2026-04-27 21:00:03.571 +03:00 [INF] Running appointment reminder job at "2026-04-27T18:00:03.5700100Z"
+2026-04-27 21:00:04.080 +03:00 [INF] Appointment reminder job completed.
+2026-04-27 21:36:18.209 +03:00 [INF] Running appointment reminder job at "2026-04-27T18:36:18.1920470Z"
+2026-04-27 21:36:18.381 +03:00 [INF] Appointment reminder job completed.
+2026-04-27 22:14:32.817 +03:00 [INF] Running appointment reminder job at "2026-04-27T19:14:32.8171540Z"
+2026-04-27 22:14:32.913 +03:00 [INF] Appointment reminder job completed.
+2026-04-27 22:33:52.949 +03:00 [INF] Running appointment reminder job at "2026-04-27T19:33:52.9480600Z"
+2026-04-27 22:33:53.006 +03:00 [INF] Appointment reminder job completed.
+2026-04-27 23:01:03.488 +03:00 [INF] Running appointment reminder job at "2026-04-27T20:01:03.4886170Z"
+2026-04-27 23:01:03.519 +03:00 [INF] Appointment reminder job completed.
+2026-04-27 23:39:31.586 +03:00 [INF] Running appointment reminder job at "2026-04-27T20:39:31.5867970Z"
+2026-04-27 23:39:31.637 +03:00 [INF] Appointment reminder job completed.
