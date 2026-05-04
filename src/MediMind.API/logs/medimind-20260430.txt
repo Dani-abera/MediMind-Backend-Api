@@ -86,3 +86,14 @@
 2026-04-30 21:00:07.510 +03:00 [INF] Appointment reminder job completed.
 2026-04-30 21:30:09.465 +03:00 [INF] Running appointment reminder job at "2026-04-30T18:30:09.4623180Z"
 2026-04-30 21:30:09.632 +03:00 [INF] Appointment reminder job completed.
+2026-04-30 21:57:45.929 +03:00 [INF] Daily queue generation scheduled for "2026-05-01T06:00:00.0000000" ("2026-05-01T03:00:00.0000000Z" UTC)
+2026-04-30 21:57:46.123 +03:00 [INF] MediMind API listening on http://0.0.0.0:7252
+2026-04-30 21:57:46.124 +03:00 [INF] Scalar API reference available at http://0.0.0.0:7252/scalar/v1
+2026-04-30 22:00:01.389 +03:00 [INF] Running appointment reminder job at "2026-04-30T19:00:01.3885580Z"
+2026-04-30 22:00:01.806 +03:00 [INF] Appointment reminder job completed.
+2026-04-30 22:30:11.146 +03:00 [INF] Running appointment reminder job at "2026-04-30T19:30:11.1381190Z"
+2026-04-30 22:30:11.403 +03:00 [INF] Appointment reminder job completed.
+2026-04-30 23:00:05.416 +03:00 [INF] Running appointment reminder job at "2026-04-30T20:00:05.3959850Z"
+2026-04-30 23:00:05.629 +03:00 [INF] Appointment reminder job completed.
+2026-04-30 23:39:44.604 +03:00 [INF] Running appointment reminder job at "2026-04-30T20:39:44.6003220Z"
+2026-04-30 23:39:44.695 +03:00 [INF] Appointment reminder job completed.

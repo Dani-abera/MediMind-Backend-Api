@@ -173,7 +173,7 @@ try
         });
     }
 
-    app.UseHttpsRedirection();
+    //app.UseHttpsRedirection();
     app.UseCors("MediMindPolicy");
     app.UseIpRateLimiting();
     app.UseMiddleware<ChapaWebhookSecurityMiddleware>();

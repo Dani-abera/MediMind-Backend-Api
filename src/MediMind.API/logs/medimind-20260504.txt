@@ -1,0 +1,89 @@
+2026-05-04 00:27:45.863 +03:00 [INF] Running appointment reminder job at "2026-05-03T21:27:45.8638090Z"
+2026-05-04 00:27:45.993 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 00:43:30.413 +03:00 [INF] Running appointment reminder job at "2026-05-03T21:43:30.4135830Z"
+2026-05-04 00:43:30.440 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 01:01:44.742 +03:00 [INF] Running appointment reminder job at "2026-05-03T22:01:44.7420280Z"
+2026-05-04 01:01:44.783 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 01:51:11.708 +03:00 [INF] Running appointment reminder job at "2026-05-03T22:51:11.7087300Z"
+2026-05-04 01:51:11.732 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 02:24:16.550 +03:00 [INF] Running appointment reminder job at "2026-05-03T23:24:16.5485420Z"
+2026-05-04 02:24:16.599 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 02:58:11.028 +03:00 [INF] Running appointment reminder job at "2026-05-03T23:58:11.0286210Z"
+2026-05-04 02:58:11.115 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 03:15:20.281 +03:00 [INF] Running appointment reminder job at "2026-05-04T00:15:20.2809410Z"
+2026-05-04 03:15:20.311 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 03:31:14.170 +03:00 [INF] Running appointment reminder job at "2026-05-04T00:31:14.1706790Z"
+2026-05-04 03:31:14.192 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 04:23:27.326 +03:00 [INF] Running appointment reminder job at "2026-05-04T01:23:27.3262050Z"
+2026-05-04 04:23:27.354 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 04:58:23.344 +03:00 [INF] Running appointment reminder job at "2026-05-04T01:58:23.3437800Z"
+2026-05-04 04:58:23.375 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 05:32:05.145 +03:00 [INF] Running appointment reminder job at "2026-05-04T02:32:05.1439280Z"
+2026-05-04 05:32:05.259 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 06:05:21.842 +03:00 [INF] Running appointment reminder job at "2026-05-04T03:05:21.8429190Z"
+2026-05-04 06:05:21.872 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 06:05:21.873 +03:00 [INF] QueueGenerationJob triggered for date "2026-05-03"
+2026-05-04 06:05:21.940 +03:00 [INF] Handling GenerateDailyQueuesCommand
+2026-05-04 06:05:22.236 +03:00 [INF] Handled GenerateDailyQueuesCommand in 294ms
+2026-05-04 06:05:22.236 +03:00 [INF] Generated 0 queues for 0 centers.
+2026-05-04 06:39:35.560 +03:00 [INF] Running appointment reminder job at "2026-05-04T03:39:35.5601970Z"
+2026-05-04 06:39:35.631 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 07:08:34.671 +03:00 [INF] Running appointment reminder job at "2026-05-04T04:08:34.6713750Z"
+2026-05-04 07:08:34.702 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 07:30:22.647 +03:00 [INF] Running appointment reminder job at "2026-05-04T04:30:22.6478750Z"
+2026-05-04 07:30:22.668 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 07:30:28.979 +03:00 [INF] HTTP GET /api/v1/health-records responded 401 in 25.8575 ms
+2026-05-04 07:30:29.201 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 62.1897 ms
+2026-05-04 07:30:29.488 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 21.4631 ms
+2026-05-04 07:30:29.647 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 9.9475 ms
+2026-05-04 07:30:29.677 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 5.2964 ms
+2026-05-04 07:30:30.178 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 9.2338 ms
+2026-05-04 07:30:30.352 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 8.5449 ms
+2026-05-04 07:30:30.385 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 11.1292 ms
+2026-05-04 08:15:53.199 +03:00 [INF] Running appointment reminder job at "2026-05-04T05:15:53.1991510Z"
+2026-05-04 08:15:53.248 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 08:36:35.251 +03:00 [INF] Running appointment reminder job at "2026-05-04T05:36:35.2517130Z"
+2026-05-04 08:36:35.319 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 08:53:32.495 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 38.6559 ms
+2026-05-04 08:53:32.495 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 60.7915 ms
+2026-05-04 08:53:32.495 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 59.5743 ms
+2026-05-04 08:53:32.495 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 59.5292 ms
+2026-05-04 08:53:32.495 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 59.5288 ms
+2026-05-04 08:53:32.567 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 114.2260 ms
+2026-05-04 08:53:32.720 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 103.7225 ms
+2026-05-04 08:53:32.819 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.2308 ms
+2026-05-04 08:53:32.828 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 15.1534 ms
+2026-05-04 08:53:32.829 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.7389 ms
+2026-05-04 08:53:32.853 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 18.9156 ms
+2026-05-04 08:53:32.896 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 52.3664 ms
+2026-05-04 08:54:07.801 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 36.3945 ms
+2026-05-04 08:54:10.594 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 21.9257 ms
+2026-05-04 08:54:10.657 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 8.9203 ms
+2026-05-04 08:54:10.711 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 9.6158 ms
+2026-05-04 08:54:32.965 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.4981 ms
+2026-05-04 09:00:05.407 +03:00 [INF] Running appointment reminder job at "2026-05-04T06:00:05.4073880Z"
+2026-05-04 09:00:05.467 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 09:14:46.672 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 53.5842 ms
+2026-05-04 09:14:46.807 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 96.3738 ms
+2026-05-04 09:14:46.871 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.1458 ms
+2026-05-04 09:30:05.619 +03:00 [INF] Running appointment reminder job at "2026-05-04T06:30:05.6147700Z"
+2026-05-04 09:30:05.685 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 09:33:50.810 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 39.6462 ms
+2026-05-04 09:33:51.016 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 150.4548 ms
+2026-05-04 09:33:51.223 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.4930 ms
+2026-05-04 10:00:05.796 +03:00 [INF] Running appointment reminder job at "2026-05-04T07:00:05.7940320Z"
+2026-05-04 10:00:05.863 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 10:50:03.116 +03:00 [INF] Running appointment reminder job at "2026-05-04T07:50:03.1164520Z"
+2026-05-04 10:50:03.155 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 11:39:13.701 +03:00 [INF] Running appointment reminder job at "2026-05-04T08:39:13.7010820Z"
+2026-05-04 11:39:13.800 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 12:11:40.328 +03:00 [INF] Running appointment reminder job at "2026-05-04T09:11:40.3278970Z"
+2026-05-04 12:11:40.370 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 12:43:02.230 +03:00 [INF] Running appointment reminder job at "2026-05-04T09:43:02.2302080Z"
+2026-05-04 12:43:02.249 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 13:12:39.475 +03:00 [INF] Running appointment reminder job at "2026-05-04T10:12:39.4758780Z"
+2026-05-04 13:12:39.508 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 13:33:26.928 +03:00 [INF] Running appointment reminder job at "2026-05-04T10:33:26.9284290Z"
+2026-05-04 13:33:26.964 +03:00 [INF] Appointment reminder job completed.
+2026-05-04 14:00:01.092 +03:00 [INF] Running appointment reminder job at "2026-05-04T11:00:01.0904830Z"
+2026-05-04 14:00:01.129 +03:00 [INF] Appointment reminder job completed.
