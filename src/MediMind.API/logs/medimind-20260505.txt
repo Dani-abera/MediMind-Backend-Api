@@ -1,0 +1,96 @@
+2026-05-05 00:30:45.308 +03:00 [INF] Running appointment reminder job at "2026-05-04T21:30:45.3080940Z"
+2026-05-05 00:30:45.430 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 01:03:34.369 +03:00 [INF] Running appointment reminder job at "2026-05-04T22:03:34.3697850Z"
+2026-05-05 01:03:34.454 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 01:52:03.882 +03:00 [INF] Running appointment reminder job at "2026-05-04T22:52:03.8828180Z"
+2026-05-05 01:52:03.931 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 02:38:18.309 +03:00 [INF] Running appointment reminder job at "2026-05-04T23:38:18.3099390Z"
+2026-05-05 02:38:18.378 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 03:28:55.720 +03:00 [INF] Running appointment reminder job at "2026-05-05T00:28:55.7199780Z"
+2026-05-05 03:28:55.738 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 04:19:45.762 +03:00 [INF] Running appointment reminder job at "2026-05-05T01:19:45.7624460Z"
+2026-05-05 04:19:45.902 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 05:17:32.380 +03:00 [INF] Running appointment reminder job at "2026-05-05T02:17:32.3800240Z"
+2026-05-05 05:17:32.404 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 06:05:45.070 +03:00 [INF] Running appointment reminder job at "2026-05-05T03:05:45.0706760Z"
+2026-05-05 06:05:45.093 +03:00 [INF] QueueGenerationJob triggered for date "2026-05-03"
+2026-05-05 06:05:45.110 +03:00 [INF] Handling GenerateDailyQueuesCommand
+2026-05-05 06:05:45.124 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 06:05:45.149 +03:00 [INF] Handled GenerateDailyQueuesCommand in 38ms
+2026-05-05 06:05:45.150 +03:00 [INF] Generated 0 queues for 0 centers.
+2026-05-05 07:18:59.333 +03:00 [INF] Running appointment reminder job at "2026-05-05T04:18:59.3323590Z"
+2026-05-05 07:18:59.418 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 08:03:19.822 +03:00 [INF] Running appointment reminder job at "2026-05-05T05:03:19.8220790Z"
+2026-05-05 08:03:19.855 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 08:30:13.034 +03:00 [INF] Running appointment reminder job at "2026-05-05T05:30:13.0336140Z"
+2026-05-05 08:30:13.119 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 09:02:31.209 +03:00 [INF] Running appointment reminder job at "2026-05-05T06:02:31.2075820Z"
+2026-05-05 09:02:31.436 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 09:44:21.945 +03:00 [INF] Running appointment reminder job at "2026-05-05T06:44:21.9426420Z"
+2026-05-05 09:44:22.019 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 10:00:34.766 +03:00 [INF] Running appointment reminder job at "2026-05-05T07:00:34.7662800Z"
+2026-05-05 10:00:34.809 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 10:36:22.685 +03:00 [INF] Running appointment reminder job at "2026-05-05T07:36:22.6842640Z"
+2026-05-05 10:36:22.747 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 11:00:07.013 +03:00 [INF] Running appointment reminder job at "2026-05-05T08:00:07.0119540Z"
+2026-05-05 11:00:07.071 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 11:30:12.936 +03:00 [INF] Running appointment reminder job at "2026-05-05T08:30:12.9335630Z"
+2026-05-05 11:30:13.065 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 12:00:06.433 +03:00 [INF] Running appointment reminder job at "2026-05-05T09:00:06.4319230Z"
+2026-05-05 12:00:06.662 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 12:30:14.764 +03:00 [INF] Running appointment reminder job at "2026-05-05T09:30:14.7611460Z"
+2026-05-05 12:30:14.854 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 13:00:14.967 +03:00 [INF] Running appointment reminder job at "2026-05-05T10:00:14.9640610Z"
+2026-05-05 13:00:15.062 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 13:30:11.705 +03:00 [INF] Running appointment reminder job at "2026-05-05T10:30:11.7046280Z"
+2026-05-05 13:30:11.742 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 14:04:24.724 +03:00 [INF] Running appointment reminder job at "2026-05-05T11:04:24.7209890Z"
+2026-05-05 14:04:24.760 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 14:32:54.959 +03:00 [INF] Running appointment reminder job at "2026-05-05T11:32:54.9572890Z"
+2026-05-05 14:32:55.682 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 15:00:10.155 +03:00 [INF] Running appointment reminder job at "2026-05-05T12:00:10.1519460Z"
+2026-05-05 15:00:10.348 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 15:30:00.694 +03:00 [INF] Running appointment reminder job at "2026-05-05T12:30:00.6929790Z"
+2026-05-05 15:30:00.770 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 22:01:09.521 +03:00 [ERR] An error occurred using the connection to database 'mediminddb' on server 'tcp://localhost:5432'.
+2026-05-05 22:01:09.553 +03:00 [FTL] MediMind API terminated unexpectedly.
+Npgsql.NpgsqlException (0x80004005): Failed to connect to 127.0.0.1:5432
+ ---> System.Net.Sockets.SocketException (61): Connection refused
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Migrations.HistoryRepository.GetAppliedMigrationsAsync(CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlHistoryRepository.GetAppliedMigrationsAsync(CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Program.<Main>$(String[] args) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Program.cs:line 148
+2026-05-05 22:02:30.135 +03:00 [INF] Daily queue generation scheduled for "2026-05-06T06:00:00.0000000" ("2026-05-06T03:00:00.0000000Z" UTC)
+2026-05-05 22:02:30.863 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288, https://0.0.0.0:7088
+2026-05-05 22:02:30.864 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-05 22:02:30.864 +03:00 [INF] Scalar API reference available at https://0.0.0.0:7088/scalar/v1
+2026-05-05 22:03:20.698 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 215.5175 ms
+2026-05-05 22:03:20.726 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 8.0642 ms
+2026-05-05 22:03:20.754 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 41.0126 ms
+2026-05-05 22:03:50.655 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 29675.0959 ms
+2026-05-05 22:05:03.261 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 201 in 1361.1206 ms
+2026-05-05 22:05:46.330 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 627.4813 ms
+2026-05-05 22:12:43.148 +03:00 [INF] Center "ff8b1df0-c45f-42d5-9d68-55fbce189535" registered by admin "15a17f44-5b0e-4722-be8a-2c160bd46366"
+2026-05-05 22:12:43.211 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 201 in 3522.9386 ms
+2026-05-05 22:12:50.706 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 74473.2563 ms
+2026-05-05 22:14:35.745 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 887.9586 ms
+2026-05-05 22:30:02.879 +03:00 [INF] Running appointment reminder job at "2026-05-05T19:30:02.8758110Z"
+2026-05-05 22:30:03.255 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 23:00:03.106 +03:00 [INF] Running appointment reminder job at "2026-05-05T20:00:03.1039530Z"
+2026-05-05 23:00:03.173 +03:00 [INF] Appointment reminder job completed.
+2026-05-05 23:30:03.378 +03:00 [INF] Running appointment reminder job at "2026-05-05T20:30:03.3755420Z"
+2026-05-05 23:30:03.459 +03:00 [INF] Appointment reminder job completed.

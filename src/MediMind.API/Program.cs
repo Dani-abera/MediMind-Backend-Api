@@ -56,13 +56,7 @@ try
     // Explicit registration for health records service (also discoverable from Program.cs).
     builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
     builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));
-    builder.Services
-        .AddHttpClient<IMlServiceClient, MlServiceClient>((sp, client) =>
-        {
-            var options = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<MlServiceOptions>>().Value;
-            client.BaseAddress = new Uri(options.BaseUrl);
-            client.Timeout = TimeSpan.FromSeconds(options.TimeoutSeconds);
-        });
+    builder.Services.AddSingleton<IMlServiceClient, OnnxMlClient>();
     builder.Services.Configure<TestOtpOptions>(builder.Configuration.GetSection(TestOtpOptions.SectionName));
     
 
