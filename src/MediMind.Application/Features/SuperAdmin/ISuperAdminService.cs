@@ -1,5 +1,6 @@
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
+using MediMind.Domain.Enums;
 
 namespace MediMind.Application.Features.SuperAdmin;
 
@@ -21,6 +22,16 @@ public interface ISuperAdminSubscriptionService
     Task<SubscriptionDetailDto> UpdateSubscriptionAsync(Guid centerId, UpdateSubscriptionDto dto, Guid superAdminId, CancellationToken ct = default);
     Task<SubscriptionDetailDto> ExtendSubscriptionAsync(Guid centerId, ExtendSubscriptionDto dto, Guid superAdminId, CancellationToken ct = default);
     Task<IReadOnlyList<SubscriptionHistoryDto>> GetHistoryAsync(Guid centerId, CancellationToken ct = default);
+    Task ApplyExpiredSubscriptionsAsync(CancellationToken ct = default);
+}
+
+public interface ISubscriptionPlanService
+{
+    Task<IReadOnlyList<SubscriptionPlanDto>> GetAllPlansAsync(bool includeInactive = false, CancellationToken ct = default);
+    Task<SubscriptionPlanDto> GetPlanByIdAsync(Guid planId, CancellationToken ct = default);
+    Task<SubscriptionPlanDto> CreatePlanAsync(CreateSubscriptionPlanDto dto, CancellationToken ct = default);
+    Task<SubscriptionPlanDto> UpdatePlanAsync(Guid planId, UpdateSubscriptionPlanDto dto, CancellationToken ct = default);
+    Task DeactivatePlanAsync(Guid planId, CancellationToken ct = default);
 }
 
 public interface ISuperAdminDoctorService

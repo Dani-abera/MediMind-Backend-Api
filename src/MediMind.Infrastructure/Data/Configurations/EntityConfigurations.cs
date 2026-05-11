@@ -446,8 +446,16 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.Id).HasColumnName("payment_id");
         builder.Property(p => p.PaymentRef).HasMaxLength(100).IsRequired();
         builder.Property(p => p.Amount).HasPrecision(10, 2).IsRequired();
+        builder.Property(p => p.BaseAmount).HasPrecision(10, 2);
+        builder.Property(p => p.VatPercent).HasPrecision(5, 2);
+        builder.Property(p => p.VatFee).HasPrecision(10, 2);
+        builder.Property(p => p.ServicePercent).HasPrecision(5, 2);
+        builder.Property(p => p.ServiceFee).HasPrecision(10, 2);
+        builder.Property(p => p.TotalAmount).HasPrecision(10, 2);
+        builder.Property(p => p.Currency).HasMaxLength(10).HasDefaultValue("ETB");
         builder.Property(p => p.PaymentMethod).HasMaxLength(50);
         builder.Property(p => p.Status).HasConversion<string>().HasMaxLength(20);
+        builder.Property(p => p.ReasonType).HasConversion<string>().HasMaxLength(30);
         builder.Property(p => p.ChapaTransactionId).HasMaxLength(100);
         builder.Property(p => p.ChapaCheckoutUrl).HasMaxLength(2000);
         builder.Property(p => p.ReceiptUrl).HasMaxLength(2000);
@@ -460,7 +468,59 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
             .HasFilter("chapa_transaction_id IS NOT NULL");
         builder.HasIndex(p => p.AppointmentId);
         builder.HasIndex(p => p.PatientId);
+        builder.HasIndex(p => p.CenterId);
         builder.HasIndex(p => p.Status);
+
+        builder.HasMany(p => p.Activities).WithOne(a => a.Payment)
+            .HasForeignKey(a => a.PaymentId).OnDelete(DeleteBehavior.Cascade);
+    }
+}
+
+public class PaymentActivityConfiguration : IEntityTypeConfiguration<PaymentActivity>
+{
+    public void Configure(EntityTypeBuilder<PaymentActivity> builder)
+    {
+        builder.ToTable("payment_activities");
+        builder.HasKey(a => a.Id);
+        builder.Property(a => a.Id).HasColumnName("activity_id");
+        builder.Property(a => a.Action).HasConversion<string>().HasMaxLength(20).IsRequired();
+        builder.Property(a => a.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+        builder.Property(a => a.ChapaTransactionId).HasMaxLength(100);
+        builder.Property(a => a.PaymentRef).HasMaxLength(100);
+        builder.Property(a => a.TotalAmount).HasPrecision(10, 2).IsRequired();
+        builder.Property(a => a.AmountPaid).HasPrecision(10, 2);
+        builder.Property(a => a.ChargePaid).HasPrecision(10, 2);
+        builder.Property(a => a.Currency).HasMaxLength(10).HasDefaultValue("ETB");
+        builder.Property(a => a.PaymentMethodRaw).HasMaxLength(50);
+        builder.Property(a => a.GatewayMessage).HasMaxLength(500);
+        builder.Property(a => a.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+        builder.HasIndex(a => a.PaymentId);
+        builder.HasIndex(a => a.CreatedAt);
+    }
+}
+
+public class SubscriptionPlanConfiguration : IEntityTypeConfiguration<SubscriptionPlan>
+{
+    public void Configure(EntityTypeBuilder<SubscriptionPlan> builder)
+    {
+        builder.ToTable("subscription_plans");
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Id).HasColumnName("plan_id");
+        builder.Property(p => p.Name).HasMaxLength(100).IsRequired();
+        builder.Property(p => p.Tier).HasConversion<int>().IsRequired();
+        builder.Property(p => p.MonthlyPrice).HasPrecision(10, 2).IsRequired();
+        builder.Property(p => p.YearlyPrice).HasPrecision(10, 2).IsRequired();
+        builder.Property(p => p.MaxDoctors).IsRequired();
+        builder.Property(p => p.MaxAppointmentsPerDay).IsRequired();
+        builder.Property(p => p.Description).HasMaxLength(1000);
+        builder.Property(p => p.IsActive).HasDefaultValue(true);
+        builder.Property(p => p.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+        JsonCollectionMapping.MapStringList(builder.Property(p => p.Features), "jsonb");
+
+        builder.HasIndex(p => p.Name).IsUnique();
+        builder.HasIndex(p => p.Tier);
+        builder.HasIndex(p => p.IsActive);
     }
 }
 

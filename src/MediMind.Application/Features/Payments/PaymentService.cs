@@ -45,6 +45,7 @@ public sealed class PaymentService(
     IChapaClient chapaClient,
     IChapaWebhookValidator webhookValidator,
     IChapaConfiguration chapaConfiguration,
+    IPaymentConfiguration paymentConfiguration,
     IStorageService storageService,
     IUnitOfWork unitOfWork,
     ILogger<PaymentService> logger) : IPaymentService
@@ -67,21 +68,31 @@ public sealed class PaymentService(
         var relation = relations.FirstOrDefault(x => x.DoctorId == appointment.DoctorId)
             ?? throw new DomainException("Doctor-center pricing configuration is missing.");
 
-        var paymentRef = $"PAY{DateTime.UtcNow:yyyyMMddHHmmssfff}";
+        var paymentRef = $"APPT-{Guid.NewGuid():N}";
         while (await paymentRepository.ExistsByRefAsync(paymentRef, ct))
-            paymentRef = $"PAY{DateTime.UtcNow:yyyyMMddHHmmssfff}";
+            paymentRef = $"APPT-{Guid.NewGuid():N}";
 
-        var payment = Payment.Initiate(
+        var amounts = PaymentHelper.CalculatePrice(
+            relation.ConsultationFee,
+            paymentConfiguration.VatPercent,
+            paymentConfiguration.ServicePercent);
+
+        var payment = Payment.InitiateWithFees(
             appointment.Id,
             patientId,
-            relation.ConsultationFee,
-            "Mobile Money",
+            appointment.CenterId,
+            amounts.BaseAmount,
+            amounts.VatPercent,
+            amounts.VatFee,
+            amounts.ServicePercent,
+            amounts.ServiceFee,
+            amounts.TotalAmount,
             paymentRef);
 
         await paymentRepository.CreateAsync(payment);
 
         var initialize = new ChapaInitializeRequest(
-            Amount: payment.Amount,
+            Amount: amounts.TotalAmount,
             Currency: "ETB",
             Email: appointment.Patient.Email,
             FirstName: appointment.Patient.FullName.Split(' ').FirstOrDefault() ?? appointment.Patient.FullName,
@@ -97,17 +108,28 @@ public sealed class PaymentService(
             string.IsNullOrWhiteSpace(initResponse.Data?.CheckoutUrl))
         {
             payment.MarkFailed();
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
+                payment.PaymentRef, amounts.TotalAmount,
+                gatewayMessage: initResponse?.Message ?? "Chapa initialization failed"));
             await unitOfWork.SaveChangesAsync(ct);
             throw new PaymentException(initResponse?.Message ?? "Unable to initialize payment with Chapa.");
         }
 
         payment.SetCheckoutUrl(initResponse.Data.CheckoutUrl);
+        payment.Activities.Add(PaymentActivity.Create(
+            payment.Id, PaymentAction.Charge, PaymentStatus.Pending,
+            payment.PaymentRef, amounts.TotalAmount,
+            gatewayMessage: "Checkout URL generated"));
         await unitOfWork.SaveChangesAsync(ct);
 
         return new PaymentInitiationDto(
             payment.Id,
             payment.PaymentRef,
-            payment.Amount,
+            amounts.BaseAmount,
+            amounts.VatFee,
+            amounts.ServiceFee,
+            amounts.TotalAmount,
             "ETB",
             payment.ChapaCheckoutUrl!,
             DateTime.UtcNow.AddMinutes(30),
@@ -157,10 +179,21 @@ public sealed class PaymentService(
                 !string.Equals(verify?.Data?.Status, "success", StringComparison.OrdinalIgnoreCase))
             {
                 payment.MarkFailed();
+                payment.Activities.Add(PaymentActivity.Create(
+                    payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
+                    payment.PaymentRef, payment.TotalAmount,
+                    gatewayMessage: "Chapa verify returned non-success"));
             }
             else
             {
                 payment.Complete(verify?.Data?.FlwRef);
+                payment.Activities.Add(PaymentActivity.Create(
+                    payment.Id, PaymentAction.Charge, PaymentStatus.Completed,
+                    payment.PaymentRef, payment.TotalAmount,
+                    chapaTransactionId: verify?.Data?.FlwRef,
+                    paymentMethodRaw: verify?.Data?.PaymentType,
+                    confirmedAt: DateTime.UtcNow));
+
                 if (payment.Appointment.Status == AppointmentStatus.Pending)
                     payment.Appointment.Approve(Guid.Empty);
 
@@ -174,6 +207,10 @@ public sealed class PaymentService(
         else if (string.Equals(status, "failed", StringComparison.OrdinalIgnoreCase))
         {
             payment.MarkFailed();
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
+                payment.PaymentRef, payment.TotalAmount,
+                gatewayMessage: "Chapa reported payment failed"));
         }
 
         payment.MarkWebhookReceived();

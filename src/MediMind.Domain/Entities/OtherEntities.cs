@@ -610,11 +610,23 @@ public class Payment : BaseEntity
     public Guid PaymentId => Id;
     public Guid AppointmentId { get; private set; }
     public Guid PatientId { get; private set; }
+    public Guid CenterId { get; private set; }
     public string PaymentRef { get; private set; } = string.Empty;
-    public decimal Amount { get; private set; }
+
+    // Fee breakdown — all stored at creation time, never recomputed
+    public decimal Amount { get; private set; }           // = TotalAmount (kept for backwards compat)
+    public decimal BaseAmount { get; private set; }
+    public decimal VatPercent { get; private set; }
+    public decimal VatFee { get; private set; }
+    public decimal ServicePercent { get; private set; }
+    public decimal ServiceFee { get; private set; }
+    public decimal TotalAmount { get; private set; }
+    public string Currency { get; private set; } = "ETB";
+
     public DateTime? PaymentDate { get; private set; }
     public string PaymentMethod { get; private set; } = "Mobile Money";
     public PaymentStatus Status { get; private set; } = PaymentStatus.Pending;
+    public PaymentReasonType ReasonType { get; private set; } = PaymentReasonType.Appointment;
     public string? ChapaTransactionId { get; private set; }
     public string? ChapaCheckoutUrl { get; private set; }
     public DateTime? WebhookReceivedAt { get; private set; }
@@ -623,9 +635,11 @@ public class Payment : BaseEntity
     // Navigation
     public Appointment Appointment { get; private set; } = null!;
     public Patient Patient { get; private set; } = null!;
+    public List<PaymentActivity> Activities { get; private set; } = [];
 
     private Payment() { }
 
+    /// <summary>Legacy factory — no fee breakdown (base amount = total).</summary>
     public static Payment Initiate(
         Guid appointmentId,
         Guid patientId,
@@ -644,6 +658,8 @@ public class Payment : BaseEntity
             PatientId = patientId,
             PaymentRef = paymentRef ?? $"PAY{DateTime.UtcNow:yyyyMMddHHmmssfff}",
             Amount = amount,
+            BaseAmount = amount,
+            TotalAmount = amount,
             PaymentMethod = paymentMethod,
             Status = PaymentStatus.Pending
         };
@@ -657,6 +673,42 @@ public class Payment : BaseEntity
             MediMind.Domain.Enums.PaymentMethod.Cash => "Cash",
             _ => "Mobile Money"
         });
+
+    /// <summary>Full factory with VAT + service fee breakdown and tenant isolation.</summary>
+    public static Payment InitiateWithFees(
+        Guid appointmentId,
+        Guid patientId,
+        Guid centerId,
+        decimal baseAmount,
+        decimal vatPercent,
+        decimal vatFee,
+        decimal servicePercent,
+        decimal serviceFee,
+        decimal totalAmount,
+        string paymentRef,
+        PaymentReasonType reasonType = PaymentReasonType.Appointment)
+    {
+        if (baseAmount <= 0)
+            throw new DomainException("Payment base amount must be greater than 0 ETB.");
+
+        return new Payment
+        {
+            AppointmentId = appointmentId,
+            PatientId = patientId,
+            CenterId = centerId,
+            PaymentRef = paymentRef,
+            Amount = totalAmount,
+            BaseAmount = baseAmount,
+            VatPercent = vatPercent,
+            VatFee = vatFee,
+            ServicePercent = servicePercent,
+            ServiceFee = serviceFee,
+            TotalAmount = totalAmount,
+            PaymentMethod = "Mobile Money",
+            Status = PaymentStatus.Pending,
+            ReasonType = reasonType
+        };
+    }
 
     public void Complete(string? chapaTransactionId)
     {
@@ -697,6 +749,114 @@ public class Payment : BaseEntity
         ReceiptUrl = receiptUrl;
         UpdateTimestamp();
     }
+}
+
+// ─── Payment Activity (append-only audit log per attempt) ─────────────────────
+
+public class PaymentActivity : BaseEntity
+{
+    public Guid PaymentId { get; private set; }
+    public PaymentAction Action { get; private set; }
+    public PaymentStatus Status { get; private set; }
+    public string? ChapaTransactionId { get; private set; }
+    public string? PaymentRef { get; private set; }
+    public decimal TotalAmount { get; private set; }
+    public decimal AmountPaid { get; private set; }
+    public decimal ChargePaid { get; private set; }
+    public string Currency { get; private set; } = "ETB";
+    public string? PaymentMethodRaw { get; private set; }
+    public string? GatewayMessage { get; private set; }
+    public DateTime? ConfirmedAt { get; private set; }
+
+    public Payment Payment { get; private set; } = null!;
+
+    private PaymentActivity() { }
+
+    public static PaymentActivity Create(
+        Guid paymentId,
+        PaymentAction action,
+        PaymentStatus status,
+        string? paymentRef,
+        decimal totalAmount,
+        string currency = "ETB",
+        string? chapaTransactionId = null,
+        string? paymentMethodRaw = null,
+        string? gatewayMessage = null,
+        decimal amountPaid = 0,
+        decimal chargePaid = 0,
+        DateTime? confirmedAt = null)
+    {
+        return new PaymentActivity
+        {
+            PaymentId = paymentId,
+            Action = action,
+            Status = status,
+            ChapaTransactionId = chapaTransactionId,
+            PaymentRef = paymentRef,
+            TotalAmount = totalAmount,
+            AmountPaid = amountPaid,
+            ChargePaid = chargePaid,
+            Currency = currency,
+            PaymentMethodRaw = paymentMethodRaw,
+            GatewayMessage = gatewayMessage,
+            ConfirmedAt = confirmedAt
+        };
+    }
+}
+
+// ─── Subscription Plan (master data, SuperAdmin managed) ──────────────────────
+
+public class SubscriptionPlan : BaseEntity
+{
+    public string Name { get; private set; } = string.Empty;
+    public SubscriptionPlanTier Tier { get; private set; }
+    public decimal MonthlyPrice { get; private set; }
+    public decimal YearlyPrice { get; private set; }
+    public int MaxDoctors { get; private set; }
+    public int MaxAppointmentsPerDay { get; private set; }
+    public List<string> Features { get; private set; } = [];
+    public string? Description { get; private set; }
+    public bool IsActive { get; private set; } = true;
+
+    public ICollection<HealthcareCenter> Centers { get; private set; } = [];
+
+    private SubscriptionPlan() { }
+
+    public static SubscriptionPlan Create(
+        string name,
+        SubscriptionPlanTier tier,
+        decimal monthlyPrice,
+        decimal yearlyPrice,
+        int maxDoctors,
+        int maxAppointmentsPerDay,
+        List<string> features,
+        string? description = null)
+    {
+        return new SubscriptionPlan
+        {
+            Name = name,
+            Tier = tier,
+            MonthlyPrice = monthlyPrice,
+            YearlyPrice = yearlyPrice,
+            MaxDoctors = maxDoctors,
+            MaxAppointmentsPerDay = maxAppointmentsPerDay,
+            Features = features,
+            Description = description
+        };
+    }
+
+    public void UpdatePricing(decimal monthlyPrice, decimal yearlyPrice, int maxDoctors, int maxAppointmentsPerDay, string? description)
+    {
+        MonthlyPrice = monthlyPrice;
+        YearlyPrice = yearlyPrice;
+        MaxDoctors = maxDoctors;
+        MaxAppointmentsPerDay = maxAppointmentsPerDay;
+        Description = description;
+        UpdateTimestamp();
+    }
+
+    public void Deactivate() { IsActive = false; UpdateTimestamp(); }
+    public void Activate()   { IsActive = true;  UpdateTimestamp(); }
 }
 
 // ─── Prescription Template ────────────────────────────────────────────────────

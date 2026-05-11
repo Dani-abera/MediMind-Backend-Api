@@ -708,6 +708,31 @@
         <member name="M:MediMind.API.Controllers.ReviewsController.GetCenterReviews(System.Guid,System.Threading.CancellationToken)">
             <summary>Get average rating and recent 10 reviews for a healthcare center (public).</summary>
         </member>
+        <member name="T:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController">
+            <summary>
+            Public read + SuperAdmin write endpoints for subscription plan master data.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.#ctor(MediMind.Application.Features.SuperAdmin.ISubscriptionPlanService)">
+            <summary>
+            Public read + SuperAdmin write endpoints for subscription plan master data.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.GetAll(System.Boolean,System.Threading.CancellationToken)">
+            <summary>List all active subscription plans (public).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a subscription plan by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Create(MediMind.Application.Features.SuperAdmin.CreateSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Create a new subscription plan (SuperAdmin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Update(System.Guid,MediMind.Application.Features.SuperAdmin.UpdateSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Update pricing and limits for an existing plan (SuperAdmin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Deactivate(System.Guid,System.Threading.CancellationToken)">
+            <summary>Deactivate a plan so it no longer appears to new subscribers (SuperAdmin only).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetAll(System.String,System.String,System.Nullable{MediMind.Domain.Enums.SubscriptionStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>List all healthcare centers with filters.</summary>
         </member>

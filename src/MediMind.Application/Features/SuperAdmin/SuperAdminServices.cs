@@ -156,7 +156,7 @@ public class SuperAdminSubscriptionService(
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
 
         var oldStatus = center.SubscriptionStatus;
-        center.ApproveSubscription(dto.StartDate, dto.EndDate);
+        center.ApproveSubscription(dto.Plan, dto.StartDate, dto.EndDate);
 
         var history = SubscriptionHistory.Create(centerId, oldStatus, SubscriptionStatus.Active, superAdminId, dto.Plan, dto.StartDate, dto.EndDate, dto.Notes);
         await centerRepository.AddSubscriptionHistoryAsync(history, ct);
@@ -166,6 +166,34 @@ public class SuperAdminSubscriptionService(
 
         var updatedHistory = await centerRepository.GetSubscriptionHistoryAsync(centerId, ct);
         return MapDetail(center, updatedHistory);
+    }
+
+    public async Task ApplyExpiredSubscriptionsAsync(CancellationToken ct = default)
+    {
+        var allCenters = await centerRepository.GetAllAsync(
+            new SuperAdminCenterQueryDto(null, null, null, 1, 10000), ct);
+
+        var active = allCenters.Items
+            .Where(c => c.SubscriptionStatus == SubscriptionStatus.Active
+                     && c.SubscriptionEndDate.HasValue
+                     && c.SubscriptionEndDate.Value < DateOnly.FromDateTime(DateTime.UtcNow))
+            .ToList();
+
+        foreach (var center in active)
+        {
+            var oldStatus = center.SubscriptionStatus;
+            center.ExpireIfOverdue();
+            if (center.SubscriptionStatus == SubscriptionStatus.Expired)
+            {
+                var history = SubscriptionHistory.Create(
+                    center.Id, oldStatus, SubscriptionStatus.Expired, Guid.Empty,
+                    notes: "Automatic expiry — subscription end date passed.");
+                await centerRepository.AddSubscriptionHistoryAsync(history, ct);
+            }
+        }
+
+        if (active.Count > 0)
+            await unitOfWork.SaveChangesAsync(ct);
     }
 
     public async Task<SubscriptionDetailDto> ExtendSubscriptionAsync(Guid centerId, ExtendSubscriptionDto dto, Guid superAdminId, CancellationToken ct = default)
@@ -199,7 +227,7 @@ public class SuperAdminSubscriptionService(
         new(
             center.Id,
             center.CenterName,
-            center.SubscriptionStatus == SubscriptionStatus.Active ? "Standard" : center.SubscriptionStatus.ToString(),
+            center.CurrentPlan ?? center.SubscriptionStatus.ToString(),
             center.SubscriptionStatus.ToString(),
             center.SubscriptionStartDate,
             center.SubscriptionEndDate,

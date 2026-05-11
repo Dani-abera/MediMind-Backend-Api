@@ -103,7 +103,11 @@ public enum PaymentStatus
     Pending,
     Completed,
     Failed,
-    Refunded
+    Refunded,
+    Initialized,
+    Cancelled,
+    Expired,
+    Free
 }
 
 public enum PaymentMethod
@@ -111,6 +115,30 @@ public enum PaymentMethod
     MobileMoney,   // Telebirr, M-Pesa
     Card,
     Cash
+}
+
+public enum PaymentAction
+{
+    Charge,
+    Refund,
+    Void,
+    Authorize
+}
+
+public enum PaymentReasonType
+{
+    Appointment,
+    Subscription
+}
+
+// ─── Subscription Plan ────────────────────────────────────────────────────────
+
+public enum SubscriptionPlanTier
+{
+    Trial    = 10,
+    Basic    = 20,
+    Standard = 30,
+    Premium  = 40
 }
 
 // ─── Prescription ─────────────────────────────────────────────────────────────

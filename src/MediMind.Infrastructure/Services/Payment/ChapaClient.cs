@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -114,10 +115,15 @@ public sealed class ChapaWebhookValidator : IChapaWebhookValidator
 {
     public bool ValidateSignature(string payload, string signature, string secret)
     {
+        if (string.IsNullOrEmpty(secret)) return false;
         using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
         var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(payload));
         var computed = Convert.ToHexString(hash).ToLowerInvariant();
-        return string.Equals(computed, signature?.Trim().ToLowerInvariant(), StringComparison.Ordinal);
+        var incoming = (signature?.Trim().ToLowerInvariant()) ?? string.Empty;
+        // Constant-time comparison prevents timing attacks
+        return CryptographicOperations.FixedTimeEquals(
+            Encoding.UTF8.GetBytes(computed),
+            Encoding.UTF8.GetBytes(incoming));
     }
 }
 
@@ -126,4 +132,19 @@ public sealed class ChapaConfigurationAdapter(IOptions<ChapaOptions> options) : 
     public string WebhookSecret => options.Value.WebhookSecret;
     public string CallbackUrl => options.Value.CallbackUrl;
     public string ReturnUrl => options.Value.ReturnUrl;
+}
+
+// ─── Payment fee configuration ────────────────────────────────────────────────
+
+public sealed class PaymentSettings
+{
+    public const string SectionName = "PaymentSettings";
+    public decimal VatPercent     { get; set; } = 15m;
+    public decimal ServicePercent { get; set; } = 2m;
+}
+
+public sealed class PaymentConfigurationAdapter(IOptions<PaymentSettings> options) : IPaymentConfiguration
+{
+    public decimal VatPercent     => options.Value.VatPercent;
+    public decimal ServicePercent => options.Value.ServicePercent;
 }

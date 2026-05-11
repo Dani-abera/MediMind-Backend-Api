@@ -1,5 +1,39 @@
 namespace MediMind.Application.Features.Payments;
 
+// ─── Payment configuration interface (implemented in Infrastructure) ──────────
+
+public interface IPaymentConfiguration
+{
+    decimal VatPercent { get; }
+    decimal ServicePercent { get; }
+}
+
+// ─── Fee calculation helper ───────────────────────────────────────────────────
+
+public record PaymentAmountBreakdown(
+    decimal BaseAmount,
+    decimal VatFee,
+    decimal ServiceFee,
+    decimal TotalAmount,
+    decimal VatPercent,
+    decimal ServicePercent);
+
+public static class PaymentHelper
+{
+    public static PaymentAmountBreakdown CalculatePrice(
+        decimal baseAmount,
+        decimal vatPercent,
+        decimal servicePercent)
+    {
+        var vatFee     = Math.Round(baseAmount * (vatPercent / 100m), 2);
+        var serviceFee = Math.Round(baseAmount * (servicePercent / 100m), 2);
+        var total      = baseAmount + vatFee + serviceFee;
+        return new(baseAmount, vatFee, serviceFee, total, vatPercent, servicePercent);
+    }
+}
+
+// ─── DTOs ─────────────────────────────────────────────────────────────────────
+
 public sealed record AppointmentDetailsDto(
     string DoctorName,
     string CenterName,
@@ -9,7 +43,10 @@ public sealed record AppointmentDetailsDto(
 public sealed record PaymentInitiationDto(
     Guid PaymentId,
     string PaymentRef,
-    decimal Amount,
+    decimal BaseAmount,
+    decimal VatFee,
+    decimal ServiceFee,
+    decimal TotalAmount,
     string Currency,
     string CheckoutUrl,
     DateTime ExpiresAt,

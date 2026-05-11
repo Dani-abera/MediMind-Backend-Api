@@ -17,6 +17,7 @@ using MediMind.Infrastructure.Services.Payment;
 using MediMind.Infrastructure.Services.Pdf;
 using MediMind.Infrastructure.Services.Prescriptions;
 using MediMind.Infrastructure.Services.Audit;
+using MediMind.Application.Features.SuperAdmin;
 using MediMind.Infrastructure.Services.SuperAdmin;
 using MediMind.Infrastructure.Services.Storage;
 using MediMind.Infrastructure.SignalR;
@@ -177,6 +178,7 @@ public static class DependencyInjection
         });
 
         services.Configure<ChapaOptions>(config.GetSection(ChapaOptions.SectionName));
+        services.Configure<PaymentSettings>(config.GetSection(PaymentSettings.SectionName));
         services.AddHttpClient<IChapaClient, ChapaClient>((sp, client) =>
         {
             var options = sp.GetRequiredService<IOptions<ChapaOptions>>().Value;
@@ -190,8 +192,12 @@ public static class DependencyInjection
         services.AddScoped<MediMind.Domain.Common.Interfaces.IPaymentService, ChapaPaymentService>();
         services.AddSingleton<IChapaWebhookValidator, ChapaWebhookValidator>();
         services.AddSingleton<IChapaConfiguration, ChapaConfigurationAdapter>();
+        services.AddSingleton<IPaymentConfiguration, PaymentConfigurationAdapter>();
+        services.AddScoped<ISubscriptionPlanService, SubscriptionPlanService>();
         services.AddScoped<Application.Features.Admin.IAuditLogger, Services.Audit.AuditLoggerService>();
         services.AddHostedService<SuperAdminSeeder>();
+        services.AddHostedService<SubscriptionPlanSeeder>();
+        services.AddHostedService<SubscriptionExpiryBackgroundService>();
         services.AddScoped<IQueueHubService, QueueHubService>();
         services.AddScoped<IVideoConsultationHubNotifier, VideoConsultationHubNotifier>();
 

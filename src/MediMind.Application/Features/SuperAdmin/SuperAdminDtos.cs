@@ -128,3 +128,36 @@ public record PlatformRevenueCsvRowDto(
 // ─── Queue Regeneration ───────────────────────────────────────────────────────
 
 public record RegenerateQueueDto(string ConfirmationMessage, DateOnly? Date);
+
+// ─── Subscription Plans ───────────────────────────────────────────────────────
+
+public record SubscriptionPlanDto(
+    Guid PlanId,
+    string Name,
+    SubscriptionPlanTier Tier,
+    decimal MonthlyPrice,
+    decimal YearlyPrice,
+    int MaxDoctors,
+    int MaxAppointmentsPerDay,
+    List<string> Features,
+    string? Description,
+    bool IsActive,
+    DateTime CreatedAt);
+
+public record CreateSubscriptionPlanDto(
+    string Name,
+    SubscriptionPlanTier Tier,
+    decimal MonthlyPrice,
+    decimal YearlyPrice,
+    int MaxDoctors,
+    int MaxAppointmentsPerDay,
+    List<string> Features,
+    string? Description);
+
+public record UpdateSubscriptionPlanDto(
+    decimal MonthlyPrice,
+    decimal YearlyPrice,
+    int MaxDoctors,
+    int MaxAppointmentsPerDay,
+    List<string>? Features,
+    string? Description);

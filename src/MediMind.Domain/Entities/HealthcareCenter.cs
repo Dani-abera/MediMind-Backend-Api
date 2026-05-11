@@ -26,6 +26,8 @@ public class HealthcareCenter : BaseEntity
 
     // Subscription
     public SubscriptionStatus SubscriptionStatus { get; private set; } = SubscriptionStatus.PendingApproval;
+    public string? CurrentPlan { get; private set; }
+    public Guid? SubscriptionPlanId { get; private set; }
     public DateOnly? SubscriptionStartDate { get; private set; }
     public DateOnly? SubscriptionEndDate { get; private set; }
     public string? RejectionReason { get; private set; }
@@ -102,7 +104,9 @@ public class HealthcareCenter : BaseEntity
     public void ApproveTrial()
     {
         SubscriptionStatus = SubscriptionStatus.Trial;
+        CurrentPlan = "Trial";
         SubscriptionStartDate = DateOnly.FromDateTime(DateTime.UtcNow);
+        SubscriptionEndDate = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(30));
         RejectionReason = null;
         UpdateTimestamp();
     }
@@ -114,6 +118,29 @@ public class HealthcareCenter : BaseEntity
         SubscriptionEndDate = endDate;
         RejectionReason = null;
         UpdateTimestamp();
+    }
+
+    public void ApproveSubscription(string plan, DateOnly startDate, DateOnly endDate)
+    {
+        CurrentPlan = plan;
+        ApproveSubscription(startDate, endDate);
+    }
+
+    public void SetSubscriptionPlan(Guid planId)
+    {
+        SubscriptionPlanId = planId;
+        UpdateTimestamp();
+    }
+
+    public void ExpireIfOverdue()
+    {
+        if (SubscriptionStatus == SubscriptionStatus.Active
+            && SubscriptionEndDate.HasValue
+            && SubscriptionEndDate.Value < DateOnly.FromDateTime(DateTime.UtcNow))
+        {
+            SubscriptionStatus = SubscriptionStatus.Expired;
+            UpdateTimestamp();
+        }
     }
 
     public void Reject(string reason)
@@ -164,8 +191,9 @@ public class HealthcareCenter : BaseEntity
     }
 
     public bool IsSubscriptionActive =>
-        SubscriptionStatus == SubscriptionStatus.Active &&
-        SubscriptionEndDate >= DateOnly.FromDateTime(DateTime.UtcNow);
+        SubscriptionStatus == SubscriptionStatus.Trial ||
+        (SubscriptionStatus == SubscriptionStatus.Active &&
+         SubscriptionEndDate >= DateOnly.FromDateTime(DateTime.UtcNow));
 }
 
 // ─── Subscription History ────────────────────────────────────────────────────
