@@ -55,6 +55,9 @@ public class UserRepository(MediMindDbContext context)
     public async Task<bool> ExistsByPhoneAsync(string phone, CancellationToken ct = default) =>
         await Db.Users.AnyAsync(u => u.PhoneNumber == phone, ct);
 
+    public async Task<bool> ExistsByPhoneForRoleAsync(string phone, UserType userType, CancellationToken ct = default) =>
+        await Db.Users.AnyAsync(u => u.PhoneNumber == phone && u.UserType == userType, ct);
+
     public async Task<PagedResult<User>> SearchAsync(SuperAdminUserQueryDto query, CancellationToken ct = default)
     {
         var q = Db.Users.AsQueryable();

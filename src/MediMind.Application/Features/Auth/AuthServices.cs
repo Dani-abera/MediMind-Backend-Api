@@ -141,6 +141,11 @@ public interface IAdminAuthService
     Task<DoctorCreatedResult> CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct);
 }
 
+public interface ISuperAdminAuthService
+{
+    Task<AuthResult> LoginAsync(string email, string password, CancellationToken ct);
+}
+
 // ─── Patient Auth Service ─────────────────────────────────────────────────────
 
 public class PatientAuthService(
@@ -160,7 +165,7 @@ public class PatientAuthService(
     {
         if (await userRepository.ExistsByEmailAsync(request.Email, ct))
             throw new DomainException("Account already exists. Please login.");
-        if (await userRepository.ExistsByPhoneAsync(request.PhoneNumber, ct))
+        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Patient, ct))
             throw new DomainException("Phone number already registered. Please login.");
 
         var patient = new Patient(request.Email, request.PhoneNumber, request.FullName, request.DateOfBirth, request.Gender);
@@ -286,7 +291,7 @@ public class PatientAuthService(
             otp.MarkUsed();
         }
 
-        if (await userRepository.ExistsByPhoneAsync(request.NewPhoneNumber, ct))
+        if (await userRepository.ExistsByPhoneForRoleAsync(request.NewPhoneNumber, user.UserType, ct))
             throw new DomainException("This phone number is already in use.");
 
         user.ChangePhone(request.NewPhoneNumber);
@@ -337,9 +342,6 @@ public class DoctorAuthService(
             latestOtp.MarkUsed();
         }
 
-        if (!doctor.LicenseVerified)
-            throw new DomainException("Your medical license has not been verified yet. Contact your center administrator or support.");
-
         doctor.RecordLogin();
         var tokens = await authService.GenerateAuthTokensAsync(doctor, ct);
         await unitOfWork.SaveChangesAsync(ct);
@@ -374,7 +376,7 @@ public class AdminAuthService(
     {
         if (await userRepository.ExistsByEmailAsync(request.Email, ct))
             throw new DomainException("Email already registered.");
-        if (await userRepository.ExistsByPhoneAsync(request.PhoneNumber, ct))
+        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Admin, ct))
             throw new DomainException("Phone number already registered.");
 
         var admin = new HealthcareCenterAdmin(
@@ -423,7 +425,7 @@ public class AdminAuthService(
             ?? throw new NotFoundException(nameof(User), currentUser.UserId);
         if (admin.UserType != UserType.Admin)
             throw new ForbiddenException();
-        if (await userRepository.ExistsByPhoneAsync(request.PhoneNumber, ct))
+        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Doctor, ct))
             throw new DomainException("Phone number already registered.");
 
         var badgeNumber = await GenerateUniqueBadgeNumberAsync(doctorRepository, ct);
@@ -471,5 +473,42 @@ public class AdminAuthService(
                 return candidate;
         }
         throw new DomainException("Unable to generate unique badge number. Please try again.");
+    }
+}
+
+// ─── SuperAdmin Auth Service ──────────────────────────────────────────────────
+
+public class SuperAdminAuthService(
+    IUserRepository userRepository,
+    IPasswordService passwordService,
+    IAuthService authService,
+    IUnitOfWork unitOfWork) : ISuperAdminAuthService
+{
+    private static readonly Dictionary<string, (int Count, DateTime LockedUntil)> LoginFailures = [];
+    private static readonly TimeSpan LockDuration = TimeSpan.FromMinutes(15);
+    private const int MaxFailedAttempts = 5;
+
+    public async Task<AuthResult> LoginAsync(string email, string password, CancellationToken ct)
+    {
+        var key = email.ToLowerInvariant();
+        if (LoginFailures.TryGetValue(key, out var failure)
+            && failure.Count >= MaxFailedAttempts
+            && failure.LockedUntil > DateTime.UtcNow)
+            throw new DomainException("Too many failed attempts. Account temporarily locked for 15 minutes.");
+
+        var user = await userRepository.GetByEmailAsync(email, ct);
+        if (user is null || user.UserType != UserType.SuperAdmin || !passwordService.VerifyPassword(password, user.PasswordHash))
+        {
+            var count = LoginFailures.TryGetValue(key, out var f) ? f.Count + 1 : 1;
+            LoginFailures[key] = (count, DateTime.UtcNow.Add(LockDuration));
+            throw new DomainException("Invalid credentials.");
+        }
+
+        LoginFailures.Remove(key);
+        user.RecordLogin();
+        await unitOfWork.SaveChangesAsync(ct);
+
+        var tokens = await authService.GenerateAuthTokensAsync(user, ct);
+        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, user.Id, user.UserType.ToString(), user.FullName);
     }
 }

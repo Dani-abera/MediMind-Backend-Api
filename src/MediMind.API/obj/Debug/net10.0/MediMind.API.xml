@@ -165,10 +165,10 @@
             </summary>
         </member>
         <member name="T:MediMind.API.Controllers.AuthController">
-            <summary>Authentication — Patient, Doctor, Admin, shared token operations.</summary>
+            <summary>Authentication — Patient, Doctor, Admin, SuperAdmin, and shared token operations.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AuthController.#ctor(MediMind.Application.Features.Auth.IPatientAuthService,MediMind.Application.Features.Auth.IDoctorAuthService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Domain.Common.Interfaces.ITokenService,MediMind.Domain.Common.Interfaces.IUserRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
-            <summary>Authentication — Patient, Doctor, Admin, shared token operations.</summary>
+        <member name="M:MediMind.API.Controllers.AuthController.#ctor(MediMind.Application.Features.Auth.IPatientAuthService,MediMind.Application.Features.Auth.IDoctorAuthService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Application.Features.Auth.ISuperAdminAuthService,MediMind.Domain.Common.Interfaces.ITokenService,MediMind.Domain.Common.Interfaces.IUserRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Authentication — Patient, Doctor, Admin, SuperAdmin, and shared token operations.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AuthController.PatientRegister(MediMind.Application.Features.Auth.RegisterPatientRequest,System.Threading.CancellationToken)">
             <summary>Register a new patient account (FR-001). Sends OTP to phone number.</summary>
@@ -205,6 +205,19 @@
         </member>
         <member name="M:MediMind.API.Controllers.AuthController.AdminLogin(MediMind.API.Controllers.AdminLoginApiRequest,System.Threading.CancellationToken)">
             <summary>Admin login with email and password (FR-005).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.SuperAdminLogin(MediMind.API.Controllers.AdminLoginApiRequest,System.Threading.CancellationToken)">
+             <summary>SuperAdmin login with email and password. Returns a JWT with <c>user_type = SuperAdmin</c>.</summary>
+             <remarks>
+             Use this endpoint to authenticate as the platform SuperAdmin.
+            
+             Default seed credentials (set in `appsettings.json`):
+             - **Email:** `superadmin@medimind.et`
+             - **Password:** `MediMind@2025!`
+            
+             After 5 consecutive failures the account is locked for **15 minutes**.
+             The returned `accessToken` is valid for 15 minutes; use `/auth/refresh-token` to extend the session.
+             </remarks>
         </member>
         <member name="M:MediMind.API.Controllers.AuthController.AdminCreateDoctor(MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
             <summary>Admin creates a doctor account linked to their healthcare center (FR-006).</summary>
@@ -307,6 +320,10 @@
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.Nearby(System.Double,System.Double,System.Double,System.Threading.CancellationToken)">
             <summary>Find healthcare centers near a geographic coordinate (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetMyCenter(System.Threading.CancellationToken)">
+            <summary>Get the healthcare center registered by the authenticated admin.</summary>
+            <remarks>Returns the center linked to the admin's JWT tenant claim. 404 if the admin has not registered a center yet.</remarks>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetById(System.Guid,System.Threading.CancellationToken)">
             <summary>Get a healthcare center's full details by ID (FR-031).</summary>

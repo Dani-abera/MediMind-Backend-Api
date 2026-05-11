@@ -1,12 +1,12 @@
 version: "3.9"
 
-# ─── MediMind Full Development Stack ──────────────────────────────────────────
-# Run: docker-compose up -d
-# Swagger UI: http://localhost:5000
-# Hangfire Dashboard: http://localhost:5000/hangfire
-# SignalR Hub: ws://localhost:5000/hubs/queue
-# ML Service: http://localhost:5001
-# pgAdmin: http://localhost:5050
+# ─── MediMind Development Stack ───────────────────────────────────────────────
+# Run:              docker compose up -d
+# API:              http://localhost:5000
+# Hangfire:         http://localhost:5000/hangfire
+# SignalR (queue):  ws://localhost:5000/hubs/queue
+# SignalR (video):  ws://localhost:5000/hubs/video
+# pgAdmin:          http://localhost:5050
 
 services:
 
@@ -33,7 +33,7 @@ services:
     networks:
       - medimind_net
 
-  # ─── pgAdmin (Database GUI) ───────────────────────────────────────────────────
+  # ─── pgAdmin ─────────────────────────────────────────────────────────────────
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: medimind_pgadmin
@@ -58,19 +58,19 @@ services:
     container_name: medimind_api
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: "http://+:8080"
       ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=medimind_db;Username=postgres;Password=medimind_dev_password;"
       Jwt__SecretKey: "dev-secret-key-change-this-in-production-minimum-32-chars!!"
       Jwt__Issuer: "MediMind"
-      Jwt__Audience: "MediMind"
-      MlService__BaseUrl: "http://ml_service:5001"
+      Jwt__Audience: "MediMindUsers"
+      MlService__ModelDirectory: "models"
       Chapa__SecretKey: "CHASECK_TEST-your-test-key"
-      GeezsMS__ApiKey: "your-geez-sms-key"
-      # Optional: Cloudinary for prescriptions / images (omit to use local /uploads)
-      # Cloudinary__CloudName: "your-cloud-name"
-      # Cloudinary__ApiKey: "your-api-key"
-      # Cloudinary__ApiSecret: "your-api-secret"
+      GeezSms__ApiKey: "your-geez-sms-key"
+      Firebase__ServiceAccountPath: "/run/secrets/firebase_sa"
+      # Cloudinary__CloudName: ""
+      # Cloudinary__ApiKey: ""
+      # Cloudinary__ApiSecret: ""
     ports:
       - "5000:8080"
     depends_on:
@@ -78,23 +78,7 @@ services:
         condition: service_healthy
     volumes:
       - ./logs:/app/logs
-    networks:
-      - medimind_net
-
-  # ─── Python Flask ML Microservice ─────────────────────────────────────────────
-  ml_service:
-    build:
-      context: ./ml
-      dockerfile: Dockerfile.ml
-    container_name: medimind_ml
-    restart: unless-stopped
-    environment:
-      FLASK_ENV: development
-      MODEL_PATH: /app/models
-    ports:
-      - "5001:5001"
-    volumes:
-      - ./ml/models:/app/models
+      - ./src/MediMind.API/firebase-service-account.json:/run/secrets/firebase_sa:ro
     networks:
       - medimind_net
 

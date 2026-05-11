@@ -56,6 +56,21 @@ public class HealthcareCentersController(
         return Ok(result);
     }
 
+    /// <summary>Get the healthcare center registered by the authenticated admin.</summary>
+    /// <remarks>Returns the center linked to the admin's JWT tenant claim. 404 if the admin has not registered a center yet.</remarks>
+    [Tags("Admin — Center")]
+    [HttpGet("mine")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(typeof(CenterResponseDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetMyCenter(CancellationToken ct)
+    {
+        if (currentUser.TenantId is not { } centerId)
+            return NotFound(new { error = "No healthcare center is linked to your account yet. Please register one first." });
+        var result = await centerService.GetByIdAsync(centerId);
+        return Ok(result);
+    }
+
     /// <summary>Get a healthcare center's full details by ID (FR-031).</summary>
     [Tags("Public")]
     [HttpGet("{id:guid}")]

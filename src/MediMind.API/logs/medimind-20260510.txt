@@ -1,0 +1,604 @@
+2026-05-10 00:16:52.347 +03:00 [INF] Running appointment reminder job at "2026-05-09T21:16:52.3472650Z"
+2026-05-10 00:16:52.449 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 01:15:24.334 +03:00 [INF] Running appointment reminder job at "2026-05-09T22:15:24.3345050Z"
+2026-05-10 01:15:24.348 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 02:04:57.761 +03:00 [INF] Running appointment reminder job at "2026-05-09T23:04:57.7609870Z"
+2026-05-10 02:04:57.887 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 02:37:44.396 +03:00 [INF] Running appointment reminder job at "2026-05-09T23:37:44.3962440Z"
+2026-05-10 02:37:44.436 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 03:32:40.018 +03:00 [INF] Running appointment reminder job at "2026-05-10T00:32:40.0185970Z"
+2026-05-10 03:32:40.082 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 04:21:42.428 +03:00 [INF] Running appointment reminder job at "2026-05-10T01:21:42.4284230Z"
+2026-05-10 04:21:42.442 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 04:57:02.543 +03:00 [INF] Running appointment reminder job at "2026-05-10T01:57:02.5424520Z"
+2026-05-10 04:57:02.555 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 05:45:43.462 +03:00 [INF] Running appointment reminder job at "2026-05-10T02:45:43.4620240Z"
+2026-05-10 05:45:43.483 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 06:25:05.049 +03:00 [INF] Running appointment reminder job at "2026-05-10T03:25:05.0494240Z"
+2026-05-10 06:25:05.068 +03:00 [INF] QueueGenerationJob triggered for date "2026-05-09"
+2026-05-10 06:25:05.106 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 06:25:05.119 +03:00 [INF] Handling GenerateDailyQueuesCommand
+2026-05-10 06:25:05.415 +03:00 [INF] Handled GenerateDailyQueuesCommand in 295ms
+2026-05-10 06:25:05.418 +03:00 [INF] Generated 0 queues for 0 centers.
+2026-05-10 07:11:04.814 +03:00 [INF] Running appointment reminder job at "2026-05-10T04:11:04.8135320Z"
+2026-05-10 07:11:04.848 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 07:43:39.021 +03:00 [INF] Running appointment reminder job at "2026-05-10T04:43:39.0209510Z"
+2026-05-10 07:43:39.044 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 08:15:52.639 +03:00 [INF] Running appointment reminder job at "2026-05-10T05:15:52.6388530Z"
+2026-05-10 08:15:52.683 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 09:19:31.124 +03:00 [INF] Running appointment reminder job at "2026-05-10T06:19:31.1247490Z"
+2026-05-10 09:19:31.163 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 09:41:30.665 +03:00 [INF] Running appointment reminder job at "2026-05-10T06:41:30.6648800Z"
+2026-05-10 09:41:30.710 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 10:00:00.817 +03:00 [INF] Running appointment reminder job at "2026-05-10T07:00:00.8122390Z"
+2026-05-10 10:00:00.878 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 10:30:00.990 +03:00 [INF] Running appointment reminder job at "2026-05-10T07:30:00.9848870Z"
+2026-05-10 10:30:01.045 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 10:57:51.086 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 123.8815 ms
+2026-05-10 10:57:52.242 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 1076.2075 ms
+2026-05-10 10:57:59.480 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 73.3031 ms
+2026-05-10 10:58:08.982 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 19.3308 ms
+2026-05-10 10:59:00.384 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 244.0228 ms
+2026-05-10 11:00:01.330 +03:00 [INF] Running appointment reminder job at "2026-05-10T08:00:01.3305590Z"
+2026-05-10 11:00:01.364 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 11:00:03.912 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 400 in 178.4883 ms
+2026-05-10 11:00:49.765 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 400 in 23.5383 ms
+2026-05-10 11:09:51.238 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 191.9947 ms
+2026-05-10 11:10:49.419 +03:00 [INF] Center "8bb8f424-ced1-4eca-9cdd-437c5b212adf" registered by admin "15cc805c-cca6-4b6f-b48f-a8e5f0e30bb5"
+2026-05-10 11:10:49.500 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 201 in 1147.4401 ms
+2026-05-10 11:13:23.262 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 24.0136 ms
+2026-05-10 11:13:48.138 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 38.8304 ms
+2026-05-10 11:17:53.482 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 50.1700 ms
+2026-05-10 11:19:11.110 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 401 in 24.5751 ms
+2026-05-10 11:19:37.775 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 376.3468 ms
+2026-05-10 11:19:38.000 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0350 ms
+2026-05-10 11:19:38.207 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-10 11:19:38.399 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-10 11:19:38.457 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 450.6218 ms
+2026-05-10 11:20:38.105 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 40.9062 ms
+2026-05-10 11:20:38.198 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 96.3063 ms
+2026-05-10 11:21:38.005 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.6098 ms
+2026-05-10 11:21:38.128 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 129.0468 ms
+2026-05-10 11:22:38.002 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.4837 ms
+2026-05-10 11:22:38.061 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 63.1336 ms
+2026-05-10 11:23:38.171 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.4520 ms
+2026-05-10 11:23:38.230 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 67.1845 ms
+2026-05-10 11:24:38.031 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.8590 ms
+2026-05-10 11:24:38.089 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 66.4508 ms
+2026-05-10 11:25:18.259 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 20.5521 ms
+2026-05-10 11:25:18.898 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.0630 ms
+2026-05-10 11:25:18.961 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 60.9917 ms
+2026-05-10 11:25:39.977 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 53.4767 ms
+2026-05-10 11:25:41.288 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 20.6996 ms
+2026-05-10 11:25:42.174 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 24.8475 ms
+2026-05-10 11:25:48.815 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 39.9500 ms
+2026-05-10 11:25:57.443 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-10 11:25:57.592 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 357.0030 ms
+2026-05-10 11:26:04.646 +03:00 [INF] HTTP POST /api/v1/queue/call-next responded 400 in 58.2387 ms
+2026-05-10 11:26:10.774 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 220.6854 ms
+2026-05-10 11:26:12.215 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 61.4994 ms
+2026-05-10 11:26:15.093 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 46.8215 ms
+2026-05-10 11:26:17.016 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 200 in 60.3003 ms
+2026-05-10 11:26:18.777 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9754 ms
+2026-05-10 11:26:18.805 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 28.7798 ms
+2026-05-10 11:27:18.781 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1287 ms
+2026-05-10 11:27:18.820 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 41.4515 ms
+2026-05-10 11:27:25.127 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-10 11:27:25.370 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.NotFoundException: Doctor with key '00000000-0000-0000-0000-000000000000' was not found.
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.AddDoctorToCenterAsync(Guid centerId, AddDoctorDto dto, Guid adminId) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 137
+   at MediMind.API.Controllers.HealthcareCentersController.AddDoctor(Guid id, AddDoctorDto dto, CancellationToken ct)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-10 11:27:25.489 +03:00 [INF] HTTP POST /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 404 in 511.1353 ms
+2026-05-10 11:27:31.563 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/patients responded 200 in 62.3343 ms
+2026-05-10 11:27:39.045 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 115.4648 ms
+2026-05-10 11:27:54.303 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/analytics responded 200 in 255.0405 ms
+2026-05-10 11:27:59.262 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/revenue responded 200 in 56.9820 ms
+2026-05-10 11:28:01.134 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 200 in 7.4296 ms
+2026-05-10 11:28:18.775 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.8601 ms
+2026-05-10 11:28:18.810 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 37.9106 ms
+2026-05-10 11:28:27.239 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/analytics/export/csv responded 200 in 142.4713 ms
+2026-05-10 11:28:29.745 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/admins responded 200 in 31.2753 ms
+2026-05-10 11:28:31.977 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/audit-log responded 200 in 57.6045 ms
+2026-05-10 11:28:35.495 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/config responded 405 in 3.1250 ms
+2026-05-10 11:28:42.110 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/branding responded 404 in 1.7078 ms
+2026-05-10 11:28:47.727 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/working-hours responded 404 in 4.9098 ms
+2026-05-10 11:29:02.825 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/config responded 405 in 7.5132 ms
+2026-05-10 11:29:18.785 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5413 ms
+2026-05-10 11:29:18.815 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 34.4482 ms
+2026-05-10 11:29:41.684 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 38.4070 ms
+2026-05-10 11:30:01.512 +03:00 [INF] Running appointment reminder job at "2026-05-10T08:30:01.5123050Z"
+2026-05-10 11:30:01.532 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 11:30:02.545 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 35.6969 ms
+2026-05-10 11:30:03.187 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 12.0530 ms
+2026-05-10 11:30:14.609 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 45.9446 ms
+2026-05-10 11:30:15.447 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 11.9824 ms
+2026-05-10 11:30:16.478 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 11.8768 ms
+2026-05-10 11:30:18.776 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 0.5120 ms
+2026-05-10 11:30:18.808 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 31.4337 ms
+2026-05-10 11:31:18.781 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1978 ms
+2026-05-10 11:31:18.812 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 33.0017 ms
+2026-05-10 11:31:28.485 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/admins responded 200 in 27.6518 ms
+2026-05-10 11:32:00.894 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 41.2848 ms
+2026-05-10 11:32:01.942 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1745 ms
+2026-05-10 11:32:01.978 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 39.3310 ms
+2026-05-10 11:32:03.901 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 41.4574 ms
+2026-05-10 11:32:10.603 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 47.1966 ms
+2026-05-10 11:32:11.566 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 22.3902 ms
+2026-05-10 11:32:12.850 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 12.7324 ms
+2026-05-10 11:32:13.662 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 200 in 13.1039 ms
+2026-05-10 11:33:03.880 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.5134 ms
+2026-05-10 11:33:04.042 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 165.7626 ms
+2026-05-10 11:33:23.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 200 in 21.3724 ms
+2026-05-10 11:33:23.725 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors responded 200 in 9.5134 ms
+2026-05-10 11:34:01.923 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5644 ms
+2026-05-10 11:34:01.977 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 57.6628 ms
+2026-05-10 11:35:02.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 61.0943 ms
+2026-05-10 11:35:02.254 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 401 in 132.7777 ms
+2026-05-10 11:35:56.225 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 325.8494 ms
+2026-05-10 11:36:01.908 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7705 ms
+2026-05-10 11:37:01.906 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9656 ms
+2026-05-10 11:37:47.869 +03:00 [INF] Center "96eec7f8-cb5a-4358-8ded-eb76b878649f" registered by admin "91262dd9-0948-450a-bd02-f7fb37e42bee"
+2026-05-10 11:37:47.884 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 201 in 205.9030 ms
+2026-05-10 11:37:55.899 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 15.1395 ms
+2026-05-10 11:38:01.908 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5269 ms
+2026-05-10 11:39:01.988 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.4555 ms
+2026-05-10 11:40:01.953 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.0471 ms
+2026-05-10 11:41:01.956 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.4322 ms
+2026-05-10 11:41:19.711 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 414.0285 ms
+2026-05-10 11:41:21.809 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 145.8615 ms
+2026-05-10 11:41:22.754 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 111.3290 ms
+2026-05-10 11:41:23.535 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 107.8282 ms
+2026-05-10 11:41:38.113 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 17.5286 ms
+2026-05-10 11:42:12.710 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 23.7011 ms
+2026-05-10 11:43:04.111 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 278.2984 ms
+2026-05-10 11:43:05.713 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 116.6898 ms
+2026-05-10 11:43:06.571 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 109.3682 ms
+2026-05-10 11:43:07.204 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 110.4793 ms
+2026-05-10 11:43:07.753 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 105.4590 ms
+2026-05-10 11:43:08.200 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 106.3316 ms
+2026-05-10 11:43:08.592 +03:00 [INF] Request post:/api/v1/auth/superadmin/login from IP 192.168.43.137 has been blocked, quota 10/5m exceeded by 1. Blocked by rule POST:/api/v1/auth/*, TraceIdentifier 0HNLDRUSFFF0L:00000007. MonitorMode: False
+2026-05-10 11:43:08.608 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 429 in 31.9284 ms
+2026-05-10 11:43:10.996 +03:00 [INF] Request post:/api/v1/auth/superadmin/login from IP 192.168.43.137 has been blocked, quota 10/5m exceeded by 2. Blocked by rule POST:/api/v1/auth/*, TraceIdentifier 0HNLDRUSFFF0L:00000008. MonitorMode: False
+2026-05-10 11:43:11.000 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 429 in 5.8118 ms
+2026-05-10 11:43:14.422 +03:00 [INF] Request post:/api/v1/auth/superadmin/login from IP 192.168.43.137 has been blocked, quota 10/5m exceeded by 3. Blocked by rule POST:/api/v1/auth/*, TraceIdentifier 0HNLDRUSFFF0M:00000001. MonitorMode: False
+2026-05-10 11:43:14.428 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 429 in 10.3255 ms
+2026-05-10 11:43:17.438 +03:00 [INF] Request post:/api/v1/auth/superadmin/login from IP 192.168.43.137 has been blocked, quota 10/5m exceeded by 4. Blocked by rule POST:/api/v1/auth/*, TraceIdentifier 0HNLDRUSFFF0M:00000002. MonitorMode: False
+2026-05-10 11:43:17.441 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 429 in 5.2710 ms
+2026-05-10 11:43:17.710 +03:00 [INF] Request post:/api/v1/auth/superadmin/login from IP 192.168.43.137 has been blocked, quota 10/5m exceeded by 5. Blocked by rule POST:/api/v1/auth/*, TraceIdentifier 0HNLDRUSFFF0M:00000003. MonitorMode: False
+2026-05-10 11:43:17.710 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 429 in 1.3176 ms
+2026-05-10 11:43:45.036 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 182.2218 ms
+2026-05-10 11:43:45.304 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.5813 ms
+2026-05-10 11:43:45.425 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 129.7891 ms
+2026-05-10 11:44:28.151 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 68.6043 ms
+2026-05-10 11:44:45.328 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.2468 ms
+2026-05-10 11:44:45.366 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 44.8095 ms
+2026-05-10 11:45:45.308 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5091 ms
+2026-05-10 11:45:45.354 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 48.5389 ms
+2026-05-10 11:46:25.537 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 2.9939 ms
+2026-05-10 11:46:26.591 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.6206 ms
+2026-05-10 11:46:26.674 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 85.0351 ms
+2026-05-10 11:46:31.643 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 53.2970 ms
+2026-05-10 11:46:32.535 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 33.1795 ms
+2026-05-10 11:46:50.668 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 40.0090 ms
+2026-05-10 11:46:51.703 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7022 ms
+2026-05-10 11:46:51.788 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 88.1754 ms
+2026-05-10 11:47:02.277 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 32.1948 ms
+2026-05-10 11:47:08.038 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 49.8778 ms
+2026-05-10 11:47:14.762 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 41.9447 ms
+2026-05-10 11:47:25.908 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 132.9368 ms
+2026-05-10 11:47:51.723 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6702 ms
+2026-05-10 11:47:51.773 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 53.1216 ms
+2026-05-10 11:48:51.736 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 18.0380 ms
+2026-05-10 11:48:51.785 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 66.8782 ms
+2026-05-10 11:49:51.927 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 32.5764 ms
+2026-05-10 11:49:52.165 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 134.8296 ms
+2026-05-10 11:50:51.763 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.7458 ms
+2026-05-10 11:50:51.831 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 64.0159 ms
+2026-05-10 11:51:07.078 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 8.1379 ms
+2026-05-10 11:51:08.143 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3379 ms
+2026-05-10 11:51:08.207 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 68.5967 ms
+2026-05-10 11:52:08.152 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2547 ms
+2026-05-10 11:52:08.242 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 92.4033 ms
+2026-05-10 11:52:35.860 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 146.5195 ms
+2026-05-10 11:52:36.567 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 21.3567 ms
+2026-05-10 11:52:37.166 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 25.0366 ms
+2026-05-10 11:52:37.799 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 22.8195 ms
+2026-05-10 11:52:38.315 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 24.3817 ms
+2026-05-10 11:52:39.406 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 87.8135 ms
+2026-05-10 11:52:41.631 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 20.8184 ms
+2026-05-10 11:52:42.196 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 22.5534 ms
+2026-05-10 11:52:48.664 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 34.8459 ms
+2026-05-10 11:53:12.890 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.5341 ms
+2026-05-10 11:53:12.995 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 118.9712 ms
+2026-05-10 12:09:04.989 +03:00 [INF] Running appointment reminder job at "2026-05-10T09:09:04.9863790Z"
+2026-05-10 12:09:05.038 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 12:09:07.508 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 31.4095 ms
+2026-05-10 12:09:07.545 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 401 in 24.5006 ms
+2026-05-10 12:09:09.456 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.3348 ms
+2026-05-10 12:25:05.846 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 10.9038 ms
+2026-05-10 12:25:05.847 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.5524 ms
+2026-05-10 12:25:05.940 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 401 in 10.2373 ms
+2026-05-10 12:25:08.157 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.0295 ms
+2026-05-10 12:25:08.164 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3265 ms
+2026-05-10 12:41:00.138 +03:00 [INF] Running appointment reminder job at "2026-05-10T09:41:00.1377640Z"
+2026-05-10 12:41:00.166 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 12:41:05.919 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.2448 ms
+2026-05-10 12:41:05.920 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.3063 ms
+2026-05-10 12:41:08.138 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6410 ms
+2026-05-10 12:41:08.139 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8801 ms
+2026-05-10 12:56:43.927 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9563 ms
+2026-05-10 12:56:43.938 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2669 ms
+2026-05-10 12:57:08.190 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7860 ms
+2026-05-10 12:57:08.192 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8510 ms
+2026-05-10 13:12:56.643 +03:00 [INF] Running appointment reminder job at "2026-05-10T10:12:56.6435110Z"
+2026-05-10 13:12:56.681 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 13:13:06.297 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.8842 ms
+2026-05-10 13:13:06.297 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7171 ms
+2026-05-10 13:13:08.135 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 0.2660 ms
+2026-05-10 13:13:08.139 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.3982 ms
+2026-05-10 13:14:08.193 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 9.4588 ms
+2026-05-10 13:14:08.192 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.4010 ms
+2026-05-10 13:15:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9775 ms
+2026-05-10 13:15:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.0321 ms
+2026-05-10 13:16:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1380 ms
+2026-05-10 13:16:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5239 ms
+2026-05-10 13:17:08.187 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.5614 ms
+2026-05-10 13:17:08.187 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.7280 ms
+2026-05-10 13:18:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6915 ms
+2026-05-10 13:18:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7834 ms
+2026-05-10 13:19:08.259 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1783 ms
+2026-05-10 13:19:08.260 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.5632 ms
+2026-05-10 13:20:08.189 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.0926 ms
+2026-05-10 13:20:08.189 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3632 ms
+2026-05-10 13:21:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.0717 ms
+2026-05-10 13:21:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.2121 ms
+2026-05-10 13:22:10.373 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.4296 ms
+2026-05-10 13:22:10.373 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3590 ms
+2026-05-10 13:23:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9437 ms
+2026-05-10 13:23:08.186 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 9.8432 ms
+2026-05-10 13:24:08.193 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.8521 ms
+2026-05-10 13:24:08.195 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.9244 ms
+2026-05-10 13:25:08.166 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.3301 ms
+2026-05-10 13:25:08.166 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3496 ms
+2026-05-10 13:26:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3186 ms
+2026-05-10 13:26:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3417 ms
+2026-05-10 13:27:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3992 ms
+2026-05-10 13:27:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7407 ms
+2026-05-10 13:28:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1048 ms
+2026-05-10 13:28:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.0790 ms
+2026-05-10 13:29:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9820 ms
+2026-05-10 13:29:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.2058 ms
+2026-05-10 13:30:06.604 +03:00 [INF] Running appointment reminder job at "2026-05-10T10:30:06.6042690Z"
+2026-05-10 13:30:06.635 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 13:30:08.168 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.5292 ms
+2026-05-10 13:30:08.168 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1393 ms
+2026-05-10 13:31:08.179 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6164 ms
+2026-05-10 13:31:08.179 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3153 ms
+2026-05-10 13:32:08.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.0750 ms
+2026-05-10 13:32:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.1074 ms
+2026-05-10 13:33:08.191 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.6908 ms
+2026-05-10 13:33:08.192 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.7296 ms
+2026-05-10 13:34:08.164 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2033 ms
+2026-05-10 13:34:08.164 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2428 ms
+2026-05-10 13:35:08.167 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.0765 ms
+2026-05-10 13:35:08.167 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.6676 ms
+2026-05-10 13:36:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.0319 ms
+2026-05-10 13:36:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5633 ms
+2026-05-10 13:37:08.178 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1340 ms
+2026-05-10 13:37:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.0719 ms
+2026-05-10 13:38:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.3355 ms
+2026-05-10 13:38:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.9027 ms
+2026-05-10 13:39:08.184 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3270 ms
+2026-05-10 13:39:08.184 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.8228 ms
+2026-05-10 13:40:08.184 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9881 ms
+2026-05-10 13:40:08.184 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6983 ms
+2026-05-10 13:41:08.191 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5899 ms
+2026-05-10 13:41:08.190 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5217 ms
+2026-05-10 13:42:08.180 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.0325 ms
+2026-05-10 13:42:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.4808 ms
+2026-05-10 13:43:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.8402 ms
+2026-05-10 13:43:08.191 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0050 ms
+2026-05-10 13:44:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.6920 ms
+2026-05-10 13:44:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3940 ms
+2026-05-10 13:45:08.160 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3022 ms
+2026-05-10 13:45:08.161 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0923 ms
+2026-05-10 13:46:08.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.4964 ms
+2026-05-10 13:46:08.189 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1855 ms
+2026-05-10 13:47:08.222 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.2888 ms
+2026-05-10 13:47:08.222 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.3542 ms
+2026-05-10 13:48:08.187 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4763 ms
+2026-05-10 13:48:08.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3527 ms
+2026-05-10 13:49:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3071 ms
+2026-05-10 13:49:08.174 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7744 ms
+2026-05-10 13:50:08.192 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.6887 ms
+2026-05-10 13:50:08.192 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.9333 ms
+2026-05-10 13:51:08.189 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0132 ms
+2026-05-10 13:51:08.190 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9883 ms
+2026-05-10 13:52:08.186 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.4093 ms
+2026-05-10 13:52:08.186 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.8269 ms
+2026-05-10 13:53:08.186 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.7662 ms
+2026-05-10 13:53:08.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.0490 ms
+2026-05-10 13:54:08.304 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.6026 ms
+2026-05-10 13:54:08.303 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8667 ms
+2026-05-10 13:55:08.179 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.1699 ms
+2026-05-10 13:55:08.179 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9270 ms
+2026-05-10 13:56:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9744 ms
+2026-05-10 13:56:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.1111 ms
+2026-05-10 13:57:08.179 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.8912 ms
+2026-05-10 13:57:08.191 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.9774 ms
+2026-05-10 13:58:08.167 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.4950 ms
+2026-05-10 13:58:08.168 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7665 ms
+2026-05-10 13:59:08.187 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9818 ms
+2026-05-10 13:59:08.187 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9937 ms
+2026-05-10 14:00:06.917 +03:00 [INF] Running appointment reminder job at "2026-05-10T11:00:06.9163660Z"
+2026-05-10 14:00:06.982 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 14:00:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.4181 ms
+2026-05-10 14:00:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8563 ms
+2026-05-10 14:01:08.191 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9380 ms
+2026-05-10 14:01:08.203 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.1856 ms
+2026-05-10 14:02:08.230 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2084 ms
+2026-05-10 14:02:08.230 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9674 ms
+2026-05-10 14:03:08.271 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2184 ms
+2026-05-10 14:03:08.277 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6699 ms
+2026-05-10 14:04:08.201 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.3083 ms
+2026-05-10 14:04:08.202 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.7907 ms
+2026-05-10 14:05:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.2928 ms
+2026-05-10 14:05:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.2270 ms
+2026-05-10 14:06:08.191 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.4850 ms
+2026-05-10 14:06:08.191 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.5862 ms
+2026-05-10 14:07:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.7501 ms
+2026-05-10 14:07:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6905 ms
+2026-05-10 14:08:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.0560 ms
+2026-05-10 14:08:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5138 ms
+2026-05-10 14:09:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.7247 ms
+2026-05-10 14:09:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5862 ms
+2026-05-10 14:10:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5683 ms
+2026-05-10 14:10:08.170 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.0114 ms
+2026-05-10 14:11:08.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.5281 ms
+2026-05-10 14:11:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6220 ms
+2026-05-10 14:12:08.168 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2467 ms
+2026-05-10 14:12:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.9023 ms
+2026-05-10 14:13:08.159 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2523 ms
+2026-05-10 14:13:08.163 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.9503 ms
+2026-05-10 14:14:08.213 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6691 ms
+2026-05-10 14:14:08.213 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.2712 ms
+2026-05-10 14:15:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2363 ms
+2026-05-10 14:15:08.170 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.4214 ms
+2026-05-10 14:16:08.192 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.2473 ms
+2026-05-10 14:16:08.192 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.3534 ms
+2026-05-10 14:17:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6355 ms
+2026-05-10 14:17:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.9423 ms
+2026-05-10 14:18:08.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.9855 ms
+2026-05-10 14:18:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.3305 ms
+2026-05-10 14:19:08.202 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7124 ms
+2026-05-10 14:19:08.202 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.6819 ms
+2026-05-10 14:20:08.163 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2637 ms
+2026-05-10 14:20:08.163 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.0888 ms
+2026-05-10 14:21:08.180 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0941 ms
+2026-05-10 14:21:08.180 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5105 ms
+2026-05-10 14:22:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.4230 ms
+2026-05-10 14:22:08.186 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9197 ms
+2026-05-10 14:23:08.197 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7877 ms
+2026-05-10 14:23:08.205 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.6305 ms
+2026-05-10 14:24:08.179 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.0139 ms
+2026-05-10 14:24:08.182 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8127 ms
+2026-05-10 14:25:08.166 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5205 ms
+2026-05-10 14:25:08.170 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.0117 ms
+2026-05-10 14:26:08.179 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.1368 ms
+2026-05-10 14:26:08.180 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8863 ms
+2026-05-10 14:27:08.324 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1931 ms
+2026-05-10 14:27:08.390 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.4453 ms
+2026-05-10 14:28:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.2626 ms
+2026-05-10 14:28:08.182 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.5789 ms
+2026-05-10 14:29:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.6189 ms
+2026-05-10 14:29:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.5024 ms
+2026-05-10 14:30:07.183 +03:00 [INF] Running appointment reminder job at "2026-05-10T11:30:07.1831580Z"
+2026-05-10 14:30:07.208 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 14:30:08.163 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.3200 ms
+2026-05-10 14:30:08.165 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5163 ms
+2026-05-10 14:31:08.165 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.8059 ms
+2026-05-10 14:31:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.0148 ms
+2026-05-10 14:32:08.171 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.6854 ms
+2026-05-10 14:32:08.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.4695 ms
+2026-05-10 14:33:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2555 ms
+2026-05-10 14:33:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7146 ms
+2026-05-10 14:34:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7768 ms
+2026-05-10 14:34:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.2792 ms
+2026-05-10 14:35:08.186 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.7295 ms
+2026-05-10 14:35:08.187 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.7251 ms
+2026-05-10 14:36:08.188 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.3296 ms
+2026-05-10 14:36:08.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.6022 ms
+2026-05-10 14:37:08.174 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.2173 ms
+2026-05-10 14:37:08.174 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.4189 ms
+2026-05-10 14:38:08.169 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1053 ms
+2026-05-10 14:38:08.169 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0935 ms
+2026-05-10 14:39:08.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5696 ms
+2026-05-10 14:39:08.188 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3734 ms
+2026-05-10 14:40:08.182 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.5940 ms
+2026-05-10 14:40:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.1759 ms
+2026-05-10 14:41:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.8746 ms
+2026-05-10 14:41:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9823 ms
+2026-05-10 14:42:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4683 ms
+2026-05-10 14:42:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5752 ms
+2026-05-10 14:43:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.8046 ms
+2026-05-10 14:43:08.186 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.8003 ms
+2026-05-10 14:44:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6766 ms
+2026-05-10 14:44:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6696 ms
+2026-05-10 14:45:08.176 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5890 ms
+2026-05-10 14:45:08.176 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9603 ms
+2026-05-10 14:46:08.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5286 ms
+2026-05-10 14:46:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2419 ms
+2026-05-10 14:54:08.208 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3333 ms
+2026-05-10 14:54:08.209 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.8231 ms
+2026-05-10 14:55:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9532 ms
+2026-05-10 14:55:08.184 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3511 ms
+2026-05-10 14:56:08.457 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.8115 ms
+2026-05-10 14:56:08.457 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.5663 ms
+2026-05-10 14:57:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2163 ms
+2026-05-10 14:57:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.7749 ms
+2026-05-10 14:58:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4506 ms
+2026-05-10 14:58:08.182 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.6004 ms
+2026-05-10 14:59:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2654 ms
+2026-05-10 14:59:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7424 ms
+2026-05-10 15:00:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.0776 ms
+2026-05-10 15:00:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7720 ms
+2026-05-10 15:00:09.630 +03:00 [INF] Running appointment reminder job at "2026-05-10T12:00:09.6281660Z"
+2026-05-10 15:00:09.665 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 15:01:08.186 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5190 ms
+2026-05-10 15:01:08.189 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.1072 ms
+2026-05-10 15:02:08.191 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0168 ms
+2026-05-10 15:02:08.191 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9146 ms
+2026-05-10 15:03:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.7744 ms
+2026-05-10 15:03:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.0151 ms
+2026-05-10 15:04:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.8945 ms
+2026-05-10 15:04:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.8283 ms
+2026-05-10 15:05:08.178 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.8265 ms
+2026-05-10 15:05:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.5398 ms
+2026-05-10 15:06:08.163 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5218 ms
+2026-05-10 15:06:08.163 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9998 ms
+2026-05-10 15:07:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.5135 ms
+2026-05-10 15:07:08.725 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.9633 ms
+2026-05-10 15:08:08.163 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3687 ms
+2026-05-10 15:08:08.163 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.4312 ms
+2026-05-10 15:09:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3344 ms
+2026-05-10 15:09:08.174 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5793 ms
+2026-05-10 15:10:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.7514 ms
+2026-05-10 15:10:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.7158 ms
+2026-05-10 15:11:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9934 ms
+2026-05-10 15:11:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5895 ms
+2026-05-10 15:12:08.176 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.5800 ms
+2026-05-10 15:12:08.176 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.7358 ms
+2026-05-10 15:13:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2256 ms
+2026-05-10 15:13:08.176 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.7976 ms
+2026-05-10 15:14:08.159 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9625 ms
+2026-05-10 15:14:08.159 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.2446 ms
+2026-05-10 15:15:08.445 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9780 ms
+2026-05-10 15:15:08.454 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3598 ms
+2026-05-10 15:16:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5105 ms
+2026-05-10 15:16:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7786 ms
+2026-05-10 15:17:08.185 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.8579 ms
+2026-05-10 15:17:08.185 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.0561 ms
+2026-05-10 15:18:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.2249 ms
+2026-05-10 15:18:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9610 ms
+2026-05-10 15:19:08.170 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3095 ms
+2026-05-10 15:19:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.8848 ms
+2026-05-10 15:20:08.164 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3488 ms
+2026-05-10 15:20:08.172 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.4944 ms
+2026-05-10 15:21:08.166 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.0800 ms
+2026-05-10 15:21:08.166 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1444 ms
+2026-05-10 15:22:08.178 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5532 ms
+2026-05-10 15:22:08.178 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.2247 ms
+2026-05-10 15:23:08.187 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.8097 ms
+2026-05-10 15:23:08.189 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8010 ms
+2026-05-10 15:24:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2038 ms
+2026-05-10 15:24:08.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.4370 ms
+2026-05-10 15:25:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.5772 ms
+2026-05-10 15:25:08.184 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.2528 ms
+2026-05-10 15:41:07.961 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.8314 ms
+2026-05-10 15:41:07.963 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.3336 ms
+2026-05-10 15:41:09.242 +03:00 [INF] Running appointment reminder job at "2026-05-10T12:41:09.2414900Z"
+2026-05-10 15:41:09.283 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 15:41:13.384 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.1439 ms
+2026-05-10 15:41:13.386 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9869 ms
+2026-05-10 15:42:08.190 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2107 ms
+2026-05-10 15:42:08.190 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4048 ms
+2026-05-10 15:43:08.175 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1306 ms
+2026-05-10 15:43:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.4519 ms
+2026-05-10 15:44:08.217 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.5717 ms
+2026-05-10 15:44:08.217 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3686 ms
+2026-05-10 15:45:08.451 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1960 ms
+2026-05-10 15:45:08.461 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5398 ms
+2026-05-10 15:46:08.183 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1702 ms
+2026-05-10 15:46:08.183 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2626 ms
+2026-05-10 15:53:24.878 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 31.8871 ms
+2026-05-10 15:54:09.395 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.8463 ms
+2026-05-10 15:55:08.953 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.1675 ms
+2026-05-10 15:56:08.621 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.4305 ms
+2026-05-10 15:57:10.125 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.3988 ms
+2026-05-10 15:58:20.042 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 120.6778 ms
+2026-05-10 15:59:08.570 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 18.0794 ms
+2026-05-10 16:00:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3198 ms
+2026-05-10 16:00:10.764 +03:00 [INF] Running appointment reminder job at "2026-05-10T13:00:10.7590220Z"
+2026-05-10 16:00:10.806 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 16:01:08.199 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.6215 ms
+2026-05-10 16:02:08.197 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9348 ms
+2026-05-10 16:03:08.181 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.0865 ms
+2026-05-10 16:04:08.192 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.9355 ms
+2026-05-10 16:05:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5980 ms
+2026-05-10 16:06:08.187 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.8374 ms
+2026-05-10 16:07:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7717 ms
+2026-05-10 16:08:08.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.7560 ms
+2026-05-10 16:09:08.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.0127 ms
+2026-05-10 16:10:08.174 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9356 ms
+2026-05-10 16:11:08.841 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9475 ms
+2026-05-10 16:12:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.2516 ms
+2026-05-10 16:16:08.249 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.2135 ms
+2026-05-10 16:17:08.333 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1742 ms
+2026-05-10 16:18:08.242 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.4573 ms
+2026-05-10 16:19:08.164 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6128 ms
+2026-05-10 16:20:08.171 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5645 ms
+2026-05-10 16:21:08.190 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.5863 ms
+2026-05-10 16:22:08.271 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.0645 ms
+2026-05-10 16:23:08.160 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5803 ms
+2026-05-10 16:24:08.188 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.6685 ms
+2026-05-10 16:25:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4320 ms
+2026-05-10 16:26:08.393 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1541 ms
+2026-05-10 16:27:08.782 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1824 ms
+2026-05-10 16:28:08.459 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0444 ms
+2026-05-10 16:29:08.257 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.9545 ms
+2026-05-10 16:30:08.172 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.7471 ms
+2026-05-10 16:30:12.344 +03:00 [INF] Running appointment reminder job at "2026-05-10T13:30:12.3423250Z"
+2026-05-10 16:30:12.371 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 16:31:08.162 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7485 ms
+2026-05-10 16:32:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9366 ms
+2026-05-10 16:33:08.180 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.6682 ms
+2026-05-10 16:34:08.300 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2665 ms
+2026-05-10 16:35:08.176 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.6512 ms
+2026-05-10 16:36:08.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9734 ms
+2026-05-10 16:37:08.157 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0151 ms
+2026-05-10 16:38:08.173 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5012 ms
+2026-05-10 16:39:08.162 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.7788 ms
+2026-05-10 16:40:08.160 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.9823 ms
+2026-05-10 16:41:08.597 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.2560 ms
+2026-05-10 16:42:08.160 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6911 ms
+2026-05-10 16:43:08.177 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.2103 ms
+2026-05-10 16:44:08.161 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6351 ms
+2026-05-10 16:45:08.160 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6506 ms
+2026-05-10 16:46:08.169 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5438 ms
+2026-05-10 16:47:08.154 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7165 ms
+2026-05-10 17:03:22.845 +03:00 [INF] Running appointment reminder job at "2026-05-10T14:03:22.8432700Z"
+2026-05-10 17:03:22.953 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 17:04:00.380 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.4795 ms
+2026-05-10 17:04:33.326 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5947 ms
+2026-05-10 17:58:31.866 +03:00 [INF] Running appointment reminder job at "2026-05-10T14:58:31.8652250Z"
+2026-05-10 17:58:31.897 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 18:31:39.324 +03:00 [INF] Running appointment reminder job at "2026-05-10T15:31:39.3247620Z"
+2026-05-10 18:31:39.390 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 19:20:42.774 +03:00 [INF] Running appointment reminder job at "2026-05-10T16:20:42.7732000Z"
+2026-05-10 19:20:42.802 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 20:06:40.773 +03:00 [INF] Running appointment reminder job at "2026-05-10T17:06:40.7733530Z"
+2026-05-10 20:06:40.853 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 20:40:16.408 +03:00 [INF] Running appointment reminder job at "2026-05-10T17:40:16.4083750Z"
+2026-05-10 20:40:16.423 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 21:08:12.165 +03:00 [INF] Running appointment reminder job at "2026-05-10T18:08:12.1649860Z"
+2026-05-10 21:08:12.224 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 21:51:06.525 +03:00 [INF] Running appointment reminder job at "2026-05-10T18:51:06.5249720Z"
+2026-05-10 21:51:06.547 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 22:07:07.229 +03:00 [INF] Running appointment reminder job at "2026-05-10T19:07:07.2297450Z"
+2026-05-10 22:07:07.242 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 22:52:06.665 +03:00 [INF] Running appointment reminder job at "2026-05-10T19:52:06.6651540Z"
+2026-05-10 22:52:06.694 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 23:24:42.089 +03:00 [INF] Running appointment reminder job at "2026-05-10T20:24:42.0894590Z"
+2026-05-10 23:24:42.124 +03:00 [INF] Appointment reminder job completed.
+2026-05-10 23:53:11.104 +03:00 [INF] Running appointment reminder job at "2026-05-10T20:53:11.1044380Z"
+2026-05-10 23:53:11.177 +03:00 [INF] Appointment reminder job completed.

@@ -1,0 +1,314 @@
+2026-05-09 16:12:41.557 +03:00 [INF] Daily queue generation scheduled for "2026-05-10T06:00:00.0000000" ("2026-05-10T03:00:00.0000000Z" UTC)
+2026-05-09 16:12:41.596 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-09 16:12:41.597 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-09 16:16:19.430 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 129.5424 ms
+2026-05-09 16:17:42.886 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-09 16:17:42.887 +03:00 [INF] SMS delivered to 251943034193.
+2026-05-09 16:17:42.893 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 1948.0528 ms
+2026-05-09 16:17:57.548 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Your medical license has not been verified yet. Contact your center administrator or support.
+   at MediMind.Application.Features.Auth.DoctorAuthService.VerifyOtpAsync(String badgeNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 341
+   at MediMind.API.Controllers.AuthController.DoctorVerifyOtp(DoctorVerifyOtpApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 150
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 16:17:57.582 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 400 in 143.3491 ms
+2026-05-09 16:19:07.230 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 309.8299 ms
+2026-05-09 16:19:07.274 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 40.7615 ms
+2026-05-09 16:19:07.287 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 53.7137 ms
+2026-05-09 16:19:07.454 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 13.0790 ms
+2026-05-09 16:19:07.464 +03:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 3.3373 ms
+2026-05-09 16:19:07.466 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 7.2418 ms
+2026-05-09 16:19:08.126 +03:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 1.1311 ms
+2026-05-09 16:19:33.064 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 25350.7410 ms
+2026-05-09 16:20:54.583 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Your medical license has not been verified yet. Contact your center administrator or support.
+   at MediMind.Application.Features.Auth.DoctorAuthService.VerifyOtpAsync(String badgeNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 341
+   at MediMind.API.Controllers.AuthController.DoctorVerifyOtp(DoctorVerifyOtpApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 150
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 16:20:54.594 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 400 in 132.3275 ms
+2026-05-09 16:21:46.847 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 362.4581 ms
+2026-05-09 16:21:47.192 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 11.4470 ms
+2026-05-09 16:21:47.192 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 41.7377 ms
+2026-05-09 16:22:03.266 +03:00 [INF] HTTP GET /api/v1/api/v1/queue/center/ responded 404 in 13.4805 ms
+2026-05-09 16:22:06.622 +03:00 [INF] HTTP GET /api/v1/api/v1/appointments responded 404 in 8.6261 ms
+2026-05-09 16:22:08.836 +03:00 [INF] HTTP GET /api/v1/api/v1/appointments responded 404 in 1.6199 ms
+2026-05-09 16:22:12.366 +03:00 [INF] HTTP GET /api/v1/api/v1/appointments responded 404 in 11.4992 ms
+2026-05-09 16:22:13.318 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/doctors responded 404 in 1.7313 ms
+2026-05-09 16:22:47.151 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 5.0420 ms
+2026-05-09 16:22:47.151 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.5485 ms
+2026-05-09 16:22:59.625 +03:00 [INF] HTTP POST /api/v1/api/v1/healthcare-centers/doctors responded 404 in 6.8862 ms
+2026-05-09 16:23:00.969 +03:00 [INF] HTTP POST /api/v1/api/v1/healthcare-centers/doctors responded 404 in 2.3455 ms
+2026-05-09 16:23:07.216 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/patients responded 404 in 3.1206 ms
+2026-05-09 16:23:09.480 +03:00 [INF] HTTP GET /api/v1/api/v1/payments responded 404 in 2.0448 ms
+2026-05-09 16:23:47.191 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.9929 ms
+2026-05-09 16:23:47.192 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 1.9196 ms
+2026-05-09 16:24:47.170 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 3.3668 ms
+2026-05-09 16:24:47.170 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6410 ms
+2026-05-09 16:25:47.175 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.6094 ms
+2026-05-09 16:25:47.175 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 4.6095 ms
+2026-05-09 16:26:47.188 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.2385 ms
+2026-05-09 16:26:47.188 +03:00 [INF] HTTP GET /api/v1/api/v1/healthcare-centers/dashboard/today responded 404 in 6.4596 ms
+2026-05-09 16:27:47.238 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.7993 ms
+2026-05-09 16:27:47.245 +03:00 [INF] HTTP GET /api/v1healthcare-centers/dashboard/today responded 404 in 3.0935 ms
+2026-05-09 16:28:26.638 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 19.6048 ms
+2026-05-09 16:28:27.709 +03:00 [INF] HTTP GET /api/v1healthcare-centers/dashboard/today responded 404 in 5.1105 ms
+2026-05-09 16:28:27.709 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.8618 ms
+2026-05-09 16:29:13.302 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 9.1613 ms
+2026-05-09 16:29:14.398 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.8143 ms
+2026-05-09 16:29:14.508 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 111.1056 ms
+2026-05-09 16:30:09.863 +03:00 [INF] HTTP GET /api/v1/api/v1/queue/center/ responded 404 in 5.1470 ms
+2026-05-09 16:30:12.082 +03:00 [INF] Running appointment reminder job at "2026-05-09T13:30:12.0776930Z"
+2026-05-09 16:30:12.450 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 16:30:14.370 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.4650 ms
+2026-05-09 16:30:14.372 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1973 ms
+2026-05-09 16:31:14.391 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.9673 ms
+2026-05-09 16:31:14.392 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.9666 ms
+2026-05-09 16:32:14.393 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 11.0148 ms
+2026-05-09 16:32:14.393 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.4723 ms
+2026-05-09 16:33:14.384 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2610 ms
+2026-05-09 16:33:14.387 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.9807 ms
+2026-05-09 16:34:14.403 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 14.8318 ms
+2026-05-09 16:34:14.404 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 14.8677 ms
+2026-05-09 16:35:14.432 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1385 ms
+2026-05-09 16:35:14.432 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.1948 ms
+2026-05-09 16:36:14.392 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.7046 ms
+2026-05-09 16:36:14.392 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.6220 ms
+2026-05-09 16:37:14.463 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 21.2118 ms
+2026-05-09 16:37:14.464 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 15.6260 ms
+2026-05-09 16:37:30.603 +03:00 [INF] HTTP GET /api/v1/appointments responded 401 in 41.7717 ms
+2026-05-09 16:38:14.374 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.2280 ms
+2026-05-09 16:39:14.470 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.6028 ms
+2026-05-09 16:40:14.389 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.4619 ms
+2026-05-09 16:41:14.390 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.3054 ms
+2026-05-09 16:42:27.846 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 20.9893 ms
+2026-05-09 16:42:29.073 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.5384 ms
+2026-05-09 16:42:29.082 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.3498 ms
+2026-05-09 16:42:52.737 +03:00 [INF] HTTP GET /api/v1/queue/center/ responded 404 in 6.2682 ms
+2026-05-09 16:42:55.443 +03:00 [INF] HTTP GET /api/v1/appointments responded 401 in 73.2684 ms
+2026-05-09 16:43:27.094 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 24.4559 ms
+2026-05-09 16:43:28.195 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.0032 ms
+2026-05-09 16:43:28.195 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 9.7234 ms
+2026-05-09 16:43:32.839 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/doctors responded 404 in 4.3155 ms
+2026-05-09 16:43:35.684 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/patients responded 404 in 3.8038 ms
+2026-05-09 16:43:48.135 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/patients responded 404 in 1.8916 ms
+2026-05-09 16:43:49.921 +03:00 [INF] HTTP GET /api/v1/payments responded 401 in 52.4141 ms
+2026-05-09 16:44:28.158 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.7395 ms
+2026-05-09 16:45:28.180 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.0570 ms
+2026-05-09 16:46:28.176 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.1279 ms
+2026-05-09 16:47:28.168 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.3072 ms
+2026-05-09 16:48:28.313 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.5784 ms
+2026-05-09 16:49:10.014 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 14.3224 ms
+2026-05-09 16:49:28.166 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.2667 ms
+2026-05-09 16:50:28.161 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.9269 ms
+2026-05-09 16:51:28.203 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.1294 ms
+2026-05-09 16:51:44.179 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 5.3241 ms
+2026-05-09 16:51:46.888 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 1.0728 ms
+2026-05-09 16:51:48.475 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 1.0295 ms
+2026-05-09 16:51:48.725 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 1.5026 ms
+2026-05-09 16:52:21.912 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 10.2095 ms
+2026-05-09 16:52:22.926 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1120 ms
+2026-05-09 16:52:22.938 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 10.3175 ms
+2026-05-09 16:52:34.232 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 401 in 41.5580 ms
+2026-05-09 16:53:22.975 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 14.4777 ms
+2026-05-09 16:54:23.086 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.2921 ms
+2026-05-09 16:55:22.932 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.4193 ms
+2026-05-09 16:56:22.935 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4098 ms
+2026-05-09 16:56:47.074 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 201 in 1141.2986 ms
+2026-05-09 16:57:09.857 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 174.1510 ms
+2026-05-09 16:57:09.946 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.6070 ms
+2026-05-09 16:57:09.948 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.2029 ms
+2026-05-09 16:57:21.189 +03:00 [INF] HTTP GET /api/v1/queue/center/ responded 404 in 3.5456 ms
+2026-05-09 16:57:24.382 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/doctors responded 404 in 1.2689 ms
+2026-05-09 16:57:44.393 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/admins responded 404 in 2.2940 ms
+2026-05-09 16:57:50.763 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/audit-log responded 404 in 6.4055 ms
+2026-05-09 16:58:09.955 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1985 ms
+2026-05-09 16:58:09.955 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.1278 ms
+2026-05-09 16:58:17.715 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/doctors responded 404 in 0.8188 ms
+2026-05-09 16:58:18.733 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/doctors responded 404 in 2.1071 ms
+2026-05-09 16:59:00.364 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 335.5434 ms
+2026-05-09 16:59:07.604 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 89.9301 ms
+2026-05-09 16:59:09.942 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 0.5971 ms
+2026-05-09 16:59:09.947 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0715 ms
+2026-05-09 16:59:14.548 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 24.5582 ms
+2026-05-09 16:59:32.221 +03:00 [INF] HTTP GET /api/v1/queue/center/ responded 404 in 1.9592 ms
+2026-05-09 16:59:33.632 +03:00 [INF] HTTP GET /api/v1/queue/center/ responded 404 in 3.5919 ms
+2026-05-09 17:00:09.973 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.7119 ms
+2026-05-09 17:00:09.973 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.8861 ms
+2026-05-09 17:00:12.162 +03:00 [INF] Running appointment reminder job at "2026-05-09T14:00:12.1623030Z"
+2026-05-09 17:00:12.178 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 17:01:09.982 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5501 ms
+2026-05-09 17:01:09.982 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2771 ms
+2026-05-09 17:02:09.976 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.4100 ms
+2026-05-09 17:02:09.976 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.6202 ms
+2026-05-09 17:03:09.973 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.0420 ms
+2026-05-09 17:03:09.973 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0190 ms
+2026-05-09 17:04:09.968 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.6234 ms
+2026-05-09 17:04:09.968 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.2210 ms
+2026-05-09 17:05:09.991 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.0659 ms
+2026-05-09 17:05:09.991 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3268 ms
+2026-05-09 17:06:10.145 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.8111 ms
+2026-05-09 17:06:10.146 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.6154 ms
+2026-05-09 17:07:09.986 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2600 ms
+2026-05-09 17:07:09.986 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1041 ms
+2026-05-09 17:08:20.796 +03:00 [INF] Daily queue generation scheduled for "2026-05-10T06:00:00.0000000" ("2026-05-10T03:00:00.0000000Z" UTC)
+2026-05-09 17:08:20.841 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-09 17:08:20.841 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-09 17:08:49.872 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 229.7426 ms
+2026-05-09 17:08:50.563 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.5151 ms
+2026-05-09 17:08:50.564 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.0039 ms
+2026-05-09 17:09:03.324 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 60.6324 ms
+2026-05-09 17:09:46.424 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 401 in 12.1731 ms
+2026-05-09 17:09:50.583 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.6015 ms
+2026-05-09 17:09:50.583 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.6565 ms
+2026-05-09 17:10:28.461 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 401 in 8.9912 ms
+2026-05-09 17:10:50.583 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.9640 ms
+2026-05-09 17:10:50.583 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.9640 ms
+2026-05-09 17:11:41.867 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 9.8585 ms
+2026-05-09 17:12:04.000 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-09 17:12:04.001 +03:00 [INF] SMS delivered to 251943034193.
+2026-05-09 17:12:04.014 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 3308.0834 ms
+2026-05-09 17:12:21.582 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 101.0209 ms
+2026-05-09 17:12:21.854 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 0.9769 ms
+2026-05-09 17:13:04.220 +03:00 [INF] HTTP GET /api/v1/doctor/appointments responded 404 in 11.6531 ms
+2026-05-09 17:13:20.152 +03:00 [INF] HTTP GET /api/v1/doctor/appointments responded 404 in 5.5430 ms
+2026-05-09 17:13:21.855 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 0.5318 ms
+2026-05-09 17:13:32.259 +03:00 [INF] HTTP GET /api/v1/doctor/patients responded 404 in 2.8150 ms
+2026-05-09 17:13:33.982 +03:00 [INF] HTTP GET /api/v1/doctor/consultations/active responded 404 in 1.4235 ms
+2026-05-09 17:13:33.988 +03:00 [INF] HTTP GET /api/v1/doctor/consultations/today responded 404 in 0.4746 ms
+2026-05-09 17:13:33.994 +03:00 [INF] HTTP GET /api/v1/doctor/consultations responded 404 in 1.5061 ms
+2026-05-09 17:13:43.105 +03:00 [INF] HTTP GET /api/v1/doctor/prescriptions responded 404 in 4.1104 ms
+2026-05-09 17:13:45.563 +03:00 [INF] HTTP GET /api/v1/doctor/prescription-templates responded 404 in 3.3697 ms
+2026-05-09 17:14:10.179 +03:00 [INF] HTTP GET /api/v1/doctor/schedules responded 404 in 9.6238 ms
+2026-05-09 17:14:12.866 +03:00 [INF] HTTP GET /api/v1/doctor/profile responded 404 in 1.3179 ms
+2026-05-09 17:14:21.862 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7100 ms
+2026-05-09 17:14:30.855 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 27.4102 ms
+2026-05-09 17:15:21.880 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9283 ms
+2026-05-09 17:16:21.883 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6612 ms
+2026-05-09 17:16:28.325 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 4.3817 ms
+2026-05-09 17:17:17.223 +03:00 [INF] HTTP POST /api/v1/auth/super-admin/login responded 404 in 22.0605 ms
+2026-05-09 17:17:58.199 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Invalid credentials.
+   at MediMind.Application.Features.Auth.AdminAuthService.LoginAsync(String email, String password, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 403
+   at MediMind.API.Controllers.AuthController.AdminLogin(AdminLoginApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 174
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 17:17:58.233 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 400 in 556.1213 ms
+2026-05-09 17:22:31.820 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 148.9390 ms
+2026-05-09 17:22:32.741 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 18.2104 ms
+2026-05-09 17:22:32.759 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 27.7802 ms
+2026-05-09 17:23:05.054 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 31921.4345 ms
+2026-05-09 17:30:08.360 +03:00 [INF] Running appointment reminder job at "2026-05-09T14:30:08.3577630Z"
+2026-05-09 17:30:08.670 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 17:45:39.469 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 33.0360 ms
+2026-05-09 17:46:09.288 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MediMind.Application.Features.Auth.ISuperAdminAuthService' while attempting to activate 'MediMind.API.Controllers.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method995(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 17:46:09.302 +03:00 [ERR] HTTP POST /api/v1/auth/superadmin/login responded 500 in 491.0783 ms
+2026-05-09 17:49:47.908 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MediMind.Application.Features.Auth.ISuperAdminAuthService' while attempting to activate 'MediMind.API.Controllers.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method995(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 17:49:47.921 +03:00 [ERR] HTTP POST /api/v1/auth/superadmin/login responded 500 in 101.9984 ms
+2026-05-09 17:49:48.632 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MediMind.Application.Features.Auth.ISuperAdminAuthService' while attempting to activate 'MediMind.API.Controllers.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method995(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 17:49:48.651 +03:00 [ERR] HTTP POST /api/v1/auth/superadmin/login responded 500 in 29.2775 ms
+2026-05-09 18:00:08.605 +03:00 [INF] Running appointment reminder job at "2026-05-09T15:00:08.6020770Z"
+2026-05-09 18:00:08.652 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 18:09:53.470 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'MediMind.Application.Features.Auth.ISuperAdminAuthService' while attempting to activate 'MediMind.API.Controllers.AuthController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at lambda_method995(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-09 18:09:53.486 +03:00 [ERR] HTTP POST /api/v1/auth/superadmin/login responded 500 in 99.8750 ms
+2026-05-09 18:17:32.308 +03:00 [INF] Daily queue generation scheduled for "2026-05-10T06:00:00.0000000" ("2026-05-10T03:00:00.0000000Z" UTC)
+2026-05-09 18:17:32.350 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-09 18:17:32.350 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-09 18:29:13.070 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 97.5905 ms
+2026-05-09 18:29:30.577 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 629.9142 ms
+2026-05-09 18:30:02.518 +03:00 [INF] Running appointment reminder job at "2026-05-09T15:30:02.5186680Z"
+2026-05-09 18:30:02.620 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 18:42:53.426 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 346.6158 ms
+2026-05-09 18:42:53.547 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 27.4468 ms
+2026-05-09 18:42:53.568 +03:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 28.5777 ms
+2026-05-09 18:43:06.834 +03:00 [INF] HTTP GET /scalar/v1 responded 200 in 17.0415 ms
+2026-05-09 18:43:07.013 +03:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 2.6291 ms
+2026-05-09 18:43:07.013 +03:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 1.8051 ms
+2026-05-09 18:43:24.357 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 30490.3033 ms
+2026-05-09 18:43:35.720 +03:00 [INF] HTTP GET /openapi/v1.json responded 200 in 28621.2647 ms
+2026-05-09 18:57:15.296 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 283.8928 ms
+2026-05-09 18:57:52.609 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 35.5362 ms
+2026-05-09 18:59:39.520 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 401 in 92.4744 ms
+2026-05-09 19:00:02.696 +03:00 [INF] Running appointment reminder job at "2026-05-09T16:00:02.6947540Z"
+2026-05-09 19:00:02.741 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 19:01:38.854 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 60.1081 ms
+2026-05-09 19:09:49.956 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 50.9095 ms
+2026-05-09 19:15:55.620 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 401 in 158.0765 ms
+2026-05-09 20:15:51.718 +03:00 [INF] Running appointment reminder job at "2026-05-09T17:15:51.7164940Z"
+2026-05-09 20:15:51.763 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 21:03:44.086 +03:00 [INF] Running appointment reminder job at "2026-05-09T18:03:44.0865550Z"
+2026-05-09 21:03:44.103 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 22:00:01.729 +03:00 [INF] Running appointment reminder job at "2026-05-09T19:00:01.7295990Z"
+2026-05-09 22:00:01.785 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 22:44:27.656 +03:00 [INF] Running appointment reminder job at "2026-05-09T19:44:27.6558830Z"
+2026-05-09 22:44:27.669 +03:00 [INF] Appointment reminder job completed.
+2026-05-09 23:27:13.091 +03:00 [INF] Running appointment reminder job at "2026-05-09T20:27:13.0912490Z"
+2026-05-09 23:27:13.165 +03:00 [INF] Appointment reminder job completed.

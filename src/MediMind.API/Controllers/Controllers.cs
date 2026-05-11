@@ -18,13 +18,14 @@ public abstract class BaseController : ControllerBase { }
 // AUTH CONTROLLER
 // ═══════════════════════════════════════════════════════════════════════════════
 
-/// <summary>Authentication — Patient, Doctor, Admin, shared token operations.</summary>
+/// <summary>Authentication — Patient, Doctor, Admin, SuperAdmin, and shared token operations.</summary>
 [ApiController]
 [Route("api/v1/auth")]
 public class AuthController(
     IPatientAuthService patientAuth,
     IDoctorAuthService doctorAuth,
     IAdminAuthService adminAuth,
+    ISuperAdminAuthService superAdminAuth,
     ITokenService tokenService,
     IUserRepository userRepository,
     ICurrentUser currentUser) : ControllerBase
@@ -172,6 +173,30 @@ public class AuthController(
     public async Task<IActionResult> AdminLogin([FromBody] AdminLoginApiRequest request, CancellationToken ct)
     {
         var result = await adminAuth.LoginAsync(request.Email, request.Password, ct);
+        return Ok(result);
+    }
+
+    // ── SuperAdmin ───────────────────────────────────────────────────────────
+
+    /// <summary>SuperAdmin login with email and password. Returns a JWT with <c>user_type = SuperAdmin</c>.</summary>
+    /// <remarks>
+    /// Use this endpoint to authenticate as the platform SuperAdmin.
+    ///
+    /// Default seed credentials (set in `appsettings.json`):
+    /// - **Email:** `superadmin@medimind.et`
+    /// - **Password:** `MediMind@2025!`
+    ///
+    /// After 5 consecutive failures the account is locked for **15 minutes**.
+    /// The returned `accessToken` is valid for 15 minutes; use `/auth/refresh-token` to extend the session.
+    /// </remarks>
+    [Tags("Authentication")]
+    [HttpPost("superadmin/login")]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SuperAdminLogin([FromBody] AdminLoginApiRequest request, CancellationToken ct)
+    {
+        var result = await superAdminAuth.LoginAsync(request.Email, request.Password, ct);
         return Ok(result);
     }
 

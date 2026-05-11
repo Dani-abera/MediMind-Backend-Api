@@ -94,7 +94,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Gender).HasConversion<string>().HasMaxLength(20);
 
         builder.HasIndex(u => u.Email).IsUnique();
-        builder.HasIndex(u => u.PhoneNumber).IsUnique();
+        builder.HasIndex(u => new { u.PhoneNumber, u.UserType }).IsUnique();
         builder.HasIndex(u => new { u.UserType, u.Status });
 
         // TPT (Table-Per-Type) inheritance

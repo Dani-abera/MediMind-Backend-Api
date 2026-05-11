@@ -1,0 +1,30 @@
+**/.git
+**/.gitignore
+**/.idea
+**/.vscode
+**/.DS_Store
+**/*.user
+**/*.suo
+
+# Build outputs — not needed, build stage handles everything
+**/bin
+**/obj
+
+# Logs
+**/logs
+
+# Test projects — not needed in the image
+tests/
+
+# Docs
+docs/
+README.md
+CLAUDE.md
+
+# Local dev files
+docker-compose.yml
+scripts/
+
+# Secrets — never bake these in
+src/MediMind.API/firebase-service-account.json
+src/MediMind.API/appsettings.Development.json

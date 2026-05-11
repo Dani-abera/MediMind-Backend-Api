@@ -43,6 +43,7 @@ public static class DependencyInjection
         services.AddScoped<Features.Auth.IPatientAuthService, Features.Auth.PatientAuthService>();
         services.AddScoped<Features.Auth.IDoctorAuthService, Features.Auth.DoctorAuthService>();
         services.AddScoped<Features.Auth.IAdminAuthService, Features.Auth.AdminAuthService>();
+        services.AddScoped<Features.Auth.ISuperAdminAuthService, Features.Auth.SuperAdminAuthService>();
 
         services.AddScoped<Features.MedicalHistory.IMedicalHistoryService, Features.MedicalHistory.MedicalHistoryService>();
         services.AddScoped<Features.EmergencyContacts.IEmergencyContactService, Features.EmergencyContacts.EmergencyContactService>();

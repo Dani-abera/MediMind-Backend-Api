@@ -32,6 +32,7 @@ public interface IUserRepository : IRepository<User>
     Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default);
     Task<bool> ExistsByEmailAsync(string email, CancellationToken ct = default);
     Task<bool> ExistsByPhoneAsync(string phone, CancellationToken ct = default);
+    Task<bool> ExistsByPhoneForRoleAsync(string phone, UserType userType, CancellationToken ct = default);
     Task<PagedResult<User>> SearchAsync(SuperAdminUserQueryDto query, CancellationToken ct = default);
     Task<bool> ExistsByEmailAsync(string email);
 }
