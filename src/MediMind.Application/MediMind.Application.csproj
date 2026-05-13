@@ -23,6 +23,8 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.*" />
     <!-- DI abstractions -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.*" />
+    <!-- Caching abstractions for deduplication in queue notifications -->
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="10.*" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="10.*" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.*" />
     <PackageReference Include="QuestPDF" Version="2024.*" />

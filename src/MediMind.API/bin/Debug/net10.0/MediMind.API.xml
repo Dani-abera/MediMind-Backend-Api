@@ -673,7 +673,7 @@
             Queue management with SignalR-backed real-time updates (FR-025–FR-029).
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediMind.Application.Features.Queue.IQueueService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediMind.Application.Features.Queue.IQueueService,MediMind.Application.Features.Doctors.IDoctorProfileService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Queue management with SignalR-backed real-time updates (FR-025–FR-029).
             </summary>
@@ -698,6 +698,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.QueueController.Emergency(MediMind.API.Controllers.EmergencyInsertRequest)">
             <summary>Insert an emergency patient at the front of the queue (FR-029).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetDoctorQueue(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get today's queue for the authenticated doctor at a given center.</summary>
         </member>
         <member name="T:MediMind.API.Controllers.ReviewsController">
             <summary>Patient reviews of doctors and healthcare centers (post-appointment).</summary>

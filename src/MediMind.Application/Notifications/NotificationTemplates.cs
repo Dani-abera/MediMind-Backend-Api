@@ -69,6 +69,12 @@ public static class NotificationTemplates
             $"You are #{position} — please stay nearby; you will be called soon.",
             $"MediMind: You are #{position}. Please stay close; you'll be called soon.");
 
+    public static (string Title, string Body, string SmsMessage) QueueYouAreNext() =>
+        (
+            "You're next!",
+            "You are next in the queue. Please be ready and stay nearby.",
+            "MediMind: You are next in queue. Please be ready.");
+
     public static (string Title, string Body, string SmsMessage) QueueCalledNow(string room, string centerName) =>
         (
             "Please proceed",

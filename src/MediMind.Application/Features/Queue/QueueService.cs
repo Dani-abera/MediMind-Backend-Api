@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using MediMind.Application.Notifications;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Exceptions;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace MediMind.Application.Features.Queue;
@@ -13,7 +15,7 @@ namespace MediMind.Application.Features.Queue;
 public interface IQueueService
 {
     /// <summary>Calls the next waiting patient for a center.</summary>
-    Task<QueueItemDto> CallNextPatientAsync(Guid centerId, Guid adminId);
+    Task<QueueItemDto> CallNextPatientAsync(Guid centerId, Guid adminId, string? roomNumber = null);
 
     /// <summary>Marks a patient as arrived and starts consultation.</summary>
     Task<QueueItemDto> MarkPatientArrivedAsync(Guid queueId, Guid adminId);
@@ -45,11 +47,12 @@ public class QueueService(
     IAppointmentRepository appointmentRepository,
     IHealthcareCenterRepository healthcareCenterRepository,
     INotificationService notificationService,
+    IMemoryCache cache,
     IUnitOfWork unitOfWork,
     ILogger<QueueService> logger) : IQueueService
 {
     /// <inheritdoc />
-    public async Task<QueueItemDto> CallNextPatientAsync(Guid centerId, Guid adminId)
+    public async Task<QueueItemDto> CallNextPatientAsync(Guid centerId, Guid adminId, string? roomNumber = null)
     {
         await EnsureAdminBelongsToCenter(centerId, adminId);
         var date = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -57,7 +60,7 @@ public class QueueService(
         var next = await queueRepository.GetNextWaitingAsync(centerId, date)
             ?? throw new NotFoundException("Queue", $"No waiting patients for center {centerId} on {date}");
 
-        next.CallPatient();
+        next.CallPatient(roomNumber);
         await unitOfWork.SaveChangesAsync();
 
         await queueRepository.RecalculatePositionsAsync(centerId, date);
@@ -69,14 +72,15 @@ public class QueueService(
         var center = await healthcareCenterRepository.GetByIdAsync(centerId)
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
 
-        var msg = $"You're next! Please proceed to consultation room at {center.CenterName}";
+        var effectiveRoom = roomNumber ?? "consultation room";
+        var tpl = NotificationTemplates.QueueCalledNow(effectiveRoom, center.CenterName);
         await notificationService.SendPushAsync(
             appointment.PatientId,
-            "Queue Update",
-            msg,
+            tpl.Title,
+            tpl.Body,
             new Dictionary<string, string> { ["queueId"] = next.Id.ToString() });
         if (!string.IsNullOrWhiteSpace(appointment.Patient.PhoneNumber))
-            await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, msg);
+            await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, tpl.SmsMessage);
 
         var calledItem = MapQueueItem(next, appointment);
         await notificationService.BroadcastQueueEventAsync(centerId, "NextPatientCalled", new
@@ -84,7 +88,7 @@ public class QueueService(
             queueId = calledItem.QueueId,
             queueNumber = calledItem.QueueNumber,
             patientName = calledItem.PatientName,
-            roomNumber = (string?)null
+            roomNumber = next.RoomNumber
         });
 
         var dashboard = await BuildDashboard(centerId, date);
@@ -219,6 +223,7 @@ public class QueueService(
             queue.QueueNumber,
             queue.Position,
             queue.EstimatedWaitTimeMinutes,
+            FormatWaitTime(queue.EstimatedWaitTimeMinutes),
             queue.Status.ToString(),
             BuildStatusMessage(queue),
             new QueueCenterInfoDto(center.CenterName, center.Address),
@@ -290,7 +295,7 @@ public class QueueService(
 
         foreach (var item in ordered.Select((a, index) => new { Appointment = a, Position = index + 1, Wait = index * center.SlotDurationMinutes }))
         {
-            var text = $"You are #{item.Position} in today's queue at {center.CenterName}. Estimated wait: {item.Wait} minutes.";
+            var text = $"You are #{item.Position} in today's queue at {center.CenterName}. Estimated wait: {FormatWaitTime(item.Wait)}.";
             await notificationService.SendPushAsync(item.Appointment.PatientId, "Queue generated", text);
             if (!string.IsNullOrWhiteSpace(item.Appointment.Patient.PhoneNumber))
                 await notificationService.SendSmsAsync(item.Appointment.Patient.PhoneNumber, text);
@@ -319,11 +324,13 @@ public class QueueService(
             if (appointment is null)
                 continue;
 
+            // Always send SignalR position update
             var status = new PatientQueueStatusDto(
                 entry.Id,
                 entry.QueueNumber,
                 entry.Position,
                 entry.EstimatedWaitTimeMinutes,
+                FormatWaitTime(entry.EstimatedWaitTimeMinutes),
                 entry.Status.ToString(),
                 BuildStatusMessage(entry),
                 new QueueCenterInfoDto(appointment.Center.CenterName, appointment.Center.Address),
@@ -331,6 +338,39 @@ public class QueueService(
                 appointment.AppointmentTime);
 
             await notificationService.SendQueueUpdateToPatientAsync(appointment.PatientId, status);
+
+            if (entry.Status != QueueStatus.Waiting)
+                continue;
+
+            // One-time push+SMS when 3 positions away
+            if (entry.Position == 3)
+            {
+                var key = $"queue_soon_{entry.Id}_{date:yyyy-MM-dd}";
+                if (!cache.TryGetValue(key, out _))
+                {
+                    cache.Set(key, true, TimeSpan.FromHours(12));
+                    var tpl = NotificationTemplates.QueueCallingSoon(entry.Position);
+                    await notificationService.SendPushAsync(appointment.PatientId, tpl.Title, tpl.Body,
+                        new Dictionary<string, string> { ["queueId"] = entry.Id.ToString() });
+                    if (!string.IsNullOrWhiteSpace(appointment.Patient?.PhoneNumber))
+                        await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, tpl.SmsMessage);
+                }
+            }
+
+            // One-time push+SMS when patient is next (position 1)
+            if (entry.Position == 1)
+            {
+                var key = $"queue_next_{entry.Id}_{date:yyyy-MM-dd}";
+                if (!cache.TryGetValue(key, out _))
+                {
+                    cache.Set(key, true, TimeSpan.FromHours(12));
+                    var tpl = NotificationTemplates.QueueYouAreNext();
+                    await notificationService.SendPushAsync(appointment.PatientId, tpl.Title, tpl.Body,
+                        new Dictionary<string, string> { ["queueId"] = entry.Id.ToString() });
+                    if (!string.IsNullOrWhiteSpace(appointment.Patient?.PhoneNumber))
+                        await notificationService.SendSmsAsync(appointment.Patient.PhoneNumber, tpl.SmsMessage);
+                }
+            }
         }
     }
 
@@ -377,7 +417,8 @@ public class QueueService(
             appointment.Doctor?.FullName ?? string.Empty,
             appointment.AppointmentTime,
             queue.CalledTime,
-            queue.ConsultationStartTime);
+            queue.ConsultationStartTime,
+            queue.RoomNumber);
     }
 
     private static string MaskName(string? fullName)
@@ -394,12 +435,20 @@ public class QueueService(
 
     private static string BuildStatusMessage(QueueEntry queue) => queue.Status switch
     {
-        QueueStatus.Waiting => $"You are #{queue.Position} in queue, estimated wait: {queue.EstimatedWaitTimeMinutes} minutes",
-        QueueStatus.Called => "You're next. Please proceed now.",
+        QueueStatus.Waiting => $"You are #{queue.Position} in queue, estimated wait: {FormatWaitTime(queue.EstimatedWaitTimeMinutes)}",
+        QueueStatus.Called => "You've been called. Please proceed to your consultation room.",
         QueueStatus.InConsultation => "Your consultation is in progress",
         QueueStatus.Completed => "Your consultation is complete",
         QueueStatus.Missed => "You were marked as missed",
         QueueStatus.Cancelled => "Queue entry cancelled",
         _ => "Queue status updated"
     };
+
+    public static string FormatWaitTime(int totalMinutes)
+    {
+        if (totalMinutes <= 0) return "0m";
+        var h = totalMinutes / 60;
+        var m = totalMinutes % 60;
+        return h > 0 && m > 0 ? $"{h}h {m}m" : h > 0 ? $"{h}h" : $"{m}m";
+    }
 }

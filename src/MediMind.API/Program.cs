@@ -53,6 +53,7 @@ try
     builder.Services.AddHostedService<AppointmentReminderService>();
     builder.Services.AddHostedService<MedicationReminderHostedService>();
     builder.Services.AddHostedService<DailyQueueGenerationService>();
+    builder.Services.AddHostedService<QueueHeartbeatService>();
     // Explicit registration for health records service (also discoverable from Program.cs).
     builder.Services.AddScoped<IHealthRecordService, HealthRecordService>();
     builder.Services.Configure<MlServiceOptions>(builder.Configuration.GetSection(MlServiceOptions.SectionName));

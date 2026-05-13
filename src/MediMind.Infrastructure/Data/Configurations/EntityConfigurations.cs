@@ -342,6 +342,7 @@ public class QueueEntryConfiguration : IEntityTypeConfiguration<QueueEntry>
         builder.Property(q => q.Id).HasColumnName("queue_id");
         builder.Property(q => q.QueueNumber).HasMaxLength(10).IsRequired();
         builder.Property(q => q.Status).HasConversion<string>().HasMaxLength(20);
+        builder.Property(q => q.RoomNumber).HasMaxLength(50);
         builder.ToTable(t => t.HasCheckConstraint("ck_queue_position", "position > 0"));
         builder.ToTable(t => t.HasCheckConstraint("ck_estimated_wait", "estimated_wait_time_minutes >= 0"));
 

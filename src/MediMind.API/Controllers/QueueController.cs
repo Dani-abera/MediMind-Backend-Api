@@ -1,4 +1,5 @@
 using MediMind.API.Attributes;
+using MediMind.Application.Features.Doctors;
 using MediMind.Application.Features.Queue;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -6,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MediMind.API.Controllers;
 
-public record CallNextRequest(Guid CenterId);
+public record CallNextRequest(Guid CenterId, string? RoomNumber = null);
 public record EmergencyInsertRequest(Guid AppointmentId, Guid CenterId);
 
 /// <summary>
@@ -15,7 +16,10 @@ public record EmergencyInsertRequest(Guid AppointmentId, Guid CenterId);
 [ApiController]
 [Authorize]
 [Route("api/v1/queue")]
-public class QueueController(IQueueService queueService, ICurrentUser currentUser) : ControllerBase
+public class QueueController(
+    IQueueService queueService,
+    IDoctorProfileService doctorProfileService,
+    ICurrentUser currentUser) : ControllerBase
 {
     /// <summary>Get the queue position and wait estimate for a patient's appointment (FR-025).</summary>
     [Tags("Patient — Appointments")]
@@ -46,7 +50,7 @@ public class QueueController(IQueueService queueService, ICurrentUser currentUse
     [ProducesResponseType(typeof(QueueItemDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> CallNext([FromBody] CallNextRequest request)
     {
-        var result = await queueService.CallNextPatientAsync(request.CenterId, currentUser.UserId);
+        var result = await queueService.CallNextPatientAsync(request.CenterId, currentUser.UserId, request.RoomNumber);
         return Ok(result);
     }
 
@@ -94,6 +98,17 @@ public class QueueController(IQueueService queueService, ICurrentUser currentUse
             return Forbid();
 
         var result = await queueService.InsertEmergencyPatientAsync(request.AppointmentId, currentUser.UserId);
+        return Ok(result);
+    }
+
+    /// <summary>Get today's queue for the authenticated doctor at a given center.</summary>
+    [Tags("Doctor — Queue")]
+    [HttpGet("doctor/{centerId:guid}")]
+    [RequireRole("Doctor")]
+    [ProducesResponseType(typeof(List<DoctorQueueItemDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetDoctorQueue(Guid centerId, CancellationToken ct)
+    {
+        var result = await doctorProfileService.GetQueueAsync(currentUser.UserId, centerId, ct);
         return Ok(result);
     }
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JvkEXgUAcWI=",
+  "dgSpecHash": "zFyuvyfORA4=",
   "success": true,
   "projectFilePath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Application/MediMind.Application.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "/Users/dani/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.12.0/fluentvalidation.dependencyinjectionextensions.11.12.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/mediatr/12.5.0/mediatr.12.5.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.8/microsoft.extensions.caching.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.8/microsoft.extensions.configuration.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.8/microsoft.extensions.dependencyinjection.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.diagnostics.abstractions/10.0.8/microsoft.extensions.diagnostics.abstractions.10.0.8.nupkg.sha512",

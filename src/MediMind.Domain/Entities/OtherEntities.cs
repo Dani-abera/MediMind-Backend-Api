@@ -20,6 +20,7 @@ public class QueueEntry : BaseEntity
     public QueueStatus Status { get; private set; } = QueueStatus.Waiting;
     public int EstimatedWaitTimeMinutes { get; private set; }
     public DateTime? CalledTime { get; private set; }
+    public string? RoomNumber { get; private set; }
     public DateTime? ConsultationStartTime { get; private set; }
     public DateTime? ConsultationEndTime { get; private set; }
 
@@ -39,13 +40,14 @@ public class QueueEntry : BaseEntity
         EstimatedWaitTimeMinutes = (position - 1) * slotDurationMinutes;
     }
 
-    public void CallPatient()
+    public void CallPatient(string? roomNumber = null)
     {
         if (Status != QueueStatus.Waiting)
             throw new DomainException("Only waiting patients can be called.");
 
         Status = QueueStatus.Called;
         CalledTime = DateTime.UtcNow;
+        RoomNumber = roomNumber;
         UpdateTimestamp();
     }
 

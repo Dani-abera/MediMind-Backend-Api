@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "MQ0G5clco9M=",
+  "dgSpecHash": "xe03KrS+r0s=",
   "success": true,
   "projectFilePath": "/Users/dani/RiderProjects/MediMind/tests/MediMind.UnitTests/MediMind.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "/Users/dani/.nuget/packages/mediatr/12.5.0/mediatr.12.5.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.codecoverage/17.14.1/microsoft.codecoverage.17.14.1.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.extensions.caching.abstractions/10.0.8/microsoft.extensions.caching.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.configuration.abstractions/10.0.8/microsoft.extensions.configuration.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.8/microsoft.extensions.dependencyinjection.abstractions.10.0.8.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.extensions.diagnostics.abstractions/10.0.8/microsoft.extensions.diagnostics.abstractions.10.0.8.nupkg.sha512",

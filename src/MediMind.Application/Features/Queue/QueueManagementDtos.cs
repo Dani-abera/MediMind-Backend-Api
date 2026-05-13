@@ -11,13 +11,15 @@ public record QueueItemDto(
     string DoctorName,
     TimeOnly AppointmentTime,
     DateTime? CalledTime,
-    DateTime? ConsultationStartTime);
+    DateTime? ConsultationStartTime,
+    string? RoomNumber);
 
 public record PatientQueueStatusDto(
     Guid QueueId,
     string QueueNumber,
     int CurrentPosition,
     int EstimatedWaitTimeMinutes,
+    string FormattedWaitTime,
     string Status,
     string StatusMessage,
     QueueCenterInfoDto Center,
