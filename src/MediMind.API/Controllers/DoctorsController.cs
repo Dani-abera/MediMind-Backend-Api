@@ -68,7 +68,18 @@ public class DoctorsController(
                 doctor.DoctorHealthcareCenters.Where(x => x.IsActive).Select(x => new DoctorCenterInfoDto(x.CenterId, x.Center.CenterName, x.ConsultationFee)).ToList()));
         }
 
-        return Ok(new PagedResult<DoctorResponseDto>(doctors, result.Page, result.PageSize, result.TotalCount));
+        string? emptyMessage = null;
+        if (doctors.Count == 0 && !string.IsNullOrEmpty(specialization) && centerId.HasValue)
+            emptyMessage = $"No {specialization} doctors at this center";
+
+        return Ok(new
+        {
+            items = doctors,
+            totalCount = result.TotalCount,
+            page = result.Page,
+            pageSize = result.PageSize,
+            message = emptyMessage
+        });
     }
 
     /// <summary>Get a doctor's full profile by ID (FR-010).</summary>

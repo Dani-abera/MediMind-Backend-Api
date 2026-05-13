@@ -87,7 +87,7 @@
             Appointment booking, status management, and availability queries.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediMind.Application.Features.Appointments.IAppointmentService,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.AppointmentNotes.IAppointmentNoteService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediMind.Application.Features.Appointments.IAppointmentService,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.AppointmentNotes.IAppointmentNoteService,MediMind.Application.Features.Appointments.IWaitlistService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Appointment booking, status management, and availability queries.
             </summary>
@@ -124,6 +124,12 @@
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.AvailableDates(System.Guid,System.Guid,System.Int32,System.Threading.CancellationToken)">
             <summary>Get dates on which a doctor has at least one available slot (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.SubscribeWaitlist(MediMind.Application.Features.Appointments.WaitlistSubscribeDto,System.Threading.CancellationToken)">
+            <summary>Subscribe to be notified when a slot opens for a fully-booked doctor (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.UnsubscribeWaitlist(System.Guid,System.Threading.CancellationToken)">
+            <summary>Unsubscribe from a waitlist (FR-011).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.GetNote(System.Guid,System.Threading.CancellationToken)">
             <summary>Get the private doctor note for an appointment.</summary>
@@ -315,8 +321,8 @@
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.Register(MediMind.Application.Features.CenterManagement.RegisterCenterDto,System.Threading.CancellationToken)">
             <summary>Register a new healthcare center for the authenticated admin (FR-030).</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Search(System.String,System.String,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
-            <summary>Search healthcare centers by city, specialization, or name (FR-031).</summary>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Search(System.String,System.String,System.String,System.Nullable{System.DateOnly},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Search healthcare centers by city, specialization, name, or availability (FR-031).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.Nearby(System.Double,System.Double,System.Double,System.Threading.CancellationToken)">
             <summary>Find healthcare centers near a geographic coordinate (FR-031).</summary>

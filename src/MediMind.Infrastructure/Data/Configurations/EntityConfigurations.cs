@@ -203,6 +203,8 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_advance_booking", "advance_booking_days BETWEEN 1 AND 90"));
 
+        builder.Property(c => c.RequiresPaymentBeforeConfirmation).HasDefaultValue(false);
+
         builder.HasIndex(c => c.LicenseNumber).IsUnique();
         builder.HasIndex(c => new { c.City, c.Region });
         builder.HasIndex(c => c.SubscriptionStatus);
@@ -243,6 +245,27 @@ public class SuperAdminUserConfiguration : IEntityTypeConfiguration<SuperAdminUs
     {
         builder.ToTable("super_admins");
         builder.Property(s => s.Id).HasColumnName("super_admin_id");
+    }
+}
+
+// ─── Waitlist Subscription ────────────────────────────────────────────────────
+
+public class WaitlistSubscriptionConfiguration : IEntityTypeConfiguration<WaitlistSubscription>
+{
+    public void Configure(EntityTypeBuilder<WaitlistSubscription> builder)
+    {
+        builder.ToTable("waitlist_subscriptions");
+        builder.HasKey(w => w.Id);
+        builder.Property(w => w.IsActive).HasDefaultValue(true);
+        builder.HasIndex(w => new { w.PatientId, w.DoctorId, w.CenterId });
+        builder.HasIndex(w => new { w.DoctorId, w.CenterId, w.IsActive });
+
+        builder.HasOne(w => w.Patient).WithMany()
+            .HasForeignKey(w => w.PatientId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(w => w.Doctor).WithMany()
+            .HasForeignKey(w => w.DoctorId).OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(w => w.Center).WithMany()
+            .HasForeignKey(w => w.CenterId).OnDelete(DeleteBehavior.Restrict);
     }
 }
 

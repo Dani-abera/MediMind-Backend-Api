@@ -229,3 +229,48 @@ public class AppointmentReminderJob(
         logger.LogInformation("Appointment reminder job completed.");
     }
 }
+
+// ─── SMS Retry Job (GAP-8) ────────────────────────────────────────────────────
+
+public interface IAppointmentSmsRetryJob
+{
+    Task RetrySmsAsync(Guid appointmentId, string phone, string message, CancellationToken ct = default);
+}
+
+/// <summary>
+/// Hangfire delayed job: retries a failed 24h reminder SMS once.
+/// Falls back to push notification if SMS fails again.
+/// </summary>
+public class AppointmentSmsRetryJob(
+    ISmsService smsService,
+    IPushNotificationService pushService,
+    IAppointmentRepository appointmentRepository,
+    ILogger<AppointmentSmsRetryJob> logger) : IAppointmentSmsRetryJob
+{
+    public async Task RetrySmsAsync(Guid appointmentId, string phone, string message, CancellationToken ct = default)
+    {
+        try
+        {
+            await smsService.SendAsync(phone, message, ct);
+            logger.LogInformation("SMS retry succeeded for appointment {AppointmentId}", appointmentId);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "SMS retry failed for appointment {AppointmentId}; falling back to push", appointmentId);
+            try
+            {
+                var appointment = await appointmentRepository.GetByIdAsync(appointmentId);
+                if (appointment is not null)
+                    await pushService.SendToUserAsync(appointment.PatientId,
+                        "Appointment reminder",
+                        message,
+                        new Dictionary<string, string> { ["appointmentId"] = appointmentId.ToString() },
+                        ct);
+            }
+            catch (Exception pushEx)
+            {
+                logger.LogError(pushEx, "Push fallback also failed for appointment {AppointmentId}", appointmentId);
+            }
+        }
+    }
+}

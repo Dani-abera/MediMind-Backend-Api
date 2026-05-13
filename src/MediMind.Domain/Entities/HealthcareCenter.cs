@@ -41,6 +41,7 @@ public class HealthcareCenter : BaseEntity
     public int AdvanceBookingDays { get; private set; } = 30;   // 1–90
     public int CancellationHours { get; private set; } = 2;     // Min hours before appointment
     public bool AutoApproveAppointments { get; private set; } = false;
+    public bool RequiresPaymentBeforeConfirmation { get; private set; } = false;
 
     // GPS
     public decimal? Latitude { get; private set; }
@@ -87,7 +88,8 @@ public class HealthcareCenter : BaseEntity
         int slotDurationMinutes,
         int advanceBookingDays,
         int cancellationHours,
-        bool autoApproveAppointments)
+        bool autoApproveAppointments,
+        bool requiresPaymentBeforeConfirmation = false)
     {
         if (!new[] { 15, 30, 45, 60 }.Contains(slotDurationMinutes))
             throw new Domain.Exceptions.DomainException("Slot duration must be 15, 30, 45, or 60 minutes.");
@@ -98,6 +100,7 @@ public class HealthcareCenter : BaseEntity
         AdvanceBookingDays = advanceBookingDays;
         CancellationHours = cancellationHours;
         AutoApproveAppointments = autoApproveAppointments;
+        RequiresPaymentBeforeConfirmation = requiresPaymentBeforeConfirmation;
         UpdateTimestamp();
     }
 

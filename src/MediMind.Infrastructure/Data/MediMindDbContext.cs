@@ -53,6 +53,7 @@ public class MediMindDbContext(
     public DbSet<AppointmentNote> AppointmentNotes => Set<AppointmentNote>();
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<SubscriptionHistory> SubscriptionHistories => Set<SubscriptionHistory>();
+    public DbSet<WaitlistSubscription> WaitlistSubscriptions => Set<WaitlistSubscription>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -276,7 +276,8 @@ public class HealthcareCenterRepository(MediMindDbContext context)
             config.SlotDurationMinutes,
             config.AdvanceBookingDays,
             config.CancellationHours,
-            config.AutoApproveAppointments);
+            config.AutoApproveAppointments,
+            config.RequiresPaymentBeforeConfirmation);
         return true;
     }
 
@@ -1532,6 +1533,33 @@ public class NotificationPreferenceRepository(MediMindDbContext context) : INoti
     public Task UpdateAsync(NotificationPreference preference, CancellationToken ct = default)
     {
         context.NotificationPreferences.Update(preference);
+        return Task.CompletedTask;
+    }
+}
+
+// ─── Waitlist Subscription Repository ────────────────────────────────────────
+
+public class WaitlistSubscriptionRepository(MediMindDbContext context) : IWaitlistSubscriptionRepository
+{
+    public async Task<WaitlistSubscription?> GetByIdAsync(Guid subscriptionId, Guid patientId, CancellationToken ct = default) =>
+        await context.WaitlistSubscriptions
+            .FirstOrDefaultAsync(w => w.Id == subscriptionId && w.PatientId == patientId, ct);
+
+    public async Task<IReadOnlyList<WaitlistSubscription>> GetActiveByDoctorAndCenterAsync(Guid doctorId, Guid centerId, CancellationToken ct = default) =>
+        await context.WaitlistSubscriptions
+            .Where(w => w.DoctorId == doctorId && w.CenterId == centerId && w.IsActive)
+            .ToListAsync(ct);
+
+    public async Task<WaitlistSubscription?> GetActiveByPatientDoctorCenterAsync(Guid patientId, Guid doctorId, Guid centerId, CancellationToken ct = default) =>
+        await context.WaitlistSubscriptions
+            .FirstOrDefaultAsync(w => w.PatientId == patientId && w.DoctorId == doctorId && w.CenterId == centerId && w.IsActive, ct);
+
+    public async Task AddAsync(WaitlistSubscription subscription, CancellationToken ct = default) =>
+        await context.WaitlistSubscriptions.AddAsync(subscription, ct);
+
+    public Task UpdateAsync(WaitlistSubscription subscription, CancellationToken ct = default)
+    {
+        context.WaitlistSubscriptions.Update(subscription);
         return Task.CompletedTask;
     }
 }

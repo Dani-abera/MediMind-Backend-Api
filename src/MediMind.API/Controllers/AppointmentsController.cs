@@ -20,6 +20,7 @@ public class AppointmentsController(
     IAppointmentService appointmentService,
     IAppointmentAvailabilityService availabilityService,
     IAppointmentNoteService appointmentNoteService,
+    IWaitlistService waitlistService,
     ICurrentUser currentUser) : ControllerBase
 {
     /// <summary>Book a new appointment for the authenticated patient (FR-011).</summary>
@@ -151,6 +152,30 @@ public class AppointmentsController(
     {
         var dates = await availabilityService.GetAvailableDatesAsync(doctorId, centerId, daysAhead);
         return Ok(dates);
+    }
+
+    // ─── Waitlist ─────────────────────────────────────────────────────────────
+
+    /// <summary>Subscribe to be notified when a slot opens for a fully-booked doctor (FR-011).</summary>
+    [Tags("Patient — Appointments")]
+    [HttpPost("waitlist")]
+    [RequireRole("Patient")]
+    [ProducesResponseType(typeof(WaitlistResponseDto), StatusCodes.Status201Created)]
+    public async Task<IActionResult> SubscribeWaitlist([FromBody] WaitlistSubscribeDto dto, CancellationToken ct)
+    {
+        var result = await waitlistService.SubscribeAsync(currentUser.UserId, dto, ct);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
+
+    /// <summary>Unsubscribe from a waitlist (FR-011).</summary>
+    [Tags("Patient — Appointments")]
+    [HttpDelete("waitlist/{id:guid}")]
+    [RequireRole("Patient")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> UnsubscribeWaitlist(Guid id, CancellationToken ct)
+    {
+        await waitlistService.UnsubscribeAsync(id, currentUser.UserId, ct);
+        return NoContent();
     }
 
     // ─── Appointment Notes (private doctor notes) ──────────────────────────────

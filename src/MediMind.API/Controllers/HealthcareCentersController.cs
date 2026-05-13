@@ -34,14 +34,14 @@ public class HealthcareCentersController(
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
-    /// <summary>Search healthcare centers by city, specialization, or name (FR-031).</summary>
+    /// <summary>Search healthcare centers by city, specialization, name, or availability (FR-031).</summary>
     [Tags("Public")]
     [HttpGet]
     [AllowAnonymous]
     [ProducesResponseType(typeof(PagedResult<CenterResponseDto>), StatusCodes.Status200OK)]
-    public async Task<IActionResult> Search([FromQuery] string? city, [FromQuery] string? specialization, [FromQuery] string? name, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
+    public async Task<IActionResult> Search([FromQuery] string? city, [FromQuery] string? specialization, [FromQuery] string? name, [FromQuery] DateOnly? availableOnDate, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
-        var result = await centerService.SearchAsync(new CenterSearchDto(city, specialization, name, page, pageSize));
+        var result = await centerService.SearchAsync(new CenterSearchDto(city, specialization, name, page, pageSize, availableOnDate));
         return Ok(result);
     }
 

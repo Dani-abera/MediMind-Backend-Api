@@ -300,6 +300,15 @@ public interface IPrescriptionTemplateRepository
     Task<bool> DeleteAsync(Guid templateId, Guid doctorId, CancellationToken ct = default);
 }
 
+public interface IWaitlistSubscriptionRepository
+{
+    Task<WaitlistSubscription?> GetByIdAsync(Guid subscriptionId, Guid patientId, CancellationToken ct = default);
+    Task<IReadOnlyList<WaitlistSubscription>> GetActiveByDoctorAndCenterAsync(Guid doctorId, Guid centerId, CancellationToken ct = default);
+    Task<WaitlistSubscription?> GetActiveByPatientDoctorCenterAsync(Guid patientId, Guid doctorId, Guid centerId, CancellationToken ct = default);
+    Task AddAsync(WaitlistSubscription subscription, CancellationToken ct = default);
+    Task UpdateAsync(WaitlistSubscription subscription, CancellationToken ct = default);
+}
+
 public interface IAppointmentNoteRepository
 {
     Task<AppointmentNote?> GetByAppointmentAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default);
@@ -327,14 +336,16 @@ public record CenterSearchDto(
     string? Specialization,
     string? Name,
     int Page = 1,
-    int PageSize = 20);
+    int PageSize = 20,
+    DateOnly? AvailableOnDate = null);
 
 public record CenterConfigurationDto(
     int SlotDurationMinutes,
     int AdvanceBookingDays,
     int CancellationHours,
     bool AutoApproveAppointments,
-    object? WorkingHours = null);
+    object? WorkingHours = null,
+    bool RequiresPaymentBeforeConfirmation = false);
 
 public record DoctorSearchDto(
     Guid? CenterId,

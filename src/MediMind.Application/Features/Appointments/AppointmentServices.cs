@@ -202,6 +202,8 @@ public class AppointmentService(
     IQueueRepository queueRepository,
     IQueueHubService queueHubService,
     IPushNotificationService pushNotificationService,
+    INotificationPreferenceRepository notificationPreferenceRepository,
+    IWaitlistService waitlistService,
     IUnitOfWork unitOfWork,
     ILogger<AppointmentService> logger,
     MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAppointmentService
@@ -212,6 +214,7 @@ public class AppointmentService(
         await bookingValidationService.ValidateBookingAsync(dto, patientId);
         await unitOfWork.BeginTransactionAsync();
         Appointment created;
+        bool requiresPayment = false;
         try
         {
             // Concurrency note:
@@ -224,6 +227,8 @@ public class AppointmentService(
 
             var center = await healthcareCenterRepository.GetByIdAsync(dto.CenterId)
                 ?? throw new NotFoundException(nameof(HealthcareCenter), dto.CenterId);
+
+            requiresPayment = center.RequiresPaymentBeforeConfirmation;
 
             var appointment = Appointment.Book(
                 patientId,
@@ -253,7 +258,9 @@ public class AppointmentService(
         {
             try
             {
-                await pushNotificationService.SendToUserAsync(patientId, "Appointment booked", "Your appointment request was submitted.");
+                var prefs = await notificationPreferenceRepository.GetByUserIdAsync(patientId);
+                if (prefs is null || prefs.AppointmentRemindersPush)
+                    await pushNotificationService.SendToUserAsync(patientId, "Appointment booked", "Your appointment request was submitted.");
                 await queueHubService.BroadcastQueueUpdateAsync(dto.CenterId, new { type = "appointmentBooked", appointmentId = created.Id });
             }
             catch (Exception ex)
@@ -264,7 +271,10 @@ public class AppointmentService(
 
         await auditLogger.LogAsync(AuditActions.AppointmentCreated, patientId, "Patient", dto.CenterId, "Appointment", created.Id);
 
-        return await BuildResponseAsync(created);
+        var response = await BuildResponseAsync(created);
+        if (requiresPayment)
+            response = response with { RequiresPayment = true, PaymentInitiationUrl = $"/api/v1/payments/initiate/{created.Id}" };
+        return response;
     }
 
     /// <inheritdoc />
@@ -291,20 +301,47 @@ public class AppointmentService(
                 throw new ValidationException("Too close to appointment time");
         }
 
+        var freedDate = appointment.AppointmentDate;
+        var doctorId = appointment.DoctorId;
+        var patientId = appointment.PatientId;
+        var appointmentCenterId = appointment.CenterId;
+
         appointment.Cancel(requesterId, dto.CancellationReason, center.CancellationHours);
         await unitOfWork.SaveChangesAsync();
 
-        await auditLogger.LogAsync(AuditActions.AppointmentCancelled, requesterId, requesterRole, appointment.CenterId, "Appointment", appointmentId);
+        await auditLogger.LogAsync(AuditActions.AppointmentCancelled, requesterId, requesterRole, appointmentCenterId, "Appointment", appointmentId);
 
         _ = Task.Run(async () =>
         {
             try
             {
-                await pushNotificationService.SendToUserAsync(appointment.PatientId, "Appointment cancelled", "Your appointment was cancelled.");
+                var prefs = await notificationPreferenceRepository.GetByUserIdAsync(patientId);
+                if (prefs is null || prefs.AppointmentRemindersPush)
+                    await pushNotificationService.SendToUserAsync(patientId, "Appointment cancelled", "Your appointment was cancelled.");
+
+                var centerWithAdmins = await healthcareCenterRepository.GetWithAdminsAsync(appointmentCenterId);
+                if (centerWithAdmins is not null)
+                {
+                    foreach (var admin in centerWithAdmins.Admins)
+                        await pushNotificationService.SendToUserAsync(admin.Id, "Appointment cancelled",
+                            $"An appointment on {freedDate:MMM dd} was cancelled by the patient.");
+                }
             }
             catch (Exception ex)
             {
                 logger.LogWarning(ex, "Cancellation notification failed for appointment {AppointmentId}", appointmentId);
+            }
+        });
+
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await waitlistService.NotifyWaitlistAsync(doctorId, appointmentCenterId, freedDate);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Waitlist notification failed after cancellation of appointment {AppointmentId}", appointmentId);
             }
         });
     }
@@ -317,6 +354,10 @@ public class AppointmentService(
 
         if (!existing.CanReschedule)
             throw new ValidationException("Appointment cannot be rescheduled");
+
+        var appointmentDateTime = existing.AppointmentDate.ToDateTime(existing.AppointmentTime);
+        if (appointmentDateTime <= DateTime.UtcNow.AddHours(2))
+            throw new ValidationException("Too close to appointment time. Contact healthcare center to reschedule.");
 
         existing.IncrementRescheduleCount();
         existing.Cancel(patientId, dto.Reason ?? "Rescheduled by patient", 0);
@@ -517,4 +558,81 @@ public class AppointmentService(
             queue?.QueueNumber,
             queue?.EstimatedWaitTimeMinutes);
     }
+}
+
+// ─── Waitlist Service ─────────────────────────────────────────────────────────
+
+public interface IWaitlistService
+{
+    Task<WaitlistResponseDto> SubscribeAsync(Guid patientId, WaitlistSubscribeDto dto, CancellationToken ct = default);
+    Task UnsubscribeAsync(Guid subscriptionId, Guid patientId, CancellationToken ct = default);
+    Task NotifyWaitlistAsync(Guid doctorId, Guid centerId, DateOnly freedDate, CancellationToken ct = default);
+}
+
+public class WaitlistService(
+    IWaitlistSubscriptionRepository waitlistRepository,
+    IDoctorRepository doctorRepository,
+    IPushNotificationService pushNotificationService,
+    IUnitOfWork unitOfWork,
+    ILogger<WaitlistService> logger) : IWaitlistService
+{
+    public async Task<WaitlistResponseDto> SubscribeAsync(Guid patientId, WaitlistSubscribeDto dto, CancellationToken ct = default)
+    {
+        var existing = await waitlistRepository.GetActiveByPatientDoctorCenterAsync(patientId, dto.DoctorId, dto.CenterId, ct);
+        if (existing is not null)
+            return MapToDto(existing);
+
+        var subscription = WaitlistSubscription.Create(patientId, dto.DoctorId, dto.CenterId, dto.PreferredDateFrom, dto.PreferredDateTo);
+        await waitlistRepository.AddAsync(subscription, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+        return MapToDto(subscription);
+    }
+
+    public async Task UnsubscribeAsync(Guid subscriptionId, Guid patientId, CancellationToken ct = default)
+    {
+        var subscription = await waitlistRepository.GetByIdAsync(subscriptionId, patientId, ct)
+            ?? throw new NotFoundException(nameof(WaitlistSubscription), subscriptionId);
+        subscription.Deactivate();
+        await waitlistRepository.UpdateAsync(subscription, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+    }
+
+    public async Task NotifyWaitlistAsync(Guid doctorId, Guid centerId, DateOnly freedDate, CancellationToken ct = default)
+    {
+        var subscribers = await waitlistRepository.GetActiveByDoctorAndCenterAsync(doctorId, centerId, ct);
+        var eligible = subscribers.Where(s => freedDate >= s.PreferredDateFrom && freedDate <= s.PreferredDateTo).ToList();
+        if (eligible.Count == 0) return;
+
+        var doctor = await doctorRepository.GetByIdAsync(doctorId);
+        var doctorName = doctor?.FullName ?? "your doctor";
+
+        foreach (var sub in eligible)
+        {
+            try
+            {
+                await pushNotificationService.SendToUserAsync(
+                    sub.PatientId,
+                    "Appointment slot available",
+                    $"A slot has opened for Dr. {doctorName} on {freedDate:MMM dd}. Book now!",
+                    new Dictionary<string, string>
+                    {
+                        ["doctorId"] = doctorId.ToString(),
+                        ["centerId"] = centerId.ToString(),
+                        ["date"] = freedDate.ToString("yyyy-MM-dd")
+                    },
+                    ct);
+                sub.MarkNotified();
+                await waitlistRepository.UpdateAsync(sub, ct);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Failed to notify waitlist subscriber {PatientId}", sub.PatientId);
+            }
+        }
+
+        await unitOfWork.SaveChangesAsync(ct);
+    }
+
+    private static WaitlistResponseDto MapToDto(WaitlistSubscription s) =>
+        new(s.Id, s.PatientId, s.DoctorId, s.CenterId, s.PreferredDateFrom, s.PreferredDateTo, s.IsActive, s.NotifiedAt);
 }

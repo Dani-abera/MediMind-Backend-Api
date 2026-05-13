@@ -171,7 +171,6 @@
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/HealthChecks.NpgSql.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/AspNetCoreRateLimit.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/AutoMapper.dll
-/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/BCrypt.Net-Next.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/CloudinaryDotNet.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/Dapper.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/Dapper.AOT.dll
@@ -316,3 +315,4 @@
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/win-x86/native/onnxruntime.lib
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/win-x86/native/onnxruntime_providers_shared.dll
 /Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/runtimes/win-x86/native/onnxruntime_providers_shared.lib
+/Users/dani/RiderProjects/MediMind/src/MediMind.API/bin/Debug/net10.0/BCrypt-Net-Next.dll

@@ -77,6 +77,59 @@ public class QueueEntry : BaseEntity
     }
 }
 
+// ─── Waitlist Subscription ────────────────────────────────────────────────────
+
+/// <summary>
+/// Maps to `waitlist_subscriptions` table.
+/// Created when a patient wants to be notified when a slot opens for a fully-booked doctor.
+/// </summary>
+public class WaitlistSubscription : BaseEntity
+{
+    public Guid PatientId { get; private set; }
+    public Guid DoctorId { get; private set; }
+    public Guid CenterId { get; private set; }
+    public DateOnly PreferredDateFrom { get; private set; }
+    public DateOnly PreferredDateTo { get; private set; }
+    public bool IsActive { get; private set; } = true;
+    public DateTime? NotifiedAt { get; private set; }
+
+    // Navigation
+    public Patient Patient { get; private set; } = null!;
+    public Doctor Doctor { get; private set; } = null!;
+    public HealthcareCenter Center { get; private set; } = null!;
+
+    private WaitlistSubscription() { }
+
+    public static WaitlistSubscription Create(
+        Guid patientId, Guid doctorId, Guid centerId,
+        DateOnly preferredDateFrom, DateOnly preferredDateTo)
+    {
+        if (preferredDateTo < preferredDateFrom)
+            throw new DomainException("PreferredDateTo must be on or after PreferredDateFrom.");
+        return new WaitlistSubscription
+        {
+            PatientId = patientId,
+            DoctorId = doctorId,
+            CenterId = centerId,
+            PreferredDateFrom = preferredDateFrom,
+            PreferredDateTo = preferredDateTo
+        };
+    }
+
+    public void MarkNotified()
+    {
+        IsActive = false;
+        NotifiedAt = DateTime.UtcNow;
+        UpdateTimestamp();
+    }
+
+    public void Deactivate()
+    {
+        IsActive = false;
+        UpdateTimestamp();
+    }
+}
+
 // ─── Doctor Schedule ──────────────────────────────────────────────────────────
 
 /// <summary>Maps to `doctor_schedules` table. One schedule per doctor per center.</summary>

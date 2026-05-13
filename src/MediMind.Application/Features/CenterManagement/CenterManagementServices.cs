@@ -82,11 +82,32 @@ public class HealthcareCenterService(
     public async Task<PagedResult<CenterResponseDto>> SearchAsync(CenterSearchDto search)
     {
         var result = await centerRepository.SearchAsync(search);
-        var mapped = new List<CenterResponseDto>(result.Items.Count);
-        foreach (var center in result.Items)
+        var items = result.Items.AsEnumerable();
+
+        if (search.AvailableOnDate.HasValue)
+        {
+            var date = search.AvailableOnDate.Value;
+            var available = new List<Domain.Entities.HealthcareCenter>();
+            foreach (var center in items)
+            {
+                var doctors = await centerRepository.GetDoctorsAsync(center.Id);
+                var hasSlot = false;
+                foreach (var dc in doctors.Where(d => d.IsActive))
+                {
+                    var slots = await appointmentAvailabilityService.GetAvailableSlotsAsync(dc.DoctorId, center.Id, date);
+                    if (slots.Any(s => s.IsAvailable)) { hasSlot = true; break; }
+                }
+                if (hasSlot) available.Add(center);
+            }
+            items = available;
+        }
+
+        var mapped = new List<CenterResponseDto>();
+        foreach (var center in items)
             mapped.Add(await MapCenter(center, null));
 
-        return new PagedResult<CenterResponseDto>(mapped, result.Page, result.PageSize, result.TotalCount);
+        return new PagedResult<CenterResponseDto>(mapped, result.Page, result.PageSize,
+            search.AvailableOnDate.HasValue ? mapped.Count : result.TotalCount);
     }
 
     public async Task<IEnumerable<CenterResponseDto>> SearchNearbyAsync(double latitude, double longitude, double radiusKm)

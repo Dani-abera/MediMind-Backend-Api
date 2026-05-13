@@ -90,6 +90,7 @@ public static class DependencyInjection
         services.AddScoped<IReviewRepository, ReviewRepository>();
         services.AddScoped<IFavoriteRepository, FavoriteRepository>();
         services.AddScoped<INotificationPreferenceRepository, NotificationPreferenceRepository>();
+        services.AddScoped<IWaitlistSubscriptionRepository, WaitlistSubscriptionRepository>();
         services.AddScoped<IPrescriptionTemplateRepository, PrescriptionTemplateRepository>();
         services.AddScoped<IAppointmentNoteRepository, AppointmentNoteRepository>();
         services.AddScoped<IAuditLogRepository, AuditLogRepository>();
@@ -224,6 +225,7 @@ public static class DependencyInjection
 
         // Hangfire job implementations (so recurring jobs can be resolved via DI)
         services.AddScoped<IAppointmentReminderJob, AppointmentReminderJob>();
+        services.AddScoped<IAppointmentSmsRetryJob, AppointmentSmsRetryJob>();
         services.AddScoped<IQueueGenerationJob, QueueGenerationJob>();
 
         // ─── Health Checks ───────────────────────────────────────────────────
