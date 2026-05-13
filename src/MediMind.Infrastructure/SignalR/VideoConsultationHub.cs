@@ -65,6 +65,23 @@ public sealed class VideoConsultationHub(IVideoConsultationService consultationS
     public Task SendIceCandidate(string consultationId, string targetConnectionId, string candidate) =>
         Clients.Client(targetConnectionId).SendAsync("ReceiveIceCandidate", Context.ConnectionId, candidate);
 
+    public async Task BroadcastMediaState(string consultationId, bool isMuted, bool isCameraEnabled)
+    {
+        if (!Guid.TryParse(consultationId, out var cid))
+            return;
+        lock (Connections)
+        {
+            if (!Connections.ContainsKey(Context.ConnectionId))
+                return;
+        }
+        await Clients.OthersInGroup(GroupName(cid)).SendAsync("ParticipantMediaStateChanged", new
+        {
+            connectionId = Context.ConnectionId,
+            isMuted,
+            isCameraEnabled
+        });
+    }
+
     public async Task SendChatMessage(string consultationId, string content)
     {
         if (!Guid.TryParse(consultationId, out var cid))
@@ -76,15 +93,22 @@ public sealed class VideoConsultationHub(IVideoConsultationService consultationS
                 return;
         }
 
-        var message = await consultationService.SaveChatMessageAsync(cid, connection.UserId, connection.UserType, content);
-        await Clients.Group(GroupName(cid)).SendAsync("ReceiveChatMessage", new
+        try
         {
-            messageId = message.MessageId,
-            senderId = message.SenderId,
-            senderName = message.SenderName,
-            content = message.Content,
-            sentAt = message.SentAt
-        });
+            var message = await consultationService.SaveChatMessageAsync(cid, connection.UserId, connection.UserType, content);
+            await Clients.Group(GroupName(cid)).SendAsync("ReceiveChatMessage", new
+            {
+                messageId = message.MessageId,
+                senderId = message.SenderId,
+                senderName = message.SenderName,
+                content = message.Content,
+                sentAt = message.SentAt
+            });
+        }
+        catch
+        {
+            await Clients.Caller.SendAsync("MessageSendFailed", new { content });
+        }
     }
 
     public Task<List<object>> GetRoomParticipants(string consultationId)
@@ -150,5 +174,5 @@ public sealed class VideoConsultationHubNotifier(IHubContext<VideoConsultationHu
 
     public Task NotifyQualityAlertAsync(Guid consultationId, Guid userId, string message, CancellationToken ct = default) =>
         hubContext.Clients.Group($"consultation_{consultationId}")
-            .SendAsync("QualityAlert", new { userId, message }, ct);
+            .SendAsync("QualityAlert", new { userId, message, audioOnlyRecommended = true }, ct);
 }

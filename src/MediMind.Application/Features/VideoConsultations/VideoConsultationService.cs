@@ -23,11 +23,39 @@ public interface IVideoConsultationService
     Task ReportQualityAsync(Guid consultationId, Guid userId, int bandwidth, int packetsLost, int frameRate, CancellationToken ct = default);
 }
 
+/// <summary>WebRTC ICE server configuration entry. Pass the full array to <c>new RTCPeerConnection({ iceServers })</c>.</summary>
+/// <param name="Urls">One or more STUN/TURN URLs for this entry (e.g. <c>stun:stun.l.google.com:19302</c>).</param>
+/// <param name="Username">TURN username credential, <c>null</c> for STUN-only entries.</param>
+/// <param name="Credential">TURN password credential, <c>null</c> for STUN-only entries.</param>
 public sealed record IceServerDto(string[] Urls, string? Username, string? Credential);
+
+/// <summary>Public profile information about a consultation participant.</summary>
 public sealed record UserInfoDto(Guid UserId, string FullName, string? Specialization, string? ProfileImageUrl);
+
+/// <summary>Represents a currently connected participant with their live SignalR connection ID.</summary>
+/// <param name="ConnectionId">SignalR connection ID — use as <c>targetConnectionId</c> in WebRTC signaling hub methods.</param>
+/// <param name="UserId">The participant's user ID.</param>
+/// <param name="UserType"><c>Doctor</c> or <c>Patient</c>.</param>
+/// <param name="DisplayName">The participant's full name for display.</param>
 public sealed record ParticipantConnectionDto(string ConnectionId, Guid UserId, string UserType, string DisplayName);
+
+/// <summary>Caller's own identity and display name as resolved from the JWT and appointment.</summary>
 public sealed record ConnectionInfoDto(Guid UserId, string UserType, string DisplayName);
 
+/// <summary>
+/// Session bootstrap data returned by the Initiate endpoint. Contains ICE servers for WebRTC setup
+/// and participant profile info for rendering the call screen before the peer connects.
+/// </summary>
+/// <param name="ConsultationId">Unique ID for this consultation session.</param>
+/// <param name="AppointmentId">The appointment this consultation is linked to.</param>
+/// <param name="RoomId">Opaque room identifier (used internally; SignalR hub uses <c>consultationId</c> for grouping).</param>
+/// <param name="Status"><c>Scheduled</c>, <c>InProgress</c>, <c>Completed</c>, or <c>Cancelled</c>.</param>
+/// <param name="JoinUrl">WebSocket base URL for the SignalR hub.</param>
+/// <param name="IceServers">Pass directly to <c>RTCPeerConnection</c> constructor as <c>iceServers</c>.</param>
+/// <param name="DoctorInfo">Doctor's display name, specialization, and profile image.</param>
+/// <param name="PatientInfo">Patient's display name and profile image.</param>
+/// <param name="AppointmentDate">Scheduled date of the appointment.</param>
+/// <param name="AppointmentTime">Scheduled time of the appointment.</param>
 public sealed record ConsultationSessionDto(
     Guid ConsultationId,
     Guid AppointmentId,
@@ -40,6 +68,16 @@ public sealed record ConsultationSessionDto(
     DateOnly AppointmentDate,
     TimeOnly AppointmentTime);
 
+/// <summary>
+/// Connection bootstrapping data returned by the Join endpoint. Contains everything needed to
+/// connect to the SignalR hub, initiate WebRTC signaling, and render the chat panel.
+/// </summary>
+/// <param name="ConsultationId">Consultation ID — pass to all hub methods.</param>
+/// <param name="RoomId">Opaque room identifier.</param>
+/// <param name="SignalRHubUrl">Relative hub path (<c>/hubs/video</c>). Prepend host and add <c>?access_token=</c> for WebSocket connection.</param>
+/// <param name="YourConnectionInfo">Caller's own identity for rendering the local video label.</param>
+/// <param name="OtherParticipants">Participants already connected at join time. Usually empty; participants arrive via <c>UserJoined</c> SignalR events in real usage.</param>
+/// <param name="ChatHistory">Most recent 50 chat messages in chronological order. Render immediately on join.</param>
 public sealed record ConsultationJoinDto(
     Guid ConsultationId,
     string RoomId,
@@ -48,6 +86,15 @@ public sealed record ConsultationJoinDto(
     IReadOnlyList<ParticipantConnectionDto> OtherParticipants,
     IReadOnlyList<ChatMessageDto> ChatHistory);
 
+/// <summary>A single chat message exchanged during a video consultation.</summary>
+/// <param name="MessageId">Unique message ID.</param>
+/// <param name="ConsultationId">The consultation this message belongs to.</param>
+/// <param name="SenderId">User ID of the sender.</param>
+/// <param name="SenderName">Resolved full name of the sender for display.</param>
+/// <param name="SenderType"><c>Doctor</c> or <c>Patient</c>.</param>
+/// <param name="Content">Message text (1–2000 characters).</param>
+/// <param name="SentAt">UTC timestamp when the message was persisted.</param>
+/// <param name="IsRead">Whether the recipient has read this message.</param>
 public sealed record ChatMessageDto(
     Guid MessageId,
     Guid ConsultationId,
@@ -223,7 +270,7 @@ public sealed class VideoConsultationService(
         if (bandwidth < 500)
         {
             consultation.ReportQuality("Low");
-            await hubNotifier.NotifyQualityAlertAsync(consultationId, userId, "Poor connection detected. Consider switching to audio-only mode.", ct);
+            await hubNotifier.NotifyQualityAlertAsync(consultationId, userId, "Poor connection. Audio-only mode recommended", ct);
         }
 
         await unitOfWork.SaveChangesAsync(ct);
