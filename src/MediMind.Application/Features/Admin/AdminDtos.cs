@@ -26,6 +26,25 @@ public record EnrolledPatientSummaryDto(
     DateOnly? LastVisit,
     int TotalAppointments);
 
+public record PatientPredictionSummaryDto(
+    Guid PredictionId,
+    DateOnly PredictionDate,
+    decimal DiabetesRisk,
+    string DiabetesCategory,
+    decimal HypertensionRisk,
+    string HypertensionCategory,
+    decimal CvdRisk,
+    string CvdCategory,
+    decimal Confidence,
+    string Recommendations);
+
+public record PatientPrescriptionSummaryDto(
+    Guid PrescriptionId,
+    string DoctorName,
+    DateOnly IssueDate,
+    string Diagnosis,
+    string Status);
+
 public record EnrolledPatientDetailDto(
     Guid PatientId,
     string FullName,
@@ -39,7 +58,9 @@ public record EnrolledPatientDetailDto(
     int TotalAppointments,
     DateOnly? LastVisit,
     DateOnly? FirstVisit,
-    List<AppointmentSummaryDto> RecentAppointments);
+    List<AppointmentSummaryDto> RecentAppointments,
+    PatientPredictionSummaryDto? LatestPrediction,
+    List<PatientPrescriptionSummaryDto> RecentPrescriptions);
 
 public record AppointmentSummaryDto(
     Guid AppointmentId,

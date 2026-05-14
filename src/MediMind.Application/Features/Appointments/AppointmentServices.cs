@@ -83,17 +83,27 @@ public interface IAppointmentService
     /// Returns past appointments (date < today or status Completed/Cancelled/NoShow), paginated descending.
     /// </summary>
     Task<PagedResult<AppointmentResponseDto>> GetPastAsync(Guid patientId, int page, int pageSize, CancellationToken ct = default);
+
+    /// <summary>
+    /// Marks a confirmed or in-progress appointment as completed by the doctor.
+    /// </summary>
+    Task MarkCompleteAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default);
 }
 
 public class AppointmentAvailabilityService(
     IDoctorScheduleRepository doctorScheduleRepository,
-    IAppointmentRepository appointmentRepository) : IAppointmentAvailabilityService
+    IAppointmentRepository appointmentRepository,
+    IScheduleExceptionRepository scheduleExceptionRepository) : IAppointmentAvailabilityService
 {
     /// <inheritdoc />
     public async Task<List<TimeSlot>> GetAvailableSlotsAsync(Guid doctorId, Guid centerId, DateOnly date)
     {
         var schedule = await doctorScheduleRepository.GetByDoctorAndCenterAsync(doctorId, centerId);
         if (schedule is null)
+            return [];
+
+        var isException = await scheduleExceptionRepository.ExistsAsync(doctorId, centerId, date);
+        if (isException)
             return [];
 
         var dayName = date.DayOfWeek.ToString();
@@ -541,22 +551,52 @@ public class AppointmentService(
         var center = full.Center;
         var canCancel = full.IsCancellable(center?.CancellationHours ?? 2);
         var queue = full.QueueEntry;
+        var canInitiateVideo = full.Status == AppointmentStatus.Confirmed && full.VideoConsultation is null;
+        var latestPayment = full.Payments.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
 
         return new AppointmentResponseDto(
-            full.Id,
-            full.Status.ToString(),
-            full.AppointmentDate,
-            full.AppointmentTime,
-            full.DurationMinutes,
-            full.ReasonForVisit,
-            full.BookingDate,
-            new AppointmentPatientDto(full.PatientId, full.Patient?.FullName ?? string.Empty, full.Patient?.PhoneNumber ?? string.Empty),
-            new AppointmentDoctorDto(full.DoctorId, full.Doctor?.FullName ?? string.Empty, full.Doctor?.Specialization ?? string.Empty),
-            new AppointmentCenterDto(full.CenterId, center?.CenterName ?? string.Empty, center?.Address ?? string.Empty, center?.PhoneNumber ?? string.Empty),
-            canCancel,
-            full.CanReschedule,
-            queue?.QueueNumber,
-            queue?.EstimatedWaitTimeMinutes);
+            Id: full.Id,
+            Status: full.Status.ToString(),
+            DateTime: full.AppointmentDate.ToDateTime(full.AppointmentTime),
+            DurationMinutes: full.DurationMinutes,
+            Reason: full.ReasonForVisit,
+            Symptoms: full.Symptoms,
+            BookingDate: full.BookingDate,
+            PatientId: full.PatientId,
+            PatientName: full.Patient?.FullName ?? string.Empty,
+            PatientPhone: full.Patient?.PhoneNumber,
+            DoctorId: full.DoctorId,
+            DoctorName: full.Doctor?.FullName ?? string.Empty,
+            DoctorSpecialization: full.Doctor?.Specialization,
+            DoctorAvatarUrl: full.Doctor?.ProfileImageUrl,
+            CenterId: full.CenterId,
+            CenterName: center?.CenterName ?? string.Empty,
+            CenterAddress: center?.Address,
+            CenterPhone: center?.PhoneNumber,
+            CenterLatitude: center?.Latitude.HasValue == true ? (double?)Convert.ToDouble(center.Latitude) : null,
+            CenterLongitude: center?.Longitude.HasValue == true ? (double?)Convert.ToDouble(center.Longitude) : null,
+            Type: "InPerson",
+            CanCancel: canCancel,
+            CanReschedule: full.CanReschedule,
+            QueueNumber: queue?.Position,
+            EstimatedWaitMinutes: queue?.EstimatedWaitTimeMinutes,
+            CanInitiateVideoConsultation: canInitiateVideo,
+            VideoConsultationId: full.VideoConsultation?.ConsultationId,
+            CancellationPolicyHours: center?.CancellationHours ?? 2,
+            PaymentId: latestPayment?.Id,
+            PaymentStatus: latestPayment?.Status.ToString());
+    }
+
+    public async Task MarkCompleteAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default)
+    {
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId)
+            ?? throw new NotFoundException(nameof(Appointment), appointmentId);
+
+        if (appointment.DoctorId != doctorId)
+            throw new UnauthorizedException();
+
+        appointment.MarkCompleted();
+        await unitOfWork.SaveChangesAsync(ct);
     }
 }
 

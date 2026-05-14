@@ -29,6 +29,12 @@ public interface IQueueService
     /// <summary>Inserts emergency patient at top of queue.</summary>
     Task<QueueItemDto> InsertEmergencyPatientAsync(Guid appointmentId, Guid adminId);
 
+    /// <summary>Moves a waiting patient to the back of today's queue (admin action).</summary>
+    Task<QueueItemDto> SkipAsync(Guid queueId, Guid adminId);
+
+    /// <summary>Patient cancels their own queue position.</summary>
+    Task CancelByPatientAsync(Guid appointmentId, Guid patientId);
+
     /// <summary>Gets queue status for a patient appointment.</summary>
     Task<PatientQueueStatusDto> GetQueueStatusAsync(Guid appointmentId, Guid patientId);
 
@@ -201,6 +207,64 @@ public class QueueService(
         await notificationService.BroadcastQueueRefreshAsync(appointment.CenterId, dashboard);
 
         return MapQueueItem(emergency, appointment);
+    }
+
+    /// <inheritdoc />
+    public async Task<QueueItemDto> SkipAsync(Guid queueId, Guid adminId)
+    {
+        var queue = await queueRepository.GetByIdAsync(queueId)
+            ?? throw new NotFoundException("Queue", queueId);
+
+        await EnsureAdminBelongsToCenter(queue.CenterId, adminId);
+
+        var entries = (await queueRepository.GetCenterQueueAsync(queue.CenterId, queue.QueueDate)).ToList();
+        var maxPosition = entries
+            .Where(e => e.Status == QueueStatus.Waiting && e.Id != queue.Id)
+            .Select(e => e.Position)
+            .DefaultIfEmpty(0)
+            .Max();
+
+        var center = await healthcareCenterRepository.GetByIdAsync(queue.CenterId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), queue.CenterId);
+
+        queue.Skip();
+        queue.UpdatePosition(maxPosition + 1, center.SlotDurationMinutes);
+        await unitOfWork.SaveChangesAsync();
+
+        await queueRepository.RecalculatePositionsAsync(queue.CenterId, queue.QueueDate);
+        await unitOfWork.SaveChangesAsync();
+
+        await NotifyWaitingPatients(queue.CenterId, queue.QueueDate);
+        var dashboard = await BuildDashboard(queue.CenterId, queue.QueueDate);
+        await notificationService.BroadcastQueueRefreshAsync(queue.CenterId, dashboard);
+
+        var appointment = await appointmentRepository.GetByIdAsync(queue.AppointmentId)
+            ?? throw new NotFoundException(nameof(Appointment), queue.AppointmentId);
+
+        return MapQueueItem(queue, appointment);
+    }
+
+    /// <inheritdoc />
+    public async Task CancelByPatientAsync(Guid appointmentId, Guid patientId)
+    {
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId)
+            ?? throw new NotFoundException(nameof(Appointment), appointmentId);
+
+        if (appointment.PatientId != patientId)
+            throw new UnauthorizedException();
+
+        var queue = await queueRepository.GetByAppointmentIdAsync(appointmentId)
+            ?? throw new NotFoundException("Queue", appointmentId);
+
+        queue.Cancel();
+        await unitOfWork.SaveChangesAsync();
+
+        await queueRepository.RecalculatePositionsAsync(queue.CenterId, queue.QueueDate);
+        await unitOfWork.SaveChangesAsync();
+
+        await NotifyWaitingPatients(queue.CenterId, queue.QueueDate);
+        var dashboard = await BuildDashboard(queue.CenterId, queue.QueueDate);
+        await notificationService.BroadcastQueueRefreshAsync(queue.CenterId, dashboard);
     }
 
     /// <inheritdoc />

@@ -58,16 +58,18 @@ public sealed class PaymentsController(PaymentAppService paymentService, ICurren
         return Ok(result);
     }
 
-    /// <summary>Download a PDF payment receipt (FR-093).</summary>
+    /// <summary>Get the PDF receipt URL for a payment (FR-093). Generates the receipt if not yet stored.</summary>
     [Tags("Patient — Payments", "Admin — Payments")]
     [HttpGet("{id:guid}/receipt")]
     [Authorize(Policy = "PatientOrAdmin")]
-    [ProducesResponseType(typeof(FileContentResult), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Receipt(Guid id, CancellationToken ct)
     {
         var status = await paymentService.GetPaymentStatusAsync(id, currentUser.UserType, currentUser.UserId, currentUser.TenantId, ct);
-        var pdf = await paymentService.GenerateReceiptAsync(status.PaymentId, ct);
-        return File(pdf, "application/pdf", $"receipt-{status.PaymentRef}.pdf");
+        if (string.IsNullOrEmpty(status.ReceiptUrl))
+            await paymentService.GenerateReceiptAsync(status.PaymentId, ct);
+        var updated = await paymentService.GetPaymentStatusAsync(id, currentUser.UserType, currentUser.UserId, currentUser.TenantId, ct);
+        return Ok(new { url = updated.ReceiptUrl });
     }
 
     /// <summary>Chapa HMAC-verified webhook — updates payment and appointment status (FR-094).</summary>

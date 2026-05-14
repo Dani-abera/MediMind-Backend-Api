@@ -84,4 +84,7 @@ public sealed record PaymentHistoryItemDto(
     string Status,
     DateTime CreatedAt,
     DateTime? PaymentDate,
-    string? ReceiptUrl);
+    string? ReceiptUrl,
+    string PatientName,
+    string DoctorName,
+    string? PaymentMethod);

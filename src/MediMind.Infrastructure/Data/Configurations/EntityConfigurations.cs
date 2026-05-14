@@ -288,6 +288,39 @@ public class DoctorScheduleConfiguration : IEntityTypeConfiguration<DoctorSchedu
     }
 }
 
+// ─── Doctor Invitation ────────────────────────────────────────────────────────
+
+public class DoctorInvitationConfiguration : IEntityTypeConfiguration<DoctorInvitation>
+{
+    public void Configure(EntityTypeBuilder<DoctorInvitation> builder)
+    {
+        builder.ToTable("doctor_invitations");
+        builder.HasKey(i => i.Id);
+        builder.Property(i => i.Email).IsRequired().HasMaxLength(200);
+        builder.Property(i => i.FullName).IsRequired().HasMaxLength(100);
+        builder.Property(i => i.LicenseNumber).IsRequired().HasMaxLength(100);
+        builder.Property(i => i.Specialization).IsRequired().HasMaxLength(100);
+        builder.Property(i => i.PhoneNumber).IsRequired().HasMaxLength(20);
+        builder.Property(i => i.Token).IsRequired().HasMaxLength(64);
+        builder.Property(i => i.ConsultationFee).HasColumnType("decimal(10,2)");
+        builder.HasIndex(i => i.Token).IsUnique();
+        builder.HasIndex(i => new { i.Email, i.CenterId });
+    }
+}
+
+// ─── Schedule Exception ───────────────────────────────────────────────────────
+
+public class ScheduleExceptionConfiguration : IEntityTypeConfiguration<ScheduleException>
+{
+    public void Configure(EntityTypeBuilder<ScheduleException> builder)
+    {
+        builder.ToTable("schedule_exceptions");
+        builder.HasKey(e => e.Id);
+        builder.Property(e => e.Reason).IsRequired().HasMaxLength(200);
+        builder.HasIndex(e => new { e.DoctorId, e.CenterId, e.ExceptionDate }).IsUnique();
+    }
+}
+
 // ─── Appointment ─────────────────────────────────────────────────────────────
 
 public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>

@@ -323,6 +323,23 @@ public interface IAuditLogRepository
     Task<PagedResult<AuditLog>> QueryGlobalAsync(AuditLogFilterDto filter, CancellationToken ct = default);
 }
 
+public interface IDoctorInvitationRepository
+{
+    Task<DoctorInvitation?> GetByTokenAsync(string token, CancellationToken ct = default);
+    Task<DoctorInvitation?> GetByEmailAndCenterAsync(string email, Guid centerId, CancellationToken ct = default);
+    Task<DoctorInvitation> CreateAsync(DoctorInvitation invitation, CancellationToken ct = default);
+    Task UpdateAsync(DoctorInvitation invitation, CancellationToken ct = default);
+}
+
+public interface IScheduleExceptionRepository
+{
+    Task<IReadOnlyList<ScheduleException>> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId, CancellationToken ct = default);
+    Task<IReadOnlyList<ScheduleException>> GetByDateRangeAsync(Guid doctorId, Guid centerId, DateOnly from, DateOnly to, CancellationToken ct = default);
+    Task<bool> ExistsAsync(Guid doctorId, Guid centerId, DateOnly date, CancellationToken ct = default);
+    Task<ScheduleException> CreateAsync(ScheduleException exception, CancellationToken ct = default);
+    Task<bool> DeleteAsync(Guid doctorId, Guid centerId, DateOnly date, CancellationToken ct = default);
+}
+
 public record AppointmentFilterDto(
     AppointmentStatus? Status,
     DateOnly? StartDate,
@@ -344,8 +361,9 @@ public record CenterConfigurationDto(
     int AdvanceBookingDays,
     int CancellationHours,
     bool AutoApproveAppointments,
-    object? WorkingHours = null,
-    bool RequiresPaymentBeforeConfirmation = false);
+    Dictionary<string, string>? WorkingHours = null,
+    bool RequiresPaymentBeforeConfirmation = false,
+    List<string>? ServicesOffered = null);
 
 public record DoctorSearchDto(
     Guid? CenterId,

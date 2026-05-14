@@ -93,7 +93,9 @@ public class AdminManagementService(
 
 public class PatientDirectoryService(
     IAppointmentRepository appointmentRepository,
-    IHealthcareCenterRepository centerRepository) : IPatientDirectoryService
+    IHealthcareCenterRepository centerRepository,
+    IPrescriptionRepository prescriptionRepository,
+    IHealthPredictionRepository healthPredictionRepository) : IPatientDirectoryService
 {
     public async Task<PagedResult<EnrolledPatientSummaryDto>> ListEnrolledPatientsAsync(
         Guid centerId, PatientDirectoryQueryDto query, Guid requesterId, CancellationToken ct = default)
@@ -156,7 +158,7 @@ public class PatientDirectoryService(
             .ToList();
 
         if (appointments.Count == 0)
-            throw new NotFoundException("Patient enrollment", patientId);
+            throw new ForbiddenException("Patient not registered at your healthcare center. Cannot access records");
 
         var patient = appointments.First().Patient;
         var recent = appointments.Take(5)
@@ -166,6 +168,31 @@ public class PatientDirectoryService(
                 a.AppointmentTime,
                 a.Doctor.FullName,
                 a.Status.ToString()))
+            .ToList();
+
+        var latestPrediction = await healthPredictionRepository.GetLatestAsync(patientId);
+        var prescriptions = await prescriptionRepository.GetByPatientAsync(patientId, 1, 5, ct);
+
+        PatientPredictionSummaryDto? predictionDto = latestPrediction is null ? null : new PatientPredictionSummaryDto(
+            latestPrediction.Id,
+            latestPrediction.PredictionDate,
+            latestPrediction.DiabetesRisk,
+            latestPrediction.DiabetesCategory.ToString(),
+            latestPrediction.HypertensionRisk,
+            latestPrediction.HypertensionCategory.ToString(),
+            latestPrediction.CvdRisk,
+            latestPrediction.CvdCategory.ToString(),
+            latestPrediction.Confidence,
+            latestPrediction.Recommendations);
+
+        var prescriptionDtos = prescriptions
+            .Where(p => p.CenterId == centerId)
+            .Select(p => new PatientPrescriptionSummaryDto(
+                p.Id,
+                p.Doctor.FullName,
+                p.IssueDate,
+                p.Diagnosis,
+                p.Status.ToString()))
             .ToList();
 
         return new EnrolledPatientDetailDto(
@@ -181,7 +208,9 @@ public class PatientDirectoryService(
             appointments.Count,
             appointments.Max(a => a.AppointmentDate),
             appointments.Min(a => a.AppointmentDate),
-            recent);
+            recent,
+            predictionDto,
+            prescriptionDtos);
     }
 
     private async Task EnsureAdminAccessAsync(Guid centerId, Guid adminId, CancellationToken ct)

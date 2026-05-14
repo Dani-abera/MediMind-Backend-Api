@@ -111,6 +111,12 @@ public class Doctor : User
         YearsOfExperience = yearsOfExperience;
     }
 
+    public void SetLicenseNumber(string licenseNumber)
+    {
+        LicenseNumber = licenseNumber;
+        UpdateTimestamp();
+    }
+
     public void UpdateProfessionalInfo(
         string specialization,
         int yearsOfExperience,

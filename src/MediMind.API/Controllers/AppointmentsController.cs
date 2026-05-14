@@ -178,6 +178,30 @@ public class AppointmentsController(
         return NoContent();
     }
 
+    /// <summary>Doctor marks an in-progress or confirmed appointment as completed.</summary>
+    [Tags("Doctor — Appointments")]
+    [HttpPost("{id:guid}/complete")]
+    [RequireRole("Doctor")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> MarkComplete(Guid id, CancellationToken ct)
+    {
+        await appointmentService.MarkCompleteAsync(id, currentUser.UserId, ct);
+        return NoContent();
+    }
+
+    /// <summary>Bulk-approve a list of pending appointments (admin shortcut).</summary>
+    [Tags("Admin — Appointments")]
+    [HttpPost("bulk-approve")]
+    [RequireRole("Admin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> BulkApprove([FromBody] BulkApproveDto dto, CancellationToken ct)
+    {
+        var centerId = currentUser.TenantId ?? throw new UnauthorizedException();
+        foreach (var id in dto.Ids)
+            await appointmentService.ApproveAppointmentAsync(id, currentUser.UserId, centerId);
+        return NoContent();
+    }
+
     // ─── Appointment Notes (private doctor notes) ──────────────────────────────
 
     /// <summary>Get the private doctor note for an appointment.</summary>
@@ -212,5 +236,57 @@ public class AppointmentsController(
     {
         var note = await appointmentNoteService.UpsertAsync(id, currentUser.UserId, dto, ct);
         return Ok(note);
+    }
+
+    // ─── Calendar Views (FR-022) ──────────────────────────────────────────────
+
+    /// <summary>Day view: all appointments for a single date, grouped (FR-022).</summary>
+    [Tags("Doctor — Appointments", "Admin — Appointments")]
+    [HttpGet("calendar/day")]
+    [RequireRole("Doctor", "Admin")]
+    [ProducesResponseType(typeof(CalendarSyncResponseDto<List<CalendarDayDto>>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> CalendarDay([FromQuery] DateOnly date, CancellationToken ct)
+    {
+        var filter = new AppointmentFilterDto(null, date, date, null, 1, 200);
+        var result = await appointmentService.GetAppointmentsAsync(currentUser.UserId, currentUser.UserType, currentUser.TenantId, filter);
+        var grouped = result.Items.GroupBy(a => DateOnly.FromDateTime(a.DateTime))
+            .Select(g => new CalendarDayDto(g.Key, g.OrderBy(a => a.DateTime).ToList()))
+            .ToList();
+        return Ok(new CalendarSyncResponseDto<List<CalendarDayDto>>(grouped, DateTime.UtcNow));
+    }
+
+    /// <summary>Week view: appointments from startDate to startDate+6 days, grouped by day (FR-022).</summary>
+    [Tags("Doctor — Appointments", "Admin — Appointments")]
+    [HttpGet("calendar/week")]
+    [RequireRole("Doctor", "Admin")]
+    [ProducesResponseType(typeof(CalendarSyncResponseDto<List<CalendarDayDto>>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> CalendarWeek([FromQuery] DateOnly startDate, CancellationToken ct)
+    {
+        var endDate = startDate.AddDays(6);
+        var filter = new AppointmentFilterDto(null, startDate, endDate, null, 1, 500);
+        var result = await appointmentService.GetAppointmentsAsync(currentUser.UserId, currentUser.UserType, currentUser.TenantId, filter);
+        var grouped = result.Items.GroupBy(a => DateOnly.FromDateTime(a.DateTime))
+            .Select(g => new CalendarDayDto(g.Key, g.OrderBy(a => a.DateTime).ToList()))
+            .ToList();
+        return Ok(new CalendarSyncResponseDto<List<CalendarDayDto>>(grouped, DateTime.UtcNow));
+    }
+
+    /// <summary>Doctor view: appointments for a specific doctor over a date range (FR-022).</summary>
+    [Tags("Doctor — Appointments", "Admin — Appointments")]
+    [HttpGet("calendar/doctor/{doctorId:guid}")]
+    [RequireRole("Doctor", "Admin")]
+    [ProducesResponseType(typeof(CalendarSyncResponseDto<List<CalendarDayDto>>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> CalendarDoctor(Guid doctorId, [FromQuery] DateOnly startDate, [FromQuery] DateOnly? endDate, CancellationToken ct)
+    {
+        if (currentUser.UserType == "Doctor" && currentUser.UserId != doctorId)
+            return Forbid();
+
+        var end = endDate ?? startDate.AddDays(6);
+        var filter = new AppointmentFilterDto(null, startDate, end, doctorId, 1, 500);
+        var result = await appointmentService.GetAppointmentsAsync(currentUser.UserId, currentUser.UserType, currentUser.TenantId, filter);
+        var grouped = result.Items.GroupBy(a => DateOnly.FromDateTime(a.DateTime))
+            .Select(g => new CalendarDayDto(g.Key, g.OrderBy(a => a.DateTime).ToList()))
+            .ToList();
+        return Ok(new CalendarSyncResponseDto<List<CalendarDayDto>>(grouped, DateTime.UtcNow));
     }
 }

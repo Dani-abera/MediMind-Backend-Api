@@ -1,0 +1,348 @@
+2026-05-13 11:14:40.932 +03:00 [INF] ✅ Seeded 4 subscription plans.
+2026-05-13 11:14:40.950 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-14T00:00:00.0000000Z
+2026-05-13 11:14:40.953 +03:00 [INF] Daily queue generation scheduled for "2026-05-14T06:00:00.0000000" ("2026-05-14T03:00:00.0000000Z" UTC)
+2026-05-13 11:14:41.008 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-13 11:14:41.008 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-13 11:15:57.101 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 294.1829 ms
+2026-05-13 11:16:26.078 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Invalid credentials.
+   at MediMind.Application.Features.Auth.AdminAuthService.LoginAsync(String email, String password, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 408
+   at MediMind.API.Controllers.AuthController.AdminLogin(AdminLoginApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 175
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-13 11:16:26.101 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 400 in 888.7960 ms
+2026-05-13 11:16:34.452 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 308.6239 ms
+2026-05-13 11:16:34.764 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 41.7187 ms
+2026-05-13 11:16:34.893 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-13 11:16:35.178 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-13 11:16:35.219 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 488.2898 ms
+2026-05-13 11:16:45.009 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-13 11:16:45.087 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 132.5830 ms
+2026-05-13 11:16:50.370 +03:00 [INF] HTTP POST /api/v1/queue/call-next responded 400 in 19.2966 ms
+2026-05-13 11:16:53.367 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 185.3687 ms
+2026-05-13 11:16:56.393 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 56.6889 ms
+2026-05-13 11:17:08.866 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 23.1335 ms
+2026-05-13 11:17:31.319 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 181.2408 ms
+2026-05-13 11:17:34.689 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3320 ms
+2026-05-13 11:18:34.694 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.8680 ms
+2026-05-13 11:19:34.692 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.6138 ms
+2026-05-13 11:20:34.683 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1770 ms
+2026-05-13 11:21:34.749 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 18.9443 ms
+2026-05-13 11:22:34.750 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.3708 ms
+2026-05-13 11:23:34.688 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.2366 ms
+2026-05-13 11:24:19.867 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 487.3367 ms
+2026-05-13 11:24:34.687 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.6537 ms
+2026-05-13 11:25:34.702 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.4283 ms
+2026-05-13 11:26:34.722 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 20.5392 ms
+2026-05-13 11:27:34.933 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 22.3173 ms
+2026-05-13 11:28:34.718 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.3742 ms
+2026-05-13 11:29:34.708 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.2845 ms
+2026-05-13 11:30:11.382 +03:00 [INF] Running appointment reminder job at "2026-05-13T08:30:11.3815540Z"
+2026-05-13 11:30:11.474 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 11:30:34.705 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2113 ms
+2026-05-13 11:31:34.890 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 14.8736 ms
+2026-05-13 11:32:34.779 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 63.2816 ms
+2026-05-13 11:33:34.707 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.6462 ms
+2026-05-13 11:34:34.799 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 49.3907 ms
+2026-05-13 11:35:34.719 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.8472 ms
+2026-05-13 11:36:34.728 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.6794 ms
+2026-05-13 11:37:34.733 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.7568 ms
+2026-05-13 11:38:34.712 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.9979 ms
+2026-05-13 11:39:34.717 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.3122 ms
+2026-05-13 11:40:34.725 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.3463 ms
+2026-05-13 11:41:34.729 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.4078 ms
+2026-05-13 11:42:34.717 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.9298 ms
+2026-05-13 11:43:34.718 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9140 ms
+2026-05-13 11:44:34.736 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.1996 ms
+2026-05-13 11:45:34.738 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.9807 ms
+2026-05-13 11:46:34.757 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 30.4253 ms
+2026-05-13 11:47:37.255 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 34.5185 ms
+2026-05-13 11:48:34.709 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.0113 ms
+2026-05-13 11:49:34.731 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.7444 ms
+2026-05-13 11:50:34.772 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.0894 ms
+2026-05-13 11:51:34.766 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.5517 ms
+2026-05-13 11:52:34.744 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.7928 ms
+2026-05-13 11:53:35.512 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3478 ms
+2026-05-13 11:54:34.784 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.8558 ms
+2026-05-13 11:54:46.642 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 79.4047 ms
+2026-05-13 11:54:47.016 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 224
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-13 11:54:47.027 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 400 in 141.0279 ms
+2026-05-13 11:54:52.626 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 5.0502 ms
+2026-05-13 11:54:52.631 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 0.5454 ms
+2026-05-13 11:54:52.636 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 0.8137 ms
+2026-05-13 11:54:52.642 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 0.7621 ms
+2026-05-13 11:54:52.867 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 219.4826 ms
+2026-05-13 11:54:59.838 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 3.6293 ms
+2026-05-13 11:55:05.668 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 2.5273 ms
+2026-05-13 11:55:09.534 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 2.2428 ms
+2026-05-13 11:55:10.972 +03:00 [INF] HTTP GET /api/v1/health-records responded 401 in 1.4482 ms
+2026-05-13 11:55:11.024 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 0.8339 ms
+2026-05-13 11:55:11.072 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 401 in 0.3474 ms
+2026-05-13 11:55:34.718 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1958 ms
+2026-05-13 11:55:47.129 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1358 ms
+2026-05-13 11:56:15.955 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-13 11:56:16.066 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-13 11:56:16.067 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-13 11:56:16.070 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 979.4020 ms
+2026-05-13 11:56:34.713 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7716 ms
+2026-05-13 11:56:35.450 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 241.7342 ms
+2026-05-13 11:56:35.829 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 400 in 8.4238 ms
+2026-05-13 11:56:35.865 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 14.2565 ms
+2026-05-13 11:56:35.904 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-13 11:56:35.913 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.1072 ms
+2026-05-13 11:56:35.914 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 82.1850 ms
+2026-05-13 11:56:35.957 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 119.4911 ms
+2026-05-13 11:56:35.964 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 195.2848 ms
+2026-05-13 11:56:37.345 +03:00 [INF] ONNX models loaded from /Users/dani/RiderProjects/MediMind/src/MediMind.API/models
+2026-05-13 11:56:37.375 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 1522.4653 ms
+2026-05-13 11:56:44.950 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 21.3269 ms
+2026-05-13 11:56:48.143 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 54.4395 ms
+2026-05-13 11:57:34.713 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.7955 ms
+2026-05-13 11:57:39.330 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.4020 ms
+2026-05-13 11:58:03.097 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 112.4370 ms
+2026-05-13 11:58:03.155 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 15.5291 ms
+2026-05-13 11:58:03.214 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 9.5313 ms
+2026-05-13 11:58:34.720 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2081 ms
+2026-05-13 11:58:39.907 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.4094 ms
+2026-05-13 11:59:27.585 +03:00 [INF] HTTP GET /api/v1/predictions responded 404 in 10.2248 ms
+2026-05-13 11:59:27.645 +03:00 [INF] HTTP GET /api/v1/predictions/latest responded 404 in 0.8617 ms
+2026-05-13 11:59:28.526 +03:00 [INF] HTTP GET /api/v1/medication-reminders responded 200 in 35.5890 ms
+2026-05-13 11:59:34.721 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 1.7515 ms
+2026-05-13 11:59:40.767 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.0480 ms
+2026-05-13 11:59:56.904 +03:00 [INF] HTTP POST /api/v1/health-records responded 422 in 84.7984 ms
+2026-05-13 12:00:11.516 +03:00 [INF] Running appointment reminder job at "2026-05-13T09:00:11.5159100Z"
+2026-05-13 12:00:11.534 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 12:00:34.734 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 11.5152 ms
+2026-05-13 12:00:41.404 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.3921 ms
+2026-05-13 12:01:15.507 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 56.0513 ms
+2026-05-13 12:01:34.704 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.1010 ms
+2026-05-13 12:01:44.653 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.3347 ms
+2026-05-13 12:02:34.729 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.5928 ms
+2026-05-13 12:02:44.898 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.5829 ms
+2026-05-13 12:03:34.744 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.3443 ms
+2026-05-13 12:04:34.735 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.2018 ms
+2026-05-13 12:05:34.714 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.6006 ms
+2026-05-13 12:06:34.710 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.6638 ms
+2026-05-13 12:07:34.720 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 12.9859 ms
+2026-05-13 12:08:34.723 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 18.2376 ms
+2026-05-13 12:09:34.775 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 17.0433 ms
+2026-05-13 12:10:34.731 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.3959 ms
+2026-05-13 12:11:34.758 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.3607 ms
+2026-05-13 12:12:34.736 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 3.4630 ms
+2026-05-13 12:13:35.635 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 10.6397 ms
+2026-05-13 12:14:34.807 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.0090 ms
+2026-05-13 12:15:34.726 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 13.8663 ms
+2026-05-13 12:16:34.738 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.3900 ms
+2026-05-13 12:17:34.801 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 18.5415 ms
+2026-05-13 12:18:34.808 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3461 ms
+2026-05-13 12:19:34.736 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.9342 ms
+2026-05-13 12:20:34.714 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.1478 ms
+2026-05-13 12:21:34.755 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.8970 ms
+2026-05-13 12:22:34.720 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.4935 ms
+2026-05-13 12:23:34.945 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 23.6896 ms
+2026-05-13 12:24:34.720 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.8406 ms
+2026-05-13 12:25:34.750 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.9068 ms
+2026-05-13 12:26:34.753 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.8985 ms
+2026-05-13 12:27:34.712 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.0938 ms
+2026-05-13 12:28:34.737 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.2506 ms
+2026-05-13 12:29:34.978 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.5340 ms
+2026-05-13 12:30:11.733 +03:00 [INF] Running appointment reminder job at "2026-05-13T09:30:11.7308160Z"
+2026-05-13 12:30:11.769 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 12:30:34.800 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.9200 ms
+2026-05-13 12:31:34.732 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.0718 ms
+2026-05-13 12:32:34.730 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.3463 ms
+2026-05-13 12:33:34.798 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 14.3055 ms
+2026-05-13 12:34:34.729 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.7536 ms
+2026-05-13 12:35:34.729 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.4728 ms
+2026-05-13 12:36:34.852 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 27.5482 ms
+2026-05-13 12:37:34.740 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9041 ms
+2026-05-13 12:38:34.734 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9040 ms
+2026-05-13 12:39:34.726 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.7703 ms
+2026-05-13 12:40:34.742 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.0434 ms
+2026-05-13 12:41:34.726 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.1917 ms
+2026-05-13 12:42:34.894 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.1445 ms
+2026-05-13 12:43:34.717 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.5270 ms
+2026-05-13 12:44:34.737 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 5.9510 ms
+2026-05-13 12:45:34.751 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 9.3118 ms
+2026-05-13 12:46:34.779 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.4794 ms
+2026-05-13 12:47:34.745 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.3037 ms
+2026-05-13 13:00:11.967 +03:00 [INF] Running appointment reminder job at "2026-05-13T10:00:11.9599310Z"
+2026-05-13 13:00:12.000 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 13:30:12.223 +03:00 [INF] Running appointment reminder job at "2026-05-13T10:30:12.2175240Z"
+2026-05-13 13:30:12.260 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 14:00:12.483 +03:00 [INF] Running appointment reminder job at "2026-05-13T11:00:12.4788570Z"
+2026-05-13 14:00:12.521 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 14:30:12.754 +03:00 [INF] Running appointment reminder job at "2026-05-13T11:30:12.7499840Z"
+2026-05-13 14:30:12.797 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 15:00:13.021 +03:00 [INF] Running appointment reminder job at "2026-05-13T12:00:13.0168900Z"
+2026-05-13 15:00:13.047 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 15:30:13.309 +03:00 [INF] Running appointment reminder job at "2026-05-13T12:30:13.3075180Z"
+2026-05-13 15:30:13.333 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 16:00:13.572 +03:00 [INF] Running appointment reminder job at "2026-05-13T13:00:13.5690020Z"
+2026-05-13 16:00:13.607 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 16:30:13.873 +03:00 [INF] Running appointment reminder job at "2026-05-13T13:30:13.8683400Z"
+2026-05-13 16:30:13.933 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 16:38:31.958 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 139.3730 ms
+2026-05-13 16:38:34.123 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 1605.9948 ms
+2026-05-13 16:44:32.867 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 399.0153 ms
+2026-05-13 16:51:18.151 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 162.0312 ms
+2026-05-13 16:54:47.572 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 389.8083 ms
+2026-05-13 16:54:54.505 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 401 in 77.1871 ms
+2026-05-13 16:58:01.885 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 645.8886 ms
+2026-05-13 16:58:02.132 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2598 ms
+2026-05-13 16:58:02.424 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 289.8421 ms
+2026-05-13 16:58:18.710 +03:00 [INF] HTTP GET /api/v1/queue/center/96eec7f8-cb5a-4358-8ded-eb76b878649f responded 200 in 126.2308 ms
+2026-05-13 16:58:25.837 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 405 in 10.9299 ms
+2026-05-13 16:58:33.684 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors responded 200 in 113.0406 ms
+2026-05-13 16:59:02.122 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.7264 ms
+2026-05-13 16:59:02.234 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 117.3115 ms
+2026-05-13 17:00:02.182 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 14.1013 ms
+2026-05-13 17:00:02.369 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 199.6995 ms
+2026-05-13 17:00:14.035 +03:00 [INF] Running appointment reminder job at "2026-05-13T14:00:14.0317280Z"
+2026-05-13 17:00:14.043 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 17:00:28.115 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 404 in 5.3566 ms
+2026-05-13 17:00:41.818 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 107.8555 ms
+2026-05-13 17:00:59.930 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 38.4698 ms
+2026-05-13 17:01:02.093 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7336 ms
+2026-05-13 17:01:02.137 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 43.6888 ms
+2026-05-13 17:01:05.188 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 42.2970 ms
+2026-05-13 17:01:09.421 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 19.2201 ms
+2026-05-13 17:01:11.782 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 29.5513 ms
+2026-05-13 17:01:13.762 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 15.7559 ms
+2026-05-13 17:01:18.542 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 26.4213 ms
+2026-05-13 17:01:20.929 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 18.1856 ms
+2026-05-13 17:01:22.230 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 16.8860 ms
+2026-05-13 17:01:23.868 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 19.9986 ms
+2026-05-13 17:01:24.646 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 28.1065 ms
+2026-05-13 17:01:25.796 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 35.1004 ms
+2026-05-13 17:02:02.133 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 16.8280 ms
+2026-05-13 17:02:02.199 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 80.8544 ms
+2026-05-13 17:02:09.128 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 508.8988 ms
+2026-05-13 17:02:11.825 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 10.6044 ms
+2026-05-13 17:02:15.720 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 36.1787 ms
+2026-05-13 17:02:19.343 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 23.1958 ms
+2026-05-13 17:03:02.134 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 7.0029 ms
+2026-05-13 17:03:02.186 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 57.7532 ms
+2026-05-13 17:04:02.126 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 2.7706 ms
+2026-05-13 17:04:02.177 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 53.8003 ms
+2026-05-13 17:05:02.164 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 4.2948 ms
+2026-05-13 17:05:02.213 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 44.3305 ms
+2026-05-13 17:06:02.280 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 6.9466 ms
+2026-05-13 17:06:02.585 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 192.0663 ms
+2026-05-13 17:07:04.594 +03:00 [INF] HTTP GET /api/v1/api/v1/notifications/unread-count responded 404 in 8.3280 ms
+2026-05-13 17:07:04.693 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 89.5452 ms
+2026-05-13 17:13:36.780 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-13 17:13:37.302 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-13 17:13:37.304 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-13 17:13:37.311 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 4054.4413 ms
+2026-05-13 17:13:52.288 +03:00 [ERR] An unhandled exception has occurred while executing the request.
+MediMind.Domain.Exceptions.DomainException: Invalid or expired OTP.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct)
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 64
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-13 17:13:52.349 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 400 in 274.9000 ms
+2026-05-13 17:14:36.924 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-13 17:14:37.484 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-13 17:14:37.484 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-13 17:14:37.487 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 2363.4279 ms
+2026-05-13 17:14:54.592 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 145.1421 ms
+2026-05-13 17:14:55.409 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 400 in 37.8079 ms
+2026-05-13 17:14:55.412 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.0191 ms
+2026-05-13 17:15:13.572 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 56.6694 ms
+2026-05-13 17:15:13.579 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 85.6550 ms
+2026-05-13 17:15:13.580 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 84.5074 ms
+2026-05-13 17:15:13.588 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 97.2129 ms
+2026-05-13 17:15:13.612 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 100.4548 ms
+2026-05-13 17:15:17.191 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 14.0378 ms
+2026-05-13 17:15:21.484 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 39.7576 ms
+2026-05-13 17:15:55.830 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.5295 ms
+2026-05-13 17:16:57.839 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 56.5788 ms
+2026-05-13 17:30:14.360 +03:00 [INF] Running appointment reminder job at "2026-05-13T14:30:14.3557950Z"
+2026-05-13 17:30:14.393 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 17:38:55.181 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 167.0565 ms
+2026-05-13 17:38:55.814 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 417.4524 ms
+2026-05-13 17:38:55.956 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.9995 ms
+2026-05-13 17:38:57.964 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 32.1214 ms
+2026-05-13 17:38:57.969 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 12.8132 ms
+2026-05-13 17:38:58.014 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 55.7257 ms
+2026-05-13 17:38:58.040 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 74.8320 ms
+2026-05-13 17:38:58.042 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 86.2647 ms
+2026-05-13 17:39:02.798 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 26.9986 ms
+2026-05-13 17:39:05.269 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 44.7048 ms
+2026-05-13 17:39:24.245 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 43.3290 ms
+2026-05-13 17:39:26.409 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 127.1854 ms
+2026-05-13 17:39:26.464 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 10.3933 ms
+2026-05-13 17:39:26.529 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 22.1844 ms
+2026-05-13 17:39:30.948 +03:00 [INF] HTTP GET /api/v1/patients/me/medical-history responded 404 in 162.2515 ms
+2026-05-13 17:39:55.805 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 311.0893 ms
+2026-05-13 17:39:56.155 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.7514 ms
+2026-05-13 17:40:16.367 +03:00 [INF] HTTP GET /api/v1/predictions responded 404 in 2.8323 ms
+2026-05-13 17:40:16.437 +03:00 [INF] HTTP GET /api/v1/predictions/latest responded 404 in 2.3345 ms
+2026-05-13 17:40:18.764 +03:00 [INF] HTTP GET /api/v1/medication-reminders responded 200 in 29.1672 ms
+2026-05-13 17:40:35.205 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 1344.9024 ms
+2026-05-13 17:40:38.746 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 20.7000 ms
+2026-05-13 17:44:33.443 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 171.4954 ms
+2026-05-13 17:44:56.391 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.8912 ms
+2026-05-13 17:44:56.407 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 47.5300 ms
+2026-05-13 17:44:56.412 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 51.0513 ms
+2026-05-13 17:44:56.461 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 91.5000 ms
+2026-05-13 17:44:56.501 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 137.4087 ms
+2026-05-13 17:44:59.114 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 14.8108 ms
+2026-05-13 17:45:00.842 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 48.5985 ms
+2026-05-13 17:45:33.897 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.2773 ms
+2026-05-13 17:46:35.324 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.2012 ms
+2026-05-13 17:47:37.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 49.5067 ms
+2026-05-13 18:14:42.658 +03:00 [INF] Running appointment reminder job at "2026-05-13T15:14:42.6560280Z"
+2026-05-13 18:14:42.691 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 18:37:55.206 +03:00 [INF] Running appointment reminder job at "2026-05-13T15:37:55.2032880Z"
+2026-05-13 18:37:55.266 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 19:11:34.874 +03:00 [INF] Running appointment reminder job at "2026-05-13T16:11:34.8733690Z"
+2026-05-13 19:11:35.006 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 19:46:45.436 +03:00 [INF] Running appointment reminder job at "2026-05-13T16:46:45.4361010Z"
+2026-05-13 19:46:45.462 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 20:00:14.675 +03:00 [INF] Running appointment reminder job at "2026-05-13T17:00:14.6718220Z"
+2026-05-13 20:00:14.717 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 20:30:15.088 +03:00 [INF] Running appointment reminder job at "2026-05-13T17:30:15.0863610Z"
+2026-05-13 20:30:15.158 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 21:00:00.552 +03:00 [INF] Running appointment reminder job at "2026-05-13T18:00:00.5363020Z"
+2026-05-13 21:00:00.645 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 21:30:01.095 +03:00 [INF] Running appointment reminder job at "2026-05-13T18:30:01.0893760Z"
+2026-05-13 21:30:01.136 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 22:00:01.404 +03:00 [INF] Running appointment reminder job at "2026-05-13T19:00:01.3979210Z"
+2026-05-13 22:00:01.438 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 22:30:01.617 +03:00 [INF] Running appointment reminder job at "2026-05-13T19:30:01.6143630Z"
+2026-05-13 22:30:01.655 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 23:00:01.877 +03:00 [INF] Running appointment reminder job at "2026-05-13T20:00:01.8740060Z"
+2026-05-13 23:00:01.914 +03:00 [INF] Appointment reminder job completed.
+2026-05-13 23:30:02.130 +03:00 [INF] Running appointment reminder job at "2026-05-13T20:30:02.1261590Z"
+2026-05-13 23:30:02.161 +03:00 [INF] Appointment reminder job completed.

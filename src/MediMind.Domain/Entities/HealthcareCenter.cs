@@ -84,12 +84,30 @@ public class HealthcareCenter : BaseEntity
         ServicesOffered = servicesOffered;
     }
 
+    public void UpdateGeneralInfo(
+        string name, string phone, string email,
+        string city, string region, string address,
+        List<string> services, List<string> specializations)
+    {
+        CenterName = name;
+        PhoneNumber = phone;
+        Email = email;
+        City = city;
+        Region = region;
+        Address = address;
+        ServicesOffered = services;
+        Specializations = specializations;
+        UpdateTimestamp();
+    }
+
     public void UpdateConfiguration(
         int slotDurationMinutes,
         int advanceBookingDays,
         int cancellationHours,
         bool autoApproveAppointments,
-        bool requiresPaymentBeforeConfirmation = false)
+        bool requiresPaymentBeforeConfirmation = false,
+        Dictionary<string, string>? workingHours = null,
+        List<string>? servicesOffered = null)
     {
         if (!new[] { 15, 30, 45, 60 }.Contains(slotDurationMinutes))
             throw new Domain.Exceptions.DomainException("Slot duration must be 15, 30, 45, or 60 minutes.");
@@ -101,6 +119,8 @@ public class HealthcareCenter : BaseEntity
         CancellationHours = cancellationHours;
         AutoApproveAppointments = autoApproveAppointments;
         RequiresPaymentBeforeConfirmation = requiresPaymentBeforeConfirmation;
+        if (workingHours is not null) WorkingHours = workingHours;
+        if (servicesOffered is not null) ServicesOffered = servicesOffered;
         UpdateTimestamp();
     }
 

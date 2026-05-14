@@ -30,7 +30,7 @@
             All endpoints verify center_id claim == route {id} via service layer.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AdminController.#ctor(MediMind.Application.Features.Admin.IAdminManagementService,MediMind.Application.Features.Admin.IPatientDirectoryService,MediMind.Application.Features.Admin.ITodayDashboardService,MediMind.Application.Features.Admin.IRevenueService,MediMind.Application.Features.Admin.IAuditLogService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.AdminController.#ctor(MediMind.Application.Features.Admin.IAdminManagementService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Application.Features.Admin.IPatientDirectoryService,MediMind.Application.Features.Admin.ITodayDashboardService,MediMind.Application.Features.Admin.IRevenueService,MediMind.Application.Features.Admin.IAuditLogService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Admin-scoped operations: account management, patient directory,
             today's dashboard, revenue, bulk operations, audit log.
@@ -50,7 +50,7 @@
             <summary>List patients enrolled at this center (have ≥1 appointment here).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AdminController.GetPatient(System.Guid,System.Guid,System.Threading.CancellationToken)">
-            <summary>Get full patient summary (no health records — doctor-only per FR-023).</summary>
+            <summary>Get patient records for an enrolled patient (FR-023).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AdminController.TodayDashboard(System.Guid,System.Threading.CancellationToken)">
             <summary>Get today's operational dashboard snapshot for this center.</summary>
@@ -63,6 +63,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.AdminController.AuditLog(System.Guid,System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>Query the append-only audit log for this center (NFR-008).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.InviteDoctor(System.Guid,MediMind.Application.Features.Auth.InviteDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Invite a doctor to join this center. Sends an invitation email valid for 48 hours (FR-020).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.AppointmentBulkController">
             <summary>Admin bulk operations on appointments.</summary>
@@ -131,6 +134,12 @@
         <member name="M:MediMind.API.Controllers.AppointmentsController.UnsubscribeWaitlist(System.Guid,System.Threading.CancellationToken)">
             <summary>Unsubscribe from a waitlist (FR-011).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.MarkComplete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Doctor marks an in-progress or confirmed appointment as completed.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.BulkApprove(MediMind.Application.Features.Appointments.BulkApproveDto,System.Threading.CancellationToken)">
+            <summary>Bulk-approve a list of pending appointments (admin shortcut).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.GetNote(System.Guid,System.Threading.CancellationToken)">
             <summary>Get the private doctor note for an appointment.</summary>
         </member>
@@ -139,6 +148,15 @@
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.UpdateNote(System.Guid,MediMind.Application.Features.AppointmentNotes.UpsertAppointmentNoteDto,System.Threading.CancellationToken)">
             <summary>Update the private doctor note for an appointment.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarDay(System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Day view: all appointments for a single date, grouped (FR-022).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarWeek(System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Week view: appointments from startDate to startDate+6 days, grouped by day (FR-022).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarDoctor(System.Guid,System.DateOnly,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
+            <summary>Doctor view: appointments for a specific doctor over a date range (FR-022).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.CenterLogoController">
             <summary>
@@ -228,6 +246,9 @@
         <member name="M:MediMind.API.Controllers.AuthController.AdminCreateDoctor(MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
             <summary>Admin creates a doctor account linked to their healthcare center (FR-006).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AcceptDoctorInvitation(MediMind.Application.Features.Auth.AcceptInvitationRequest,System.Threading.CancellationToken)">
+            <summary>Accept a doctor invitation and create the doctor account (FR-020).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.AuthController.RefreshToken(MediMind.API.Controllers.RefreshTokenApiRequest,System.Threading.CancellationToken)">
             <summary>Exchange a valid refresh token for a new access + refresh token pair.</summary>
         </member>
@@ -237,12 +258,12 @@
         <member name="T:MediMind.API.Controllers.ErrorController">
             <summary>Global error handler — maps domain exceptions to RFC 7807 ProblemDetails responses.</summary>
         </member>
-        <member name="T:MediMind.API.Controllers.DoctorSchedulesController">
+        <member name="T:MediMind.API.Controllers.AddScheduleExceptionDto">
             <summary>
             Doctor schedule management endpoints.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.AddScheduleExceptionDto.#ctor(System.DateOnly,System.String)">
             <summary>
             Doctor schedule management endpoints.
             </summary>
@@ -255,6 +276,15 @@
         </member>
         <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>Delete a doctor's schedule by ID (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.GetExceptions(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>List all exception dates for a doctor at a center (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.AddException(System.Guid,System.Guid,MediMind.API.Controllers.AddScheduleExceptionDto,System.Threading.CancellationToken)">
+            <summary>Mark a specific date as unavailable for a doctor (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.RemoveException(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Remove an exception date, making the day available again (FR-021).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.DoctorsController">
             <summary>
@@ -337,8 +367,29 @@
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConfig(System.Guid,MediMind.Domain.Common.Interfaces.CenterConfigurationDto,System.Threading.CancellationToken)">
             <summary>Update center configuration (capacity, queue settings, etc.) (FR-032).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetAdminConfig(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get admin-facing general settings for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateGeneralConfig(System.Guid,MediMind.Application.Features.CenterManagement.AdminCenterConfigUpdateDto,System.Threading.CancellationToken)">
+            <summary>Update general center info (name, phone, services, etc.) (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBookingRules(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get booking rules for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateBookingRules(System.Guid,MediMind.Application.Features.CenterManagement.AdminBookingRulesDto,System.Threading.CancellationToken)">
+            <summary>Update booking rules (slot duration, advance booking, cancellation policy) (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetWorkingHours(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get working hours for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateWorkingHours(System.Guid,MediMind.Application.Features.CenterManagement.AdminWorkingHoursDto,System.Threading.CancellationToken)">
+            <summary>Update working hours for this center (FR-030).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.AddDoctor(System.Guid,MediMind.Application.Features.CenterManagement.AddDoctorDto,System.Threading.CancellationToken)">
             <summary>Add an existing doctor to this healthcare center (FR-033).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConsultationFee(System.Guid,System.Guid,MediMind.Application.Features.CenterManagement.UpdateConsultationFeeDto,System.Threading.CancellationToken)">
+            <summary>Update a doctor's consultation fee at this healthcare center (FR-025).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.RemoveDoctor(System.Guid,System.Guid,System.Threading.CancellationToken)">
             <summary>Remove a doctor from this healthcare center (FR-033).</summary>
@@ -350,10 +401,10 @@
             <summary>Get the analytics dashboard for a healthcare center (FR-040).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.ExportCsv(System.Guid,System.DateOnly,System.DateOnly)">
-            <summary>Export patient volume trend data as CSV (FR-041).</summary>
+            <summary>Export all analytics metrics as CSV (FR-041).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.ExportPdf(System.Guid,System.DateOnly,System.DateOnly)">
-            <summary>Export analytics summary as a PDF report (FR-041).</summary>
+            <summary>Export full analytics report as PDF (FR-041).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.HealthPredictionsController">
             <summary>
@@ -578,7 +629,7 @@
             <summary>List payment history for the current user or admin's center (FR-092).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.PaymentsController.Receipt(System.Guid,System.Threading.CancellationToken)">
-            <summary>Download a PDF payment receipt (FR-093).</summary>
+            <summary>Get the PDF receipt URL for a payment (FR-093). Generates the receipt if not yet stored.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.PaymentsController.Webhook(System.Threading.CancellationToken)">
             <summary>Chapa HMAC-verified webhook — updates payment and appointment status (FR-094).</summary>
@@ -701,6 +752,12 @@
         </member>
         <member name="M:MediMind.API.Controllers.QueueController.GetDoctorQueue(System.Guid,System.Threading.CancellationToken)">
             <summary>Get today's queue for the authenticated doctor at a given center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Skip(System.Guid)">
+            <summary>Move a waiting patient to the back of today's queue (admin skip).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.CancelByPatient(System.Guid)">
+            <summary>Patient cancels their own queue position for a given appointment.</summary>
         </member>
         <member name="T:MediMind.API.Controllers.ReviewsController">
             <summary>Patient reviews of doctors and healthcare centers (post-appointment).</summary>

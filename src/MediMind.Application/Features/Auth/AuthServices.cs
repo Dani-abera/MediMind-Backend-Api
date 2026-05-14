@@ -28,6 +28,9 @@ public record AuthResult(
 
 public record RegisterResult(Guid UserId, string Message);
 public record DoctorCreatedResult(Guid DoctorId, string BadgeNumber, string Message);
+public record DoctorInvitationResult(Guid InvitationId, string Message);
+public record AcceptInvitationRequest(string Token, string Password);
+public record AcceptInvitationResult(Guid DoctorId, string BadgeNumber, string Message);
 
 public record PatientProfileDto(
     Guid PatientId,
@@ -70,6 +73,14 @@ public record PatchPatientProfileRequest(
 
 public record AdminRegisterRequest(string FullName, string Email, string PhoneNumber, string Password);
 public record CreateDoctorRequest(string FullName, string PhoneNumber, string Specialization, int YearsOfExperience);
+public record InviteDoctorRequest(
+    string FullName,
+    string Email,
+    string PhoneNumber,
+    string Specialization,
+    string LicenseNumber,
+    int YearsOfExperience,
+    decimal ConsultationFee);
 
 // ─── Validators ───────────────────────────────────────────────────────────────
 
@@ -112,6 +123,23 @@ public class CreateDoctorRequestValidator : AbstractValidator<CreateDoctorReques
     }
 }
 
+public class InviteDoctorRequestValidator : AbstractValidator<InviteDoctorRequest>
+{
+    public InviteDoctorRequestValidator()
+    {
+        RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.Email).NotEmpty().EmailAddress()
+            .WithMessage("Please enter valid email address");
+        RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\+251[0-9]{9}$")
+            .WithMessage("Phone number must be in Ethiopian format: +251XXXXXXXXX");
+        RuleFor(x => x.Specialization).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.LicenseNumber).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.YearsOfExperience).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.ConsultationFee).GreaterThan(0)
+            .WithMessage("Consultation fee must be greater than 0.");
+    }
+}
+
 // ─── Service Interfaces ───────────────────────────────────────────────────────
 
 public record ChangePhoneRequest(string NewPhoneNumber, string OtpCode);
@@ -139,6 +167,8 @@ public interface IAdminAuthService
     Task<Guid> RegisterAsync(AdminRegisterRequest request, CancellationToken ct);
     Task<AuthResult> LoginAsync(string email, string password, CancellationToken ct);
     Task<DoctorCreatedResult> CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct);
+    Task<DoctorInvitationResult> InviteDoctorAsync(Guid centerId, InviteDoctorRequest request, CancellationToken ct);
+    Task<AcceptInvitationResult> AcceptDoctorInvitationAsync(AcceptInvitationRequest request, CancellationToken ct);
 }
 
 public interface ISuperAdminAuthService
@@ -360,11 +390,14 @@ public class AdminAuthService(
     IUserRepository userRepository,
     IDoctorRepository doctorRepository,
     IHealthcareCenterRepository centerRepository,
+    IDoctorInvitationRepository invitationRepository,
+    IRepository<DoctorHealthcareCenter> affiliationRepository,
     IPasswordService passwordService,
     IAuthService authService,
     ICurrentUser currentUser,
     IUnitOfWork unitOfWork,
     ISmsService smsService,
+    IEmailService emailService,
     MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAdminAuthService
 {
     // In-memory login failure tracking (consistent with in-memory refresh token store pattern)
@@ -462,6 +495,88 @@ public class AdminAuthService(
         }
 
         return new DoctorCreatedResult(doctor.Id, badgeNumber, "Doctor created successfully. Use badge number for OTP login.");
+    }
+
+    public async Task<DoctorInvitationResult> InviteDoctorAsync(Guid centerId, InviteDoctorRequest request, CancellationToken ct)
+    {
+        if (currentUser.TenantId != centerId)
+            throw new Domain.Exceptions.ForbiddenException();
+
+        if (await userRepository.ExistsByEmailAsync(request.Email, ct))
+            throw new DomainException("An account with this email already exists.");
+
+        var existing = await invitationRepository.GetByEmailAndCenterAsync(request.Email, centerId, ct);
+        if (existing is not null && !existing.IsAccepted && existing.ExpiresAt > DateTime.UtcNow)
+            throw new DomainException("An active invitation has already been sent to this email.");
+
+        var center = await centerRepository.GetByIdAsync(centerId, ct)
+            ?? throw new Domain.Exceptions.NotFoundException(nameof(HealthcareCenter), centerId);
+
+        var invitation = new DoctorInvitation(
+            centerId,
+            request.Email,
+            request.FullName,
+            request.LicenseNumber,
+            request.Specialization,
+            request.YearsOfExperience,
+            request.ConsultationFee,
+            request.PhoneNumber);
+
+        await invitationRepository.CreateAsync(invitation, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+
+        var invitationLink = $"https://app.medimind.et/doctors/accept-invitation?token={invitation.Token}";
+        try
+        {
+            await emailService.SendDoctorInvitationAsync(request.Email, request.FullName, center.CenterName, invitationLink, ct);
+        }
+        catch (Exception)
+        {
+            // Email failure must not roll back a successfully stored invitation
+        }
+
+        return new DoctorInvitationResult(invitation.Id, "Invitation sent to doctor's email. Valid for 48 hours.");
+    }
+
+    public async Task<AcceptInvitationResult> AcceptDoctorInvitationAsync(AcceptInvitationRequest request, CancellationToken ct)
+    {
+        var invitation = await invitationRepository.GetByTokenAsync(request.Token, ct)
+            ?? throw new Domain.Exceptions.NotFoundException("Invitation", request.Token);
+
+        if (invitation.ExpiresAt < DateTime.UtcNow)
+            throw new DomainException("Invitation link expired. Resend invitation");
+
+        if (invitation.IsAccepted)
+            throw new DomainException("This invitation has already been used.");
+
+        if (await userRepository.ExistsByEmailAsync(invitation.Email, ct))
+            throw new DomainException("An account with this email already exists.");
+
+        var badgeNumber = await GenerateUniqueBadgeNumberAsync(doctorRepository, ct);
+        var doctor = new Doctor(
+            invitation.Email,
+            invitation.PhoneNumber,
+            invitation.FullName,
+            DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
+            Gender.Other,
+            invitation.Specialization,
+            badgeNumber,
+            invitation.YearsOfExperience);
+        doctor.SetLicenseNumber(invitation.LicenseNumber);
+        doctor.SetPasswordHash(passwordService.HashPassword(request.Password));
+        doctor.Activate();
+
+        await doctorRepository.AddAsync(doctor, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+
+        var affiliation = new DoctorHealthcareCenter(doctor.Id, invitation.CenterId, invitation.ConsultationFee);
+        await affiliationRepository.AddAsync(affiliation, ct);
+
+        invitation.Accept();
+        await invitationRepository.UpdateAsync(invitation, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+
+        return new AcceptInvitationResult(doctor.Id, badgeNumber, "Account created successfully. Use your badge number for OTP login.");
     }
 
     private static async Task<string> GenerateUniqueBadgeNumberAsync(IDoctorRepository repo, CancellationToken ct)

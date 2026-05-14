@@ -112,5 +112,27 @@ public class QueueController(
         return Ok(result);
     }
 
+    /// <summary>Move a waiting patient to the back of today's queue (admin skip).</summary>
+    [Tags("Admin — Queue")]
+    [HttpPost("{queueId:guid}/skip")]
+    [RequireRole("Admin")]
+    [ProducesResponseType(typeof(QueueItemDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Skip(Guid queueId)
+    {
+        var result = await queueService.SkipAsync(queueId, currentUser.UserId);
+        return Ok(result);
+    }
+
+    /// <summary>Patient cancels their own queue position for a given appointment.</summary>
+    [Tags("Patient — Appointments")]
+    [HttpPost("cancel/{appointmentId:guid}")]
+    [RequireRole("Patient")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> CancelByPatient(Guid appointmentId)
+    {
+        await queueService.CancelByPatientAsync(appointmentId, currentUser.UserId);
+        return NoContent();
+    }
+
     // Queue regeneration moved to POST /api/v1/super-admin/centers/{id}/queue/regenerate
 }

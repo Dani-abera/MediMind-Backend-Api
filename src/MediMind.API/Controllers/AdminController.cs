@@ -1,5 +1,6 @@
 using CsvHelper;
 using MediMind.Application.Features.Admin;
+using MediMind.Application.Features.Auth;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ namespace MediMind.API.Controllers;
 [Authorize(Policy = "AdminOnly")]
 public class AdminController(
     IAdminManagementService adminManagement,
+    IAdminAuthService adminAuth,
     IPatientDirectoryService patientDirectory,
     ITodayDashboardService todayDashboard,
     IRevenueService revenueService,
@@ -88,12 +90,11 @@ public class AdminController(
         return Ok(result);
     }
 
-    /// <summary>Get full patient summary (no health records — doctor-only per FR-023).</summary>
+    /// <summary>Get patient records for an enrolled patient (FR-023).</summary>
     [Tags("Admin — Patient Directory")]
     [HttpGet("{id:guid}/patients/{patientId:guid}")]
     [ProducesResponseType(typeof(EnrolledPatientDetailDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetPatient(Guid id, Guid patientId, CancellationToken ct)
     {
         EnsureCenterAccess(id);
@@ -197,6 +198,23 @@ public class AdminController(
     // ═══════════════════════════════════════════════════════════════════════════
 
     // Logo endpoints are in CenterLogoController.cs to avoid route conflicts with HealthcareCentersController
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // DOCTOR INVITATIONS (FR-020)
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    /// <summary>Invite a doctor to join this center. Sends an invitation email valid for 48 hours (FR-020).</summary>
+    [Tags("Admin — Doctors")]
+    [HttpPost("{id:guid}/doctors/invite")]
+    [ProducesResponseType(typeof(DoctorInvitationResult), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> InviteDoctor(Guid id, [FromBody] InviteDoctorRequest dto, CancellationToken ct)
+    {
+        EnsureCenterAccess(id);
+        var result = await adminAuth.InviteDoctorAsync(id, dto, ct);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
 
     // ─── Helper ──────────────────────────────────────────────────────────────
 

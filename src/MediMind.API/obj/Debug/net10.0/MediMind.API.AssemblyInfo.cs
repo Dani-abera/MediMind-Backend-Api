@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediMind.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+98b802e1a530e03e34d60ade1073ed9c1b4453af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+07bca5df8097057c6e52a3e80d0d21298edf58c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediMind.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediMind.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

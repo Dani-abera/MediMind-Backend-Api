@@ -277,7 +277,9 @@ public class HealthcareCenterRepository(MediMindDbContext context)
             config.AdvanceBookingDays,
             config.CancellationHours,
             config.AutoApproveAppointments,
-            config.RequiresPaymentBeforeConfirmation);
+            config.RequiresPaymentBeforeConfirmation,
+            config.WorkingHours,
+            config.ServicesOffered);
         return true;
     }
 
@@ -596,6 +598,70 @@ public class DoctorScheduleRepository(MediMindDbContext context)
 
         Db.DoctorSchedules.Remove(schedule);
         await Db.SaveChangesAsync();
+        return true;
+    }
+}
+
+// ─── Doctor Invitation Repository ────────────────────────────────────────────
+
+public class DoctorInvitationRepository(MediMindDbContext context)
+    : Repository<DoctorInvitation>(context), IDoctorInvitationRepository
+{
+    public async Task<DoctorInvitation?> GetByTokenAsync(string token, CancellationToken ct = default) =>
+        await Db.DoctorInvitations.FirstOrDefaultAsync(i => i.Token == token, ct);
+
+    public async Task<DoctorInvitation?> GetByEmailAndCenterAsync(string email, Guid centerId, CancellationToken ct = default) =>
+        await Db.DoctorInvitations
+            .Where(i => i.Email == email && i.CenterId == centerId)
+            .OrderByDescending(i => i.CreatedAt)
+            .FirstOrDefaultAsync(ct);
+
+    public async Task<DoctorInvitation> CreateAsync(DoctorInvitation invitation, CancellationToken ct = default)
+    {
+        await Db.DoctorInvitations.AddAsync(invitation, ct);
+        return invitation;
+    }
+
+    public new async Task UpdateAsync(DoctorInvitation invitation, CancellationToken ct = default)
+    {
+        Db.DoctorInvitations.Update(invitation);
+        await Task.CompletedTask;
+    }
+}
+
+// ─── Schedule Exception Repository ───────────────────────────────────────────
+
+public class ScheduleExceptionRepository(MediMindDbContext context)
+    : Repository<ScheduleException>(context), IScheduleExceptionRepository
+{
+    public async Task<IReadOnlyList<ScheduleException>> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId, CancellationToken ct = default) =>
+        await Db.ScheduleExceptions
+            .Where(e => e.DoctorId == doctorId && e.CenterId == centerId)
+            .OrderBy(e => e.ExceptionDate)
+            .ToListAsync(ct);
+
+    public async Task<IReadOnlyList<ScheduleException>> GetByDateRangeAsync(Guid doctorId, Guid centerId, DateOnly from, DateOnly to, CancellationToken ct = default) =>
+        await Db.ScheduleExceptions
+            .Where(e => e.DoctorId == doctorId && e.CenterId == centerId && e.ExceptionDate >= from && e.ExceptionDate <= to)
+            .ToListAsync(ct);
+
+    public async Task<bool> ExistsAsync(Guid doctorId, Guid centerId, DateOnly date, CancellationToken ct = default) =>
+        await Db.ScheduleExceptions.AnyAsync(e => e.DoctorId == doctorId && e.CenterId == centerId && e.ExceptionDate == date, ct);
+
+    public async Task<ScheduleException> CreateAsync(ScheduleException exception, CancellationToken ct = default)
+    {
+        await Db.ScheduleExceptions.AddAsync(exception, ct);
+        await Db.SaveChangesAsync(ct);
+        return exception;
+    }
+
+    public async Task<bool> DeleteAsync(Guid doctorId, Guid centerId, DateOnly date, CancellationToken ct = default)
+    {
+        var existing = await Db.ScheduleExceptions
+            .FirstOrDefaultAsync(e => e.DoctorId == doctorId && e.CenterId == centerId && e.ExceptionDate == date, ct);
+        if (existing is null) return false;
+        Db.ScheduleExceptions.Remove(existing);
+        await Db.SaveChangesAsync(ct);
         return true;
     }
 }
@@ -995,6 +1061,8 @@ public class PaymentRepository(MediMindDbContext context)
     public async Task<IEnumerable<Payment>> GetByPatientAsync(Guid patientId, int page, int pageSize) =>
         await Db.Payments
             .AsNoTracking()
+            .Include(p => p.Patient)
+            .Include(p => p.Appointment).ThenInclude(a => a.Doctor)
             .Where(p => p.PatientId == patientId)
             .OrderByDescending(p => p.CreatedAt)
             .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))
@@ -1004,7 +1072,8 @@ public class PaymentRepository(MediMindDbContext context)
     public async Task<IEnumerable<Payment>> GetByCenterAsync(Guid centerId, int page, int pageSize) =>
         await Db.Payments
             .AsNoTracking()
-            .Include(p => p.Appointment)
+            .Include(p => p.Patient)
+            .Include(p => p.Appointment).ThenInclude(a => a.Doctor)
             .Where(p => p.Appointment.CenterId == centerId)
             .OrderByDescending(p => p.CreatedAt)
             .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))

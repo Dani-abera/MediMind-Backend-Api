@@ -211,6 +211,19 @@ public class AuthController(
         return CreatedAtAction(nameof(AdminCreateDoctor), result);
     }
 
+    /// <summary>Accept a doctor invitation and create the doctor account (FR-020).</summary>
+    [Tags("Admin — Doctors")]
+    [HttpPost("doctors/accept-invitation")]
+    [AllowAnonymous]
+    [ProducesResponseType(typeof(AcceptInvitationResult), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> AcceptDoctorInvitation([FromBody] AcceptInvitationRequest request, CancellationToken ct)
+    {
+        var result = await adminAuth.AcceptDoctorInvitationAsync(request, ct);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
+
     // ── Shared ───────────────────────────────────────────────────────────────
 
     /// <summary>Exchange a valid refresh token for a new access + refresh token pair.</summary>

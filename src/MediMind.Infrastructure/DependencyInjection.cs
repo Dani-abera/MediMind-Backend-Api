@@ -94,6 +94,8 @@ public static class DependencyInjection
         services.AddScoped<IPrescriptionTemplateRepository, PrescriptionTemplateRepository>();
         services.AddScoped<IAppointmentNoteRepository, AppointmentNoteRepository>();
         services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+        services.AddScoped<IDoctorInvitationRepository, DoctorInvitationRepository>();
+        services.AddScoped<IScheduleExceptionRepository, ScheduleExceptionRepository>();
 
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();

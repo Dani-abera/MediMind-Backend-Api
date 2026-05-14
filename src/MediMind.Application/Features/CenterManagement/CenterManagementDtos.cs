@@ -105,7 +105,88 @@ public record CenterResponseDto(
     bool IsOpenNow,
     string? Warning = null);
 
+// ─── Admin settings page DTOs (portal-facing field names) ────────────────────
+
+public record AdminCenterConfigDto(
+    string Id,
+    string Name,
+    string Phone,
+    string Email,
+    string City,
+    string Region,
+    string FullAddress,
+    string LicenseNumber,
+    double? Latitude,
+    double? Longitude,
+    List<string> Services,
+    List<string> Specializations,
+    string? LogoUrl);
+
+public record AdminCenterConfigUpdateDto(
+    string Name,
+    string Phone,
+    string Email,
+    string City,
+    string Region,
+    string FullAddress,
+    List<string> Services,
+    List<string> Specializations);
+
+public record AdminBookingRulesDto(
+    int SlotDurationMinutes,
+    int AdvanceBookingDays,
+    int CancellationHoursMin,
+    bool AutoApproveAll,
+    bool AutoApproveKnownPatients,
+    bool RequiresPaymentBeforeConfirmation,
+    string? Warning = null);
+
+public record AdminDayHoursDto(
+    string Day,
+    bool IsClosed,
+    string? OpenTime,
+    string? CloseTime,
+    string? BreakStart,
+    string? BreakEnd);
+
+public record AdminWorkingHoursDto(IReadOnlyList<AdminDayHoursDto> Days);
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+public static class WorkingHoursConverter
+{
+    private static readonly string[] DayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    public static AdminWorkingHoursDto ToAdminDto(Dictionary<string, string> dict)
+    {
+        var days = DayOrder.Select(day =>
+        {
+            dict.TryGetValue(day, out var value);
+            if (string.IsNullOrWhiteSpace(value))
+                return new AdminDayHoursDto(day, IsClosed: true, null, null, null, null);
+            var parts = value.Split('-', 2, StringSplitOptions.TrimEntries);
+            return parts.Length == 2
+                ? new AdminDayHoursDto(day, IsClosed: false, parts[0], parts[1], null, null)
+                : new AdminDayHoursDto(day, IsClosed: true, null, null, null, null);
+        }).ToList();
+        return new AdminWorkingHoursDto(days);
+    }
+
+    public static Dictionary<string, string> FromAdminDto(AdminWorkingHoursDto dto)
+    {
+        var dict = new Dictionary<string, string>();
+        foreach (var d in dto.Days)
+        {
+            if (!d.IsClosed && d.OpenTime is not null && d.CloseTime is not null)
+                dict[d.Day] = $"{d.OpenTime}-{d.CloseTime}";
+        }
+        return dict;
+    }
+}
+
 public record AddDoctorDto(Guid DoctorId, decimal ConsultationFee);
+
+public record UpdateConsultationFeeDto(decimal ConsultationFee);
 
 public record DoctorCenterRelationDto(Guid DoctorId, Guid CenterId, decimal ConsultationFee, bool IsActive, DateOnly JoinedDate);
 
@@ -140,4 +221,5 @@ public record AnalyticsDashboardDto(
     List<DoctorUtilizationDto> DoctorUtilization,
     double? AverageWaitTimeMinutes,
     RevenueMetricsDto RevenueMetrics,
-    AnalyticsSummaryDto Summary);
+    AnalyticsSummaryDto Summary,
+    string? NoDataMessage);

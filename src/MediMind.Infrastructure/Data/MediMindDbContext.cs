@@ -54,6 +54,8 @@ public class MediMindDbContext(
     public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
     public DbSet<SubscriptionHistory> SubscriptionHistories => Set<SubscriptionHistory>();
     public DbSet<WaitlistSubscription> WaitlistSubscriptions => Set<WaitlistSubscription>();
+    public DbSet<DoctorInvitation> DoctorInvitations => Set<DoctorInvitation>();
+    public DbSet<ScheduleException> ScheduleExceptions => Set<ScheduleException>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

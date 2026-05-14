@@ -71,6 +71,22 @@ public class QueueEntry : BaseEntity
         UpdateTimestamp();
     }
 
+    public void Skip()
+    {
+        if (Status != QueueStatus.Waiting && Status != QueueStatus.Called)
+            throw new DomainException("Only waiting or called entries can be skipped.");
+        Status = QueueStatus.Waiting;
+        UpdateTimestamp();
+    }
+
+    public void Cancel()
+    {
+        if (Status == QueueStatus.Completed || Status == QueueStatus.InConsultation)
+            throw new DomainException("Cannot cancel a completed or in-progress consultation.");
+        Status = QueueStatus.Cancelled;
+        UpdateTimestamp();
+    }
+
     public void UpdatePosition(int newPosition, int slotDurationMinutes)
     {
         Position = newPosition;
@@ -167,8 +183,8 @@ public class DoctorSchedule : BaseEntity
             throw new DomainException("End time must be after start time.");
         if (breakStart.HasValue && breakEnd.HasValue && breakEnd <= breakStart)
             throw new DomainException("Break end time must be after break start time.");
-        if (breakStart.HasValue && (breakStart < startTime || breakStart > endTime))
-            throw new DomainException("Break must be within working hours.");
+        if (breakStart.HasValue && breakEnd.HasValue && (breakStart < startTime || breakEnd > endTime))
+            throw new DomainException($"Break time must be within working hours [{startTime:HH\\:mm}-{endTime:HH\\:mm}]");
 
         DoctorId = doctorId;
         CenterId = centerId;
@@ -207,6 +223,81 @@ public class DoctorSchedule : BaseEntity
 
     public bool IsWorkingDay(DateOnly date) =>
         WorkingDays.Contains(date.DayOfWeek.ToString());
+}
+
+// ─── Doctor Invitation ────────────────────────────────────────────────────────
+
+/// <summary>
+/// Token-based invitation sent to a doctor by a healthcare center admin.
+/// Account is only created after the doctor accepts via the invitation link.
+/// </summary>
+public class DoctorInvitation : BaseEntity
+{
+    public Guid CenterId { get; private set; }
+    public string Email { get; private set; } = string.Empty;
+    public string FullName { get; private set; } = string.Empty;
+    public string LicenseNumber { get; private set; } = string.Empty;
+    public string Specialization { get; private set; } = string.Empty;
+    public int YearsOfExperience { get; private set; }
+    public decimal ConsultationFee { get; private set; }
+    public string PhoneNumber { get; private set; } = string.Empty;
+    public string Token { get; private set; } = string.Empty;
+    public DateTime ExpiresAt { get; private set; }
+    public bool IsAccepted { get; private set; }
+
+    private DoctorInvitation() { }
+
+    public DoctorInvitation(
+        Guid centerId,
+        string email,
+        string fullName,
+        string licenseNumber,
+        string specialization,
+        int yearsOfExperience,
+        decimal consultationFee,
+        string phoneNumber)
+    {
+        CenterId = centerId;
+        Email = email;
+        FullName = fullName;
+        LicenseNumber = licenseNumber;
+        Specialization = specialization;
+        YearsOfExperience = yearsOfExperience;
+        ConsultationFee = consultationFee;
+        PhoneNumber = phoneNumber;
+        Token = Guid.NewGuid().ToString("N");
+        ExpiresAt = DateTime.UtcNow.AddHours(48);
+    }
+
+    public void Accept()
+    {
+        IsAccepted = true;
+        UpdateTimestamp();
+    }
+}
+
+// ─── Schedule Exception ───────────────────────────────────────────────────────
+
+/// <summary>
+/// Marks a specific date as unavailable for a doctor at a given center (out-of-office, leave, etc.).
+/// Causes GetAvailableSlotsAsync to return empty for that date.
+/// </summary>
+public class ScheduleException : BaseEntity
+{
+    public Guid DoctorId { get; private set; }
+    public Guid CenterId { get; private set; }
+    public DateOnly ExceptionDate { get; private set; }
+    public string Reason { get; private set; } = string.Empty;
+
+    private ScheduleException() { }
+
+    public ScheduleException(Guid doctorId, Guid centerId, DateOnly date, string reason)
+    {
+        DoctorId = doctorId;
+        CenterId = centerId;
+        ExceptionDate = date;
+        Reason = reason;
+    }
 }
 
 // ─── Health Record ────────────────────────────────────────────────────────────

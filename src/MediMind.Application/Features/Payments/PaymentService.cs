@@ -4,6 +4,7 @@ using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Exceptions;
 using Microsoft.Extensions.Logging;
+using INotificationService = MediMind.Domain.Common.Interfaces.INotificationService;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -48,6 +49,7 @@ public sealed class PaymentService(
     IPaymentConfiguration paymentConfiguration,
     IStorageService storageService,
     IUnitOfWork unitOfWork,
+    INotificationService notificationService,
     ILogger<PaymentService> logger) : IPaymentService
 {
     public async Task<PaymentInitiationDto> InitiatePaymentAsync(Guid appointmentId, Guid patientId, CancellationToken ct = default)
@@ -61,8 +63,9 @@ public sealed class PaymentService(
             throw new DomainException("Payments are only allowed for pending or confirmed appointments.");
 
         var existingPayment = await paymentRepository.GetByAppointmentIdAsync(appointmentId);
-        if (existingPayment is not null && existingPayment.Status == PaymentStatus.Completed)
-            throw new DomainException("A completed payment already exists for this appointment.");
+        if (existingPayment is not null &&
+            existingPayment.Status is PaymentStatus.Completed or PaymentStatus.Pending)
+            throw new DomainException("Payment already initiated for this appointment.");
 
         var relations = await healthcareCenterRepository.GetDoctorsAsync(appointment.CenterId);
         var relation = relations.FirstOrDefault(x => x.DoctorId == appointment.DoctorId)
@@ -162,7 +165,9 @@ public sealed class PaymentService(
         var payment = await paymentRepository.GetByRefAsync(txRef);
         if (payment is null)
         {
-            logger.LogWarning("Chapa webhook payment not found for tx_ref={TxRef}", txRef);
+            logger.LogError(
+                "Chapa webhook received for unknown tx_ref={TxRef}. Possible orphaned transaction or replay attack. Manual review required.",
+                txRef);
             return;
         }
 
@@ -199,8 +204,26 @@ public sealed class PaymentService(
 
                 _ = Task.Run(async () =>
                 {
-                    try { await GenerateReceiptAsync(payment.Id, CancellationToken.None); }
-                    catch (Exception ex) { logger.LogWarning(ex, "Receipt generation failed for payment {PaymentId}", payment.Id); }
+                    try
+                    {
+                        await GenerateReceiptAsync(payment.Id, CancellationToken.None);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogError(ex, "PDF receipt generation attempt 1 failed for payment {PaymentId}. Retrying.", payment.Id);
+                        try
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(5));
+                            await GenerateReceiptAsync(payment.Id, CancellationToken.None);
+                        }
+                        catch (Exception retryEx)
+                        {
+                            logger.LogError(retryEx,
+                                "PDF receipt generation failed after retry for payment {PaymentId}. Sending plain-text receipt fallback.",
+                                payment.Id);
+                            await SendPlainTextReceiptAsync(payment, CancellationToken.None);
+                        }
+                    }
                 }, CancellationToken.None);
             }
         }
@@ -247,7 +270,10 @@ public sealed class PaymentService(
             p.Status.ToString(),
             p.CreatedAt,
             p.PaymentDate,
-            p.ReceiptUrl)).ToList();
+            p.ReceiptUrl,
+            p.Patient?.FullName ?? string.Empty,
+            p.Appointment?.Doctor?.FullName ?? string.Empty,
+            p.PaymentMethod)).ToList();
     }
 
     public async Task<byte[]> GenerateReceiptAsync(Guid paymentId, CancellationToken ct = default)
@@ -297,6 +323,26 @@ public sealed class PaymentService(
                 page.Footer().AlignCenter().Text("Thank you for choosing MediMind");
             });
         });
+
+    private async Task SendPlainTextReceiptAsync(Payment payment, CancellationToken ct)
+    {
+        var msg =
+            $"MediMind Payment Receipt\n" +
+            $"Ref: {payment.PaymentRef}\n" +
+            $"Amount: ETB {payment.Amount:F2}\n" +
+            $"Date: {payment.PaymentDate:yyyy-MM-dd}\n" +
+            $"Doctor: {payment.Appointment.Doctor.FullName}\n" +
+            $"Status: PAID\n" +
+            $"Transaction ID: {payment.ChapaTransactionId}";
+        try
+        {
+            await notificationService.SendSmsAsync(payment.Patient.PhoneNumber, msg, ct);
+        }
+        catch (Exception smsEx)
+        {
+            logger.LogError(smsEx, "Plain-text SMS receipt also failed for payment {PaymentId}.", payment.Id);
+        }
+    }
 
     private static void EnsureReadAccess(Payment payment, string userType, Guid userId, Guid? centerId)
     {

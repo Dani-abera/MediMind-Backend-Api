@@ -17,26 +17,42 @@ public record RescheduleAppointmentDto(DateOnly NewDate, TimeOnly NewTime, strin
 public record ApproveRejectDto(string? Reason);
 
 public record AppointmentResponseDto(
-    Guid AppointmentId,
+    Guid Id,
     string Status,
-    DateOnly AppointmentDate,
-    TimeOnly AppointmentTime,
+    DateTime DateTime,
     int DurationMinutes,
-    string ReasonForVisit,
+    string Reason,
+    string? Symptoms,
     DateTime BookingDate,
-    AppointmentPatientDto Patient,
-    AppointmentDoctorDto Doctor,
-    AppointmentCenterDto Center,
+    // Patient — flat
+    Guid PatientId,
+    string PatientName,
+    string? PatientPhone,
+    // Doctor — flat
+    Guid DoctorId,
+    string DoctorName,
+    string? DoctorSpecialization,
+    string? DoctorAvatarUrl,
+    // Center — flat
+    Guid CenterId,
+    string CenterName,
+    string? CenterAddress,
+    string? CenterPhone,
+    double? CenterLatitude,
+    double? CenterLongitude,
+    // Appointment
+    string Type,
     bool CanCancel,
     bool CanReschedule,
-    string? QueueNumber,
-    int? EstimatedWaitTime,
+    int? QueueNumber,
+    int? EstimatedWaitMinutes,
     bool RequiresPayment = false,
-    string? PaymentInitiationUrl = null);
-
-public record AppointmentPatientDto(Guid PatientId, string FullName, string PhoneNumber);
-public record AppointmentDoctorDto(Guid DoctorId, string FullName, string Specialization);
-public record AppointmentCenterDto(Guid CenterId, string CenterName, string Address, string PhoneNumber);
+    string? PaymentInitiationUrl = null,
+    Guid? PaymentId = null,
+    string? PaymentStatus = null,
+    bool CanInitiateVideoConsultation = false,
+    Guid? VideoConsultationId = null,
+    int CancellationPolicyHours = 2);
 
 public record AvailabilityResponseDto(
     Guid DoctorId,
@@ -50,6 +66,16 @@ public record AvailabilitySlotDto(string Time, bool IsAvailable);
 public record TimeSlot(TimeOnly Time, bool IsAvailable, int SlotDuration);
 
 public record RescheduleCountDto(Guid AppointmentId, int RescheduleCount, bool CanReschedule);
+
+public record CalendarDayDto(DateOnly Date, List<AppointmentResponseDto> Appointments);
+
+public record BulkApproveDto(List<Guid> Ids);
+
+public record CalendarSyncResponseDto<T>(
+    T Data,
+    DateTime LastSyncedAt,
+    bool IsOnline = true,
+    string? ErrorMessage = null);
 
 public record WaitlistSubscribeDto(
     Guid DoctorId,

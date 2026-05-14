@@ -15,7 +15,14 @@ public interface IHealthcareCenterService
     Task<PagedResult<CenterResponseDto>> SearchAsync(CenterSearchDto search);
     Task<IEnumerable<CenterResponseDto>> SearchNearbyAsync(double latitude, double longitude, double radiusKm);
     Task<CenterResponseDto> UpdateConfigurationAsync(Guid centerId, CenterConfigurationDto dto, Guid adminId);
+    Task<AdminCenterConfigDto> GetAdminConfigAsync(Guid centerId, Guid adminId);
+    Task<AdminCenterConfigDto> UpdateAdminConfigAsync(Guid centerId, AdminCenterConfigUpdateDto dto, Guid adminId);
+    Task<AdminBookingRulesDto> GetBookingRulesAsync(Guid centerId, Guid adminId);
+    Task<AdminBookingRulesDto> UpdateBookingRulesAsync(Guid centerId, AdminBookingRulesDto dto, Guid adminId);
+    Task<AdminWorkingHoursDto> GetWorkingHoursAsync(Guid centerId, Guid adminId);
+    Task<AdminWorkingHoursDto> UpdateWorkingHoursAsync(Guid centerId, AdminWorkingHoursDto dto, Guid adminId);
     Task<DoctorCenterRelationDto> AddDoctorToCenterAsync(Guid centerId, AddDoctorDto dto, Guid adminId);
+    Task<DoctorCenterRelationDto> UpdateConsultationFeeAsync(Guid centerId, Guid doctorId, UpdateConsultationFeeDto dto, Guid adminId, CancellationToken ct = default);
     Task<bool> RemoveDoctorFromCenterAsync(Guid centerId, Guid doctorId, Guid adminId);
     Task<IEnumerable<DoctorResponseDto>> GetDoctorsAsync(Guid centerId);
 }
@@ -136,13 +143,25 @@ public class HealthcareCenterService(
 
         var slot = ClampSlotDuration(dto.SlotDurationMinutes);
         var advance = Math.Clamp(dto.AdvanceBookingDays, 1, 90);
-        var warning = slot != dto.SlotDurationMinutes || advance != dto.AdvanceBookingDays
-            ? "Some configuration values were clamped to supported limits."
-            : null;
 
-        var updateModel = new CenterConfigurationDto(slot, advance, Math.Max(dto.CancellationHours, 0), dto.AutoApproveAppointments, dto.WorkingHours);
-        await centerRepository.UpdateConfigurationAsync(centerId, updateModel);
-        await unitOfWork.SaveChangesAsync();
+        var warnings = new List<string>();
+        if (slot != dto.SlotDurationMinutes)
+            warnings.Add($"Slot duration adjusted to {slot} minutes.");
+        if (advance != dto.AdvanceBookingDays)
+            warnings.Add("Maximum advance booking is 90 days. Value adjusted to 90");
+        var warning = warnings.Count > 0 ? string.Join(" ", warnings) : null;
+
+        var updateModel = new CenterConfigurationDto(slot, advance, Math.Max(dto.CancellationHours, 0), dto.AutoApproveAppointments, dto.WorkingHours, dto.RequiresPaymentBeforeConfirmation, dto.ServicesOffered);
+        try
+        {
+            await centerRepository.UpdateConfigurationAsync(centerId, updateModel);
+            await unitOfWork.SaveChangesAsync();
+        }
+        catch (Exception ex) when (ex is not NotFoundException)
+        {
+            logger.LogError(ex, "Failed to save configuration for center {CenterId}", centerId);
+            throw new ApplicationException("Settings not saved. Try again or contact support");
+        }
 
         var center = await centerRepository.GetByIdAsync(centerId)
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
@@ -150,6 +169,113 @@ public class HealthcareCenterService(
         var response = await MapCenter(center, null);
         return response with { Warning = warning };
     }
+
+    public async Task<AdminCenterConfigDto> GetAdminConfigAsync(Guid centerId, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        return MapAdminConfig(center);
+    }
+
+    public async Task<AdminCenterConfigDto> UpdateAdminConfigAsync(Guid centerId, AdminCenterConfigUpdateDto dto, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        center.UpdateGeneralInfo(dto.Name, dto.Phone, dto.Email, dto.City, dto.Region, dto.FullAddress, dto.Services, dto.Specializations);
+        try
+        {
+            await centerRepository.UpdateAsync(center);
+            await unitOfWork.SaveChangesAsync();
+        }
+        catch (Exception ex) when (ex is not NotFoundException)
+        {
+            logger.LogError(ex, "Failed to save general config for center {CenterId}", centerId);
+            throw new ApplicationException("Settings not saved. Try again or contact support");
+        }
+        await auditLogger.LogAsync(AuditActions.CenterConfigChanged, adminId, "Admin", centerId, "HealthcareCenter", centerId);
+        return MapAdminConfig(center);
+    }
+
+    public async Task<AdminBookingRulesDto> GetBookingRulesAsync(Guid centerId, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        return MapBookingRules(center);
+    }
+
+    public async Task<AdminBookingRulesDto> UpdateBookingRulesAsync(Guid centerId, AdminBookingRulesDto dto, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+
+        var slot = ClampSlotDuration(dto.SlotDurationMinutes);
+        var advance = Math.Clamp(dto.AdvanceBookingDays, 1, 90);
+
+        var warnings = new List<string>();
+        if (slot != dto.SlotDurationMinutes)
+            warnings.Add($"Slot duration adjusted to {slot} minutes.");
+        if (advance != dto.AdvanceBookingDays)
+            warnings.Add("Maximum advance booking is 90 days. Value adjusted to 90");
+        var warning = warnings.Count > 0 ? string.Join(" ", warnings) : null;
+
+        var configDto = new CenterConfigurationDto(slot, advance, Math.Max(dto.CancellationHoursMin, 0), dto.AutoApproveAll || dto.AutoApproveKnownPatients, null, dto.RequiresPaymentBeforeConfirmation);
+        try
+        {
+            await centerRepository.UpdateConfigurationAsync(centerId, configDto);
+            await unitOfWork.SaveChangesAsync();
+        }
+        catch (Exception ex) when (ex is not NotFoundException)
+        {
+            logger.LogError(ex, "Failed to save booking rules for center {CenterId}", centerId);
+            throw new ApplicationException("Settings not saved. Try again or contact support");
+        }
+        await auditLogger.LogAsync(AuditActions.CenterConfigChanged, adminId, "Admin", centerId, "HealthcareCenter", centerId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        return MapBookingRules(center, warning);
+    }
+
+    public async Task<AdminWorkingHoursDto> GetWorkingHoursAsync(Guid centerId, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        return WorkingHoursConverter.ToAdminDto(center.WorkingHours);
+    }
+
+    public async Task<AdminWorkingHoursDto> UpdateWorkingHoursAsync(Guid centerId, AdminWorkingHoursDto dto, Guid adminId)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        var newHours = WorkingHoursConverter.FromAdminDto(dto);
+        var configDto = new CenterConfigurationDto(
+            center.SlotDurationMinutes, center.AdvanceBookingDays, center.CancellationHours,
+            center.AutoApproveAppointments, newHours, center.RequiresPaymentBeforeConfirmation);
+        try
+        {
+            await centerRepository.UpdateConfigurationAsync(centerId, configDto);
+            await unitOfWork.SaveChangesAsync();
+        }
+        catch (Exception ex) when (ex is not NotFoundException)
+        {
+            logger.LogError(ex, "Failed to save working hours for center {CenterId}", centerId);
+            throw new ApplicationException("Settings not saved. Try again or contact support");
+        }
+        await auditLogger.LogAsync(AuditActions.CenterConfigChanged, adminId, "Admin", centerId, "HealthcareCenter", centerId);
+        return WorkingHoursConverter.ToAdminDto(newHours);
+    }
+
+    private static AdminCenterConfigDto MapAdminConfig(HealthcareCenter c) =>
+        new(c.Id.ToString(), c.CenterName, c.PhoneNumber, c.Email, c.City, c.Region, c.Address,
+            c.LicenseNumber, (double?)c.Latitude, (double?)c.Longitude,
+            c.ServicesOffered, c.Specializations, c.ProfileImageUrl);
+
+    private static AdminBookingRulesDto MapBookingRules(HealthcareCenter c, string? warning = null) =>
+        new(c.SlotDurationMinutes, c.AdvanceBookingDays, c.CancellationHours,
+            c.AutoApproveAppointments, false, c.RequiresPaymentBeforeConfirmation, warning);
 
     public async Task<DoctorCenterRelationDto> AddDoctorToCenterAsync(Guid centerId, AddDoctorDto dto, Guid adminId)
     {
@@ -169,6 +295,21 @@ public class HealthcareCenterService(
         logger.LogInformation("Doctor invitation email stub sent to {Email} for center {CenterId}", doctor.Email, centerId);
 
         return new DoctorCenterRelationDto(doctor.Id, centerId, relation.ConsultationFee, relation.IsActive, relation.JoinedDate);
+    }
+
+    public async Task<DoctorCenterRelationDto> UpdateConsultationFeeAsync(Guid centerId, Guid doctorId, UpdateConsultationFeeDto dto, Guid adminId, CancellationToken ct = default)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+
+        var relations = await centerRepository.GetDoctorsAsync(centerId);
+        var relation = relations.FirstOrDefault(x => x.DoctorId == doctorId && x.IsActive)
+            ?? throw new NotFoundException(nameof(DoctorHealthcareCenter), doctorId);
+
+        relation.UpdateFee(dto.ConsultationFee);
+        await unitOfWork.SaveChangesAsync(ct);
+
+        await auditLogger.LogAsync(AuditActions.CenterConfigChanged, adminId, "Admin", centerId, "DoctorHealthcareCenter", relation.Id);
+        return new DoctorCenterRelationDto(relation.DoctorId, relation.CenterId, relation.ConsultationFee, relation.IsActive, relation.JoinedDate);
     }
 
     public async Task<bool> RemoveDoctorFromCenterAsync(Guid centerId, Guid doctorId, Guid adminId)
@@ -311,6 +452,9 @@ public class AnalyticsService(
 {
     public async Task<AnalyticsDashboardDto> GetDashboardAnalyticsAsync(Guid centerId, Guid adminId, DateOnly startDate, DateOnly endDate)
     {
+        if (startDate > endDate)
+            throw new DomainException("Start date must be on or before end date.");
+
         var center = await centerRepository.GetWithAdminsAsync(centerId)
             ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
 
@@ -399,6 +543,7 @@ public class AnalyticsService(
             doctorUtilization,
             avgWait,
             new RevenueMetricsDto(totalRevenue, revenueByDoctor, avgPerAppointment),
-            summary);
+            summary,
+            appointments.Count == 0 ? "No appointments match selected criteria" : null);
     }
 }
