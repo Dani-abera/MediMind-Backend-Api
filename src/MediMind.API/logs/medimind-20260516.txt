@@ -1,0 +1,1573 @@
+2026-05-16 00:00:01.422 +03:00 [INF] Running appointment reminder job at "2026-05-15T21:00:01.4185290Z"
+2026-05-16 00:00:01.515 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 00:00:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2161 ms
+2026-05-16 00:01:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4773 ms
+2026-05-16 00:02:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5242 ms
+2026-05-16 00:03:35.093 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.3534 ms
+2026-05-16 00:04:35.150 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.9664 ms
+2026-05-16 00:05:35.081 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.3763 ms
+2026-05-16 00:06:35.087 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 21.7921 ms
+2026-05-16 00:07:35.053 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1088 ms
+2026-05-16 00:08:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4902 ms
+2026-05-16 00:09:35.130 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0830 ms
+2026-05-16 00:10:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7518 ms
+2026-05-16 00:11:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2395 ms
+2026-05-16 00:12:35.085 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.1929 ms
+2026-05-16 00:13:35.052 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7382 ms
+2026-05-16 00:14:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2778 ms
+2026-05-16 00:15:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.8321 ms
+2026-05-16 00:16:35.082 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.2073 ms
+2026-05-16 00:17:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7681 ms
+2026-05-16 00:18:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4180 ms
+2026-05-16 00:19:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.7127 ms
+2026-05-16 00:20:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.1443 ms
+2026-05-16 00:21:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.0462 ms
+2026-05-16 00:22:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2518 ms
+2026-05-16 00:23:35.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.8979 ms
+2026-05-16 00:24:35.221 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.4116 ms
+2026-05-16 00:25:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.8530 ms
+2026-05-16 00:26:35.080 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.2028 ms
+2026-05-16 00:27:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.4833 ms
+2026-05-16 00:28:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.8585 ms
+2026-05-16 00:29:35.051 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4103 ms
+2026-05-16 00:30:01.693 +03:00 [INF] Running appointment reminder job at "2026-05-15T21:30:01.6876740Z"
+2026-05-16 00:30:01.727 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 00:30:35.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9442 ms
+2026-05-16 00:31:35.052 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.9900 ms
+2026-05-16 00:32:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2371 ms
+2026-05-16 00:33:35.094 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.9520 ms
+2026-05-16 00:34:35.114 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1061 ms
+2026-05-16 00:35:35.060 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.8272 ms
+2026-05-16 00:36:35.059 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1938 ms
+2026-05-16 00:37:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2848 ms
+2026-05-16 00:38:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2990 ms
+2026-05-16 00:39:35.082 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7470 ms
+2026-05-16 00:40:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9647 ms
+2026-05-16 00:41:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6540 ms
+2026-05-16 00:42:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.8382 ms
+2026-05-16 00:43:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.3469 ms
+2026-05-16 00:44:35.127 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.8133 ms
+2026-05-16 00:45:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7560 ms
+2026-05-16 00:46:35.088 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3945 ms
+2026-05-16 00:47:35.090 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1050 ms
+2026-05-16 00:48:35.095 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.7706 ms
+2026-05-16 00:49:35.094 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6740 ms
+2026-05-16 00:50:35.090 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.6744 ms
+2026-05-16 00:51:35.099 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.3803 ms
+2026-05-16 00:52:35.099 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0145 ms
+2026-05-16 00:53:35.107 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5511 ms
+2026-05-16 00:54:35.100 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3304 ms
+2026-05-16 00:55:35.060 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6313 ms
+2026-05-16 00:56:35.102 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.7065 ms
+2026-05-16 00:57:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.9417 ms
+2026-05-16 00:58:35.074 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2017 ms
+2026-05-16 00:59:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3087 ms
+2026-05-16 01:00:01.973 +03:00 [INF] Running appointment reminder job at "2026-05-15T22:00:01.9708890Z"
+2026-05-16 01:00:01.996 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 01:00:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.8113 ms
+2026-05-16 01:01:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.7234 ms
+2026-05-16 01:02:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.9959 ms
+2026-05-16 01:03:35.086 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.2886 ms
+2026-05-16 01:04:35.121 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3608 ms
+2026-05-16 01:05:35.098 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.8344 ms
+2026-05-16 01:06:35.083 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.4992 ms
+2026-05-16 01:07:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2308 ms
+2026-05-16 01:08:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.8985 ms
+2026-05-16 01:09:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2800 ms
+2026-05-16 01:10:35.074 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3269 ms
+2026-05-16 01:11:35.273 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6560 ms
+2026-05-16 01:12:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.8430 ms
+2026-05-16 01:13:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.0889 ms
+2026-05-16 01:14:35.153 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.5640 ms
+2026-05-16 01:15:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7081 ms
+2026-05-16 01:16:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6019 ms
+2026-05-16 01:17:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1495 ms
+2026-05-16 01:18:35.086 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.6529 ms
+2026-05-16 01:19:35.058 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3558 ms
+2026-05-16 01:20:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.4933 ms
+2026-05-16 01:21:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3743 ms
+2026-05-16 01:22:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7194 ms
+2026-05-16 01:23:35.328 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.0786 ms
+2026-05-16 01:24:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0746 ms
+2026-05-16 01:25:35.081 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.1971 ms
+2026-05-16 01:26:35.092 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 26.0421 ms
+2026-05-16 01:27:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.6316 ms
+2026-05-16 01:28:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1838 ms
+2026-05-16 01:29:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2148 ms
+2026-05-16 01:30:02.211 +03:00 [INF] Running appointment reminder job at "2026-05-15T22:30:02.2092570Z"
+2026-05-16 01:30:02.250 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 01:30:35.078 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2839 ms
+2026-05-16 01:31:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.1599 ms
+2026-05-16 01:32:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6260 ms
+2026-05-16 01:33:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.5669 ms
+2026-05-16 01:34:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5619 ms
+2026-05-16 01:35:35.130 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2891 ms
+2026-05-16 01:36:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6507 ms
+2026-05-16 01:37:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.4679 ms
+2026-05-16 01:38:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.5683 ms
+2026-05-16 01:39:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.7688 ms
+2026-05-16 01:40:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4450 ms
+2026-05-16 01:41:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.9223 ms
+2026-05-16 01:42:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.9309 ms
+2026-05-16 01:43:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3340 ms
+2026-05-16 01:44:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.5470 ms
+2026-05-16 01:45:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.5580 ms
+2026-05-16 01:46:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.7229 ms
+2026-05-16 01:47:35.080 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7727 ms
+2026-05-16 01:48:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4441 ms
+2026-05-16 01:49:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7328 ms
+2026-05-16 01:50:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6489 ms
+2026-05-16 01:51:35.053 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0320 ms
+2026-05-16 01:52:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6258 ms
+2026-05-16 01:53:35.054 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6698 ms
+2026-05-16 01:54:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5014 ms
+2026-05-16 01:55:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5132 ms
+2026-05-16 01:56:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3203 ms
+2026-05-16 01:57:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2078 ms
+2026-05-16 01:58:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4958 ms
+2026-05-16 01:59:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.7219 ms
+2026-05-16 02:00:02.468 +03:00 [INF] Running appointment reminder job at "2026-05-15T23:00:02.4647900Z"
+2026-05-16 02:00:02.494 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 02:00:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0922 ms
+2026-05-16 02:01:35.074 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7476 ms
+2026-05-16 02:02:35.112 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.5332 ms
+2026-05-16 02:03:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2185 ms
+2026-05-16 02:04:35.111 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0855 ms
+2026-05-16 02:05:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.1449 ms
+2026-05-16 02:06:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4368 ms
+2026-05-16 02:07:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3741 ms
+2026-05-16 02:08:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6986 ms
+2026-05-16 02:09:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1695 ms
+2026-05-16 02:10:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.4094 ms
+2026-05-16 02:11:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1811 ms
+2026-05-16 02:12:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.8444 ms
+2026-05-16 02:13:35.080 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.9456 ms
+2026-05-16 02:14:35.086 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0852 ms
+2026-05-16 02:15:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3902 ms
+2026-05-16 02:16:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9535 ms
+2026-05-16 02:17:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3533 ms
+2026-05-16 02:18:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.0662 ms
+2026-05-16 02:19:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.1615 ms
+2026-05-16 02:20:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1126 ms
+2026-05-16 02:21:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.4787 ms
+2026-05-16 02:22:35.059 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5452 ms
+2026-05-16 02:23:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9984 ms
+2026-05-16 02:24:35.074 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6460 ms
+2026-05-16 02:25:35.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9084 ms
+2026-05-16 02:26:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2201 ms
+2026-05-16 02:27:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3887 ms
+2026-05-16 02:28:35.055 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0841 ms
+2026-05-16 02:29:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.9844 ms
+2026-05-16 02:30:02.735 +03:00 [INF] Running appointment reminder job at "2026-05-15T23:30:02.7311610Z"
+2026-05-16 02:30:02.763 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 02:30:35.058 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5641 ms
+2026-05-16 02:31:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0779 ms
+2026-05-16 02:32:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.9915 ms
+2026-05-16 02:33:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.9720 ms
+2026-05-16 02:34:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6228 ms
+2026-05-16 02:35:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6829 ms
+2026-05-16 02:36:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1886 ms
+2026-05-16 02:37:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2609 ms
+2026-05-16 02:38:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3746 ms
+2026-05-16 02:39:35.083 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3717 ms
+2026-05-16 02:40:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.9783 ms
+2026-05-16 02:41:35.055 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.0999 ms
+2026-05-16 02:42:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4309 ms
+2026-05-16 02:43:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2000 ms
+2026-05-16 02:44:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3009 ms
+2026-05-16 02:45:35.060 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7862 ms
+2026-05-16 02:46:35.173 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2373 ms
+2026-05-16 02:47:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7529 ms
+2026-05-16 02:48:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2779 ms
+2026-05-16 02:49:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.3950 ms
+2026-05-16 02:50:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2365 ms
+2026-05-16 02:51:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.9628 ms
+2026-05-16 02:52:35.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4578 ms
+2026-05-16 02:53:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7765 ms
+2026-05-16 02:54:35.053 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0144 ms
+2026-05-16 02:55:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9672 ms
+2026-05-16 02:56:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8268 ms
+2026-05-16 02:57:35.060 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2145 ms
+2026-05-16 02:58:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3902 ms
+2026-05-16 02:59:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7072 ms
+2026-05-16 03:00:01.208 +03:00 [INF] Subscription expiry check completed at 2026-05-16T00:00:01.1965210Z
+2026-05-16 03:00:02.931 +03:00 [INF] Running appointment reminder job at "2026-05-16T00:00:02.9307470Z"
+2026-05-16 03:00:02.944 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 03:00:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.0140 ms
+2026-05-16 03:01:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2781 ms
+2026-05-16 03:02:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.8340 ms
+2026-05-16 03:03:35.372 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.3192 ms
+2026-05-16 03:04:35.218 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0666 ms
+2026-05-16 03:05:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6085 ms
+2026-05-16 03:06:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0797 ms
+2026-05-16 03:07:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.1070 ms
+2026-05-16 03:08:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9806 ms
+2026-05-16 03:09:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4617 ms
+2026-05-16 03:10:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.5278 ms
+2026-05-16 03:11:35.065 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6132 ms
+2026-05-16 03:12:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3882 ms
+2026-05-16 03:13:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7395 ms
+2026-05-16 03:14:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.4127 ms
+2026-05-16 03:15:35.085 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6720 ms
+2026-05-16 03:16:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3816 ms
+2026-05-16 03:17:35.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7038 ms
+2026-05-16 03:18:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.3352 ms
+2026-05-16 03:19:35.053 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3686 ms
+2026-05-16 03:20:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1639 ms
+2026-05-16 03:21:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3148 ms
+2026-05-16 03:22:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.1803 ms
+2026-05-16 03:23:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.0258 ms
+2026-05-16 03:24:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1293 ms
+2026-05-16 03:25:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2009 ms
+2026-05-16 03:26:35.074 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0068 ms
+2026-05-16 03:27:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2243 ms
+2026-05-16 03:28:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6064 ms
+2026-05-16 03:29:35.137 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.6490 ms
+2026-05-16 03:30:03.246 +03:00 [INF] Running appointment reminder job at "2026-05-16T00:30:03.2417360Z"
+2026-05-16 03:30:03.291 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 03:30:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.1191 ms
+2026-05-16 03:31:35.057 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7765 ms
+2026-05-16 03:32:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2630 ms
+2026-05-16 03:33:35.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4453 ms
+2026-05-16 03:34:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4895 ms
+2026-05-16 03:35:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0080 ms
+2026-05-16 03:36:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.0852 ms
+2026-05-16 03:37:35.046 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4423 ms
+2026-05-16 03:38:35.087 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0928 ms
+2026-05-16 03:39:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.5817 ms
+2026-05-16 03:40:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4228 ms
+2026-05-16 03:41:35.121 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6723 ms
+2026-05-16 03:42:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2246 ms
+2026-05-16 03:43:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4618 ms
+2026-05-16 03:44:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7679 ms
+2026-05-16 03:45:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9749 ms
+2026-05-16 03:46:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.4123 ms
+2026-05-16 03:47:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.9030 ms
+2026-05-16 03:48:35.073 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.3772 ms
+2026-05-16 03:49:35.077 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.6879 ms
+2026-05-16 03:50:35.108 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3764 ms
+2026-05-16 03:51:35.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7374 ms
+2026-05-16 03:52:35.066 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.5101 ms
+2026-05-16 03:53:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.0716 ms
+2026-05-16 03:54:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0808 ms
+2026-05-16 03:55:35.059 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1819 ms
+2026-05-16 03:56:35.084 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1347 ms
+2026-05-16 03:57:35.054 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7759 ms
+2026-05-16 03:58:35.072 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7987 ms
+2026-05-16 03:59:35.055 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5043 ms
+2026-05-16 04:00:03.489 +03:00 [INF] Running appointment reminder job at "2026-05-16T01:00:03.4849800Z"
+2026-05-16 04:00:03.521 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 04:00:35.068 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6332 ms
+2026-05-16 04:01:35.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8109 ms
+2026-05-16 04:02:35.075 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9321 ms
+2026-05-16 04:03:35.069 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0826 ms
+2026-05-16 04:04:35.148 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.6200 ms
+2026-05-16 04:05:35.061 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4863 ms
+2026-05-16 04:06:35.076 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9297 ms
+2026-05-16 04:07:35.070 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3011 ms
+2026-05-16 04:08:35.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3700 ms
+2026-05-16 04:09:35.063 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8183 ms
+2026-05-16 04:30:03.785 +03:00 [INF] Running appointment reminder job at "2026-05-16T01:30:03.7819290Z"
+2026-05-16 04:30:03.817 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 05:00:04.061 +03:00 [INF] Running appointment reminder job at "2026-05-16T02:00:04.0574180Z"
+2026-05-16 05:00:04.090 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 05:16:35.246 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 63.5975 ms
+2026-05-16 05:17:06.796 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 26.1251 ms
+2026-05-16 05:17:37.502 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 05:17:37.506 +03:00 [INF] SMS delivered to 251943034193.
+2026-05-16 05:17:37.521 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 4436.9468 ms
+2026-05-16 05:17:59.724 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 516.8485 ms
+2026-05-16 05:18:00.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 58.2028 ms
+2026-05-16 05:18:00.241 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 228.6468 ms
+2026-05-16 05:18:00.264 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 253.7757 ms
+2026-05-16 05:18:05.855 +03:00 [INF] HTTP GET /api/v1/doctors/me/schedules responded 200 in 86.3717 ms
+2026-05-16 05:18:08.332 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 05:18:08.435 +03:00 [INF] HTTP GET /api/v1/doctors/me responded 200 in 268.8455 ms
+2026-05-16 05:18:22.319 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 90.3658 ms
+2026-05-16 05:18:23.079 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 42.9184 ms
+2026-05-16 05:18:23.103 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 10.3856 ms
+2026-05-16 05:18:23.115 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 8.9030 ms
+2026-05-16 05:19:00.033 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.3737 ms
+2026-05-16 05:20:00.038 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.9381 ms
+2026-05-16 05:21:00.127 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 109.3975 ms
+2026-05-16 05:22:00.189 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 66.4789 ms
+2026-05-16 05:23:02.227 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 163.3013 ms
+2026-05-16 05:24:00.536 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 417.9363 ms
+2026-05-16 05:24:10.513 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 2201.8717 ms
+2026-05-16 05:24:57.904 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 2047.8176 ms
+2026-05-16 05:24:59.158 +03:00 [INF] HTTP GET /api/v1/super-admin/dashboard responded 404 in 50.1743 ms
+2026-05-16 05:24:59.223 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 381.4296 ms
+2026-05-16 05:25:59.096 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 110.3468 ms
+2026-05-16 05:26:51.455 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 1088.3015 ms
+2026-05-16 05:26:53.742 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 400 in 121.2778 ms
+2026-05-16 05:26:58.821 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.9760 ms
+2026-05-16 05:27:24.552 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 594.4876 ms
+2026-05-16 05:27:27.022 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 210.9593 ms
+2026-05-16 05:27:49.157 +03:00 [INF] HTTP GET /api/v1/super-admin/users responded 200 in 2489.0366 ms
+2026-05-16 05:27:58.849 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 75.9243 ms
+2026-05-16 05:28:00.623 +03:00 [INF] HTTP GET /api/v1/super-admin/subscriptions responded 404 in 12.6238 ms
+2026-05-16 05:28:10.282 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 404 in 4.1748 ms
+2026-05-16 05:28:12.671 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 404 in 4.4035 ms
+2026-05-16 05:28:13.963 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 404 in 3.0450 ms
+2026-05-16 05:28:18.392 +03:00 [INF] HTTP GET /api/v1/super-admin/audit-log responded 200 in 349.4653 ms
+2026-05-16 05:28:32.053 +03:00 [INF] HTTP GET /api/v1/super-admin/settings responded 404 in 6.5644 ms
+2026-05-16 05:29:00.132 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 970.8755 ms
+2026-05-16 05:29:58.980 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 61.7553 ms
+2026-05-16 05:30:04.367 +03:00 [INF] Running appointment reminder job at "2026-05-16T02:30:04.3572390Z"
+2026-05-16 05:30:04.497 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 05:30:17.102 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 36.5953 ms
+2026-05-16 05:30:18.231 +03:00 [INF] HTTP GET /api/v1/super-admin/dashboard responded 404 in 5.2546 ms
+2026-05-16 05:30:18.503 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 336.2690 ms
+2026-05-16 05:30:33.739 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 455.6479 ms
+2026-05-16 05:31:18.891 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 46.5032 ms
+2026-05-16 05:32:18.508 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 100.5135 ms
+2026-05-16 05:33:18.227 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.6730 ms
+2026-05-16 05:34:23.615 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 80.9515 ms
+2026-05-16 05:35:18.414 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.4648 ms
+2026-05-16 05:35:39.831 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 10.7258 ms
+2026-05-16 05:35:40.438 +03:00 [INF] HTTP GET /api/v1/super-admin/dashboard responded 404 in 2.9998 ms
+2026-05-16 05:35:40.451 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.3293 ms
+2026-05-16 05:35:46.233 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 297.1231 ms
+2026-05-16 05:35:48.151 +03:00 [INF] HTTP GET /api/v1/super-admin/centers/pending responded 200 in 469.9237 ms
+2026-05-16 05:35:55.190 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 400 in 86.0640 ms
+2026-05-16 05:35:56.074 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 121.2048 ms
+2026-05-16 05:35:56.811 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 12.2170 ms
+2026-05-16 05:35:57.786 +03:00 [INF] HTTP GET /api/v1/super-admin/centers/pending responded 200 in 24.8287 ms
+2026-05-16 05:36:40.742 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 100.6646 ms
+2026-05-16 05:37:40.644 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 145.3317 ms
+2026-05-16 05:38:40.524 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.8039 ms
+2026-05-16 05:39:40.615 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 128.3060 ms
+2026-05-16 05:40:40.486 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 92.5146 ms
+2026-05-16 05:40:41.309 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 690.9279 ms
+2026-05-16 05:40:41.379 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.4922 ms
+2026-05-16 05:41:40.362 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.2583 ms
+2026-05-16 05:42:40.402 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.7656 ms
+2026-05-16 05:43:40.462 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 49.2073 ms
+2026-05-16 05:44:40.428 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.8064 ms
+2026-05-16 05:45:33.122 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 81.2035 ms
+2026-05-16 05:45:33.920 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 40.4870 ms
+2026-05-16 05:45:34.052 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 401 in 160.3809 ms
+2026-05-16 05:45:34.502 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 482.3181 ms
+2026-05-16 05:45:34.509 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 401.8988 ms
+2026-05-16 05:45:34.572 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.4897 ms
+2026-05-16 05:45:34.751 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 217.2636 ms
+2026-05-16 05:45:46.843 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 60.7402 ms
+2026-05-16 05:45:51.870 +03:00 [INF] HTTP GET /api/v1/super-admin/centers/pending responded 200 in 40.7347 ms
+2026-05-16 05:46:33.829 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.0488 ms
+2026-05-16 05:47:33.809 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.7769 ms
+2026-05-16 05:47:36.879 +03:00 [INF] HTTP GET /api/v1/super-admin/settings responded 404 in 16.4898 ms
+2026-05-16 05:47:41.790 +03:00 [INF] HTTP GET /api/v1/super-admin/audit-log responded 200 in 364.6310 ms
+2026-05-16 05:48:33.894 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 96.6319 ms
+2026-05-16 05:49:33.860 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.2405 ms
+2026-05-16 05:50:33.827 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.9273 ms
+2026-05-16 05:51:00.970 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 46.3080 ms
+2026-05-16 05:51:01.661 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 401 in 29.1930 ms
+2026-05-16 05:51:01.661 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 38.4632 ms
+2026-05-16 05:51:02.253 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 558.9019 ms
+2026-05-16 05:51:02.254 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 559.8011 ms
+2026-05-16 05:51:02.306 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.3585 ms
+2026-05-16 05:51:02.426 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 133.1470 ms
+2026-05-16 05:51:06.556 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 80.1968 ms
+2026-05-16 05:51:14.823 +03:00 [INF] HTTP GET /api/v1/super-admin/centers/pending responded 200 in 37.9690 ms
+2026-05-16 05:52:01.525 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.5180 ms
+2026-05-16 05:52:09.146 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 190.5550 ms
+2026-05-16 05:52:30.419 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 40.4731 ms
+2026-05-16 05:53:00.737 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 27.1477 ms
+2026-05-16 05:53:01.496 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6823 ms
+2026-05-16 05:54:01.518 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.4174 ms
+2026-05-16 05:55:01.504 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6085 ms
+2026-05-16 05:55:04.501 +03:00 [INF] HTTP POST /api/v1/auth/admin/register responded 201 in 1324.5394 ms
+2026-05-16 05:55:28.384 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 338.3634 ms
+2026-05-16 05:56:01.536 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.4752 ms
+2026-05-16 05:57:01.510 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.0768 ms
+2026-05-16 05:58:01.522 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.6515 ms
+2026-05-16 05:59:01.520 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.6912 ms
+2026-05-16 06:00:00.330 +03:00 [INF] Daily queue generation completed.
+2026-05-16 06:00:00.342 +03:00 [INF] Daily queue generation scheduled for "2026-05-17T06:00:00.0000000" ("2026-05-17T03:00:00.0000000Z" UTC)
+2026-05-16 06:00:01.507 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.9289 ms
+2026-05-16 06:00:04.583 +03:00 [INF] Running appointment reminder job at "2026-05-16T03:00:04.5834930Z"
+2026-05-16 06:00:04.595 +03:00 [INF] QueueGenerationJob triggered for date "2026-05-15"
+2026-05-16 06:00:04.609 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 06:00:04.657 +03:00 [INF] Handling GenerateDailyQueuesCommand
+2026-05-16 06:00:04.702 +03:00 [INF] Handled GenerateDailyQueuesCommand in 45ms
+2026-05-16 06:00:04.703 +03:00 [INF] Generated 0 queues for 0 centers.
+2026-05-16 06:00:12.412 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 204.9968 ms
+2026-05-16 06:00:23.508 +03:00 [INF] Center "893297d0-0fef-4cf8-a3c1-59961b43607d" registered by admin "4472787d-a832-4809-bf1a-367886556868"
+2026-05-16 06:00:23.531 +03:00 [INF] HTTP POST /api/v1/healthcare-centers responded 201 in 406.7543 ms
+2026-05-16 06:00:23.546 +03:00 [INF] HTTP POST /api/v1/payments/subscription/initiate responded 404 in 3.5232 ms
+2026-05-16 06:00:32.587 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 9.8739 ms
+2026-05-16 06:00:58.830 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 181.1950 ms
+2026-05-16 06:00:58.923 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.4953 ms
+2026-05-16 06:00:58.948 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 32.6463 ms
+2026-05-16 06:01:05.677 +03:00 [INF] HTTP GET /api/v1/super-admin/centers/pending responded 200 in 27.4853 ms
+2026-05-16 06:01:05.681 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 35.8495 ms
+2026-05-16 06:01:16.596 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 06:01:16.731 +03:00 [INF] Center "893297d0-0fef-4cf8-a3c1-59961b43607d" approved by SuperAdmin "357c6ade-6a6c-44dc-8b71-5647e470f375"
+2026-05-16 06:01:16.735 +03:00 [INF] HTTP POST /api/v1/super-admin/centers/893297d0-0fef-4cf8-a3c1-59961b43607d/approve responded 200 in 210.2995 ms
+2026-05-16 06:01:16.762 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 15.1828 ms
+2026-05-16 06:01:21.914 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 51.7840 ms
+2026-05-16 06:01:23.369 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 20.0503 ms
+2026-05-16 06:01:30.965 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 5.3111 ms
+2026-05-16 06:01:54.792 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 148.4445 ms
+2026-05-16 06:01:54.896 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.5435 ms
+2026-05-16 06:01:55.159 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 06:01:55.346 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 06:01:55.416 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/dashboard/today responded 200 in 521.6865 ms
+2026-05-16 06:01:55.517 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/branding responded 200 in 31.4182 ms
+2026-05-16 06:01:55.519 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/config responded 200 in 33.7270 ms
+2026-05-16 06:02:03.533 +03:00 [INF] HTTP GET /api/v1/queue/center/893297d0-0fef-4cf8-a3c1-59961b43607d responded 200 in 169.3570 ms
+2026-05-16 06:02:06.673 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 93.4428 ms
+2026-05-16 06:02:08.838 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 67.5480 ms
+2026-05-16 06:02:16.477 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 57.4984 ms
+2026-05-16 06:02:17.988 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/roster responded 200 in 75.4259 ms
+2026-05-16 06:02:18.049 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/invitations responded 200 in 53.5923 ms
+2026-05-16 06:02:54.910 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.8765 ms
+2026-05-16 06:02:54.946 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/dashboard/today responded 200 in 55.2940 ms
+2026-05-16 06:03:17.851 +03:00 [INF] Email sent via Resend to danielabera285@gmail.com. Subject: You've been invited to join Wollo General Hospital on MediMind
+2026-05-16 06:03:20.198 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251911087036 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 06:03:20.657 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=251911087036 Body={"error_message":"DEFAULT_CAMPAIGN_RECIPIENT_NOT_WHITELISTED: This starter campaign can only send to verified numbers. Please verify this MSISDN first via the whitelist API. Error Code :: 10007"}
+2026-05-16 06:03:20.658 +03:00 [ERR] SMS delivery failed for +251911087036. Primary=null. Fallback=null
+2026-05-16 06:03:20.662 +03:00 [INF] HTTP POST /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/invite responded 201 in 4712.4104 ms
+2026-05-16 06:03:20.707 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/roster responded 200 in 19.5206 ms
+2026-05-16 06:03:20.717 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/invitations responded 200 in 7.8910 ms
+2026-05-16 06:03:28.415 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/patients responded 200 in 82.1985 ms
+2026-05-16 06:03:29.779 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 109.5916 ms
+2026-05-16 06:03:32.491 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/analytics responded 200 in 325.7246 ms
+2026-05-16 06:03:33.451 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/revenue responded 200 in 100.3015 ms
+2026-05-16 06:03:34.560 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/roster responded 200 in 39.0495 ms
+2026-05-16 06:03:34.579 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/doctors/invitations responded 200 in 15.5130 ms
+2026-05-16 06:03:43.374 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/analytics/export/csv responded 200 in 498.8997 ms
+2026-05-16 06:03:45.655 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/admins responded 200 in 24.6572 ms
+2026-05-16 06:03:54.911 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.2271 ms
+2026-05-16 06:03:54.981 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/dashboard/today responded 200 in 96.3678 ms
+2026-05-16 06:04:19.690 +03:00 [ERR] Failed executing DbCommand (31ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?' (DbType = Date), @p3='?' (DbType = DateTime), @p4='?', @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32), @p11='?', @p12='?' (DbType = DateTime), @p13='?', @p14='?', @p15='?', @p16='?', @p17='?' (DbType = DateTime), @p18='?', @p19='?' (DbType = Guid), @p20='?' (DbType = Guid), @p21='?', @p22='?' (DbType = Boolean), @p23='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, date_of_birth, deleted_at, email, full_name, gender, is_deleted, is_verified, last_login, otp_attempts, otp_code, otp_expires_at, password_hash, phone_number, profile_image_url, status, updated_at, user_type)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18);
+INSERT INTO healthcare_center_admins (user_id, center_id, department, is_active, role)
+VALUES (@p19, @p20, @p21, @p22, @p23);
+2026-05-16 06:04:19.757 +03:00 [ERR] An exception occurred in the database while saving changes for context type 'MediMind.Infrastructure.Data.MediMindDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: i_x_users_phone_number_user_type
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: i_x_users_phone_number_user_type
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2026-05-16 06:04:19.761 +03:00 [ERR] HTTP POST /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/admins responded 500 in 298.3313 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: i_x_users_phone_number_user_type
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.MediMindDbContext.SaveChangesAsync(CancellationToken ct)
+   at MediMind.Application.Features.Admin.AdminManagementService.InviteAdminAsync(Guid centerId, InviteAdminDto dto, Guid requesterId, CancellationToken ct)
+   at MediMind.API.Controllers.AdminController.InviteAdmin(Guid id, InviteAdminDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/AdminController.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 06:04:19.838 +03:00 [ERR] Unhandled server error on POST /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/admins
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23505: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23505
+    MessageText: duplicate key value violates unique constraint "i_x_users_phone_number_user_type"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: i_x_users_phone_number_user_type
+    File: nbtinsert.c
+    Line: 666
+    Routine: _bt_check_unique
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalDatabase.SaveChangesAsync(IList`1 entries, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.MediMindDbContext.SaveChangesAsync(CancellationToken ct)
+   at MediMind.Application.Features.Admin.AdminManagementService.InviteAdminAsync(Guid centerId, InviteAdminDto dto, Guid requesterId, CancellationToken ct)
+   at MediMind.API.Controllers.AdminController.InviteAdmin(Guid id, InviteAdminDto dto, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/AdminController.cs:line 55
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-05-16 06:04:30.077 +03:00 [ERR] Resend email exception for test@gmail.com
+Resend.ResendException: You can only send testing emails to your own email address (danielabera285@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain.
+   at Resend.ResendClient.Execute[T1,T2](HttpRequestMessage req, Func`2 map, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Services.Notifications.ResendEmailService.SendAsync(String to, String subject, String htmlBody, CancellationToken ct)
+2026-05-16 06:04:30.082 +03:00 [INF] Admin test@gmail.com invited to center "893297d0-0fef-4cf8-a3c1-59961b43607d" by "4472787d-a832-4809-bf1a-367886556868"
+2026-05-16 06:04:30.082 +03:00 [INF] HTTP POST /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/admins responded 201 in 584.0010 ms
+2026-05-16 06:04:30.127 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/admins responded 200 in 17.4511 ms
+2026-05-16 06:04:35.621 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/audit-log responded 200 in 72.2550 ms
+2026-05-16 06:04:42.181 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/config responded 200 in 31.5317 ms
+2026-05-16 06:04:47.797 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/branding responded 200 in 46.9203 ms
+2026-05-16 06:04:49.194 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/working-hours responded 200 in 35.7703 ms
+2026-05-16 06:04:53.224 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/booking-rules responded 200 in 39.3103 ms
+2026-05-16 06:04:54.902 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.5828 ms
+2026-05-16 06:04:54.917 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/dashboard/today responded 200 in 38.2655 ms
+2026-05-16 06:04:57.991 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d/config responded 200 in 36.0628 ms
+2026-05-16 06:05:31.159 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 50.6673 ms
+2026-05-16 06:05:36.363 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 06:05:36.364 +03:00 [INF] SMS delivered to 251943034193.
+2026-05-16 06:05:36.365 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 2165.0825 ms
+2026-05-16 06:05:53.241 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 114.8308 ms
+2026-05-16 06:05:53.384 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.3834 ms
+2026-05-16 06:05:53.532 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 188.7237 ms
+2026-05-16 06:05:53.584 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 244.5240 ms
+2026-05-16 06:05:59.764 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 133.6928 ms
+2026-05-16 06:06:00.548 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 43.3061 ms
+2026-05-16 06:06:01.990 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 46.9069 ms
+2026-05-16 06:06:02.805 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 39.9846 ms
+2026-05-16 06:06:02.819 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 11.2483 ms
+2026-05-16 06:06:02.828 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 5.1676 ms
+2026-05-16 06:06:06.267 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 8.6695 ms
+2026-05-16 06:06:08.336 +03:00 [INF] HTTP GET /api/v1/prescription-templates responded 200 in 69.1467 ms
+2026-05-16 06:06:13.144 +03:00 [INF] HTTP GET /api/v1/doctors/me/schedules responded 200 in 56.5527 ms
+2026-05-16 06:06:14.500 +03:00 [INF] HTTP GET /api/v1/doctors/me responded 200 in 41.6068 ms
+2026-05-16 06:06:54.442 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 454.8409 ms
+2026-05-16 06:07:53.537 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.4353 ms
+2026-05-16 06:08:56.703 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 356.4891 ms
+2026-05-16 06:09:53.417 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.8273 ms
+2026-05-16 06:10:53.391 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.8193 ms
+2026-05-16 06:11:53.382 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.0443 ms
+2026-05-16 06:12:53.370 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.6428 ms
+2026-05-16 06:13:53.371 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.7178 ms
+2026-05-16 06:14:53.380 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.0353 ms
+2026-05-16 06:15:53.372 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.9991 ms
+2026-05-16 06:16:53.358 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.4968 ms
+2026-05-16 06:17:53.379 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.8660 ms
+2026-05-16 06:18:53.367 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.9422 ms
+2026-05-16 06:19:53.414 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.7425 ms
+2026-05-16 06:20:53.421 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 63.8348 ms
+2026-05-16 06:20:53.747 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 295.1909 ms
+2026-05-16 06:20:53.914 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.0541 ms
+2026-05-16 06:21:53.363 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.9870 ms
+2026-05-16 06:22:53.386 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.2855 ms
+2026-05-16 06:23:53.447 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0518 ms
+2026-05-16 06:24:53.433 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 62.6294 ms
+2026-05-16 06:26:04.466 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.5180 ms
+2026-05-16 06:27:09.489 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.5213 ms
+2026-05-16 06:28:07.505 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.7541 ms
+2026-05-16 07:02:49.825 +03:00 [INF] Running appointment reminder job at "2026-05-16T04:02:49.8182080Z"
+2026-05-16 07:02:49.934 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 07:36:07.615 +03:00 [INF] Running appointment reminder job at "2026-05-16T04:36:07.6097070Z"
+2026-05-16 07:53:45.109 +03:00 [ERR] An error occurred using the connection to database 'mediminddb' on server 'tcp://localhost:5432'.
+2026-05-16 07:53:45.255 +03:00 [ERR] An exception occurred while iterating over the results of a query for context type 'MediMind.Infrastructure.Data.MediMindDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-05-16 07:53:45.353 +03:00 [WRN] Failed to process the job '34367d3f-2e41-49c7-890e-1673760fe59d': an exception occurred. Retry attempt 1 of 10 will be performed in 00:00:20.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|209_0(NpgsqlConnector conn, String username, SslMode sslMode, GssEncryptionMode gssEncMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.AppointmentRepository.GetByCenterAndDateAsync(Guid centerId, DateOnly date, CancellationToken ct)
+   at MediMind.Infrastructure.Services.Notifications.AppointmentReminderJob.SendRemindersAsync(CancellationToken ct)
+   at InvokeStub_TaskAwaiter.GetResult(Object, Object, IntPtr*)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+2026-05-16 08:26:02.524 +03:00 [INF] Running appointment reminder job at "2026-05-16T05:26:02.5233480Z"
+2026-05-16 08:26:02.563 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 08:26:03.148 +03:00 [INF] Running appointment reminder job at "2026-05-16T05:26:03.1485600Z"
+2026-05-16 08:26:03.154 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 09:11:58.470 +03:00 [INF] Running appointment reminder job at "2026-05-16T06:11:58.4705970Z"
+2026-05-16 09:11:58.535 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 09:23:47.112 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-17T00:00:00.0000000Z
+2026-05-16 09:23:47.127 +03:00 [INF] Daily queue generation scheduled for "2026-05-17T06:00:00.0000000" ("2026-05-17T03:00:00.0000000Z" UTC)
+2026-05-16 09:23:47.196 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-16 09:23:47.197 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-16 09:30:02.914 +03:00 [INF] Running appointment reminder job at "2026-05-16T06:30:02.9128430Z"
+2026-05-16 09:30:03.172 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 09:31:03.559 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 250.8628 ms
+2026-05-16 09:32:58.901 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 129.1873 ms
+2026-05-16 09:33:22.230 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 09:33:22.231 +03:00 [INF] SMS delivered to 251943034193.
+2026-05-16 09:33:22.238 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 1703.8702 ms
+2026-05-16 09:33:36.552 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 159.5600 ms
+2026-05-16 09:33:37.020 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-16 09:33:37.043 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 221.4130 ms
+2026-05-16 09:33:37.094 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 269.4662 ms
+2026-05-16 09:33:37.120 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 297.3445 ms
+2026-05-16 09:33:57.560 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 250.6108 ms
+2026-05-16 09:33:59.336 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 48.0378 ms
+2026-05-16 09:34:03.890 +03:00 [INF] ONNX models loaded from /Users/dani/RiderProjects/MediMind/src/MediMind.API/models
+2026-05-16 09:34:04.014 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 267.6950 ms
+2026-05-16 09:34:08.581 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 81.7375 ms
+2026-05-16 09:34:08.619 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 32.3025 ms
+2026-05-16 09:34:08.631 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 7.9992 ms
+2026-05-16 09:34:18.884 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 18.4587 ms
+2026-05-16 09:34:20.213 +03:00 [INF] HTTP GET /api/v1/prescription-templates responded 200 in 55.1464 ms
+2026-05-16 09:34:36.821 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.3658 ms
+2026-05-16 09:34:42.661 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 09:34:42.712 +03:00 [INF] HTTP GET /api/v1/doctors/me responded 200 in 90.7779 ms
+2026-05-16 09:34:51.504 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 18.2330 ms
+2026-05-16 09:35:13.592 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 350.7428 ms
+2026-05-16 09:35:13.689 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.9239 ms
+2026-05-16 09:35:13.708 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 09:35:13.860 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 09:35:13.885 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 201.7173 ms
+2026-05-16 09:35:13.975 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-16 09:35:13.997 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 53.2449 ms
+2026-05-16 09:35:13.998 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 54.3198 ms
+2026-05-16 09:35:23.914 +03:00 [INF] HTTP GET /api/v1/queue/center/96eec7f8-cb5a-4358-8ded-eb76b878649f responded 200 in 96.5636 ms
+2026-05-16 09:35:39.099 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/roster responded 200 in 79.3303 ms
+2026-05-16 09:35:39.145 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/invitations responded 200 in 39.8791 ms
+2026-05-16 09:35:55.464 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/patients responded 200 in 86.5608 ms
+2026-05-16 09:35:56.867 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 149.4945 ms
+2026-05-16 09:35:59.091 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/analytics responded 200 in 299.8892 ms
+2026-05-16 09:35:59.954 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/revenue responded 200 in 102.8833 ms
+2026-05-16 09:36:01.068 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/roster responded 200 in 50.0067 ms
+2026-05-16 09:36:01.084 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/invitations responded 200 in 9.3400 ms
+2026-05-16 09:36:02.674 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/admins responded 200 in 62.4545 ms
+2026-05-16 09:36:09.285 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/audit-log responded 200 in 101.3548 ms
+2026-05-16 09:36:13.678 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.0718 ms
+2026-05-16 09:36:13.703 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 32.2171 ms
+2026-05-16 09:36:39.251 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 42.8324 ms
+2026-05-16 09:36:42.331 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 13.2834 ms
+2026-05-16 09:36:43.470 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/working-hours responded 200 in 55.0454 ms
+2026-05-16 09:36:45.453 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/booking-rules responded 200 in 24.1923 ms
+2026-05-16 09:36:47.341 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 26.9788 ms
+2026-05-16 09:37:13.709 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.6003 ms
+2026-05-16 09:37:13.730 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 40.7853 ms
+2026-05-16 09:38:13.711 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.8725 ms
+2026-05-16 09:38:13.738 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 50.1529 ms
+2026-05-16 09:39:13.724 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 36.9379 ms
+2026-05-16 09:39:13.728 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.1898 ms
+2026-05-16 09:39:36.331 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 137.7046 ms
+2026-05-16 09:40:13.716 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.6403 ms
+2026-05-16 09:40:13.738 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 42.7143 ms
+2026-05-16 09:41:13.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.7330 ms
+2026-05-16 09:41:13.767 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 47.6556 ms
+2026-05-16 09:42:13.872 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 54.7986 ms
+2026-05-16 09:42:13.932 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 72.4422 ms
+2026-05-16 09:43:13.863 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.2436 ms
+2026-05-16 09:43:13.927 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 39.8589 ms
+2026-05-16 09:44:13.841 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 125.2052 ms
+2026-05-16 09:44:13.910 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 129.0398 ms
+2026-05-16 09:45:13.754 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.1392 ms
+2026-05-16 09:45:13.776 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 56.8613 ms
+2026-05-16 09:46:13.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.1528 ms
+2026-05-16 09:46:13.769 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 43.7952 ms
+2026-05-16 09:47:13.699 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.9411 ms
+2026-05-16 09:47:13.722 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 45.7135 ms
+2026-05-16 09:47:57.633 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 09:47:57.768 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 09:47:57.769 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-16 09:47:57.771 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 786.1178 ms
+2026-05-16 09:48:12.354 +03:00 [ERR] HTTP POST /api/v1/auth/patient/verify-otp responded 500 in 195.5231 ms
+MediMind.Domain.Exceptions.DomainException: This phone number is in use by another role.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 239
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 09:48:12.567 +03:00 [WRN] DomainException on POST /api/v1/auth/patient/verify-otp: This phone number is in use by another role.
+2026-05-16 09:48:13.687 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.6748 ms
+2026-05-16 09:48:13.707 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 24.9354 ms
+2026-05-16 09:48:49.146 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 09:48:49.253 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 09:48:49.254 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-16 09:48:49.254 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 245.9298 ms
+2026-05-16 09:49:03.256 +03:00 [ERR] HTTP POST /api/v1/auth/patient/verify-otp responded 500 in 34.9424 ms
+MediMind.Domain.Exceptions.DomainException: This phone number is in use by another role.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 239
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 09:49:03.265 +03:00 [WRN] DomainException on POST /api/v1/auth/patient/verify-otp: This phone number is in use by another role.
+2026-05-16 09:49:13.744 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.1164 ms
+2026-05-16 09:49:13.771 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 56.3457 ms
+2026-05-16 09:50:13.778 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 43.4525 ms
+2026-05-16 09:50:13.778 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 401 in 39.8234 ms
+2026-05-16 09:50:14.316 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 151.5724 ms
+2026-05-16 09:50:14.316 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 109.2493 ms
+2026-05-16 09:50:14.425 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.1607 ms
+2026-05-16 09:50:14.462 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 48.5953 ms
+2026-05-16 09:51:13.784 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.3838 ms
+2026-05-16 09:51:13.816 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 64.1308 ms
+2026-05-16 09:52:13.737 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.4910 ms
+2026-05-16 09:52:13.776 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 59.8619 ms
+2026-05-16 09:53:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.4290 ms
+2026-05-16 09:53:13.736 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 45.2267 ms
+2026-05-16 09:54:13.748 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.5815 ms
+2026-05-16 09:54:13.770 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 33.9705 ms
+2026-05-16 09:55:13.853 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.8492 ms
+2026-05-16 09:55:14.036 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 82.5270 ms
+2026-05-16 09:56:13.809 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.2846 ms
+2026-05-16 09:56:13.839 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 66.0035 ms
+2026-05-16 09:57:13.772 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 40.0023 ms
+2026-05-16 09:57:13.836 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 63.5289 ms
+2026-05-16 09:58:13.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.7109 ms
+2026-05-16 09:58:13.773 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 44.0502 ms
+2026-05-16 09:59:13.740 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.7218 ms
+2026-05-16 09:59:13.776 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 67.9248 ms
+2026-05-16 10:00:04.016 +03:00 [INF] Running appointment reminder job at "2026-05-16T07:00:04.0133240Z"
+2026-05-16 10:00:04.093 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 10:00:13.902 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.0150 ms
+2026-05-16 10:00:13.963 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 85.7835 ms
+2026-05-16 10:01:13.753 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.8640 ms
+2026-05-16 10:01:13.827 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 105.4154 ms
+2026-05-16 10:02:13.792 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.5691 ms
+2026-05-16 10:02:13.817 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 39.0281 ms
+2026-05-16 10:03:13.939 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 46.0921 ms
+2026-05-16 10:03:14.151 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 181.6767 ms
+2026-05-16 10:03:52.956 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 10:03:53.400 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 10:03:53.401 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-16 10:03:53.403 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 2930.5290 ms
+2026-05-16 10:04:03.789 +03:00 [ERR] HTTP POST /api/v1/auth/patient/verify-otp responded 500 in 64.2175 ms
+MediMind.Domain.Exceptions.DomainException: This phone number is in use by another role.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 239
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:04:03.823 +03:00 [WRN] DomainException on POST /api/v1/auth/patient/verify-otp: This phone number is in use by another role.
+2026-05-16 10:04:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.7118 ms
+2026-05-16 10:04:13.744 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 37.4270 ms
+2026-05-16 10:05:13.873 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 131.2104 ms
+2026-05-16 10:05:13.910 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 125.0109 ms
+2026-05-16 10:06:15.138 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 401 in 507.7549 ms
+2026-05-16 10:06:15.138 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 507.6952 ms
+2026-05-16 10:06:33.030 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 190.4706 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:06:33.075 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:06:33.092 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 56.5369 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:06:33.100 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:07:26.448 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 59.4248 ms
+2026-05-16 10:07:26.475 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 90.7347 ms
+2026-05-16 10:07:27.029 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 177.3037 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:07:27.103 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:08:14.269 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 53.3710 ms
+2026-05-16 10:08:14.336 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3517 ms
+2026-05-16 10:08:15.333 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 158.5052 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:08:15.342 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:09:13.709 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.9081 ms
+2026-05-16 10:09:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.9436 ms
+2026-05-16 10:09:13.751 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 7.0565 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:09:13.760 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:10:13.769 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.6464 ms
+2026-05-16 10:10:13.784 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 10.4772 ms
+2026-05-16 10:10:13.858 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 9.2035 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:10:13.872 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:11:13.761 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 16.0095 ms
+2026-05-16 10:11:13.766 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.6599 ms
+2026-05-16 10:11:13.869 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 13.0162 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:11:13.882 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:12:13.714 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.9685 ms
+2026-05-16 10:12:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1482 ms
+2026-05-16 10:12:13.760 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 6.7491 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:12:13.768 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:13:14.906 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 28.9251 ms
+2026-05-16 10:13:14.912 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 35.1919 ms
+2026-05-16 10:13:14.956 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 17.2084 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:13:14.992 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:14:13.761 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 15.0702 ms
+2026-05-16 10:14:13.762 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 16.6939 ms
+2026-05-16 10:14:14.134 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 14.1709 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:14:14.166 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:15:13.714 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.1728 ms
+2026-05-16 10:15:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.2271 ms
+2026-05-16 10:15:13.755 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 9.6492 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:15:13.761 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:16:13.720 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1639 ms
+2026-05-16 10:16:13.720 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.7410 ms
+2026-05-16 10:16:13.801 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 31.9058 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:16:13.806 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:17:13.704 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.3308 ms
+2026-05-16 10:17:13.706 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6333 ms
+2026-05-16 10:17:13.751 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 8.4995 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:17:13.758 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:17:33.910 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 401 in 11.7293 ms
+2026-05-16 10:17:33.963 +03:00 [ERR] HTTP POST /api/v1/auth/refresh-token responded 500 in 14.5412 ms
+MediMind.Domain.Exceptions.DomainException: Session expired. Please login.
+   at MediMind.API.Controllers.AuthController.RefreshToken(RefreshTokenApiRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 236
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 10:17:33.970 +03:00 [WRN] DomainException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-16 10:18:13.702 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.7865 ms
+2026-05-16 10:18:13.705 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2145 ms
+2026-05-16 10:19:13.723 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.4303 ms
+2026-05-16 10:19:13.725 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.5198 ms
+2026-05-16 10:20:13.729 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.0391 ms
+2026-05-16 10:20:13.733 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.3943 ms
+2026-05-16 10:21:13.714 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3360 ms
+2026-05-16 10:21:13.717 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 16.1145 ms
+2026-05-16 10:22:13.722 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0948 ms
+2026-05-16 10:22:13.728 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.5463 ms
+2026-05-16 10:23:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7056 ms
+2026-05-16 10:23:13.717 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.8499 ms
+2026-05-16 10:24:13.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.4443 ms
+2026-05-16 10:24:13.725 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9187 ms
+2026-05-16 10:25:13.716 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7515 ms
+2026-05-16 10:25:13.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6458 ms
+2026-05-16 10:26:13.784 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.6235 ms
+2026-05-16 10:26:13.842 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.2251 ms
+2026-05-16 10:27:13.704 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.6641 ms
+2026-05-16 10:27:13.708 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.0699 ms
+2026-05-16 10:28:13.696 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8738 ms
+2026-05-16 10:28:13.701 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.1337 ms
+2026-05-16 10:29:13.714 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.0523 ms
+2026-05-16 10:29:13.724 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.4189 ms
+2026-05-16 10:30:04.249 +03:00 [INF] Running appointment reminder job at "2026-05-16T07:30:04.2474290Z"
+2026-05-16 10:30:04.371 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 10:30:13.731 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.3631 ms
+2026-05-16 10:30:13.734 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.6968 ms
+2026-05-16 10:31:13.710 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8062 ms
+2026-05-16 10:31:13.712 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1317 ms
+2026-05-16 10:32:13.714 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.7075 ms
+2026-05-16 10:32:13.717 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.3116 ms
+2026-05-16 10:33:13.764 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.2890 ms
+2026-05-16 10:33:13.771 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.2362 ms
+2026-05-16 10:34:13.726 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.1869 ms
+2026-05-16 10:34:13.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.2169 ms
+2026-05-16 10:35:13.716 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2658 ms
+2026-05-16 10:35:13.719 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.8360 ms
+2026-05-16 10:36:13.724 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.6519 ms
+2026-05-16 10:36:13.727 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.0432 ms
+2026-05-16 10:37:14.120 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5865 ms
+2026-05-16 10:37:14.121 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3232 ms
+2026-05-16 10:38:13.729 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.3753 ms
+2026-05-16 10:38:13.732 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.2976 ms
+2026-05-16 10:39:13.725 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.5022 ms
+2026-05-16 10:39:13.725 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.8138 ms
+2026-05-16 10:40:13.722 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2269 ms
+2026-05-16 10:40:13.726 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.9270 ms
+2026-05-16 10:41:13.718 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.7754 ms
+2026-05-16 10:41:13.725 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.0447 ms
+2026-05-16 10:42:13.726 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.9445 ms
+2026-05-16 10:42:13.727 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.8154 ms
+2026-05-16 10:43:13.731 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.2012 ms
+2026-05-16 10:43:13.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.1884 ms
+2026-05-16 10:44:13.707 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 6.1380 ms
+2026-05-16 10:44:13.711 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.5101 ms
+2026-05-16 10:45:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.4953 ms
+2026-05-16 10:45:13.716 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.3187 ms
+2026-05-16 10:46:13.695 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.1785 ms
+2026-05-16 10:46:13.697 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.5458 ms
+2026-05-16 10:47:13.731 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.6219 ms
+2026-05-16 10:47:13.734 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5470 ms
+2026-05-16 10:48:13.727 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5647 ms
+2026-05-16 10:48:13.729 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.4105 ms
+2026-05-16 10:49:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7866 ms
+2026-05-16 10:49:13.722 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5958 ms
+2026-05-16 10:50:13.723 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.0709 ms
+2026-05-16 10:50:13.729 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.9961 ms
+2026-05-16 10:51:13.699 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6328 ms
+2026-05-16 10:51:13.709 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.6085 ms
+2026-05-16 10:52:13.706 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.7854 ms
+2026-05-16 10:52:13.711 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.6751 ms
+2026-05-16 10:53:13.711 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.1601 ms
+2026-05-16 10:53:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6904 ms
+2026-05-16 10:54:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.5273 ms
+2026-05-16 10:54:13.713 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.4296 ms
+2026-05-16 10:55:13.706 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.8217 ms
+2026-05-16 10:55:13.707 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.6703 ms
+2026-05-16 10:56:13.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.2912 ms
+2026-05-16 10:56:13.726 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.2975 ms
+2026-05-16 10:57:13.711 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7403 ms
+2026-05-16 10:57:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.0269 ms
+2026-05-16 10:58:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.6678 ms
+2026-05-16 10:58:13.716 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2518 ms
+2026-05-16 10:59:13.701 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0157 ms
+2026-05-16 10:59:13.704 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.7457 ms
+2026-05-16 11:00:04.503 +03:00 [INF] Running appointment reminder job at "2026-05-16T08:00:04.5029600Z"
+2026-05-16 11:00:04.546 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 11:00:13.724 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0801 ms
+2026-05-16 11:00:13.726 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.8548 ms
+2026-05-16 11:01:13.718 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.6662 ms
+2026-05-16 11:01:13.726 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.8134 ms
+2026-05-16 11:02:13.711 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.1552 ms
+2026-05-16 11:02:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.9365 ms
+2026-05-16 11:03:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.7762 ms
+2026-05-16 11:03:13.726 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.3658 ms
+2026-05-16 11:04:13.699 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 7.8479 ms
+2026-05-16 11:04:13.704 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.9416 ms
+2026-05-16 11:05:13.719 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5116 ms
+2026-05-16 11:05:13.723 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.5863 ms
+2026-05-16 11:06:13.716 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.3403 ms
+2026-05-16 11:06:13.719 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2765 ms
+2026-05-16 11:07:13.723 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.1515 ms
+2026-05-16 11:07:13.728 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.7991 ms
+2026-05-16 11:08:13.718 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.9675 ms
+2026-05-16 11:08:13.720 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.6774 ms
+2026-05-16 11:09:13.715 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 5.7988 ms
+2026-05-16 11:09:13.717 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.1370 ms
+2026-05-16 11:10:13.696 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8030 ms
+2026-05-16 11:10:13.701 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.3498 ms
+2026-05-16 11:11:13.716 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.3292 ms
+2026-05-16 11:11:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6400 ms
+2026-05-16 11:12:13.700 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0613 ms
+2026-05-16 11:12:13.702 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0994 ms
+2026-05-16 11:13:13.709 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.0938 ms
+2026-05-16 11:13:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.7414 ms
+2026-05-16 11:14:13.696 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.5329 ms
+2026-05-16 11:14:13.698 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5606 ms
+2026-05-16 11:15:13.715 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8335 ms
+2026-05-16 11:15:13.716 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.2249 ms
+2026-05-16 11:16:13.704 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.5783 ms
+2026-05-16 11:16:13.707 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2193 ms
+2026-05-16 11:17:13.712 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8519 ms
+2026-05-16 11:17:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.1571 ms
+2026-05-16 11:18:13.718 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.2713 ms
+2026-05-16 11:18:13.725 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.4789 ms
+2026-05-16 11:19:13.699 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.2928 ms
+2026-05-16 11:19:13.700 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8588 ms
+2026-05-16 11:20:13.697 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.3914 ms
+2026-05-16 11:20:13.698 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.7220 ms
+2026-05-16 11:21:13.905 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.2615 ms
+2026-05-16 11:21:13.907 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3454 ms
+2026-05-16 11:22:13.704 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.7159 ms
+2026-05-16 11:22:13.706 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.8383 ms
+2026-05-16 11:23:13.722 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6253 ms
+2026-05-16 11:23:13.723 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.1642 ms
+2026-05-16 11:24:13.711 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.9945 ms
+2026-05-16 11:25:17.361 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.0312 ms
+2026-05-16 11:26:13.736 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.2723 ms
+2026-05-16 11:27:13.847 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.8533 ms
+2026-05-16 11:27:14.172 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 11:27:14.301 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 11:27:14.302 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-16 11:27:14.311 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 1428.3267 ms
+2026-05-16 11:27:33.407 +03:00 [ERR] HTTP POST /api/v1/auth/patient/verify-otp responded 500 in 78.0112 ms
+MediMind.Domain.Exceptions.DomainException: Invalid or expired OTP.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 234
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 11:27:33.455 +03:00 [WRN] DomainException on POST /api/v1/auth/patient/verify-otp: Invalid or expired OTP.
+2026-05-16 11:28:13.741 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.2560 ms
+2026-05-16 11:28:44.058 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251943034193 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 11:28:44.144 +03:00 [INF] SMS Ethiopia accepted. Phone=251943034193 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 11:28:44.144 +03:00 [INF] SMS delivered to +251943034193 using stripped prefix.
+2026-05-16 11:28:44.144 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 384.4475 ms
+2026-05-16 11:28:56.664 +03:00 [ERR] HTTP POST /api/v1/auth/patient/verify-otp responded 500 in 57.2360 ms
+MediMind.Domain.Exceptions.DomainException: This phone number is in use by another role.
+   at MediMind.Application.Features.Auth.PatientAuthService.VerifyOtpAsync(String phoneNumber, String otpCode, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Application/Features/Auth/AuthServices.cs:line 239
+   at MediMind.API.Controllers.AuthController.PatientVerifyOtp(VerifyOtpRequest request, CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Controllers/Controllers.cs:line 63
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 36
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-05-16 11:28:56.672 +03:00 [WRN] DomainException on POST /api/v1/auth/patient/verify-otp: This phone number is in use by another role.
+2026-05-16 11:29:14.544 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.5171 ms
+2026-05-16 11:30:04.820 +03:00 [INF] Running appointment reminder job at "2026-05-16T08:30:04.8145850Z"
+2026-05-16 11:30:04.925 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 11:30:15.209 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 40.6652 ms
+2026-05-16 11:31:13.732 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 17.2934 ms
+2026-05-16 11:32:14.003 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.9708 ms
+2026-05-16 11:32:25.598 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=+251914330934 Body={"error_message":"Invalid MSISDN (phone number). It should start with 2519 and be 12 digits long. Error code :: 10000"}
+2026-05-16 11:32:25.731 +03:00 [INF] SMS Ethiopia accepted. Phone=251914330934 Body={"sent":true,"id":0,"description":"Accepted for delivery"}
+2026-05-16 11:32:25.731 +03:00 [INF] SMS delivered to +251914330934 using stripped prefix.
+2026-05-16 11:32:25.735 +03:00 [INF] HTTP POST /api/v1/auth/patient/request-otp responded 200 in 803.8892 ms
+2026-05-16 11:32:57.747 +03:00 [INF] HTTP POST /api/v1/auth/patient/verify-otp responded 200 in 608.4695 ms
+2026-05-16 11:32:58.818 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.4628 ms
+2026-05-16 11:32:58.938 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 400 in 148.1658 ms
+2026-05-16 11:33:02.091 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.1295 ms
+2026-05-16 11:33:02.153 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 86.2461 ms
+2026-05-16 11:33:02.154 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 84.7856 ms
+2026-05-16 11:33:02.197 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 132.5742 ms
+2026-05-16 11:33:02.200 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 128.9643 ms
+2026-05-16 11:33:13.763 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.4690 ms
+2026-05-16 11:33:58.941 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.1834 ms
+2026-05-16 11:34:13.737 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.3239 ms
+2026-05-16 11:35:14.134 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 58.6954 ms
+2026-05-16 11:36:11.165 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 74.8416 ms
+2026-05-16 11:36:13.463 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.3095 ms
+2026-05-16 11:36:13.527 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 110.5409 ms
+2026-05-16 11:36:13.540 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 104.8805 ms
+2026-05-16 11:36:13.567 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 147.6573 ms
+2026-05-16 11:36:13.569 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 140.6619 ms
+2026-05-16 11:36:13.763 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.0943 ms
+2026-05-16 11:36:21.749 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 17.0734 ms
+2026-05-16 11:36:21.911 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 97.2038 ms
+2026-05-16 11:36:24.162 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 95.8384 ms
+2026-05-16 11:36:30.188 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/893297d0-0fef-4cf8-a3c1-59961b43607d responded 200 in 43.2873 ms
+2026-05-16 11:36:41.572 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 204.0501 ms
+2026-05-16 11:36:41.655 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 15.6474 ms
+2026-05-16 11:36:41.741 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 25.0784 ms
+2026-05-16 11:36:43.596 +03:00 [INF] HTTP GET /api/v1/predictions responded 404 in 2.1167 ms
+2026-05-16 11:36:43.662 +03:00 [INF] HTTP GET /api/v1/predictions/latest responded 404 in 2.4704 ms
+2026-05-16 11:37:09.758 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 31.9311 ms
+2026-05-16 11:37:09.839 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 31.1468 ms
+2026-05-16 11:37:11.395 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.7474 ms
+2026-05-16 11:37:13.709 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.5013 ms
+2026-05-16 11:38:13.745 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.6851 ms
+2026-05-16 11:38:13.837 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.7414 ms
+2026-05-16 11:39:13.713 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2962 ms
+2026-05-16 11:40:13.792 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5537 ms
+2026-05-16 11:41:13.742 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.9422 ms
+2026-05-16 11:42:13.826 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.1153 ms
+2026-05-16 11:43:13.897 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1899 ms
+2026-05-16 11:44:13.732 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5258 ms
+2026-05-16 11:45:13.700 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9689 ms
+2026-05-16 11:46:13.720 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.3518 ms
+2026-05-16 11:47:13.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.0799 ms
+2026-05-16 11:48:13.710 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1959 ms
+2026-05-16 11:49:13.708 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.7499 ms
+2026-05-16 11:50:13.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.1178 ms
+2026-05-16 11:51:13.864 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.8371 ms
+2026-05-16 11:52:13.724 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6668 ms
+2026-05-16 11:53:13.717 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.8044 ms
+2026-05-16 11:54:13.723 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.5403 ms
+2026-05-16 11:55:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.9455 ms
+2026-05-16 11:55:41.745 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 49.7325 ms
+2026-05-16 11:55:42.258 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 348.4217 ms
+2026-05-16 11:55:42.421 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.3228 ms
+2026-05-16 11:55:43.940 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.2415 ms
+2026-05-16 11:55:43.948 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 26.4488 ms
+2026-05-16 11:55:43.951 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 22.1648 ms
+2026-05-16 11:55:43.951 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 19.3078 ms
+2026-05-16 11:55:43.995 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 55.5399 ms
+2026-05-16 11:56:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.8516 ms
+2026-05-16 11:56:46.524 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.1864 ms
+2026-05-16 11:57:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1033 ms
+2026-05-16 11:58:13.697 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3518 ms
+2026-05-16 11:59:13.711 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.9819 ms
+2026-05-16 12:00:05.043 +03:00 [INF] Running appointment reminder job at "2026-05-16T09:00:05.0418150Z"
+2026-05-16 12:00:05.076 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 12:00:13.893 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.2059 ms
+2026-05-16 12:01:14.632 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3685 ms
+2026-05-16 12:02:13.755 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.9397 ms
+2026-05-16 12:03:13.790 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3054 ms
+2026-05-16 12:04:13.720 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.1534 ms
+2026-05-16 12:05:13.733 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.8280 ms
+2026-05-16 12:06:13.701 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.3868 ms
+2026-05-16 12:07:13.699 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1884 ms
+2026-05-16 12:08:13.710 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.7787 ms
+2026-05-16 12:09:13.718 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 17.1775 ms
+2026-05-16 12:10:13.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2246 ms
+2026-05-16 12:11:13.719 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3878 ms
+2026-05-16 12:12:13.708 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2155 ms
+2026-05-16 12:13:13.709 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6261 ms
+2026-05-16 12:14:13.705 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.8488 ms
+2026-05-16 12:15:13.722 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.0455 ms
+2026-05-16 12:16:13.737 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.1590 ms
+2026-05-16 12:17:13.793 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3513 ms
+2026-05-16 12:18:14.817 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6143 ms
+2026-05-16 12:19:13.723 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.2111 ms
+2026-05-16 12:20:13.794 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.2289 ms
+2026-05-16 12:21:13.721 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.7385 ms
+2026-05-16 12:22:13.714 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.2808 ms
+2026-05-16 12:23:13.710 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1670 ms
+2026-05-16 12:42:28.884 +03:00 [INF] Running appointment reminder job at "2026-05-16T09:42:28.8751180Z"
+2026-05-16 12:42:28.932 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 12:51:13.887 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 41.5761 ms
+2026-05-16 12:52:13.879 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6662 ms
+2026-05-16 12:53:13.870 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.4486 ms
+2026-05-16 13:28:42.040 +03:00 [INF] Running appointment reminder job at "2026-05-16T10:28:42.0356640Z"
+2026-05-16 13:28:42.226 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 14:17:51.327 +03:00 [INF] Running appointment reminder job at "2026-05-16T11:17:51.3273700Z"
+2026-05-16 14:17:51.354 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 14:54:12.662 +03:00 [INF] Running appointment reminder job at "2026-05-16T11:54:12.6619070Z"
+2026-05-16 14:54:12.683 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 15:05:54.955 +03:00 [INF] Running appointment reminder job at "2026-05-16T12:05:54.9537480Z"
+2026-05-16 15:05:55.026 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 15:41:33.128 +03:00 [INF] Running appointment reminder job at "2026-05-16T12:41:33.1283100Z"
+2026-05-16 15:41:33.168 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 16:00:07.670 +03:00 [INF] Running appointment reminder job at "2026-05-16T13:00:07.6674760Z"
+2026-05-16 16:00:07.800 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 16:30:07.927 +03:00 [INF] Running appointment reminder job at "2026-05-16T13:30:07.9263150Z"
+2026-05-16 16:30:08.039 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 17:00:09.185 +03:00 [INF] Running appointment reminder job at "2026-05-16T14:00:09.1838990Z"
+2026-05-16 17:00:09.234 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 17:30:09.405 +03:00 [INF] Running appointment reminder job at "2026-05-16T14:30:09.4043650Z"
+2026-05-16 17:30:09.439 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 18:46:16.422 +03:00 [INF] Running appointment reminder job at "2026-05-16T15:46:16.4179660Z"
+2026-05-16 18:46:16.552 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 19:36:26.583 +03:00 [INF] Running appointment reminder job at "2026-05-16T16:36:26.5830630Z"
+2026-05-16 19:36:26.626 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 20:01:20.054 +03:00 [INF] Running appointment reminder job at "2026-05-16T17:01:20.0543820Z"
+2026-05-16 20:01:20.080 +03:00 [INF] Appointment reminder job completed.
+2026-05-16 20:30:14.587 +03:00 [INF] Running appointment reminder job at "2026-05-16T17:30:14.5854660Z"
+2026-05-16 20:30:14.621 +03:00 [INF] Appointment reminder job completed.

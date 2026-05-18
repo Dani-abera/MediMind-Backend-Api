@@ -29,6 +29,7 @@ public record AuthResult(
 public record RegisterResult(Guid UserId, string Message);
 public record DoctorCreatedResult(Guid DoctorId, string BadgeNumber, string Message);
 public record DoctorInvitationResult(Guid InvitationId, string Message);
+public record PendingInvitationDto(Guid InvitationId, string FullName, string Email, string PhoneNumber, string Specialization, string LicenseNumber, DateTime ExpiresAt);
 public record AcceptInvitationRequest(string Token, string Password);
 public record AcceptInvitationResult(Guid DoctorId, string BadgeNumber, string Message);
 
@@ -169,6 +170,7 @@ public interface IAdminAuthService
     Task<DoctorCreatedResult> CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct);
     Task<DoctorInvitationResult> InviteDoctorAsync(Guid centerId, InviteDoctorRequest request, CancellationToken ct);
     Task<AcceptInvitationResult> AcceptDoctorInvitationAsync(AcceptInvitationRequest request, CancellationToken ct);
+    Task<IReadOnlyList<PendingInvitationDto>> GetPendingInvitationsAsync(Guid centerId, CancellationToken ct);
 }
 
 public interface ISuperAdminAuthService
@@ -535,7 +537,20 @@ public class AdminAuthService(
             // Email failure must not roll back a successfully stored invitation
         }
 
-        return new DoctorInvitationResult(invitation.Id, "Invitation sent to doctor's email. Valid for 48 hours.");
+        if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+        {
+            try
+            {
+                var smsMessage = $"You have been invited to join {center.CenterName} on MediMind as a doctor. Accept your invitation here: {invitationLink} (valid 48 hours)";
+                await smsService.SendAsync(request.PhoneNumber, smsMessage, ct);
+            }
+            catch (Exception)
+            {
+                // SMS failure must not roll back a successfully stored invitation
+            }
+        }
+
+        return new DoctorInvitationResult(invitation.Id, "Invitation sent to doctor's email and SMS. Valid for 48 hours.");
     }
 
     public async Task<AcceptInvitationResult> AcceptDoctorInvitationAsync(AcceptInvitationRequest request, CancellationToken ct)
@@ -577,6 +592,17 @@ public class AdminAuthService(
         await unitOfWork.SaveChangesAsync(ct);
 
         return new AcceptInvitationResult(doctor.Id, badgeNumber, "Account created successfully. Use your badge number for OTP login.");
+    }
+
+    public async Task<IReadOnlyList<PendingInvitationDto>> GetPendingInvitationsAsync(Guid centerId, CancellationToken ct)
+    {
+        if (currentUser.TenantId != centerId)
+            throw new Domain.Exceptions.ForbiddenException();
+
+        var invitations = await invitationRepository.GetPendingByCenterAsync(centerId, ct);
+        return invitations.Select(i => new PendingInvitationDto(
+            i.Id, i.FullName, i.Email, i.PhoneNumber, i.Specialization, i.LicenseNumber, i.ExpiresAt))
+            .ToList();
     }
 
     private static async Task<string> GenerateUniqueBadgeNumberAsync(IDoctorRepository repo, CancellationToken ct)

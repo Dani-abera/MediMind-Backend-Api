@@ -76,6 +76,36 @@ namespace MediMind.API.Controllers;
 [Tags("Telemedicine — Video Consultations")]
 public sealed class VideoConsultationsController(IVideoConsultationService service, ICurrentUser currentUser) : ControllerBase
 {
+    /// <summary>List video consultations for the authenticated doctor.</summary>
+    /// <remarks>
+    /// **Doctor only.** Returns consultations belonging to the caller, optionally filtered by status and/or today's date.
+    ///
+    /// **Query parameters:**
+    /// - `status` — `Scheduled`, `InProgress`, `Completed`, or `Cancelled` (omit for all)
+    /// - `today` — `true` to restrict to appointments scheduled for today
+    /// - `page` / `pageSize` — pagination (default: page 1, pageSize 20)
+    ///
+    /// **Error cases:**
+    /// - `403` — Caller is not a doctor.
+    /// </remarks>
+    /// <param name="status">Optional status filter.</param>
+    /// <param name="today">When true, only today's consultations are returned.</param>
+    /// <param name="page">1-based page number (default: 1).</param>
+    /// <param name="pageSize">Items per page (default: 20).</param>
+    [HttpGet]
+    [Authorize(Policy = "DoctorOnly")]
+    [ProducesResponseType(typeof(IReadOnlyList<ConsultationSessionDto>), StatusCodes.Status200OK)]
+    public async Task<ActionResult<IReadOnlyList<ConsultationSessionDto>>> List(
+        [FromQuery] string? status,
+        [FromQuery] bool today = false,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        CancellationToken ct = default)
+    {
+        var result = await service.ListForDoctorAsync(currentUser.UserId, status, today, page, pageSize, ct);
+        return Ok(result);
+    }
+
     /// <summary>Initiate a new video consultation session for a confirmed appointment.</summary>
     /// <remarks>
     /// **Doctor only.** Creates the consultation room and sends an FCM push notification to the patient.

@@ -255,15 +255,12 @@
         <member name="M:MediMind.API.Controllers.AuthController.Logout">
             <summary>Logout and revoke the current user's refresh token.</summary>
         </member>
-        <member name="T:MediMind.API.Controllers.ErrorController">
-            <summary>Global error handler — maps domain exceptions to RFC 7807 ProblemDetails responses.</summary>
-        </member>
-        <member name="T:MediMind.API.Controllers.AddScheduleExceptionDto">
+        <member name="T:MediMind.API.Controllers.DoctorSchedulesController">
             <summary>
             Doctor schedule management endpoints.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AddScheduleExceptionDto.#ctor(System.DateOnly,System.String)">
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.IScheduleExceptionRepository,MediMind.Domain.Common.Interfaces.IAppointmentRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Doctor schedule management endpoints.
             </summary>
@@ -291,7 +288,7 @@
             Doctor directory search, availability, and doctor-facing dashboard.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.DoctorsController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorRepository,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.Doctors.IDoctorProfileService,MediMind.Application.Features.Doctors.IDoctorPatientAccessChecker,MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Application.Features.HealthPredictions.IHealthPredictionService,MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,MediMind.Application.Features.Prescriptions.IPrescriptionService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.DoctorsController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorRepository,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.Doctors.IDoctorProfileService,MediMind.Application.Features.Doctors.IDoctorPatientAccessChecker,MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Application.Features.HealthPredictions.IHealthPredictionService,MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,MediMind.Application.Features.Prescriptions.IPrescriptionService,MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Doctor directory search, availability, and doctor-facing dashboard.
             </summary>
@@ -317,6 +314,9 @@
         <member name="M:MediMind.API.Controllers.DoctorsController.GetMyCenters(System.Threading.CancellationToken)">
             <summary>Get all healthcare centers the authenticated doctor is affiliated with.</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMySchedules(System.Threading.CancellationToken)">
+            <summary>Get all weekly schedules for the authenticated doctor across all centers (FR-020).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.DoctorsController.GetTodayDashboard(System.Threading.CancellationToken)">
             <summary>Get today's appointments for the authenticated doctor (FR-021).</summary>
         </member>
@@ -325,6 +325,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.DoctorsController.GetMyPatients(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>Get all distinct patients the doctor has seen, with optional search.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientProfile(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a specific patient's profile (doctor must have an active/completed appointment) (FR-023).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientHealthRecords(System.Guid,System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32)">
             <summary>Get a patient's health records (doctor must have active/completed appointment) (FR-023).</summary>
@@ -343,7 +346,7 @@
             Healthcare center registration, configuration, doctor relations, and analytics.
             </summary>
         </member>
-        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediMind.Application.Features.CenterManagement.IHealthcareCenterService,MediMind.Application.Features.CenterManagement.IAnalyticsService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediMind.Application.Features.CenterManagement.IHealthcareCenterService,MediMind.Application.Features.CenterManagement.IAnalyticsService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
             <summary>
             Healthcare center registration, configuration, doctor relations, and analytics.
             </summary>
@@ -373,6 +376,9 @@
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateGeneralConfig(System.Guid,MediMind.Application.Features.CenterManagement.AdminCenterConfigUpdateDto,System.Threading.CancellationToken)">
             <summary>Update general center info (name, phone, services, etc.) (FR-030).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBranding(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get branding info (logo URL, description) for this center.</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBookingRules(System.Guid,System.Threading.CancellationToken)">
             <summary>Get booking rules for this center (FR-030).</summary>
         </member>
@@ -396,6 +402,12 @@
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctors(System.Guid,System.Threading.CancellationToken)">
             <summary>List all active doctors affiliated with a healthcare center (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctorRoster(System.Guid,System.Threading.CancellationToken)">
+            <summary>Admin roster view — doctors with license, fee, and today's appointment count (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetPendingInvitations(System.Guid,System.Threading.CancellationToken)">
+            <summary>List pending (not yet accepted) doctor invitations for this center (FR-020).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.Analytics(System.Guid,System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
             <summary>Get the analytics dashboard for a healthcare center (FR-040).</summary>
@@ -847,6 +859,9 @@
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.Reactivate(System.Guid,System.Threading.CancellationToken)">
             <summary>Reactivate a suspended doctor account.</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Dashboard(System.Threading.CancellationToken)">
+            <summary>Get platform-wide KPI dashboard snapshot.</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Dashboard(System.Threading.CancellationToken)">
             <summary>Get platform-wide KPI dashboard snapshot.</summary>
         </member>
@@ -1025,6 +1040,24 @@
              | `QualityAlert` | `{ userId, message, audioOnlyRecommended }` | Triggered when reported bandwidth is below 500 Kbps. If `audioOnlyRecommended` is `true`, offer the user an option to disable their video track. |
              | `ConsultationEnded` | `{ reason }` | Session terminated (by doctor, admin, or timeout). Navigate away from call screen. |
              </remarks>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.List(System.String,System.Boolean,System.Int32,System.Int32,System.Threading.CancellationToken)">
+             <summary>List video consultations for the authenticated doctor.</summary>
+             <remarks>
+             **Doctor only.** Returns consultations belonging to the caller, optionally filtered by status and/or today's date.
+            
+             **Query parameters:**
+             - `status` — `Scheduled`, `InProgress`, `Completed`, or `Cancelled` (omit for all)
+             - `today` — `true` to restrict to appointments scheduled for today
+             - `page` / `pageSize` — pagination (default: page 1, pageSize 20)
+            
+             **Error cases:**
+             - `403` — Caller is not a doctor.
+             </remarks>
+             <param name="status">Optional status filter.</param>
+             <param name="today">When true, only today's consultations are returned.</param>
+             <param name="page">1-based page number (default: 1).</param>
+             <param name="pageSize">Items per page (default: 20).</param>
         </member>
         <member name="M:MediMind.API.Controllers.VideoConsultationsController.Initiate(MediMind.API.Controllers.InitiateConsultationRequest,System.Threading.CancellationToken)">
              <summary>Initiate a new video consultation session for a confirmed appointment.</summary>

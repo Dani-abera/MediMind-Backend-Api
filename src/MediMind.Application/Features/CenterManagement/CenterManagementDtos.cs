@@ -192,6 +192,18 @@ public record DoctorCenterRelationDto(Guid DoctorId, Guid CenterId, decimal Cons
 
 public record DoctorCenterInfoDto(Guid CenterId, string CenterName, decimal ConsultationFee);
 
+public record AdminDoctorRosterItemDto(
+    Guid DoctorId,
+    string FullName,
+    string? Specialization,
+    string LicenseNumber,
+    bool LicenseVerified,
+    decimal ConsultationFee,
+    DateOnly JoinedDate,
+    bool IsActive,
+    string? AvatarUrl,
+    int TodayAppointments);
+
 public record DoctorResponseDto(
     Guid DoctorId,
     string FullName,

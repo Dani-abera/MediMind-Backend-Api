@@ -27,6 +27,7 @@ public class DoctorsController(
     IHealthPredictionService healthPredictionService,
     IMedicalHistoryService medicalHistoryService,
     IPrescriptionService prescriptionService,
+    IDoctorScheduleRepository scheduleRepository,
     ICurrentUser currentUser) : ControllerBase
 {
     /// <summary>Search the doctor directory with optional filters (FR-010).</summary>
@@ -166,6 +167,45 @@ public class DoctorsController(
         return Ok(centers);
     }
 
+    /// <summary>Get all weekly schedules for the authenticated doctor across all centers (FR-020).</summary>
+    [Tags("Doctor — Profile")]
+    [HttpGet("me/schedules")]
+    [Authorize(Policy = "DoctorOnly")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetMySchedules(CancellationToken ct)
+    {
+        var rows = await scheduleRepository.GetAllByDoctorAsync(currentUser.UserId);
+        var result = rows.Select(r =>
+        {
+            var s = r.Schedule;
+            var breaks = new List<object>();
+            if (s.BreakStart.HasValue && s.BreakEnd.HasValue)
+            {
+                breaks.Add(new
+                {
+                    label = "Break",
+                    startMinuteOfDay = s.BreakStart.Value.Hour * 60 + s.BreakStart.Value.Minute,
+                    durationMinutes = (int)(s.BreakEnd.Value - s.BreakStart.Value).TotalMinutes
+                });
+            }
+
+            return new
+            {
+                doctorId = s.DoctorId,
+                centerId = s.CenterId,
+                centerName = r.CenterName,
+                workingDays = s.WorkingDays,
+                startHour = s.StartTime.Hour,
+                startMinute = s.StartTime.Minute,
+                endHour = s.EndTime.Hour,
+                endMinute = s.EndTime.Minute,
+                slotDurationMinutes = s.SlotDuration,
+                breaks
+            };
+        });
+        return Ok(new { data = result });
+    }
+
     /// <summary>Get today's appointments for the authenticated doctor (FR-021).</summary>
     [Tags("Doctor — Dashboard")]
     [HttpGet("me/today")]
@@ -197,6 +237,20 @@ public class DoctorsController(
     {
         var result = await doctorProfileService.GetPatientsAsync(currentUser.UserId, search, page, pageSize);
         return Ok(result);
+    }
+
+    /// <summary>Get a specific patient's profile (doctor must have an active/completed appointment) (FR-023).</summary>
+    [Tags("Doctor — Patients")]
+    [HttpGet("me/patients/{patientId:guid}")]
+    [Authorize(Policy = "DoctorOnly")]
+    [ProducesResponseType(typeof(DoctorPatientProfileDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetPatientProfile(Guid patientId, CancellationToken ct)
+    {
+        await patientAccessChecker.EnsureAccessAsync(currentUser.UserId, patientId, ct);
+        var profile = await doctorProfileService.GetPatientProfileAsync(currentUser.UserId, patientId, ct);
+        return profile is null ? NotFound() : Ok(profile);
     }
 
     // ─── Patient data access (FR-023) ─────────────────────────────────────────

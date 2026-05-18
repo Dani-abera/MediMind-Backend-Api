@@ -3,7 +3,6 @@ using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MediMind.API.Controllers;
 
@@ -304,48 +303,4 @@ public record PatchPatientProfileApiRequest(
     string? BloodType);
 
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// ERROR CONTROLLER
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/// <summary>Global error handler — maps domain exceptions to RFC 7807 ProblemDetails responses.</summary>
-[ApiExplorerSettings(IgnoreApi = true)]
-[Route("/error")]
-public class ErrorController : ControllerBase
-{
-    [HttpGet, HttpPost, HttpPut, HttpDelete, HttpPatch]
-    public IActionResult HandleError()
-    {
-        var feature = HttpContext.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
-        if (feature?.Error is null)
-            return Problem(statusCode: 500, title: "Internal Server Error", instance: HttpContext.Request.Path);
-
-        // Validation errors — return structured "errors" map per RFC 7807 + FluentValidation conventions
-        if (feature.Error is FluentValidation.ValidationException ve)
-        {
-            var modelState = new ModelStateDictionary();
-            foreach (var err in ve.Errors)
-                modelState.AddModelError(err.PropertyName, err.ErrorMessage);
-            return ValidationProblem(
-                modelStateDictionary: modelState,
-                instance: HttpContext.Request.Path);
-        }
-
-        var (status, title) = feature.Error switch
-        {
-            Domain.Exceptions.DomainException => (400, "Business Rule Violation"),
-            Domain.Exceptions.NotFoundException => (404, "Resource Not Found"),
-            Domain.Exceptions.ForbiddenException => (403, "Access Denied"),
-            Domain.Exceptions.TenantIsolationException => (403, "Tenant Isolation Violation"),
-            _ => (500, "Internal Server Error")
-        };
-
-        return Problem(
-            statusCode: status,
-            title: title,
-            detail: feature.Error.Message,
-            instance: HttpContext.Request.Path,
-            type: "https://tools.ietf.org/html/rfc7807");
-    }
-}
 

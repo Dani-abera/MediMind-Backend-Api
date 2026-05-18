@@ -18,6 +18,8 @@ public record UpsertDoctorScheduleDto(
     TimeOnly? BreakStart,
     TimeOnly? BreakEnd);
 
+public record AddScheduleExceptionDto(DateOnly Date, string Reason);
+
 /// <summary>
 /// Doctor schedule management endpoints.
 /// </summary>
@@ -25,8 +27,6 @@ public record UpsertDoctorScheduleDto(
 [Authorize]
 [Route("api/v1/doctor-schedules")]
 [Tags("Admin — Schedules")]
-public record AddScheduleExceptionDto(DateOnly Date, string Reason);
-
 public class DoctorSchedulesController(
     IDoctorScheduleRepository scheduleRepository,
     IScheduleExceptionRepository exceptionRepository,

@@ -752,6 +752,14 @@
           }
         }
       },
+      "Resend/0.5.1": {
+        "runtime": {
+          "lib/net8.0/Resend.dll": {
+            "assemblyVersion": "0.5.1.0",
+            "fileVersion": "0.5.1.0"
+          }
+        }
+      },
       "Scalar.AspNetCore/2.13.22": {
         "runtime": {
           "lib/net10.0/Scalar.AspNetCore.dll": {
@@ -971,6 +979,7 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.1",
           "QRCoder": "1.6.0",
           "QuestPDF": "2024.12.3",
+          "Resend": "0.5.1",
           "Serilog.AspNetCore": "8.0.3",
           "Serilog.Sinks.Console": "6.1.1",
           "Serilog.Sinks.File": "6.0.0",
@@ -1327,6 +1336,13 @@
       "sha512": "sha512-gdIoEC9cTnySnDdbwcguUfSS2+444rGEeecQH5n0IKUA9Tm4473eRrFjPk5HoD5I2BxjuyDW+WCGnwKa+OIXsw==",
       "path": "questpdf/2024.12.3",
       "hashPath": "questpdf.2024.12.3.nupkg.sha512"
+    },
+    "Resend/0.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-omjgTjmosGHJ+bF9Mnk6Gu4TqCwIE/XyeYvQCfkPlDmoUE5yuNwxUP5Cyt9Og2KTqTzKqfQypFzlgCgORCEOSw==",
+      "path": "resend/0.5.1",
+      "hashPath": "resend.0.5.1.nupkg.sha512"
     },
     "Scalar.AspNetCore/2.13.22": {
       "type": "package",

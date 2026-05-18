@@ -17,6 +17,7 @@ public interface IDoctorProfileService
     Task<List<DoctorTodayAppointmentDto>> GetTodayAppointmentsAsync(Guid doctorId, CancellationToken ct = default);
     Task<List<DoctorQueueItemDto>> GetQueueAsync(Guid doctorId, Guid centerId, CancellationToken ct = default);
     Task<DoctorPatientsPageDto> GetPatientsAsync(Guid doctorId, string? search, int page, int pageSize, CancellationToken ct = default);
+    Task<DoctorPatientProfileDto?> GetPatientProfileAsync(Guid doctorId, Guid patientId, CancellationToken ct = default);
 }
 
 public interface IDoctorPatientAccessChecker
@@ -30,6 +31,7 @@ public class DoctorProfileService(
     IAppointmentRepository appointmentRepository,
     IQueueRepository queueRepository,
     IPrescriptionRepository prescriptionRepository,
+    IPatientRepository patientRepository,
     IUnitOfWork unitOfWork) : IDoctorProfileService
 {
     public async Task<DoctorProfileDto?> GetProfileAsync(Guid doctorId, CancellationToken ct = default)
@@ -56,7 +58,7 @@ public class DoctorProfileService(
 
         return doctor.DoctorHealthcareCenters
             .Where(x => x.IsActive)
-            .Select(x => new DoctorAffiliatedCenterDto(x.CenterId, x.Center.CenterName, x.ConsultationFee, x.JoinedDate))
+            .Select(x => new DoctorAffiliatedCenterDto(x.CenterId, x.Center.CenterName, x.ConsultationFee, x.JoinedDate, x.IsActive))
             .ToList();
     }
 
@@ -156,20 +158,61 @@ public class DoctorProfileService(
         return new DoctorPatientsPageDto(paged, boundedPage, boundedSize, total);
     }
 
+    public async Task<DoctorPatientProfileDto?> GetPatientProfileAsync(Guid doctorId, Guid patientId, CancellationToken ct = default)
+    {
+        var patient = await patientRepository.GetByUserIdAsync(patientId, ct);
+        if (patient is null) return null;
+
+        var appointments = await appointmentRepository.GetByPatientAsync(patientId, ct);
+        var lastVisit = appointments
+            .Where(a => a.DoctorId == doctorId && a.Status == AppointmentStatus.Completed)
+            .OrderByDescending(a => a.AppointmentDate)
+            .Select(a => (DateOnly?)a.AppointmentDate)
+            .FirstOrDefault();
+        var totalVisits = appointments.Count(a => a.DoctorId == doctorId && a.Status == AppointmentStatus.Completed);
+
+        var primaryContact = patient.EmergencyContacts.FirstOrDefault(c => c.IsPrimary)
+                             ?? patient.EmergencyContacts.FirstOrDefault();
+
+        return new DoctorPatientProfileDto(
+            patient.Id.ToString(),
+            patient.FullName,
+            patient.DateOfBirth,
+            patient.Age,
+            patient.Gender.ToString(),
+            patient.PhoneNumber,
+            patient.Email,
+            patient.BloodType?.ToString(),
+            patient.Address,
+            primaryContact is null ? null : new DoctorEmergencyContactDto(
+                primaryContact.FullName,
+                primaryContact.PhoneNumber,
+                primaryContact.Relationship.ToString()),
+            patient.ChronicConditions,
+            patient.Allergies?.Split(',').Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)).ToList() ?? [],
+            patient.CurrentMedications,
+            patient.ProfileImageUrl,
+            lastVisit,
+            totalVisits);
+    }
+
     private static DoctorProfileDto MapToProfileDto(Doctor doctor) =>
         new(
             doctor.Id,
+            doctor.Email,
             doctor.FullName,
+            doctor.BadgeNumber,
             doctor.Specialization,
             doctor.LicenseNumber,
+            doctor.LicenseVerified,
             doctor.YearsOfExperience,
-            doctor.Qualifications,
+            doctor.Qualifications?.Split(',').Select(q => q.Trim()).Where(q => !string.IsNullOrEmpty(q)).ToList() ?? [],
             doctor.LanguagesSpoken,
             doctor.ProfileImageUrl,
             doctor.Biography,
             doctor.DoctorHealthcareCenters
                 .Where(x => x.IsActive)
-                .Select(x => new DoctorAffiliatedCenterDto(x.CenterId, x.Center.CenterName, x.ConsultationFee, x.JoinedDate))
+                .Select(x => new DoctorAffiliatedCenterDto(x.CenterId, x.Center.CenterName, x.ConsultationFee, x.JoinedDate, x.IsActive))
                 .ToList());
 }
 

@@ -21,6 +21,7 @@ public interface IVideoConsultationService
     Task<ConsultationSessionDto> GetByIdAsync(Guid consultationId, Guid userId, string userType, CancellationToken ct = default);
     Task<ConsultationSessionDto> GetByAppointmentAsync(Guid appointmentId, Guid userId, string userType, CancellationToken ct = default);
     Task ReportQualityAsync(Guid consultationId, Guid userId, int bandwidth, int packetsLost, int frameRate, CancellationToken ct = default);
+    Task<IReadOnlyList<ConsultationSessionDto>> ListForDoctorAsync(Guid doctorId, string? status, bool today, int page, int pageSize, CancellationToken ct = default);
 }
 
 /// <summary>WebRTC ICE server configuration entry. Pass the full array to <c>new RTCPeerConnection({ iceServers })</c>.</summary>
@@ -259,6 +260,16 @@ public sealed class VideoConsultationService(
             ?? throw new NotFoundException(nameof(VideoConsultation), appointmentId);
         EnsureAccess(consultation, userId, userType);
         return MapSession(consultation, consultation.Appointment);
+    }
+
+    public async Task<IReadOnlyList<ConsultationSessionDto>> ListForDoctorAsync(Guid doctorId, string? status, bool today, int page, int pageSize, CancellationToken ct = default)
+    {
+        VideoConsultationStatus? statusEnum = null;
+        if (!string.IsNullOrWhiteSpace(status) && Enum.TryParse<VideoConsultationStatus>(status, ignoreCase: true, out var parsed))
+            statusEnum = parsed;
+
+        var consultations = await videoRepository.GetByDoctorIdAsync(doctorId, statusEnum, today, page, pageSize);
+        return consultations.Select(c => MapSession(c, c.Appointment)).ToList();
     }
 
     public async Task ReportQualityAsync(Guid consultationId, Guid userId, int bandwidth, int packetsLost, int frameRate, CancellationToken ct = default)

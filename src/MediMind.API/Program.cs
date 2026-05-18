@@ -61,6 +61,10 @@ try
     builder.Services.Configure<TestOtpOptions>(builder.Configuration.GetSection(TestOtpOptions.SectionName));
     
 
+    // ─── Exception Handling ───────────────────────────────────────────────────
+    builder.Services.AddExceptionHandler<MediMind.API.Middleware.GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
+
     // ─── Controllers ─────────────────────────────────────────────────────────
     builder.Services.AddControllers()
         .AddJsonOptions(o =>
@@ -144,6 +148,7 @@ try
     }
 
     // ─── Middleware Pipeline ──────────────────────────────────────────────────
+    app.UseExceptionHandler();
     app.UseSerilogRequestLogging();
 
     var uploadsRoot = Path.Combine(app.Environment.ContentRootPath, "uploads");
@@ -176,9 +181,6 @@ try
     app.UseAuthentication();
     app.UseMiddleware<TenantValidationMiddleware>();
     app.UseAuthorization();
-
-    // Global exception handler (maps domain exceptions to correct HTTP codes)
-    app.UseExceptionHandler("/error");
 
     app.MapControllers();
 

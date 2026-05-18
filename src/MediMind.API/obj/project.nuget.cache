@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3UslTkAwF88=",
+  "dgSpecHash": "ZZFIfPpp8LU=",
   "success": true,
   "projectFilePath": "/Users/dani/RiderProjects/MediMind/src/MediMind.API/MediMind.API.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "/Users/dani/.nuget/packages/polly.extensions.http/3.0.0/polly.extensions.http.3.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/qrcoder/1.6.0/qrcoder.1.6.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/questpdf/2024.12.3/questpdf.2024.12.3.nupkg.sha512",
+    "/Users/dani/.nuget/packages/resend/0.5.1/resend.0.5.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/scalar.aspnetcore/2.13.22/scalar.aspnetcore.2.13.22.nupkg.sha512",
     "/Users/dani/.nuget/packages/serilog/4.0.0/serilog.4.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/serilog.aspnetcore/8.0.3/serilog.aspnetcore.8.0.3.nupkg.sha512",

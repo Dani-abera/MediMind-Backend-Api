@@ -1370,6 +1370,10 @@
               "target": "Package",
               "version": "[2024.*, )"
             },
+            "Resend": {
+              "target": "Package",
+              "version": "[0.5.1, )"
+            },
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[8.*, )"

@@ -2,11 +2,14 @@ namespace MediMind.Application.Features.Doctors;
 
 public record DoctorProfileDto(
     Guid DoctorId,
+    string Email,
     string FullName,
+    string BadgeNumber,
     string Specialization,
     string LicenseNumber,
+    bool LicenseVerified,
     int YearsOfExperience,
-    string? Qualifications,
+    List<string> Qualifications,
     List<string> LanguagesSpoken,
     string? ProfileImageUrl,
     string? Biography,
@@ -16,7 +19,8 @@ public record DoctorAffiliatedCenterDto(
     Guid CenterId,
     string CenterName,
     decimal ConsultationFee,
-    DateOnly JoinedDate);
+    DateOnly JoinedDate,
+    bool IsActive);
 
 public record UpdateDoctorProfileDto(
     string? Biography,
@@ -56,3 +60,23 @@ public record DoctorPatientsPageDto(
     int Page,
     int PageSize,
     int TotalCount);
+
+public record DoctorPatientProfileDto(
+    string Id,
+    string FullName,
+    DateOnly DateOfBirth,
+    int Age,
+    string Gender,
+    string Phone,
+    string? Email,
+    string? BloodType,
+    string? Address,
+    DoctorEmergencyContactDto? EmergencyContact,
+    List<string> ChronicConditions,
+    List<string> Allergies,
+    List<string> CurrentMedications,
+    string? AvatarUrl,
+    DateOnly? LastVisit,
+    int TotalVisits);
+
+public record DoctorEmergencyContactDto(string Name, string Phone, string? Relationship);

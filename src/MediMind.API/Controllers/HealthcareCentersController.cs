@@ -1,5 +1,6 @@
 using CsvHelper;
 using MediMind.API.Attributes;
+using MediMind.Application.Features.Auth;
 using MediMind.Application.Features.CenterManagement;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -21,6 +22,7 @@ namespace MediMind.API.Controllers;
 public class HealthcareCentersController(
     IHealthcareCenterService centerService,
     IAnalyticsService analyticsService,
+    IAdminAuthService adminAuth,
     ICurrentUser currentUser) : ControllerBase
 {
     /// <summary>Register a new healthcare center for the authenticated admin (FR-030).</summary>
@@ -116,6 +118,23 @@ public class HealthcareCentersController(
         return Ok(result);
     }
 
+    /// <summary>Get branding info (logo URL, description) for this center.</summary>
+    [Tags("Admin — Center Settings")]
+    [HttpGet("{id:guid}/branding")]
+    [RequireRole("Admin", "SuperAdmin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetBranding(Guid id, CancellationToken ct)
+    {
+        var config = await centerService.GetAdminConfigAsync(id, currentUser.UserId);
+        return Ok(new
+        {
+            centerId = id.ToString(),
+            logoUrl = config.LogoUrl,
+            coverUrl = (string?)null,
+            description = string.Empty
+        });
+    }
+
     /// <summary>Get booking rules for this center (FR-030).</summary>
     [Tags("Admin — Center Settings")]
     [HttpGet("{id:guid}/booking-rules")]
@@ -207,6 +226,30 @@ public class HealthcareCentersController(
     {
         var doctors = await centerService.GetDoctorsAsync(id);
         return Ok(doctors);
+    }
+
+    /// <summary>Admin roster view — doctors with license, fee, and today's appointment count (FR-020).</summary>
+    [Tags("Admin — Doctors")]
+    [HttpGet("{id:guid}/doctors/roster")]
+    [RequireRole("Admin")]
+    [ProducesResponseType(typeof(IEnumerable<AdminDoctorRosterItemDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> GetDoctorRoster(Guid id, CancellationToken ct)
+    {
+        var result = await centerService.GetAdminDoctorRosterAsync(id, currentUser.UserId, ct);
+        return Ok(result);
+    }
+
+    /// <summary>List pending (not yet accepted) doctor invitations for this center (FR-020).</summary>
+    [Tags("Admin — Doctors")]
+    [HttpGet("{id:guid}/doctors/invitations")]
+    [RequireRole("Admin")]
+    [ProducesResponseType(typeof(IReadOnlyList<PendingInvitationDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> GetPendingInvitations(Guid id, CancellationToken ct)
+    {
+        var result = await adminAuth.GetPendingInvitationsAsync(id, ct);
+        return Ok(result);
     }
 
     /// <summary>Get the analytics dashboard for a healthcare center (FR-040).</summary>

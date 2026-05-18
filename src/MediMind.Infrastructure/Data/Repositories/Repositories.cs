@@ -572,6 +572,15 @@ public class DoctorScheduleRepository(MediMindDbContext context)
     public async Task<DoctorSchedule?> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId) =>
         await Db.DoctorSchedules.FirstOrDefaultAsync(s => s.DoctorId == doctorId && s.CenterId == centerId);
 
+    public async Task<IReadOnlyList<(DoctorSchedule Schedule, string CenterName)>> GetAllByDoctorAsync(Guid doctorId)
+    {
+        var rows = await Db.DoctorSchedules
+            .Where(s => s.DoctorId == doctorId)
+            .Join(Db.HealthcareCenters, s => s.CenterId, c => c.Id, (s, c) => new { Schedule = s, c.CenterName })
+            .ToListAsync();
+        return rows.Select(x => (x.Schedule, x.CenterName)).ToList();
+    }
+
     public async Task<DoctorSchedule> CreateAsync(DoctorSchedule schedule)
     {
         await Db.DoctorSchedules.AddAsync(schedule);
@@ -615,6 +624,12 @@ public class DoctorInvitationRepository(MediMindDbContext context)
             .Where(i => i.Email == email && i.CenterId == centerId)
             .OrderByDescending(i => i.CreatedAt)
             .FirstOrDefaultAsync(ct);
+
+    public async Task<IReadOnlyList<DoctorInvitation>> GetPendingByCenterAsync(Guid centerId, CancellationToken ct = default) =>
+        await Db.DoctorInvitations
+            .Where(i => i.CenterId == centerId && !i.IsAccepted && i.ExpiresAt > DateTime.UtcNow)
+            .OrderByDescending(i => i.CreatedAt)
+            .ToListAsync(ct);
 
     public async Task<DoctorInvitation> CreateAsync(DoctorInvitation invitation, CancellationToken ct = default)
     {
@@ -1195,6 +1210,31 @@ public class VideoConsultationRepository(MediMindDbContext context)
     public async Task SaveQualityMetricAsync(VideoQualityMetric metric)
     {
         await Db.VideoQualityMetrics.AddAsync(metric);
+    }
+
+    public async Task<IReadOnlyList<VideoConsultation>> GetByDoctorIdAsync(Guid doctorId, VideoConsultationStatus? status, bool todayOnly, int page, int pageSize)
+    {
+        var query = Db.VideoConsultations
+            .Include(v => v.Appointment).ThenInclude(a => a.Patient)
+            .Include(v => v.Appointment).ThenInclude(a => a.Doctor)
+            .Where(v => v.Appointment.DoctorId == doctorId)
+            .AsQueryable();
+
+        if (status.HasValue)
+            query = query.Where(v => v.Status == status.Value);
+
+        if (todayOnly)
+        {
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
+            query = query.Where(v => v.Appointment.AppointmentDate == today);
+        }
+
+        return await query
+            .OrderByDescending(v => v.Appointment.AppointmentDate)
+            .ThenByDescending(v => v.Appointment.AppointmentTime)
+            .Skip((Math.Max(page, 1) - 1) * Math.Max(pageSize, 1))
+            .Take(Math.Max(pageSize, 1))
+            .ToListAsync();
     }
 }
 

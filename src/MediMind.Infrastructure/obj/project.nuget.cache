@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "K/J4NkM4ov4=",
+  "dgSpecHash": "jAWAK6bOVR4=",
   "success": true,
   "projectFilePath": "/Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/MediMind.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -47,7 +47,7 @@
     "/Users/dani/.nuget/packages/microsoft.aspnetcore.signalr.core/1.2.0/microsoft.aspnetcore.signalr.core.1.2.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.aspnetcore.signalr.protocols.json/1.2.0/microsoft.aspnetcore.signalr.protocols.json.1.2.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.aspnetcore.websockets/2.3.9/microsoft.aspnetcore.websockets.2.3.9.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.aspnetcore.webutilities/2.3.0/microsoft.aspnetcore.webutilities.2.3.0.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.aspnetcore.webutilities/8.0.20/microsoft.aspnetcore.webutilities.8.0.20.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.build.framework/18.0.2/microsoft.build.framework.18.0.2.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.codeanalysis.analyzers/3.11.0/microsoft.codeanalysis.analyzers.3.11.0.nupkg.sha512",
@@ -91,7 +91,7 @@
     "/Users/dani/.nuget/packages/microsoft.identitymodel.tokens/8.18.0/microsoft.identitymodel.tokens.8.18.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.ml.onnxruntime/1.20.1/microsoft.ml.onnxruntime.1.20.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.ml.onnxruntime.managed/1.20.1/microsoft.ml.onnxruntime.managed.1.20.1.nupkg.sha512",
-    "/Users/dani/.nuget/packages/microsoft.net.http.headers/2.3.0/microsoft.net.http.headers.2.3.0.nupkg.sha512",
+    "/Users/dani/.nuget/packages/microsoft.net.http.headers/8.0.20/microsoft.net.http.headers.8.0.20.nupkg.sha512",
     "/Users/dani/.nuget/packages/microsoft.visualstudio.solutionpersistence/1.0.52/microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "/Users/dani/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/newtonsoft.json/13.0.4/newtonsoft.json.13.0.4.nupkg.sha512",
@@ -99,6 +99,7 @@
     "/Users/dani/.nuget/packages/npgsql.entityframeworkcore.postgresql/10.0.1/npgsql.entityframeworkcore.postgresql.10.0.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/qrcoder/1.6.0/qrcoder.1.6.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/questpdf/2024.12.3/questpdf.2024.12.3.nupkg.sha512",
+    "/Users/dani/.nuget/packages/resend/0.5.1/resend.0.5.1.nupkg.sha512",
     "/Users/dani/.nuget/packages/serilog/4.0.0/serilog.4.0.0.nupkg.sha512",
     "/Users/dani/.nuget/packages/serilog.aspnetcore/8.0.3/serilog.aspnetcore.8.0.3.nupkg.sha512",
     "/Users/dani/.nuget/packages/serilog.extensions.hosting/8.0.0/serilog.extensions.hosting.8.0.0.nupkg.sha512",

@@ -10,6 +10,23 @@ using System.Text;
 namespace MediMind.API.Controllers.SuperAdmin;
 
 [ApiController]
+[Route("api/v1/super-admin")]
+[Authorize(Policy = "SuperAdminOnly")]
+[Tags("SuperAdmin — Dashboard")]
+public class SuperAdminDashboardController(
+    ISuperAdminPlatformService platformService) : ControllerBase
+{
+    /// <summary>Get platform-wide KPI dashboard snapshot.</summary>
+    [HttpGet("dashboard")]
+    [ProducesResponseType(typeof(PlatformKpiDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Dashboard(CancellationToken ct)
+    {
+        var result = await platformService.GetKpisAsync(ct);
+        return Ok(result);
+    }
+}
+
+[ApiController]
 [Route("api/v1/super-admin/platform")]
 [Authorize(Policy = "SuperAdminOnly")]
 [Tags("SuperAdmin — Platform Analytics")]

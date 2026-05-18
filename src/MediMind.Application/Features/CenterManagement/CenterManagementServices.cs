@@ -25,6 +25,7 @@ public interface IHealthcareCenterService
     Task<DoctorCenterRelationDto> UpdateConsultationFeeAsync(Guid centerId, Guid doctorId, UpdateConsultationFeeDto dto, Guid adminId, CancellationToken ct = default);
     Task<bool> RemoveDoctorFromCenterAsync(Guid centerId, Guid doctorId, Guid adminId);
     Task<IEnumerable<DoctorResponseDto>> GetDoctorsAsync(Guid centerId);
+    Task<IEnumerable<AdminDoctorRosterItemDto>> GetAdminDoctorRosterAsync(Guid centerId, Guid adminId, CancellationToken ct = default);
 }
 
 public interface IAnalyticsService
@@ -342,7 +343,7 @@ public class HealthcareCenterService(
 
             var centers = doctor.DoctorHealthcareCenters
                 .Where(x => x.IsActive)
-                .Select(x => new DoctorCenterInfoDto(x.CenterId, x.Center.CenterName, x.ConsultationFee))
+                .Select(x => new DoctorCenterInfoDto(x.CenterId, x.Center?.CenterName ?? string.Empty, x.ConsultationFee))
                 .ToList();
 
             results.Add(new DoctorResponseDto(
@@ -359,6 +360,25 @@ public class HealthcareCenterService(
         }
 
         return results;
+    }
+
+    public async Task<IEnumerable<AdminDoctorRosterItemDto>> GetAdminDoctorRosterAsync(Guid centerId, Guid adminId, CancellationToken ct = default)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var relations = await centerRepository.GetDoctorsAsync(centerId);
+        return relations
+            .Select(r => new AdminDoctorRosterItemDto(
+                r.DoctorId,
+                r.Doctor.FullName,
+                r.Doctor.Specialization,
+                r.Doctor.LicenseNumber,
+                r.Doctor.LicenseVerified,
+                r.ConsultationFee,
+                r.JoinedDate,
+                r.IsActive,
+                r.Doctor.ProfileImageUrl,
+                0))
+            .ToList();
     }
 
     private async Task EnsureAdminAuthority(Guid centerId, Guid adminId)

@@ -110,6 +110,7 @@ public interface IAppointmentRepository : IRepository<Appointment>
 public interface IDoctorScheduleRepository : IRepository<DoctorSchedule>
 {
     Task<DoctorSchedule?> GetByDoctorAndCenterAsync(Guid doctorId, Guid centerId);
+    Task<IReadOnlyList<(DoctorSchedule Schedule, string CenterName)>> GetAllByDoctorAsync(Guid doctorId);
     Task<DoctorSchedule> CreateAsync(DoctorSchedule schedule);
     Task<DoctorSchedule?> UpdateAsync(DoctorSchedule schedule);
     Task<bool> DeleteAsync(Guid scheduleId);
@@ -195,6 +196,7 @@ public interface IVideoConsultationRepository : IRepository<VideoConsultation>
     Task<IEnumerable<ChatMessage>> GetChatHistoryAsync(Guid consultationId, int page = 1, int pageSize = 50);
     Task<ChatMessage> SaveMessageAsync(ChatMessage message);
     Task SaveQualityMetricAsync(VideoQualityMetric metric);
+    Task<IReadOnlyList<VideoConsultation>> GetByDoctorIdAsync(Guid doctorId, VideoConsultationStatus? status, bool todayOnly, int page, int pageSize);
 }
 
 public interface IPrescriptionRepository
@@ -327,6 +329,7 @@ public interface IDoctorInvitationRepository
 {
     Task<DoctorInvitation?> GetByTokenAsync(string token, CancellationToken ct = default);
     Task<DoctorInvitation?> GetByEmailAndCenterAsync(string email, Guid centerId, CancellationToken ct = default);
+    Task<IReadOnlyList<DoctorInvitation>> GetPendingByCenterAsync(Guid centerId, CancellationToken ct = default);
     Task<DoctorInvitation> CreateAsync(DoctorInvitation invitation, CancellationToken ct = default);
     Task UpdateAsync(DoctorInvitation invitation, CancellationToken ct = default);
 }

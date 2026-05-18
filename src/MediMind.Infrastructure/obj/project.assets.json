@@ -768,18 +768,18 @@
           }
         }
       },
-      "Microsoft.AspNetCore.WebUtilities/2.3.0": {
+      "Microsoft.AspNetCore.WebUtilities/8.0.20": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Http.Headers": "2.3.0"
+          "Microsoft.Net.Http.Headers": "8.0.20"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {
+          "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {
+          "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll": {
             "related": ".xml"
           }
         }
@@ -1839,18 +1839,18 @@
           "build/netstandard2.0/Microsoft.ML.OnnxRuntime.Managed.targets": {}
         }
       },
-      "Microsoft.Net.Http.Headers/2.3.0": {
+      "Microsoft.Net.Http.Headers/8.0.20": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Primitives": "8.0.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
+          "lib/net8.0/Microsoft.Net.Http.Headers.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {
+          "lib/net8.0/Microsoft.Net.Http.Headers.dll": {
             "related": ".xml"
           }
         }
@@ -2034,6 +2034,24 @@
           "runtimes/win-x86/native/qpdf.dll": {
             "assetType": "native",
             "rid": "win-x86"
+          }
+        }
+      },
+      "Resend/0.5.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.WebUtilities": "8.0.20",
+          "Microsoft.Extensions.Http": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Resend.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Resend.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -3237,16 +3255,18 @@
         "microsoft.aspnetcore.websockets.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.WebUtilities/2.3.0": {
-      "sha512": "trbXdWzoAEUVd0PE2yTopkz4kjZaAIA7xUWekd5uBw+7xE8Do/YOVTeb9d9koPTlbtZT539aESJjSLSqD8eYrQ==",
+    "Microsoft.AspNetCore.WebUtilities/8.0.20": {
+      "sha512": "KuQNopMvYW5ogv7ioAj19x/Wx+Kc6irjmSXuJQBOtNfXE7VGruTnYoFvi2GuxSCrNoJAhotlp5rg76MeOA4tXQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.webutilities/2.3.0",
+      "path": "microsoft.aspnetcore.webutilities/8.0.20",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll",
-        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.xml",
-        "microsoft.aspnetcore.webutilities.2.3.0.nupkg.sha512",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.AspNetCore.WebUtilities.dll",
+        "lib/net8.0/Microsoft.AspNetCore.WebUtilities.xml",
+        "microsoft.aspnetcore.webutilities.8.0.20.nupkg.sha512",
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
@@ -5334,16 +5354,18 @@
         "microsoft.ml.onnxruntime.managed.nuspec"
       ]
     },
-    "Microsoft.Net.Http.Headers/2.3.0": {
-      "sha512": "/M0wVg6tJUOHutWD3BMOUVZAioJVXe0tCpFiovzv0T9T12TBf4MnaHP0efO8TCr1a6O9RZgQeZ9Gdark8L9XdA==",
+    "Microsoft.Net.Http.Headers/8.0.20": {
+      "sha512": "S12GAe3JAvO22Rx8lNE932WzwtzC0zq/2lGs6bgAqova33B+ZrQSKP6pZ4GOqN2+qXMNQOcoPsO4HDQO48KyTg==",
       "type": "package",
-      "path": "microsoft.net.http.headers/2.3.0",
+      "path": "microsoft.net.http.headers/8.0.20",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll",
-        "lib/netstandard2.0/Microsoft.Net.Http.Headers.xml",
-        "microsoft.net.http.headers.2.3.0.nupkg.sha512",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net8.0/Microsoft.Net.Http.Headers.dll",
+        "lib/net8.0/Microsoft.Net.Http.Headers.xml",
+        "microsoft.net.http.headers.8.0.20.nupkg.sha512",
         "microsoft.net.http.headers.nuspec"
       ]
     },
@@ -5545,6 +5567,21 @@
         "runtimes/win-x86/native/libstdc++-6.dll",
         "runtimes/win-x86/native/libwinpthread-1.dll",
         "runtimes/win-x86/native/qpdf.dll"
+      ]
+    },
+    "Resend/0.5.1": {
+      "sha512": "omjgTjmosGHJ+bF9Mnk6Gu4TqCwIE/XyeYvQCfkPlDmoUE5yuNwxUP5Cyt9Og2KTqTzKqfQypFzlgCgORCEOSw==",
+      "type": "package",
+      "path": "resend/0.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "icon.png",
+        "lib/net8.0/Resend.dll",
+        "lib/net8.0/Resend.xml",
+        "resend.0.5.1.nupkg.sha512",
+        "resend.nuspec"
       ]
     },
     "Serilog/4.0.0": {
@@ -6098,6 +6135,7 @@
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 10.0.1",
       "QRCoder >= 1.6.0",
       "QuestPDF >= 2024.*",
+      "Resend >= 0.5.1",
       "Serilog.AspNetCore >= 8.*",
       "Serilog.Sinks.Console >= 6.*",
       "Serilog.Sinks.File >= 6.*",
@@ -6245,6 +6283,10 @@
           "QuestPDF": {
             "target": "Package",
             "version": "[2024.*, )"
+          },
+          "Resend": {
+            "target": "Package",
+            "version": "[0.5.1, )"
           },
           "Serilog.AspNetCore": {
             "target": "Package",

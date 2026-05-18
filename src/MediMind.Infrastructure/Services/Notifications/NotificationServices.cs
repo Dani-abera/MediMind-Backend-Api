@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using MediMind.Domain.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Resend;
 
 namespace MediMind.Infrastructure.Services.Notifications;
 
@@ -107,48 +108,38 @@ public class FirebasePushNotificationService(
     }
 }
 
-// ─── Email Service (SendGrid) ─────────────────────────────────────────────────
+// ─── Email Service (Resend) ───────────────────────────────────────────────────
 
-public class SendGridEmailService(
-    IHttpClientFactory httpClientFactory,
+public class ResendEmailService(
+    IResend resend,
     IConfiguration config,
-    ILogger<SendGridEmailService> logger)
+    ILogger<ResendEmailService> logger)
     : IEmailService
 {
-    private readonly string _apiKey = config["SendGrid:ApiKey"] ?? string.Empty;
-    private readonly string _fromEmail = config["SendGrid:FromEmail"] ?? "noreply@medimind.et";
-    private readonly string _fromName = config["SendGrid:FromName"] ?? "MediMind";
+    private readonly string _fromEmail = config["Resend:FromEmail"] ?? "noreply@medimind.et";
+    private readonly string _fromName = config["Resend:FromName"] ?? "MediMind";
 
     public async Task SendAsync(string to, string subject, string htmlBody, CancellationToken ct = default)
     {
-        if (string.IsNullOrWhiteSpace(_apiKey))
-        {
-            logger.LogWarning("SendGrid API key not configured. Email not sent to {To}", to);
-            return;
-        }
-
-        var client = httpClientFactory.CreateClient("SendGrid");
         try
         {
-            var payload = new
-            {
-                personalizations = new[] { new { to = new[] { new { email = to } } } },
-                from = new { email = _fromEmail, name = _fromName },
-                subject,
-                content = new[] { new { type = "text/html", value = htmlBody } }
-            };
-            var response = await client.PostAsJsonAsync("v3/mail/send", payload, ct);
-            if (!response.IsSuccessStatusCode)
-                logger.LogWarning("Email delivery failed to {To}. Status: {Status}", to, response.StatusCode);
+            var message = new EmailMessage();
+            message.From = $"{_fromName} <{_fromEmail}>";
+            message.To.Add(to);
+            message.Subject = subject;
+            message.HtmlBody = htmlBody;
+
+            await resend.EmailSendAsync(message, ct);
+            logger.LogInformation("Email sent via Resend to {To}. Subject: {Subject}", to, subject);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Email delivery exception for {To}", to);
+            logger.LogError(ex, "Resend email exception for {To}", to);
         }
     }
 
     public async Task SendWelcomeAsync(string to, string fullName, CancellationToken ct = default) =>
-        await SendAsync(to, "Welcome to MediMind! 🏥",
+        await SendAsync(to, "Welcome to MediMind",
             $"<h2>Welcome, {fullName}!</h2><p>Your MediMind account is ready. " +
             $"Start booking appointments and tracking your health today.</p>", ct);
 
@@ -157,9 +148,9 @@ public class SendGridEmailService(
         string invitationLink, CancellationToken ct = default) =>
         await SendAsync(to, $"You've been invited to join {centerName} on MediMind",
             $"<h2>Dear Dr. {doctorName},</h2>" +
-            $"<p>{centerName} has invited you to join MediMind platform.</p>" +
-            $"<p><a href='{invitationLink}'>Accept Invitation</a></p>" +
-            $"<p>This link expires in 48 hours.</p>", ct);
+            $"<p>{centerName} has invited you to join MediMind as a doctor.</p>" +
+            $"<p><a href='{invitationLink}' style='background:#2563eb;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;display:inline-block;'>Accept Invitation</a></p>" +
+            $"<p style='color:#6b7280;font-size:14px;'>This link expires in 48 hours.</p>", ct);
 }
 
 // ─── Appointment Reminder Background Job ──────────────────────────────────────

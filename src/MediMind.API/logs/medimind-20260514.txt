@@ -344,3 +344,61 @@ System.InvalidOperationException: The LINQ expression 's => s.ToLower().Contains
 2026-05-14 08:07:22.047 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 8.6785 ms
 2026-05-14 08:07:26.164 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.3426 ms
 2026-05-14 08:08:26.186 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.8465 ms
+2026-05-14 08:30:06.894 +03:00 [INF] Running appointment reminder job at "2026-05-14T05:30:06.8930080Z"
+2026-05-14 08:30:06.943 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 09:00:07.102 +03:00 [INF] Running appointment reminder job at "2026-05-14T06:00:07.1025480Z"
+2026-05-14 09:00:07.124 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 09:30:05.004 +03:00 [INF] Running appointment reminder job at "2026-05-14T06:30:04.9994480Z"
+2026-05-14 09:30:05.084 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 10:00:05.313 +03:00 [INF] Running appointment reminder job at "2026-05-14T07:00:05.2995250Z"
+2026-05-14 10:00:05.407 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 10:30:05.530 +03:00 [INF] Running appointment reminder job at "2026-05-14T07:30:05.5254770Z"
+2026-05-14 10:30:05.603 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 11:00:05.744 +03:00 [INF] Running appointment reminder job at "2026-05-14T08:00:05.7432430Z"
+2026-05-14 11:00:05.790 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 11:30:05.984 +03:00 [INF] Running appointment reminder job at "2026-05-14T08:30:05.9837210Z"
+2026-05-14 11:30:06.023 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 12:00:06.214 +03:00 [INF] Running appointment reminder job at "2026-05-14T09:00:06.2109290Z"
+2026-05-14 12:00:06.244 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 12:30:06.478 +03:00 [INF] Running appointment reminder job at "2026-05-14T09:30:06.4784540Z"
+2026-05-14 12:30:06.509 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 13:00:06.744 +03:00 [INF] Running appointment reminder job at "2026-05-14T10:00:06.7423290Z"
+2026-05-14 13:00:06.800 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 13:30:06.996 +03:00 [INF] Running appointment reminder job at "2026-05-14T10:30:06.9901770Z"
+2026-05-14 13:30:07.038 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 14:00:12.612 +03:00 [INF] Running appointment reminder job at "2026-05-14T11:00:12.6064820Z"
+2026-05-14 14:00:12.670 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 14:30:12.859 +03:00 [INF] Running appointment reminder job at "2026-05-14T11:30:12.8586900Z"
+2026-05-14 14:30:12.904 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 15:00:13.057 +03:00 [INF] Running appointment reminder job at "2026-05-14T12:00:13.0552020Z"
+2026-05-14 15:00:13.093 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 15:30:13.260 +03:00 [INF] Running appointment reminder job at "2026-05-14T12:30:13.2601610Z"
+2026-05-14 15:30:13.292 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 16:10:47.531 +03:00 [INF] Running appointment reminder job at "2026-05-14T13:10:47.5317340Z"
+2026-05-14 16:10:47.572 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 17:02:40.009 +03:00 [INF] Running appointment reminder job at "2026-05-14T14:02:40.0090650Z"
+2026-05-14 17:02:40.077 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 17:37:25.946 +03:00 [INF] Running appointment reminder job at "2026-05-14T14:37:25.9462030Z"
+2026-05-14 17:37:25.978 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 18:10:50.017 +03:00 [INF] Running appointment reminder job at "2026-05-14T15:10:50.0176260Z"
+2026-05-14 18:10:50.073 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 18:38:32.645 +03:00 [INF] Running appointment reminder job at "2026-05-14T15:38:32.6455820Z"
+2026-05-14 18:38:32.675 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 19:26:35.012 +03:00 [INF] Running appointment reminder job at "2026-05-14T16:26:35.0123410Z"
+2026-05-14 19:26:35.087 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 19:48:14.310 +03:00 [INF] Running appointment reminder job at "2026-05-14T16:48:14.3098870Z"
+2026-05-14 19:48:14.370 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 20:40:28.595 +03:00 [INF] Running appointment reminder job at "2026-05-14T17:40:28.5952490Z"
+2026-05-14 20:40:28.709 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 20:57:23.527 +03:00 [INF] Running appointment reminder job at "2026-05-14T17:57:23.5275410Z"
+2026-05-14 20:57:23.595 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 21:41:31.972 +03:00 [INF] Running appointment reminder job at "2026-05-14T18:41:31.9723850Z"
+2026-05-14 21:41:31.995 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 22:16:33.406 +03:00 [INF] Running appointment reminder job at "2026-05-14T19:16:33.4057080Z"
+2026-05-14 22:16:33.478 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 22:58:39.772 +03:00 [INF] Running appointment reminder job at "2026-05-14T19:58:39.7726830Z"
+2026-05-14 22:58:39.796 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 23:23:04.430 +03:00 [INF] Running appointment reminder job at "2026-05-14T20:23:04.4301970Z"
+2026-05-14 23:23:04.477 +03:00 [INF] Appointment reminder job completed.
+2026-05-14 23:58:58.714 +03:00 [INF] Running appointment reminder job at "2026-05-14T20:58:58.7147310Z"
+2026-05-14 23:58:58.752 +03:00 [INF] Appointment reminder job completed.

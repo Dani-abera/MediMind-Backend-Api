@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using Resend;
 using System.Text;
 using Hangfire;
 using Hangfire.MemoryStorage;
@@ -99,7 +100,7 @@ public static class DependencyInjection
 
         services.AddScoped<ISmsService, GeezSmsService>();
         services.AddScoped<IPushNotificationService, FirebasePushNotificationService>();
-        services.AddScoped<IEmailService, SendGridEmailService>();
+        services.AddScoped<IEmailService, ResendEmailService>();
         services.AddScoped<INotificationService, MediMindNotificationService>();
         services.AddScoped<IPdfService, PrescriptionPdfService>();
         services.AddScoped<IQrCodeService, QrCodeService>();
@@ -170,15 +171,13 @@ public static class DependencyInjection
             client.Timeout = TimeSpan.FromSeconds(config.GetValue("MlService:TimeoutSeconds", 30));
         });
 
-        services.AddHttpClient("SendGrid", (sp, client) =>
+        services.AddOptions();
+        services.AddHttpClient<ResendClient>();
+        services.Configure<ResendClientOptions>(o =>
         {
-            client.BaseAddress = new Uri("https://api.sendgrid.com/");
-            client.Timeout = TimeSpan.FromSeconds(30);
-            var cfg = sp.GetRequiredService<IConfiguration>();
-            var apiKey = cfg["SendGrid:ApiKey"];
-            if (!string.IsNullOrWhiteSpace(apiKey))
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+            o.ApiToken = config["Resend:ApiKey"] ?? string.Empty;
         });
+        services.AddTransient<IResend, ResendClient>();
 
         services.Configure<ChapaOptions>(config.GetSection(ChapaOptions.SectionName));
         services.Configure<PaymentSettings>(config.GetSection(PaymentSettings.SectionName));
