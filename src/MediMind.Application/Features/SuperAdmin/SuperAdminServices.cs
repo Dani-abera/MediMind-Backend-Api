@@ -10,6 +10,42 @@ using UserType = MediMind.Domain.Enums.UserType;
 
 namespace MediMind.Application.Features.SuperAdmin;
 
+// ─── Platform Settings Service ────────────────────────────────────────────────
+
+public class PlatformSettingsService(
+    IPlatformConfigurationRepository repo,
+    IUnitOfWork unitOfWork) : IPlatformSettingsService
+{
+    public async Task<PlatformSettingsDto> GetAsync(CancellationToken ct = default)
+    {
+        var config = await repo.GetAsync(ct) ?? PlatformConfiguration.CreateDefault();
+        return Map(config);
+    }
+
+    public async Task<PlatformSettingsDto> UpdateAsync(UpdatePlatformSettingsDto dto, CancellationToken ct = default)
+    {
+        var config = await repo.GetAsync(ct) ?? PlatformConfiguration.CreateDefault();
+        var flagsJson = System.Text.Json.JsonSerializer.Serialize(dto.FeatureFlags);
+        config.Update(
+            (decimal)dto.TrialFeeEtb, (decimal)dto.BasicFeeEtb, (decimal)dto.PremiumFeeEtb,
+            dto.MaxAdvanceBookingDays, dto.MaxSlotDurationMinutes,
+            flagsJson, dto.MaintenanceMode, dto.MaintenanceMessage);
+        await repo.UpsertAsync(config, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+        return Map(config);
+    }
+
+    private static PlatformSettingsDto Map(PlatformConfiguration c)
+    {
+        var flags = System.Text.Json.JsonSerializer
+            .Deserialize<Dictionary<string, bool>>(c.FeatureFlagsJson) ?? [];
+        return new PlatformSettingsDto(
+            (double)c.TrialFeeEtb, (double)c.BasicFeeEtb, (double)c.PremiumFeeEtb,
+            c.MaxAdvanceBookingDays, c.MaxSlotDurationMinutes,
+            flags, c.MaintenanceMode, c.MaintenanceMessage);
+    }
+}
+
 // ─── Center Service ────────────────────────────────────────────────────────────
 
 public class SuperAdminCenterService(
@@ -29,6 +65,33 @@ public class SuperAdminCenterService(
     {
         var centers = await centerRepository.GetPendingApprovalAsync(ct);
         return await MapManyAsync(centers, ct);
+    }
+
+    public async Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetActiveCentersAsync(CancellationToken ct = default)
+    {
+        var centers = await centerRepository.GetActiveSubscriptionsAsync(ct);
+        return await MapManyAsync(centers, ct);
+    }
+
+    public async Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetSuspendedCentersAsync(CancellationToken ct = default)
+    {
+        var result = await centerRepository.GetAllAsync(
+            new SuperAdminCenterQueryDto(null, null, SubscriptionStatus.Suspended, 1, 10000), ct);
+        return await MapManyAsync(result.Items, ct);
+    }
+
+    public async Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetRejectedCentersAsync(CancellationToken ct = default)
+    {
+        var result = await centerRepository.GetAllAsync(
+            new SuperAdminCenterQueryDto(null, null, SubscriptionStatus.Rejected, 1, 10000), ct);
+        return await MapManyAsync(result.Items, ct);
+    }
+
+    public async Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetExpiredCentersAsync(CancellationToken ct = default)
+    {
+        var result = await centerRepository.GetAllAsync(
+            new SuperAdminCenterQueryDto(null, null, SubscriptionStatus.Expired, 1, 10000), ct);
+        return await MapManyAsync(result.Items, ct);
     }
 
     public async Task<SuperAdminCenterSummaryDto> GetCenterAsync(Guid centerId, CancellationToken ct = default)
@@ -166,6 +229,24 @@ public class SuperAdminSubscriptionService(
 
         var updatedHistory = await centerRepository.GetSubscriptionHistoryAsync(centerId, ct);
         return MapDetail(center, updatedHistory);
+    }
+
+    public async Task<PagedResult<SubscriptionDetailDto>> GetAllSubscriptionsAsync(int page, int pageSize, CancellationToken ct = default)
+    {
+        var query = new SuperAdminCenterQueryDto(null, null, null, page, pageSize);
+        var result = await centerRepository.GetAllAsync(query, ct);
+        var items = result.Items
+            .Select(c => new SubscriptionDetailDto(
+                c.Id,
+                c.CenterName,
+                c.CurrentPlan ?? c.SubscriptionStatus.ToString(),
+                c.SubscriptionStatus.ToString(),
+                c.SubscriptionStartDate,
+                c.SubscriptionEndDate,
+                c.IsSubscriptionActive,
+                []))
+            .ToList();
+        return new PagedResult<SubscriptionDetailDto>(items, result.Page, result.PageSize, result.TotalCount);
     }
 
     public async Task ApplyExpiredSubscriptionsAsync(CancellationToken ct = default)
@@ -445,6 +526,59 @@ public class SuperAdminPlatformService(
         return new PlatformRevenueReportDto(startDate, endDate, rows.Sum(x => x.DailyRevenue), byDay);
     }
 
+    public async Task<PlatformAnalyticsDto> GetAnalyticsAsync(string period, CancellationToken ct = default)
+    {
+        var days = period switch { "last60" => 60, "last90" => 90, _ => 30 };
+        var start = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-days));
+        var end = DateOnly.FromDateTime(DateTime.UtcNow);
+        var startDt = DateTime.UtcNow.AddDays(-days);
+
+        // Revenue
+        var revByCenter = await paymentRepository.GetPlatformRevenueByCenterAsync(start, end, ct);
+        var revByMonth = await paymentRepository.GetPlatformRevenueByMonthAsync(start, end, ct);
+        var totalRevenue = revByCenter.Sum(x => x.Revenue);
+
+        // New registrations per month
+        var allCenters = await centerRepository.GetAllAsync(new SuperAdminCenterQueryDto(null, null, null, 1, 100000), ct);
+        var allDoctors = await doctorRepository.GetAllAsync(new SuperAdminDoctorQueryDto(null, null, null, 1, 100000), ct);
+        var allUsers = await userRepository.SearchAsync(new SuperAdminUserQueryDto(null, UserType.Patient, null, 1, 100000), ct);
+
+        var newCentersPerMonth = allCenters.Items
+            .Where(c => c.CreatedAt >= startDt)
+            .GroupBy(c => c.CreatedAt.ToString("yyyy-MM"))
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        var newDoctorsPerMonth = allDoctors.Items
+            .Where(d => d.CreatedAt >= startDt)
+            .GroupBy(d => d.CreatedAt.ToString("yyyy-MM"))
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        var newPatientsPerMonth = allUsers.Items
+            .Where(u => u.CreatedAt >= startDt)
+            .GroupBy(u => u.CreatedAt.ToString("yyyy-MM"))
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        // Churn rates
+        var totalEverActive = allCenters.Items.Count(c =>
+            c.SubscriptionStatus != SubscriptionStatus.PendingApproval &&
+            c.SubscriptionStatus != SubscriptionStatus.Rejected);
+        var churned30 = await centerRepository.GetChurnedCentersCountAsync(DateTime.UtcNow.AddDays(-30), ct);
+        var churned60 = await centerRepository.GetChurnedCentersCountAsync(DateTime.UtcNow.AddDays(-60), ct);
+        var churned90 = await centerRepository.GetChurnedCentersCountAsync(DateTime.UtcNow.AddDays(-90), ct);
+        double SafeRate(int churned) => totalEverActive == 0 ? 0 : Math.Round(churned * 100.0 / totalEverActive, 2);
+
+        return new PlatformAnalyticsDto(
+            totalRevenue,
+            revByCenter.Select(x => new RevenueByCenterDto(x.CenterId, x.CenterName, x.Revenue)).ToList(),
+            revByMonth,
+            newCentersPerMonth,
+            newDoctorsPerMonth,
+            newPatientsPerMonth,
+            SafeRate(churned30),
+            SafeRate(churned60),
+            SafeRate(churned90));
+    }
+
     public async Task<IReadOnlyList<PlatformRevenueCsvRowDto>> GetRevenueCsvRowsAsync(DateOnly startDate, DateOnly endDate, CancellationToken ct = default)
     {
         var allCenters = await centerRepository.GetAllAsync(new SuperAdminCenterQueryDto(null, null, null, 1, 10000), ct);
@@ -465,4 +599,32 @@ public class SuperAdminPlatformService(
 
         return rows.OrderBy(r => r.Date).ThenBy(r => r.CenterName).ToList();
     }
+}
+
+// ─── SuperAdmin Profile Service ────────────────────────────────────────────────
+
+public class SuperAdminProfileService(
+    IUserRepository userRepository,
+    IUnitOfWork unitOfWork) : ISuperAdminProfileService
+{
+    public async Task<SuperAdminProfileDto> GetProfileAsync(Guid superAdminId, CancellationToken ct = default)
+    {
+        var user = await userRepository.GetByIdAsync(superAdminId, ct)
+            ?? throw new NotFoundException(nameof(User), superAdminId);
+        return Map(user);
+    }
+
+    public async Task<SuperAdminProfileDto> UpdateProfileAsync(Guid superAdminId, UpdateSuperAdminProfileDto dto, CancellationToken ct = default)
+    {
+        var user = await userRepository.GetByIdAsync(superAdminId, ct)
+            ?? throw new NotFoundException(nameof(User), superAdminId);
+        user.UpdateIdentityProfile(dto.FullName, dto.DateOfBirth, Enum.Parse<Gender>(dto.Gender, ignoreCase: true));
+        await unitOfWork.SaveChangesAsync(ct);
+        return Map(user);
+    }
+
+    private static SuperAdminProfileDto Map(User u) => new(
+        u.Id, u.FullName, u.Email, u.PhoneNumber,
+        u.Gender.ToString(), u.DateOfBirth, u.ProfileImageUrl,
+        u.LastLogin, u.IsVerified, u.CreatedAt);
 }

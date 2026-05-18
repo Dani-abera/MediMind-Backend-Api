@@ -38,6 +38,42 @@ public class SuperAdminCentersController(
         return Ok(result);
     }
 
+    /// <summary>List active (subscribed) centers.</summary>
+    [HttpGet("active")]
+    [ProducesResponseType(typeof(IReadOnlyList<SuperAdminCenterSummaryDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetActive(CancellationToken ct)
+    {
+        var result = await centerService.GetActiveCentersAsync(ct);
+        return Ok(result);
+    }
+
+    /// <summary>List suspended centers.</summary>
+    [HttpGet("suspended")]
+    [ProducesResponseType(typeof(IReadOnlyList<SuperAdminCenterSummaryDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetSuspended(CancellationToken ct)
+    {
+        var result = await centerService.GetSuspendedCentersAsync(ct);
+        return Ok(result);
+    }
+
+    /// <summary>List rejected centers.</summary>
+    [HttpGet("rejected")]
+    [ProducesResponseType(typeof(IReadOnlyList<SuperAdminCenterSummaryDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetRejected(CancellationToken ct)
+    {
+        var result = await centerService.GetRejectedCentersAsync(ct);
+        return Ok(result);
+    }
+
+    /// <summary>List expired-subscription centers.</summary>
+    [HttpGet("expired")]
+    [ProducesResponseType(typeof(IReadOnlyList<SuperAdminCenterSummaryDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetExpired(CancellationToken ct)
+    {
+        var result = await centerService.GetExpiredCentersAsync(ct);
+        return Ok(result);
+    }
+
     /// <summary>Get a single center by ID.</summary>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(SuperAdminCenterSummaryDto), StatusCodes.Status200OK)]

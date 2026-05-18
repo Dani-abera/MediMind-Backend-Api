@@ -8,6 +8,10 @@ public interface ISuperAdminCenterService
 {
     Task<PagedResult<SuperAdminCenterSummaryDto>> GetAllCentersAsync(SuperAdminCenterQueryDto query, CancellationToken ct = default);
     Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetPendingCentersAsync(CancellationToken ct = default);
+    Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetActiveCentersAsync(CancellationToken ct = default);
+    Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetSuspendedCentersAsync(CancellationToken ct = default);
+    Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetRejectedCentersAsync(CancellationToken ct = default);
+    Task<IReadOnlyList<SuperAdminCenterSummaryDto>> GetExpiredCentersAsync(CancellationToken ct = default);
     Task<SuperAdminCenterSummaryDto> GetCenterAsync(Guid centerId, CancellationToken ct = default);
     Task<SuperAdminCenterSummaryDto> ApproveCenterAsync(Guid centerId, ApproveCenterDto dto, Guid superAdminId, CancellationToken ct = default);
     Task<SuperAdminCenterSummaryDto> RejectCenterAsync(Guid centerId, RejectCenterDto dto, Guid superAdminId, CancellationToken ct = default);
@@ -23,6 +27,7 @@ public interface ISuperAdminSubscriptionService
     Task<SubscriptionDetailDto> ExtendSubscriptionAsync(Guid centerId, ExtendSubscriptionDto dto, Guid superAdminId, CancellationToken ct = default);
     Task<IReadOnlyList<SubscriptionHistoryDto>> GetHistoryAsync(Guid centerId, CancellationToken ct = default);
     Task ApplyExpiredSubscriptionsAsync(CancellationToken ct = default);
+    Task<PagedResult<SubscriptionDetailDto>> GetAllSubscriptionsAsync(int page, int pageSize, CancellationToken ct = default);
 }
 
 public interface ISubscriptionPlanService
@@ -55,9 +60,22 @@ public interface ISuperAdminUserService
     Task SoftDeleteUserAsync(Guid userId, SoftDeleteUserDto dto, Guid superAdminId, CancellationToken ct = default);
 }
 
+public interface IPlatformSettingsService
+{
+    Task<PlatformSettingsDto> GetAsync(CancellationToken ct = default);
+    Task<PlatformSettingsDto> UpdateAsync(UpdatePlatformSettingsDto dto, CancellationToken ct = default);
+}
+
+public interface ISuperAdminProfileService
+{
+    Task<SuperAdminProfileDto> GetProfileAsync(Guid superAdminId, CancellationToken ct = default);
+    Task<SuperAdminProfileDto> UpdateProfileAsync(Guid superAdminId, UpdateSuperAdminProfileDto dto, CancellationToken ct = default);
+}
+
 public interface ISuperAdminPlatformService
 {
     Task<PlatformKpiDto> GetKpisAsync(CancellationToken ct = default);
     Task<PlatformRevenueReportDto> GetRevenueReportAsync(DateOnly startDate, DateOnly endDate, CancellationToken ct = default);
     Task<IReadOnlyList<PlatformRevenueCsvRowDto>> GetRevenueCsvRowsAsync(DateOnly startDate, DateOnly endDate, CancellationToken ct = default);
+    Task<PlatformAnalyticsDto> GetAnalyticsAsync(string period, CancellationToken ct = default);
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediMind.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4152b10de5bc86818edf0e9b9cfe427d615f8f76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3fb480c8fac1f5466625702a6160b566a6ef1c89")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediMind.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediMind.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

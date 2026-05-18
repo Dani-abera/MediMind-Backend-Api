@@ -148,8 +148,8 @@ try
     }
 
     // ─── Middleware Pipeline ──────────────────────────────────────────────────
-    app.UseExceptionHandler();
     app.UseSerilogRequestLogging();
+    app.UseExceptionHandler();
 
     var uploadsRoot = Path.Combine(app.Environment.ContentRootPath, "uploads");
     Directory.CreateDirectory(uploadsRoot);

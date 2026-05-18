@@ -60,6 +60,7 @@ public static class DependencyInjection
         services.AddScoped<IVideoConsultationRepository, VideoConsultationRepository>();
         services.AddScoped<IPrescriptionRepository, PrescriptionRepository>();
         
+        services.AddScoped<IPlatformConfigurationRepository, PlatformConfigurationRepository>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.Configure<PrescriptionStorageOptions>(config.GetSection(PrescriptionStorageOptions.SectionName));

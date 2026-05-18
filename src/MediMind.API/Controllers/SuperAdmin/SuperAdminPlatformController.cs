@@ -24,6 +24,15 @@ public class SuperAdminDashboardController(
         var result = await platformService.GetKpisAsync(ct);
         return Ok(result);
     }
+
+    /// <summary>Get platform-wide analytics. period: last30 | last60 | last90</summary>
+    [HttpGet("analytics")]
+    [ProducesResponseType(typeof(PlatformAnalyticsDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Analytics([FromQuery] string period = "last30", CancellationToken ct = default)
+    {
+        var result = await platformService.GetAnalyticsAsync(period, ct);
+        return Ok(result);
+    }
 }
 
 [ApiController]
@@ -39,6 +48,15 @@ public class SuperAdminPlatformController(
     public async Task<IActionResult> Dashboard(CancellationToken ct)
     {
         var result = await platformService.GetKpisAsync(ct);
+        return Ok(result);
+    }
+
+    /// <summary>Get platform-wide analytics (revenue, registrations, churn). period: last30 | last60 | last90</summary>
+    [HttpGet("analytics")]
+    [ProducesResponseType(typeof(PlatformAnalyticsDto), StatusCodes.Status200OK)]
+    public async Task<IActionResult> Analytics([FromQuery] string period = "last30", CancellationToken ct = default)
+    {
+        var result = await platformService.GetAnalyticsAsync(period, ct);
         return Ok(result);
     }
 

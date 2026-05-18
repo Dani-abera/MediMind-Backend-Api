@@ -69,6 +69,8 @@ public static class DependencyInjection
         services.AddScoped<Features.SuperAdmin.ISuperAdminDoctorService, Features.SuperAdmin.SuperAdminDoctorService>();
         services.AddScoped<Features.SuperAdmin.ISuperAdminUserService, Features.SuperAdmin.SuperAdminUserService>();
         services.AddScoped<Features.SuperAdmin.ISuperAdminPlatformService, Features.SuperAdmin.SuperAdminPlatformService>();
+        services.AddScoped<Features.SuperAdmin.IPlatformSettingsService, Features.SuperAdmin.PlatformSettingsService>();
+        services.AddScoped<Features.SuperAdmin.ISuperAdminProfileService, Features.SuperAdmin.SuperAdminProfileService>();
         // ISubscriptionPlanService implemented in Infrastructure (needs DbContext); registered there.
 
         return services;

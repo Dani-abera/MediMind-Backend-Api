@@ -125,6 +125,19 @@ public record PlatformRevenueCsvRowDto(
     decimal DailyRevenue,
     int AppointmentCount);
 
+public record RevenueByCenterDto(Guid CenterId, string CenterName, decimal RevenueEtb);
+
+public record PlatformAnalyticsDto(
+    decimal TotalRevenueEtb,
+    IReadOnlyList<RevenueByCenterDto> RevenueByCenterTop20,
+    Dictionary<string, decimal> RevenueByMonth,
+    Dictionary<string, int> NewCentersPerMonth,
+    Dictionary<string, int> NewDoctorsPerMonth,
+    Dictionary<string, int> NewPatientsPerMonth,
+    double ChurnRate30d,
+    double ChurnRate60d,
+    double ChurnRate90d);
+
 // ─── Queue Regeneration ───────────────────────────────────────────────────────
 
 public record RegenerateQueueDto(string ConfirmationMessage, DateOnly? Date);
@@ -161,3 +174,44 @@ public record UpdateSubscriptionPlanDto(
     int MaxAppointmentsPerDay,
     List<string>? Features,
     string? Description);
+
+// ─── SuperAdmin Profile ───────────────────────────────────────────────────────
+
+public record SuperAdminProfileDto(
+    Guid Id,
+    string FullName,
+    string Email,
+    string PhoneNumber,
+    string Gender,
+    DateOnly DateOfBirth,
+    string? ProfileImageUrl,
+    DateTime? LastLogin,
+    bool IsVerified,
+    DateTime CreatedAt);
+
+public record UpdateSuperAdminProfileDto(
+    string FullName,
+    DateOnly DateOfBirth,
+    string Gender);
+
+// ─── Platform Settings ────────────────────────────────────────────────────────
+
+public record PlatformSettingsDto(
+    double TrialFeeEtb,
+    double BasicFeeEtb,
+    double PremiumFeeEtb,
+    int MaxAdvanceBookingDays,
+    int MaxSlotDurationMinutes,
+    Dictionary<string, bool> FeatureFlags,
+    bool MaintenanceMode,
+    string MaintenanceMessage);
+
+public record UpdatePlatformSettingsDto(
+    double TrialFeeEtb,
+    double BasicFeeEtb,
+    double PremiumFeeEtb,
+    int MaxAdvanceBookingDays,
+    int MaxSlotDurationMinutes,
+    Dictionary<string, bool> FeatureFlags,
+    bool MaintenanceMode,
+    string MaintenanceMessage);

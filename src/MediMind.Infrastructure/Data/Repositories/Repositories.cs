@@ -315,8 +315,16 @@ public class HealthcareCenterRepository(MediMindDbContext context)
 
     public async Task<IReadOnlyList<HealthcareCenter>> GetActiveSubscriptionsAsync(CancellationToken ct = default) =>
         await Db.HealthcareCenters
-            .Where(c => c.SubscriptionStatus == SubscriptionStatus.Active)
+            .Where(c => (c.SubscriptionStatus == SubscriptionStatus.Active || c.SubscriptionStatus == SubscriptionStatus.Trial) && !c.IsDeleted)
             .ToListAsync(ct);
+
+    public async Task<int> GetChurnedCentersCountAsync(DateTime since, CancellationToken ct = default) =>
+        await Db.SubscriptionHistories
+            .Where(h => (h.NewStatus == SubscriptionStatus.Expired || h.NewStatus == SubscriptionStatus.Suspended)
+                     && h.ChangedAt >= since)
+            .Select(h => h.CenterId)
+            .Distinct()
+            .CountAsync(ct);
 
     public async Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default) =>
         await Db.HealthcareCenters.AnyAsync(c => c.LicenseNumber == licenseNumber, ct);
@@ -1118,6 +1126,41 @@ public class PaymentRepository(MediMindDbContext context)
         return await Task.FromResult(payment);
     }
 
+    public async Task<IReadOnlyList<(Guid CenterId, string CenterName, decimal Revenue)>> GetPlatformRevenueByCenterAsync(DateOnly start, DateOnly end, CancellationToken ct = default)
+    {
+        var from = start.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
+        var to = end.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc);
+        return await Db.Payments
+            .AsNoTracking()
+            .Include(p => p.Appointment).ThenInclude(a => a.Center)
+            .Where(p => p.Status == PaymentStatus.Completed
+                     && p.PaymentDate >= from && p.PaymentDate <= to)
+            .GroupBy(p => new { p.Appointment.CenterId, p.Appointment.Center!.CenterName })
+            .Select(g => new { g.Key.CenterId, g.Key.CenterName, Revenue = g.Sum(p => p.Amount) })
+            .OrderByDescending(x => x.Revenue)
+            .Take(20)
+            .ToListAsync(ct)
+            .ContinueWith(t => (IReadOnlyList<(Guid, string, decimal)>)t.Result
+                .Select(x => (x.CenterId, x.CenterName, x.Revenue)).ToList());
+    }
+
+    public async Task<Dictionary<string, decimal>> GetPlatformRevenueByMonthAsync(DateOnly start, DateOnly end, CancellationToken ct = default)
+    {
+        var from = start.ToDateTime(TimeOnly.MinValue, DateTimeKind.Utc);
+        var to = end.ToDateTime(TimeOnly.MaxValue, DateTimeKind.Utc);
+        var rows = await Db.Payments
+            .AsNoTracking()
+            .Where(p => p.Status == PaymentStatus.Completed
+                     && p.PaymentDate >= from && p.PaymentDate <= to)
+            .Select(p => new { p.PaymentDate, p.Amount })
+            .ToListAsync(ct);
+
+        return rows
+            .Where(r => r.PaymentDate.HasValue)
+            .GroupBy(r => r.PaymentDate!.Value.ToString("yyyy-MM"))
+            .ToDictionary(g => g.Key, g => g.Sum(r => r.Amount));
+    }
+
     public async Task<Payment?> GetByRefAsync(string paymentRef, CancellationToken ct = default) =>
         await Db.Payments.FirstOrDefaultAsync(p => p.PaymentRef == paymentRef, ct);
 
@@ -1670,5 +1713,20 @@ public class WaitlistSubscriptionRepository(MediMindDbContext context) : IWaitli
     {
         context.WaitlistSubscriptions.Update(subscription);
         return Task.CompletedTask;
+    }
+}
+
+public class PlatformConfigurationRepository(MediMindDbContext db) : IPlatformConfigurationRepository
+{
+    public async Task<PlatformConfiguration?> GetAsync(CancellationToken ct = default) =>
+        await db.PlatformConfigurations.OrderBy(x => x.Id).FirstOrDefaultAsync(ct);
+
+    public async Task UpsertAsync(PlatformConfiguration config, CancellationToken ct = default)
+    {
+        var existing = await db.PlatformConfigurations.FindAsync([config.Id], ct);
+        if (existing is null)
+            await db.PlatformConfigurations.AddAsync(config, ct);
+        else
+            db.PlatformConfigurations.Update(config);
     }
 }

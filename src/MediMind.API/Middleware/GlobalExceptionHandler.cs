@@ -50,7 +50,7 @@ public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logge
         NotFoundException         => (404, "Resource Not Found"),
         ForbiddenException        => (403, "Access Denied"),
         TenantIsolationException  => (403, "Tenant Isolation Violation"),
-        UnauthorizedException     => (403, "Access Denied"),
+        UnauthorizedException     => (401, "Unauthorized"),
         ServiceUnavailableException => (503, "Service Unavailable"),
         PaymentException          => (402, "Payment Error"),
         _                         => (500, "Internal Server Error")

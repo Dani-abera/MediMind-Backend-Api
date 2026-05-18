@@ -817,6 +817,18 @@
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetPending(System.Threading.CancellationToken)">
             <summary>List centers awaiting approval.</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetActive(System.Threading.CancellationToken)">
+            <summary>List active (subscribed) centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetSuspended(System.Threading.CancellationToken)">
+            <summary>List suspended centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetRejected(System.Threading.CancellationToken)">
+            <summary>List rejected centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetExpired(System.Threading.CancellationToken)">
+            <summary>List expired-subscription centers.</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>Get a single center by ID.</summary>
         </member>
@@ -862,8 +874,14 @@
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Dashboard(System.Threading.CancellationToken)">
             <summary>Get platform-wide KPI dashboard snapshot.</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Analytics(System.String,System.Threading.CancellationToken)">
+            <summary>Get platform-wide analytics. period: last30 | last60 | last90</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Dashboard(System.Threading.CancellationToken)">
             <summary>Get platform-wide KPI dashboard snapshot.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Analytics(System.String,System.Threading.CancellationToken)">
+            <summary>Get platform-wide analytics (revenue, registrations, churn). period: last30 | last60 | last90</summary>
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Revenue(System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
             <summary>Get platform-wide revenue report aggregated by day.</summary>
@@ -876,6 +894,21 @@
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminAuditLogController.ExportCsv(System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid},System.String,System.Threading.CancellationToken)">
             <summary>Export global audit log as CSV.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminProfileController.GetProfile(System.Threading.CancellationToken)">
+            <summary>Get the logged-in super admin's own profile.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminProfileController.UpdateProfile(MediMind.Application.Features.SuperAdmin.UpdateSuperAdminProfileDto,System.Threading.CancellationToken)">
+            <summary>Update the logged-in super admin's profile (fullName, dateOfBirth, gender).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSettingsController.Get(System.Threading.CancellationToken)">
+            <summary>Get platform-wide configuration settings.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSettingsController.Update(MediMind.Application.Features.SuperAdmin.UpdatePlatformSettingsDto,System.Threading.CancellationToken)">
+            <summary>Update platform-wide configuration settings.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.GetAll(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List all center subscriptions (paginated).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.Get(System.Guid,System.Threading.CancellationToken)">
             <summary>Get current subscription details and history for a center.</summary>

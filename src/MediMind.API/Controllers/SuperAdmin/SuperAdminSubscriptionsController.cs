@@ -13,6 +13,18 @@ public class SuperAdminSubscriptionsController(
     ISuperAdminSubscriptionService subscriptionService,
     ICurrentUser currentUser) : ControllerBase
 {
+    /// <summary>List all center subscriptions (paginated).</summary>
+    [HttpGet("/api/v1/super-admin/subscriptions")]
+    [ProducesResponseType(typeof(PagedResult<SubscriptionDetailDto>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 20,
+        CancellationToken ct = default)
+    {
+        var result = await subscriptionService.GetAllSubscriptionsAsync(page, pageSize, ct);
+        return Ok(result);
+    }
+
     /// <summary>Get current subscription details and history for a center.</summary>
     [HttpGet]
     [ProducesResponseType(typeof(SubscriptionDetailDto), StatusCodes.Status200OK)]

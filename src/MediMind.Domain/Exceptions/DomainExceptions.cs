@@ -27,8 +27,8 @@ public class TenantIsolationException()
     : Exception("Cross-tenant data access is strictly prohibited.");
 
 /// <summary>
-/// Thrown when an authenticated user is not authorized for a resource.
-/// Results in HTTP 403 Forbidden.
+/// Thrown when a request lacks valid authentication credentials (expired token, invalid session).
+/// Results in HTTP 401 Unauthorized.
 /// </summary>
 public class UnauthorizedException(string message = "Access denied") : Exception(message);
 

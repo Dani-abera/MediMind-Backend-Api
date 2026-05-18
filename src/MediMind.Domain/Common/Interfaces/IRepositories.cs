@@ -77,6 +77,7 @@ public interface IHealthcareCenterRepository : IRepository<HealthcareCenter>
     Task<bool> AddDoctorAsync(DoctorHealthcareCenter relation);
     Task<bool> RemoveDoctorAsync(Guid doctorId, Guid centerId);
     Task<IReadOnlyList<HealthcareCenter>> GetActiveSubscriptionsAsync(CancellationToken ct = default);
+    Task<int> GetChurnedCentersCountAsync(DateTime since, CancellationToken ct = default);
     Task<bool> ExistsByLicenseAsync(string licenseNumber, CancellationToken ct = default);
     Task<HealthcareCenter?> GetWithAdminsAsync(Guid centerId, CancellationToken ct = default);
     Task<PagedResult<HealthcareCenter>> GetAllAsync(SuperAdminCenterQueryDto query, CancellationToken ct = default);
@@ -179,9 +180,10 @@ public interface IPaymentRepository : IRepository<Payment>
     Task<IEnumerable<Payment>> GetByCenterAsync(Guid centerId, int page, int pageSize);
     Task<decimal> GetTotalRevenueAsync(Guid centerId, DateOnly startDate, DateOnly endDate);
     Task<Payment?> UpdateAsync(Payment payment);
-
     Task<bool> ExistsByRefAsync(string paymentRef, CancellationToken ct = default);
     Task<IReadOnlyList<Payment>> GetByAppointmentAsync(Guid appointmentId, CancellationToken ct = default);
+    Task<IReadOnlyList<(Guid CenterId, string CenterName, decimal Revenue)>> GetPlatformRevenueByCenterAsync(DateOnly start, DateOnly end, CancellationToken ct = default);
+    Task<Dictionary<string, decimal>> GetPlatformRevenueByMonthAsync(DateOnly start, DateOnly end, CancellationToken ct = default);
 }
 
 public interface IVideoConsultationRepository : IRepository<VideoConsultation>
@@ -404,3 +406,9 @@ public record SuperAdminUserQueryDto(
     UserStatus? Status,
     int Page = 1,
     int PageSize = 20);
+
+public interface IPlatformConfigurationRepository
+{
+    Task<PlatformConfiguration?> GetAsync(CancellationToken ct = default);
+    Task UpsertAsync(PlatformConfiguration config, CancellationToken ct = default);
+}

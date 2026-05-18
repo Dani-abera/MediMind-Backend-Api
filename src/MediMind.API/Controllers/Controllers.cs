@@ -233,7 +233,7 @@ public class AuthController(
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenApiRequest request, CancellationToken ct)
     {
         if (!tokenService.ValidateRefreshToken(request.RefreshToken, out var userId))
-            throw new Domain.Exceptions.DomainException("Session expired. Please login.");
+            throw new Domain.Exceptions.UnauthorizedException("Session expired. Please login.");
 
         var user = await userRepository.GetByIdAsync(userId, ct)
             ?? throw new Domain.Exceptions.NotFoundException(nameof(Domain.Entities.User), userId);
