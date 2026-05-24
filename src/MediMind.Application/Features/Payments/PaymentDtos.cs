@@ -48,9 +48,12 @@ public sealed record PaymentInitiationDto(
     decimal ServiceFee,
     decimal TotalAmount,
     string Currency,
-    string CheckoutUrl,
     DateTime ExpiresAt,
-    AppointmentDetailsDto AppointmentDetails);
+    AppointmentDetailsDto AppointmentDetails,
+    string PatientEmail,
+    string PatientPhone,
+    string PatientFirstName,
+    string PatientLastName);
 
 public sealed record PaymentStatusDto(
     Guid PaymentId,

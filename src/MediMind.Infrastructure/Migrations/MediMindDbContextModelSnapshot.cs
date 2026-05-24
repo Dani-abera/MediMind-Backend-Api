@@ -37,6 +37,14 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("time without time zone")
                         .HasColumnName("appointment_time");
 
+                    b.Property<string>("AppointmentType")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasDefaultValue("InPerson")
+                        .HasColumnName("appointment_type");
+
                     b.Property<DateTime?>("ApprovedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("approved_at");
@@ -157,7 +165,8 @@ namespace MediMind.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId", "CenterId", "AppointmentDate", "AppointmentTime")
                         .IsUnique()
-                        .HasDatabaseName("idx_appointments_no_double_booking");
+                        .HasDatabaseName("idx_appointments_no_double_booking")
+                        .HasFilter("status <> 'Cancelled'");
 
                     b.ToTable("appointments", null, t =>
                         {
@@ -1024,10 +1033,6 @@ namespace MediMind.Infrastructure.Migrations
                         .HasColumnType("numeric(11,8)")
                         .HasColumnName("longitude");
 
-                    b.Property<Guid?>("PatientId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("patient_id");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -1101,9 +1106,6 @@ namespace MediMind.Infrastructure.Migrations
                     b.HasIndex("LicenseNumber")
                         .IsUnique()
                         .HasDatabaseName("i_x_healthcare_centers_license_number");
-
-                    b.HasIndex("PatientId")
-                        .HasDatabaseName("i_x_healthcare_centers_patient_id");
 
                     b.HasIndex("SubscriptionPlanId")
                         .HasDatabaseName("i_x_healthcare_centers_subscription_plan_id");
@@ -1995,6 +1997,49 @@ namespace MediMind.Infrastructure.Migrations
 
                             t.HasCheckConstraint("ck_queue_position", "position > 0");
                         });
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at")
+                        .HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expires_at");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("token");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Token")
+                        .IsUnique()
+                        .HasDatabaseName("i_x_refresh_tokens_token");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("i_x_refresh_tokens_user_id");
+
+                    b.ToTable("refresh_tokens", (string)null);
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Review", b =>
@@ -2987,11 +3032,6 @@ namespace MediMind.Infrastructure.Migrations
 
             modelBuilder.Entity("MediMind.Domain.Entities.HealthcareCenter", b =>
                 {
-                    b.HasOne("MediMind.Domain.Entities.Patient", null)
-                        .WithMany("EnrolledCenters")
-                        .HasForeignKey("PatientId")
-                        .HasConstraintName("f_k_healthcare_centers_patients_patient_id");
-
                     b.HasOne("MediMind.Domain.Entities.SubscriptionPlan", null)
                         .WithMany("Centers")
                         .HasForeignKey("SubscriptionPlanId")
@@ -3125,6 +3165,18 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Appointment");
 
                     b.Navigation("Center");
+                });
+
+            modelBuilder.Entity("MediMind.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("MediMind.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("f_k_refresh_tokens_users_user_id");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MediMind.Domain.Entities.Review", b =>
@@ -3365,8 +3417,6 @@ namespace MediMind.Infrastructure.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("EmergencyContacts");
-
-                    b.Navigation("EnrolledCenters");
 
                     b.Navigation("Favorites");
 

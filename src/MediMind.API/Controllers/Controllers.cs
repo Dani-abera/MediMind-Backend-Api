@@ -232,15 +232,16 @@ public class AuthController(
     [ProducesResponseType(typeof(AuthResult), StatusCodes.Status200OK)]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenApiRequest request, CancellationToken ct)
     {
-        if (!tokenService.ValidateRefreshToken(request.RefreshToken, out var userId))
+        var userId = await tokenService.ValidateRefreshTokenAsync(request.RefreshToken, ct);
+        if (userId is null)
             throw new Domain.Exceptions.UnauthorizedException("Session expired. Please login.");
 
-        var user = await userRepository.GetByIdAsync(userId, ct)
-            ?? throw new Domain.Exceptions.NotFoundException(nameof(Domain.Entities.User), userId);
+        var user = await userRepository.GetByIdAsync(userId.Value, ct)
+            ?? throw new Domain.Exceptions.NotFoundException(nameof(Domain.Entities.User), userId.Value);
 
         var tenantId = (user as Domain.Entities.HealthcareCenterAdmin)?.CenterId;
         var (accessToken, refreshToken) = tokenService.GenerateTokens(user.Id, user.UserType.ToString(), tenantId);
-        return Ok(new AuthResult(accessToken, refreshToken, user.Id, user.UserType.ToString(), user.FullName));
+        return Ok(new AuthResult(accessToken, refreshToken, user.Id, user.UserType.ToString(), user.FullName, true));
     }
 
     /// <summary>Logout and revoke the current user's refresh token.</summary>
@@ -248,9 +249,9 @@ public class AuthController(
     [HttpPost("logout")]
     [Authorize]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public IActionResult Logout()
+    public async Task<IActionResult> Logout(CancellationToken ct)
     {
-        tokenService.RevokeRefreshToken(currentUser.UserId);
+        await tokenService.RevokeRefreshTokenAsync(currentUser.UserId, ct);
         return NoContent();
     }
 

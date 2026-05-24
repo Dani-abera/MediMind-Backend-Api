@@ -124,15 +124,19 @@ public sealed class VideoConsultationService(
             ?? throw new NotFoundException(nameof(Appointment), appointmentId);
         if (appointment.DoctorId != doctorId)
             throw new ForbiddenException("Only the assigned doctor can initiate this consultation.");
-        if (appointment.Status != AppointmentStatus.Confirmed)
-            throw new DomainException("Appointment must be confirmed before starting a video consultation.");
+        if (appointment.Status is AppointmentStatus.Cancelled or AppointmentStatus.NoShow)
+            throw new DomainException("Cannot initiate a video consultation for a cancelled or no-show appointment.");
 
-        var existing = await videoRepository.GetByAppointmentIdAsync(appointmentId);
-        if (existing is not null && existing.Status is VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress)
-            throw new DomainException("An active consultation already exists for this appointment.");
+        var consultation = await videoRepository.GetByAppointmentIdAsync(appointmentId)
+            ?? throw new DomainException("No video consultation channel found. Please re-book as a video consultation.");
 
-        var consultation = VideoConsultation.Create(appointmentId);
-        await videoRepository.CreateAsync(consultation);
+        if (consultation.Status == VideoConsultationStatus.InProgress)
+            return MapSession(consultation, appointment);
+
+        if (consultation.Status is VideoConsultationStatus.Completed or VideoConsultationStatus.Cancelled)
+            throw new DomainException("This consultation has already ended.");
+
+        consultation.Start();
         await unitOfWork.SaveChangesAsync(ct);
 
         await pushNotificationService.SendToUserAsync(
@@ -162,9 +166,6 @@ public sealed class VideoConsultationService(
         if ((isDoctor && appointment.DoctorId != userId) || (isPatient && appointment.PatientId != userId) || (!isDoctor && !isPatient))
             throw new ForbiddenException("You are not allowed to join this consultation.");
 
-        if (consultation.Status == VideoConsultationStatus.Scheduled)
-            consultation.Start();
-
         var participant = new VideoConsultationParticipant(
             consultation.Id,
             isPatient ? userId : null,
@@ -193,7 +194,7 @@ public sealed class VideoConsultationService(
         await videoRepository.UpdateParticipantLeftAsync(consultationId, consultation.Appointment.PatientId);
         await videoRepository.UpdateParticipantLeftAsync(consultationId, consultation.Appointment.DoctorId);
 
-        if (endedByDoctor && consultation.Appointment.Status == AppointmentStatus.InProgress)
+        if (endedByDoctor && consultation.Appointment.Status is AppointmentStatus.InProgress or AppointmentStatus.Confirmed)
             consultation.Appointment.MarkCompleted();
 
         await unitOfWork.SaveChangesAsync(ct);
@@ -207,6 +208,10 @@ public sealed class VideoConsultationService(
 
         var consultation = await videoRepository.GetByIdAsync(consultationId)
             ?? throw new NotFoundException(nameof(VideoConsultation), consultationId);
+
+        if (consultation.Status is VideoConsultationStatus.Completed or VideoConsultationStatus.Cancelled)
+            throw new DomainException("Cannot send messages in a completed or cancelled consultation.");
+
         var senderName = string.Equals(senderType, "Doctor", StringComparison.OrdinalIgnoreCase)
             ? consultation.Appointment.Doctor.FullName
             : consultation.Appointment.Patient.FullName;

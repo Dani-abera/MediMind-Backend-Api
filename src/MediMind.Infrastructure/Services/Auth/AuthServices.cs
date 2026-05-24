@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
+using MediMind.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -13,15 +15,12 @@ namespace MediMind.Infrastructure.Services.Auth;
 
 // ─── JWT Token Service ────────────────────────────────────────────────────────
 
-public class TokenService(IConfiguration config) : ITokenService, IJwtService
+public class TokenService(IConfiguration config, MediMindDbContext db) : ITokenService, IJwtService
 {
     private readonly string _secretKey = config["Jwt:SecretKey"]
         ?? throw new InvalidOperationException("Jwt:SecretKey is not configured.");
     private readonly string _issuer = config["Jwt:Issuer"] ?? "MediMind";
     private readonly string _audience = config["Jwt:Audience"] ?? "MediMind";
-
-    // In-memory refresh token store — replace with Redis or DB in production
-    private static readonly Dictionary<Guid, (string Token, DateTime Expiry)> RefreshTokens = [];
 
     public (string AccessToken, string RefreshToken) GenerateTokens(
         Guid userId, string userType, Guid? tenantId)
@@ -51,27 +50,38 @@ public class TokenService(IConfiguration config) : ITokenService, IJwtService
             expires: DateTime.UtcNow.AddMinutes(15), // 15-minute expiry (FR-002)
             signingCredentials: credentials);
 
-        var refreshToken = GenerateRefreshToken();
-        RefreshTokens[userId] = (refreshToken, DateTime.UtcNow.AddDays(7)); // 7-day expiry
+        var rawRefreshToken = GenerateRefreshToken();
+        var expiresAt = DateTime.UtcNow.AddDays(7);
 
-        return (new JwtSecurityTokenHandler().WriteToken(accessToken), refreshToken);
+        // Persist: replace any existing token for this user (atomic delete + insert)
+        db.RefreshTokens.Where(r => r.UserId == userId).ExecuteDelete();
+        db.RefreshTokens.Add(new RefreshToken(userId, rawRefreshToken, expiresAt));
+        db.SaveChanges();
+
+        return (new JwtSecurityTokenHandler().WriteToken(accessToken), rawRefreshToken);
     }
 
-    public bool ValidateRefreshToken(string refreshToken, out Guid userId)
+    public async Task<Guid?> ValidateRefreshTokenAsync(string refreshToken, CancellationToken ct = default)
     {
-        userId = Guid.Empty;
-        var match = RefreshTokens.FirstOrDefault(kvp => kvp.Value.Token == refreshToken);
-        if (match.Key == Guid.Empty) return false;
-        if (match.Value.Expiry < DateTime.UtcNow)
-        {
-            RefreshTokens.Remove(match.Key);
-            return false;
-        }
-        userId = match.Key;
-        return true;
+        var row = await db.RefreshTokens
+            .FirstOrDefaultAsync(r => r.Token == refreshToken, ct);
+
+        if (row is null) return null;
+
+        // Atomic DELETE — returns 0 if a concurrent request already consumed this token
+        var deleted = await db.RefreshTokens
+            .Where(r => r.Token == refreshToken)
+            .ExecuteDeleteAsync(ct);
+
+        if (deleted == 0) return null;
+
+        return row.IsExpired ? null : row.UserId;
     }
 
-    public void RevokeRefreshToken(Guid userId) => RefreshTokens.Remove(userId);
+    public async Task RevokeRefreshTokenAsync(Guid userId, CancellationToken ct = default)
+    {
+        await db.RefreshTokens.Where(r => r.UserId == userId).ExecuteDeleteAsync(ct);
+    }
 
     private static string GenerateRefreshToken()
     {

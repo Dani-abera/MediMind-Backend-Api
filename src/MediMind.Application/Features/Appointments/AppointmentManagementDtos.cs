@@ -8,7 +8,8 @@ public record CreateAppointmentDto(
     DateOnly AppointmentDate,
     TimeOnly AppointmentTime,
     string ReasonForVisit,
-    string? Symptoms);
+    string? Symptoms,
+    AppointmentType AppointmentType = AppointmentType.InPerson);
 
 public record CancelAppointmentDto(string CancellationReason);
 
@@ -52,7 +53,11 @@ public record AppointmentResponseDto(
     string? PaymentStatus = null,
     bool CanInitiateVideoConsultation = false,
     Guid? VideoConsultationId = null,
-    int CancellationPolicyHours = 2);
+    string? VideoConsultationStatus = null,
+    int CancellationPolicyHours = 2,
+    decimal? ConsultationFee = null,
+    decimal? ServiceFee = null,
+    decimal? TotalAmount = null);
 
 public record AvailabilityResponseDto(
     Guid DoctorId,

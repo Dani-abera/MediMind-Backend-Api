@@ -47,6 +47,12 @@ public enum SlotDurationMinutes
 
 // ─── Appointment ─────────────────────────────────────────────────────────────
 
+public enum AppointmentType
+{
+    InPerson,
+    VideoConsultation
+}
+
 public enum AppointmentStatus
 {
     Pending,

@@ -2,14 +2,14 @@ using MediMind.Application.Features.Admin;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace MediMind.Infrastructure.Services.Audit;
 
 public class AuditLoggerService(
-    IAuditLogRepository auditLogRepository,
+    IServiceScopeFactory scopeFactory,
     IHttpContextAccessor httpContextAccessor,
-    IUnitOfWork unitOfWork,
     ILogger<AuditLoggerService> logger) : IAuditLogger
 {
     public async Task LogAsync(
@@ -29,8 +29,12 @@ public class AuditLoggerService(
             var userAgent = ctx?.Request.Headers.UserAgent.ToString() ?? "unknown";
 
             var entry = AuditLog.Create(action, userId, userType, centerId, entityType, entityId, ipAddress, userAgent, metadata);
-            await auditLogRepository.AppendAsync(entry, ct);
-            await unitOfWork.SaveChangesAsync(ct);
+
+            await using var scope = scopeFactory.CreateAsyncScope();
+            var repo = scope.ServiceProvider.GetRequiredService<IAuditLogRepository>();
+            var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
+            await repo.AppendAsync(entry, ct);
+            await uow.SaveChangesAsync(ct);
         }
         catch (Exception ex)
         {

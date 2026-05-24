@@ -1253,3 +1253,86 @@ System.AggregateException: One or more errors occurred. (Cannot write DateTime w
 2026-05-18 17:02:21.817 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 57.7983 ms
 2026-05-18 17:03:08.045 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.2500 ms
 2026-05-18 17:04:08.189 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 56.1816 ms
+2026-05-18 17:05:08.043 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.7890 ms
+2026-05-18 17:06:08.071 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.8824 ms
+2026-05-18 17:07:08.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.0455 ms
+2026-05-18 17:08:08.064 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.2468 ms
+2026-05-18 17:08:57.153 +03:00 [INF] HTTP PUT /api/v1/super-admin/settings responded 200 in 525.2888 ms
+2026-05-18 17:09:04.468 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 44.4245 ms
+2026-05-18 17:09:08.023 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.0068 ms
+2026-05-18 17:09:22.514 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 260.7404 ms
+2026-05-18 17:09:22.750 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.0808 ms
+2026-05-18 17:09:22.841 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-18 17:09:22.981 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-18 17:09:23.040 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 302.1226 ms
+2026-05-18 17:09:23.147 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-18 17:09:23.169 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 89.1632 ms
+2026-05-18 17:09:23.173 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 93.7354 ms
+2026-05-18 17:10:10.626 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 117.9065 ms
+2026-05-18 17:10:13.802 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/admins responded 200 in 50.5504 ms
+2026-05-18 17:10:15.780 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/audit-log responded 200 in 63.8971 ms
+2026-05-18 17:10:18.875 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 16.8615 ms
+2026-05-18 17:10:21.119 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 53.0429 ms
+2026-05-18 17:10:22.786 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.2739 ms
+2026-05-18 17:10:22.823 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 54.5591 ms
+2026-05-18 17:10:22.836 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 67.1801 ms
+2026-05-18 17:10:27.891 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 43.4896 ms
+2026-05-18 17:10:46.610 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/working-hours responded 200 in 49.4595 ms
+2026-05-18 17:10:51.528 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/booking-rules responded 200 in 41.3651 ms
+2026-05-18 17:10:55.619 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 32.5527 ms
+2026-05-18 17:11:22.752 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.7611 ms
+2026-05-18 17:11:22.771 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 27.8393 ms
+2026-05-18 17:12:22.759 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.0594 ms
+2026-05-18 17:12:22.791 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 46.7528 ms
+2026-05-18 17:13:22.761 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.3430 ms
+2026-05-18 17:13:22.778 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 31.9801 ms
+2026-05-18 17:14:22.759 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.6942 ms
+2026-05-18 17:14:22.780 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 27.4145 ms
+2026-05-18 17:15:22.791 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.6433 ms
+2026-05-18 17:15:22.820 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 71.4898 ms
+2026-05-18 17:16:23.022 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.0667 ms
+2026-05-18 17:16:23.089 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 40.6254 ms
+2026-05-18 17:17:22.764 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 13.6384 ms
+2026-05-18 17:17:22.795 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 43.8328 ms
+2026-05-18 17:18:22.847 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.4148 ms
+2026-05-18 17:18:22.889 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 37.0557 ms
+2026-05-18 17:19:22.871 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.9826 ms
+2026-05-18 17:19:22.921 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 30.5639 ms
+2026-05-18 17:20:22.785 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.5311 ms
+2026-05-18 17:20:22.807 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 50.3421 ms
+2026-05-18 17:21:22.757 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.8910 ms
+2026-05-18 17:21:22.770 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 25.5919 ms
+2026-05-18 17:22:22.795 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.4213 ms
+2026-05-18 17:22:22.808 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 30.0391 ms
+2026-05-18 17:39:59.146 +03:00 [INF] Running appointment reminder job at "2026-05-18T14:39:59.1449340Z"
+2026-05-18 17:39:59.173 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 17:40:09.222 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 44.9305 ms
+2026-05-18 17:40:09.222 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 401 in 33.2805 ms
+2026-05-18 17:40:09.953 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 12.4587 ms
+2026-05-18 17:40:09.953 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 239.5596 ms
+2026-05-18 17:40:10.117 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.7353 ms
+2026-05-18 17:40:10.138 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 20.1942 ms
+2026-05-18 17:40:22.785 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.4083 ms
+2026-05-18 17:40:22.807 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 35.8613 ms
+2026-05-18 18:44:50.400 +03:00 [INF] Running appointment reminder job at "2026-05-18T15:44:50.4000620Z"
+2026-05-18 18:44:50.414 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 19:20:28.974 +03:00 [INF] Running appointment reminder job at "2026-05-18T16:20:28.9738430Z"
+2026-05-18 19:20:28.992 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 19:39:43.756 +03:00 [INF] Running appointment reminder job at "2026-05-18T16:39:43.7557030Z"
+2026-05-18 19:39:43.764 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 20:00:14.861 +03:00 [INF] Running appointment reminder job at "2026-05-18T17:00:14.8516630Z"
+2026-05-18 20:00:14.901 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 20:30:15.033 +03:00 [INF] Running appointment reminder job at "2026-05-18T17:30:15.0263150Z"
+2026-05-18 20:30:15.065 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 21:00:00.299 +03:00 [INF] Running appointment reminder job at "2026-05-18T18:00:00.2934930Z"
+2026-05-18 21:00:00.349 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 21:30:00.524 +03:00 [INF] Running appointment reminder job at "2026-05-18T18:30:00.5174390Z"
+2026-05-18 21:30:00.559 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 22:00:00.766 +03:00 [INF] Running appointment reminder job at "2026-05-18T19:00:00.7620000Z"
+2026-05-18 22:00:00.797 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 22:30:00.986 +03:00 [INF] Running appointment reminder job at "2026-05-18T19:30:00.9802470Z"
+2026-05-18 22:30:01.016 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 23:01:19.377 +03:00 [INF] Running appointment reminder job at "2026-05-18T20:01:19.3722930Z"
+2026-05-18 23:01:19.414 +03:00 [INF] Appointment reminder job completed.
+2026-05-18 23:43:44.325 +03:00 [INF] Running appointment reminder job at "2026-05-18T20:43:44.3179470Z"
+2026-05-18 23:43:44.373 +03:00 [INF] Appointment reminder job completed.

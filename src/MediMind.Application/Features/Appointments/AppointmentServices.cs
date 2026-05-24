@@ -65,6 +65,11 @@ public interface IAppointmentService
     Task RejectAppointmentAsync(Guid appointmentId, Guid adminId, Guid adminCenterId, string reason);
 
     /// <summary>
+    /// Allows the assigned doctor to decline a pending appointment.
+    /// </summary>
+    Task DoctorRejectAppointmentAsync(Guid appointmentId, Guid doctorId, string reason);
+
+    /// <summary>
     /// Returns a scoped appointment.
     /// </summary>
     Task<AppointmentResponseDto?> GetByIdAsync(Guid appointmentId, Guid requesterId, string requesterRole, Guid? centerId = null);
@@ -214,6 +219,7 @@ public class AppointmentService(
     IPushNotificationService pushNotificationService,
     INotificationPreferenceRepository notificationPreferenceRepository,
     IWaitlistService waitlistService,
+    IVideoConsultationRepository videoConsultationRepository,
     IUnitOfWork unitOfWork,
     ILogger<AppointmentService> logger,
     MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAppointmentService
@@ -250,12 +256,17 @@ public class AppointmentService(
                 dto.ReasonForVisit,
                 dto.Symptoms,
                 center.AdvanceBookingDays,
-                2);
+                2,
+                dto.AppointmentType);
 
-            if (center.AutoApproveAppointments)
+            if (center.AutoApproveAppointments && !center.RequiresPaymentBeforeConfirmation)
                 appointment.Approve(Guid.Empty);
 
             created = await appointmentRepository.CreateAsync(appointment);
+
+            var consultation = VideoConsultation.Create(created.Id);
+            await videoConsultationRepository.CreateAsync(consultation);
+
             await unitOfWork.CommitTransactionAsync();
         }
         catch
@@ -295,6 +306,8 @@ public class AppointmentService(
 
         if (requesterRole == "Patient" && appointment.PatientId != requesterId)
             throw new UnauthorizedException();
+        if (requesterRole == "Doctor" && appointment.DoctorId != requesterId)
+            throw new UnauthorizedException();
         if (requesterRole == "Admin" && appointment.CenterId != centerId)
             throw new UnauthorizedException();
 
@@ -315,6 +328,9 @@ public class AppointmentService(
         var doctorId = appointment.DoctorId;
         var patientId = appointment.PatientId;
         var appointmentCenterId = appointment.CenterId;
+
+        if (appointment.VideoConsultation?.Status is VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress)
+            appointment.VideoConsultation.Cancel();
 
         appointment.Cancel(requesterId, dto.CancellationReason, center.CancellationHours);
         await unitOfWork.SaveChangesAsync();
@@ -369,6 +385,9 @@ public class AppointmentService(
         if (appointmentDateTime <= DateTime.UtcNow.AddHours(2))
             throw new ValidationException("Too close to appointment time. Contact healthcare center to reschedule.");
 
+        if (existing.VideoConsultation?.Status is VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress)
+            existing.VideoConsultation.Cancel();
+
         existing.IncrementRescheduleCount();
         existing.Cancel(patientId, dto.Reason ?? "Rescheduled by patient", 0);
 
@@ -378,7 +397,8 @@ public class AppointmentService(
             dto.NewDate,
             dto.NewTime,
             existing.ReasonForVisit,
-            existing.Symptoms);
+            existing.Symptoms,
+            existing.AppointmentType);
 
         await bookingValidationService.ValidateBookingAsync(createDto, patientId);
 
@@ -395,13 +415,18 @@ public class AppointmentService(
             existing.ReasonForVisit,
             existing.Symptoms,
             center.AdvanceBookingDays,
-            2);
+            2,
+            existing.AppointmentType);
 
         newAppointment.LinkToOriginal(existing.Id);
-        if (center.AutoApproveAppointments)
+        if (center.AutoApproveAppointments && !center.RequiresPaymentBeforeConfirmation)
             newAppointment.Approve(Guid.Empty);
 
         await appointmentRepository.CreateAsync(newAppointment);
+
+        var newConsultation = VideoConsultation.Create(newAppointment.Id);
+        await videoConsultationRepository.CreateAsync(newConsultation);
+
         await unitOfWork.SaveChangesAsync();
 
         await auditLogger.LogAsync(AuditActions.AppointmentRescheduled, patientId, "Patient", newAppointment.CenterId, "Appointment", newAppointment.Id);
@@ -462,7 +487,57 @@ public class AppointmentService(
 
         appointment.Reject(adminId, reason);
         await unitOfWork.SaveChangesAsync();
+
+        var patientId = appointment.PatientId;
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var body = string.IsNullOrWhiteSpace(reason)
+                    ? "Your appointment request was not approved."
+                    : $"Your appointment was rejected: {reason}";
+                await pushNotificationService.SendToUserAsync(patientId, "Appointment not approved", body);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Rejection notification failed for appointment {AppointmentId}", appointmentId);
+            }
+        });
+
         await auditLogger.LogAsync(AuditActions.AppointmentRejected, adminId, "Admin", adminCenterId, "Appointment", appointmentId);
+    }
+
+    /// <inheritdoc />
+    public async Task DoctorRejectAppointmentAsync(Guid appointmentId, Guid doctorId, string reason)
+    {
+        var appointment = await appointmentRepository.GetByIdAsync(appointmentId)
+            ?? throw new NotFoundException(nameof(Appointment), appointmentId);
+
+        if (appointment.DoctorId != doctorId)
+            throw new UnauthorizedException();
+        if (appointment.Status != AppointmentStatus.Pending)
+            throw new ValidationException("Only pending appointments can be declined");
+
+        appointment.Reject(doctorId, reason);
+        await unitOfWork.SaveChangesAsync();
+
+        var patientId = appointment.PatientId;
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                var body = string.IsNullOrWhiteSpace(reason)
+                    ? "Your appointment was declined by the doctor."
+                    : $"Your appointment was declined: {reason}";
+                await pushNotificationService.SendToUserAsync(patientId, "Appointment declined", body);
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Doctor rejection notification failed for appointment {AppointmentId}", appointmentId);
+            }
+        });
+
+        await auditLogger.LogAsync(AuditActions.AppointmentRejected, doctorId, "Doctor", appointment.CenterId, "Appointment", appointmentId);
     }
 
     /// <inheritdoc />
@@ -551,8 +626,14 @@ public class AppointmentService(
         var center = full.Center;
         var canCancel = full.IsCancellable(center?.CancellationHours ?? 2);
         var queue = full.QueueEntry;
-        var canInitiateVideo = full.Status == AppointmentStatus.Confirmed && full.VideoConsultation is null;
+        var canInitiateVideo = full.VideoConsultation?.Status == VideoConsultationStatus.Scheduled;
         var latestPayment = full.Payments.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
+
+        var doctorCenterLink = full.Doctor?.DoctorHealthcareCenters
+            .FirstOrDefault(dhc => dhc.CenterId == full.CenterId);
+        var consultationFee = doctorCenterLink?.ConsultationFee;
+        var serviceFee = consultationFee.HasValue ? Math.Round(consultationFee.Value * 0.02m, 2) : (decimal?)null;
+        var totalAmount = consultationFee.HasValue ? consultationFee.Value + serviceFee!.Value : (decimal?)null;
 
         return new AppointmentResponseDto(
             Id: full.Id,
@@ -575,16 +656,20 @@ public class AppointmentService(
             CenterPhone: center?.PhoneNumber,
             CenterLatitude: center?.Latitude.HasValue == true ? (double?)Convert.ToDouble(center.Latitude) : null,
             CenterLongitude: center?.Longitude.HasValue == true ? (double?)Convert.ToDouble(center.Longitude) : null,
-            Type: "InPerson",
+            Type: full.AppointmentType.ToString(),
             CanCancel: canCancel,
             CanReschedule: full.CanReschedule,
             QueueNumber: queue?.Position,
             EstimatedWaitMinutes: queue?.EstimatedWaitTimeMinutes,
             CanInitiateVideoConsultation: canInitiateVideo,
             VideoConsultationId: full.VideoConsultation?.ConsultationId,
+            VideoConsultationStatus: full.VideoConsultation?.Status.ToString(),
             CancellationPolicyHours: center?.CancellationHours ?? 2,
             PaymentId: latestPayment?.Id,
-            PaymentStatus: latestPayment?.Status.ToString());
+            PaymentStatus: latestPayment?.Status.ToString(),
+            ConsultationFee: consultationFee,
+            ServiceFee: serviceFee,
+            TotalAmount: totalAmount);
     }
 
     public async Task MarkCompleteAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default)
@@ -596,6 +681,10 @@ public class AppointmentService(
             throw new UnauthorizedException();
 
         appointment.MarkCompleted();
+
+        if (appointment.VideoConsultation?.Status is VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress)
+            appointment.VideoConsultation.Cancel();
+
         await unitOfWork.SaveChangesAsync(ct);
     }
 }

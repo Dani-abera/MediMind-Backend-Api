@@ -217,6 +217,19 @@ public class AdminController(
         return StatusCode(StatusCodes.Status201Created, result);
     }
 
+    /// <summary>Create a doctor account immediately and link them to this center. Account is live at once; doctor receives badge number via SMS and email. No activation required.</summary>
+    [Tags("Admin — Doctors")]
+    [HttpPost("{id:guid}/doctors/create")]
+    [ProducesResponseType(typeof(DoctorCreatedResult), StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> CreateDoctor(Guid id, [FromBody] CreateDoctorRequest dto, CancellationToken ct)
+    {
+        EnsureCenterAccess(id);
+        var result = await adminAuth.CreateDoctorAsync(dto, ct);
+        return StatusCode(StatusCodes.Status201Created, result);
+    }
+
     // ─── Helper ──────────────────────────────────────────────────────────────
 
     private void EnsureCenterAccess(Guid centerId)

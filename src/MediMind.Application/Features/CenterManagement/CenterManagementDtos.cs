@@ -103,6 +103,8 @@ public record CenterResponseDto(
     int DoctorCount,
     double? Distance,
     bool IsOpenNow,
+    double? Latitude = null,
+    double? Longitude = null,
     string? Warning = null);
 
 // ─── Admin settings page DTOs (portal-facing field names) ────────────────────

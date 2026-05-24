@@ -19,6 +19,7 @@ public class GeezSmsService(
 {
     public async Task SendAsync(string phoneNumber, string message, CancellationToken ct = default)
     {
+        // EthiopiaPhone.Normalize always returns 251XXXXXXXXX (no +), which Geez SMS requires.
         var response = await geezSmsClient.SendSmsAsync(phoneNumber, message, ct);
         if (response is not null && IsHttpSuccess(response))
         {
@@ -26,25 +27,8 @@ public class GeezSmsService(
             return;
         }
 
-        // Some gateways reject '+' prefix and require 2519XXXXXXXX format.
-        var stripped = EthiopiaPhone.Normalize(phoneNumber).TrimStart('+');
-        if (!string.Equals(stripped, phoneNumber.Trim(), StringComparison.Ordinal))
-        {
-            var fallback = await geezSmsClient.SendSmsAsync(stripped, message, ct);
-            if (fallback is not null && IsHttpSuccess(fallback))
-            {
-                logger.LogInformation("SMS delivered to {Phone} using stripped prefix.", phoneNumber);
-                return;
-            }
-
-            logger.LogError(
-                "SMS delivery failed for {Phone}. Primary={Primary}. Fallback={Fallback}",
-                phoneNumber, response?.Message, fallback?.Message);
-            throw new InvalidOperationException("Failed to deliver SMS OTP.");
-        }
-
         logger.LogError("SMS delivery failed for {Phone}. Response={Response}", phoneNumber, response?.Message);
-        throw new InvalidOperationException("Failed to deliver SMS OTP.");
+        throw new InvalidOperationException("Failed to deliver SMS.");
     }
 
     private static bool IsHttpSuccess(GeezSendResponse r) =>

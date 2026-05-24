@@ -4,6 +4,33 @@ using MediMind.Domain.Exceptions;
 
 namespace MediMind.Domain.Entities;
 
+// ─── Refresh Token ────────────────────────────────────────────────────────────
+
+/// <summary>
+/// Persisted refresh token (7-day expiry, one-time use).
+/// Replaces the previous in-memory dictionary so tokens survive server restarts.
+/// </summary>
+public class RefreshToken : BaseEntity
+{
+    public Guid UserId { get; private set; }
+    public string Token { get; private set; } = string.Empty;
+    public DateTime ExpiresAt { get; private set; }
+
+    // Navigation
+    public User User { get; private set; } = null!;
+
+    private RefreshToken() { }
+
+    public RefreshToken(Guid userId, string token, DateTime expiresAt)
+    {
+        UserId = userId;
+        Token = token;
+        ExpiresAt = expiresAt;
+    }
+
+    public bool IsExpired => ExpiresAt < DateTime.UtcNow;
+}
+
 // ─── Queue Entry ──────────────────────────────────────────────────────────────
 
 /// <summary>

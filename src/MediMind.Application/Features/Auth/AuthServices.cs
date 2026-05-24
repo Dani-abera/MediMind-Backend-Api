@@ -9,6 +9,25 @@ using Microsoft.Extensions.Options;
 
 namespace MediMind.Application.Features.Auth;
 
+/// <summary>
+/// Normalizes Ethiopian phone numbers to 251XXXXXXXXX (no + prefix) for consistent DB storage
+/// and Geez SMS delivery. Application layer cannot reference Infrastructure, so the logic is
+/// duplicated here intentionally.
+/// </summary>
+internal static class PhoneNormalizer
+{
+    internal static string Normalize(string phone)
+    {
+        var p = phone.Trim().Replace(" ", "").Replace("-", "");
+        if (p.StartsWith('+')) p = p[1..];
+        if (p.StartsWith("09") && p.Length == 10) return "251" + p[1..];
+        if (p.StartsWith("07") && p.Length == 10) return "251" + p[1..];
+        if (p.StartsWith('9') && p.Length == 9) return "251" + p;
+        if (p.StartsWith('7') && p.Length == 9) return "251" + p;
+        return p; // already 251XXXXXXXXX
+    }
+}
+
 // ─── Constants ────────────────────────────────────────────────────────────────
 
 public static class OtpPurposes
@@ -24,7 +43,8 @@ public record AuthResult(
     string RefreshToken,
     Guid UserId,
     string UserType,
-    string FullName);
+    string FullName,
+    bool IsProfileComplete);
 
 public record RegisterResult(Guid UserId, string Message);
 public record DoctorCreatedResult(Guid DoctorId, string BadgeNumber, string Message);
@@ -73,7 +93,14 @@ public record PatchPatientProfileRequest(
     BloodType? BloodType);
 
 public record AdminRegisterRequest(string FullName, string Email, string PhoneNumber, string Password);
-public record CreateDoctorRequest(string FullName, string PhoneNumber, string Specialization, int YearsOfExperience);
+public record CreateDoctorRequest(
+    string FullName,
+    string Email,
+    string PhoneNumber,
+    string Specialization,
+    string LicenseNumber,
+    int YearsOfExperience,
+    decimal ConsultationFee);
 public record InviteDoctorRequest(
     string FullName,
     string Email,
@@ -90,8 +117,9 @@ public class RegisterPatientRequestValidator : AbstractValidator<RegisterPatient
     public RegisterPatientRequestValidator()
     {
         RuleFor(x => x.Email).NotEmpty().EmailAddress();
-        RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\+251[0-9]{9}$")
-            .WithMessage("Phone number must be in Ethiopian format: +251XXXXXXXXX");
+        RuleFor(x => x.PhoneNumber).NotEmpty()
+            .Matches(@"^\+?251[0-9]{9}$")
+            .WithMessage("Phone number must be in Ethiopian format: 251XXXXXXXXX or +251XXXXXXXXX");
         RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
         RuleFor(x => x.DateOfBirth)
             .Must(dob => dob <= DateOnly.FromDateTime(DateTime.Today.AddYears(-18)))
@@ -108,7 +136,9 @@ public class AdminRegisterRequestValidator : AbstractValidator<AdminRegisterRequ
     {
         RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
         RuleFor(x => x.Email).NotEmpty().EmailAddress();
-        RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\+251[0-9]{9}$");
+        RuleFor(x => x.PhoneNumber).NotEmpty()
+            .Matches(@"^\+?251[0-9]{9}$")
+            .WithMessage("Phone number must be in Ethiopian format: 251XXXXXXXXX or +251XXXXXXXXX");
         RuleFor(x => x.Password).NotEmpty().MinimumLength(8);
     }
 }
@@ -118,9 +148,16 @@ public class CreateDoctorRequestValidator : AbstractValidator<CreateDoctorReques
     public CreateDoctorRequestValidator()
     {
         RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
-        RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\+251[0-9]{9}$");
+        RuleFor(x => x.Email).NotEmpty().EmailAddress()
+            .WithMessage("Please enter a valid email address");
+        RuleFor(x => x.PhoneNumber).NotEmpty()
+            .Matches(@"^\+?251[0-9]{9}$")
+            .WithMessage("Phone number must be in Ethiopian format: 251XXXXXXXXX or +251XXXXXXXXX");
         RuleFor(x => x.Specialization).NotEmpty().MaximumLength(100);
+        RuleFor(x => x.LicenseNumber).NotEmpty().MaximumLength(100);
         RuleFor(x => x.YearsOfExperience).GreaterThanOrEqualTo(0);
+        RuleFor(x => x.ConsultationFee).GreaterThan(0)
+            .WithMessage("Consultation fee must be greater than 0 ETB.");
     }
 }
 
@@ -131,8 +168,9 @@ public class InviteDoctorRequestValidator : AbstractValidator<InviteDoctorReques
         RuleFor(x => x.FullName).NotEmpty().MaximumLength(100);
         RuleFor(x => x.Email).NotEmpty().EmailAddress()
             .WithMessage("Please enter valid email address");
-        RuleFor(x => x.PhoneNumber).NotEmpty().Matches(@"^\+251[0-9]{9}$")
-            .WithMessage("Phone number must be in Ethiopian format: +251XXXXXXXXX");
+        RuleFor(x => x.PhoneNumber).NotEmpty()
+            .Matches(@"^\+?251[0-9]{9}$")
+            .WithMessage("Phone number must be in Ethiopian format: 251XXXXXXXXX or +251XXXXXXXXX");
         RuleFor(x => x.Specialization).NotEmpty().MaximumLength(100);
         RuleFor(x => x.LicenseNumber).NotEmpty().MaximumLength(100);
         RuleFor(x => x.YearsOfExperience).GreaterThanOrEqualTo(0);
@@ -195,59 +233,69 @@ public class PatientAuthService(
 {
     public async Task<RegisterResult> RegisterAsync(RegisterPatientRequest request, CancellationToken ct)
     {
-        if (await userRepository.ExistsByEmailAsync(request.Email, ct))
-            throw new DomainException("Account already exists. Please login.");
-        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Patient, ct))
-            throw new DomainException("Phone number already registered. Please login.");
+        var phone = PhoneNormalizer.Normalize(request.PhoneNumber);
 
-        var patient = new Patient(request.Email, request.PhoneNumber, request.FullName, request.DateOfBirth, request.Gender);
+        if (await userRepository.ExistsByPhoneForRoleAsync(phone, UserType.Patient, ct))
+            throw new DomainException("A patient account with this phone number already exists.");
+
+        var patient = new Patient(request.Email, phone, request.FullName, request.DateOfBirth, request.Gender);
         patient.SetPasswordHash(passwordService.HashPassword(request.Password));
-
-        var otp = otpService.GenerateOtp();
-        patient.GenerateOtp(otp, expiryMinutes: 5);
 
         await patientRepository.AddAsync(patient, ct);
         await unitOfWork.SaveChangesAsync(ct);
-        await smsService.SendOtpAsync(request.PhoneNumber, otp, ct);
 
-        return new RegisterResult(patient.Id, "OTP sent to your phone number. Please verify.");
+        return new RegisterResult(patient.Id, "Account created. Verify your phone number via OTP to activate.");
     }
 
     public async Task RequestOtpAsync(string phoneNumber, CancellationToken ct)
     {
+        var phone = PhoneNormalizer.Normalize(phoneNumber);
+
+        if (testOtpOptions.Value.Enabled && !hostEnvironment.IsProduction())
+            return;
+
         var otp = otpService.GenerateOtp();
-        await otpVerificationRepository.AddAsync(new OtpVerification(phoneNumber, otp, OtpPurposes.PatientLogin), ct);
+        await otpVerificationRepository.AddAsync(new OtpVerification(phone, otp, OtpPurposes.PatientLogin), ct);
         await unitOfWork.SaveChangesAsync(ct);
-        await smsService.SendOtpAsync(phoneNumber, otp, ct);
+        await smsService.SendOtpAsync(phone, otp, ct);
     }
 
     public async Task<AuthResult> VerifyOtpAsync(string phoneNumber, string otpCode, CancellationToken ct)
     {
+        var phone = PhoneNormalizer.Normalize(phoneNumber);
         var useTestOtp = IsTestOtp(otpCode);
         OtpVerification? latestOtp = null;
 
         if (!useTestOtp)
         {
-            latestOtp = await otpVerificationRepository.GetLatestActiveAsync(phoneNumber, OtpPurposes.PatientLogin, ct)
+            latestOtp = await otpVerificationRepository.GetLatestActiveAsync(phone, OtpPurposes.PatientLogin, ct)
                 ?? throw new DomainException("OTP not found or expired.");
             if (!latestOtp.Matches(otpCode))
                 throw new DomainException("Invalid or expired OTP.");
         }
 
-        var existing = await userRepository.GetByPhoneAsync(phoneNumber, ct);
-        if (existing is not null && existing.UserType != UserType.Patient)
-            throw new DomainException("This phone number is in use by another role.");
+        // Query Db.Patients directly — avoids EF Core TPT INNER JOIN issues with ghost rows
+        // (orphan users rows that have no matching patients row from past data corruption).
+        var existing = await patientRepository.GetByPhoneAsync(phone, ct);
 
         Patient patient;
-        if (existing is Patient p)
+        if (existing != null)
         {
-            patient = p;
+            patient = existing;
         }
         else
         {
+            // First-time login: auto-create a minimal patient account.
+            // Use a UUID-suffixed email as fallback if the phone-based email is taken
+            // (can happen when a ghost row exists in users without a patients row).
+            var autoEmail = $"{phone}@patient.medimind.local";
+            if (await userRepository.ExistsByEmailAsync(autoEmail, ct))
+                autoEmail = $"{phone}.{Guid.NewGuid():N}@patient.medimind.local";
+
             patient = new Patient(
-                $"{phoneNumber.Replace("+", string.Empty)}@patient.medimind.local",
-                phoneNumber, "Patient",
+                autoEmail,
+                phone,
+                "Patient",
                 DateOnly.FromDateTime(new DateTime(1990, 1, 1)),
                 Gender.Other);
             patient.SetPasswordHash(passwordService.HashPassword(Guid.NewGuid().ToString("N")));
@@ -259,9 +307,10 @@ public class PatientAuthService(
             patient.Activate();
         patient.RecordLogin();
 
+        bool isProfileComplete = patient.FullName != "Patient";
         var tokens = await authService.GenerateAuthTokensAsync(patient, ct);
         await unitOfWork.SaveChangesAsync(ct);
-        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, patient.Id, patient.UserType.ToString(), patient.FullName);
+        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, patient.Id, patient.UserType.ToString(), patient.FullName, isProfileComplete);
     }
 
     public async Task<PatientProfileDto> GetProfileAsync(CancellationToken ct)
@@ -311,22 +360,23 @@ public class PatientAuthService(
 
     public async Task ChangePhoneAsync(ChangePhoneRequest request, CancellationToken ct)
     {
+        var newPhone = PhoneNormalizer.Normalize(request.NewPhoneNumber);
+
         var user = await userRepository.GetByIdAsync(currentUser.UserId, ct)
             ?? throw new NotFoundException(nameof(User), currentUser.UserId);
 
-        // Verify the OTP (it should have been issued to the NEW phone number beforehand)
         if (!IsTestOtp(request.OtpCode))
         {
-            var otp = await otpVerificationRepository.GetLatestActiveAsync(request.NewPhoneNumber, OtpPurposes.PatientLogin, ct);
+            var otp = await otpVerificationRepository.GetLatestActiveAsync(newPhone, OtpPurposes.PatientLogin, ct);
             if (otp is null || !otp.Matches(request.OtpCode))
                 throw new DomainException("Invalid or expired OTP.");
             otp.MarkUsed();
         }
 
-        if (await userRepository.ExistsByPhoneForRoleAsync(request.NewPhoneNumber, user.UserType, ct))
-            throw new DomainException("This phone number is already in use.");
+        if (await userRepository.ExistsByPhoneForRoleAsync(newPhone, user.UserType, ct))
+            throw new DomainException("This phone number is already in use by another account of the same type.");
 
-        user.ChangePhone(request.NewPhoneNumber);
+        user.ChangePhone(newPhone);
         await unitOfWork.SaveChangesAsync(ct);
     }
 
@@ -353,6 +403,9 @@ public class DoctorAuthService(
         var doctor = await doctorRepository.GetByBadgeNumberAsync(badgeNumber, ct)
             ?? throw new DomainException("Doctor badge number not found.");
 
+        if (testOtpOptions.Value.Enabled && !hostEnvironment.IsProduction())
+            return;
+
         var otp = otpService.GenerateOtp();
         await otpVerificationRepository.AddAsync(new OtpVerification(doctor.PhoneNumber, otp, OtpPurposes.DoctorLogin), ct);
         await unitOfWork.SaveChangesAsync(ct);
@@ -377,7 +430,7 @@ public class DoctorAuthService(
         doctor.RecordLogin();
         var tokens = await authService.GenerateAuthTokensAsync(doctor, ct);
         await unitOfWork.SaveChangesAsync(ct);
-        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, doctor.Id, doctor.UserType.ToString(), doctor.FullName);
+        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, doctor.Id, doctor.UserType.ToString(), doctor.FullName, true);
     }
 
     private bool IsTestOtp(string code) =>
@@ -409,13 +462,15 @@ public class AdminAuthService(
 
     public async Task<Guid> RegisterAsync(AdminRegisterRequest request, CancellationToken ct)
     {
+        var phone = PhoneNormalizer.Normalize(request.PhoneNumber);
+
         if (await userRepository.ExistsByEmailAsync(request.Email, ct))
             throw new DomainException("Email already registered.");
-        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Admin, ct))
-            throw new DomainException("Phone number already registered.");
+        if (await userRepository.ExistsByPhoneForRoleAsync(phone, UserType.Admin, ct))
+            throw new DomainException("Phone number already registered for an admin account.");
 
         var admin = new HealthcareCenterAdmin(
-            request.Email, request.PhoneNumber, request.FullName,
+            request.Email, phone, request.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
             Gender.Other, null, "Owner");
         admin.SetPasswordHash(passwordService.HashPassword(request.Password));
@@ -451,58 +506,93 @@ public class AdminAuthService(
         await auditLogger.LogAsync(AuditActions.LoginSuccess, user.Id, "Admin", centerAdmin?.CenterId, "User", user.Id, null, ct);
 
         var tokens = await authService.GenerateAuthTokensAsync(user, ct);
-        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, user.Id, user.UserType.ToString(), user.FullName);
+        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, user.Id, user.UserType.ToString(), user.FullName, true);
     }
 
     public async Task<DoctorCreatedResult> CreateDoctorAsync(CreateDoctorRequest request, CancellationToken ct)
     {
+        var phone = PhoneNormalizer.Normalize(request.PhoneNumber);
+
         var admin = await userRepository.GetByIdAsync(currentUser.UserId, ct)
             ?? throw new NotFoundException(nameof(User), currentUser.UserId);
         if (admin.UserType != UserType.Admin)
             throw new ForbiddenException();
-        if (await userRepository.ExistsByPhoneForRoleAsync(request.PhoneNumber, UserType.Doctor, ct))
-            throw new DomainException("Phone number already registered.");
+
+        if (await userRepository.ExistsByEmailAsync(request.Email, ct))
+            throw new DomainException("An account with this email already exists.");
+        if (await userRepository.ExistsByPhoneForRoleAsync(phone, UserType.Doctor, ct))
+            throw new DomainException("Phone number already registered for a doctor account.");
+
+        var centerAdmin = admin as HealthcareCenterAdmin;
+        var centerName = "MediMind";
+        HealthcareCenter? center = null;
+        if (centerAdmin?.CenterId is { } centerId)
+        {
+            center = await centerRepository.GetByIdAsync(centerId, ct);
+            if (center is not null) centerName = center.CenterName;
+        }
 
         var badgeNumber = await GenerateUniqueBadgeNumberAsync(doctorRepository, ct);
         var doctor = new Doctor(
-            $"{badgeNumber}@doctor.medimind.local",
-            request.PhoneNumber, request.FullName,
+            request.Email,
+            phone,
+            request.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
-            Gender.Other, request.Specialization, badgeNumber, request.YearsOfExperience);
+            Gender.Other,
+            request.Specialization,
+            badgeNumber,
+            request.YearsOfExperience);
+        doctor.SetLicenseNumber(request.LicenseNumber);
         doctor.SetPasswordHash(passwordService.HashPassword(Guid.NewGuid().ToString("N")));
         doctor.Activate();
 
         await doctorRepository.AddAsync(doctor, ct);
         await unitOfWork.SaveChangesAsync(ct);
 
-        var centerAdmin = await userRepository.GetByIdAsync(currentUser.UserId, ct) as HealthcareCenterAdmin;
-        var centerName = "MediMind";
-        if (centerAdmin?.CenterId is { } centerId)
+        if (center is not null)
         {
-            var center = await centerRepository.GetByIdAsync(centerId, ct);
-            if (center is not null) centerName = center.CenterName;
+            var affiliation = new DoctorHealthcareCenter(doctor.Id, center.Id, request.ConsultationFee);
+            await affiliationRepository.AddAsync(affiliation, ct);
+            await unitOfWork.SaveChangesAsync(ct);
         }
 
+        var startDate = DateTime.UtcNow.ToString("MMMM d, yyyy");
         try
         {
             await smsService.SendAsync(
-                request.PhoneNumber,
-                $"Welcome to {centerName} on MediMind, Dr. {request.FullName}! " +
-                $"Your badge number is: {badgeNumber}. Use it with OTP to log in.",
+                phone,
+                $"Welcome to {centerName}, Dr. {request.FullName}! Your MediMind account is ready. " +
+                $"Badge number: {badgeNumber}. Use it with OTP to log in. Start date: {startDate}.",
                 ct);
         }
-        catch (Exception)
-        {
-            // SMS failure must not roll back a successful doctor creation
-        }
+        catch (Exception) { }
 
-        return new DoctorCreatedResult(doctor.Id, badgeNumber, "Doctor created successfully. Use badge number for OTP login.");
+        try
+        {
+            await emailService.SendAsync(
+                request.Email,
+                "Your MediMind Doctor Account is Ready",
+                $"<p>Dear Dr. {request.FullName},</p>" +
+                $"<p>Your doctor account at <strong>{centerName}</strong> has been created on MediMind.</p>" +
+                $"<p><strong>Badge number:</strong> {badgeNumber}</p>" +
+                $"<p><strong>Start date:</strong> {startDate}</p>" +
+                $"<p>Use your badge number and OTP to log in to the MediMind Doctor app.</p>" +
+                $"<p>Welcome to the team!</p>",
+                ct);
+        }
+        catch (Exception) { }
+
+        return new DoctorCreatedResult(doctor.Id, badgeNumber, "Doctor account created successfully. Badge number sent via SMS and email.");
     }
 
     public async Task<DoctorInvitationResult> InviteDoctorAsync(Guid centerId, InviteDoctorRequest request, CancellationToken ct)
     {
         if (currentUser.TenantId != centerId)
             throw new Domain.Exceptions.ForbiddenException();
+
+        var invitePhone = !string.IsNullOrWhiteSpace(request.PhoneNumber)
+            ? PhoneNormalizer.Normalize(request.PhoneNumber)
+            : string.Empty;
 
         if (await userRepository.ExistsByEmailAsync(request.Email, ct))
             throw new DomainException("An account with this email already exists.");
@@ -522,7 +612,7 @@ public class AdminAuthService(
             request.Specialization,
             request.YearsOfExperience,
             request.ConsultationFee,
-            request.PhoneNumber);
+            invitePhone);
 
         await invitationRepository.CreateAsync(invitation, ct);
         await unitOfWork.SaveChangesAsync(ct);
@@ -537,12 +627,12 @@ public class AdminAuthService(
             // Email failure must not roll back a successfully stored invitation
         }
 
-        if (!string.IsNullOrWhiteSpace(request.PhoneNumber))
+        if (!string.IsNullOrWhiteSpace(invitePhone))
         {
             try
             {
                 var smsMessage = $"You have been invited to join {center.CenterName} on MediMind as a doctor. Accept your invitation here: {invitationLink} (valid 48 hours)";
-                await smsService.SendAsync(request.PhoneNumber, smsMessage, ct);
+                await smsService.SendAsync(invitePhone, smsMessage, ct);
             }
             catch (Exception)
             {
@@ -650,6 +740,6 @@ public class SuperAdminAuthService(
         await unitOfWork.SaveChangesAsync(ct);
 
         var tokens = await authService.GenerateAuthTokensAsync(user, ct);
-        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, user.Id, user.UserType.ToString(), user.FullName);
+        return new AuthResult(tokens.AccessToken, tokens.RefreshToken, user.Id, user.UserType.ToString(), user.FullName, true);
     }
 }

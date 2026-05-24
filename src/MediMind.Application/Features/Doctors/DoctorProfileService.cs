@@ -219,7 +219,7 @@ public class DoctorProfileService(
 public class DoctorPatientAccessChecker(IAppointmentRepository appointmentRepository) : IDoctorPatientAccessChecker
 {
     private static readonly AppointmentStatus[] ValidStatuses =
-        [AppointmentStatus.Confirmed, AppointmentStatus.InProgress, AppointmentStatus.Completed];
+        [AppointmentStatus.Pending, AppointmentStatus.Confirmed, AppointmentStatus.InProgress, AppointmentStatus.Completed];
 
     public async Task<bool> HasAccessAsync(Guid doctorId, Guid patientId, CancellationToken ct = default)
     {

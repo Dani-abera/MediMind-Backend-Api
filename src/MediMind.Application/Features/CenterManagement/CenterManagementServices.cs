@@ -424,7 +424,9 @@ public class HealthcareCenterService(
             center.AutoApproveAppointments,
             doctorCount,
             distance,
-            isOpen);
+            isOpen,
+            Latitude: center.Latitude.HasValue ? Convert.ToDouble(center.Latitude.Value) : null,
+            Longitude: center.Longitude.HasValue ? Convert.ToDouble(center.Longitude.Value) : null);
     }
 
     private static Dictionary<string, string> BuildWorkingHoursDictionary(WorkingHoursDto dto)

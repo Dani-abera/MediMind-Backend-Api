@@ -61,10 +61,10 @@ public class AppointmentsController(
         return Ok(result);
     }
 
-    /// <summary>Cancel an appointment by patient or admin (FR-013).</summary>
-    [Tags("Patient — Appointments", "Admin — Appointments")]
+    /// <summary>Cancel an appointment by patient, doctor, or admin (FR-013).</summary>
+    [Tags("Patient — Appointments", "Doctor — Appointments", "Admin — Appointments")]
     [HttpPost("{id:guid}/cancel")]
-    [RequireRole("Patient", "Admin")]
+    [RequireRole("Patient", "Doctor", "Admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Cancel(Guid id, [FromBody] CancelAppointmentDto dto, CancellationToken ct)
     {
@@ -104,6 +104,17 @@ public class AppointmentsController(
     {
         var centerId = currentUser.TenantId ?? throw new UnauthorizedException();
         await appointmentService.RejectAppointmentAsync(id, currentUser.UserId, centerId, dto.Reason ?? "Rejected by admin");
+        return NoContent();
+    }
+
+    /// <summary>Doctor declines a pending appointment with a reason.</summary>
+    [Tags("Doctor — Appointments")]
+    [HttpPost("{id:guid}/doctor-reject")]
+    [RequireRole("Doctor")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> DoctorReject(Guid id, [FromBody] ApproveRejectDto dto, CancellationToken ct)
+    {
+        await appointmentService.DoctorRejectAppointmentAsync(id, currentUser.UserId, dto.Reason ?? "Declined by doctor");
         return NoContent();
     }
 
@@ -204,16 +215,15 @@ public class AppointmentsController(
 
     // ─── Appointment Notes (private doctor notes) ──────────────────────────────
 
-    /// <summary>Get the private doctor note for an appointment.</summary>
+    /// <summary>Get the private doctor note for an appointment. Returns null if no note exists yet.</summary>
     [Tags("Doctor — Appointments")]
     [HttpGet("{id:guid}/notes")]
     [Authorize(Policy = "DoctorOnly")]
     [ProducesResponseType(typeof(AppointmentNoteResponseDto), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetNote(Guid id, CancellationToken ct)
     {
         var note = await appointmentNoteService.GetAsync(id, currentUser.UserId, ct);
-        return note is null ? NotFound() : Ok(note);
+        return Ok(note);
     }
 
     /// <summary>Create or update the private doctor note for an appointment (upsert).</summary>

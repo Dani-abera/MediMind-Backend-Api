@@ -22,8 +22,8 @@ public interface ITokenService
 {
     /// <summary>Generates JWT access token (15 min) + refresh token (7 days).</summary>
     (string AccessToken, string RefreshToken) GenerateTokens(Guid userId, string userType, Guid? tenantId);
-    bool ValidateRefreshToken(string refreshToken, out Guid userId);
-    void RevokeRefreshToken(Guid userId);
+    Task<Guid?> ValidateRefreshTokenAsync(string refreshToken, CancellationToken ct = default);
+    Task RevokeRefreshTokenAsync(Guid userId, CancellationToken ct = default);
 }
 
 public interface IPasswordService

@@ -33,6 +33,7 @@ public class DoctorsController(
     /// <summary>Search the doctor directory with optional filters (FR-010).</summary>
     [Tags("Doctor — Profile")]
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(PagedResult<DoctorResponseDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> Search([FromQuery] Guid? centerId, [FromQuery] string? specialization, [FromQuery] string? name, [FromQuery] DateOnly? availableOnDate, [FromQuery] int page = 1, [FromQuery] int pageSize = 20, CancellationToken ct = default)
     {
@@ -86,6 +87,7 @@ public class DoctorsController(
     /// <summary>Get a doctor's full profile by ID (FR-010).</summary>
     [Tags("Doctor — Profile")]
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
     [ProducesResponseType(typeof(DoctorResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Get(Guid id, CancellationToken ct)
@@ -112,7 +114,7 @@ public class DoctorsController(
     /// <summary>Get available time slots for a specific doctor on a given date.</summary>
     [Tags("Patient — Appointments")]
     [HttpGet("{id:guid}/availability")]
-    [RequireRole("Patient")]
+    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Availability(Guid id, [FromQuery] Guid centerId, [FromQuery] DateOnly date)
     {
@@ -123,7 +125,7 @@ public class DoctorsController(
     /// <summary>Get dates on which a specific doctor has at least one available slot.</summary>
     [Tags("Patient — Appointments")]
     [HttpGet("{id:guid}/available-dates")]
-    [RequireRole("Patient")]
+    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> AvailableDates(Guid id, [FromQuery] Guid centerId, [FromQuery] int daysAhead = 30)
     {

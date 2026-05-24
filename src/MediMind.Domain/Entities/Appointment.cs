@@ -21,6 +21,7 @@ public class Appointment : BaseEntity
     public TimeOnly AppointmentTime { get; private set; }
     public int DurationMinutes { get; private set; } = 30;
     public AppointmentStatus Status { get; private set; } = AppointmentStatus.Pending;
+    public AppointmentType AppointmentType { get; private set; } = AppointmentType.InPerson;
     public string ReasonForVisit { get; private set; } = string.Empty;
     public string? Symptoms { get; private set; }
     public DateTime BookingDate { get; private set; } = DateTime.UtcNow;
@@ -69,7 +70,8 @@ public class Appointment : BaseEntity
         string reasonForVisit,
         string? symptoms,
         int advanceBookingDays,
-        int minimumHoursNotice)
+        int minimumHoursNotice,
+        AppointmentType appointmentType = AppointmentType.InPerson)
     {
         // Rule: Must be at least minimumHoursNotice hours in the future
         var appointmentDateTime = appointmentDate.ToDateTime(appointmentTime);
@@ -95,7 +97,8 @@ public class Appointment : BaseEntity
             DurationMinutes = durationMinutes,
             ReasonForVisit = reasonForVisit,
             Symptoms = symptoms,
-            Status = AppointmentStatus.Pending
+            Status = AppointmentStatus.Pending,
+            AppointmentType = appointmentType
         };
 
         appointment.AddDomainEvent(new AppointmentBookedEvent(appointment.Id, patientId, doctorId, centerId));
@@ -166,8 +169,11 @@ public class Appointment : BaseEntity
 
     public void MarkCompleted()
     {
-        if (Status != AppointmentStatus.InProgress)
-            throw new DomainException("Appointment must be in-progress to mark as completed.");
+        if (Status is not AppointmentStatus.Confirmed and not AppointmentStatus.InProgress)
+            throw new DomainException("Appointment must be confirmed or in-progress to mark as completed.");
+
+        if (Status == AppointmentStatus.Confirmed)
+            CheckInTime ??= DateTime.UtcNow;
 
         Status = AppointmentStatus.Completed;
         CheckOutTime = DateTime.UtcNow;

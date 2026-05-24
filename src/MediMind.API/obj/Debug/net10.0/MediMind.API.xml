@@ -67,6 +67,9 @@
         <member name="M:MediMind.API.Controllers.AdminController.InviteDoctor(System.Guid,MediMind.Application.Features.Auth.InviteDoctorRequest,System.Threading.CancellationToken)">
             <summary>Invite a doctor to join this center. Sends an invitation email valid for 48 hours (FR-020).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.AdminController.CreateDoctor(System.Guid,MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Create a doctor account immediately and link them to this center. Account is live at once; doctor receives badge number via SMS and email. No activation required.</summary>
+        </member>
         <member name="T:MediMind.API.Controllers.AppointmentBulkController">
             <summary>Admin bulk operations on appointments.</summary>
         </member>
@@ -105,7 +108,7 @@
             <summary>Get appointment details by ID (FR-012).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.Cancel(System.Guid,MediMind.Application.Features.Appointments.CancelAppointmentDto,System.Threading.CancellationToken)">
-            <summary>Cancel an appointment by patient or admin (FR-013).</summary>
+            <summary>Cancel an appointment by patient, doctor, or admin (FR-013).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.Reschedule(System.Guid,MediMind.Application.Features.Appointments.RescheduleAppointmentDto,System.Threading.CancellationToken)">
             <summary>Reschedule an existing patient appointment (FR-014).</summary>
@@ -115,6 +118,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.Reject(System.Guid,MediMind.Application.Features.Appointments.ApproveRejectDto,System.Threading.CancellationToken)">
             <summary>Reject a pending appointment request with a reason (FR-015).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.DoctorReject(System.Guid,MediMind.Application.Features.Appointments.ApproveRejectDto,System.Threading.CancellationToken)">
+            <summary>Doctor declines a pending appointment with a reason.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.Upcoming(System.Threading.CancellationToken)">
             <summary>Upcoming appointments (date ≥ today, status Pending or Confirmed), sorted ascending (FR-012).</summary>
@@ -141,7 +147,7 @@
             <summary>Bulk-approve a list of pending appointments (admin shortcut).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.GetNote(System.Guid,System.Threading.CancellationToken)">
-            <summary>Get the private doctor note for an appointment.</summary>
+            <summary>Get the private doctor note for an appointment. Returns null if no note exists yet.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AppointmentsController.UpsertNote(System.Guid,MediMind.Application.Features.AppointmentNotes.UpsertAppointmentNoteDto,System.Threading.CancellationToken)">
             <summary>Create or update the private doctor note for an appointment (upsert).</summary>
@@ -252,7 +258,7 @@
         <member name="M:MediMind.API.Controllers.AuthController.RefreshToken(MediMind.API.Controllers.RefreshTokenApiRequest,System.Threading.CancellationToken)">
             <summary>Exchange a valid refresh token for a new access + refresh token pair.</summary>
         </member>
-        <member name="M:MediMind.API.Controllers.AuthController.Logout">
+        <member name="M:MediMind.API.Controllers.AuthController.Logout(System.Threading.CancellationToken)">
             <summary>Logout and revoke the current user's refresh token.</summary>
         </member>
         <member name="T:MediMind.API.Controllers.DoctorSchedulesController">
@@ -870,6 +876,15 @@
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.Reactivate(System.Guid,System.Threading.CancellationToken)">
             <summary>Reactivate a suspended doctor account.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.List(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List paginated notification history for the authenticated super admin.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.MarkRead(System.Guid,System.Threading.CancellationToken)">
+            <summary>Mark a single notification as read.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.MarkAllRead(System.Threading.CancellationToken)">
+            <summary>Mark all notifications as read for the authenticated super admin.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Dashboard(System.Threading.CancellationToken)">
             <summary>Get platform-wide KPI dashboard snapshot.</summary>

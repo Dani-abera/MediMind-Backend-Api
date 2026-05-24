@@ -450,7 +450,7 @@ public class SuperAdminUserService(
         var user = await userRepository.GetByIdAsync(userId, ct)
             ?? throw new NotFoundException(nameof(User), userId);
 
-        tokenService.RevokeRefreshToken(userId);
+        await tokenService.RevokeRefreshTokenAsync(userId, ct);
         await auditLogger.LogAsync(AuditActions.SuperAdmin_UserForceLogout, superAdminId, "SuperAdmin", null, "User", userId, $"{{\"reason\":\"{dto.Reason}\"}}", ct);
     }
 

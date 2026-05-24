@@ -46,6 +46,9 @@ public class UserRepository(MediMindDbContext context)
     public async Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default) =>
         await Db.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone, ct);
 
+    public async Task<User?> GetByPhoneAndTypeAsync(string phone, UserType userType, CancellationToken ct = default) =>
+        await Db.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone && u.UserType == userType, ct);
+
     public async Task<bool> ExistsByEmailAsync(string email, CancellationToken ct = default) =>
         await Db.Users.AnyAsync(u => u.Email == email.ToLowerInvariant(), ct);
 
@@ -93,6 +96,11 @@ public class PatientRepository(MediMindDbContext context)
             .Include(p => p.HealthRecords)
             .Include(p => p.HealthPredictions)
             .FirstOrDefaultAsync(p => p.Id == patientId, ct);
+
+    // Queries Db.Patients directly (not Db.Users) to avoid EF Core TPT INNER JOIN issues
+    // with orphan rows in the users table that have no matching patients row.
+    public async Task<Patient?> GetByPhoneAsync(string phone, CancellationToken ct = default) =>
+        await Db.Patients.FirstOrDefaultAsync(p => p.PhoneNumber == phone, ct);
 }
 
 // ─── Doctor Repository ────────────────────────────────────────────────────────
@@ -381,16 +389,22 @@ public class AppointmentRepository(MediMindDbContext context)
         await Db.Appointments
             .Include(a => a.Patient)
             .Include(a => a.Doctor)
+                .ThenInclude(d => d.DoctorHealthcareCenters)
             .Include(a => a.Center)
             .Include(a => a.QueueEntry)
+            .Include(a => a.Payments)
+            .Include(a => a.VideoConsultation)
             .FirstOrDefaultAsync(a => a.Id == appointmentId);
 
     public async Task<Appointment?> GetByIdForPatientAsync(Guid appointmentId, Guid patientId) =>
         await Db.Appointments
             .Include(a => a.Patient)
             .Include(a => a.Doctor)
+                .ThenInclude(d => d.DoctorHealthcareCenters)
             .Include(a => a.Center)
             .Include(a => a.QueueEntry)
+            .Include(a => a.Payments)
+            .Include(a => a.VideoConsultation)
             .FirstOrDefaultAsync(a => a.Id == appointmentId && a.PatientId == patientId);
 
     public async Task<PagedResult<Appointment>> GetByPatientAsync(Guid patientId, AppointmentFilterDto filter)
@@ -399,8 +413,11 @@ public class AppointmentRepository(MediMindDbContext context)
             .Where(a => a.PatientId == patientId)
             .Include(a => a.Patient)
             .Include(a => a.Doctor)
+                .ThenInclude(d => d.DoctorHealthcareCenters)
             .Include(a => a.Center)
             .Include(a => a.QueueEntry)
+            .Include(a => a.Payments)
+            .Include(a => a.VideoConsultation)
             .AsQueryable();
         query = ApplyFilter(query, filter);
         return await BuildPagedResult(query, filter);
@@ -412,8 +429,11 @@ public class AppointmentRepository(MediMindDbContext context)
             .Where(a => a.CenterId == centerId)
             .Include(a => a.Patient)
             .Include(a => a.Doctor)
+                .ThenInclude(d => d.DoctorHealthcareCenters)
             .Include(a => a.Center)
             .Include(a => a.QueueEntry)
+            .Include(a => a.Payments)
+            .Include(a => a.VideoConsultation)
             .AsQueryable();
         query = ApplyFilter(query, filter);
         return await BuildPagedResult(query, filter);
@@ -422,11 +442,14 @@ public class AppointmentRepository(MediMindDbContext context)
     public async Task<PagedResult<Appointment>> GetByDoctorAsync(Guid doctorId, Guid centerId, AppointmentFilterDto filter)
     {
         var query = Db.Appointments
-            .Where(a => a.DoctorId == doctorId && a.CenterId == centerId)
+            .Where(a => a.DoctorId == doctorId && (centerId == Guid.Empty || a.CenterId == centerId))
             .Include(a => a.Patient)
             .Include(a => a.Doctor)
+                .ThenInclude(d => d.DoctorHealthcareCenters)
             .Include(a => a.Center)
             .Include(a => a.QueueEntry)
+            .Include(a => a.Payments)
+            .Include(a => a.VideoConsultation)
             .AsQueryable();
         query = ApplyFilter(query, filter);
         return await BuildPagedResult(query, filter);
@@ -1052,7 +1075,11 @@ public class PaymentRepository(MediMindDbContext context)
             .FirstOrDefaultAsync(p => p.Id == paymentId);
 
     public async Task<Payment?> GetByRefAsync(string paymentRef) =>
-        await Db.Payments.FirstOrDefaultAsync(p => p.PaymentRef == paymentRef);
+        await Db.Payments
+            .Include(p => p.Patient)
+            .Include(p => p.Appointment).ThenInclude(a => a.Doctor)
+            .Include(p => p.Appointment).ThenInclude(a => a.Center)
+            .FirstOrDefaultAsync(p => p.PaymentRef == paymentRef);
 
     public async Task<Payment?> GetByAppointmentIdAsync(Guid appointmentId) =>
         await Db.Payments
@@ -1439,6 +1466,28 @@ public class NotificationLogRepository(MediMindDbContext context)
 
     public async Task<int> GetUnreadCountAsync(Guid userId, CancellationToken ct = default) =>
         await _db.NotificationLogs.CountAsync(n => n.UserId == userId && !n.IsRead, ct);
+
+    public async Task<(IReadOnlyList<NotificationLog> Items, int TotalCount)> GetPagedAsync(
+        Guid userId, int page, int pageSize, CancellationToken ct = default)
+    {
+        var q = _db.NotificationLogs
+            .Where(n => n.UserId == userId)
+            .OrderByDescending(n => n.SentAt);
+        var total = await q.CountAsync(ct);
+        var items = await q
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(ct);
+        return (items, total);
+    }
+
+    public async Task<NotificationLog?> GetByIdForUserAsync(Guid id, Guid userId, CancellationToken ct = default) =>
+        await _db.NotificationLogs.FirstOrDefaultAsync(n => n.Id == id && n.UserId == userId, ct);
+
+    public async Task MarkAllReadAsync(Guid userId, CancellationToken ct = default) =>
+        await _db.NotificationLogs
+            .Where(n => n.UserId == userId && !n.IsRead)
+            .ExecuteUpdateAsync(s => s.SetProperty(n => n.IsRead, true), ct);
 }
 
 public class MedicationReminderRepository(MediMindDbContext context)

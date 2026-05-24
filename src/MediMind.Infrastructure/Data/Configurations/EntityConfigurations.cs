@@ -124,6 +124,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
             .HasForeignKey(p => p.PatientId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(p => p.MedicationReminders).WithOne(r => r.Patient)
             .HasForeignKey(r => r.PatientId).OnDelete(DeleteBehavior.Cascade);
+
+        builder.Ignore(p => p.EnrolledCenters);
     }
 }
 
@@ -331,6 +333,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.HasKey(a => a.Id);
         builder.Property(a => a.Id).HasColumnName("appointment_id");
         builder.Property(a => a.Status).HasConversion<string>().HasMaxLength(20);
+        builder.Property(a => a.AppointmentType).HasConversion<string>().HasMaxLength(20).HasDefaultValue(AppointmentType.InPerson);
         builder.Property(a => a.ReasonForVisit).IsRequired();
         builder.Property(a => a.DurationMinutes).HasDefaultValue(30);
         builder.Property(a => a.BookingDate).HasDefaultValueSql("TIMEZONE('utc', NOW())");
@@ -343,8 +346,10 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
             "ck_appointment_date_not_past", "appointment_date >= CURRENT_DATE"));
 
         // THE most critical unique constraint: prevent double-booking
+        // Partial index: cancelled appointments free up the slot for rebooking
         builder.HasIndex(a => new { a.DoctorId, a.CenterId, a.AppointmentDate, a.AppointmentTime })
             .IsUnique()
+            .HasFilter("status <> 'Cancelled'")
             .HasDatabaseName("idx_appointments_no_double_booking");
 
         builder.HasIndex(a => new { a.PatientId, a.AppointmentDate });
@@ -924,5 +929,25 @@ public class NotificationPreferenceConfiguration : IEntityTypeConfiguration<Noti
         builder.Property(p => p.PromotionalEmails).HasDefaultValue(false);
 
         builder.HasIndex(p => p.UserId).IsUnique();
+    }
+}
+
+// ─── Refresh Token ────────────────────────────────────────────────────────────
+
+public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
+{
+    public void Configure(EntityTypeBuilder<RefreshToken> builder)
+    {
+        builder.ToTable("refresh_tokens");
+        builder.HasKey(r => r.Id);
+        builder.Property(r => r.Token).HasMaxLength(256).IsRequired();
+        builder.Property(r => r.ExpiresAt).IsRequired();
+        builder.Property(r => r.CreatedAt).HasDefaultValueSql("TIMEZONE('utc', NOW())");
+
+        builder.HasIndex(r => r.Token).IsUnique();
+        builder.HasIndex(r => r.UserId);
+
+        builder.HasOne(r => r.User).WithMany()
+            .HasForeignKey(r => r.UserId).OnDelete(DeleteBehavior.Cascade);
     }
 }

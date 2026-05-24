@@ -30,6 +30,7 @@ public interface IUserRepository : IRepository<User>
 {
     Task<User?> GetByEmailAsync(string email, CancellationToken ct = default);
     Task<User?> GetByPhoneAsync(string phone, CancellationToken ct = default);
+    Task<User?> GetByPhoneAndTypeAsync(string phone, UserType userType, CancellationToken ct = default);
     Task<bool> ExistsByEmailAsync(string email, CancellationToken ct = default);
     Task<bool> ExistsByPhoneAsync(string phone, CancellationToken ct = default);
     Task<bool> ExistsByPhoneForRoleAsync(string phone, UserType userType, CancellationToken ct = default);
@@ -41,6 +42,7 @@ public interface IPatientRepository : IRepository<Patient>
 {
     Task<Patient?> GetByUserIdAsync(Guid userId, CancellationToken ct = default);
     Task<Patient?> GetWithHealthRecordsAsync(Guid patientId, CancellationToken ct = default);
+    Task<Patient?> GetByPhoneAsync(string phone, CancellationToken ct = default);
 }
 
 public interface IDoctorRepository : IRepository<Doctor>
@@ -228,6 +230,9 @@ public interface INotificationLogRepository
     Task AddAsync(NotificationLog log, CancellationToken ct = default);
     Task<IReadOnlyList<NotificationLog>> GetRecentForUserAsync(Guid userId, int take, CancellationToken ct = default);
     Task<int> GetUnreadCountAsync(Guid userId, CancellationToken ct = default);
+    Task<(IReadOnlyList<NotificationLog> Items, int TotalCount)> GetPagedAsync(Guid userId, int page, int pageSize, CancellationToken ct = default);
+    Task<NotificationLog?> GetByIdForUserAsync(Guid id, Guid userId, CancellationToken ct = default);
+    Task MarkAllReadAsync(Guid userId, CancellationToken ct = default);
 }
 
 public interface IMedicationReminderRepository

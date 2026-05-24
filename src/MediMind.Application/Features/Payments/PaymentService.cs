@@ -3,6 +3,7 @@ using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using INotificationService = MediMind.Domain.Common.Interfaces.INotificationService;
 using QuestPDF.Fluent;
@@ -50,7 +51,8 @@ public sealed class PaymentService(
     IStorageService storageService,
     IUnitOfWork unitOfWork,
     INotificationService notificationService,
-    ILogger<PaymentService> logger) : IPaymentService
+    ILogger<PaymentService> logger,
+    IServiceScopeFactory scopeFactory) : IPaymentService
 {
     public async Task<PaymentInitiationDto> InitiatePaymentAsync(Guid appointmentId, Guid patientId, CancellationToken ct = default)
     {
@@ -63,13 +65,41 @@ public sealed class PaymentService(
             throw new DomainException("Payments are only allowed for pending or confirmed appointments.");
 
         var existingPayment = await paymentRepository.GetByAppointmentIdAsync(appointmentId);
-        if (existingPayment is not null &&
-            existingPayment.Status is PaymentStatus.Completed or PaymentStatus.Pending)
-            throw new DomainException("Payment already initiated for this appointment.");
+        if (existingPayment is not null && existingPayment.Status == PaymentStatus.Completed)
+            throw new DomainException("This appointment has already been paid.");
+
+        if (existingPayment is not null && existingPayment.Status == PaymentStatus.Pending)
+        {
+            var existingNameParts = appointment.Patient.FullName
+                .Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            return new PaymentInitiationDto(
+                existingPayment.Id,
+                existingPayment.PaymentRef,
+                existingPayment.BaseAmount,
+                existingPayment.VatFee,
+                existingPayment.ServiceFee,
+                existingPayment.TotalAmount,
+                "ETB",
+                DateTime.UtcNow.AddMinutes(30),
+                new AppointmentDetailsDto(
+                    appointment.Doctor.FullName,
+                    appointment.Center.CenterName,
+                    appointment.AppointmentDate,
+                    appointment.AppointmentTime),
+                appointment.Patient.Email,
+                appointment.Patient.PhoneNumber,
+                existingNameParts.FirstOrDefault() ?? appointment.Patient.FullName,
+                existingNameParts.ElementAtOrDefault(1) ?? "");
+        }
 
         var relations = await healthcareCenterRepository.GetDoctorsAsync(appointment.CenterId);
-        var relation = relations.FirstOrDefault(x => x.DoctorId == appointment.DoctorId)
-            ?? throw new DomainException("Doctor-center pricing configuration is missing.");
+        var relation = relations.FirstOrDefault(x => x.DoctorId == appointment.DoctorId && x.IsActive)
+            ?? relations.FirstOrDefault(x => x.DoctorId == appointment.DoctorId)
+            ?? throw new NotFoundException("DoctorHealthcareCenter",
+                $"Doctor {appointment.DoctorId} at Center {appointment.CenterId}");
+
+        if (relation.ConsultationFee <= 0)
+            throw new DomainException("Consultation fee for this doctor is not configured. Please contact the healthcare center.");
 
         var paymentRef = $"APPT-{Guid.NewGuid():N}";
         while (await paymentRepository.ExistsByRefAsync(paymentRef, ct))
@@ -94,37 +124,14 @@ public sealed class PaymentService(
 
         await paymentRepository.CreateAsync(payment);
 
-        var initialize = new ChapaInitializeRequest(
-            Amount: amounts.TotalAmount,
-            Currency: "ETB",
-            Email: appointment.Patient.Email,
-            FirstName: appointment.Patient.FullName.Split(' ').FirstOrDefault() ?? appointment.Patient.FullName,
-            LastName: appointment.Patient.FullName.Split(' ').Skip(1).FirstOrDefault() ?? "Patient",
-            TxRef: payment.PaymentRef,
-            CallbackUrl: chapaConfiguration.CallbackUrl,
-            ReturnUrl: chapaConfiguration.ReturnUrl,
-            Customization: new ChapaCustomization("MediMind Appointment", $"Consultation with {appointment.Doctor.FullName}")
-        );
-
-        var initResponse = await chapaClient.InitializePaymentAsync(initialize, ct);
-        if (initResponse is null || !string.Equals(initResponse.Status, "success", StringComparison.OrdinalIgnoreCase) ||
-            string.IsNullOrWhiteSpace(initResponse.Data?.CheckoutUrl))
-        {
-            payment.MarkFailed();
-            payment.Activities.Add(PaymentActivity.Create(
-                payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
-                payment.PaymentRef, amounts.TotalAmount,
-                gatewayMessage: initResponse?.Message ?? "Chapa initialization failed"));
-            await unitOfWork.SaveChangesAsync(ct);
-            throw new PaymentException(initResponse?.Message ?? "Unable to initialize payment with Chapa.");
-        }
-
-        payment.SetCheckoutUrl(initResponse.Data.CheckoutUrl);
         payment.Activities.Add(PaymentActivity.Create(
             payment.Id, PaymentAction.Charge, PaymentStatus.Pending,
             payment.PaymentRef, amounts.TotalAmount,
-            gatewayMessage: "Checkout URL generated"));
+            gatewayMessage: "Native checkout initiated via Chapa SDK"));
         await unitOfWork.SaveChangesAsync(ct);
+
+        var nameParts = appointment.Patient.FullName
+            .Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         return new PaymentInitiationDto(
             payment.Id,
@@ -134,13 +141,16 @@ public sealed class PaymentService(
             amounts.ServiceFee,
             amounts.TotalAmount,
             "ETB",
-            payment.ChapaCheckoutUrl!,
             DateTime.UtcNow.AddMinutes(30),
             new AppointmentDetailsDto(
                 appointment.Doctor.FullName,
                 appointment.Center.CenterName,
                 appointment.AppointmentDate,
-                appointment.AppointmentTime));
+                appointment.AppointmentTime),
+            appointment.Patient.Email,
+            appointment.Patient.PhoneNumber,
+            nameParts.FirstOrDefault() ?? appointment.Patient.FullName,
+            nameParts.ElementAtOrDefault(1) ?? "");
     }
 
     public async Task ProcessWebhookAsync(string payload, string chapaSignature, CancellationToken ct = default)
@@ -202,26 +212,28 @@ public sealed class PaymentService(
                 if (payment.Appointment.Status == AppointmentStatus.Pending)
                     payment.Appointment.Approve(Guid.Empty);
 
+                var capturedPaymentId = payment.Id;
                 _ = Task.Run(async () =>
                 {
+                    using var scope = scopeFactory.CreateScope();
+                    var svc = scope.ServiceProvider.GetRequiredService<IPaymentService>();
                     try
                     {
-                        await GenerateReceiptAsync(payment.Id, CancellationToken.None);
+                        await svc.GenerateReceiptAsync(capturedPaymentId, CancellationToken.None);
                     }
                     catch (Exception ex)
                     {
-                        logger.LogError(ex, "PDF receipt generation attempt 1 failed for payment {PaymentId}. Retrying.", payment.Id);
+                        logger.LogError(ex, "PDF receipt generation failed for payment {PaymentId}. Sending SMS fallback.", capturedPaymentId);
                         try
                         {
-                            await Task.Delay(TimeSpan.FromSeconds(5));
-                            await GenerateReceiptAsync(payment.Id, CancellationToken.None);
+                            var paymentRepo = scope.ServiceProvider.GetRequiredService<IPaymentRepository>();
+                            var freshPayment = await paymentRepo.GetByIdAsync(capturedPaymentId);
+                            if (freshPayment is not null)
+                                await ((PaymentService)svc).SendPlainTextReceiptAsync(freshPayment, CancellationToken.None);
                         }
-                        catch (Exception retryEx)
+                        catch (Exception smsEx)
                         {
-                            logger.LogError(retryEx,
-                                "PDF receipt generation failed after retry for payment {PaymentId}. Sending plain-text receipt fallback.",
-                                payment.Id);
-                            await SendPlainTextReceiptAsync(payment, CancellationToken.None);
+                            logger.LogError(smsEx, "SMS receipt fallback also failed for payment {PaymentId}.", capturedPaymentId);
                         }
                     }
                 }, CancellationToken.None);
@@ -324,7 +336,7 @@ public sealed class PaymentService(
             });
         });
 
-    private async Task SendPlainTextReceiptAsync(Payment payment, CancellationToken ct)
+    internal async Task SendPlainTextReceiptAsync(Payment payment, CancellationToken ct)
     {
         var msg =
             $"MediMind Payment Receipt\n" +
