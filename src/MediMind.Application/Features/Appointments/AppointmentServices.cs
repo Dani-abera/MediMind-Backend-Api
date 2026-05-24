@@ -3,6 +3,7 @@ using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
 using MediMind.Domain.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace MediMind.Application.Features.Appointments;
@@ -222,7 +223,8 @@ public class AppointmentService(
     IVideoConsultationRepository videoConsultationRepository,
     IUnitOfWork unitOfWork,
     ILogger<AppointmentService> logger,
-    MediMind.Application.Features.Admin.IAuditLogger auditLogger) : IAppointmentService
+    MediMind.Application.Features.Admin.IAuditLogger auditLogger,
+    IServiceScopeFactory scopeFactory) : IAppointmentService
 {
     /// <inheritdoc />
     public async Task<AppointmentResponseDto> BookAppointmentAsync(CreateAppointmentDto dto, Guid patientId)
@@ -275,18 +277,24 @@ public class AppointmentService(
             throw;
         }
 
+        var capturedAppointmentId = created.Id;
         _ = Task.Run(async () =>
         {
+            using var scope = scopeFactory.CreateScope();
+            var sp = scope.ServiceProvider;
             try
             {
-                var prefs = await notificationPreferenceRepository.GetByUserIdAsync(patientId);
+                var prefRepo = sp.GetRequiredService<INotificationPreferenceRepository>();
+                var prefs = await prefRepo.GetByUserIdAsync(patientId);
                 if (prefs is null || prefs.AppointmentRemindersPush)
-                    await pushNotificationService.SendToUserAsync(patientId, "Appointment booked", "Your appointment request was submitted.");
-                await queueHubService.BroadcastQueueUpdateAsync(dto.CenterId, new { type = "appointmentBooked", appointmentId = created.Id });
+                    await sp.GetRequiredService<IPushNotificationService>()
+                        .SendToUserAsync(patientId, "Appointment booked", "Your appointment request was submitted.");
+                await sp.GetRequiredService<IQueueHubService>()
+                    .BroadcastQueueUpdateAsync(dto.CenterId, new { type = "appointmentBooked", appointmentId = capturedAppointmentId });
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex, "Notification dispatch failed for appointment {AppointmentId}", created.Id);
+                logger.LogWarning(ex, "Notification dispatch failed for appointment {AppointmentId}", capturedAppointmentId);
             }
         });
 
@@ -339,17 +347,22 @@ public class AppointmentService(
 
         _ = Task.Run(async () =>
         {
+            using var scope = scopeFactory.CreateScope();
+            var sp = scope.ServiceProvider;
             try
             {
-                var prefs = await notificationPreferenceRepository.GetByUserIdAsync(patientId);
+                var prefRepo = sp.GetRequiredService<INotificationPreferenceRepository>();
+                var push = sp.GetRequiredService<IPushNotificationService>();
+                var prefs = await prefRepo.GetByUserIdAsync(patientId);
                 if (prefs is null || prefs.AppointmentRemindersPush)
-                    await pushNotificationService.SendToUserAsync(patientId, "Appointment cancelled", "Your appointment was cancelled.");
+                    await push.SendToUserAsync(patientId, "Appointment cancelled", "Your appointment was cancelled.");
 
-                var centerWithAdmins = await healthcareCenterRepository.GetWithAdminsAsync(appointmentCenterId);
+                var centerWithAdmins = await sp.GetRequiredService<IHealthcareCenterRepository>()
+                    .GetWithAdminsAsync(appointmentCenterId);
                 if (centerWithAdmins is not null)
                 {
                     foreach (var admin in centerWithAdmins.Admins)
-                        await pushNotificationService.SendToUserAsync(admin.Id, "Appointment cancelled",
+                        await push.SendToUserAsync(admin.Id, "Appointment cancelled",
                             $"An appointment on {freedDate:MMM dd} was cancelled by the patient.");
                 }
             }
@@ -361,9 +374,11 @@ public class AppointmentService(
 
         _ = Task.Run(async () =>
         {
+            using var scope = scopeFactory.CreateScope();
             try
             {
-                await waitlistService.NotifyWaitlistAsync(doctorId, appointmentCenterId, freedDate);
+                await scope.ServiceProvider.GetRequiredService<IWaitlistService>()
+                    .NotifyWaitlistAsync(doctorId, appointmentCenterId, freedDate);
             }
             catch (Exception ex)
             {

@@ -47,6 +47,17 @@ public sealed class PaymentsController(PaymentAppService paymentService, ICurren
         return Ok(result);
     }
 
+    /// <summary>Sync payment status with Chapa — call this after completing a Chapa checkout if status has not updated (FR-094).</summary>
+    [Tags("Patient — Payments")]
+    [HttpPost("{id:guid}/sync")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(typeof(PaymentStatusDto), StatusCodes.Status200OK)]
+    public async Task<ActionResult<PaymentStatusDto>> Sync(Guid id, CancellationToken ct)
+    {
+        var result = await paymentService.SyncPaymentAsync(id, currentUser.UserId, ct);
+        return Ok(result);
+    }
+
     /// <summary>List payment history for the current user or admin's center (FR-092).</summary>
     [Tags("Patient — Payments", "Admin — Payments")]
     [HttpGet]

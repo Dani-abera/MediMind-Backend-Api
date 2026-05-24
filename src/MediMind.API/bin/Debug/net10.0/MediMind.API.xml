@@ -643,6 +643,9 @@
         <member name="M:MediMind.API.Controllers.PaymentsController.ByAppointment(System.Guid,System.Threading.CancellationToken)">
             <summary>Get the payment associated with a specific appointment (FR-091).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Sync(System.Guid,System.Threading.CancellationToken)">
+            <summary>Sync payment status with Chapa — call this after completing a Chapa checkout if status has not updated (FR-094).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.PaymentsController.History(System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>List payment history for the current user or admin's center (FR-092).</summary>
         </member>

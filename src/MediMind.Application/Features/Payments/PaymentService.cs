@@ -37,6 +37,7 @@ public interface IPaymentService
     Task<PaymentStatusDto> GetPaymentStatusAsync(Guid paymentId, string userType, Guid userId, Guid? centerId, CancellationToken ct = default);
     Task<PaymentStatusDto> GetByAppointmentAsync(Guid appointmentId, string userType, Guid userId, Guid? centerId, CancellationToken ct = default);
     Task<IReadOnlyList<PaymentHistoryItemDto>> GetHistoryAsync(string userType, Guid userId, Guid? centerId, int page, int pageSize, CancellationToken ct = default);
+    Task<PaymentStatusDto> SyncPaymentAsync(Guid paymentId, Guid patientId, CancellationToken ct = default);
     Task<byte[]> GenerateReceiptAsync(Guid paymentId, CancellationToken ct = default);
 }
 
@@ -250,6 +251,81 @@ public sealed class PaymentService(
 
         payment.MarkWebhookReceived();
         await unitOfWork.SaveChangesAsync(ct);
+    }
+
+    public async Task<PaymentStatusDto> SyncPaymentAsync(Guid paymentId, Guid patientId, CancellationToken ct = default)
+    {
+        var payment = await paymentRepository.GetByIdAsync(paymentId)
+            ?? throw new NotFoundException(nameof(Payment), paymentId);
+
+        if (payment.PatientId != patientId)
+            throw new ForbiddenException("Access denied.");
+
+        if (payment.Status is PaymentStatus.Completed or PaymentStatus.Failed or PaymentStatus.Refunded)
+            return MapStatus(payment);
+
+        // Retry up to 3 times (2 s apart) — Chapa SDK fires onPaymentFinished before
+        // Chapa's backend settles the transaction, so verify may return "pending" initially.
+        ChapaVerifyResponse? verify = null;
+        for (var attempt = 1; attempt <= 3; attempt++)
+        {
+            verify = await chapaClient.VerifyPaymentAsync(payment.PaymentRef, ct);
+
+            logger.LogInformation(
+                "Chapa verify attempt {Attempt}/3 for payment {PaymentId} (txRef={TxRef}): " +
+                "outerStatus={OuterStatus}, dataStatus={DataStatus}, flwRef={FlwRef}",
+                attempt, paymentId, payment.PaymentRef,
+                verify?.Status, verify?.Data?.Status, verify?.Data?.FlwRef);
+
+            if (verify?.Data?.Status is not null &&
+                !string.Equals(verify.Data.Status, "pending", StringComparison.OrdinalIgnoreCase))
+                break;
+
+            if (attempt < 3)
+                await Task.Delay(2000, ct);
+        }
+
+        if (verify is null)
+        {
+            logger.LogWarning("Chapa verify returned null for payment {PaymentId}. Chapa API may be unreachable.", paymentId);
+            return MapStatus(payment);
+        }
+
+        if (string.Equals(verify.Status, "success", StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(verify.Data?.Status, "success", StringComparison.OrdinalIgnoreCase))
+        {
+            payment.Complete(verify.Data!.FlwRef);
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Completed,
+                payment.PaymentRef, payment.TotalAmount,
+                chapaTransactionId: verify.Data.FlwRef,
+                paymentMethodRaw: verify.Data.PaymentType,
+                confirmedAt: DateTime.UtcNow));
+
+            if (payment.Appointment.Status == AppointmentStatus.Pending)
+                payment.Appointment.Approve(Guid.Empty);
+
+            logger.LogInformation("Payment {PaymentId} marked Completed via manual sync.", paymentId);
+        }
+        else if (string.Equals(verify.Data?.Status, "failed", StringComparison.OrdinalIgnoreCase))
+        {
+            payment.MarkFailed();
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
+                payment.PaymentRef, payment.TotalAmount,
+                gatewayMessage: "Chapa verify returned failed on manual sync"));
+
+            logger.LogInformation("Payment {PaymentId} marked Failed via manual sync.", paymentId);
+        }
+        else
+        {
+            logger.LogWarning(
+                "Payment {PaymentId} sync: no status change after retries. outerStatus={OuterStatus}, dataStatus={DataStatus}",
+                paymentId, verify.Status, verify.Data?.Status);
+        }
+
+        await unitOfWork.SaveChangesAsync(ct);
+        return MapStatus(payment);
     }
 
     public async Task<PaymentStatusDto> GetPaymentStatusAsync(Guid paymentId, string userType, Guid userId, Guid? centerId, CancellationToken ct = default)
