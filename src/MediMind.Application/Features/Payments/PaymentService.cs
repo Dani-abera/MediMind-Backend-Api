@@ -210,34 +210,41 @@ public sealed class PaymentService(
                     paymentMethodRaw: verify?.Data?.PaymentType,
                     confirmedAt: DateTime.UtcNow));
 
-                if (payment.Appointment.Status == AppointmentStatus.Pending)
-                    payment.Appointment.Approve(Guid.Empty);
-
-                var capturedPaymentId = payment.Id;
-                _ = Task.Run(async () =>
+                if (payment.ReasonType == PaymentReasonType.Appointment
+                    && payment.Appointment != null
+                    && payment.Appointment.Status == AppointmentStatus.Pending)
                 {
-                    using var scope = scopeFactory.CreateScope();
-                    var svc = scope.ServiceProvider.GetRequiredService<IPaymentService>();
-                    try
+                    payment.Appointment.Approve(Guid.Empty);
+                }
+
+                if (payment.ReasonType == PaymentReasonType.Appointment)
+                {
+                    var capturedPaymentId = payment.Id;
+                    _ = Task.Run(async () =>
                     {
-                        await svc.GenerateReceiptAsync(capturedPaymentId, CancellationToken.None);
-                    }
-                    catch (Exception ex)
-                    {
-                        logger.LogError(ex, "PDF receipt generation failed for payment {PaymentId}. Sending SMS fallback.", capturedPaymentId);
+                        using var scope = scopeFactory.CreateScope();
+                        var svc = scope.ServiceProvider.GetRequiredService<IPaymentService>();
                         try
                         {
-                            var paymentRepo = scope.ServiceProvider.GetRequiredService<IPaymentRepository>();
-                            var freshPayment = await paymentRepo.GetByIdAsync(capturedPaymentId);
-                            if (freshPayment is not null)
-                                await ((PaymentService)svc).SendPlainTextReceiptAsync(freshPayment, CancellationToken.None);
+                            await svc.GenerateReceiptAsync(capturedPaymentId, CancellationToken.None);
                         }
-                        catch (Exception smsEx)
+                        catch (Exception ex)
                         {
-                            logger.LogError(smsEx, "SMS receipt fallback also failed for payment {PaymentId}.", capturedPaymentId);
+                            logger.LogError(ex, "PDF receipt generation failed for payment {PaymentId}. Sending SMS fallback.", capturedPaymentId);
+                            try
+                            {
+                                var paymentRepo = scope.ServiceProvider.GetRequiredService<IPaymentRepository>();
+                                var freshPayment = await paymentRepo.GetByIdAsync(capturedPaymentId);
+                                if (freshPayment is not null)
+                                    await ((PaymentService)svc).SendPlainTextReceiptAsync(freshPayment, CancellationToken.None);
+                            }
+                            catch (Exception smsEx)
+                            {
+                                logger.LogError(smsEx, "SMS receipt fallback also failed for payment {PaymentId}.", capturedPaymentId);
+                            }
                         }
-                    }
-                }, CancellationToken.None);
+                    }, CancellationToken.None);
+                }
             }
         }
         else if (string.Equals(status, "failed", StringComparison.OrdinalIgnoreCase))
@@ -302,8 +309,12 @@ public sealed class PaymentService(
                 paymentMethodRaw: verify.Data.PaymentType,
                 confirmedAt: DateTime.UtcNow));
 
-            if (payment.Appointment.Status == AppointmentStatus.Pending)
+            if (payment.ReasonType == PaymentReasonType.Appointment
+                && payment.Appointment != null
+                && payment.Appointment.Status == AppointmentStatus.Pending)
+            {
                 payment.Appointment.Approve(Guid.Empty);
+            }
 
             logger.LogInformation("Payment {PaymentId} marked Completed via manual sync.", paymentId);
         }
@@ -370,6 +381,8 @@ public sealed class PaymentService(
             ?? throw new NotFoundException(nameof(Payment), paymentId);
         if (payment.Status != PaymentStatus.Completed)
             throw new DomainException("Receipt can only be generated for completed payments.");
+        if (payment.ReasonType == PaymentReasonType.Subscription)
+            throw new DomainException("PDF receipts are not supported for subscription payments.");
 
         QuestPDF.Settings.License = LicenseType.Community;
         var pdfBytes = BuildReceipt(payment).GeneratePdf();
@@ -436,7 +449,7 @@ public sealed class PaymentService(
     {
         if (string.Equals(userType, "Patient", StringComparison.OrdinalIgnoreCase) && payment.PatientId != userId)
             throw new ForbiddenException("Access denied.");
-        if (string.Equals(userType, "Admin", StringComparison.OrdinalIgnoreCase) && payment.Appointment.CenterId != centerId)
+        if (string.Equals(userType, "Admin", StringComparison.OrdinalIgnoreCase) && payment.CenterId != centerId)
             throw new ForbiddenException("Access denied.");
     }
 

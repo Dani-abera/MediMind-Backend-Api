@@ -64,7 +64,7 @@ public sealed record PaymentStatusDto(
     string? PaymentMethod,
     string? ChapaTransactionId,
     string? ReceiptUrl,
-    Guid AppointmentId);
+    Guid? AppointmentId);
 
 public sealed record PaymentReceiptDto(
     string PaymentRef,
@@ -82,7 +82,7 @@ public sealed record PaymentReceiptDto(
 public sealed record PaymentHistoryItemDto(
     Guid PaymentId,
     string PaymentRef,
-    Guid AppointmentId,
+    Guid? AppointmentId,
     decimal Amount,
     string Status,
     DateTime CreatedAt,

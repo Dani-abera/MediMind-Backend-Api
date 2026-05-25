@@ -1,5 +1,7 @@
 using MediMind.Application.Features.Admin;
 using MediMind.Application.Features.Appointments;
+using MediMind.Application.Features.Payments;
+using MediMind.Application.Features.SuperAdmin;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
@@ -26,6 +28,7 @@ public interface IHealthcareCenterService
     Task<bool> RemoveDoctorFromCenterAsync(Guid centerId, Guid doctorId, Guid adminId);
     Task<IEnumerable<DoctorResponseDto>> GetDoctorsAsync(Guid centerId);
     Task<IEnumerable<AdminDoctorRosterItemDto>> GetAdminDoctorRosterAsync(Guid centerId, Guid adminId, CancellationToken ct = default);
+    Task<SubscriptionPaymentInitiationDto> InitiateSubscriptionPaymentAsync(Guid centerId, Guid planId, SubscriptionBillingCycle billingCycle, Guid adminId, CancellationToken ct = default);
 }
 
 public interface IAnalyticsService
@@ -40,7 +43,12 @@ public class HealthcareCenterService(
     IAppointmentAvailabilityService appointmentAvailabilityService,
     ILogger<HealthcareCenterService> logger,
     IUnitOfWork unitOfWork,
-    IAuditLogger auditLogger) : IHealthcareCenterService
+    IAuditLogger auditLogger,
+    ISubscriptionPlanService subscriptionPlanService,
+    IPaymentRepository paymentRepository,
+    IChapaClient chapaClient,
+    IChapaConfiguration chapaConfiguration,
+    IPaymentConfiguration paymentConfiguration) : IHealthcareCenterService
 {
     public async Task<CenterResponseDto> RegisterCenterAsync(RegisterCenterDto dto, Guid adminUserId)
     {
@@ -379,6 +387,77 @@ public class HealthcareCenterService(
                 r.Doctor.ProfileImageUrl,
                 0))
             .ToList();
+    }
+
+    public async Task<SubscriptionPaymentInitiationDto> InitiateSubscriptionPaymentAsync(
+        Guid centerId, Guid planId, SubscriptionBillingCycle billingCycle, Guid adminId, CancellationToken ct = default)
+    {
+        var center = await centerRepository.GetWithAdminsAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+
+        if (!center.Admins.Any(a => a.Id == adminId))
+            throw new ForbiddenException("You do not have authority over this healthcare center.");
+
+        var plan = await subscriptionPlanService.GetPlanByIdAsync(planId, ct);
+        if (!plan.IsActive)
+            throw new DomainException("The selected subscription plan is not currently available.");
+
+        var baseAmount = billingCycle == SubscriptionBillingCycle.Monthly ? plan.MonthlyPrice : plan.YearlyPrice;
+        if (baseAmount <= 0)
+            throw new DomainException("Selected plan has no price configured for this billing cycle.");
+
+        var admin = await userRepository.GetByIdAsync(adminId)
+            ?? throw new NotFoundException("Admin", adminId);
+
+        var paymentRef = $"SUB-{Guid.NewGuid():N}";
+        while (await paymentRepository.ExistsByRefAsync(paymentRef, ct))
+            paymentRef = $"SUB-{Guid.NewGuid():N}";
+
+        var amounts = PaymentHelper.CalculatePrice(baseAmount, paymentConfiguration.VatPercent, paymentConfiguration.ServicePercent);
+
+        var payment = Payment.InitiateSubscription(
+            centerId, adminId,
+            amounts.BaseAmount, amounts.VatPercent, amounts.VatFee,
+            amounts.ServicePercent, amounts.ServiceFee, amounts.TotalAmount,
+            paymentRef);
+
+        await paymentRepository.CreateAsync(payment);
+
+        payment.Activities.Add(PaymentActivity.Create(
+            payment.Id, PaymentAction.Charge, PaymentStatus.Pending,
+            paymentRef, amounts.TotalAmount,
+            gatewayMessage: $"Subscription payment initiated for plan '{plan.Name}' ({billingCycle})"));
+
+        var nameParts = admin.FullName.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        var chapaResponse = await chapaClient.InitializePaymentAsync(new ChapaInitializeRequest(
+            amounts.TotalAmount,
+            "ETB",
+            admin.Email,
+            nameParts.FirstOrDefault() ?? admin.FullName,
+            nameParts.ElementAtOrDefault(1) ?? "",
+            paymentRef,
+            chapaConfiguration.CallbackUrl,
+            chapaConfiguration.ReturnUrl,
+            new ChapaCustomization($"MediMind — {plan.Name} Plan", $"Subscription ({billingCycle}) for {center.CenterName}")), ct);
+
+        var checkoutUrl = chapaResponse?.Data?.CheckoutUrl
+            ?? throw new DomainException("Chapa payment initialization failed. Please try again.");
+
+        payment.SetCheckoutUrl(checkoutUrl);
+        center.MarkPaymentPending(planId, paymentRef, billingCycle);
+
+        await unitOfWork.SaveChangesAsync(ct);
+        logger.LogInformation("Subscription payment {Ref} initiated for center {CenterId}, plan {PlanId}", paymentRef, centerId, planId);
+
+        return new SubscriptionPaymentInitiationDto(
+            payment.Id,
+            paymentRef,
+            amounts.TotalAmount,
+            "ETB",
+            checkoutUrl,
+            plan.Name,
+            billingCycle.ToString(),
+            DateTime.UtcNow.AddMinutes(30));
     }
 
     private async Task EnsureAdminAuthority(Guid centerId, Guid adminId)

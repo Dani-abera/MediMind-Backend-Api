@@ -1,5 +1,6 @@
 using MediMind.Domain.Common;
 using MediMind.Domain.Enums;
+using MediMind.Domain.Exceptions;
 
 namespace MediMind.Domain.Entities;
 
@@ -31,6 +32,10 @@ public class HealthcareCenter : BaseEntity
     public DateOnly? SubscriptionStartDate { get; private set; }
     public DateOnly? SubscriptionEndDate { get; private set; }
     public string? RejectionReason { get; private set; }
+
+    // Pending subscription payment (admin selected plan, awaiting SuperAdmin verification)
+    public string? PendingPaymentRef { get; private set; }
+    public SubscriptionBillingCycle? PendingBillingCycle { get; private set; }
 
     // Soft-delete (GDPR NFR-009)
     public bool IsDeleted { get; private set; }
@@ -152,6 +157,29 @@ public class HealthcareCenter : BaseEntity
     public void SetSubscriptionPlan(Guid planId)
     {
         SubscriptionPlanId = planId;
+        UpdateTimestamp();
+    }
+
+    public void MarkPaymentPending(Guid planId, string paymentRef, SubscriptionBillingCycle billingCycle)
+    {
+        SubscriptionPlanId = planId;
+        PendingPaymentRef = paymentRef;
+        PendingBillingCycle = billingCycle;
+        SubscriptionStatus = SubscriptionStatus.AwaitingActivation;
+        UpdateTimestamp();
+    }
+
+    public void ActivateFromPayment(string planName, DateOnly startDate, DateOnly endDate)
+    {
+        if (SubscriptionStatus != SubscriptionStatus.AwaitingActivation)
+            throw new DomainException("Center must be in AwaitingActivation status to activate from payment.");
+        CurrentPlan = planName;
+        SubscriptionStatus = SubscriptionStatus.Active;
+        SubscriptionStartDate = startDate;
+        SubscriptionEndDate = endDate;
+        PendingPaymentRef = null;
+        PendingBillingCycle = null;
+        RejectionReason = null;
         UpdateTimestamp();
     }
 

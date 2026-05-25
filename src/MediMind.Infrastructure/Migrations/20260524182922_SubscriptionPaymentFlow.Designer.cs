@@ -3,6 +3,7 @@ using System;
 using MediMind.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MediMind.Infrastructure.Migrations
 {
     [DbContext(typeof(MediMindDbContext))]
-    partial class MediMindDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260524182922_SubscriptionPaymentFlow")]
+    partial class SubscriptionPaymentFlow
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

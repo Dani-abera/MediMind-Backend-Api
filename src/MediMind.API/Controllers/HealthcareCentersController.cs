@@ -3,6 +3,7 @@ using MediMind.API.Attributes;
 using MediMind.Application.Features.Auth;
 using MediMind.Application.Features.CenterManagement;
 using MediMind.Domain.Common.Interfaces;
+using MediMind.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
@@ -70,6 +71,25 @@ public class HealthcareCentersController(
         if (currentUser.TenantId is not { } centerId)
             return NotFound(new { error = "No healthcare center is linked to your account yet. Please register one first." });
         var result = await centerService.GetByIdAsync(centerId);
+        return Ok(result);
+    }
+
+    /// <summary>Initiate a Chapa subscription payment for a chosen plan (admin picks plan, pays via Chapa checkout).</summary>
+    [Tags("Admin — Center")]
+    [HttpPost("{centerId:guid}/subscription/pay")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(typeof(SubscriptionPaymentInitiationDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public async Task<IActionResult> PaySubscription(
+        Guid centerId,
+        [FromBody] SelectSubscriptionPlanDto dto,
+        CancellationToken ct)
+    {
+        if (!Enum.TryParse<SubscriptionBillingCycle>(dto.BillingCycle, ignoreCase: true, out var billingCycle))
+            return BadRequest(new { error = "BillingCycle must be 'Monthly' or 'Yearly'." });
+
+        var result = await centerService.InitiateSubscriptionPaymentAsync(centerId, dto.PlanId, billingCycle, currentUser.UserId, ct);
         return Ok(result);
     }
 

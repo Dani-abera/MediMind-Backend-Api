@@ -125,6 +125,17 @@ public class SuperAdminCentersController(
         return Ok(result);
     }
 
+    /// <summary>Verify the Chapa subscription payment and activate the center (combined verify + approve action).</summary>
+    [HttpPost("{id:guid}/verify-payment")]
+    [ProducesResponseType(typeof(SuperAdminCenterSummaryDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> VerifyPayment(Guid id, CancellationToken ct)
+    {
+        var result = await centerService.VerifySubscriptionPaymentAsync(id, currentUser.UserId, ct);
+        return Ok(result);
+    }
+
     /// <summary>Soft-delete a center (GDPR NFR-009). Irreversible.</summary>
     [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]

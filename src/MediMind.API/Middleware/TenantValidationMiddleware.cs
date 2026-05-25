@@ -21,14 +21,24 @@ public class TenantValidationMiddleware(RequestDelegate next)
             var segments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
             if (segments.Length >= 4 && Guid.TryParse(segments[3], out var centerIdFromRoute))
             {
-                var centerClaim = context.User.FindFirst("center_id")?.Value
-                                  ?? context.User.FindFirst("tenant_id")?.Value;
+                // Subscription payment is initiated right after center registration, before the
+                // admin re-logs in to get a JWT with the new center_id claim. The service layer
+                // already verifies ownership via DB (center.Admins.Any), so skip the claim check.
+                var isSubscriptionPay = segments.Length >= 6
+                    && string.Equals(segments[4], "subscription", StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(segments[5], "pay", StringComparison.OrdinalIgnoreCase);
 
-                if (!Guid.TryParse(centerClaim, out var centerIdFromClaim) || centerIdFromClaim != centerIdFromRoute)
+                if (!isSubscriptionPay)
                 {
-                    context.Response.StatusCode = StatusCodes.Status403Forbidden;
-                    await context.Response.WriteAsJsonAsync(new { error = "Access denied to this healthcare center" });
-                    return;
+                    var centerClaim = context.User.FindFirst("center_id")?.Value
+                                      ?? context.User.FindFirst("tenant_id")?.Value;
+
+                    if (!Guid.TryParse(centerClaim, out var centerIdFromClaim) || centerIdFromClaim != centerIdFromRoute)
+                    {
+                        context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                        await context.Response.WriteAsJsonAsync(new { error = "Access denied to this healthcare center" });
+                        return;
+                    }
                 }
             }
         }

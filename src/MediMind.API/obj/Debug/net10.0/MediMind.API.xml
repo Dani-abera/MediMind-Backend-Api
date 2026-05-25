@@ -370,6 +370,9 @@
             <summary>Get the healthcare center registered by the authenticated admin.</summary>
             <remarks>Returns the center linked to the admin's JWT tenant claim. 404 if the admin has not registered a center yet.</remarks>
         </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.PaySubscription(System.Guid,MediMind.Application.Features.CenterManagement.SelectSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Initiate a Chapa subscription payment for a chosen plan (admin picks plan, pays via Chapa checkout).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetById(System.Guid,System.Threading.CancellationToken)">
             <summary>Get a healthcare center's full details by ID (FR-031).</summary>
         </member>
@@ -852,6 +855,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Reactivate(System.Guid,System.Threading.CancellationToken)">
             <summary>Reactivate a suspended center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.VerifyPayment(System.Guid,System.Threading.CancellationToken)">
+            <summary>Verify the Chapa subscription payment and activate the center (combined verify + approve action).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Delete(System.Guid,System.Threading.CancellationToken)">
             <summary>Soft-delete a center (GDPR NFR-009). Irreversible.</summary>

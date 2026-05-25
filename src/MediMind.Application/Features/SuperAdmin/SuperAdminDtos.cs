@@ -18,7 +18,11 @@ public record SuperAdminCenterSummaryDto(
     string? RejectionReason,
     bool IsDeleted,
     int DoctorCount,
-    DateTime CreatedAt);
+    DateTime CreatedAt,
+    string? PendingPlanName = null,
+    string? PendingPaymentRef = null,
+    string? PendingPaymentStatus = null,
+    string? PendingBillingCycle = null);
 
 public record ApproveCenterDto(string? Notes);
 

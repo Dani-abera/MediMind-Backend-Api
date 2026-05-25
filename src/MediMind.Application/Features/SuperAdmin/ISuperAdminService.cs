@@ -18,6 +18,7 @@ public interface ISuperAdminCenterService
     Task<SuperAdminCenterSummaryDto> SuspendCenterAsync(Guid centerId, SuspendCenterDto dto, Guid superAdminId, CancellationToken ct = default);
     Task<SuperAdminCenterSummaryDto> ReactivateCenterAsync(Guid centerId, Guid superAdminId, CancellationToken ct = default);
     Task SoftDeleteCenterAsync(Guid centerId, Guid superAdminId, CancellationToken ct = default);
+    Task<SuperAdminCenterSummaryDto> VerifySubscriptionPaymentAsync(Guid centerId, Guid superAdminId, CancellationToken ct = default);
 }
 
 public interface ISuperAdminSubscriptionService

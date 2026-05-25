@@ -237,3 +237,18 @@ public record AnalyticsDashboardDto(
     RevenueMetricsDto RevenueMetrics,
     AnalyticsSummaryDto Summary,
     string? NoDataMessage);
+
+// ─── Subscription Payment ─────────────────────────────────────────────────────
+
+public record SelectSubscriptionPlanDto(Guid PlanId, string BillingCycle);
+
+public record SubscriptionPaymentInitiationDto(
+    Guid PaymentId,
+    string PaymentRef,
+    decimal Amount,
+    string Currency,
+    string CheckoutUrl,
+    string PlanName,
+    string BillingCycle,
+    DateTime ExpiresAt);
+

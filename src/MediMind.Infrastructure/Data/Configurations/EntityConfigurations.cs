@@ -121,7 +121,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.HasMany(p => p.Appointments).WithOne(a => a.Patient)
             .HasForeignKey(a => a.PatientId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(p => p.Payments).WithOne(p => p.Patient)
-            .HasForeignKey(p => p.PatientId).OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(p => p.PatientId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(p => p.MedicationReminders).WithOne(r => r.Patient)
             .HasForeignKey(r => r.PatientId).OnDelete(DeleteBehavior.Cascade);
 
@@ -194,7 +194,9 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.Property(c => c.ServicesOffered).IsRequired();
         JsonCollectionMapping.MapStringList(builder.Property(c => c.Specializations), "text");
 
-        builder.Property(c => c.SubscriptionStatus).HasConversion<string>().HasMaxLength(20);
+        builder.Property(c => c.SubscriptionStatus).HasConversion<string>().HasMaxLength(30);
+        builder.Property(c => c.PendingPaymentRef).HasMaxLength(100);
+        builder.Property(c => c.PendingBillingCycle).HasConversion<int?>().IsRequired(false);
         builder.Property(c => c.Latitude).HasPrecision(10, 8);
         builder.Property(c => c.Longitude).HasPrecision(11, 8);
         builder.Property(c => c.ProfileImageUrl).HasMaxLength(1024);
@@ -365,7 +367,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.HasMany(a => a.Prescriptions).WithOne(p => p.Appointment)
             .HasForeignKey(p => p.AppointmentId).OnDelete(DeleteBehavior.Restrict);
         builder.HasMany(a => a.Payments).WithOne(p => p.Appointment)
-            .HasForeignKey(p => p.AppointmentId).OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(p => p.AppointmentId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
     }
 }
 
@@ -528,10 +530,12 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.HasIndex(p => p.ChapaTransactionId)
             .IsUnique()
             .HasFilter("chapa_transaction_id IS NOT NULL");
+        builder.Property(p => p.AdminId).IsRequired(false);
         builder.HasIndex(p => p.AppointmentId);
         builder.HasIndex(p => p.PatientId);
         builder.HasIndex(p => p.CenterId);
         builder.HasIndex(p => p.Status);
+        builder.HasIndex(p => p.ReasonType);
 
         builder.HasMany(p => p.Activities).WithOne(a => a.Payment)
             .HasForeignKey(a => a.PaymentId).OnDelete(DeleteBehavior.Cascade);

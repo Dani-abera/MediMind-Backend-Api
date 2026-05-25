@@ -34,7 +34,14 @@ public enum SubscriptionStatus
     Active,
     Suspended,
     Expired,
-    Rejected
+    Rejected,
+    AwaitingActivation
+}
+
+public enum SubscriptionBillingCycle
+{
+    Monthly = 1,
+    Yearly = 2
 }
 
 public enum SlotDurationMinutes

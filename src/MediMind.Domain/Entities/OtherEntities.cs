@@ -781,8 +781,9 @@ public class VideoQualityMetric : BaseEntity
 public class Payment : BaseEntity
 {
     public Guid PaymentId => Id;
-    public Guid AppointmentId { get; private set; }
-    public Guid PatientId { get; private set; }
+    public Guid? AppointmentId { get; private set; }
+    public Guid? PatientId { get; private set; }
+    public Guid? AdminId { get; private set; }
     public Guid CenterId { get; private set; }
     public string PaymentRef { get; private set; } = string.Empty;
 
@@ -806,8 +807,8 @@ public class Payment : BaseEntity
     public string? ReceiptUrl { get; private set; }
 
     // Navigation
-    public Appointment Appointment { get; private set; } = null!;
-    public Patient Patient { get; private set; } = null!;
+    public Appointment? Appointment { get; private set; }
+    public Patient? Patient { get; private set; }
     public List<PaymentActivity> Activities { get; private set; } = [];
 
     private Payment() { }
@@ -880,6 +881,40 @@ public class Payment : BaseEntity
             PaymentMethod = "Mobile Money",
             Status = PaymentStatus.Pending,
             ReasonType = reasonType
+        };
+    }
+
+    public static Payment InitiateSubscription(
+        Guid centerId,
+        Guid adminId,
+        decimal baseAmount,
+        decimal vatPercent,
+        decimal vatFee,
+        decimal servicePercent,
+        decimal serviceFee,
+        decimal totalAmount,
+        string paymentRef)
+    {
+        if (baseAmount <= 0)
+            throw new DomainException("Subscription payment base amount must be greater than 0 ETB.");
+
+        return new Payment
+        {
+            CenterId = centerId,
+            AdminId = adminId,
+            AppointmentId = null,
+            PatientId = null,
+            PaymentRef = paymentRef,
+            Amount = totalAmount,
+            BaseAmount = baseAmount,
+            VatPercent = vatPercent,
+            VatFee = vatFee,
+            ServicePercent = servicePercent,
+            ServiceFee = serviceFee,
+            TotalAmount = totalAmount,
+            PaymentMethod = "Mobile Money",
+            Status = PaymentStatus.Pending,
+            ReasonType = PaymentReasonType.Subscription
         };
     }
 

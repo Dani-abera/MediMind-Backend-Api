@@ -1,4 +1,5 @@
 using MediMind.Application.Features.Admin;
+using MediMind.Application.Features.Payments;
 using MediMind.Domain.Common.Interfaces;
 using MediMind.Domain.Entities;
 using MediMind.Domain.Enums;
@@ -52,7 +53,10 @@ public class SuperAdminCenterService(
     IHealthcareCenterRepository centerRepository,
     IUnitOfWork unitOfWork,
     IAuditLogger auditLogger,
-    ILogger<SuperAdminCenterService> logger) : ISuperAdminCenterService
+    ILogger<SuperAdminCenterService> logger,
+    IPaymentRepository paymentRepository,
+    IChapaClient chapaClient,
+    ISubscriptionPlanService subscriptionPlanService) : ISuperAdminCenterService
 {
     public async Task<PagedResult<SuperAdminCenterSummaryDto>> GetAllCentersAsync(SuperAdminCenterQueryDto query, CancellationToken ct = default)
     {
@@ -179,6 +183,69 @@ public class SuperAdminCenterService(
         await auditLogger.LogAsync(AuditActions.SuperAdmin_CenterDeleted, superAdminId, "SuperAdmin", centerId, "HealthcareCenter", centerId, null, ct);
     }
 
+    public async Task<SuperAdminCenterSummaryDto> VerifySubscriptionPaymentAsync(Guid centerId, Guid superAdminId, CancellationToken ct = default)
+    {
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+
+        if (center.SubscriptionStatus != SubscriptionStatus.AwaitingActivation)
+            throw new DomainException("Center is not awaiting activation. Only centers with AwaitingActivation status can be verified.");
+
+        if (string.IsNullOrWhiteSpace(center.PendingPaymentRef))
+            throw new DomainException("No pending payment reference found for this center.");
+
+        var payment = await paymentRepository.GetByRefAsync(center.PendingPaymentRef, ct)
+            ?? throw new NotFoundException("Subscription payment", center.PendingPaymentRef);
+
+        var verify = await chapaClient.VerifyPaymentAsync(center.PendingPaymentRef, ct);
+        if (verify is null
+            || !string.Equals(verify.Status, "success", StringComparison.OrdinalIgnoreCase)
+            || !string.Equals(verify.Data?.Status, "success", StringComparison.OrdinalIgnoreCase))
+        {
+            throw new DomainException("Chapa payment verification failed. The payment has not been confirmed by Chapa yet.");
+        }
+
+        if (payment.Status != PaymentStatus.Completed)
+        {
+            payment.Complete(verify.Data!.FlwRef);
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Completed,
+                payment.PaymentRef, payment.TotalAmount,
+                chapaTransactionId: verify.Data.FlwRef,
+                paymentMethodRaw: verify.Data.PaymentType,
+                confirmedAt: DateTime.UtcNow));
+        }
+
+        var planName = center.CurrentPlan ?? "Unknown";
+        if (center.SubscriptionPlanId.HasValue)
+        {
+            try
+            {
+                var plan = await subscriptionPlanService.GetPlanByIdAsync(center.SubscriptionPlanId.Value, ct);
+                planName = plan.Name;
+            }
+            catch { /* use fallback planName */ }
+        }
+
+        var billingCycle = center.PendingBillingCycle ?? SubscriptionBillingCycle.Monthly;
+        var startDate = DateOnly.FromDateTime(DateTime.UtcNow);
+        var endDate = billingCycle == SubscriptionBillingCycle.Yearly
+            ? startDate.AddDays(365)
+            : startDate.AddDays(30);
+
+        var oldStatus = center.SubscriptionStatus;
+        center.ActivateFromPayment(planName, startDate, endDate);
+
+        var history = SubscriptionHistory.Create(centerId, oldStatus, SubscriptionStatus.Active, superAdminId, planName, startDate, endDate, "Activated after Chapa payment verification");
+        await centerRepository.AddSubscriptionHistoryAsync(history, ct);
+        await unitOfWork.SaveChangesAsync(ct);
+
+        await auditLogger.LogAsync(AuditActions.SuperAdmin_SubscriptionUpdated, superAdminId, "SuperAdmin", centerId, "HealthcareCenter", centerId, $"{{\"plan\":\"{planName}\",\"billingCycle\":\"{billingCycle}\"}}", ct);
+        logger.LogInformation("Subscription payment verified and center {CenterId} activated with plan {Plan}", centerId, planName);
+
+        return await MapAsync(center, ct);
+    }
+
     private async Task<List<SuperAdminCenterSummaryDto>> MapManyAsync(IReadOnlyList<HealthcareCenter> centers, CancellationToken ct)
     {
         var result = new List<SuperAdminCenterSummaryDto>(centers.Count);
@@ -190,11 +257,34 @@ public class SuperAdminCenterService(
     private async Task<SuperAdminCenterSummaryDto> MapAsync(HealthcareCenter c, CancellationToken ct)
     {
         var doctorCount = (await centerRepository.GetDoctorsAsync(c.Id)).Count(x => x.IsActive);
+
+        string? pendingPlanName = null;
+        string? pendingPaymentStatus = null;
+        if (c.SubscriptionStatus == SubscriptionStatus.AwaitingActivation
+            && !string.IsNullOrWhiteSpace(c.PendingPaymentRef))
+        {
+            if (c.SubscriptionPlanId.HasValue)
+            {
+                try
+                {
+                    var plan = await subscriptionPlanService.GetPlanByIdAsync(c.SubscriptionPlanId.Value, ct);
+                    pendingPlanName = plan.Name;
+                }
+                catch { /* plan may have been deactivated */ }
+            }
+            var payment = await paymentRepository.GetByRefAsync(c.PendingPaymentRef, ct);
+            pendingPaymentStatus = payment?.Status.ToString();
+        }
+
         return new SuperAdminCenterSummaryDto(
             c.Id, c.CenterName, c.CenterType, c.LicenseNumber,
             c.City, c.Region, c.PhoneNumber, c.Email,
             c.SubscriptionStatus.ToString(), c.SubscriptionEndDate,
-            c.RejectionReason, c.IsDeleted, doctorCount, c.CreatedAt);
+            c.RejectionReason, c.IsDeleted, doctorCount, c.CreatedAt,
+            PendingPlanName: pendingPlanName,
+            PendingPaymentRef: c.PendingPaymentRef,
+            PendingPaymentStatus: pendingPaymentStatus,
+            PendingBillingCycle: c.PendingBillingCycle?.ToString());
     }
 }
 
