@@ -641,7 +641,13 @@ public class AppointmentService(
         var center = full.Center;
         var canCancel = full.IsCancellable(center?.CancellationHours ?? 2);
         var queue = full.QueueEntry;
-        var canInitiateVideo = full.VideoConsultation?.Status == VideoConsultationStatus.Scheduled;
+        var appointmentActive = full.Status is not (AppointmentStatus.Cancelled or AppointmentStatus.NoShow or AppointmentStatus.Completed);
+        var canInitiateVideo = appointmentActive
+            && (full.VideoConsultation == null
+                || full.VideoConsultation.Status is (VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress));
+        var canChat = appointmentActive
+            && full.VideoConsultation != null
+            && full.VideoConsultation.Status is not (VideoConsultationStatus.Completed or VideoConsultationStatus.Cancelled);
         var latestPayment = full.Payments.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
 
         var doctorCenterLink = full.Doctor?.DoctorHealthcareCenters
@@ -677,6 +683,7 @@ public class AppointmentService(
             QueueNumber: queue?.Position,
             EstimatedWaitMinutes: queue?.EstimatedWaitTimeMinutes,
             CanInitiateVideoConsultation: canInitiateVideo,
+            CanChat: canChat,
             VideoConsultationId: full.VideoConsultation?.ConsultationId,
             VideoConsultationStatus: full.VideoConsultation?.Status.ToString(),
             CancellationPolicyHours: center?.CancellationHours ?? 2,

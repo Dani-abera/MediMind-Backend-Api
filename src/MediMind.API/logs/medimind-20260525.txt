@@ -857,3 +857,1247 @@ DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error
 2026-05-25 06:50:54.149 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8542 ms
 2026-05-25 06:51:54.191 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.3021 ms
 2026-05-25 06:51:54.237 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.9229 ms
+2026-05-25 06:52:54.136 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.9319 ms
+2026-05-25 06:52:54.145 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.9725 ms
+2026-05-25 06:53:54.299 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.3326 ms
+2026-05-25 06:53:54.341 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 48.4735 ms
+2026-05-25 06:54:54.132 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.8900 ms
+2026-05-25 06:54:54.142 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 13.2855 ms
+2026-05-25 06:55:54.569 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 74.1292 ms
+2026-05-25 06:55:54.651 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.4651 ms
+2026-05-25 06:56:54.205 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 42.0831 ms
+2026-05-25 06:56:54.225 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 67.2412 ms
+2026-05-25 06:56:54.844 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 483.3756 ms
+2026-05-25 06:56:55.025 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.2603 ms
+2026-05-25 06:57:54.132 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.7055 ms
+2026-05-25 06:57:54.139 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.4661 ms
+2026-05-25 06:58:54.116 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.9069 ms
+2026-05-25 06:58:54.190 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 80.5457 ms
+2026-05-25 06:59:15.105 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 57.9551 ms
+2026-05-25 06:59:54.110 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.6303 ms
+2026-05-25 06:59:54.113 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5155 ms
+2026-05-25 07:00:08.615 +03:00 [INF] Running appointment reminder job at "2026-05-25T04:00:08.6128500Z"
+2026-05-25 07:00:08.640 +03:00 [INF] Appointment reminder job completed.
+2026-05-25 07:00:54.163 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.3793 ms
+2026-05-25 07:00:54.194 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.8973 ms
+2026-05-25 07:01:54.120 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.8191 ms
+2026-05-25 07:01:54.130 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.2810 ms
+2026-05-25 07:02:54.093 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0015 ms
+2026-05-25 07:02:54.099 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 0.2863 ms
+2026-05-25 07:03:54.105 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.0667 ms
+2026-05-25 07:03:54.106 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.4283 ms
+2026-05-25 07:04:54.130 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 2.7793 ms
+2026-05-25 07:04:54.133 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.5403 ms
+2026-05-25 07:05:54.264 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.6294 ms
+2026-05-25 07:05:54.289 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3219 ms
+2026-05-25 07:06:54.094 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 4.9912 ms
+2026-05-25 07:06:54.095 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.8700 ms
+2026-05-25 07:07:54.287 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8088 ms
+2026-05-25 07:07:54.301 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.7779 ms
+2026-05-25 07:08:54.341 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.4398 ms
+2026-05-25 07:08:54.357 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 1.0435 ms
+2026-05-25 07:09:42.065 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 32.0165 ms
+2026-05-25 07:10:07.892 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 735.6090 ms
+2026-05-25 07:10:13.239 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 173.0587 ms
+2026-05-25 07:10:13.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 114.7554 ms
+2026-05-25 07:10:14.325 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:10:15.054 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 1394.0657 ms
+2026-05-25 07:10:15.186 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 1546.8740 ms
+2026-05-25 07:10:23.071 +03:00 [INF] ONNX models loaded from /Users/dani/RiderProjects/MediMind/src/MediMind.API/models
+2026-05-25 07:10:23.124 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:10:23.238 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 452.9995 ms
+2026-05-25 07:10:25.948 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:10:26.071 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 186.3124 ms
+2026-05-25 07:10:35.097 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:10:35.234 +03:00 [INF] HTTP GET /api/v1/appointments/fd649f1c-92bf-4b14-b3ed-8b082c88d477 responded 200 in 209.3840 ms
+2026-05-25 07:10:35.286 +03:00 [INF] HTTP GET /api/v1/appointments/fd649f1c-92bf-4b14-b3ed-8b082c88d477/notes responded 204 in 46.2205 ms
+2026-05-25 07:10:39.565 +03:00 [INF] HTTP GET /api/v1/appointments/dd6ab25a-b0b7-4f13-b1f7-f3e942aa1b75 responded 200 in 18.7650 ms
+2026-05-25 07:10:39.605 +03:00 [INF] HTTP GET /api/v1/appointments/dd6ab25a-b0b7-4f13-b1f7-f3e942aa1b75/notes responded 200 in 35.3012 ms
+2026-05-25 07:10:40.424 +03:00 [INF] HTTP GET /api/v1/appointments/dd6ab25a-b0b7-4f13-b1f7-f3e942aa1b75 responded 200 in 29.5640 ms
+2026-05-25 07:10:40.467 +03:00 [INF] HTTP GET /api/v1/appointments/dd6ab25a-b0b7-4f13-b1f7-f3e942aa1b75/notes responded 200 in 35.0751 ms
+2026-05-25 07:10:46.619 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 29.4811 ms
+2026-05-25 07:10:55.540 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 34.7172 ms
+2026-05-25 07:10:57.789 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 35.8275 ms
+2026-05-25 07:10:57.919 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.3275 ms
+2026-05-25 07:10:57.937 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 41.3165 ms
+2026-05-25 07:10:57.997 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 101.4188 ms
+2026-05-25 07:11:03.242 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 43.4420 ms
+2026-05-25 07:11:05.625 +03:00 [INF] HTTP GET /api/v1/appointments/8c34fa50-3d8e-4af1-8a0d-597e290323ac responded 200 in 25.4413 ms
+2026-05-25 07:11:05.655 +03:00 [INF] HTTP GET /api/v1/appointments/8c34fa50-3d8e-4af1-8a0d-597e290323ac/notes responded 204 in 23.3482 ms
+2026-05-25 07:11:25.975 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 20.0333 ms
+2026-05-25 07:11:26.038 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 37.5920 ms
+2026-05-25 07:11:26.067 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.7967 ms
+2026-05-25 07:11:57.896 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.3262 ms
+2026-05-25 07:12:18.680 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 106.5772 ms
+2026-05-25 07:12:59.900 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 59.7403 ms
+2026-05-25 07:13:24.085 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.4150 ms
+2026-05-25 07:13:57.981 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.9488 ms
+2026-05-25 07:14:31.959 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 210.2335 ms
+2026-05-25 07:14:57.964 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.4980 ms
+2026-05-25 07:15:31.288 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.7620 ms
+2026-05-25 07:15:57.935 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.4600 ms
+2026-05-25 07:16:40.915 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 13.6645 ms
+2026-05-25 07:16:57.907 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.5780 ms
+2026-05-25 07:17:43.400 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 76.0876 ms
+2026-05-25 07:17:57.915 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.0490 ms
+2026-05-25 07:18:57.939 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.4303 ms
+2026-05-25 07:19:57.934 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.5739 ms
+2026-05-25 07:20:57.918 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.4457 ms
+2026-05-25 07:21:57.973 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 54.0338 ms
+2026-05-25 07:22:58.029 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.1044 ms
+2026-05-25 07:23:58.766 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 70.9709 ms
+2026-05-25 07:24:58.208 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 138.8988 ms
+2026-05-25 07:25:20.694 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.7413 ms
+2026-05-25 07:25:20.841 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.3318 ms
+2026-05-25 07:25:21.263 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 541.4982 ms
+2026-05-25 07:25:21.265 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 464.8474 ms
+2026-05-25 07:25:21.289 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 491.9896 ms
+2026-05-25 07:25:21.365 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 654.9065 ms
+2026-05-25 07:25:39.934 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 54.8435 ms
+2026-05-25 07:25:40.205 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 90.5286 ms
+2026-05-25 07:25:44.157 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:25:44.269 +03:00 [INF] HTTP GET /api/v1/appointments/8c34fa50-3d8e-4af1-8a0d-597e290323ac responded 200 in 211.4037 ms
+2026-05-25 07:25:51.930 +03:00 [INF] HTTP GET /api/v1/queue/status/8c34fa50-3d8e-4af1-8a0d-597e290323ac responded 200 in 171.3914 ms
+2026-05-25 07:25:52.210 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.4507 ms
+2026-05-25 07:25:53.263 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.9460 ms
+2026-05-25 07:25:55.308 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.2338 ms
+2026-05-25 07:25:57.946 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 26.6931 ms
+2026-05-25 07:25:58.547 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 258.3305 ms
+2026-05-25 07:25:58.734 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.1811 ms
+2026-05-25 07:25:59.351 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.9788 ms
+2026-05-25 07:26:01.752 +03:00 [INF] HTTP POST /api/v1/payments/initiate responded 200 in 145.1626 ms
+2026-05-25 07:26:07.413 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 9.0408 ms
+2026-05-25 07:26:20.967 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.3544 ms
+2026-05-25 07:26:23.567 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.9432 ms
+2026-05-25 07:26:32.830 +03:00 [INF] HTTP GET /api/v1/appointments/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413 responded 401 in 9.4673 ms
+2026-05-25 07:26:32.946 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 72.2153 ms
+2026-05-25 07:26:33.100 +03:00 [INF] HTTP GET /api/v1/appointments/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413 responded 200 in 36.6463 ms
+2026-05-25 07:26:44.170 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 73.3691 ms
+2026-05-25 07:26:49.853 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f responded 200 in 38.3553 ms
+2026-05-25 07:26:51.881 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors responded 200 in 186.8080 ms
+2026-05-25 07:26:53.611 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 0.7325 ms
+2026-05-25 07:26:54.142 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 07:26:54.186 +03:00 [INF] HTTP GET /api/v1/doctors/879e5b0a-9504-424d-8053-b1b200dd1929 responded 200 in 93.7298 ms
+2026-05-25 07:26:56.582 +03:00 [INF] HTTP GET /api/v1/doctors/879e5b0a-9504-424d-8053-b1b200dd1929/available-dates responded 200 in 315.8138 ms
+2026-05-25 07:26:56.736 +03:00 [INF] HTTP GET /api/v1/doctors/879e5b0a-9504-424d-8053-b1b200dd1929/availability responded 200 in 26.9579 ms
+2026-05-25 07:26:57.948 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.1793 ms
+2026-05-25 07:27:21.116 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 60.3195 ms
+2026-05-25 07:27:23.667 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 5.4468 ms
+2026-05-25 07:27:54.848 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 13.7211 ms
+2026-05-25 07:27:58.041 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.1761 ms
+2026-05-25 07:28:22.419 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 13.0880 ms
+2026-05-25 07:28:25.886 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.8426 ms
+2026-05-25 07:28:31.138 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 119.8705 ms
+2026-05-25 07:28:33.108 +03:00 [INF] HTTP GET /api/v1/queue/status/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 93.1065 ms
+2026-05-25 07:28:33.181 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.7232 ms
+2026-05-25 07:28:34.223 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 0.9888 ms
+2026-05-25 07:28:36.343 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.2233 ms
+2026-05-25 07:28:40.390 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.5408 ms
+2026-05-25 07:28:48.512 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.9663 ms
+2026-05-25 07:28:55.923 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.2524 ms
+2026-05-25 07:28:57.951 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.6439 ms
+2026-05-25 07:29:04.568 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 10.8408 ms
+2026-05-25 07:29:22.412 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.7515 ms
+2026-05-25 07:29:25.964 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.8961 ms
+2026-05-25 07:29:34.155 +03:00 [INF] HTTP GET /api/v1/appointments/fbe5cabf-c385-470f-a37f-f944c429e283 responded 200 in 51.8718 ms
+2026-05-25 07:29:34.617 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.0311 ms
+2026-05-25 07:29:56.016 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.9940 ms
+2026-05-25 07:29:58.001 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.2141 ms
+2026-05-25 07:30:04.664 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.0723 ms
+2026-05-25 07:30:08.855 +03:00 [INF] Running appointment reminder job at "2026-05-25T04:30:08.8506290Z"
+2026-05-25 07:30:08.958 +03:00 [INF] Appointment reminder job completed.
+2026-05-25 07:30:22.915 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 79.5091 ms
+2026-05-25 07:30:26.641 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 7.0155 ms
+2026-05-25 07:30:37.243 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 12.4261 ms
+2026-05-25 07:30:49.469 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 522.2618 ms
+2026-05-25 07:30:57.908 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 34.8573 ms
+2026-05-25 07:31:01.057 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.3628 ms
+2026-05-25 07:31:07.134 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 573.4996 ms
+2026-05-25 07:31:07.260 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.9681 ms
+2026-05-25 07:31:07.333 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 86.0507 ms
+2026-05-25 07:31:07.430 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/branding responded 200 in 39.6183 ms
+2026-05-25 07:31:07.432 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/config responded 200 in 41.7415 ms
+2026-05-25 07:31:11.002 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.5975 ms
+2026-05-25 07:31:30.455 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.3953 ms
+2026-05-25 07:31:35.195 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.9842 ms
+2026-05-25 07:31:44.514 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 6.9220 ms
+2026-05-25 07:32:05.828 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.2900 ms
+2026-05-25 07:32:07.296 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.6974 ms
+2026-05-25 07:32:07.323 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 52.4502 ms
+2026-05-25 07:33:07.271 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.8656 ms
+2026-05-25 07:33:07.306 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 54.9341 ms
+2026-05-25 07:34:07.264 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.1573 ms
+2026-05-25 07:34:07.282 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 29.9094 ms
+2026-05-25 07:35:07.255 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.8778 ms
+2026-05-25 07:35:07.276 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 38.4978 ms
+2026-05-25 07:36:07.268 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0384 ms
+2026-05-25 07:36:07.293 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 49.5085 ms
+2026-05-25 07:37:07.273 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.2671 ms
+2026-05-25 07:37:07.294 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 38.2933 ms
+2026-05-25 07:38:07.268 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.0795 ms
+2026-05-25 07:38:07.296 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 52.0555 ms
+2026-05-25 07:38:14.454 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.2204 ms
+2026-05-25 07:38:14.457 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.1762 ms
+2026-05-25 07:39:07.280 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0762 ms
+2026-05-25 07:39:07.298 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 35.3857 ms
+2026-05-25 07:40:07.278 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.9623 ms
+2026-05-25 07:40:07.310 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 53.0002 ms
+2026-05-25 07:41:07.296 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.9588 ms
+2026-05-25 07:41:07.317 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 57.7636 ms
+2026-05-25 07:42:07.263 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 13.4885 ms
+2026-05-25 07:42:07.291 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 40.4539 ms
+2026-05-25 07:43:07.274 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.3645 ms
+2026-05-25 07:43:07.296 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 38.3671 ms
+2026-05-25 07:44:07.266 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.0164 ms
+2026-05-25 07:44:07.295 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 48.3532 ms
+2026-05-25 07:45:07.256 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.4696 ms
+2026-05-25 07:45:07.282 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 35.1373 ms
+2026-05-25 07:46:07.284 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 37.7597 ms
+2026-05-25 07:46:07.284 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 401 in 37.6152 ms
+2026-05-25 07:46:07.397 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-25 07:46:07.438 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 138.2865 ms
+2026-05-25 07:46:07.449 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 149.3784 ms
+2026-05-25 07:46:07.938 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.1514 ms
+2026-05-25 07:47:07.347 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 60.5132 ms
+2026-05-25 07:48:07.262 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.9390 ms
+2026-05-25 07:49:07.271 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.6581 ms
+2026-05-25 07:50:07.255 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.2014 ms
+2026-05-25 07:50:16.970 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.4168 ms
+2026-05-25 07:50:17.213 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 91.8528 ms
+2026-05-25 07:50:17.516 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.5812 ms
+2026-05-25 07:50:18.428 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.5281 ms
+2026-05-25 07:51:07.271 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.8564 ms
+2026-05-25 07:52:07.262 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0247 ms
+2026-05-25 07:53:07.267 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.5218 ms
+2026-05-25 07:54:07.247 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.1741 ms
+2026-05-25 07:55:07.252 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.4518 ms
+2026-05-25 07:56:07.269 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.0348 ms
+2026-05-25 07:57:07.271 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.7355 ms
+2026-05-25 07:58:07.261 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.1235 ms
+2026-05-25 07:59:07.265 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.1262 ms
+2026-05-25 08:00:07.281 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.7613 ms
+2026-05-25 08:00:09.188 +03:00 [INF] Running appointment reminder job at "2026-05-25T05:00:09.1847120Z"
+2026-05-25 08:00:09.211 +03:00 [INF] Appointment reminder job completed.
+2026-05-25 08:01:07.276 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 35.3662 ms
+2026-05-25 08:01:07.416 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 130.2160 ms
+2026-05-25 08:01:07.428 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.4317 ms
+2026-05-25 08:01:14.574 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.7870 ms
+2026-05-25 08:01:15.489 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 0.9245 ms
+2026-05-25 08:01:16.105 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 0.5847 ms
+2026-05-25 08:01:16.131 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.6710 ms
+2026-05-25 08:01:25.331 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.5443 ms
+2026-05-25 08:01:25.707 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 1.6754 ms
+2026-05-25 08:01:26.553 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.6619 ms
+2026-05-25 08:01:45.806 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.2246 ms
+2026-05-25 08:01:56.042 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.4206 ms
+2026-05-25 08:02:00.558 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.7280 ms
+2026-05-25 08:02:07.257 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.7947 ms
+2026-05-25 08:02:16.123 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 10.4386 ms
+2026-05-25 08:02:26.355 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.7698 ms
+2026-05-25 08:02:46.430 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 6.4188 ms
+2026-05-25 08:02:56.667 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.1866 ms
+2026-05-25 08:03:01.265 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.0916 ms
+2026-05-25 08:03:07.255 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.1085 ms
+2026-05-25 08:04:07.264 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.5200 ms
+2026-05-25 08:05:07.266 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.7539 ms
+2026-05-25 08:06:07.265 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.1544 ms
+2026-05-25 08:07:07.274 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.3280 ms
+2026-05-25 08:08:07.254 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.3210 ms
+2026-05-25 08:09:07.265 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.2154 ms
+2026-05-25 08:09:13.515 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 9.1713 ms
+2026-05-25 08:10:07.255 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.9428 ms
+2026-05-25 08:11:07.265 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.7532 ms
+2026-05-25 08:12:07.267 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.7581 ms
+2026-05-25 08:12:56.225 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 729.7310 ms
+2026-05-25 08:13:07.425 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 166.1508 ms
+2026-05-25 08:13:16.535 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 372.3381 ms
+2026-05-25 08:13:16.654 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.3419 ms
+2026-05-25 08:13:16.851 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 197.3406 ms
+2026-05-25 08:13:16.930 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/config responded 200 in 47.5522 ms
+2026-05-25 08:13:16.930 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/branding responded 200 in 50.2163 ms
+2026-05-25 08:13:20.886 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/roster responded 200 in 115.9603 ms
+2026-05-25 08:13:21.075 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/invitations responded 200 in 182.6375 ms
+2026-05-25 08:14:13.264 +03:00 [ERR] SMS Ethiopia HTTP "BadRequest". Phone=251944440033 Body={"error_message":"DEFAULT_CAMPAIGN_RECIPIENT_NOT_WHITELISTED: This starter campaign can only send to verified numbers. Please verify this MSISDN first via the whitelist API. Error Code :: 10007"}
+2026-05-25 08:14:13.271 +03:00 [ERR] SMS delivery failed for 251944440033. Response=null
+2026-05-25 08:14:14.591 +03:00 [ERR] Resend email exception for sosen@gmail.com
+Resend.ResendException: You can only send testing emails to your own email address (danielabera285@gmail.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain.
+   at Resend.ResendClient.Execute[T1,T2](HttpRequestMessage req, Func`2 map, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Services.Notifications.ResendEmailService.SendAsync(String to, String subject, String htmlBody, CancellationToken ct)
+2026-05-25 08:14:14.661 +03:00 [INF] HTTP POST /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/create responded 201 in 5552.3615 ms
+2026-05-25 08:14:14.784 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/roster responded 200 in 36.5135 ms
+2026-05-25 08:14:14.800 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/invitations responded 200 in 11.5256 ms
+2026-05-25 08:14:16.656 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.3792 ms
+2026-05-25 08:14:16.692 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 55.5342 ms
+2026-05-25 08:14:50.515 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 269.6282 ms
+2026-05-25 08:14:51.618 +03:00 [INF] HTTP GET /api/v1/appointments/662cbbf9-625e-4817-b4e3-6528859a88d7 responded 401 in 137.7823 ms
+2026-05-25 08:14:52.325 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 16.1509 ms
+2026-05-25 08:14:52.637 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 975.4290 ms
+2026-05-25 08:14:52.876 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 6.2431 ms
+2026-05-25 08:14:53.401 +03:00 [INF] HTTP GET /api/v1/appointments/662cbbf9-625e-4817-b4e3-6528859a88d7 responded 200 in 688.9327 ms
+2026-05-25 08:14:53.861 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 5.7457 ms
+2026-05-25 08:14:56.866 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 1524.8265 ms
+2026-05-25 08:14:57.999 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 406.0605 ms
+2026-05-25 08:15:06.202 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 48.6572 ms
+2026-05-25 08:15:06.701 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.4970 ms
+2026-05-25 08:15:14.267 +03:00 [INF] HTTP GET /api/v1/appointments/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413 responded 200 in 1943.1782 ms
+2026-05-25 08:15:23.051 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 33.4208 ms
+2026-05-25 08:15:36.868 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 11.2148 ms
+2026-05-25 08:15:38.783 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 103.1572 ms
+2026-05-25 08:15:39.081 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 164.3162 ms
+2026-05-25 08:15:53.174 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 6.6320 ms
+2026-05-25 08:15:58.434 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 81.3818 ms
+2026-05-25 08:16:07.813 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 68.4495 ms
+2026-05-25 08:16:21.830 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 313.2243 ms
+2026-05-25 08:16:22.210 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 319.6384 ms
+2026-05-25 08:16:24.014 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.9361 ms
+2026-05-25 08:16:37.861 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 2.6870 ms
+2026-05-25 08:16:54.056 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 4.6336 ms
+2026-05-25 08:16:58.424 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.5966 ms
+2026-05-25 08:17:09.456 +03:00 [INF] HTTP POST //hubs/queue/negotiate responded 404 in 3.6280 ms
+2026-05-25 08:17:19.731 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 51.5219 ms
+2026-05-25 08:17:20.097 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 229.5023 ms
+2026-05-25 08:18:16.833 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.1287 ms
+2026-05-25 08:18:16.888 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 83.6585 ms
+2026-05-25 08:19:16.695 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.9195 ms
+2026-05-25 08:19:16.746 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 59.0085 ms
+2026-05-25 08:19:41.168 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.4692 ms
+2026-05-25 08:19:41.316 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.4047 ms
+2026-05-25 08:19:41.375 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 77.5080 ms
+2026-05-25 08:19:41.382 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 83.7800 ms
+2026-05-25 08:19:41.413 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 142.7672 ms
+2026-05-25 08:19:41.420 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 125.0965 ms
+2026-05-25 08:19:48.201 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 43.7849 ms
+2026-05-25 08:19:48.514 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 53.5304 ms
+2026-05-25 08:19:52.885 +03:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 41.5787 ms
+2026-05-25 08:19:59.997 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e responded 200 in 51.3897 ms
+2026-05-25 08:20:01.906 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors responded 200 in 55.4072 ms
+2026-05-25 08:20:03.901 +03:00 [INF] HTTP GET /api/v1/doctors/911aeb5b-110d-4038-a932-61fbac2b82a0 responded 200 in 27.3613 ms
+2026-05-25 08:20:05.859 +03:00 [INF] HTTP GET /api/v1/doctors/911aeb5b-110d-4038-a932-61fbac2b82a0/available-dates responded 200 in 62.8503 ms
+2026-05-25 08:20:16.741 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 71.7316 ms
+2026-05-25 08:20:16.829 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 160.3158 ms
+2026-05-25 08:20:18.194 +03:00 [INF] HTTP GET /api/v1/doctor-schedules/911aeb5b-110d-4038-a932-61fbac2b82a0/059d505c-4456-4e39-992f-470dc3da8e6e responded 404 in 368.5168 ms
+2026-05-25 08:20:19.040 +03:00 [INF] HTTP GET /api/v1/doctor-schedules/911aeb5b-110d-4038-a932-61fbac2b82a0/059d505c-4456-4e39-992f-470dc3da8e6e/exceptions responded 200 in 547.1370 ms
+2026-05-25 08:20:20.628 +03:00 [INF] HTTP POST /api/v1/doctor-schedules responded 200 in 256.8742 ms
+2026-05-25 08:20:20.667 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/roster responded 200 in 32.2058 ms
+2026-05-25 08:20:20.683 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/doctors/invitations responded 200 in 13.3398 ms
+2026-05-25 08:20:27.061 +03:00 [INF] HTTP GET /api/v1/doctors/911aeb5b-110d-4038-a932-61fbac2b82a0/available-dates responded 200 in 174.9380 ms
+2026-05-25 08:20:27.432 +03:00 [INF] HTTP GET /api/v1/doctors/911aeb5b-110d-4038-a932-61fbac2b82a0/availability responded 200 in 16.4695 ms
+2026-05-25 08:20:41.310 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.5165 ms
+2026-05-25 08:20:42.749 +03:00 [INF] HTTP POST /api/v1/appointments responded 201 in 355.2872 ms
+2026-05-25 08:20:42.767 +03:00 [INF] No FCM tokens for user "9de98a66-b1ea-4a7a-99c1-7e721ebd8110"; push skipped.
+2026-05-25 08:20:42.912 +03:00 [INF] HTTP POST /api/v1/payments/initiate responded 200 in 81.5801 ms
+2026-05-25 08:21:07.492 +03:00 [INF] Chapa verify attempt 1/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:08.368 +03:00 [INF] Chapa verify attempt 1/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:10.127 +03:00 [INF] Chapa verify attempt 2/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:11.139 +03:00 [INF] Chapa verify attempt 2/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:12.844 +03:00 [INF] Chapa verify attempt 3/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:12.845 +03:00 [WRN] Chapa verify returned null for payment "2c34ad03-583f-45a9-821c-057572fa655c". Chapa API may be unreachable.
+2026-05-25 08:21:12.860 +03:00 [INF] HTTP POST /api/v1/payments/2c34ad03-583f-45a9-821c-057572fa655c/sync responded 200 in 8173.2283 ms
+2026-05-25 08:21:13.646 +03:00 [INF] Chapa verify attempt 3/3 for payment "2c34ad03-583f-45a9-821c-057572fa655c" (txRef=APPT-b6269b75ab4b4c2399824f5900b458bb): outerStatus=null, dataStatus=null, flwRef=null
+2026-05-25 08:21:13.646 +03:00 [WRN] Chapa verify returned null for payment "2c34ad03-583f-45a9-821c-057572fa655c". Chapa API may be unreachable.
+2026-05-25 08:21:13.647 +03:00 [INF] HTTP POST /api/v1/payments/2c34ad03-583f-45a9-821c-057572fa655c/sync responded 200 in 5927.9172 ms
+2026-05-25 08:21:16.674 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.7062 ms
+2026-05-25 08:21:16.750 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 101.4407 ms
+2026-05-25 08:21:37.227 +03:00 [INF] HTTP GET /api/v1/appointments/6394a833-fe75-41e2-98ff-91130e1f5a0f responded 200 in 43.8644 ms
+2026-05-25 08:21:41.388 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.4188 ms
+2026-05-25 08:22:16.673 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.6635 ms
+2026-05-25 08:22:16.710 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 46.0139 ms
+2026-05-25 08:22:45.056 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.8859 ms
+2026-05-25 08:23:16.609 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 158.2683 ms
+2026-05-25 08:23:16.676 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.0084 ms
+2026-05-25 08:23:16.711 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 55.3060 ms
+2026-05-25 08:23:16.723 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 55.4415 ms
+2026-05-25 08:23:24.955 +03:00 [INF] HTTP GET /api/v1/appointments/6394a833-fe75-41e2-98ff-91130e1f5a0f responded 200 in 28.7751 ms
+2026-05-25 08:23:49.042 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-26T00:00:00.0000000Z
+2026-05-25 08:23:49.057 +03:00 [INF] Daily queue generation scheduled for "2026-05-26T06:00:00.0000000" ("2026-05-26T03:00:00.0000000Z" UTC)
+2026-05-25 08:23:49.103 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-25 08:23:49.104 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-25 08:23:55.117 +03:00 [INF] HTTP GET /api/v1/subscription-plans responded 200 in 117.1799 ms
+2026-05-25 08:24:16.868 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:24:16.889 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-25 08:24:16.909 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 121.5458 ms
+2026-05-25 08:24:17.034 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:24:17.067 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 276.5874 ms
+2026-05-25 08:24:47.642 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.4824 ms
+2026-05-25 08:24:49.294 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 55.6954 ms
+2026-05-25 08:24:49.850 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 18.3167 ms
+2026-05-25 08:24:51.778 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 26.8145 ms
+2026-05-25 08:25:16.687 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.4047 ms
+2026-05-25 08:25:16.723 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 51.5674 ms
+2026-05-25 08:25:47.561 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.3381 ms
+2026-05-25 08:26:16.727 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.1705 ms
+2026-05-25 08:26:16.775 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 60.5380 ms
+2026-05-25 08:26:54.326 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.3888 ms
+2026-05-25 08:27:16.715 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.8720 ms
+2026-05-25 08:27:16.747 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 55.0258 ms
+2026-05-25 08:28:17.599 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 122.2173 ms
+2026-05-25 08:28:17.713 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 401 in 2.9897 ms
+2026-05-25 08:28:18.512 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-25 08:28:18.523 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 381.8834 ms
+2026-05-25 08:28:18.721 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 425.9756 ms
+2026-05-25 08:28:19.200 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 17.3546 ms
+dPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-05-25 08:25:44.797 +03:00 [ERR] BackgroundService failed
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.PeriodicTimer.State.Signal(Boolean stopping, CancellationToken cancellationToken)
+   at System.Threading.CancellationTokenSource.ExecuteCallbackHandlers(Boolean throwOnFirstException)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.TrySetException(Object exceptionObject)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetException(Exception exception, Task`1& taskField)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at MediMind.Infrastructure.Services.SuperAdmin.SubscriptionPlanSeeder.StartAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/SuperAdmin/SubscriptionPlanSeeder.cs:line 57
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|54_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult(TResult result)
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Memory`1 socketAddress, SocketFlags receivedFlags, SocketError socketError)
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at System.Threading.PeriodicTimer.State.System.Threading.Tasks.Sources.IValueTaskSource<System.Boolean>.GetResult(Int16 token)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.ExecuteAsync(CancellationToken stoppingToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/MedicationReminderHostedService.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-05-25 08:25:44.799 +03:00 [FTL] The HostOptions.BackgroundServiceExceptionBehavior is configured to StopHost. A BackgroundService has thrown an unhandled exception, and the IHost instance is stopping. To avoid this behavior, configure this to Ignore; however the BackgroundService will not be restarted.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.PeriodicTimer.State.Signal(Boolean stopping, CancellationToken cancellationToken)
+   at System.Threading.CancellationTokenSource.ExecuteCallbackHandlers(Boolean throwOnFirstException)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.TrySetException(Object exceptionObject)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetException(Exception exception, Task`1& taskField)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at MediMind.Infrastructure.Services.SuperAdmin.SubscriptionPlanSeeder.StartAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/SuperAdmin/SubscriptionPlanSeeder.cs:line 57
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|54_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult(TResult result)
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Memory`1 socketAddress, SocketFlags receivedFlags, SocketError socketError)
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at System.Threading.PeriodicTimer.State.System.Threading.Tasks.Sources.IValueTaskSource<System.Boolean>.GetResult(Int16 token)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.ExecuteAsync(CancellationToken stoppingToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/MedicationReminderHostedService.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-05-25 08:25:44.801 +03:00 [FTL] MediMind API terminated unexpectedly.
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Program.<Main>$(String[] args) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Program.cs:line 271
+2026-05-25 08:26:52.844 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-26T00:00:00.0000000Z
+2026-05-25 08:26:52.860 +03:00 [INF] Daily queue generation scheduled for "2026-05-26T06:00:00.0000000" ("2026-05-26T03:00:00.0000000Z" UTC)
+2026-05-25 08:26:52.925 +03:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2026-05-25 08:26:52.946 +03:00 [ERR] BackgroundService failed
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.PeriodicTimer.State.Signal(Boolean stopping, CancellationToken cancellationToken)
+   at System.Threading.CancellationTokenSource.ExecuteCallbackHandlers(Boolean throwOnFirstException)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.TrySetException(Object exceptionObject)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetException(Exception exception, Task`1& taskField)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at MediMind.Infrastructure.Services.SuperAdmin.SubscriptionPlanSeeder.StartAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/SuperAdmin/SubscriptionPlanSeeder.cs:line 57
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|54_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult(TResult result)
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Memory`1 socketAddress, SocketFlags receivedFlags, SocketError socketError)
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at System.Threading.PeriodicTimer.State.System.Threading.Tasks.Sources.IValueTaskSource<System.Boolean>.GetResult(Int16 token)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.ExecuteAsync(CancellationToken stoppingToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/MedicationReminderHostedService.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-05-25 08:26:52.948 +03:00 [FTL] The HostOptions.BackgroundServiceExceptionBehavior is configured to StopHost. A BackgroundService has thrown an unhandled exception, and the IHost instance is stopping. To avoid this behavior, configure this to Ignore; however the BackgroundService will not be restarted.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.PeriodicTimer.State.Signal(Boolean stopping, CancellationToken cancellationToken)
+   at System.Threading.CancellationTokenSource.ExecuteCallbackHandlers(Boolean throwOnFirstException)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Microsoft.Extensions.Hosting.Internal.Host.DisposeAsync()
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task.TrySetException(Object exceptionObject)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetException(Exception exception, Task`1& taskField)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at MediMind.Infrastructure.Services.SuperAdmin.SubscriptionPlanSeeder.StartAsync(CancellationToken ct) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/SuperAdmin/SubscriptionPlanSeeder.cs:line 57
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.ShapedQueryCompilingExpressionVisitor.SingleAsync[TSource](IAsyncEnumerable`1 asyncEnumerable, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder`1.SetResult(TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.AwaitTaskContinuation.RunOrScheduleAction(IAsyncStateMachineBox box, Boolean allowInlining)
+   at System.Threading.Tasks.Task.RunContinuations(Object continuationObject)
+   at System.Threading.Tasks.Task`1.TrySetResult(TResult result)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.SetExistingTaskResult(Task`1 task, TResult result)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext(Thread threadPoolThread)
+   at System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1.AsyncStateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|54_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.ExecutionContextCallback(Object s)
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.MoveNext()
+   at System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore`1.SetResult(TResult result)
+   at System.Net.Sockets.SocketAsyncEventArgs.TransferCompletionCallbackCore(Int32 bytesTransferred, Memory`1 socketAddress, SocketFlags receivedFlags, SocketError socketError)
+   at System.Net.Sockets.SocketAsyncEngine.System.Threading.IThreadPoolWorkItem.Execute()
+   at System.Threading.ThreadPoolWorkQueue.Dispatch()
+   at System.Threading.PortableThreadPool.WorkerThread.WorkerThreadStart()
+   at System.Threading.Thread.StartCallback()
+--- End of stack trace from previous location ---
+   at System.Threading.PeriodicTimer.State.System.Threading.Tasks.Sources.IValueTaskSource<System.Boolean>.GetResult(Int16 token)
+   at MediMind.Infrastructure.Services.Notifications.MedicationReminderHostedService.ExecuteAsync(CancellationToken stoppingToken) in /Users/dani/RiderProjects/MediMind/src/MediMind.Infrastructure/Services/Notifications/MedicationReminderHostedService.cs:line 35
+   at Microsoft.Extensions.Hosting.Internal.Host.TryExecuteBackgroundServiceAsync(BackgroundService backgroundService)
+2026-05-25 08:26:52.951 +03:00 [FTL] MediMind API terminated unexpectedly.
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5288: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+   at Microsoft.Extensions.Hosting.Internal.Host.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync(IHost host, CancellationToken token)
+   at Program.<Main>$(String[] args) in /Users/dani/RiderProjects/MediMind/src/MediMind.API/Program.cs:line 271
+2026-05-25 08:29:21.852 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-26T00:00:00.0000000Z
+2026-05-25 08:29:21.870 +03:00 [INF] Daily queue generation scheduled for "2026-05-26T06:00:00.0000000" ("2026-05-26T03:00:00.0000000Z" UTC)
+2026-05-25 08:29:21.931 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-25 08:29:21.931 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-25 08:30:07.018 +03:00 [INF] Running appointment reminder job at "2026-05-25T05:30:07.0179910Z"
+2026-05-25 08:30:07.128 +03:00 [INF] Appointment reminder job completed.
+2026-05-25 08:30:30.371 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 243.6289 ms
+2026-05-25 08:30:30.784 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.8921 ms
+2026-05-25 08:30:30.784 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 401 in 15.8943 ms
+2026-05-25 08:30:31.222 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-25 08:30:31.255 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 450.6404 ms
+2026-05-25 08:30:31.559 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 756.1841 ms
+2026-05-25 08:30:32.135 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:30:32.435 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:30:32.510 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/059d505c-4456-4e39-992f-470dc3da8e6e/dashboard/today responded 200 in 506.0338 ms
+2026-05-25 08:30:52.245 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 137.9344 ms
+2026-05-25 08:30:57.062 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 742.9420 ms
+2026-05-25 08:30:57.496 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:30:57.516 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-25 08:30:57.568 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 274.2098 ms
+2026-05-25 08:30:57.658 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 364.6737 ms
+2026-05-25 08:30:57.741 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 447.7974 ms
+2026-05-25 08:31:04.005 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:31:04.074 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 136.7219 ms
+2026-05-25 08:31:06.069 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:31:06.154 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 127.9558 ms
+2026-05-25 08:31:06.222 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad/notes responded 204 in 62.2862 ms
+2026-05-25 08:31:31.439 +03:00 [INF] No FCM tokens for user "9de98a66-b1ea-4a7a-99c1-7e721ebd8110"; push skipped.
+2026-05-25 08:31:31.582 +03:00 [INF] HTTP POST /api/v1/video-consultations/initiate responded 201 in 985.3745 ms
+2026-05-25 08:31:32.364 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 377.8805 ms
+2026-05-25 08:31:32.418 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 43.6706 ms
+2026-05-25 08:31:39.333 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 69.7590 ms
+2026-05-25 08:31:39.444 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 181.5335 ms
+2026-05-25 08:31:39.508 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 47.6745 ms
+2026-05-25 08:31:39.540 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 14.9771 ms
+2026-05-25 08:31:41.661 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 99.5707 ms
+2026-05-25 08:31:41.679 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 6.9395 ms
+2026-05-25 08:32:40.876 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 340.5139 ms
+2026-05-25 08:32:40.939 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 406.1849 ms
+2026-05-25 08:32:41.466 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 495.8082 ms
+2026-05-25 08:32:41.550 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.2845 ms
+2026-05-25 08:33:39.535 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.8961 ms
+2026-05-25 08:34:21.090 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.5892 ms
+2026-05-25 08:34:21.548 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 257.6643 ms
+2026-05-25 08:34:21.653 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 359.1180 ms
+2026-05-25 08:34:21.730 +03:00 [INF] ONNX models loaded from /Users/dani/RiderProjects/MediMind/src/MediMind.API/models
+2026-05-25 08:34:21.741 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 447.1893 ms
+2026-05-25 08:34:21.753 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 457.7618 ms
+2026-05-25 08:34:21.782 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 521.9362 ms
+2026-05-25 08:34:25.382 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 65.4733 ms
+2026-05-25 08:34:25.703 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 56.9647 ms
+2026-05-25 08:34:35.502 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-25 08:34:35.576 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 110.0444 ms
+2026-05-25 08:34:39.036 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 37.2005 ms
+2026-05-25 08:34:39.294 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.3596 ms
+2026-05-25 08:34:41.071 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 5.2826 ms
+2026-05-25 08:34:41.300 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 76.9350 ms
+2026-05-25 08:34:42.301 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.8807 ms
+2026-05-25 08:34:44.435 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.5420 ms
+2026-05-25 08:34:48.478 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 4.8758 ms
+2026-05-25 08:34:56.611 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.7560 ms
+2026-05-25 08:35:12.719 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 34.9795 ms
+2026-05-25 08:35:21.332 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 112.3313 ms
+2026-05-25 08:35:39.408 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.2129 ms
+2026-05-25 08:35:42.923 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.6612 ms
+2026-05-25 08:36:12.985 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 6.7991 ms
+2026-05-25 08:36:21.294 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.8007 ms
+2026-05-25 08:36:39.297 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.1964 ms
+2026-05-25 08:36:43.335 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 4.0355 ms
+2026-05-25 08:36:59.082 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 203.2723 ms
+2026-05-25 08:36:59.108 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 17.0795 ms
+2026-05-25 08:37:16.573 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 64.9423 ms
+2026-05-25 08:37:25.354 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.3843 ms
+2026-05-25 08:37:39.580 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.7346 ms
+2026-05-25 08:37:49.703 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 23.1515 ms
+2026-05-25 08:38:39.319 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 64.3867 ms
+2026-05-25 08:39:30.594 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 5.3068 ms
+2026-05-25 08:39:31.030 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.4840 ms
+2026-05-25 08:39:32.630 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.4580 ms
+2026-05-25 08:39:34.604 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.4682 ms
+2026-05-25 08:39:35.720 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 1.1183 ms
+2026-05-25 08:39:37.000 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 1.7949 ms
+2026-05-25 08:39:39.041 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.3405 ms
+2026-05-25 08:39:39.291 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.7216 ms
+2026-05-25 08:39:43.079 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 1.4104 ms
+2026-05-25 08:39:51.119 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 4.4464 ms
+2026-05-25 08:40:34.604 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.7912 ms
+2026-05-25 08:40:39.272 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.4890 ms
+2026-05-25 08:40:49.776 +03:00 [INF] HTTP GET /api/v1/appointments/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413 responded 200 in 131.8537 ms
+2026-05-25 08:40:53.186 +03:00 [WRN] NotFoundException on GET /api/v1/video-consultations/appointment/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413: VideoConsultation with key '4a00c5a8-f8f6-4f4a-9e41-c8129cf98413' was not found.
+2026-05-25 08:40:53.198 +03:00 [INF] HTTP GET /api/v1/video-consultations/appointment/4a00c5a8-f8f6-4f4a-9e41-c8129cf98413 responded 404 in 151.8369 ms
+2026-05-25 08:41:34.651 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.9883 ms
+2026-05-25 08:41:39.343 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.2078 ms
+2026-05-25 08:42:36.836 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.3604 ms
+2026-05-25 08:42:39.262 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.0773 ms
+2026-05-25 08:43:26.187 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 344.1995 ms
+2026-05-25 08:43:26.217 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 24.4873 ms
+2026-05-25 08:43:34.285 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 87.1600 ms
+2026-05-25 08:43:39.243 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.7683 ms
+2026-05-25 08:43:58.533 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 60.9353 ms
+2026-05-25 08:44:04.880 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 12.1106 ms
+2026-05-25 08:44:04.980 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30660.5971 ms
+2026-05-25 08:44:35.118 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30216.3952 ms
+2026-05-25 08:44:35.168 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 117.5982 ms
+2026-05-25 08:44:39.374 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 124.3641 ms
+2026-05-25 08:44:43.437 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 221.9310 ms
+2026-05-25 08:45:05.292 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30109.6152 ms
+2026-05-25 08:45:05.372 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 15.3234 ms
+2026-05-25 08:45:35.477 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30061.3971 ms
+2026-05-25 08:45:35.482 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 11.0005 ms
+2026-05-25 08:45:39.373 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.2963 ms
+2026-05-25 08:46:05.746 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30250.3685 ms
+2026-05-25 08:46:06.272 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 401 in 157.3116 ms
+2026-05-25 08:46:09.044 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 401 in 9.3748 ms
+2026-05-25 08:46:19.211 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 401 in 47.8602 ms
+2026-05-25 08:46:39.929 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 40.7369 ms
+2026-05-25 08:46:41.110 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 1126.9620 ms
+2026-05-25 08:46:41.234 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 64.1240 ms
+2026-05-25 08:46:49.274 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 19.2736 ms
+2026-05-25 08:47:20.858 +03:00 [INF] HTTP GET /hubs/video responded 101 in 31547.5139 ms
+2026-05-25 08:47:21.826 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 12.7708 ms
+2026-05-25 08:47:39.346 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.5827 ms
+2026-05-25 08:47:52.142 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30130.8590 ms
+2026-05-25 08:47:52.150 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 4.8123 ms
+2026-05-25 08:48:22.196 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30036.6546 ms
+2026-05-25 08:48:22.202 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 4.1946 ms
+2026-05-25 08:48:39.318 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.2474 ms
+2026-05-25 08:48:52.250 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30042.3090 ms
+2026-05-25 08:48:52.263 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.1938 ms
+2026-05-25 08:49:22.290 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30021.1607 ms
+2026-05-25 08:49:22.303 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 6.1100 ms
+2026-05-25 08:49:39.412 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 164.3175 ms
+2026-05-25 08:49:52.362 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30049.0771 ms
+2026-05-25 08:49:52.372 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.3903 ms
+2026-05-25 08:50:22.425 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30017.5971 ms
+2026-05-25 08:50:22.430 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 1.7639 ms
+2026-05-25 08:50:35.913 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 51.5640 ms
+2026-05-25 08:50:36.017 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 21.6847 ms
+2026-05-25 08:50:36.019 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 1.2368 ms
+2026-05-25 08:50:36.019 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 1.3020 ms
+2026-05-25 08:50:36.025 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 0.3211 ms
+2026-05-25 08:50:36.201 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 179.7950 ms
+2026-05-25 08:50:36.243 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 171.2965 ms
+2026-05-25 08:50:36.389 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.6657 ms
+2026-05-25 08:50:36.431 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 1.9997 ms
+2026-05-25 08:50:36.453 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 404 in 25.7263 ms
+2026-05-25 08:50:36.469 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 75.1395 ms
+2026-05-25 08:50:36.492 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 404 in 76.8498 ms
+2026-05-25 08:50:39.242 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.8294 ms
+2026-05-25 08:50:42.576 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 37.7616 ms
+2026-05-25 08:50:42.910 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 30.9111 ms
+2026-05-25 08:50:45.635 +03:00 [INF] HTTP GET /api/v1/appointments/72012d70-bb82-4491-9faa-b1b1a40d40ad responded 200 in 56.1203 ms
+2026-05-25 08:50:48.448 +03:00 [INF] HTTP GET /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9 responded 200 in 76.0434 ms
+2026-05-25 08:50:49.783 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 3.1969 ms
+2026-05-25 08:50:50.020 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/join responded 200 in 84.0339 ms
+2026-05-25 08:50:50.929 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.4442 ms
+2026-05-25 08:50:52.461 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30023.5017 ms
+2026-05-25 08:50:52.474 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 0.7313 ms
+2026-05-25 08:50:53.057 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 0.3121 ms
+2026-05-25 08:50:57.121 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.8949 ms
+2026-05-25 08:51:05.159 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.1911 ms
+2026-05-25 08:51:21.250 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 22.8523 ms
+2026-05-25 08:51:22.561 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30081.3285 ms
+2026-05-25 08:51:22.688 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 61.7348 ms
+2026-05-25 08:51:36.704 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 53.1602 ms
+2026-05-25 08:51:39.259 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.7608 ms
+2026-05-25 08:51:51.301 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.9017 ms
+2026-05-25 08:51:52.733 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30025.1148 ms
+2026-05-25 08:51:52.738 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 6.1468 ms
+2026-05-25 08:52:21.349 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 3.6173 ms
+2026-05-25 08:52:22.755 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 5.4012 ms
+2026-05-25 08:52:22.775 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30034.5722 ms
+2026-05-25 08:52:36.556 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.6383 ms
+2026-05-25 08:52:39.232 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.1689 ms
+2026-05-25 08:52:51.402 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.8798 ms
+2026-05-25 08:52:52.783 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30025.6109 ms
+2026-05-25 08:52:52.790 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 0.8900 ms
+2026-05-25 08:53:21.450 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 2.9280 ms
+2026-05-25 08:53:22.816 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30022.2103 ms
+2026-05-25 08:53:22.819 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 1.9254 ms
+2026-05-25 08:53:36.490 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.4603 ms
+2026-05-25 08:53:39.238 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.8730 ms
+2026-05-25 08:53:52.847 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30024.1486 ms
+2026-05-25 08:53:52.849 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.2460 ms
+2026-05-25 08:54:22.869 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30016.7803 ms
+2026-05-25 08:54:22.874 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.3136 ms
+2026-05-25 08:54:39.248 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.0599 ms
+2026-05-25 08:54:52.892 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30014.5165 ms
+2026-05-25 08:54:52.895 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.4698 ms
+2026-05-25 08:55:22.909 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30011.2527 ms
+2026-05-25 08:55:22.915 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 1.7524 ms
+2026-05-25 08:55:39.263 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.2270 ms
+2026-05-25 08:55:52.934 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30014.1733 ms
+2026-05-25 08:55:52.935 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 1.8611 ms
+2026-05-25 08:56:22.955 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30014.1126 ms
+2026-05-25 08:56:22.965 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 3.1819 ms
+2026-05-25 08:56:39.247 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.3481 ms
+2026-05-25 08:56:52.980 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30011.9771 ms
+2026-05-25 08:56:52.985 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 1.8271 ms
+2026-05-25 08:57:23.001 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30012.8521 ms
+2026-05-25 08:57:23.008 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 4.0229 ms
+2026-05-25 08:57:39.243 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.5579 ms
+2026-05-25 08:57:53.026 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30014.3140 ms
+2026-05-25 08:57:53.030 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 2.0539 ms
+2026-05-25 08:58:23.050 +03:00 [INF] HTTP GET /hubs/video responded 101 in 30012.8595 ms
+2026-05-25 08:58:23.060 +03:00 [INF] HTTP POST /hubs/video/negotiate responded 200 in 3.4708 ms
+2026-05-25 08:58:37.105 +03:00 [INF] HTTP POST /api/v1/video-consultations/04fff5d3-37b6-4162-8e92-e023c3fcd5b9/end responded 204 in 743.0867 ms
+2026-05-25 08:58:37.144 +03:00 [INF] HTTP GET /hubs/video responded 101 in 14080.0635 ms
+2026-05-25 08:58:39.255 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.8050 ms
+2026-05-25 08:59:14.380 +03:00 [INF] HTTP POST //hubs/video/negotiate responded 404 in 6.4678 ms
+2026-05-25 08:59:22.065 +03:00 [WRN] No active FCM tokens for user "9de98a66-b1ea-4a7a-99c1-7e721ebd8110"; push skipped.
+2026-05-25 08:59:39.324 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.4381 ms
+2026-05-25 09:00:07.329 +03:00 [INF] Running appointment reminder job at "2026-05-25T06:00:07.3288600Z"
+2026-05-25 09:00:07.353 +03:00 [INF] Appointment reminder job completed.
+2026-05-25 09:00:39.335 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.1330 ms

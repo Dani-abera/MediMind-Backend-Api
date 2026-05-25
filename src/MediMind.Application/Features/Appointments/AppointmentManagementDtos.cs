@@ -52,6 +52,7 @@ public record AppointmentResponseDto(
     Guid? PaymentId = null,
     string? PaymentStatus = null,
     bool CanInitiateVideoConsultation = false,
+    bool CanChat = false,
     Guid? VideoConsultationId = null,
     string? VideoConsultationStatus = null,
     int CancellationPolicyHours = 2,

@@ -127,8 +127,13 @@ public sealed class VideoConsultationService(
         if (appointment.Status is AppointmentStatus.Cancelled or AppointmentStatus.NoShow)
             throw new DomainException("Cannot initiate a video consultation for a cancelled or no-show appointment.");
 
-        var consultation = await videoRepository.GetByAppointmentIdAsync(appointmentId)
-            ?? throw new DomainException("No video consultation channel found. Please re-book as a video consultation.");
+        var consultation = await videoRepository.GetByAppointmentIdAsync(appointmentId);
+        if (consultation is null)
+        {
+            consultation = VideoConsultation.Create(appointmentId);
+            await videoRepository.CreateAsync(consultation);
+            await unitOfWork.SaveChangesAsync(ct);
+        }
 
         if (consultation.Status == VideoConsultationStatus.InProgress)
             return MapSession(consultation, appointment);
