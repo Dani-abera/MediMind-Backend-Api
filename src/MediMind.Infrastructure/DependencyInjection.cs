@@ -21,6 +21,7 @@ using MediMind.Infrastructure.Services.Audit;
 using MediMind.Application.Features.SuperAdmin;
 using MediMind.Infrastructure.Services.SuperAdmin;
 using MediMind.Infrastructure.Services.Storage;
+using MediMind.Infrastructure.Services;
 using MediMind.Infrastructure.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -203,6 +204,8 @@ public static class DependencyInjection
         services.AddHostedService<SubscriptionExpiryBackgroundService>();
         services.AddScoped<IQueueHubService, QueueHubService>();
         services.AddScoped<IVideoConsultationHubNotifier, VideoConsultationHubNotifier>();
+        services.Configure<AgoraOptions>(config.GetSection(AgoraOptions.SectionName));
+        services.AddSingleton<IAgoraTokenService, AgoraTokenService>();
 
         // ─── SignalR (real-time queue updates) ───────────────────────────────
         services.AddSignalR(options =>

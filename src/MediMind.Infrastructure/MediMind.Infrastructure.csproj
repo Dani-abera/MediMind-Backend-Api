@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="MediMind.UnitTests" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MediMind.Domain\MediMind.Domain.csproj" />
     <ProjectReference Include="..\MediMind.Application\MediMind.Application.csproj" />
   </ItemGroup>

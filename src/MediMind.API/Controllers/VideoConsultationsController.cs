@@ -276,6 +276,16 @@ public sealed class VideoConsultationsController(IVideoConsultationService servi
         return Ok(result);
     }
 
+    /// <summary>Persist a chat message sent via Agora RTM during a consultation.</summary>
+    [HttpPost("{id:guid}/messages")]
+    [Authorize(Policy = "PatientOrDoctor")]
+    [ProducesResponseType(typeof(ChatMessageDto), StatusCodes.Status200OK)]
+    public async Task<ActionResult<ChatMessageDto>> SendMessage(Guid id, [FromBody] SendChatMessageRequest request, CancellationToken ct)
+    {
+        var result = await service.SaveChatMessageAsync(id, currentUser.UserId, currentUser.UserType, request.Content, ct);
+        return Ok(result);
+    }
+
     /// <summary>Get the video consultation associated with a specific appointment.</summary>
     /// <remarks>
     /// Convenience lookup — equivalent to `GET /{id}` when you have the appointment ID but not the
@@ -348,3 +358,7 @@ public sealed record InitiateConsultationRequest(Guid AppointmentId);
 /// <param name="PacketsLost">Total RTP packets lost since the last report.</param>
 /// <param name="FrameRate">Current video frame rate in frames per second.</param>
 public sealed record QualityReportRequest(int Bandwidth, int PacketsLost, int FrameRate);
+
+/// <summary>Request body for sending a chat message via Agora RTM (persisted to the database).</summary>
+/// <param name="Content">Message text (1–2000 characters).</param>
+public sealed record SendChatMessageRequest(string Content);

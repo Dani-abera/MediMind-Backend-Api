@@ -11,6 +11,13 @@ public interface IVideoConsultationHubNotifier
     Task NotifyQualityAlertAsync(Guid consultationId, Guid userId, string message, CancellationToken ct = default);
 }
 
+public interface IAgoraTokenService
+{
+    string AppId { get; }
+    string GenerateRtcToken(string channelName, string userIdString = "", int expirationSeconds = 3600);
+    string GenerateRtmToken(string userIdString, int expirationSeconds = 3600);
+}
+
 public interface IVideoConsultationService
 {
     Task<ConsultationSessionDto> InitiateConsultationAsync(Guid appointmentId, Guid doctorId, CancellationToken ct = default);
@@ -82,6 +89,10 @@ public sealed record ConsultationSessionDto(
 public sealed record ConsultationJoinDto(
     Guid ConsultationId,
     string RoomId,
+    string AgoraToken,
+    string AgoraAppId,
+    string AgoraRtmToken,
+    string AgoraRtmUserId,
     string SignalRHubUrl,
     ConnectionInfoDto YourConnectionInfo,
     IReadOnlyList<ParticipantConnectionDto> OtherParticipants,
@@ -111,6 +122,7 @@ public sealed class VideoConsultationService(
     IAppointmentRepository appointmentRepository,
     IPushNotificationService pushNotificationService,
     IVideoConsultationHubNotifier hubNotifier,
+    IAgoraTokenService agoraTokenService,
     IUnitOfWork unitOfWork) : IVideoConsultationService
 {
     private static readonly IceServerDto[] DefaultIceServers =
@@ -150,6 +162,7 @@ public sealed class VideoConsultationService(
             "Dr. has started your video consultation. Tap to join.",
             new Dictionary<string, string>
             {
+                ["type"] = "video_started",
                 ["consultationId"] = consultation.Id.ToString(),
                 ["roomId"] = consultation.RoomId
             },
@@ -178,10 +191,20 @@ public sealed class VideoConsultationService(
         await videoRepository.AddParticipantAsync(participant);
         await unitOfWork.SaveChangesAsync(ct);
 
+        // RTC token: bound to the channel; uid="" means any uid (mobile passes 0 = auto-assign).
+        var rtcToken = agoraTokenService.GenerateRtcToken(consultation.RoomId);
+        // RTM token: bound to a specific userId. The client MUST use this same userId for RTM login.
+        var rtmUserId = userId.ToString();
+        var rtmToken = agoraTokenService.GenerateRtmToken(rtmUserId);
+
         var history = await GetChatHistoryAsync(consultation.Id, 1, 50, ct);
         return new ConsultationJoinDto(
             consultation.Id,
             consultation.RoomId,
+            rtcToken,
+            agoraTokenService.AppId,
+            rtmToken,
+            rtmUserId,
             "/hubs/video",
             new ConnectionInfoDto(userId, userType, isDoctor ? appointment.Doctor.FullName : appointment.Patient.FullName),
             [],

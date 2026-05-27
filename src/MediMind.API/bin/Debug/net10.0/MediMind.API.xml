@@ -1244,6 +1244,9 @@
              <param name="page">1-based page number (default: 1).</param>
              <param name="pageSize">Messages per page, max 50 (default: 50).</param>
         </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.SendMessage(System.Guid,MediMind.API.Controllers.SendChatMessageRequest,System.Threading.CancellationToken)">
+            <summary>Persist a chat message sent via Agora RTM during a consultation.</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.VideoConsultationsController.ByAppointment(System.Guid,System.Threading.CancellationToken)">
              <summary>Get the video consultation associated with a specific appointment.</summary>
              <remarks>
@@ -1321,6 +1324,17 @@
         </member>
         <member name="P:MediMind.API.Controllers.QualityReportRequest.FrameRate">
             <summary>Current video frame rate in frames per second.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.SendChatMessageRequest">
+            <summary>Request body for sending a chat message via Agora RTM (persisted to the database).</summary>
+            <param name="Content">Message text (1–2000 characters).</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.SendChatMessageRequest.#ctor(System.String)">
+            <summary>Request body for sending a chat message via Agora RTM (persisted to the database).</summary>
+            <param name="Content">Message text (1–2000 characters).</param>
+        </member>
+        <member name="P:MediMind.API.Controllers.SendChatMessageRequest.Content">
+            <summary>Message text (1–2000 characters).</summary>
         </member>
         <member name="T:MediMind.API.Middleware.TenantValidationMiddleware">
             <summary>

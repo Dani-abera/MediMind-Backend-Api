@@ -344,8 +344,14 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
         builder.Property(a => a.Reminder2hSentAt);
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_duration_minutes", "duration_minutes IN (15, 30, 45, 60)"));
+        // Past-date guard applies only to new bookings (status='Pending').
+        // Once an appointment is Confirmed/InProgress/Completed/Cancelled/NoShow
+        // it must remain writable for normal lifecycle updates (check-in,
+        // marking complete after the call, etc.) even though its date is now
+        // in the past — otherwise every post-appointment write throws 23514.
         builder.ToTable(t => t.HasCheckConstraint(
-            "ck_appointment_date_not_past", "appointment_date >= CURRENT_DATE"));
+            "ck_appointment_date_not_past",
+            "status <> 'Pending' OR appointment_date >= CURRENT_DATE"));
 
         // THE most critical unique constraint: prevent double-booking
         // Partial index: cancelled appointments free up the slot for rebooking

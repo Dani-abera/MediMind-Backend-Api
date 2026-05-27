@@ -170,7 +170,7 @@ namespace MediMind.Infrastructure.Migrations
 
                     b.ToTable("appointments", null, t =>
                         {
-                            t.HasCheckConstraint("ck_appointment_date_not_past", "appointment_date >= CURRENT_DATE");
+                            t.HasCheckConstraint("ck_appointment_date_not_past", "status <> 'Pending' OR appointment_date >= CURRENT_DATE");
 
                             t.HasCheckConstraint("ck_duration_minutes", "duration_minutes IN (15, 30, 45, 60)");
                         });
