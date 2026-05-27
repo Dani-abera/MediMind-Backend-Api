@@ -645,9 +645,7 @@ public class AppointmentService(
         var canInitiateVideo = appointmentActive
             && (full.VideoConsultation == null
                 || full.VideoConsultation.Status is (VideoConsultationStatus.Scheduled or VideoConsultationStatus.InProgress));
-        var canChat = appointmentActive
-            && full.VideoConsultation != null
-            && full.VideoConsultation.Status is not (VideoConsultationStatus.Completed or VideoConsultationStatus.Cancelled);
+        var canChat = appointmentActive;
         var latestPayment = full.Payments.OrderByDescending(p => p.CreatedAt).FirstOrDefault();
 
         var doctorCenterLink = full.Doctor?.DoctorHealthcareCenters
