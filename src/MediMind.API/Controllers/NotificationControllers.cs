@@ -88,8 +88,9 @@ public record MedicationReminderDto(
     string MedicationName,
     string Dosage,
     string Frequency,
-    string ReminderTimes,
-    bool IsActive);
+    string[] ReminderTimes,
+    bool IsActive,
+    DateTime StartDate);
 
 public record RegisterDeviceTokenRequest(string FcmToken, string Platform, string? DeviceModel);
 
@@ -134,7 +135,7 @@ public class MedicationRemindersController(
 
     /// <summary>Create a new medication reminder schedule for the authenticated patient (FR-080).</summary>
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(MedicationReminderDto), StatusCodes.Status201Created)]
     public async Task<IActionResult> Create([FromBody] CreateMedicationReminderRequest request, CancellationToken ct)
     {
         var json = JsonSerializer.Serialize(request.ReminderTimes);
@@ -147,7 +148,7 @@ public class MedicationRemindersController(
 
         await reminderRepository.AddAsync(entity, ct);
         await unitOfWork.SaveChangesAsync(ct);
-        return CreatedAtAction(nameof(GetMine), new { id = entity.Id }, new { id = entity.Id });
+        return CreatedAtAction(nameof(GetMine), new { id = entity.Id }, ToDto(entity));
     }
 
     /// <summary>List all medication reminders for the authenticated patient (FR-081).</summary>
@@ -156,8 +157,7 @@ public class MedicationRemindersController(
     public async Task<IActionResult> GetMine(CancellationToken ct)
     {
         var items = await reminderRepository.GetByPatientAsync(currentUser.UserId, ct);
-        return Ok(items.Select(r => new MedicationReminderDto(
-            r.Id, r.MedicationName, r.Dosage, r.Frequency, r.ReminderTimes, r.IsActive)));
+        return Ok(items.Select(ToDto));
     }
 
     /// <summary>Update an existing medication reminder (FR-082).</summary>
@@ -196,7 +196,7 @@ public class MedicationRemindersController(
 
     /// <summary>Toggle a medication reminder active/inactive (FR-084).</summary>
     [HttpPatch("{id:guid}/toggle")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(MedicationReminderDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Toggle(Guid id, CancellationToken ct)
     {
@@ -206,6 +206,11 @@ public class MedicationRemindersController(
 
         entity.SetActive(!entity.IsActive);
         await unitOfWork.SaveChangesAsync(ct);
-        return NoContent();
+        return Ok(ToDto(entity));
     }
+
+    private static MedicationReminderDto ToDto(MedicationReminder r) =>
+        new(r.Id, r.MedicationName, r.Dosage, r.Frequency,
+            JsonSerializer.Deserialize<string[]>(r.ReminderTimes) ?? [],
+            r.IsActive, r.CreatedAt);
 }

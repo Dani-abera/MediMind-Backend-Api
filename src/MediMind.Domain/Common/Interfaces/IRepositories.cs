@@ -155,7 +155,7 @@ public interface IHealthRecordRepository : IRepository<HealthRecord>
     Task<HealthRecord> CreateAsync(HealthRecord record);
     Task<HealthRecord?> UpdateAsync(HealthRecord record);
     Task<bool> DeleteAsync(Guid recordId, Guid patientId);
-    Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days);
+    Task<HealthTrendsResponseDto> GetTrendAsync(Guid patientId, int days);
     Task<int> GetRecordCountAsync(Guid patientId);
     Task<HealthRecord?> GetLatestAsync(Guid patientId);
     Task<IEnumerable<HealthRecord>> GetAllForPredictionAsync(Guid patientId);

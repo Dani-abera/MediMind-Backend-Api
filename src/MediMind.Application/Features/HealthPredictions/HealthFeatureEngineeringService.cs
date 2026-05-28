@@ -82,7 +82,7 @@ public class HealthFeatureEngineeringService : IHealthFeatureEngineeringService
             .Where(r => r.GlucoseLevel.HasValue)
             .Select(r => new
             {
-                X = r.RecordDate.DayNumber - firstDate.DayNumber,
+                X = (double)(r.RecordDate.DayNumber - firstDate.DayNumber),
                 Y = (double)r.GlucoseLevel!.Value
             })
             .ToList();

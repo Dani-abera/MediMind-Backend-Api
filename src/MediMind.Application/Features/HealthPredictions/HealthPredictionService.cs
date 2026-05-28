@@ -64,7 +64,7 @@ public class HealthPredictionService(
 
         var records = (await healthRecordRepository.GetAllForPredictionAsync(patientId)).ToList();
         if (records.Count < 1)
-            throw new ValidationException("Start tracking your health data to get AI predictions");
+            throw new ValidationException("Please log at least one vital record before running a prediction.");
 
         var features = featureEngineeringService.ComputeFeatures(records, patient);
         var predictionResponse = await mlServiceClient.PredictAsync(features);
@@ -129,10 +129,10 @@ public class HealthPredictionService(
         var canRequest = count > 0;
         var message = count switch
         {
-            0 => "Start tracking your health data to get AI predictions",
-            <= 6 => $"Prediction based on {count} days of health data. Track for 30+ days for high confidence results.",
-            <= 29 => $"Prediction based on {count} days of health data. Keep tracking to improve confidence.",
-            _ => $"Prediction based on {count} days of health data. Data quality is excellent for high confidence results."
+            0 => "Start logging your vital signs to unlock AI health predictions.",
+            <= 6 => $"You have {count} record{(count == 1 ? "" : "s")}. Log vitals for 7+ days to get a meaningful prediction.",
+            <= 29 => $"You have {count} records. Keep logging to reach high-confidence predictions (30+ days).",
+            _ => $"You have {count} records. Your data quality is excellent."
         };
 
         return new PredictionRequestStatusDto(canRequest, count, confidence, message);

@@ -33,9 +33,10 @@ public class HealthPredictionsController(
             var response = await healthPredictionService.RequestPredictionAsync(currentUser.UserId);
             return Accepted(response);
         }
-        catch (ServiceUnavailableException ex)
+        catch (ServiceUnavailableException)
         {
-            return StatusCode(StatusCodes.Status503ServiceUnavailable, new { error = ex.Message });
+            return StatusCode(StatusCodes.Status503ServiceUnavailable,
+                new { error = "Our AI is temporarily unavailable. Please try again in a few minutes." });
         }
     }
 
@@ -56,17 +57,13 @@ public class HealthPredictionsController(
     [RequireRole("Patient", "Doctor")]
     [ProducesResponseType(typeof(HealthPredictionResponseDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetLatest([FromQuery] Guid? patientId = null)
     {
         try
         {
             var targetPatientId = await ResolvePatientContextAsync(patientId);
             var latest = await healthPredictionService.GetLatestAsync(targetPatientId);
-            if (latest is null)
-                return NotFound(new { error = "Prediction not found" });
-
-            return Ok(latest);
+            return Ok(latest); // null when no predictions exist → Flutter reads response.data == null → returns null
         }
         catch (UnauthorizedException)
         {

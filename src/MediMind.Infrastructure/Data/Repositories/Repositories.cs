@@ -939,7 +939,7 @@ public class HealthRecordRepository(MediMindDbContext context)
         return true;
     }
 
-    public async Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days)
+    public async Task<HealthTrendsResponseDto> GetTrendAsync(Guid patientId, int days)
     {
         var since = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-days));
         var records = await Db.HealthRecords
@@ -949,32 +949,78 @@ public class HealthRecordRepository(MediMindDbContext context)
             .ThenBy(h => h.RecordTime)
             .ToListAsync();
 
-        var half = records.Count / 2;
-        var firstHalfSystolic = records.Take(half).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).ToList();
-        var secondHalfSystolic = records.Skip(half).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).ToList();
+        var systolic      = BuildMetricTrend(records, r => r.SystolicBp.HasValue,      r => (double)r.SystolicBp!.Value,      "Systolic BP",  "mmHg", 90,   120);
+        var diastolic     = BuildMetricTrend(records, r => r.DiastolicBp.HasValue,     r => (double)r.DiastolicBp!.Value,     "Diastolic BP", "mmHg", 60,   80);
+        var glucose       = BuildMetricTrend(records, r => r.GlucoseLevel.HasValue,    r => (double)r.GlucoseLevel!.Value,    "Blood Glucose","mg/dL",70,   100);
+        var weight        = BuildMetricTrend(records, r => r.Weight.HasValue,          r => (double)r.Weight!.Value,          "Weight",       "kg",   null, null);
+        var heartRate     = BuildMetricTrend(records, r => r.HeartRate.HasValue,       r => (double)r.HeartRate!.Value,       "Heart Rate",   "bpm",  60,   100);
+        var temperature   = BuildMetricTrend(records, r => r.Temperature.HasValue,     r => (double)r.Temperature!.Value,     "Temperature",  "°C",   36.1, 37.2);
+        var oxygenSat     = BuildMetricTrend(records, r => r.OxygenSaturation.HasValue,r => (double)r.OxygenSaturation!.Value,"SpO₂",        "%",    95,   100);
 
-        var firstAvg = firstHalfSystolic.Count > 0 ? firstHalfSystolic.Average() : (double?)null;
-        var secondAvg = secondHalfSystolic.Count > 0 ? secondHalfSystolic.Average() : (double?)null;
+        var overallInsight = BuildOverallInsight(systolic, diastolic, glucose);
 
-        var trend = "Stable";
-        if (firstAvg.HasValue && secondAvg.HasValue)
+        return new HealthTrendsResponseDto(systolic, diastolic, glucose, weight, heartRate, temperature, oxygenSat, overallInsight);
+    }
+
+    private static MetricTrendDto? BuildMetricTrend(
+        List<HealthRecord> records,
+        Func<HealthRecord, bool> hasValue,
+        Func<HealthRecord, double> getValue,
+        string metric, string unit,
+        double? normalMin, double? normalMax)
+    {
+        var relevant = records.Where(hasValue).ToList();
+        if (relevant.Count == 0) return null;
+
+        var points = relevant
+            .GroupBy(r => r.RecordDate)
+            .OrderBy(g => g.Key)
+            .Select(g => new TrendPointDto(
+                g.Key.ToString("yyyy-MM-dd"),
+                Math.Round(g.Select(getValue).Average(), 2)))
+            .ToList();
+
+        var values  = relevant.Select(getValue).ToList();
+        var average = Math.Round(values.Average(), 2);
+        var minimum = Math.Round(values.Min(), 2);
+        var maximum = Math.Round(values.Max(), 2);
+
+        var mid            = Math.Max(1, relevant.Count / 2);
+        var firstHalfAvg  = relevant.Take(mid).Select(getValue).Average();
+        var secondHalfAvg = relevant.Skip(mid).Select(getValue).DefaultIfEmpty(firstHalfAvg).Average();
+        var pctChange     = firstHalfAvg == 0 ? 0 : Math.Abs(secondHalfAvg - firstHalfAvg) / firstHalfAvg;
+        var direction     = pctChange < 0.05 ? "stable"
+                          : secondHalfAvg < firstHalfAvg ? "decreasing"
+                          : "increasing";
+
+        var insight = BuildInsight(average, normalMin, normalMax, direction, metric, unit);
+
+        return new MetricTrendDto(metric, unit, points, average, minimum, maximum, direction, normalMin, normalMax, insight);
+    }
+
+    private static string? BuildInsight(double average, double? normalMin, double? normalMax,
+        string direction, string metric, string unit)
+    {
+        if (normalMin is null || normalMax is null) return null;
+        if (average < normalMin) return $"Average {metric} is below the normal range ({normalMin}–{normalMax} {unit}).";
+        if (average > normalMax) return $"Average {metric} is above the normal range ({normalMin}–{normalMax} {unit}).";
+        return direction switch
         {
-            if (secondAvg.Value < firstAvg.Value - 5)
-                trend = "Improving";
-            else if (secondAvg.Value > firstAvg.Value + 5)
-                trend = "Worsening";
-        }
+            "decreasing" => $"{metric} is trending down — within normal range.",
+            "increasing" => $"{metric} is trending up — monitor closely.",
+            _            => $"{metric} is stable and within normal range.",
+        };
+    }
 
-        return new HealthTrendDto(
-            $"Last {days} Days",
-            records.Where(x => x.SystolicBp.HasValue).Select(x => (double?)x.SystolicBp!.Value).Average(),
-            records.Where(x => x.DiastolicBp.HasValue).Select(x => (double?)x.DiastolicBp!.Value).Average(),
-            records.Where(x => x.GlucoseLevel.HasValue).Select(x => (double?)x.GlucoseLevel!.Value).Average(),
-            records.Where(x => x.Weight.HasValue).Select(x => (double?)x.Weight!.Value).Average(),
-            records.Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp).Min(),
-            records.Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp).Max(),
-            records.Count,
-            trend);
+    private static string? BuildOverallInsight(MetricTrendDto? systolic, MetricTrendDto? diastolic, MetricTrendDto? glucose)
+    {
+        var issues = new List<string>();
+        if (systolic  is { Average: > 130 }) issues.Add("elevated systolic blood pressure");
+        if (diastolic is { Average: > 80  }) issues.Add("elevated diastolic blood pressure");
+        if (glucose   is { Average: > 100 }) issues.Add("elevated blood glucose");
+        return issues.Count == 0
+            ? "All monitored metrics are within acceptable ranges."
+            : $"Some metrics need attention: {string.Join(", ", issues)}.";
     }
 
     public async Task<int> GetRecordCountAsync(Guid patientId) =>

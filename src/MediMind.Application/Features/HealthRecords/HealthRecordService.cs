@@ -14,7 +14,7 @@ public interface IHealthRecordService
     Task<HealthRecordResponseDto?> GetByIdAsync(Guid recordId, Guid requesterId, string requesterRole, Guid? requesterCenterId);
     Task<HealthRecordResponseDto?> UpdateAsync(Guid recordId, Guid patientId, UpdateHealthRecordDto dto);
     Task<bool> DeleteAsync(Guid recordId, Guid patientId);
-    Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days = 30);
+    Task<HealthTrendsResponseDto> GetTrendAsync(Guid patientId, int days = 30);
     Task<HealthRecordResponseDto?> GetLatestAsync(Guid patientId);
     Task<int> GetCountAsync(Guid patientId);
     void ValidatePatientOwnership(Guid requesterPatientId, Guid targetPatientId);
@@ -136,32 +136,11 @@ public class HealthRecordService(
     public async Task<bool> DeleteAsync(Guid recordId, Guid patientId) =>
         await repository.DeleteAsync(recordId, patientId);
 
-    public async Task<HealthTrendDto> GetTrendAsync(Guid patientId, int days = 30)
+    public async Task<HealthTrendsResponseDto> GetTrendAsync(Guid patientId, int days = 30)
     {
         var allowedDays = new[] { 7, 14, 30, 90 };
         var normalizedDays = allowedDays.Contains(days) ? days : 30;
-        var trend = await repository.GetTrendAsync(patientId, normalizedDays);
-
-        // Re-apply trend policy in service: compare first half vs second half systolic average.
-        var records = (await repository.GetByPatientIdAsync(
-                patientId,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-normalizedDays)),
-                DateOnly.FromDateTime(DateTime.UtcNow),
-                1,
-                500))
-            .OrderBy(x => x.RecordDate)
-            .ThenBy(x => x.RecordTime)
-            .ToList();
-
-        var midpoint = records.Count / 2;
-        var firstHalfAvg = records.Take(midpoint).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).DefaultIfEmpty().Average();
-        var secondHalfAvg = records.Skip(midpoint).Where(x => x.SystolicBp.HasValue).Select(x => x.SystolicBp!.Value).DefaultIfEmpty().Average();
-
-        var direction = Math.Abs(secondHalfAvg - firstHalfAvg) <= 5
-            ? "Stable"
-            : secondHalfAvg < firstHalfAvg - 5 ? "Improving" : "Worsening";
-
-        return trend with { TrendDirection = direction };
+        return await repository.GetTrendAsync(patientId, normalizedDays);
     }
 
     public async Task<HealthRecordResponseDto?> GetLatestAsync(Guid patientId)

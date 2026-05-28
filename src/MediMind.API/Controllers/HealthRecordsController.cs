@@ -114,7 +114,7 @@ public class HealthRecordsController(
     /// <summary>Get vitals trend statistics for the authenticated patient over a rolling window (FR-055).</summary>
     [HttpGet("trends")]
     [RequireRole("Patient")]
-    [ProducesResponseType(typeof(HealthTrendDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(HealthTrendsResponseDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetTrends([FromQuery] int days = 30, CancellationToken ct = default)
     {
         var trend = await healthRecordService.GetTrendAsync(currentUser.UserId, days);
