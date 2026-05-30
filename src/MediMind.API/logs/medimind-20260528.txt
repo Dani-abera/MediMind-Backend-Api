@@ -1500,3 +1500,47 @@ System.OverflowException: Arithmetic operation resulted in an overflow.
 2026-05-28 21:16:17.955 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 55.2592 ms
 2026-05-28 21:17:16.777 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6871 ms
 2026-05-28 21:18:01.793 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 72.0482 ms
+2026-05-28 21:18:16.747 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.7044 ms
+2026-05-28 21:19:10.332 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.3019 ms
+2026-05-28 21:19:16.752 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9018 ms
+2026-05-28 21:20:17.341 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1820 ms
+2026-05-28 21:21:17.492 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.4051 ms
+2026-05-28 21:21:28.114 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.1082 ms
+2026-05-28 21:22:16.916 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.7050 ms
+2026-05-28 21:22:29.920 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.1086 ms
+2026-05-28 21:23:16.765 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.9365 ms
+2026-05-28 21:23:36.309 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.3196 ms
+2026-05-28 21:24:16.758 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.9510 ms
+2026-05-28 21:24:36.925 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.4983 ms
+2026-05-28 21:24:47.757 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 604.8536 ms
+2026-05-28 21:24:54.106 +03:00 [INF] HTTP PUT /api/v1/profile-images/me responded 400 in 433.1642 ms
+2026-05-28 21:25:16.758 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1036 ms
+2026-05-28 21:25:36.979 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.9743 ms
+2026-05-28 21:26:16.875 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.2447 ms
+2026-05-28 21:26:36.983 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 71.5748 ms
+2026-05-28 21:26:37.373 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 343.8479 ms
+2026-05-28 21:26:37.437 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.5980 ms
+2026-05-28 21:27:16.779 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.0010 ms
+2026-05-28 21:27:37.264 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.1961 ms
+2026-05-28 21:28:18.179 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 35.9593 ms
+2026-05-28 21:29:18.512 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 53.6250 ms
+2026-05-28 21:29:45.991 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 61.0041 ms
+2026-05-28 21:30:09.990 +03:00 [INF] HTTP GET /api/v1/appointments/efa0a2fa-f4bb-49bb-a7ad-fd58732e6af3 responded 200 in 332.3255 ms
+2026-05-28 21:30:11.664 +03:00 [INF] Running appointment reminder job at "2026-05-28T18:30:11.6569960Z"
+2026-05-28 21:30:11.696 +03:00 [INF] Appointment reminder job completed.
+2026-05-28 21:30:16.861 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.8823 ms
+2026-05-28 21:30:19.617 +03:00 [INF] HTTP POST /api/v1/payments/initiate responded 200 in 434.1117 ms
+2026-05-28 21:30:46.009 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.2520 ms
+2026-05-28 21:31:11.754 +03:00 [WRN] DomainException on POST /api/v1/video-consultations/86991285-af4a-40b4-96fc-78fefca991c1/join: This consultation is no longer active.
+2026-05-28 21:31:11.780 +03:00 [INF] HTTP POST /api/v1/video-consultations/86991285-af4a-40b4-96fc-78fefca991c1/join responded 400 in 351.1534 ms
+2026-05-28 21:31:16.754 +03:00 [WRN] DomainException on POST /api/v1/video-consultations/86991285-af4a-40b4-96fc-78fefca991c1/join: This consultation is no longer active.
+2026-05-28 21:31:16.755 +03:00 [INF] HTTP POST /api/v1/video-consultations/86991285-af4a-40b4-96fc-78fefca991c1/join responded 400 in 63.9180 ms
+2026-05-28 21:31:16.767 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4514 ms
+2026-05-28 21:37:16.859 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 38.3655 ms
+2026-05-28 21:38:16.824 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.3070 ms
+2026-05-28 22:13:48.609 +03:00 [INF] Running appointment reminder job at "2026-05-28T19:13:48.6057360Z"
+2026-05-28 22:13:48.628 +03:00 [INF] Appointment reminder job completed.
+2026-05-28 23:00:34.805 +03:00 [INF] Running appointment reminder job at "2026-05-28T20:00:34.8053660Z"
+2026-05-28 23:00:34.873 +03:00 [INF] Appointment reminder job completed.
+2026-05-28 23:40:54.186 +03:00 [INF] Running appointment reminder job at "2026-05-28T20:40:54.1866100Z"
+2026-05-28 23:40:54.199 +03:00 [INF] Appointment reminder job completed.

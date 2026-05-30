@@ -526,7 +526,7 @@ public class HealthPredictionRecord
 
 public class Prescription : BaseEntity
 {
-    public Guid AppointmentId { get; private set; }
+    public Guid? AppointmentId { get; private set; }
     public Guid PatientId { get; private set; }
     public Guid DoctorId { get; private set; }
     public Guid CenterId { get; private set; }
@@ -544,7 +544,7 @@ public class Prescription : BaseEntity
     public PrescriptionStatus Status { get; private set; } = PrescriptionStatus.Active;
 
     // Navigation
-    public Appointment Appointment { get; private set; } = null!;
+    public Appointment? Appointment { get; private set; }
     public Patient Patient { get; private set; } = null!;
     public Doctor Doctor { get; private set; } = null!;
     public HealthcareCenter Center { get; private set; } = null!;
@@ -552,7 +552,7 @@ public class Prescription : BaseEntity
     private Prescription() { }
 
     public static Prescription Issue(
-        Guid appointmentId, Guid patientId, Guid doctorId, Guid centerId,
+        Guid? appointmentId, Guid patientId, Guid doctorId, Guid centerId,
         string diagnosis, List<MedicationItem> medications,
         List<string>? labTests = null, string? followUpInstructions = null,
         string? specialInstructions = null, DateOnly? expiryDate = null)

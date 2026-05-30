@@ -9,6 +9,7 @@ namespace MediMind.Application.Features.Prescriptions;
 
 public class PrescriptionService(
     IAppointmentRepository appointmentRepository,
+    IDoctorRepository doctorRepository,
     IPrescriptionRepository prescriptionRepository,
     IPdfService pdfService,
     IPrescriptionFileStorage prescriptionFileStorage,
@@ -23,20 +24,48 @@ public class PrescriptionService(
         Guid doctorId,
         CancellationToken ct = default)
     {
-        var appointment = await appointmentRepository.GetByIdAsync(dto.AppointmentId)
-                          ?? throw new NotFoundException(nameof(Appointment), dto.AppointmentId);
+        Guid patientId;
+        Guid centerId;
+        string doctorName = string.Empty;
+        string patientName = string.Empty;
+        string centerName = string.Empty;
 
-        if (appointment.DoctorId != doctorId)
-            throw new ForbiddenException("You can only issue prescriptions for your own appointments.");
+        if (dto.AppointmentId.HasValue && dto.AppointmentId.Value != Guid.Empty)
+        {
+            var appointment = await appointmentRepository.GetByIdAsync(dto.AppointmentId.Value)
+                              ?? throw new NotFoundException(nameof(Appointment), dto.AppointmentId.Value);
 
-        if (appointment.Status != AppointmentStatus.Completed &&
-            appointment.Status != AppointmentStatus.InProgress)
-            throw new DomainException(
-                "Prescriptions can only be issued for in-progress or completed appointments.");
+            if (appointment.DoctorId != doctorId)
+                throw new ForbiddenException("You can only issue prescriptions for your own appointments.");
 
-        var existing = await prescriptionRepository.GetByAppointmentAsync(dto.AppointmentId, ct);
-        if (existing is not null)
-            throw new DomainException("A prescription already exists for this appointment.");
+            if (appointment.Status != AppointmentStatus.Completed &&
+                appointment.Status != AppointmentStatus.InProgress)
+                throw new DomainException(
+                    "Prescriptions can only be issued for in-progress or completed appointments.");
+
+            var existing = await prescriptionRepository.GetByAppointmentAsync(dto.AppointmentId.Value, ct);
+            if (existing is not null)
+                throw new DomainException("A prescription already exists for this appointment.");
+
+            patientId = appointment.PatientId;
+            centerId = appointment.CenterId;
+            doctorName = appointment.Doctor?.FullName ?? string.Empty;
+            patientName = appointment.Patient?.FullName ?? string.Empty;
+            centerName = appointment.Center?.CenterName ?? string.Empty;
+        }
+        else
+        {
+            if (!dto.PatientId.HasValue || dto.PatientId.Value == Guid.Empty)
+                throw new DomainException("PatientId is required when no AppointmentId is provided.");
+
+            patientId = dto.PatientId.Value;
+
+            var centerIds = (await doctorRepository.GetCenterIdsAsync(doctorId)).ToList();
+            if (centerIds.Count == 0)
+                throw new DomainException("Doctor is not associated with any healthcare center.");
+
+            centerId = centerIds[0];
+        }
 
         var medications = dto.Medications
             .Select(m => new MedicationItem(m.Name, m.Dosage, m.Frequency, m.Duration, m.Instructions))
@@ -44,9 +73,9 @@ public class PrescriptionService(
 
         var prescription = Prescription.Issue(
             dto.AppointmentId,
-            appointment.PatientId,
+            patientId,
             doctorId,
-            appointment.CenterId,
+            centerId,
             dto.Diagnosis,
             medications,
             dto.LabTests,
@@ -61,15 +90,11 @@ public class PrescriptionService(
         await prescriptionRepository.CreateAsync(prescription, ct);
         await unitOfWork.SaveChangesAsync(ct);
 
-        await auditLogger.LogAsync(AuditActions.PrescriptionIssued, doctorId, "Doctor", appointment.CenterId, "Prescription", prescription.Id, null, ct);
+        await auditLogger.LogAsync(AuditActions.PrescriptionIssued, doctorId, "Doctor", centerId, "Prescription", prescription.Id, null, ct);
 
         _ = GenerateAndStorePdfAsync(prescription.Id);
 
-        return MapToResponse(
-            prescription,
-            appointment.Doctor?.FullName ?? string.Empty,
-            appointment.Patient?.FullName ?? string.Empty,
-            appointment.Center?.CenterName ?? string.Empty);
+        return MapToResponse(prescription, doctorName, patientName, centerName);
     }
 
     private async Task GenerateAndStorePdfAsync(Guid prescriptionId)

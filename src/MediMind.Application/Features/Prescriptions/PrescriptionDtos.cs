@@ -8,7 +8,8 @@ public record MedicationDto(
     string? Instructions);
 
 public record CreatePrescriptionDto(
-    Guid AppointmentId,
+    Guid? AppointmentId,
+    Guid? PatientId,
     string Diagnosis,
     List<MedicationDto> Medications,
     List<string>? LabTests,
@@ -18,7 +19,7 @@ public record CreatePrescriptionDto(
 
 public record PrescriptionResponseDto(
     Guid PrescriptionId,
-    Guid AppointmentId,
+    Guid? AppointmentId,
     Guid PatientId,
     Guid DoctorId,
     Guid CenterId,

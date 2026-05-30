@@ -613,10 +613,11 @@ public class PrescriptionConfiguration : IEntityTypeConfiguration<Prescription>
         builder.ToTable(t => t.HasCheckConstraint(
             "ck_expiry_date", "expiry_date > issue_date OR expiry_date IS NULL"));
 
-        builder.HasIndex(p => p.AppointmentId).IsUnique();
+        builder.HasIndex(p => p.AppointmentId).IsUnique()
+            .HasFilter("appointment_id IS NOT NULL");
 
         builder.HasOne(p => p.Appointment).WithMany(a => a.Prescriptions)
-            .HasForeignKey(p => p.AppointmentId).OnDelete(DeleteBehavior.Restrict);
+            .HasForeignKey(p => p.AppointmentId).IsRequired(false).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(p => p.Patient).WithMany(pt => pt.Prescriptions)
             .HasForeignKey(p => p.PatientId).OnDelete(DeleteBehavior.Restrict);
         builder.HasOne(p => p.Doctor).WithMany(d => d.Prescriptions)

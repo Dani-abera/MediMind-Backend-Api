@@ -1,0 +1,398 @@
+2026-05-29 00:41:52.721 +03:00 [INF] Running appointment reminder job at "2026-05-28T21:41:52.7213840Z"
+2026-05-29 00:41:52.812 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 01:29:01.448 +03:00 [INF] Running appointment reminder job at "2026-05-28T22:29:01.4479310Z"
+2026-05-29 01:29:01.487 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 02:19:46.855 +03:00 [INF] Running appointment reminder job at "2026-05-28T23:19:46.8547200Z"
+2026-05-29 02:19:46.925 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 03:08:49.231 +03:00 [INF] Running appointment reminder job at "2026-05-29T00:08:49.2308340Z"
+2026-05-29 03:08:49.258 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 03:58:20.620 +03:00 [INF] Running appointment reminder job at "2026-05-29T00:58:20.6199460Z"
+2026-05-29 03:58:20.678 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 04:32:56.210 +03:00 [INF] Running appointment reminder job at "2026-05-29T01:32:56.2101780Z"
+2026-05-29 04:32:56.229 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 05:42:52.640 +03:00 [INF] Running appointment reminder job at "2026-05-29T02:42:52.6388050Z"
+2026-05-29 05:42:52.851 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 06:14:32.543 +03:00 [INF] Running appointment reminder job at "2026-05-29T03:14:32.5431760Z"
+2026-05-29 06:14:32.567 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 06:14:32.570 +03:00 [INF] QueueGenerationJob triggered for date "2026-05-28"
+2026-05-29 06:14:32.640 +03:00 [INF] Handling GenerateDailyQueuesCommand
+2026-05-29 06:14:32.936 +03:00 [INF] Handled GenerateDailyQueuesCommand in 295ms
+2026-05-29 06:14:32.940 +03:00 [INF] Generated 0 queues for 0 centers.
+2026-05-29 06:33:58.569 +03:00 [INF] Running appointment reminder job at "2026-05-29T03:33:58.5689940Z"
+2026-05-29 06:33:58.594 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 07:10:05.475 +03:00 [INF] Running appointment reminder job at "2026-05-29T04:10:05.4755860Z"
+2026-05-29 07:10:05.497 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 07:34:57.069 +03:00 [INF] Running appointment reminder job at "2026-05-29T04:34:57.0691120Z"
+2026-05-29 07:34:57.090 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 08:13:37.795 +03:00 [INF] Running appointment reminder job at "2026-05-29T05:13:37.7946530Z"
+2026-05-29 08:13:37.871 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 08:38:04.356 +03:00 [INF] Running appointment reminder job at "2026-05-29T05:38:04.3553890Z"
+2026-05-29 08:38:04.458 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 09:00:03.273 +03:00 [INF] Running appointment reminder job at "2026-05-29T06:00:03.2714180Z"
+2026-05-29 09:00:03.315 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 09:15:10.895 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 79.6398 ms
+2026-05-29 09:15:10.895 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 79.6405 ms
+2026-05-29 09:15:10.895 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 79.6478 ms
+2026-05-29 09:15:10.895 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 76.9256 ms
+2026-05-29 09:15:11.055 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 240.6414 ms
+2026-05-29 09:15:11.231 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 184.2856 ms
+2026-05-29 09:15:11.331 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.4605 ms
+2026-05-29 09:15:11.339 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 16.3279 ms
+2026-05-29 09:15:11.343 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 14.7875 ms
+2026-05-29 09:15:11.370 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 43.4977 ms
+2026-05-29 09:15:19.900 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.1095 ms
+2026-05-29 09:15:19.952 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.6417 ms
+2026-05-29 09:16:20.110 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 255.3376 ms
+2026-05-29 09:16:43.727 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 96.8161 ms
+2026-05-29 09:17:17.277 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 30.2634 ms
+2026-05-29 09:17:19.884 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 102.0776 ms
+2026-05-29 09:18:17.693 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 51.0313 ms
+2026-05-29 09:18:49.459 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 170.9215 ms
+2026-05-29 09:18:49.489 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 57.1938 ms
+2026-05-29 09:18:49.491 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.1356 ms
+2026-05-29 09:18:49.613 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 209.2010 ms
+2026-05-29 09:18:49.684 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 204.5690 ms
+2026-05-29 09:18:49.700 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 289.3348 ms
+2026-05-29 09:19:08.412 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 135.4478 ms
+2026-05-29 09:19:14.206 +03:00 [INF] Handling UploadMyProfileImageCommand
+2026-05-29 09:19:14.433 +03:00 [INF] Handled UploadMyProfileImageCommand in 221ms
+2026-05-29 09:19:14.455 +03:00 [INF] HTTP PUT /api/v1/profile-images/me responded 200 in 627.5318 ms
+2026-05-29 09:19:16.905 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.5562 ms
+2026-05-29 09:19:20.690 +03:00 [INF] HTTP PATCH /api/v1/auth/patient/profile responded 204 in 164.7046 ms
+2026-05-29 09:19:20.780 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 8.6535 ms
+2026-05-29 09:19:38.502 +03:00 [INF] HTTP GET /api/v1/patients/me/medical-history responded 200 in 282.8846 ms
+2026-05-29 09:19:50.020 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.6207 ms
+2026-05-29 09:19:50.238 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 118.7044 ms
+2026-05-29 09:20:16.762 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.8512 ms
+2026-05-29 09:20:24.973 +03:00 [INF] HTTP POST /api/v1/patients/me/emergency-contacts responded 201 in 181.1313 ms
+2026-05-29 09:20:40.593 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 47.8306 ms
+2026-05-29 09:20:49.719 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.9644 ms
+2026-05-29 09:20:51.119 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 20.9240 ms
+2026-05-29 09:20:58.445 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 183.0811 ms
+2026-05-29 09:21:02.968 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 66.0105 ms
+2026-05-29 09:21:06.059 +03:00 [WRN] DomainException on GET /api/v1/payments/0021abea-8b35-431d-b0a6-8bb65195aa5e/receipt: Receipt can only be generated for completed payments.
+2026-05-29 09:21:06.066 +03:00 [INF] HTTP GET /api/v1/payments/0021abea-8b35-431d-b0a6-8bb65195aa5e/receipt responded 400 in 124.6261 ms
+2026-05-29 09:21:10.180 +03:00 [WRN] DomainException on GET /api/v1/payments/36d2044b-1ac3-4750-a8bb-7aeeec6dd992/receipt: Receipt can only be generated for completed payments.
+2026-05-29 09:21:10.181 +03:00 [INF] HTTP GET /api/v1/payments/36d2044b-1ac3-4750-a8bb-7aeeec6dd992/receipt responded 400 in 35.6491 ms
+2026-05-29 09:21:13.636 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 14.3786 ms
+2026-05-29 09:21:16.750 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.0992 ms
+2026-05-29 09:21:49.726 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 48.9698 ms
+2026-05-29 09:22:08.519 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 25.3038 ms
+2026-05-29 09:22:17.675 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.9313 ms
+2026-05-29 09:22:50.222 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 438.2962 ms
+2026-05-29 09:23:16.955 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 36.9036 ms
+2026-05-29 09:23:50.499 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.4533 ms
+2026-05-29 09:24:16.816 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.5376 ms
+2026-05-29 09:25:16.923 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.9563 ms
+2026-05-29 09:25:59.233 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 74.3108 ms
+2026-05-29 09:26:19.159 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.6113 ms
+2026-05-29 09:27:16.929 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 21.2565 ms
+2026-05-29 09:28:13.101 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 52.5786 ms
+2026-05-29 09:28:13.304 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.4364 ms
+2026-05-29 09:28:13.362 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 83.5928 ms
+2026-05-29 09:28:13.393 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 149.0040 ms
+2026-05-29 09:28:13.405 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 135.0807 ms
+2026-05-29 09:28:13.486 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 197.4694 ms
+2026-05-29 09:28:17.120 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.3285 ms
+2026-05-29 09:28:19.567 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 25.4773 ms
+2026-05-29 09:28:19.567 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 23.5688 ms
+2026-05-29 09:28:19.585 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 54.9059 ms
+2026-05-29 09:28:19.649 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 95.6815 ms
+2026-05-29 09:28:19.684 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 136.0595 ms
+2026-05-29 09:28:40.928 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 49.9545 ms
+2026-05-29 09:28:41.339 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 352.1382 ms
+2026-05-29 09:28:45.921 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 49.8126 ms
+2026-05-29 09:28:46.061 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 88.1059 ms
+2026-05-29 09:28:53.311 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 714.3690 ms
+2026-05-29 09:28:58.201 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 35.1870 ms
+2026-05-29 09:28:58.356 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 13.5294 ms
+2026-05-29 09:28:58.429 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 12.2178 ms
+2026-05-29 09:29:13.332 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 52.0755 ms
+2026-05-29 09:29:16.857 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1443 ms
+2026-05-29 09:29:47.676 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 74.2411 ms
+2026-05-29 09:29:47.778 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 21.2274 ms
+2026-05-29 09:29:47.836 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 7.2583 ms
+2026-05-29 09:30:11.225 +03:00 [INF] Running appointment reminder job at "2026-05-29T06:30:11.2205830Z"
+2026-05-29 09:30:11.256 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 09:30:13.287 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 20.8829 ms
+2026-05-29 09:30:13.618 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 202.8435 ms
+2026-05-29 09:30:13.694 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.4045 ms
+2026-05-29 09:30:16.751 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.7865 ms
+2026-05-29 09:31:13.386 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 118.6292 ms
+2026-05-29 09:31:16.772 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.9670 ms
+2026-05-29 09:32:13.315 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.3052 ms
+2026-05-29 09:32:16.771 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.1374 ms
+2026-05-29 09:33:13.969 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.9252 ms
+2026-05-29 09:33:16.747 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.4451 ms
+2026-05-29 09:33:37.423 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 36.9481 ms
+2026-05-29 09:33:37.502 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 25.9538 ms
+2026-05-29 09:33:37.556 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 13.9778 ms
+2026-05-29 09:33:50.531 +03:00 [INF] HTTP GET /api/v1/health-predictions/2f7496cd-95af-46d0-b316-ad55e6bf20b6 responded 200 in 80.7790 ms
+2026-05-29 09:34:13.973 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.2115 ms
+2026-05-29 09:34:16.756 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.4419 ms
+2026-05-29 09:35:13.976 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.5593 ms
+2026-05-29 09:35:16.749 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.0334 ms
+2026-05-29 09:35:20.903 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 39.5491 ms
+2026-05-29 09:35:30.881 +03:00 [INF] Handling UploadMyProfileImageCommand
+2026-05-29 09:35:30.966 +03:00 [INF] Handled UploadMyProfileImageCommand in 74ms
+2026-05-29 09:35:30.969 +03:00 [INF] HTTP PUT /api/v1/profile-images/me responded 200 in 238.4227 ms
+2026-05-29 09:35:54.064 +03:00 [INF] Handling DeleteMyProfileImageCommand
+2026-05-29 09:35:54.114 +03:00 [INF] Handled DeleteMyProfileImageCommand in 49ms
+2026-05-29 09:35:54.117 +03:00 [INF] HTTP DELETE /api/v1/profile-images/me responded 204 in 159.4413 ms
+2026-05-29 09:35:56.680 +03:00 [INF] Handling DeleteMyProfileImageCommand
+2026-05-29 09:35:56.706 +03:00 [INF] Handled DeleteMyProfileImageCommand in 25ms
+2026-05-29 09:35:56.707 +03:00 [INF] HTTP DELETE /api/v1/profile-images/me responded 204 in 44.8189 ms
+2026-05-29 09:35:57.748 +03:00 [INF] Handling DeleteMyProfileImageCommand
+2026-05-29 09:35:57.767 +03:00 [INF] Handled DeleteMyProfileImageCommand in 18ms
+2026-05-29 09:35:57.767 +03:00 [INF] HTTP DELETE /api/v1/profile-images/me responded 204 in 27.1910 ms
+2026-05-29 09:36:02.198 +03:00 [INF] Handling UploadMyProfileImageCommand
+2026-05-29 09:36:02.263 +03:00 [INF] Handled UploadMyProfileImageCommand in 65ms
+2026-05-29 09:36:02.263 +03:00 [INF] HTTP PUT /api/v1/profile-images/me responded 200 in 244.6204 ms
+2026-05-29 09:36:06.296 +03:00 [INF] Handling DeleteMyProfileImageCommand
+2026-05-29 09:36:06.373 +03:00 [INF] Handled DeleteMyProfileImageCommand in 75ms
+2026-05-29 09:36:06.377 +03:00 [INF] HTTP DELETE /api/v1/profile-images/me responded 204 in 91.1552 ms
+2026-05-29 09:36:13.974 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.3139 ms
+2026-05-29 09:36:16.827 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.1818 ms
+2026-05-29 09:36:19.190 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 177.1401 ms
+2026-05-29 09:36:21.635 +03:00 [WRN] DomainException on GET /api/v1/payments/4efa0788-b183-4242-a32e-909e2804417e/receipt: Receipt can only be generated for completed payments.
+2026-05-29 09:36:21.644 +03:00 [INF] HTTP GET /api/v1/payments/4efa0788-b183-4242-a32e-909e2804417e/receipt responded 400 in 111.1795 ms
+2026-05-29 09:36:32.588 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 91.4435 ms
+2026-05-29 09:36:44.682 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 83.2585 ms
+2026-05-29 09:36:46.529 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 35.2982 ms
+2026-05-29 09:37:14.016 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.5678 ms
+2026-05-29 09:37:16.787 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6188 ms
+2026-05-29 09:38:14.611 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.3137 ms
+2026-05-29 09:38:16.773 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 9.3614 ms
+2026-05-29 09:39:16.947 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.9275 ms
+2026-05-29 09:39:21.899 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 66.3507 ms
+2026-05-29 09:40:16.893 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 28.5437 ms
+2026-05-29 09:40:43.906 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.3359 ms
+2026-05-29 09:41:16.790 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.1603 ms
+2026-05-29 09:41:30.526 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 45.6526 ms
+2026-05-29 09:42:17.414 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 45.0060 ms
+2026-05-29 09:42:38.384 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 102.9709 ms
+2026-05-29 09:43:17.000 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 17.4023 ms
+2026-05-29 09:43:41.312 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.4055 ms
+2026-05-29 09:43:41.564 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 94.9110 ms
+2026-05-29 09:43:41.598 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 165.8616 ms
+2026-05-29 09:43:41.649 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 141.1340 ms
+2026-05-29 09:43:41.662 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 207.5393 ms
+2026-05-29 09:43:41.708 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 226.7304 ms
+2026-05-29 09:44:03.792 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 55.0804 ms
+2026-05-29 09:44:03.838 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 30.0378 ms
+2026-05-29 09:44:03.849 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 27.9563 ms
+2026-05-29 09:44:03.850 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.5071 ms
+2026-05-29 09:44:03.858 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 50.2271 ms
+2026-05-29 09:44:03.886 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 72.0479 ms
+2026-05-29 09:44:05.582 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 29.6279 ms
+2026-05-29 09:44:05.777 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 152.7792 ms
+2026-05-29 09:44:15.719 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 39.1543 ms
+2026-05-29 09:44:15.788 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 10.7930 ms
+2026-05-29 09:44:15.844 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 10.6394 ms
+2026-05-29 09:44:16.749 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.6783 ms
+2026-05-29 09:44:31.279 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 24.0194 ms
+2026-05-29 09:44:31.350 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 11.3757 ms
+2026-05-29 09:44:31.410 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 10.5378 ms
+2026-05-29 09:45:03.915 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.2946 ms
+2026-05-29 09:45:04.494 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 20.3198 ms
+2026-05-29 09:45:04.666 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 15.6109 ms
+2026-05-29 09:45:04.730 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 12.0596 ms
+2026-05-29 09:45:16.841 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.3821 ms
+2026-05-29 09:46:03.920 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 39.7276 ms
+2026-05-29 09:46:04.331 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 272.0901 ms
+2026-05-29 09:46:04.433 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.3443 ms
+2026-05-29 09:46:16.759 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6135 ms
+2026-05-29 09:47:03.932 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.0064 ms
+2026-05-29 09:47:16.761 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.3462 ms
+2026-05-29 09:47:55.996 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.2499 ms
+2026-05-29 09:47:56.008 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 13.0897 ms
+2026-05-29 09:47:56.015 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 11.9438 ms
+2026-05-29 09:47:56.019 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.4226 ms
+2026-05-29 09:47:56.028 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 35.7264 ms
+2026-05-29 09:47:56.044 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 35.8589 ms
+2026-05-29 09:48:16.778 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.7652 ms
+2026-05-29 09:48:57.202 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.1681 ms
+2026-05-29 09:49:15.923 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 77.2760 ms
+2026-05-29 09:49:16.078 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 120.0263 ms
+2026-05-29 09:49:16.747 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.4774 ms
+2026-05-29 09:49:19.754 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 37.4148 ms
+2026-05-29 09:49:19.833 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 4.5749 ms
+2026-05-29 09:49:19.878 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 2.9303 ms
+2026-05-29 09:49:22.647 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 11.1884 ms
+2026-05-29 09:49:22.730 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 9.5620 ms
+2026-05-29 09:49:22.766 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 3.4291 ms
+2026-05-29 09:49:24.865 +03:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 56.6307 ms
+2026-05-29 09:49:44.240 +03:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 53.3665 ms
+2026-05-29 09:49:55.028 +03:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 19.2396 ms
+2026-05-29 09:49:56.713 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 57.8898 ms
+2026-05-29 09:50:16.750 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 4.8484 ms
+2026-05-29 09:50:25.343 +03:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 25.8266 ms
+2026-05-29 09:50:26.342 +03:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 35.5185 ms
+2026-05-29 09:50:32.793 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 24.0433 ms
+2026-05-29 09:50:32.846 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 16.8209 ms
+2026-05-29 09:50:32.968 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 8.6748 ms
+2026-05-29 09:50:36.364 +03:00 [INF] HTTP GET /api/v1/medication-reminders responded 200 in 57.6220 ms
+2026-05-29 09:50:47.341 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 45.5023 ms
+2026-05-29 09:50:51.238 +03:00 [INF] HTTP GET /api/v1/patients/me/medical-history responded 200 in 65.1351 ms
+2026-05-29 09:50:54.516 +03:00 [INF] HTTP GET /api/v1/patients/me/emergency-contacts responded 200 in 48.6734 ms
+2026-05-29 09:50:56.673 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.3308 ms
+2026-05-29 09:51:05.570 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 66.1310 ms
+2026-05-29 09:51:16.833 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.9439 ms
+2026-05-29 09:51:23.327 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 35.8980 ms
+2026-05-29 09:51:27.033 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 21.7018 ms
+2026-05-29 09:51:37.569 +03:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 30.0419 ms
+2026-05-29 09:51:37.644 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 22.9487 ms
+2026-05-29 09:51:37.689 +03:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 9.5695 ms
+2026-05-29 09:51:56.696 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.1408 ms
+2026-05-29 09:52:17.463 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.0699 ms
+2026-05-29 09:52:27.527 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 200 in 333.2705 ms
+2026-05-29 09:54:57.001 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.6177 ms
+2026-05-29 09:55:16.758 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.4178 ms
+2026-05-29 09:56:00.762 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.7013 ms
+2026-05-29 09:56:17.008 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.1230 ms
+2026-05-29 09:57:16.969 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.5909 ms
+2026-05-29 09:58:16.749 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.0928 ms
+2026-05-29 09:59:16.839 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.2021 ms
+2026-05-29 10:00:12.263 +03:00 [INF] Running appointment reminder job at "2026-05-29T07:00:12.2573490Z"
+2026-05-29 10:00:12.281 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 10:00:16.771 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.3440 ms
+2026-05-29 10:10:16.961 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 30.6318 ms
+2026-05-29 10:11:16.753 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6326 ms
+2026-05-29 10:12:16.765 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.8290 ms
+2026-05-29 10:13:16.855 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.6480 ms
+2026-05-29 10:14:16.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.0487 ms
+2026-05-29 10:15:16.761 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7830 ms
+2026-05-29 10:16:16.755 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.9111 ms
+2026-05-29 10:17:16.906 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 24.8827 ms
+2026-05-29 10:18:16.768 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.6468 ms
+2026-05-29 10:19:16.760 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.7900 ms
+2026-05-29 10:20:16.771 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.8957 ms
+2026-05-29 10:21:16.790 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.5155 ms
+2026-05-29 10:21:17.301 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 71.5267 ms
+2026-05-29 10:21:17.673 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 328.6294 ms
+2026-05-29 10:21:17.724 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.7411 ms
+2026-05-29 10:22:02.000 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.8251 ms
+2026-05-29 10:22:16.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.9572 ms
+2026-05-29 10:23:01.966 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.7983 ms
+2026-05-29 10:23:17.842 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2107 ms
+2026-05-29 10:24:01.954 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.9067 ms
+2026-05-29 10:25:02.003 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.2026 ms
+2026-05-29 10:25:19.085 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 3.6145 ms
+2026-05-29 10:26:02.170 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 181.7469 ms
+2026-05-29 10:26:17.558 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.4658 ms
+2026-05-29 10:27:20.040 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 27.7321 ms
+2026-05-29 10:27:21.914 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.0898 ms
+2026-05-29 10:27:22.081 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 206.1332 ms
+2026-05-29 10:27:22.082 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 68.8480 ms
+2026-05-29 10:27:22.144 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 152.3363 ms
+2026-05-29 10:27:22.167 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 131.4076 ms
+2026-05-29 10:27:22.170 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 138.5988 ms
+2026-05-29 10:27:22.174 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 192.5171 ms
+2026-05-29 10:27:23.325 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 430.3028 ms
+2026-05-29 10:27:32.245 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 35.7887 ms
+2026-05-29 10:27:32.386 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 103.1691 ms
+2026-05-29 10:27:39.645 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 46.9707 ms
+2026-05-29 10:27:39.669 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 29.3083 ms
+2026-05-29 10:27:39.675 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 27.8833 ms
+2026-05-29 10:27:39.681 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.5762 ms
+2026-05-29 10:27:39.689 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 55.8351 ms
+2026-05-29 10:27:39.717 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 63.4482 ms
+2026-05-29 10:27:39.788 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 19.9269 ms
+2026-05-29 10:27:42.529 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 31.9082 ms
+2026-05-29 10:27:42.592 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 11.3937 ms
+2026-05-29 10:27:42.645 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 15.0699 ms
+2026-05-29 10:27:44.273 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 34.0451 ms
+2026-05-29 10:27:44.351 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 39.7501 ms
+2026-05-29 10:28:12.754 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 28.4549 ms
+2026-05-29 10:28:16.770 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.3345 ms
+2026-05-29 10:28:22.247 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.9045 ms
+2026-05-29 10:28:35.329 +03:00 [INF] HTTP PATCH /api/v1/auth/patient/profile responded 204 in 89.3075 ms
+2026-05-29 10:28:35.570 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 14.7947 ms
+2026-05-29 10:29:11.962 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 9.7131 ms
+2026-05-29 10:29:16.740 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.6636 ms
+2026-05-29 10:29:17.473 +03:00 [INF] Handling UploadMyProfileImageCommand
+2026-05-29 10:29:17.534 +03:00 [INF] Handled UploadMyProfileImageCommand in 59ms
+2026-05-29 10:29:17.535 +03:00 [INF] HTTP PUT /api/v1/profile-images/me responded 200 in 198.4350 ms
+2026-05-29 10:29:22.106 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.8934 ms
+2026-05-29 10:30:00.352 +03:00 [INF] Running appointment reminder job at "2026-05-29T07:30:00.3498100Z"
+2026-05-29 10:30:00.417 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 10:30:16.906 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.5096 ms
+2026-05-29 10:30:22.119 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 45.0679 ms
+2026-05-29 10:31:16.740 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6764 ms
+2026-05-29 10:31:27.062 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.0308 ms
+2026-05-29 10:31:53.977 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 66.3572 ms
+2026-05-29 10:31:54.372 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 111.5777 ms
+2026-05-29 10:32:02.708 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 31.5583 ms
+2026-05-29 10:32:02.738 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 21.3821 ms
+2026-05-29 10:32:02.763 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 47.4927 ms
+2026-05-29 10:32:02.802 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 80.8133 ms
+2026-05-29 10:32:02.824 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 54.7193 ms
+2026-05-29 10:32:02.839 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 105.6641 ms
+2026-05-29 10:32:02.843 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 120.5155 ms
+2026-05-29 10:32:05.067 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 29.4400 ms
+2026-05-29 10:32:05.125 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 13.6997 ms
+2026-05-29 10:32:05.128 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 22.1667 ms
+2026-05-29 10:32:05.135 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.8283 ms
+2026-05-29 10:32:05.137 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 33.4564 ms
+2026-05-29 10:32:05.162 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 47.4831 ms
+2026-05-29 10:32:05.229 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 38.9283 ms
+2026-05-29 10:32:07.936 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 27.2893 ms
+2026-05-29 10:32:07.941 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 26.3263 ms
+2026-05-29 10:32:07.942 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 42.3737 ms
+2026-05-29 10:32:07.945 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.0593 ms
+2026-05-29 10:32:07.975 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 70.3968 ms
+2026-05-29 10:32:08.033 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 118.8410 ms
+2026-05-29 10:32:08.034 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 23.1736 ms
+2026-05-29 10:32:16.779 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6977 ms
+2026-05-29 10:32:21.062 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-29 10:32:21.267 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/42d210d5-283a-4b03-afd0-c14ba5ec9b6d responded 200 in 562.9994 ms
+2026-05-29 10:32:27.312 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 40.5754 ms
+2026-05-29 10:32:47.357 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 43.9725 ms
+2026-05-29 10:32:47.460 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 74.1281 ms
+2026-05-29 10:33:16.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.8815 ms
+2026-05-29 10:34:16.742 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 13.9008 ms
+2026-05-29 10:35:16.750 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.0131 ms
+2026-05-29 10:44:24.277 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.6000 ms
+2026-05-29 10:45:17.257 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 30.0302 ms
+2026-05-29 10:46:16.821 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.9668 ms
+2026-05-29 10:47:16.994 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 26.1480 ms
+2026-05-29 10:48:22.997 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 22.7875 ms
+2026-05-29 10:49:16.779 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.5882 ms
+2026-05-29 10:50:16.742 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 5.7747 ms
+2026-05-29 10:51:16.753 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.5128 ms
+2026-05-29 10:52:16.754 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.7727 ms
+2026-05-29 10:53:16.809 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 20.5968 ms
+2026-05-29 10:54:17.730 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.2055 ms
+2026-05-29 10:55:18.672 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.9592 ms
+2026-05-29 10:56:16.743 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.6752 ms
+2026-05-29 10:57:42.374 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.0340 ms
+2026-05-29 10:58:19.762 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.1959 ms
+2026-05-29 10:59:16.818 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 11.7445 ms
+2026-05-29 10:59:55.421 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 50.7424 ms
+2026-05-29 10:59:55.496 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 401 in 124.3385 ms
+2026-05-29 10:59:55.571 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 2.9670 ms
+2026-05-29 10:59:55.571 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 8.1913 ms
+2026-05-29 10:59:55.604 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 4.1370 ms
+2026-05-29 10:59:55.633 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.9225 ms
+2026-05-29 10:59:55.752 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 149.9133 ms
+2026-05-29 10:59:55.975 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 251.5800 ms
+2026-05-29 10:59:56.125 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.4558 ms
+2026-05-29 10:59:56.147 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 9.8820 ms
+2026-05-29 10:59:56.175 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 23.0061 ms
+2026-05-29 10:59:56.211 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 24.1058 ms
+2026-05-29 10:59:56.229 +03:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 200 in 14.1566 ms
+2026-05-29 10:59:56.279 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.0833 ms
+2026-05-29 10:59:56.868 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 30.7950 ms
+2026-05-29 11:00:02.645 +03:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 44.4663 ms
+2026-05-29 11:00:02.837 +03:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 85.7758 ms
+2026-05-29 11:00:05.221 +03:00 [INF] HTTP GET /api/v1/health-records responded 200 in 23.5596 ms
+2026-05-29 11:00:05.332 +03:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 10.4258 ms
+2026-05-29 11:00:05.406 +03:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 12.0149 ms
+2026-05-29 11:00:07.622 +03:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 12.1923 ms
+2026-05-29 11:00:07.889 +03:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 27.0111 ms
+2026-05-29 11:00:13.815 +03:00 [INF] Running appointment reminder job at "2026-05-29T08:00:13.8140130Z"
+2026-05-29 11:00:13.838 +03:00 [INF] Appointment reminder job completed.
+2026-05-29 11:00:16.783 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.4754 ms
+2026-05-29 11:00:56.298 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.0449 ms
+2026-05-29 11:01:16.768 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 7.3723 ms
+2026-05-29 11:02:17.020 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 56.7325 ms

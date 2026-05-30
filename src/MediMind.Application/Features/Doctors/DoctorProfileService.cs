@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MediMind.Application.Features.HealthPredictions;
 using MediMind.Application.Features.HealthRecords;
 using MediMind.Application.Features.Prescriptions;
@@ -32,6 +33,7 @@ public class DoctorProfileService(
     IQueueRepository queueRepository,
     IPrescriptionRepository prescriptionRepository,
     IPatientRepository patientRepository,
+    IPatientMedicalHistoryRepository medicalHistoryRepository,
     IUnitOfWork unitOfWork) : IDoctorProfileService
 {
     public async Task<DoctorProfileDto?> GetProfileAsync(Guid doctorId, CancellationToken ct = default)
@@ -164,6 +166,8 @@ public class DoctorProfileService(
         if (patient is null) return null;
 
         var appointments = await appointmentRepository.GetByPatientAsync(patientId, ct);
+        var history = await medicalHistoryRepository.GetByPatientIdAsync(patientId, ct);
+
         var lastVisit = appointments
             .Where(a => a.DoctorId == doctorId && a.Status == AppointmentStatus.Completed)
             .OrderByDescending(a => a.AppointmentDate)
@@ -174,6 +178,17 @@ public class DoctorProfileService(
         var primaryContact = patient.EmergencyContacts.FirstOrDefault(c => c.IsPrimary)
                              ?? patient.EmergencyContacts.FirstOrDefault();
 
+        // Prefer structured medical history (written by mobile app) over legacy Patient fields
+        var bloodType = history?.BloodType ?? patient.BloodType?.ToString();
+        var chronicConditions = ParseJsonStringArray(history?.ChronicConditions)
+                                ?? patient.ChronicConditions;
+        var allergies = ParseAllergenNames(history?.Allergies)
+                        ?? patient.Allergies?.Split(',').Select(a => a.Trim())
+                            .Where(a => !string.IsNullOrEmpty(a)).ToList()
+                        ?? [];
+        var currentMedications = ParseMedicationNames(history?.CurrentMedications)
+                                 ?? patient.CurrentMedications;
+
         return new DoctorPatientProfileDto(
             patient.Id.ToString(),
             patient.FullName,
@@ -182,18 +197,68 @@ public class DoctorProfileService(
             patient.Gender.ToString(),
             patient.PhoneNumber,
             patient.Email,
-            patient.BloodType?.ToString(),
+            bloodType,
             patient.Address,
             primaryContact is null ? null : new DoctorEmergencyContactDto(
                 primaryContact.FullName,
                 primaryContact.PhoneNumber,
                 primaryContact.Relationship.ToString()),
-            patient.ChronicConditions,
-            patient.Allergies?.Split(',').Select(a => a.Trim()).Where(a => !string.IsNullOrEmpty(a)).ToList() ?? [],
-            patient.CurrentMedications,
+            chronicConditions,
+            allergies,
+            currentMedications,
             patient.ProfileImageUrl,
             lastVisit,
             totalVisits);
+    }
+
+    private static List<string>? ParseJsonStringArray(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json) || json == "[]") return null;
+        try
+        {
+            var items = JsonSerializer.Deserialize<List<string>>(json);
+            return items is { Count: > 0 } ? items : null;
+        }
+        catch { return null; }
+    }
+
+    private static List<string>? ParseAllergenNames(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json) || json == "[]") return null;
+        try
+        {
+            // Stored as [{"allergen":"...","severity":"..."}] — extract allergen names
+            var items = JsonSerializer.Deserialize<List<JsonElement>>(json);
+            if (items is null or { Count: 0 }) return null;
+            var names = items
+                .Select(e => e.TryGetProperty("allergen", out var v) ? v.GetString() : null)
+                .Where(s => !string.IsNullOrEmpty(s))
+                .Select(s => s!)
+                .ToList();
+            return names.Count > 0 ? names : null;
+        }
+        catch { return null; }
+    }
+
+    private static List<string>? ParseMedicationNames(string? json)
+    {
+        if (string.IsNullOrWhiteSpace(json) || json == "[]") return null;
+        try
+        {
+            // Try plain string array first
+            var asStrings = JsonSerializer.Deserialize<List<string>>(json);
+            if (asStrings is { Count: > 0 }) return asStrings;
+            // Try object array — extract "name" field
+            var items = JsonSerializer.Deserialize<List<JsonElement>>(json);
+            if (items is null or { Count: 0 }) return null;
+            var names = items
+                .Select(e => e.TryGetProperty("name", out var v) ? v.GetString() : null)
+                .Where(s => !string.IsNullOrEmpty(s))
+                .Select(s => s!)
+                .ToList();
+            return names.Count > 0 ? names : null;
+        }
+        catch { return null; }
     }
 
     private static DoctorProfileDto MapToProfileDto(Doctor doctor) =>
