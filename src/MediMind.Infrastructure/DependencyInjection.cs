@@ -41,7 +41,11 @@ public static class DependencyInjection
         // ─── PostgreSQL + EF Core 10 ─────────────────────────────────────────
         services.AddDbContext<MediMindDbContext>(options =>
             options.UseNpgsql(
-                config.GetConnectionString("DefaultConnection")));
+                config.GetConnectionString("DefaultConnection"),
+                npgsqlOptions => npgsqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 3,
+                    maxRetryDelay: TimeSpan.FromSeconds(5),
+                    errorCodesToAdd: null)));
 
         // ─── Unit of Work ────────────────────────────────────────────────────
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<MediMindDbContext>());

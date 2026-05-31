@@ -235,7 +235,7 @@ public class AdminAuthServiceTests
     public async Task Login_WithCorrectCredentials_ReturnsTokens()
     {
         var admin = new HealthcareCenterAdmin("a@b.com", "+251911000003", "Admin",
-            DateOnly.Parse("1985-01-01"), Gender.Other, null, "Owner");
+            DateOnly.Parse("1985-01-01"), Gender.NotMentioned, null, "Owner");
         admin.SetPasswordHash("hashed");
         admin.Activate();
 

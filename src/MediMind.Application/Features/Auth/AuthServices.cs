@@ -50,7 +50,7 @@ public record RegisterResult(Guid UserId, string Message);
 public record DoctorCreatedResult(Guid DoctorId, string BadgeNumber, string Message);
 public record DoctorInvitationResult(Guid InvitationId, string Message);
 public record PendingInvitationDto(Guid InvitationId, string FullName, string Email, string PhoneNumber, string Specialization, string LicenseNumber, DateTime ExpiresAt);
-public record AcceptInvitationRequest(string Token, string Password);
+public record AcceptInvitationRequest(string Token);
 public record AcceptInvitationResult(Guid DoctorId, string BadgeNumber, string Message);
 
 public record PatientProfileDto(
@@ -201,6 +201,8 @@ public interface IDoctorAuthService
     Task<AuthResult> VerifyOtpAsync(string badgeNumber, string otpCode, CancellationToken ct);
 }
 
+public record ChangePasswordRequest(string Current, string NewPassword);
+
 public interface IAdminAuthService
 {
     Task<Guid> RegisterAsync(AdminRegisterRequest request, CancellationToken ct);
@@ -209,6 +211,7 @@ public interface IAdminAuthService
     Task<DoctorInvitationResult> InviteDoctorAsync(Guid centerId, InviteDoctorRequest request, CancellationToken ct);
     Task<AcceptInvitationResult> AcceptDoctorInvitationAsync(AcceptInvitationRequest request, CancellationToken ct);
     Task<IReadOnlyList<PendingInvitationDto>> GetPendingInvitationsAsync(Guid centerId, CancellationToken ct);
+    Task ChangePasswordAsync(ChangePasswordRequest request, CancellationToken ct);
 }
 
 public interface ISuperAdminAuthService
@@ -297,7 +300,7 @@ public class PatientAuthService(
                 phone,
                 "Patient",
                 DateOnly.FromDateTime(new DateTime(1990, 1, 1)),
-                Gender.Other);
+                Gender.NotMentioned);
             patient.SetPasswordHash(passwordService.HashPassword(Guid.NewGuid().ToString("N")));
             await patientRepository.AddAsync(patient, ct);
         }
@@ -472,7 +475,7 @@ public class AdminAuthService(
         var admin = new HealthcareCenterAdmin(
             request.Email, phone, request.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
-            Gender.Other, null, "Owner");
+            Gender.NotMentioned, null, "Owner");
         admin.SetPasswordHash(passwordService.HashPassword(request.Password));
         admin.Activate();
 
@@ -538,7 +541,7 @@ public class AdminAuthService(
             phone,
             request.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
-            Gender.Other,
+            Gender.NotMentioned,
             request.Specialization,
             badgeNumber,
             request.YearsOfExperience);
@@ -663,12 +666,12 @@ public class AdminAuthService(
             invitation.PhoneNumber,
             invitation.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
-            Gender.Other,
+            Gender.NotMentioned,
             invitation.Specialization,
             badgeNumber,
             invitation.YearsOfExperience);
         doctor.SetLicenseNumber(invitation.LicenseNumber);
-        doctor.SetPasswordHash(passwordService.HashPassword(request.Password));
+        doctor.SetPasswordHash(passwordService.HashPassword(Guid.NewGuid().ToString("N")));
         doctor.Activate();
 
         await doctorRepository.AddAsync(doctor, ct);
@@ -693,6 +696,18 @@ public class AdminAuthService(
         return invitations.Select(i => new PendingInvitationDto(
             i.Id, i.FullName, i.Email, i.PhoneNumber, i.Specialization, i.LicenseNumber, i.ExpiresAt))
             .ToList();
+    }
+
+    public async Task ChangePasswordAsync(ChangePasswordRequest request, CancellationToken ct)
+    {
+        var user = await userRepository.GetByIdAsync(currentUser.UserId, ct)
+            ?? throw new Domain.Exceptions.NotFoundException(nameof(HealthcareCenterAdmin), currentUser.UserId);
+
+        if (!passwordService.VerifyPassword(request.Current, user.PasswordHash))
+            throw new DomainException("Current password is incorrect.");
+
+        user.SetPasswordHash(passwordService.HashPassword(request.NewPassword));
+        await unitOfWork.SaveChangesAsync(ct);
     }
 
     private static async Task<string> GenerateUniqueBadgeNumberAsync(IDoctorRepository repo, CancellationToken ct)

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "MediMind.Domain/1.0.0": {
+        "runtime": {
+          "MediMind.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MediMind.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

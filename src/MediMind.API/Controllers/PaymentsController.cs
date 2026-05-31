@@ -58,6 +58,17 @@ public sealed class PaymentsController(PaymentAppService paymentService, ICurren
         return Ok(result);
     }
 
+    /// <summary>Verify payment status by Chapa tx_ref — for polling after checkout redirect (FR-094).</summary>
+    [Tags("Patient — Payments")]
+    [HttpPost("{txRef}/verify")]
+    [Authorize(Policy = "PatientOnly")]
+    [ProducesResponseType(typeof(PaymentStatusDto), StatusCodes.Status200OK)]
+    public async Task<ActionResult<PaymentStatusDto>> VerifyByTxRef(string txRef, CancellationToken ct)
+    {
+        var result = await paymentService.VerifyByTxRefAsync(txRef, currentUser.UserId, ct);
+        return Ok(result);
+    }
+
     /// <summary>List payment history for the current user or admin's center (FR-092).</summary>
     [Tags("Patient — Payments", "Admin — Payments")]
     [HttpGet]

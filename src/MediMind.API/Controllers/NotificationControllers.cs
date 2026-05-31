@@ -45,10 +45,9 @@ public class NotificationsController(
         return NoContent();
     }
 
-    /// <summary>List the last 50 notification log entries for the signed-in patient (FR-071).</summary>
+    /// <summary>List the last 50 notification log entries for the signed-in user (FR-071).</summary>
     [Tags("Patient — Notifications")]
     [HttpGet("history")]
-    [Authorize(Policy = "PatientOnly")]
     [ProducesResponseType(typeof(IReadOnlyList<NotificationHistoryItemDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> History(CancellationToken ct)
     {
@@ -60,7 +59,8 @@ public class NotificationsController(
             n.Title,
             n.Body,
             n.Status,
-            n.SentAt)).ToList();
+            n.SentAt,
+            n.IsRead)).ToList();
         return Ok(dto);
     }
 
@@ -105,7 +105,8 @@ public record NotificationHistoryItemDto(
     string? Title,
     string Body,
     string Status,
-    DateTime SentAt);
+    DateTime SentAt,
+    bool IsRead);
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MEDICATION REMINDERS

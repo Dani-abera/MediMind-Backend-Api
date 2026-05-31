@@ -138,7 +138,7 @@ public class HealthcareCentersController(
         return Ok(result);
     }
 
-    /// <summary>Get branding info (logo URL, description) for this center.</summary>
+    /// <summary>Get branding info (logo URL, cover URL, description) for this center.</summary>
     [Tags("Admin — Center Settings")]
     [HttpGet("{id:guid}/branding")]
     [RequireRole("Admin", "SuperAdmin")]
@@ -150,8 +150,26 @@ public class HealthcareCentersController(
         {
             centerId = id.ToString(),
             logoUrl = config.LogoUrl,
-            coverUrl = (string?)null,
-            description = string.Empty
+            coverUrl = config.CoverUrl,
+            description = config.Description ?? string.Empty
+        });
+    }
+
+    /// <summary>Update branding (logo URL, cover URL, description) for this center.</summary>
+    [Tags("Admin — Center Settings")]
+    [HttpPut("{id:guid}/branding")]
+    [RequireRole("Admin", "SuperAdmin")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> UpdateBranding(Guid id, [FromBody] CenterBrandingUpdateDto dto, CancellationToken ct)
+    {
+        await centerService.UpdateBrandingAsync(id, dto, currentUser.UserId, ct);
+        var config = await centerService.GetAdminConfigAsync(id, currentUser.UserId);
+        return Ok(new
+        {
+            centerId = id.ToString(),
+            logoUrl = config.LogoUrl,
+            coverUrl = config.CoverUrl,
+            description = config.Description ?? string.Empty
         });
     }
 

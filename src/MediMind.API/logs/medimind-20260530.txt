@@ -366,3 +366,321 @@ System.InvalidOperationException: A second operation was started on this context
 2026-05-30 17:39:20.155 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.7115 ms
 2026-05-30 17:40:20.219 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.5208 ms
 2026-05-30 17:41:20.147 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.6898 ms
+2026-05-30 17:42:20.165 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.3803 ms
+2026-05-30 17:43:20.732 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.5731 ms
+2026-05-30 17:44:20.162 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.7480 ms
+2026-05-30 17:45:20.206 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 78.9727 ms
+2026-05-30 17:45:21.028 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 593.5128 ms
+2026-05-30 17:45:21.115 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.3438 ms
+2026-05-30 17:46:20.172 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.7366 ms
+2026-05-30 17:47:20.841 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 25.9328 ms
+2026-05-30 17:47:21.277 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3927 ms
+2026-05-30 17:47:21.282 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 401 in 6.1332 ms
+2026-05-30 17:47:21.286 +03:00 [INF] HTTP GET /api/v1/appointments responded 401 in 10.4908 ms
+2026-05-30 17:47:21.416 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-30 17:47:21.416 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-30 17:47:21.559 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 263.5603 ms
+2026-05-30 17:47:21.559 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 263.5580 ms
+2026-05-30 17:47:21.633 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 336.6307 ms
+2026-05-30 17:47:22.137 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 17:47:22.221 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 276.0494 ms
+2026-05-30 17:47:39.100 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 147.6633 ms
+2026-05-30 17:47:43.787 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 128.8043 ms
+2026-05-30 17:47:43.898 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.6909 ms
+2026-05-30 17:47:43.932 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 47.4177 ms
+2026-05-30 17:47:43.935 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 50.2753 ms
+2026-05-30 17:48:00.685 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 68.2640 ms
+2026-05-30 17:48:02.662 +03:00 [INF] HTTP GET /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2 responded 200 in 110.6120 ms
+2026-05-30 17:48:02.728 +03:00 [INF] HTTP GET /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2/pdf responded 200 in 61.1751 ms
+2026-05-30 17:48:21.796 +03:00 [INF] HTTP POST /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2/revoke responded 204 in 220.8028 ms
+2026-05-30 17:48:21.810 +03:00 [INF] HTTP GET /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2 responded 200 in 11.0555 ms
+2026-05-30 17:48:28.057 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 210.0015 ms
+2026-05-30 17:48:28.091 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 25.4496 ms
+2026-05-30 17:48:28.113 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 16.1975 ms
+2026-05-30 17:48:30.448 +03:00 [INF] HTTP GET /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2 responded 200 in 26.5883 ms
+2026-05-30 17:48:30.468 +03:00 [INF] HTTP GET /api/v1/prescriptions/34971e8e-4880-4a62-b92c-9bbf66daaec2/pdf responded 200 in 16.2545 ms
+2026-05-30 17:48:43.937 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.0308 ms
+2026-05-30 17:49:03.336 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 17:49:03.499 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 241.7204 ms
+2026-05-30 17:49:06.981 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/predictions/latest responded 200 in 64.9709 ms
+2026-05-30 17:49:06.982 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/medical-history responded 200 in 66.5599 ms
+2026-05-30 17:49:06.984 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110 responded 200 in 72.2320 ms
+2026-05-30 17:49:07.037 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/health-records responded 200 in 122.2349 ms
+2026-05-30 17:49:44.015 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 48.0674 ms
+2026-05-30 17:50:43.969 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.5509 ms
+2026-05-30 17:51:43.915 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.0720 ms
+2026-05-30 17:52:04.099 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 24.8826 ms
+2026-05-30 17:52:04.700 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.5537 ms
+2026-05-30 17:52:04.903 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 226.5035 ms
+2026-05-30 17:52:04.984 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 309.9850 ms
+2026-05-30 17:53:04.645 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.3135 ms
+2026-05-30 17:54:04.687 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.5237 ms
+2026-05-30 17:55:04.650 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.1861 ms
+2026-05-30 17:56:04.668 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.4189 ms
+2026-05-30 17:56:36.903 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 64.7740 ms
+2026-05-30 17:57:04.629 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.3144 ms
+2026-05-30 17:58:04.740 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.8959 ms
+2026-05-30 17:59:04.652 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.5552 ms
+2026-05-30 18:00:02.618 +03:00 [INF] Running appointment reminder job at "2026-05-30T15:00:02.6138390Z"
+2026-05-30 18:00:02.790 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 18:00:04.996 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 55.3423 ms
+2026-05-30 18:01:05.285 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.2100 ms
+2026-05-30 18:02:04.687 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.3836 ms
+2026-05-30 18:03:04.963 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 123.8045 ms
+2026-05-30 18:03:05.527 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 454.7388 ms
+2026-05-30 18:03:05.558 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.8213 ms
+2026-05-30 18:03:51.305 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 30.8190 ms
+2026-05-30 18:03:52.120 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 30.4280 ms
+2026-05-30 18:03:52.181 +03:00 [INF] HTTP GET /api/v1/appointments responded 401 in 61.1734 ms
+2026-05-30 18:03:52.193 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 401 in 74.0525 ms
+2026-05-30 18:03:52.308 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-30 18:03:52.340 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 151.5668 ms
+2026-05-30 18:03:52.356 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 210.0091 ms
+2026-05-30 18:03:52.429 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-30 18:03:52.429 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 216.8826 ms
+2026-05-30 18:03:52.780 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 17.4794 ms
+2026-05-30 18:04:10.205 +03:00 [INF] HTTP POST /api/v1/auth/doctor/request-otp responded 200 in 140.3972 ms
+2026-05-30 18:04:13.831 +03:00 [INF] HTTP POST /api/v1/auth/doctor/verify-otp responded 200 in 99.2566 ms
+2026-05-30 18:04:13.958 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.4976 ms
+2026-05-30 18:04:14.081 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 151.4189 ms
+2026-05-30 18:04:14.146 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 216.5670 ms
+2026-05-30 18:04:29.127 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 403 in 22.8750 ms
+2026-05-30 18:05:14.195 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.4145 ms
+2026-05-30 18:06:14.167 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.3631 ms
+2026-05-30 18:07:13.987 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.3596 ms
+2026-05-30 18:07:59.732 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 403 in 28.5293 ms
+2026-05-30 18:08:04.543 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 403 in 12.4623 ms
+2026-05-30 18:08:13.974 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.4827 ms
+2026-05-30 18:08:24.260 +03:00 [INF] HTTP GET /api/v1/doctors/me responded 200 in 174.1685 ms
+2026-05-30 18:09:14.083 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.3113 ms
+2026-05-30 18:10:13.974 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.3260 ms
+2026-05-30 18:10:29.576 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-31T00:00:00.0000000Z
+2026-05-30 18:10:29.588 +03:00 [INF] Daily queue generation scheduled for "2026-05-31T06:00:00.0000000" ("2026-05-31T03:00:00.0000000Z" UTC)
+2026-05-30 18:10:29.629 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-30 18:10:29.630 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-30 18:10:45.969 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 200 in 181.3752 ms
+2026-05-30 18:11:14.109 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-30 18:11:14.142 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 118.8119 ms
+2026-05-30 18:12:13.994 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.8273 ms
+2026-05-30 18:13:14.017 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.9103 ms
+2026-05-30 18:14:14.082 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.6102 ms
+2026-05-30 18:15:14.017 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.1283 ms
+2026-05-30 18:15:31.185 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-31T00:00:00.0000000Z
+2026-05-30 18:15:31.198 +03:00 [INF] Daily queue generation scheduled for "2026-05-31T06:00:00.0000000" ("2026-05-31T03:00:00.0000000Z" UTC)
+2026-05-30 18:15:31.237 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-30 18:15:31.237 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-30 18:15:55.522 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 212.4530 ms
+2026-05-30 18:15:56.322 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-30 18:15:56.446 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 291.8935 ms
+2026-05-30 18:15:56.454 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:15:56.462 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 264.9435 ms
+2026-05-30 18:15:56.544 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 389.9609 ms
+2026-05-30 18:16:07.367 +03:00 [INF] ONNX models loaded from /Users/dani/RiderProjects/MediMind/src/MediMind.API/models
+2026-05-30 18:16:07.405 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:16:07.623 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients responded 200 in 409.9130 ms
+2026-05-30 18:16:09.994 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 78.1778 ms
+2026-05-30 18:16:10.025 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 25.8643 ms
+2026-05-30 18:16:10.055 +03:00 [INF] HTTP GET /api/v1/video-consultations responded 200 in 23.3256 ms
+2026-05-30 18:16:11.657 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 16.4572 ms
+2026-05-30 18:16:14.117 +03:00 [INF] HTTP GET /api/v1/doctors/me/schedules responded 200 in 93.0188 ms
+2026-05-30 18:16:20.020 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:16:20.061 +03:00 [INF] HTTP GET /api/v1/doctors/me responded 200 in 64.1724 ms
+2026-05-30 18:16:40.997 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:16:41.095 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 153.9514 ms
+2026-05-30 18:16:42.796 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 119.2743 ms
+2026-05-30 18:16:49.914 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:16:50.005 +03:00 [INF] HTTP GET /api/v1/appointments/c1c1cea9-5239-496f-a478-9847bd9293a7 responded 200 in 131.8477 ms
+2026-05-30 18:16:50.058 +03:00 [INF] HTTP GET /api/v1/appointments/c1c1cea9-5239-496f-a478-9847bd9293a7/notes responded 204 in 44.6398 ms
+2026-05-30 18:16:56.189 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.8490 ms
+2026-05-30 18:16:58.308 +03:00 [INF] HTTP GET /api/v1/appointments/94b9afb6-cc25-42a3-8163-7aa56a994c3c responded 200 in 50.7820 ms
+2026-05-30 18:16:58.349 +03:00 [INF] HTTP GET /api/v1/appointments/94b9afb6-cc25-42a3-8163-7aa56a994c3c/notes responded 204 in 32.2647 ms
+2026-05-30 18:17:11.525 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/predictions/latest responded 200 in 119.5816 ms
+2026-05-30 18:17:11.534 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/health-records responded 200 in 128.3089 ms
+2026-05-30 18:17:11.545 +03:00 [INF] HTTP GET /api/v1/doctors/me/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110 responded 200 in 139.3071 ms
+2026-05-30 18:17:11.547 +03:00 [INF] HTTP GET /api/v1/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110/medical-history responded 200 in 141.3552 ms
+2026-05-30 18:17:16.898 +03:00 [INF] HTTP GET /api/v1/prescriptions responded 200 in 33.9896 ms
+2026-05-30 18:17:54.116 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 78.4006 ms
+2026-05-30 18:17:56.159 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 23.4404 ms
+2026-05-30 18:18:17.643 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 437.0601 ms
+2026-05-30 18:18:17.753 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.3500 ms
+2026-05-30 18:18:17.777 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:18:17.852 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:18:17.884 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 139.8286 ms
+2026-05-30 18:18:17.992 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:18:18.021 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/branding responded 200 in 47.2894 ms
+2026-05-30 18:18:18.024 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/config responded 200 in 49.7408 ms
+2026-05-30 18:18:24.141 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 200 in 41.9957 ms
+2026-05-30 18:19:18.401 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 91.9246 ms
+2026-05-30 18:19:18.486 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 177.4490 ms
+2026-05-30 18:20:17.840 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 63.9861 ms
+2026-05-30 18:20:17.859 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 83.1527 ms
+2026-05-30 18:21:17.811 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.3618 ms
+2026-05-30 18:21:17.841 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 57.2960 ms
+2026-05-30 18:22:17.793 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.2265 ms
+2026-05-30 18:22:17.816 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 50.7563 ms
+2026-05-30 18:22:42.443 +03:00 [INF] HTTP GET /api/v1/api/v1/system/version responded 404 in 33.6043 ms
+2026-05-30 18:22:43.060 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.5458 ms
+2026-05-30 18:22:43.095 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 72.2100 ms
+2026-05-30 18:22:43.232 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/branding responded 200 in 35.6131 ms
+2026-05-30 18:22:43.236 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/config responded 200 in 37.9318 ms
+2026-05-30 18:22:55.357 +03:00 [INF] HTTP GET /api/v1/queue/center/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 154.9800 ms
+2026-05-30 18:22:59.859 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:22:59.930 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 275.5103 ms
+2026-05-30 18:23:00.699 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:23:00.800 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 123.3005 ms
+2026-05-30 18:23:13.829 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 116.4258 ms
+2026-05-30 18:23:17.484 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/roster responded 200 in 37.3305 ms
+2026-05-30 18:23:17.541 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/invitations responded 200 in 50.3383 ms
+2026-05-30 18:23:43.007 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.6023 ms
+2026-05-30 18:23:43.055 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 84.5203 ms
+2026-05-30 18:24:43.053 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.9893 ms
+2026-05-30 18:24:43.095 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 67.0717 ms
+2026-05-30 18:25:43.097 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 119.1619 ms
+2026-05-30 18:25:43.129 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 150.1738 ms
+2026-05-30 18:26:43.004 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.8837 ms
+2026-05-30 18:26:43.044 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 69.5798 ms
+2026-05-30 18:27:43.020 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.4691 ms
+2026-05-30 18:27:43.070 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 78.4218 ms
+2026-05-30 18:28:43.006 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.1247 ms
+2026-05-30 18:28:43.036 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 52.2296 ms
+2026-05-30 18:29:43.038 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.1830 ms
+2026-05-30 18:29:43.077 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 60.2518 ms
+2026-05-30 18:29:57.261 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 49.8319 ms
+2026-05-30 18:29:57.757 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 443.7585 ms
+2026-05-30 18:29:57.862 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.9783 ms
+2026-05-30 18:30:01.474 +03:00 [INF] Running appointment reminder job at "2026-05-30T15:30:01.4721650Z"
+2026-05-30 18:30:01.479 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 18:30:33.488 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 58.8283 ms
+2026-05-30 18:30:37.980 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 82.0479 ms
+2026-05-30 18:30:42.965 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.3196 ms
+2026-05-30 18:30:42.997 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 61.4031 ms
+2026-05-30 18:30:45.064 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 147.2804 ms
+2026-05-30 18:30:51.906 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 17.6142 ms
+2026-05-30 18:30:59.441 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 50.6616 ms
+2026-05-30 18:31:08.828 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 45.0198 ms
+2026-05-30 18:31:27.301 +03:00 [INF] HTTP GET /api/v1/doctor-schedules/0f45b2ca-85cf-42a9-b17e-380d43041ac3/8bb8f424-ced1-4eca-9cdd-437c5b212adf responded 200 in 201.1258 ms
+2026-05-30 18:31:27.473 +03:00 [INF] HTTP GET /api/v1/doctor-schedules/0f45b2ca-85cf-42a9-b17e-380d43041ac3/8bb8f424-ced1-4eca-9cdd-437c5b212adf/exceptions responded 200 in 64.9574 ms
+2026-05-30 18:31:37.276 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/roster responded 200 in 65.7367 ms
+2026-05-30 18:31:37.291 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/invitations responded 200 in 8.7202 ms
+2026-05-30 18:31:38.539 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/roster responded 200 in 55.1745 ms
+2026-05-30 18:31:38.546 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/invitations responded 200 in 3.1162 ms
+2026-05-30 18:31:41.770 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/patients responded 200 in 54.6277 ms
+2026-05-30 18:31:42.962 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.9150 ms
+2026-05-30 18:31:42.994 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 63.0608 ms
+2026-05-30 18:31:44.296 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110 responded 200 in 111.3658 ms
+2026-05-30 18:32:03.983 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 135.8488 ms
+2026-05-30 18:32:11.038 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:32:11.215 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/analytics responded 200 in 265.7792 ms
+2026-05-30 18:32:18.373 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/revenue responded 200 in 80.4678 ms
+2026-05-30 18:32:20.060 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/roster responded 200 in 6.8682 ms
+2026-05-30 18:32:20.065 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/doctors/invitations responded 200 in 2.3233 ms
+2026-05-30 18:32:25.822 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/admins responded 200 in 42.1098 ms
+2026-05-30 18:32:29.762 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/audit-log responded 200 in 96.8264 ms
+2026-05-30 18:32:36.862 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/config responded 200 in 53.1146 ms
+2026-05-30 18:32:42.811 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/branding responded 200 in 45.8811 ms
+2026-05-30 18:32:42.937 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.0241 ms
+2026-05-30 18:32:42.959 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 27.5653 ms
+2026-05-30 18:33:42.987 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.7263 ms
+2026-05-30 18:33:42.987 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 401 in 18.0025 ms
+2026-05-30 18:33:43.061 +03:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-05-30 18:33:43.067 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 55.8143 ms
+2026-05-30 18:33:43.081 +03:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 71.5797 ms
+2026-05-30 18:33:43.112 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/8bb8f424-ced1-4eca-9cdd-437c5b212adf/dashboard/today responded 200 in 21.5459 ms
+2026-05-30 18:34:28.886 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 188.7723 ms
+2026-05-30 18:34:29.026 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.9467 ms
+2026-05-30 18:34:29.065 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 57.5509 ms
+2026-05-30 18:34:29.104 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 17.0724 ms
+2026-05-30 18:34:29.105 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 15.6877 ms
+2026-05-30 18:34:36.669 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 35.4406 ms
+2026-05-30 18:34:44.786 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 30.3712 ms
+2026-05-30 18:34:48.678 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 50.5624 ms
+2026-05-30 18:34:49.768 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/working-hours responded 200 in 66.5733 ms
+2026-05-30 18:34:52.861 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/booking-rules responded 200 in 22.2158 ms
+2026-05-30 18:34:58.261 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 41.9534 ms
+2026-05-30 18:35:29.024 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.6526 ms
+2026-05-30 18:35:29.047 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 45.6318 ms
+2026-05-30 18:35:51.856 +03:00 [INF] HTTP POST /api/v1/auth/admin/change-password responded 404 in 4.7070 ms
+2026-05-30 18:36:29.110 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 56.6250 ms
+2026-05-30 18:36:29.158 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 102.9732 ms
+2026-05-30 18:37:29.291 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 59.8893 ms
+2026-05-30 18:37:29.340 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 95.1524 ms
+2026-05-30 18:38:20.380 +03:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-05-31T00:00:00.0000000Z
+2026-05-30 18:38:20.393 +03:00 [INF] Daily queue generation scheduled for "2026-05-31T06:00:00.0000000" ("2026-05-31T03:00:00.0000000Z" UTC)
+2026-05-30 18:38:20.431 +03:00 [INF] MediMind API listening on http://0.0.0.0:5288
+2026-05-30 18:38:20.432 +03:00 [INF] Scalar API reference available at http://0.0.0.0:5288/scalar/v1
+2026-05-30 18:38:29.220 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:38:29.238 +03:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2026-05-30 18:38:29.271 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 154.1467 ms
+2026-05-30 18:38:29.397 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:38:29.438 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 321.4546 ms
+2026-05-30 18:38:47.127 +03:00 [INF] HTTP POST /api/v1/auth/admin/change-password responded 204 in 422.2191 ms
+2026-05-30 18:39:10.061 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 60.1515 ms
+2026-05-30 18:39:29.020 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 15.4531 ms
+2026-05-30 18:39:33.698 +03:00 [WRN] DomainException on POST /api/v1/auth/admin/login: Invalid credentials.
+2026-05-30 18:39:33.714 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 400 in 309.7058 ms
+2026-05-30 18:39:39.868 +03:00 [INF] HTTP POST /api/v1/auth/admin/login responded 200 in 232.6841 ms
+2026-05-30 18:39:39.966 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.1774 ms
+2026-05-30 18:39:40.001 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 35.3598 ms
+2026-05-30 18:39:40.052 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:39:40.079 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/branding responded 200 in 54.2220 ms
+2026-05-30 18:39:40.082 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/config responded 200 in 57.6418 ms
+2026-05-30 18:39:48.150 +03:00 [INF] HTTP GET /api/v1/queue/center/96eec7f8-cb5a-4358-8ded-eb76b878649f responded 200 in 64.9010 ms
+2026-05-30 18:39:50.787 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:39:50.944 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 208.1165 ms
+2026-05-30 18:39:52.691 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:39:52.757 +03:00 [INF] HTTP GET /api/v1/appointments/8498b9c9-90fc-454e-b5ed-02d750f43372 responded 200 in 83.6569 ms
+2026-05-30 18:40:11.435 +03:00 [INF] HTTP GET /api/v1/appointments/efa0a2fa-f4bb-49bb-a7ad-fd58732e6af3 responded 200 in 84.8109 ms
+2026-05-30 18:40:17.622 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 61.1875 ms
+2026-05-30 18:40:19.452 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:40:19.514 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 85.4233 ms
+2026-05-30 18:40:31.525 +03:00 [INF] HTTP GET /api/v1/appointments responded 200 in 36.3489 ms
+2026-05-30 18:40:39.069 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/roster responded 200 in 66.7760 ms
+2026-05-30 18:40:39.103 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/doctors/invitations responded 200 in 29.9119 ms
+2026-05-30 18:40:39.962 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.0020 ms
+2026-05-30 18:40:39.997 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/dashboard/today responded 200 in 40.9762 ms
+2026-05-30 18:40:49.225 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/patients responded 200 in 68.0922 ms
+2026-05-30 18:40:50.990 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/patients/9de98a66-b1ea-4a7a-99c1-7e721ebd8110 responded 200 in 74.6981 ms
+2026-05-30 18:40:55.971 +03:00 [INF] HTTP GET /api/v1/payments responded 200 in 60.3193 ms
+2026-05-30 18:40:57.982 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2026-05-30 18:40:58.142 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/analytics responded 200 in 242.8731 ms
+2026-05-30 18:41:05.422 +03:00 [INF] HTTP GET /api/v1/healthcare-centers/96eec7f8-cb5a-4358-8ded-eb76b878649f/analytics responded 200 in 154.3476 ms
+2026-05-30 18:41:32.720 +03:00 [INF] HTTP GET /api/v1/notifications/history responded 200 in 43.8614 ms
+2026-05-30 18:41:38.298 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 37.7260 ms
+2026-05-30 18:41:39.959 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 2.7595 ms
+2026-05-30 18:42:08.128 +03:00 [INF] HTTP POST /api/v1/auth/superadmin/login responded 200 in 408.1161 ms
+2026-05-30 18:42:08.516 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 224.3706 ms
+2026-05-30 18:42:08.788 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 493.2759 ms
+2026-05-30 18:42:18.943 +03:00 [INF] HTTP GET /api/v1/super-admin/profile responded 200 in 30.5956 ms
+2026-05-30 18:43:08.309 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.2795 ms
+2026-05-30 18:43:11.727 +03:00 [INF] HTTP GET /api/v1/super-admin/settings responded 200 in 41.6805 ms
+2026-05-30 18:43:18.407 +03:00 [INF] HTTP GET /api/v1/super-admin/audit-log responded 200 in 61.3251 ms
+2026-05-30 18:43:26.228 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 200 in 182.3269 ms
+2026-05-30 18:43:29.793 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 200 in 77.5518 ms
+2026-05-30 18:43:31.462 +03:00 [INF] HTTP GET /api/v1/super-admin/analytics responded 200 in 17.9266 ms
+2026-05-30 18:43:33.393 +03:00 [INF] HTTP GET /api/v1/super-admin/subscriptions responded 200 in 49.1078 ms
+2026-05-30 18:43:39.990 +03:00 [INF] HTTP GET /api/v1/super-admin/users responded 200 in 57.7213 ms
+2026-05-30 18:43:54.580 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 59.2608 ms
+2026-05-30 18:44:00.832 +03:00 [INF] HTTP GET /api/v1/super-admin/doctors responded 200 in 52.6443 ms
+2026-05-30 18:44:05.367 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 48.8248 ms
+2026-05-30 18:44:08.289 +03:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.2687 ms
+2026-05-30 18:44:29.399 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 62.9979 ms
+2026-05-30 18:44:31.101 +03:00 [INF] HTTP GET /api/v1/super-admin/centers responded 200 in 25.9354 ms
+2026-05-30 18:44:58.580 +03:00 [INF] HTTP POST /api/v1/auth/logout responded 204 in 47.1285 ms
+2026-05-30 19:26:30.413 +03:00 [INF] Running appointment reminder job at "2026-05-30T16:26:30.4137450Z"
+2026-05-30 19:26:30.440 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 20:15:30.808 +03:00 [INF] Running appointment reminder job at "2026-05-30T17:15:30.8084180Z"
+2026-05-30 20:15:30.814 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 20:46:53.410 +03:00 [INF] Running appointment reminder job at "2026-05-30T17:46:53.4097720Z"
+2026-05-30 20:46:53.440 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 21:19:55.594 +03:00 [INF] Running appointment reminder job at "2026-05-30T18:19:55.5938670Z"
+2026-05-30 21:19:55.602 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 21:47:51.189 +03:00 [INF] Running appointment reminder job at "2026-05-30T18:47:51.1895930Z"
+2026-05-30 21:47:51.257 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 22:05:37.295 +03:00 [INF] Running appointment reminder job at "2026-05-30T19:05:37.2949150Z"
+2026-05-30 22:05:37.304 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 22:48:48.741 +03:00 [INF] Running appointment reminder job at "2026-05-30T19:48:48.7409310Z"
+2026-05-30 22:48:48.804 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 23:05:15.839 +03:00 [INF] Running appointment reminder job at "2026-05-30T20:05:15.8398190Z"
+2026-05-30 23:05:15.845 +03:00 [INF] Appointment reminder job completed.
+2026-05-30 23:49:47.112 +03:00 [INF] Running appointment reminder job at "2026-05-30T20:49:47.1120120Z"
+2026-05-30 23:49:47.149 +03:00 [INF] Appointment reminder job completed.

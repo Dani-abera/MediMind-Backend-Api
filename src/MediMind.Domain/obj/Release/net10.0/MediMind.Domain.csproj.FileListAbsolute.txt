@@ -1,0 +1,12 @@
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/bin/Release/net10.0/MediMind.Domain.deps.json
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/bin/Release/net10.0/MediMind.Domain.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/bin/Release/net10.0/MediMind.Domain.pdb
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.AssemblyInfoInputs.cache
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.AssemblyInfo.cs
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.csproj.CoreCompileInputs.cache
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.sourcelink.json
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/refint/MediMind.Domain.dll
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/MediMind.Domain.pdb
+/Users/dani/RiderProjects/MediMind/src/MediMind.Domain/obj/Release/net10.0/ref/MediMind.Domain.dll

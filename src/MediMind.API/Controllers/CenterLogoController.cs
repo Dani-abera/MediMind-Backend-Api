@@ -52,6 +52,38 @@ public class CenterLogoController(IMediator mediator, ICurrentUser currentUser) 
         return Ok(result);
     }
 
+    /// <summary>
+    /// Upload a center image by type ("logo" or "cover") — used by the admin portal branding page.
+    /// Both types are stored as the center's profile image URL (single storage field).
+    /// </summary>
+    [Tags("Admin — Center")]
+    [HttpPost("{centerId:guid}/upload-image")]
+    [Authorize(Policy = "AdminOrSuperAdmin")]
+    [Consumes("multipart/form-data")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [RequestSizeLimit(ProfileImageRules.MaxBytes)]
+    public async Task<IActionResult> UploadImage(
+        Guid centerId,
+        [FromForm] IFormFile file,
+        [FromForm] string imageType,
+        CancellationToken ct)
+    {
+        if (file is null || file.Length == 0)
+            return BadRequest(new { message = "Image file is required." });
+
+        if (currentUser.TenantId.HasValue && currentUser.TenantId.Value != centerId && currentUser.UserType != "SuperAdmin")
+            return Forbid();
+
+        await using var stream = file.OpenReadStream();
+        var command = new UploadHealthcareCenterProfileImageCommand(
+            centerId, stream, file.FileName,
+            file.ContentType ?? "application/octet-stream", file.Length);
+        var result = await mediator.Send(command, ct);
+        return Ok(new { url = result.ProfileImageUrl });
+    }
+
     /// <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
     [Tags("Admin — Center")]
     [HttpDelete("{centerId:guid}/logo")]

@@ -46,7 +46,7 @@ public class SuperAdminSeeder(
             "+251900000000",
             "System SuperAdmin",
             new DateOnly(1990, 1, 1),
-            Gender.Other);
+            Gender.NotMentioned);
 
         superAdmin.SetPasswordHash(passwordService.HashPassword(password));
         superAdmin.Activate();

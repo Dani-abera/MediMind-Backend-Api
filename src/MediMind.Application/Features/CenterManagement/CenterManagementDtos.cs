@@ -105,7 +105,8 @@ public record CenterResponseDto(
     bool IsOpenNow,
     double? Latitude = null,
     double? Longitude = null,
-    string? Warning = null);
+    string? Warning = null,
+    string? LogoUrl = null);
 
 // ─── Admin settings page DTOs (portal-facing field names) ────────────────────
 
@@ -122,7 +123,14 @@ public record AdminCenterConfigDto(
     double? Longitude,
     List<string> Services,
     List<string> Specializations,
-    string? LogoUrl);
+    string? LogoUrl,
+    string? CoverUrl = null,
+    string? Description = null);
+
+public record CenterBrandingUpdateDto(
+    string? LogoUrl,
+    string? CoverUrl,
+    string? Description);
 
 public record AdminCenterConfigUpdateDto(
     string Name,
@@ -216,7 +224,8 @@ public record DoctorResponseDto(
     List<string> LanguagesSpoken,
     decimal? ConsultationFee,
     DateTime? NextAvailableSlot,
-    List<DoctorCenterInfoDto> WorkingCenters);
+    List<DoctorCenterInfoDto> WorkingCenters,
+    string? AvatarUrl = null);
 
 public record AnalyticsPeriodDto(DateOnly StartDate, DateOnly EndDate);
 public record PatientVolumePointDto(DateOnly Date, int Count);

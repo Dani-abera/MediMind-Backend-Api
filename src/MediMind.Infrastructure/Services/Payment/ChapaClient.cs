@@ -1,9 +1,10 @@
 using System.Net.Http.Json;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using MediMind.Application.Features.Payments;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace MediMind.Infrastructure.Services.Payment;
@@ -18,45 +19,71 @@ public sealed class ChapaOptions
     public string ReturnUrl { get; set; } = string.Empty;
 }
 
-public sealed class ChapaClient(HttpClient httpClient, IOptions<ChapaOptions> options) : IChapaClient
+public sealed class ChapaClient(
+    HttpClient httpClient,
+    IOptions<ChapaOptions> options,
+    ILogger<ChapaClient> logger) : IChapaClient
 {
     private readonly ChapaOptions _options = options.Value;
+    private static readonly JsonSerializerOptions _jsonOpts = new() { PropertyNameCaseInsensitive = true };
 
     public async Task<ChapaInitializeResponse?> InitializePaymentAsync(ChapaInitializeRequest req, CancellationToken ct = default)
     {
         using var request = new HttpRequestMessage(HttpMethod.Post, "transaction/initialize");
-        request.Headers.Add("Authorization", $"Chapa-Auth {_options.SecretKey}");
+        request.Headers.Add("Authorization", $"Bearer {_options.SecretKey}");
         request.Content = JsonContent.Create(new ChapaInitializeRequestPayload(
-            req.Amount,
+            req.Amount.ToString("F2", System.Globalization.CultureInfo.InvariantCulture),
             req.Currency,
             req.Email,
             req.FirstName,
-            req.LastName,
+            string.IsNullOrWhiteSpace(req.LastName) ? "-" : req.LastName,
             req.TxRef,
             _options.CallbackUrl,
             _options.ReturnUrl,
             req.Customization));
 
         using var response = await httpClient.SendAsync(request, ct);
-        var body = await response.Content.ReadFromJsonAsync<ChapaInitializeResponseApi>(cancellationToken: ct);
-        if (body is null)
-            return null;
+        var rawBody = await response.Content.ReadAsStringAsync(ct);
 
-        return new ChapaInitializeResponse(
-            body.Message ?? "Unknown response",
-            body.Status ?? "failed",
-            new ChapaInitializeData(body.Data?.CheckoutUrl ?? string.Empty));
+        ChapaInitializeResponseApi? body = null;
+        try { body = JsonSerializer.Deserialize<ChapaInitializeResponseApi>(rawBody, _jsonOpts); }
+        catch (JsonException) { /* non-JSON response handled below */ }
+
+        if (body is null || !string.Equals(body.Status, "success", StringComparison.OrdinalIgnoreCase))
+        {
+            logger.LogWarning(
+                "Chapa initialize failed. HTTP {StatusCode} | Chapa status={ChapaStatus} | message={Message} | body={Body}",
+                (int)response.StatusCode, body?.Status, body?.Message, rawBody);
+            return null;
+        }
+
+        var checkoutUrl = body.Data?.CheckoutUrl;
+        if (string.IsNullOrEmpty(checkoutUrl))
+        {
+            logger.LogWarning("Chapa returned success but checkout_url is empty. Body={Body}", rawBody);
+            return null;
+        }
+
+        return new ChapaInitializeResponse(body.Message ?? "Hosted Link", body.Status!, new ChapaInitializeData(checkoutUrl));
     }
 
     public async Task<ChapaVerifyResponse?> VerifyPaymentAsync(string txRef, CancellationToken ct = default)
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, $"transaction/verify/{txRef}");
-        request.Headers.Add("Authorization", $"Chapa-Auth {_options.SecretKey}");
+        request.Headers.Add("Authorization", $"Bearer {_options.SecretKey}");
 
         using var response = await httpClient.SendAsync(request, ct);
-        var body = await response.Content.ReadFromJsonAsync<ChapaVerifyResponseApi>(cancellationToken: ct);
+        var rawBody = await response.Content.ReadAsStringAsync(ct);
+
+        ChapaVerifyResponseApi? body = null;
+        try { body = JsonSerializer.Deserialize<ChapaVerifyResponseApi>(rawBody, _jsonOpts); }
+        catch (JsonException) { }
+
         if (body is null || body.Data is null)
+        {
+            logger.LogWarning("Chapa verify returned no data for txRef={TxRef}. Body={Body}", txRef, rawBody);
             return null;
+        }
 
         return new ChapaVerifyResponse(
             body.Message ?? "Unknown response",
@@ -71,7 +98,7 @@ public sealed class ChapaClient(HttpClient httpClient, IOptions<ChapaOptions> op
     }
 
     private sealed record ChapaInitializeRequestPayload(
-        [property: JsonPropertyName("amount")] decimal Amount,
+        [property: JsonPropertyName("amount")] string Amount,
         [property: JsonPropertyName("currency")] string Currency,
         [property: JsonPropertyName("email")] string Email,
         [property: JsonPropertyName("first_name")] string FirstName,

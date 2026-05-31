@@ -184,6 +184,12 @@
         <member name="M:MediMind.API.Controllers.CenterLogoController.UploadLogo(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
             <summary>Upload or replace a healthcare center's logo (center admin or super-admin).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.CenterLogoController.UploadImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Upload a center image by type ("logo" or "cover") — used by the admin portal branding page.
+            Both types are stored as the center's profile image URL (single storage field).
+            </summary>
+        </member>
         <member name="M:MediMind.API.Controllers.CenterLogoController.DeleteLogo(System.Guid,System.Threading.CancellationToken)">
             <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
         </member>
@@ -251,6 +257,9 @@
         </member>
         <member name="M:MediMind.API.Controllers.AuthController.AdminCreateDoctor(MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
             <summary>Admin creates a doctor account linked to their healthcare center (FR-006).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AdminChangePassword(MediMind.Application.Features.Auth.ChangePasswordRequest,System.Threading.CancellationToken)">
+            <summary>Change the authenticated admin's password.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.AuthController.AcceptDoctorInvitation(MediMind.Application.Features.Auth.AcceptInvitationRequest,System.Threading.CancellationToken)">
             <summary>Accept a doctor invitation and create the doctor account (FR-020).</summary>
@@ -386,7 +395,10 @@
             <summary>Update general center info (name, phone, services, etc.) (FR-030).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBranding(System.Guid,System.Threading.CancellationToken)">
-            <summary>Get branding info (logo URL, description) for this center.</summary>
+            <summary>Get branding info (logo URL, cover URL, description) for this center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateBranding(System.Guid,MediMind.Application.Features.CenterManagement.CenterBrandingUpdateDto,System.Threading.CancellationToken)">
+            <summary>Update branding (logo URL, cover URL, description) for this center.</summary>
         </member>
         <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBookingRules(System.Guid,System.Threading.CancellationToken)">
             <summary>Get booking rules for this center (FR-030).</summary>
@@ -517,7 +529,7 @@
             <summary>Deactivate an FCM device token (FR-070).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.NotificationsController.History(System.Threading.CancellationToken)">
-            <summary>List the last 50 notification log entries for the signed-in patient (FR-071).</summary>
+            <summary>List the last 50 notification log entries for the signed-in user (FR-071).</summary>
         </member>
         <member name="M:MediMind.API.Controllers.NotificationsController.TestPush(MediMind.API.Controllers.TestPushRequest,System.Threading.CancellationToken)">
             <summary>
@@ -649,6 +661,9 @@
         <member name="M:MediMind.API.Controllers.PaymentsController.Sync(System.Guid,System.Threading.CancellationToken)">
             <summary>Sync payment status with Chapa — call this after completing a Chapa checkout if status has not updated (FR-094).</summary>
         </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.VerifyByTxRef(System.String,System.Threading.CancellationToken)">
+            <summary>Verify payment status by Chapa tx_ref — for polling after checkout redirect (FR-094).</summary>
+        </member>
         <member name="M:MediMind.API.Controllers.PaymentsController.History(System.Int32,System.Int32,System.Threading.CancellationToken)">
             <summary>List payment history for the current user or admin's center (FR-092).</summary>
         </member>
@@ -733,15 +748,6 @@
         </member>
         <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteMine(System.Threading.CancellationToken)">
             <summary>Remove the signed-in user's profile image (FR-003).</summary>
-        </member>
-        <member name="M:MediMind.API.Controllers.ProfileImagesController.GetCenterImage(System.Guid,System.Threading.CancellationToken)">
-            <summary>Get a healthcare center's logo URL (public) (FR-031).</summary>
-        </member>
-        <member name="M:MediMind.API.Controllers.ProfileImagesController.UploadCenterImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
-            <summary>Upload or replace a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
-        </member>
-        <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteCenterImage(System.Guid,System.Threading.CancellationToken)">
-            <summary>Remove a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
         </member>
         <member name="T:MediMind.API.Controllers.QueueController">
             <summary>

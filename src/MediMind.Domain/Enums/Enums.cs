@@ -22,7 +22,7 @@ public enum Gender
 {
     Male,
     Female,
-    Other
+    NotMentioned
 }
 
 // ─── Healthcare Center ────────────────────────────────────────────────────────

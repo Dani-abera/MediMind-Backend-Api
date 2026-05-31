@@ -67,8 +67,8 @@ public class UserRepository(MediMindDbContext context)
 
         if (!string.IsNullOrWhiteSpace(query.Search))
         {
-            var s = query.Search.ToLower();
-            q = q.Where(u => u.FullName.ToLower().Contains(s) || u.Email.ToLower().Contains(s) || u.PhoneNumber.Contains(s));
+            var s = query.Search;
+            q = q.Where(u => EF.Functions.ILike(u.FullName, $"%{s}%") || EF.Functions.ILike(u.Email, $"%{s}%") || u.PhoneNumber.Contains(s));
         }
         if (query.UserType.HasValue)
             q = q.Where(u => u.UserType == query.UserType.Value);
@@ -150,7 +150,7 @@ public class DoctorRepository(MediMindDbContext context)
     public async Task<IReadOnlyList<Doctor>> GetBySpecializationAsync(
         string specialization, CancellationToken ct = default) =>
         await Db.Doctors
-            .Where(d => d.Specialization.ToLower().Contains(specialization.ToLower()) &&
+            .Where(d => EF.Functions.ILike(d.Specialization, $"%{specialization}%") &&
                         d.Status == UserStatus.Active)
             .ToListAsync(ct);
 
@@ -164,9 +164,9 @@ public class DoctorRepository(MediMindDbContext context)
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Name))
-            q = q.Where(d => d.FullName.ToLower().Contains(query.Name.ToLower()));
+            q = q.Where(d => EF.Functions.ILike(d.FullName, $"%{query.Name}%"));
         if (!string.IsNullOrWhiteSpace(query.Specialization))
-            q = q.Where(d => d.Specialization.ToLower().Contains(query.Specialization.ToLower()));
+            q = q.Where(d => EF.Functions.ILike(d.Specialization, $"%{query.Specialization}%"));
         if (query.LicenseVerified.HasValue)
             q = q.Where(d => d.LicenseVerified == query.LicenseVerified.Value);
 
@@ -194,9 +194,9 @@ public class DoctorRepository(MediMindDbContext context)
         if (search.CenterId.HasValue)
             query = query.Where(d => d.DoctorHealthcareCenters.Any(x => x.CenterId == search.CenterId.Value && x.IsActive));
         if (!string.IsNullOrWhiteSpace(search.Specialization))
-            query = query.Where(d => d.Specialization.ToLower().Contains(search.Specialization.ToLower()));
+            query = query.Where(d => EF.Functions.ILike(d.Specialization, $"%{search.Specialization}%"));
         if (!string.IsNullOrWhiteSpace(search.Name))
-            query = query.Where(d => d.FullName.ToLower().Contains(search.Name.ToLower()));
+            query = query.Where(d => EF.Functions.ILike(d.FullName, $"%{search.Name}%"));
 
         var page = Math.Max(search.Page, 1);
         var pageSize = Math.Clamp(search.PageSize, 1, 100);
@@ -242,11 +242,11 @@ public class HealthcareCenterRepository(MediMindDbContext context)
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(search.City))
-            query = query.Where(c => c.City.ToLower().Contains(search.City.ToLower()));
+            query = query.Where(c => EF.Functions.ILike(c.City, $"%{search.City}%"));
         if (!string.IsNullOrWhiteSpace(search.Specialization))
-            query = query.Where(c => c.Specializations.Any(s => s.ToLower().Contains(search.Specialization.ToLower())));
+            query = query.Where(c => c.Specializations.Any(s => EF.Functions.ILike(s, $"%{search.Specialization}%")));
         if (!string.IsNullOrWhiteSpace(search.Name))
-            query = query.Where(c => c.CenterName.ToLower().Contains(search.Name.ToLower()));
+            query = query.Where(c => EF.Functions.ILike(c.CenterName, $"%{search.Name}%"));
 
         var page = Math.Max(search.Page, 1);
         var pageSize = Math.Clamp(search.PageSize, 1, 100);
@@ -351,9 +351,9 @@ public class HealthcareCenterRepository(MediMindDbContext context)
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(query.Name))
-            q = q.Where(c => c.CenterName.ToLower().Contains(query.Name.ToLower()));
+            q = q.Where(c => EF.Functions.ILike(c.CenterName, $"%{query.Name}%"));
         if (!string.IsNullOrWhiteSpace(query.City))
-            q = q.Where(c => c.City.ToLower().Contains(query.City.ToLower()));
+            q = q.Where(c => EF.Functions.ILike(c.City, $"%{query.City}%"));
         if (query.Status.HasValue)
             q = q.Where(c => c.SubscriptionStatus == query.Status.Value);
 

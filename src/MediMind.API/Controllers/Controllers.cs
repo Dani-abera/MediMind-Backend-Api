@@ -210,6 +210,18 @@ public class AuthController(
         return CreatedAtAction(nameof(AdminCreateDoctor), result);
     }
 
+    /// <summary>Change the authenticated admin's password.</summary>
+    [Tags("Authentication")]
+    [HttpPost("admin/change-password")]
+    [Authorize(Policy = "AdminOnly")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> AdminChangePassword([FromBody] Application.Features.Auth.ChangePasswordRequest request, CancellationToken ct)
+    {
+        await adminAuth.ChangePasswordAsync(request, ct);
+        return NoContent();
+    }
+
     /// <summary>Accept a doctor invitation and create the doctor account (FR-020).</summary>
     [Tags("Admin — Doctors")]
     [HttpPost("doctors/accept-invitation")]
@@ -259,8 +271,10 @@ public class AuthController(
 
     private static Domain.Enums.Gender ParseGender(string value)
     {
+        if (value.Equals("Not Mentioned", StringComparison.OrdinalIgnoreCase))
+            return Domain.Enums.Gender.NotMentioned;
         if (Enum.TryParse<Domain.Enums.Gender>(value, ignoreCase: true, out var g)) return g;
-        throw new Domain.Exceptions.DomainException("Invalid gender. Use Male, Female, or Other.");
+        throw new Domain.Exceptions.DomainException("Invalid gender. Use Male, Female, or Not Mentioned.");
     }
 
     private static Domain.Enums.Gender? ParseGenderNullable(string? value) =>

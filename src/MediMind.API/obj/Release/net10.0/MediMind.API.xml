@@ -1,0 +1,1432 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MediMind.API</name>
+    </assembly>
+    <members>
+        <member name="T:MediMind.API.Attributes.RequireRoleAttribute">
+            <summary>
+            Declarative role requirement attribute that maps to JWT role claims.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Authorization.CenterAccessRequirement">
+            <summary>
+            Verifies the center_id JWT claim matches the route {id} parameter.
+            Inject as a policy requirement or call explicitly in service layer.
+            This handler provides the infrastructure — center validation is also
+            enforced in service layer via EnsureAdminBelongsToCenter.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Authorization.DoctorPatientAccessRequirement">
+            <summary>
+            FR-023: Doctor can access patient data only when there is an appointment row
+            with (DoctorId = me, PatientId = target) and Status IN (Confirmed, InProgress, Completed).
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AdminController">
+            <summary>
+            Admin-scoped operations: account management, patient directory,
+            today's dashboard, revenue, bulk operations, audit log.
+            All endpoints verify center_id claim == route {id} via service layer.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.#ctor(MediMind.Application.Features.Admin.IAdminManagementService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Application.Features.Admin.IPatientDirectoryService,MediMind.Application.Features.Admin.ITodayDashboardService,MediMind.Application.Features.Admin.IRevenueService,MediMind.Application.Features.Admin.IAuditLogService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Admin-scoped operations: account management, patient directory,
+            today's dashboard, revenue, bulk operations, audit log.
+            All endpoints verify center_id claim == route {id} via service layer.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.ListAdmins(System.Guid,System.Threading.CancellationToken)">
+            <summary>List all admin accounts at this center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.InviteAdmin(System.Guid,MediMind.Application.Features.Admin.InviteAdminDto,System.Threading.CancellationToken)">
+            <summary>Invite another admin to this center. Sends invitation email with registration link.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.RemoveAdmin(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove an admin from this center (cannot remove self or last admin).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.ListPatients(System.Guid,System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List patients enrolled at this center (have ≥1 appointment here).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.GetPatient(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Get patient records for an enrolled patient (FR-023).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.TodayDashboard(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get today's operational dashboard snapshot for this center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.Revenue(System.Guid,System.DateOnly,System.DateOnly,System.String,System.Threading.CancellationToken)">
+            <summary>Aggregated revenue report with payment status breakdown.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.RevenueExportCsv(System.Guid,System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Export revenue as CSV: Date, AppointmentId, DoctorName, PatientName, Amount, PaymentMethod, Status.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.AuditLog(System.Guid,System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Query the append-only audit log for this center (NFR-008).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.InviteDoctor(System.Guid,MediMind.Application.Features.Auth.InviteDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Invite a doctor to join this center. Sends an invitation email valid for 48 hours (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AdminController.CreateDoctor(System.Guid,MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Create a doctor account immediately and link them to this center. Account is live at once; doctor receives badge number via SMS and email. No activation required.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AppointmentBulkController">
+            <summary>Admin bulk operations on appointments.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentBulkController.#ctor(MediMind.Application.Features.Admin.IBulkOperationsService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Admin bulk operations on appointments.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentBulkController.BulkApprove(MediMind.Application.Features.Admin.BulkApproveDto,System.Threading.CancellationToken)">
+            <summary>Bulk-approve multiple pending appointments (verifies each belongs to admin's center).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.QueueSkipController">
+            <summary>Queue skip operation for admin.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueSkipController.#ctor(MediMind.Application.Features.Admin.IBulkOperationsService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Queue skip operation for admin.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueSkipController.Skip(System.Guid,System.Threading.CancellationToken)">
+            <summary>Move a queue entry to the end (patient not ready). Sends notification.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AppointmentsController">
+            <summary>
+            Appointment booking, status management, and availability queries.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.#ctor(MediMind.Application.Features.Appointments.IAppointmentService,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.AppointmentNotes.IAppointmentNoteService,MediMind.Application.Features.Appointments.IWaitlistService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Appointment booking, status management, and availability queries.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Book(MediMind.Application.Features.Appointments.CreateAppointmentDto,System.Threading.CancellationToken)">
+            <summary>Book a new appointment for the authenticated patient (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Get(System.Nullable{MediMind.Domain.Enums.AppointmentStatus},System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List appointments scoped to the caller's role (patient / doctor / admin) (FR-012).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get appointment details by ID (FR-012).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Cancel(System.Guid,MediMind.Application.Features.Appointments.CancelAppointmentDto,System.Threading.CancellationToken)">
+            <summary>Cancel an appointment by patient, doctor, or admin (FR-013).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Reschedule(System.Guid,MediMind.Application.Features.Appointments.RescheduleAppointmentDto,System.Threading.CancellationToken)">
+            <summary>Reschedule an existing patient appointment (FR-014).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Approve(System.Guid,System.Threading.CancellationToken)">
+            <summary>Approve a pending appointment request (FR-015).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Reject(System.Guid,MediMind.Application.Features.Appointments.ApproveRejectDto,System.Threading.CancellationToken)">
+            <summary>Reject a pending appointment request with a reason (FR-015).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.DoctorReject(System.Guid,MediMind.Application.Features.Appointments.ApproveRejectDto,System.Threading.CancellationToken)">
+            <summary>Doctor declines a pending appointment with a reason.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Upcoming(System.Threading.CancellationToken)">
+            <summary>Upcoming appointments (date ≥ today, status Pending or Confirmed), sorted ascending (FR-012).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Past(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Past appointments (date &lt; today or status Completed/Cancelled/NoShow), paginated descending (FR-012).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.Availability(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Get available time slots for a doctor on a given date (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.AvailableDates(System.Guid,System.Guid,System.Int32,System.Threading.CancellationToken)">
+            <summary>Get dates on which a doctor has at least one available slot (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.SubscribeWaitlist(MediMind.Application.Features.Appointments.WaitlistSubscribeDto,System.Threading.CancellationToken)">
+            <summary>Subscribe to be notified when a slot opens for a fully-booked doctor (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.UnsubscribeWaitlist(System.Guid,System.Threading.CancellationToken)">
+            <summary>Unsubscribe from a waitlist (FR-011).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.MarkComplete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Doctor marks an in-progress or confirmed appointment as completed.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.BulkApprove(MediMind.Application.Features.Appointments.BulkApproveDto,System.Threading.CancellationToken)">
+            <summary>Bulk-approve a list of pending appointments (admin shortcut).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.GetNote(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the private doctor note for an appointment. Returns null if no note exists yet.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.UpsertNote(System.Guid,MediMind.Application.Features.AppointmentNotes.UpsertAppointmentNoteDto,System.Threading.CancellationToken)">
+            <summary>Create or update the private doctor note for an appointment (upsert).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.UpdateNote(System.Guid,MediMind.Application.Features.AppointmentNotes.UpsertAppointmentNoteDto,System.Threading.CancellationToken)">
+            <summary>Update the private doctor note for an appointment.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarDay(System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Day view: all appointments for a single date, grouped (FR-022).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarWeek(System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Week view: appointments from startDate to startDate+6 days, grouped by day (FR-022).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AppointmentsController.CalendarDoctor(System.Guid,System.DateOnly,System.Nullable{System.DateOnly},System.Threading.CancellationToken)">
+            <summary>Doctor view: appointments for a specific doctor over a date range (FR-022).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.CenterLogoController">
+            <summary>
+            Center logo management under /api/v1/healthcare-centers/{id}/logo.
+            The legacy /api/v1/profile-images/healthcare-centers/{id} endpoints
+            are kept with HTTP 301 redirects for one release cycle.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.CenterLogoController.#ctor(MediatR.IMediator,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Center logo management under /api/v1/healthcare-centers/{id}/logo.
+            The legacy /api/v1/profile-images/healthcare-centers/{id} endpoints
+            are kept with HTTP 301 redirects for one release cycle.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.CenterLogoController.GetLogo(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a healthcare center's logo URL (public).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.CenterLogoController.UploadLogo(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload or replace a healthcare center's logo (center admin or super-admin).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.CenterLogoController.DeleteLogo(System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a healthcare center's logo (center admin or super-admin).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.CenterLogoRedirectController">
+            <summary>
+            Backward-compatible redirect shim for the old /profile-images/healthcare-centers/{id} URLs.
+            Returns HTTP 301 to the canonical /healthcare-centers/{id}/logo path.
+            Remove in the release after AdminExtensions ships.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.AuthController">
+            <summary>Authentication — Patient, Doctor, Admin, SuperAdmin, and shared token operations.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.#ctor(MediMind.Application.Features.Auth.IPatientAuthService,MediMind.Application.Features.Auth.IDoctorAuthService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Application.Features.Auth.ISuperAdminAuthService,MediMind.Domain.Common.Interfaces.ITokenService,MediMind.Domain.Common.Interfaces.IUserRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Authentication — Patient, Doctor, Admin, SuperAdmin, and shared token operations.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.PatientRegister(MediMind.Application.Features.Auth.RegisterPatientRequest,System.Threading.CancellationToken)">
+            <summary>Register a new patient account (FR-001). Sends OTP to phone number.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.PatientRequestOtp(MediMind.API.Controllers.PhoneRequest,System.Threading.CancellationToken)">
+            <summary>Request OTP for patient login (phone-based) (FR-002).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.PatientVerifyOtp(MediMind.API.Controllers.VerifyOtpRequest,System.Threading.CancellationToken)">
+            <summary>Verify patient OTP and return JWT access + refresh tokens (FR-002).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.GetPatientProfile(System.Threading.CancellationToken)">
+            <summary>Get the authenticated patient's profile (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.UpsertPatientProfile(MediMind.API.Controllers.UpsertPatientProfileApiRequest,System.Threading.CancellationToken)">
+            <summary>Create or replace the authenticated patient's profile (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.PatchPatientProfile(MediMind.API.Controllers.PatchPatientProfileApiRequest,System.Threading.CancellationToken)">
+            <summary>Partially update the authenticated patient's profile fields (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.DeletePatientProfile(System.Threading.CancellationToken)">
+            <summary>Permanently delete the authenticated patient's account (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.ChangePhone(MediMind.API.Controllers.ChangePhoneApiRequest,System.Threading.CancellationToken)">
+            <summary>Change the authenticated patient's phone number after OTP verification.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.DoctorRequestOtp(MediMind.API.Controllers.BadgeRequest,System.Threading.CancellationToken)">
+            <summary>Request OTP for doctor login using badge number (FR-004).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.DoctorVerifyOtp(MediMind.API.Controllers.DoctorVerifyOtpApiRequest,System.Threading.CancellationToken)">
+            <summary>Verify doctor OTP and return JWT access + refresh tokens (FR-004).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AdminRegister(MediMind.Application.Features.Auth.AdminRegisterRequest,System.Threading.CancellationToken)">
+            <summary>Register a new healthcare center admin account (FR-005).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AdminLogin(MediMind.API.Controllers.AdminLoginApiRequest,System.Threading.CancellationToken)">
+            <summary>Admin login with email and password (FR-005).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.SuperAdminLogin(MediMind.API.Controllers.AdminLoginApiRequest,System.Threading.CancellationToken)">
+             <summary>SuperAdmin login with email and password. Returns a JWT with <c>user_type = SuperAdmin</c>.</summary>
+             <remarks>
+             Use this endpoint to authenticate as the platform SuperAdmin.
+            
+             Default seed credentials (set in `appsettings.json`):
+             - **Email:** `superadmin@medimind.et`
+             - **Password:** `MediMind@2025!`
+            
+             After 5 consecutive failures the account is locked for **15 minutes**.
+             The returned `accessToken` is valid for 15 minutes; use `/auth/refresh-token` to extend the session.
+             </remarks>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AdminCreateDoctor(MediMind.Application.Features.Auth.CreateDoctorRequest,System.Threading.CancellationToken)">
+            <summary>Admin creates a doctor account linked to their healthcare center (FR-006).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.AcceptDoctorInvitation(MediMind.Application.Features.Auth.AcceptInvitationRequest,System.Threading.CancellationToken)">
+            <summary>Accept a doctor invitation and create the doctor account (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.RefreshToken(MediMind.API.Controllers.RefreshTokenApiRequest,System.Threading.CancellationToken)">
+            <summary>Exchange a valid refresh token for a new access + refresh token pair.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.AuthController.Logout(System.Threading.CancellationToken)">
+            <summary>Logout and revoke the current user's refresh token.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.DoctorSchedulesController">
+            <summary>
+            Doctor schedule management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.IScheduleExceptionRepository,MediMind.Domain.Common.Interfaces.IAppointmentRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Doctor schedule management endpoints.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Upsert(MediMind.API.Controllers.UpsertDoctorScheduleDto,System.Threading.CancellationToken)">
+            <summary>Create or replace a doctor's weekly working schedule (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Get(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a doctor's schedule for a specific center (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete a doctor's schedule by ID (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.GetExceptions(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>List all exception dates for a doctor at a center (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.AddException(System.Guid,System.Guid,MediMind.API.Controllers.AddScheduleExceptionDto,System.Threading.CancellationToken)">
+            <summary>Mark a specific date as unavailable for a doctor (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorSchedulesController.RemoveException(System.Guid,System.Guid,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Remove an exception date, making the day available again (FR-021).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.DoctorsController">
+            <summary>
+            Doctor directory search, availability, and doctor-facing dashboard.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.#ctor(MediMind.Domain.Common.Interfaces.IDoctorRepository,MediMind.Application.Features.Appointments.IAppointmentAvailabilityService,MediMind.Application.Features.Doctors.IDoctorProfileService,MediMind.Application.Features.Doctors.IDoctorPatientAccessChecker,MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Application.Features.HealthPredictions.IHealthPredictionService,MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,MediMind.Application.Features.Prescriptions.IPrescriptionService,MediMind.Domain.Common.Interfaces.IDoctorScheduleRepository,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Doctor directory search, availability, and doctor-facing dashboard.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.Search(System.Nullable{System.Guid},System.String,System.String,System.Nullable{System.DateOnly},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Search the doctor directory with optional filters (FR-010).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a doctor's full profile by ID (FR-010).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.Availability(System.Guid,System.Guid,System.DateOnly)">
+            <summary>Get available time slots for a specific doctor on a given date.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.AvailableDates(System.Guid,System.Guid,System.Int32)">
+            <summary>Get dates on which a specific doctor has at least one available slot.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMyProfile(System.Threading.CancellationToken)">
+            <summary>Get the authenticated doctor's own profile (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.UpdateMyProfile(MediMind.Application.Features.Doctors.UpdateDoctorProfileDto,System.Threading.CancellationToken)">
+            <summary>Update the authenticated doctor's editable profile fields (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMyCenters(System.Threading.CancellationToken)">
+            <summary>Get all healthcare centers the authenticated doctor is affiliated with.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMySchedules(System.Threading.CancellationToken)">
+            <summary>Get all weekly schedules for the authenticated doctor across all centers (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetTodayDashboard(System.Threading.CancellationToken)">
+            <summary>Get today's appointments for the authenticated doctor (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMyQueue(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the current queue at a specific center (my assigned patients only) (FR-021).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetMyPatients(System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Get all distinct patients the doctor has seen, with optional search.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientProfile(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a specific patient's profile (doctor must have an active/completed appointment) (FR-023).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientHealthRecords(System.Guid,System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32)">
+            <summary>Get a patient's health records (doctor must have active/completed appointment) (FR-023).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientLatestPrediction(System.Guid)">
+            <summary>Get a patient's latest AI health prediction (FR-023).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientMedicalHistory(System.Guid)">
+            <summary>Get a patient's medical history (FR-023).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.DoctorsController.GetPatientPrescriptions(System.Guid,System.Int32,System.Int32)">
+            <summary>Get all prescriptions for a patient (read-only for doctor, FR-023).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthcareCentersController">
+            <summary>
+            Healthcare center registration, configuration, doctor relations, and analytics.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.#ctor(MediMind.Application.Features.CenterManagement.IHealthcareCenterService,MediMind.Application.Features.CenterManagement.IAnalyticsService,MediMind.Application.Features.Auth.IAdminAuthService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Healthcare center registration, configuration, doctor relations, and analytics.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Register(MediMind.Application.Features.CenterManagement.RegisterCenterDto,System.Threading.CancellationToken)">
+            <summary>Register a new healthcare center for the authenticated admin (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Search(System.String,System.String,System.String,System.Nullable{System.DateOnly},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Search healthcare centers by city, specialization, name, or availability (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Nearby(System.Double,System.Double,System.Double,System.Threading.CancellationToken)">
+            <summary>Find healthcare centers near a geographic coordinate (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetMyCenter(System.Threading.CancellationToken)">
+            <summary>Get the healthcare center registered by the authenticated admin.</summary>
+            <remarks>Returns the center linked to the admin's JWT tenant claim. 404 if the admin has not registered a center yet.</remarks>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.PaySubscription(System.Guid,MediMind.Application.Features.CenterManagement.SelectSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Initiate a Chapa subscription payment for a chosen plan (admin picks plan, pays via Chapa checkout).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a healthcare center's full details by ID (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConfig(System.Guid,MediMind.Domain.Common.Interfaces.CenterConfigurationDto,System.Threading.CancellationToken)">
+            <summary>Update center configuration (capacity, queue settings, etc.) (FR-032).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetAdminConfig(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get admin-facing general settings for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateGeneralConfig(System.Guid,MediMind.Application.Features.CenterManagement.AdminCenterConfigUpdateDto,System.Threading.CancellationToken)">
+            <summary>Update general center info (name, phone, services, etc.) (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBranding(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get branding info (logo URL, description) for this center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetBookingRules(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get booking rules for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateBookingRules(System.Guid,MediMind.Application.Features.CenterManagement.AdminBookingRulesDto,System.Threading.CancellationToken)">
+            <summary>Update booking rules (slot duration, advance booking, cancellation policy) (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetWorkingHours(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get working hours for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateWorkingHours(System.Guid,MediMind.Application.Features.CenterManagement.AdminWorkingHoursDto,System.Threading.CancellationToken)">
+            <summary>Update working hours for this center (FR-030).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.AddDoctor(System.Guid,MediMind.Application.Features.CenterManagement.AddDoctorDto,System.Threading.CancellationToken)">
+            <summary>Add an existing doctor to this healthcare center (FR-033).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.UpdateConsultationFee(System.Guid,System.Guid,MediMind.Application.Features.CenterManagement.UpdateConsultationFeeDto,System.Threading.CancellationToken)">
+            <summary>Update a doctor's consultation fee at this healthcare center (FR-025).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.RemoveDoctor(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a doctor from this healthcare center (FR-033).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctors(System.Guid,System.Threading.CancellationToken)">
+            <summary>List all active doctors affiliated with a healthcare center (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetDoctorRoster(System.Guid,System.Threading.CancellationToken)">
+            <summary>Admin roster view — doctors with license, fee, and today's appointment count (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.GetPendingInvitations(System.Guid,System.Threading.CancellationToken)">
+            <summary>List pending (not yet accepted) doctor invitations for this center (FR-020).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.Analytics(System.Guid,System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Get the analytics dashboard for a healthcare center (FR-040).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.ExportCsv(System.Guid,System.DateOnly,System.DateOnly)">
+            <summary>Export all analytics metrics as CSV (FR-041).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthcareCentersController.ExportPdf(System.Guid,System.DateOnly,System.DateOnly)">
+            <summary>Export full analytics report as PDF (FR-041).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthPredictionsController">
+            <summary>
+            AI-powered health predictions powered by the external ML microservice (FR-060–FR-064).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.#ctor(MediMind.Application.Features.HealthPredictions.IHealthPredictionService,MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            AI-powered health predictions powered by the external ML microservice (FR-060–FR-064).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.RequestPrediction">
+            <summary>Request a new AI health-risk prediction for the authenticated patient. Requires ≥ 7 health records (FR-060).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetHistory(System.Int32,System.Int32)">
+            <summary>Get paginated AI prediction history for the authenticated patient (FR-061).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetLatest(System.Nullable{System.Guid})">
+            <summary>Get the most recent prediction. Patients see their own; doctors provide patientId query param (FR-062).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetById(System.Guid,System.Nullable{System.Guid})">
+            <summary>Get a specific prediction by ID with role-aware access (FR-063).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthPredictionsController.GetStatus">
+            <summary>Get prediction readiness status — record count, eligibility, and last prediction date (FR-064).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthRecordAttachmentsController">
+            <summary>File attachments (PDFs, images) on health records.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordAttachmentsController.#ctor(MediMind.Application.Features.HealthRecordAttachments.IHealthRecordAttachmentService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>File attachments (PDFs, images) on health records.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordAttachmentsController.Upload(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload a file attachment to a health record (PDF or image, max 10 MB).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordAttachmentsController.GetAll(System.Guid,System.Threading.CancellationToken)">
+            <summary>List all attachments for a health record.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordAttachmentsController.GetById(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a single attachment by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordAttachmentsController.Delete(System.Guid,System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete an attachment from a health record.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.HealthRecordsController">
+            <summary>
+            Patient vitals, health records, and trend analysis (FR-050–FR-056).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.#ctor(MediMind.Application.Features.HealthRecords.IHealthRecordService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Patient vitals, health records, and trend analysis (FR-050–FR-056).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Create(MediMind.Application.Features.HealthRecords.CreateHealthRecordDto)">
+            <summary>Create a new health record for the authenticated patient (FR-050).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetMy(System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Int32,System.Int32)">
+            <summary>List the authenticated patient's health records with pagination and date filters (FR-051).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a specific health record by ID. Patients see their own; doctors see records of their patients (FR-052).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Update(System.Guid,MediMind.Application.Features.HealthRecords.UpdateHealthRecordDto,System.Threading.CancellationToken)">
+            <summary>Update an existing health record for the authenticated patient (FR-053).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete a health record for the authenticated patient (FR-054).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetTrends(System.Int32,System.Threading.CancellationToken)">
+            <summary>Get vitals trend statistics for the authenticated patient over a rolling window (FR-055).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetLatest(System.Nullable{System.Guid})">
+            <summary>Get the most recent health record. Patients see their own; doctors provide patientId query param (FR-056).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.HealthRecordsController.GetCount(System.Threading.CancellationToken)">
+            <summary>Get total record count and whether the patient has enough records (≥ 7) to request an AI prediction (FR-056).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.NotificationsController">
+            <summary>FCM device token registration and in-app notification history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.#ctor(MediMind.Domain.Common.Interfaces.INotificationService,MediMind.Domain.Common.Interfaces.INotificationLogRepository,MediMind.Domain.Common.Interfaces.ICurrentUser,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>FCM device token registration and in-app notification history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.RegisterDevice(MediMind.API.Controllers.RegisterDeviceTokenRequest,System.Threading.CancellationToken)">
+            <summary>Register or refresh an FCM device token for push notifications (FR-070).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.DeregisterDevice(MediMind.API.Controllers.DeregisterDeviceTokenRequest,System.Threading.CancellationToken)">
+            <summary>Deactivate an FCM device token (FR-070).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.History(System.Threading.CancellationToken)">
+            <summary>List the last 50 notification log entries for the signed-in user (FR-071).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationsController.TestPush(MediMind.API.Controllers.TestPushRequest,System.Threading.CancellationToken)">
+            <summary>
+            Development-only: send a test push notification to any user (SuperAdmin).
+            Only available in the Development environment.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.MedicationRemindersController">
+            <summary>Patient medication reminder schedules.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.#ctor(MediMind.Domain.Common.Interfaces.IMedicationReminderRepository,MediMind.Domain.Common.Interfaces.IUnitOfWork,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Patient medication reminder schedules.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.Create(MediMind.API.Controllers.MedicationRemindersController.CreateMedicationReminderRequest,System.Threading.CancellationToken)">
+            <summary>Create a new medication reminder schedule for the authenticated patient (FR-080).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.GetMine(System.Threading.CancellationToken)">
+            <summary>List all medication reminders for the authenticated patient (FR-081).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.Update(System.Guid,MediMind.API.Controllers.MedicationRemindersController.UpdateMedicationReminderRequest,System.Threading.CancellationToken)">
+            <summary>Update an existing medication reminder (FR-082).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete a medication reminder (FR-083).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.MedicationRemindersController.Toggle(System.Guid,System.Threading.CancellationToken)">
+            <summary>Toggle a medication reminder active/inactive (FR-084).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PatientMedicalHistoryController">
+            <summary>Structured medical background for the authenticated patient.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.#ctor(MediMind.Application.Features.MedicalHistory.IMedicalHistoryService,FluentValidation.IValidator{MediMind.Application.Features.MedicalHistory.UpsertMedicalHistoryDto},MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Structured medical background for the authenticated patient.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.Get(System.Threading.CancellationToken)">
+            <summary>Get the authenticated patient's medical history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.Upsert(MediMind.Application.Features.MedicalHistory.UpsertMedicalHistoryDto,System.Threading.CancellationToken)">
+            <summary>Create or update the authenticated patient's medical history.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PatientMedicalHistoryController.Clear(System.Threading.CancellationToken)">
+            <summary>Clear (reset) the authenticated patient's medical history, keeping the record row.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.EmergencyContactsController">
+            <summary>Emergency contacts for the authenticated patient (max 3, exactly one primary).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.#ctor(MediMind.Application.Features.EmergencyContacts.IEmergencyContactService,FluentValidation.IValidator{MediMind.Application.Features.EmergencyContacts.CreateEmergencyContactDto},FluentValidation.IValidator{MediMind.Application.Features.EmergencyContacts.UpdateEmergencyContactDto},MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Emergency contacts for the authenticated patient (max 3, exactly one primary).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.GetAll(System.Threading.CancellationToken)">
+            <summary>List all emergency contacts for the authenticated patient.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.Create(MediMind.Application.Features.EmergencyContacts.CreateEmergencyContactDto,System.Threading.CancellationToken)">
+            <summary>Add a new emergency contact (max 3 per patient).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.Update(System.Guid,MediMind.Application.Features.EmergencyContacts.UpdateEmergencyContactDto,System.Threading.CancellationToken)">
+            <summary>Update an existing emergency contact.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete an emergency contact.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.EmergencyContactsController.SetPrimary(System.Guid,System.Threading.CancellationToken)">
+            <summary>Set a contact as the primary emergency contact.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.FavoritesController">
+            <summary>Patient favourite doctors and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.#ctor(MediMind.Application.Features.Favorites.IFavoriteService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Patient favourite doctors and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.GetDoctors(System.Threading.CancellationToken)">
+            <summary>List the patient's favourite doctors.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.AddDoctor(System.Guid,System.Threading.CancellationToken)">
+            <summary>Add a doctor to favourites.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.RemoveDoctor(System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a doctor from favourites.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.GetCenters(System.Threading.CancellationToken)">
+            <summary>List the patient's favourite healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.AddCenter(System.Guid,System.Threading.CancellationToken)">
+            <summary>Add a healthcare center to favourites.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.FavoritesController.RemoveCenter(System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a healthcare center from favourites.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.NotificationPreferencesController">
+            <summary>Per-user notification channel preferences.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.#ctor(MediMind.Application.Features.NotificationPreferences.INotificationPreferenceService,MediMind.Domain.Common.Interfaces.ICurrentUser,MediMind.Domain.Common.Interfaces.INotificationLogRepository,MediMind.Domain.Common.Interfaces.IUnitOfWork)">
+            <summary>Per-user notification channel preferences.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.GetPreferences(System.Threading.CancellationToken)">
+            <summary>Get the caller's notification preferences (created with defaults if not set).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.UpdatePreferences(MediMind.Application.Features.NotificationPreferences.UpdateNotificationPreferenceDto,System.Threading.CancellationToken)">
+            <summary>Update the caller's notification preferences.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.UnreadCount(System.Threading.CancellationToken)">
+            <summary>Get the unread notification count for the authenticated user.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.MarkRead(System.Guid,System.Threading.CancellationToken)">
+            <summary>Mark a single notification as read.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.NotificationPreferencesController.MarkAllRead(System.Threading.CancellationToken)">
+            <summary>Mark all notifications as read for the authenticated user.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PaymentsController">
+            <summary>
+            Chapa payment initiation, status, history, receipts, and webhook processing.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.#ctor(MediMind.Application.Features.Payments.IPaymentService,MediMind.Domain.Common.Interfaces.ICurrentUser,Microsoft.Extensions.Logging.ILogger{MediMind.API.Controllers.PaymentsController})">
+            <summary>
+            Chapa payment initiation, status, history, receipts, and webhook processing.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Initiate(MediMind.API.Controllers.InitiatePaymentRequest,System.Threading.CancellationToken)">
+            <summary>Initiate a Chapa payment for an appointment (FR-090).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Status(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the current payment status for a payment ID (FR-091).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.ByAppointment(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the payment associated with a specific appointment (FR-091).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Sync(System.Guid,System.Threading.CancellationToken)">
+            <summary>Sync payment status with Chapa — call this after completing a Chapa checkout if status has not updated (FR-094).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.History(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List payment history for the current user or admin's center (FR-092).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Receipt(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the PDF receipt URL for a payment (FR-093). Generates the receipt if not yet stored.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Webhook(System.Threading.CancellationToken)">
+            <summary>Chapa HMAC-verified webhook — updates payment and appointment status (FR-094).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PaymentsController.Callback">
+            <summary>Chapa payment redirect callback — acknowledges the browser return after checkout (FR-094).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PrescriptionsController">
+            <summary>Digital prescriptions — creation, PDF download, QR verification, and dispensing (FR-100–FR-106).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.#ctor(MediMind.Application.Features.Prescriptions.IPrescriptionService,MediMind.Application.Features.PrescriptionTemplates.IPrescriptionTemplateService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Digital prescriptions — creation, PDF download, QR verification, and dispensing (FR-100–FR-106).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.Create(MediMind.Application.Features.Prescriptions.CreatePrescriptionDto,System.Threading.CancellationToken)">
+            <summary>Create a new digital prescription for a patient (FR-100).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.List(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List prescriptions for the current user. Patients see their own; doctors see prescriptions they issued (FR-101).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get full prescription details by ID (FR-102).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.DownloadPdf(System.Guid,System.Threading.CancellationToken)">
+            <summary>Download a prescription as a signed PDF file (FR-103).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.GetByAppointment(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get the prescription attached to a specific appointment (FR-104).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.MarkDispensed(System.Guid,System.Threading.CancellationToken)">
+            <summary>Mark a prescription as dispensed by the doctor or admin (FR-105).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.CreateFromTemplate(MediMind.Application.Features.PrescriptionTemplates.CreatePrescriptionFromTemplateDto,System.Threading.CancellationToken)">
+            <summary>Create a prescription from a saved template, with optional field overrides (FR-100).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.Revoke(System.Guid,MediMind.API.Controllers.RevokePrescriptionApiRequest,System.Threading.CancellationToken)">
+            <summary>Revoke a prescription (FR-020 edge case). Roles: Doctor (issuer) or Admin (same center).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionsController.Verify(System.Guid,System.String,System.Threading.CancellationToken)">
+            <summary>Publicly verify a prescription using its QR token (FR-106).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.PrescriptionTemplatesController">
+            <summary>
+            Prescription templates — create, manage, and apply reusable prescription drafts.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.#ctor(MediMind.Application.Features.PrescriptionTemplates.IPrescriptionTemplateService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Prescription templates — create, manage, and apply reusable prescription drafts.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.Create(MediMind.Application.Features.PrescriptionTemplates.CreatePrescriptionTemplateDto,System.Threading.CancellationToken)">
+            <summary>Create a new prescription template.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.List(System.Threading.CancellationToken)">
+            <summary>List all templates for the authenticated doctor, sorted by usage count.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a single template by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.Update(System.Guid,MediMind.Application.Features.PrescriptionTemplates.UpdatePrescriptionTemplateDto,System.Threading.CancellationToken)">
+            <summary>Update a template.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.PrescriptionTemplatesController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Delete a template.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.ProfileImagesController">
+            <summary>Profile and logo image management for users and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.#ctor(MediatR.IMediator)">
+            <summary>Profile and logo image management for users and healthcare centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.GetMine(System.Threading.CancellationToken)">
+            <summary>Get the signed-in user's profile image URL (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.UploadMine(Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload or replace the signed-in user's profile image (JPEG, PNG, WebP, GIF; max 5 MB) (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteMine(System.Threading.CancellationToken)">
+            <summary>Remove the signed-in user's profile image (FR-003).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.GetCenterImage(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a healthcare center's logo URL (public) (FR-031).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.UploadCenterImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile,System.Threading.CancellationToken)">
+            <summary>Upload or replace a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ProfileImagesController.DeleteCenterImage(System.Guid,System.Threading.CancellationToken)">
+            <summary>Remove a healthcare center's logo (center admin or super-admin) (FR-032).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.QueueController">
+            <summary>
+            Queue management with SignalR-backed real-time updates (FR-025–FR-029).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.#ctor(MediMind.Application.Features.Queue.IQueueService,MediMind.Application.Features.Doctors.IDoctorProfileService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>
+            Queue management with SignalR-backed real-time updates (FR-025–FR-029).
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetStatus(System.Guid)">
+            <summary>Get the queue position and wait estimate for a patient's appointment (FR-025).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetCenterDashboard(System.Guid,System.Nullable{System.DateOnly})">
+            <summary>Get the full queue dashboard for a center and date (FR-026).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.CallNext(MediMind.API.Controllers.CallNextRequest)">
+            <summary>Call the next waiting patient to the consultation room (FR-027).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Arrived(System.Guid)">
+            <summary>Mark a patient as arrived at the facility (FR-028).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Complete(System.Guid)">
+            <summary>Mark a consultation as complete and advance the queue (FR-028).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.NoShow(System.Guid)">
+            <summary>Mark a patient as a no-show (FR-028).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Emergency(MediMind.API.Controllers.EmergencyInsertRequest)">
+            <summary>Insert an emergency patient at the front of the queue (FR-029).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.GetDoctorQueue(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get today's queue for the authenticated doctor at a given center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.Skip(System.Guid)">
+            <summary>Move a waiting patient to the back of today's queue (admin skip).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.QueueController.CancelByPatient(System.Guid)">
+            <summary>Patient cancels their own queue position for a given appointment.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.ReviewsController">
+            <summary>Patient reviews of doctors and healthcare centers (post-appointment).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ReviewsController.#ctor(MediMind.Application.Features.Reviews.IReviewService,FluentValidation.IValidator{MediMind.Application.Features.Reviews.CreateReviewDto},MediMind.Domain.Common.Interfaces.ICurrentUser)">
+            <summary>Patient reviews of doctors and healthcare centers (post-appointment).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ReviewsController.CreateReview(System.Guid,MediMind.Application.Features.Reviews.CreateReviewDto,System.Threading.CancellationToken)">
+            <summary>Submit a review for a completed appointment (doctor and/or center).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ReviewsController.GetDoctorReviews(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get average rating and recent 10 reviews for a doctor (public).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.ReviewsController.GetCenterReviews(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get average rating and recent 10 reviews for a healthcare center (public).</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController">
+            <summary>
+            Public read + SuperAdmin write endpoints for subscription plan master data.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.#ctor(MediMind.Application.Features.SuperAdmin.ISubscriptionPlanService)">
+            <summary>
+            Public read + SuperAdmin write endpoints for subscription plan master data.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.GetAll(System.Boolean,System.Threading.CancellationToken)">
+            <summary>List all active subscription plans (public).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.GetById(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a subscription plan by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Create(MediMind.Application.Features.SuperAdmin.CreateSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Create a new subscription plan (SuperAdmin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Update(System.Guid,MediMind.Application.Features.SuperAdmin.UpdateSubscriptionPlanDto,System.Threading.CancellationToken)">
+            <summary>Update pricing and limits for an existing plan (SuperAdmin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SubscriptionPlansController.Deactivate(System.Guid,System.Threading.CancellationToken)">
+            <summary>Deactivate a plan so it no longer appears to new subscribers (SuperAdmin only).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetAll(System.String,System.String,System.Nullable{MediMind.Domain.Enums.SubscriptionStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List all healthcare centers with filters.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetPending(System.Threading.CancellationToken)">
+            <summary>List centers awaiting approval.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetActive(System.Threading.CancellationToken)">
+            <summary>List active (subscribed) centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetSuspended(System.Threading.CancellationToken)">
+            <summary>List suspended centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetRejected(System.Threading.CancellationToken)">
+            <summary>List rejected centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.GetExpired(System.Threading.CancellationToken)">
+            <summary>List expired-subscription centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a single center by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Approve(System.Guid,MediMind.Application.Features.SuperAdmin.ApproveCenterDto,System.Threading.CancellationToken)">
+            <summary>Approve a pending center, placing it in Trial status.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Reject(System.Guid,MediMind.Application.Features.SuperAdmin.RejectCenterDto,System.Threading.CancellationToken)">
+            <summary>Reject a center registration with a reason.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Suspend(System.Guid,MediMind.Application.Features.SuperAdmin.SuspendCenterDto,System.Threading.CancellationToken)">
+            <summary>Suspend an active center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Reactivate(System.Guid,System.Threading.CancellationToken)">
+            <summary>Reactivate a suspended center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.VerifyPayment(System.Guid,System.Threading.CancellationToken)">
+            <summary>Verify the Chapa subscription payment and activate the center (combined verify + approve action).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.Delete(System.Guid,System.Threading.CancellationToken)">
+            <summary>Soft-delete a center (GDPR NFR-009). Irreversible.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminCentersController.RegenerateQueue(System.Guid,MediMind.Application.Features.SuperAdmin.RegenerateQueueDto,MediMind.Application.Features.Queue.IQueueService,System.Threading.CancellationToken)">
+            <summary>Regenerate the queue for a center on a given date.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.GetAll(System.String,System.String,System.Nullable{System.Boolean},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List all doctors with optional filters.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.GetUnverified(System.Threading.CancellationToken)">
+            <summary>List doctors whose license has not been verified yet.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a single doctor by ID.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.VerifyLicense(System.Guid,MediMind.Application.Features.SuperAdmin.VerifyDoctorLicenseDto,System.Threading.CancellationToken)">
+            <summary>Mark a doctor's medical license as verified — unblocks login.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.UnverifyLicense(System.Guid,MediMind.Application.Features.SuperAdmin.UnverifyDoctorLicenseDto,System.Threading.CancellationToken)">
+            <summary>Revoke a doctor's license verification.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.Suspend(System.Guid,MediMind.Application.Features.SuperAdmin.SuspendUserDto,System.Threading.CancellationToken)">
+            <summary>Suspend a doctor account.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDoctorsController.Reactivate(System.Guid,System.Threading.CancellationToken)">
+            <summary>Reactivate a suspended doctor account.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.List(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List paginated notification history for the authenticated super admin.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.MarkRead(System.Guid,System.Threading.CancellationToken)">
+            <summary>Mark a single notification as read.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminNotificationsController.MarkAllRead(System.Threading.CancellationToken)">
+            <summary>Mark all notifications as read for the authenticated super admin.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Dashboard(System.Threading.CancellationToken)">
+            <summary>Get platform-wide KPI dashboard snapshot.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminDashboardController.Analytics(System.String,System.Threading.CancellationToken)">
+            <summary>Get platform-wide analytics. period: last30 | last60 | last90</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Dashboard(System.Threading.CancellationToken)">
+            <summary>Get platform-wide KPI dashboard snapshot.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Analytics(System.String,System.Threading.CancellationToken)">
+            <summary>Get platform-wide analytics (revenue, registrations, churn). period: last30 | last60 | last90</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.Revenue(System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Get platform-wide revenue report aggregated by day.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminPlatformController.RevenueExportCsv(System.DateOnly,System.DateOnly,System.Threading.CancellationToken)">
+            <summary>Export platform revenue as CSV.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminAuditLogController.QueryGlobal(System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Query the global (unscoped) audit log across all centers.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminAuditLogController.ExportCsv(System.Nullable{System.DateOnly},System.Nullable{System.DateOnly},System.Nullable{System.Guid},System.String,System.Threading.CancellationToken)">
+            <summary>Export global audit log as CSV.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminProfileController.GetProfile(System.Threading.CancellationToken)">
+            <summary>Get the logged-in super admin's own profile.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminProfileController.UpdateProfile(MediMind.Application.Features.SuperAdmin.UpdateSuperAdminProfileDto,System.Threading.CancellationToken)">
+            <summary>Update the logged-in super admin's profile (fullName, dateOfBirth, gender).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSettingsController.Get(System.Threading.CancellationToken)">
+            <summary>Get platform-wide configuration settings.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSettingsController.Update(MediMind.Application.Features.SuperAdmin.UpdatePlatformSettingsDto,System.Threading.CancellationToken)">
+            <summary>Update platform-wide configuration settings.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.GetAll(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>List all center subscriptions (paginated).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get current subscription details and history for a center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.Update(System.Guid,MediMind.Application.Features.SuperAdmin.UpdateSubscriptionDto,System.Threading.CancellationToken)">
+            <summary>Set a new subscription plan with explicit start/end dates.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.Extend(System.Guid,MediMind.Application.Features.SuperAdmin.ExtendSubscriptionDto,System.Threading.CancellationToken)">
+            <summary>Extend current subscription by N days.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminSubscriptionsController.History(System.Guid,System.Threading.CancellationToken)">
+            <summary>List full subscription change history for a center.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.Search(System.String,System.Nullable{MediMind.Domain.Enums.UserType},System.Nullable{MediMind.Domain.Enums.UserStatus},System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Search all platform users with optional filters.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.Get(System.Guid,System.Threading.CancellationToken)">
+            <summary>Get a user's full profile.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.Suspend(System.Guid,MediMind.Application.Features.SuperAdmin.SuspendUserDto,System.Threading.CancellationToken)">
+            <summary>Suspend a user account (blocks login).</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.Reactivate(System.Guid,System.Threading.CancellationToken)">
+            <summary>Reactivate a suspended user account.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.ForceLogout(System.Guid,MediMind.Application.Features.SuperAdmin.ForceLogoutDto,System.Threading.CancellationToken)">
+            <summary>Revoke the user's refresh token — forces logout on next token expiry.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.SuperAdmin.SuperAdminUsersController.Delete(System.Guid,MediMind.Application.Features.SuperAdmin.SoftDeleteUserDto,System.Threading.CancellationToken)">
+            <summary>Soft-delete a user for GDPR compliance (NFR-009). Cannot be undone.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.VideoConsultationsController">
+             <summary>
+             Telemedicine — video consultation sessions, real-time WebRTC signaling, in-session chat, and connection quality reporting.
+             </summary>
+             <remarks>
+             ## Full Session Lifecycle
+            
+             ```
+             Doctor                                     Patient
+               │                                           │
+               │  1. POST /initiate  ──────────────────────┤ (push notification sent)
+               │  ← 201 ConsultationSessionDto             │
+               │                                           │  2. receives FCM push
+               │  3. Connect SignalR /hubs/video            │  3. Connect SignalR /hubs/video
+               │  4. hub → JoinConsultationRoom(id)         │  4. POST /{id}/join  → 200 ConsultationJoinDto
+               │                                           │  5. hub → JoinConsultationRoom(id)
+               │  ← hub event: UserJoined                  │
+               │                                           │
+               │  ── WebRTC handshake (offer/answer/ICE) ──│
+               │  6. hub → SendOffer(targetConnectionId)   │
+               │                                           │  ← hub event: ReceiveOffer
+               │                                           │  7. hub → SendAnswer(connectionId)
+               │  ← hub event: ReceiveAnswer               │
+               │  8. hub → SendIceCandidate(...)           │  8. hub → SendIceCandidate(...)
+               │                                           │
+               │  ── Live call ────────────────────────────│
+               │  hub → BroadcastMediaState(muted, cam)    │  ← hub event: ParticipantMediaStateChanged
+               │  hub → SendChatMessage(content)           │  ← hub event: ReceiveChatMessage
+               │                                           │
+               │  ── Quality monitoring ───────────────────│
+               │                                           │  POST /{id}/quality-report (every 10s)
+               │  ← hub event: QualityAlert (if bw &lt; 500)  │  ← hub event: QualityAlert
+               │                                           │
+               │  9. POST /{id}/end                        │
+               │  ← hub event: ConsultationEnded           │  ← hub event: ConsultationEnded
+             ```
+            
+             ## SignalR Hub
+             Connect to **`/hubs/video?access_token=&lt;JWT&gt;`** (WebSocket or Long-Polling).
+            
+             ### Hub methods the client calls
+             | Method | Parameters | Description |
+             |---|---|---|
+             | `JoinConsultationRoom` | `consultationId: string` | Must be called after connecting. Adds client to the room group and records participation. |
+             | `LeaveConsultationRoom` | `consultationId: string` | Graceful leave. Also fires on disconnect. |
+             | `SendOffer` | `consultationId, targetConnectionId, sdpOffer` | Routes SDP offer to specific peer during WebRTC handshake. |
+             | `SendAnswer` | `consultationId, targetConnectionId, sdpAnswer` | Routes SDP answer to specific peer. |
+             | `SendIceCandidate` | `consultationId, targetConnectionId, candidate` | Routes ICE candidate to specific peer. |
+             | `BroadcastMediaState` | `consultationId, isMuted: bool, isCameraEnabled: bool` | Broadcasts local mute/camera state to all other participants so their UI can update. Call whenever user toggles mic or camera. |
+             | `SendChatMessage` | `consultationId, content: string` | Persists and broadcasts a chat message (1–2000 chars). |
+             | `GetRoomParticipants` | `consultationId: string` | Returns list of currently connected participants with their connectionIds. |
+            
+             ### Hub events the client receives
+             | Event | Payload | Description |
+             |---|---|---|
+             | `UserJoined` | `{ connectionId, userId, userType, userName }` | Another participant joined the room. Use `connectionId` as `targetConnectionId` when sending WebRTC offer. |
+             | `UserLeft` | `{ connectionId, userId, userType, reason? }` | Participant left or disconnected. Tear down peer connection. |
+             | `ReceiveOffer` | `senderConnectionId, sdpOffer` | Incoming SDP offer. Respond with `SendAnswer`. |
+             | `ReceiveAnswer` | `senderConnectionId, sdpAnswer` | Incoming SDP answer. Set as remote description. |
+             | `ReceiveIceCandidate` | `senderConnectionId, candidate` | Incoming ICE candidate. Add to peer connection. |
+             | `ParticipantMediaStateChanged` | `{ connectionId, isMuted, isCameraEnabled }` | Other participant toggled mic or camera. Update their video tile UI. |
+             | `ReceiveChatMessage` | `{ messageId, senderId, senderName, content, sentAt }` | New chat message. Display in chat panel. |
+             | `MessageSendFailed` | `{ content }` | Chat message failed to save. Show "Message not sent" UI with retry. |
+             | `QualityAlert` | `{ userId, message, audioOnlyRecommended }` | Triggered when reported bandwidth is below 500 Kbps. If `audioOnlyRecommended` is `true`, offer the user an option to disable their video track. |
+             | `ConsultationEnded` | `{ reason }` | Session terminated (by doctor, admin, or timeout). Navigate away from call screen. |
+             </remarks>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.#ctor(MediMind.Application.Features.VideoConsultations.IVideoConsultationService,MediMind.Domain.Common.Interfaces.ICurrentUser)">
+             <summary>
+             Telemedicine — video consultation sessions, real-time WebRTC signaling, in-session chat, and connection quality reporting.
+             </summary>
+             <remarks>
+             ## Full Session Lifecycle
+            
+             ```
+             Doctor                                     Patient
+               │                                           │
+               │  1. POST /initiate  ──────────────────────┤ (push notification sent)
+               │  ← 201 ConsultationSessionDto             │
+               │                                           │  2. receives FCM push
+               │  3. Connect SignalR /hubs/video            │  3. Connect SignalR /hubs/video
+               │  4. hub → JoinConsultationRoom(id)         │  4. POST /{id}/join  → 200 ConsultationJoinDto
+               │                                           │  5. hub → JoinConsultationRoom(id)
+               │  ← hub event: UserJoined                  │
+               │                                           │
+               │  ── WebRTC handshake (offer/answer/ICE) ──│
+               │  6. hub → SendOffer(targetConnectionId)   │
+               │                                           │  ← hub event: ReceiveOffer
+               │                                           │  7. hub → SendAnswer(connectionId)
+               │  ← hub event: ReceiveAnswer               │
+               │  8. hub → SendIceCandidate(...)           │  8. hub → SendIceCandidate(...)
+               │                                           │
+               │  ── Live call ────────────────────────────│
+               │  hub → BroadcastMediaState(muted, cam)    │  ← hub event: ParticipantMediaStateChanged
+               │  hub → SendChatMessage(content)           │  ← hub event: ReceiveChatMessage
+               │                                           │
+               │  ── Quality monitoring ───────────────────│
+               │                                           │  POST /{id}/quality-report (every 10s)
+               │  ← hub event: QualityAlert (if bw &lt; 500)  │  ← hub event: QualityAlert
+               │                                           │
+               │  9. POST /{id}/end                        │
+               │  ← hub event: ConsultationEnded           │  ← hub event: ConsultationEnded
+             ```
+            
+             ## SignalR Hub
+             Connect to **`/hubs/video?access_token=&lt;JWT&gt;`** (WebSocket or Long-Polling).
+            
+             ### Hub methods the client calls
+             | Method | Parameters | Description |
+             |---|---|---|
+             | `JoinConsultationRoom` | `consultationId: string` | Must be called after connecting. Adds client to the room group and records participation. |
+             | `LeaveConsultationRoom` | `consultationId: string` | Graceful leave. Also fires on disconnect. |
+             | `SendOffer` | `consultationId, targetConnectionId, sdpOffer` | Routes SDP offer to specific peer during WebRTC handshake. |
+             | `SendAnswer` | `consultationId, targetConnectionId, sdpAnswer` | Routes SDP answer to specific peer. |
+             | `SendIceCandidate` | `consultationId, targetConnectionId, candidate` | Routes ICE candidate to specific peer. |
+             | `BroadcastMediaState` | `consultationId, isMuted: bool, isCameraEnabled: bool` | Broadcasts local mute/camera state to all other participants so their UI can update. Call whenever user toggles mic or camera. |
+             | `SendChatMessage` | `consultationId, content: string` | Persists and broadcasts a chat message (1–2000 chars). |
+             | `GetRoomParticipants` | `consultationId: string` | Returns list of currently connected participants with their connectionIds. |
+            
+             ### Hub events the client receives
+             | Event | Payload | Description |
+             |---|---|---|
+             | `UserJoined` | `{ connectionId, userId, userType, userName }` | Another participant joined the room. Use `connectionId` as `targetConnectionId` when sending WebRTC offer. |
+             | `UserLeft` | `{ connectionId, userId, userType, reason? }` | Participant left or disconnected. Tear down peer connection. |
+             | `ReceiveOffer` | `senderConnectionId, sdpOffer` | Incoming SDP offer. Respond with `SendAnswer`. |
+             | `ReceiveAnswer` | `senderConnectionId, sdpAnswer` | Incoming SDP answer. Set as remote description. |
+             | `ReceiveIceCandidate` | `senderConnectionId, candidate` | Incoming ICE candidate. Add to peer connection. |
+             | `ParticipantMediaStateChanged` | `{ connectionId, isMuted, isCameraEnabled }` | Other participant toggled mic or camera. Update their video tile UI. |
+             | `ReceiveChatMessage` | `{ messageId, senderId, senderName, content, sentAt }` | New chat message. Display in chat panel. |
+             | `MessageSendFailed` | `{ content }` | Chat message failed to save. Show "Message not sent" UI with retry. |
+             | `QualityAlert` | `{ userId, message, audioOnlyRecommended }` | Triggered when reported bandwidth is below 500 Kbps. If `audioOnlyRecommended` is `true`, offer the user an option to disable their video track. |
+             | `ConsultationEnded` | `{ reason }` | Session terminated (by doctor, admin, or timeout). Navigate away from call screen. |
+             </remarks>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.List(System.String,System.Boolean,System.Int32,System.Int32,System.Threading.CancellationToken)">
+             <summary>List video consultations for the authenticated doctor.</summary>
+             <remarks>
+             **Doctor only.** Returns consultations belonging to the caller, optionally filtered by status and/or today's date.
+            
+             **Query parameters:**
+             - `status` — `Scheduled`, `InProgress`, `Completed`, or `Cancelled` (omit for all)
+             - `today` — `true` to restrict to appointments scheduled for today
+             - `page` / `pageSize` — pagination (default: page 1, pageSize 20)
+            
+             **Error cases:**
+             - `403` — Caller is not a doctor.
+             </remarks>
+             <param name="status">Optional status filter.</param>
+             <param name="today">When true, only today's consultations are returned.</param>
+             <param name="page">1-based page number (default: 1).</param>
+             <param name="pageSize">Items per page (default: 20).</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.Initiate(MediMind.API.Controllers.InitiateConsultationRequest,System.Threading.CancellationToken)">
+             <summary>Initiate a new video consultation session for a confirmed appointment.</summary>
+             <remarks>
+             **Doctor only.** Creates the consultation room and sends an FCM push notification to the patient.
+             The appointment must be in **Confirmed** status. Only one active session per appointment is allowed.
+            
+             Use the returned `iceServers` array when creating the client-side `RTCPeerConnection`.
+            
+             **Example request:**
+             ```json
+             { "appointmentId": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
+             ```
+            
+             **Example response (201):**
+             ```json
+             {
+               "consultationId": "a1b2c3d4-...",
+               "appointmentId": "3fa85f64-...",
+               "roomId": "room_a1b2c3d4e5f6...",
+               "status": "Scheduled",
+               "joinUrl": "wss://api.medimind.et/hubs/video",
+               "iceServers": [{ "urls": ["stun:stun.l.google.com:19302"], "username": null, "credential": null }],
+               "doctorInfo": { "userId": "...", "fullName": "Dr. Abebe Bekele", "specialization": "General Medicine", "profileImageUrl": null },
+               "patientInfo": { "userId": "...", "fullName": "Sara Haile", "profileImageUrl": null },
+               "appointmentDate": "2026-05-15",
+               "appointmentTime": "09:00:00"
+             }
+             ```
+            
+             **Error cases:**
+             - `400` — Appointment not confirmed, or an active consultation already exists for this appointment.
+             - `403` — Caller is not the doctor assigned to this appointment.
+             - `404` — Appointment not found.
+             </remarks>
+             <param name="request">The appointment to start a video session for.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.Join(System.Guid,System.Threading.CancellationToken)">
+             <summary>Join an existing video consultation session and receive connection bootstrapping data.</summary>
+             <remarks>
+             Available to both the **Doctor** and the **Patient** assigned to the appointment.
+             Call this via REST first to obtain `signalRHubUrl`, `yourConnectionInfo`, and `chatHistory`,
+             then connect to the SignalR hub and call `JoinConsultationRoom(consultationId)`.
+            
+             The session status transitions **Scheduled → InProgress** on the first join.
+            
+             **Example response (200):**
+             ```json
+             {
+               "consultationId": "a1b2c3d4-...",
+               "roomId": "room_a1b2c3d4...",
+               "signalRHubUrl": "/hubs/video",
+               "yourConnectionInfo": { "userId": "...", "userType": "Patient", "displayName": "Sara Haile" },
+               "otherParticipants": [],
+               "chatHistory": []
+             }
+             ```
+            
+             After receiving this response:
+             1. Connect to `wss://&lt;host&gt;/hubs/video?access_token=&lt;JWT&gt;`
+             2. Call hub method `JoinConsultationRoom(consultationId)`
+             3. On receiving `UserJoined` event, initiate WebRTC by calling `SendOffer(consultationId, event.connectionId, sdpOffer)`
+            
+             **Error cases:**
+             - `400` — Consultation is already completed or cancelled.
+             - `403` — Caller is not the assigned doctor or patient.
+             - `404` — Consultation not found.
+             </remarks>
+             <param name="id">The consultation ID returned by the Initiate endpoint.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.End(System.Guid,System.Threading.CancellationToken)">
+             <summary>Terminate an active video consultation session.</summary>
+             <remarks>
+             **Doctor or Admin only.** Marks the consultation as **Completed**, records leave timestamps for both
+             participants, and broadcasts a `ConsultationEnded` SignalR event to the room.
+             If called by the doctor, the linked appointment is also marked **Completed**.
+            
+             This call is idempotent — calling it on an already-ended session returns `204` with no side effects.
+            
+             **After receiving `ConsultationEnded` on the client:**
+             1. Close all `RTCPeerConnection` instances.
+             2. Stop all local `MediaStream` tracks.
+             3. Disconnect from the SignalR hub.
+             4. Navigate to the post-call summary screen.
+            
+             **Error cases:**
+             - `404` — Consultation not found.
+             </remarks>
+             <param name="id">The consultation ID to end.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.GetById(System.Guid,System.Threading.CancellationToken)">
+             <summary>Get full session details for a video consultation.</summary>
+             <remarks>
+             Returns ICE server configuration, doctor and patient info, and appointment metadata.
+             Use this to reconstruct the call screen after an app backgrounding/restore event.
+            
+             **Error cases:**
+             - `403` — Caller is not the assigned doctor or patient.
+             - `404` — Consultation not found.
+             </remarks>
+             <param name="id">The consultation ID.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.Chat(System.Guid,System.Int32,System.Int32,System.Threading.CancellationToken)">
+             <summary>Retrieve paginated in-session chat history for a consultation.</summary>
+             <remarks>
+             Messages are returned in chronological order (oldest first). The first page (50 messages) is
+             already included in the `chatHistory` field of the Join response — call this endpoint only when
+             the user scrolls up to load older messages.
+            
+             **Example response (200):**
+             ```json
+             [
+               {
+                 "messageId": "...",
+                 "consultationId": "...",
+                 "senderId": "...",
+                 "senderName": "Dr. Abebe Bekele",
+                 "senderType": "Doctor",
+                 "content": "How are you feeling today?",
+                 "sentAt": "2026-05-15T09:05:00Z",
+                 "isRead": true
+               }
+             ]
+             ```
+             </remarks>
+             <param name="id">The consultation ID.</param>
+             <param name="page">1-based page number (default: 1).</param>
+             <param name="pageSize">Messages per page, max 50 (default: 50).</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.SendMessage(System.Guid,MediMind.API.Controllers.SendChatMessageRequest,System.Threading.CancellationToken)">
+            <summary>Persist a chat message sent via Agora RTM during a consultation.</summary>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.ByAppointment(System.Guid,System.Threading.CancellationToken)">
+             <summary>Get the video consultation associated with a specific appointment.</summary>
+             <remarks>
+             Convenience lookup — equivalent to `GET /{id}` when you have the appointment ID but not the
+             consultation ID (e.g. navigating from the appointment detail screen).
+            
+             **Error cases:**
+             - `403` — Caller is not the assigned doctor or patient.
+             - `404` — No consultation found for this appointment.
+             </remarks>
+             <param name="appointmentId">The appointment ID.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.VideoConsultationsController.QualityReport(System.Guid,MediMind.API.Controllers.QualityReportRequest,System.Threading.CancellationToken)">
+             <summary>Submit a real-time connection quality report (bandwidth, packet loss, frame rate).</summary>
+             <remarks>
+             Call this endpoint **every 10 seconds** during an active call using stats from
+             `RTCPeerConnection.getStats()`. The server persists metrics and triggers a `QualityAlert`
+             SignalR event to the room if bandwidth drops below **500 Kbps**.
+            
+             **How to read stats from WebRTC (JavaScript/TypeScript):**
+             ```typescript
+             const stats = await peerConnection.getStats();
+             stats.forEach(report => {
+               if (report.type === 'inbound-rtp' &amp;&amp; report.kind === 'video') {
+                 const bandwidth = report.bytesReceived / report.timestamp * 8; // approximate Kbps
+                 const packetsLost = report.packetsLost;
+                 const frameRate = report.framesPerSecond;
+               }
+             });
+             ```
+            
+             **Example request:**
+             ```json
+             { "bandwidth": 320, "packetsLost": 12, "frameRate": 15 }
+             ```
+            
+             On `QualityAlert` event with `audioOnlyRecommended: true`, the client should:
+             1. Display toast: **"Poor connection. Audio-only mode recommended"**
+             2. Show a button "Disable video" that calls `videoTrack.enabled = false` on the local stream.
+            
+             **Error cases:**
+             - `404` — Consultation not found.
+             </remarks>
+             <param name="id">The consultation ID.</param>
+             <param name="request">Bandwidth (Kbps), packets lost count, and current frame rate.</param>
+        </member>
+        <member name="T:MediMind.API.Controllers.InitiateConsultationRequest">
+            <summary>Request body for initiating a new video consultation.</summary>
+            <param name="AppointmentId">ID of the confirmed appointment to start the session for.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.InitiateConsultationRequest.#ctor(System.Guid)">
+            <summary>Request body for initiating a new video consultation.</summary>
+            <param name="AppointmentId">ID of the confirmed appointment to start the session for.</param>
+        </member>
+        <member name="P:MediMind.API.Controllers.InitiateConsultationRequest.AppointmentId">
+            <summary>ID of the confirmed appointment to start the session for.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.QualityReportRequest">
+            <summary>Real-time WebRTC connection quality metrics collected from RTCPeerConnection.getStats().</summary>
+            <param name="Bandwidth">Current estimated receive bandwidth in Kbps. Triggers a quality alert when below 500.</param>
+            <param name="PacketsLost">Total RTP packets lost since the last report.</param>
+            <param name="FrameRate">Current video frame rate in frames per second.</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.QualityReportRequest.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>Real-time WebRTC connection quality metrics collected from RTCPeerConnection.getStats().</summary>
+            <param name="Bandwidth">Current estimated receive bandwidth in Kbps. Triggers a quality alert when below 500.</param>
+            <param name="PacketsLost">Total RTP packets lost since the last report.</param>
+            <param name="FrameRate">Current video frame rate in frames per second.</param>
+        </member>
+        <member name="P:MediMind.API.Controllers.QualityReportRequest.Bandwidth">
+            <summary>Current estimated receive bandwidth in Kbps. Triggers a quality alert when below 500.</summary>
+        </member>
+        <member name="P:MediMind.API.Controllers.QualityReportRequest.PacketsLost">
+            <summary>Total RTP packets lost since the last report.</summary>
+        </member>
+        <member name="P:MediMind.API.Controllers.QualityReportRequest.FrameRate">
+            <summary>Current video frame rate in frames per second.</summary>
+        </member>
+        <member name="T:MediMind.API.Controllers.SendChatMessageRequest">
+            <summary>Request body for sending a chat message via Agora RTM (persisted to the database).</summary>
+            <param name="Content">Message text (1–2000 characters).</param>
+        </member>
+        <member name="M:MediMind.API.Controllers.SendChatMessageRequest.#ctor(System.String)">
+            <summary>Request body for sending a chat message via Agora RTM (persisted to the database).</summary>
+            <param name="Content">Message text (1–2000 characters).</param>
+        </member>
+        <member name="P:MediMind.API.Controllers.SendChatMessageRequest.Content">
+            <summary>Message text (1–2000 characters).</summary>
+        </member>
+        <member name="T:MediMind.API.Middleware.TenantValidationMiddleware">
+            <summary>
+            Validates admin tenant access to healthcare center scoped routes.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Middleware.TenantValidationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Validates admin tenant access to healthcare center scoped routes.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Executes middleware validation.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindOpenApiExtensions">
+            <summary>
+            Registers OpenAPI document generation (Microsoft.AspNetCore.OpenApi) with MediMind-specific metadata.
+            Scalar consumes the generated JSON; Swashbuckle is not used.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindOpenApiDocumentTransformer">
+            <summary>
+            Rich top-level API description, contact, license, and JWT Bearer scheme for Scalar.
+            </summary>
+        </member>
+        <member name="M:MediMind.API.OpenApi.MediMindOpenApiDocumentTransformer.#ctor(Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider)">
+            <summary>
+            Rich top-level API description, contact, license, and JWT Bearer scheme for Scalar.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.MediMindAuthOperationTransformer">
+            <summary>
+            Marks operations as requiring Bearer auth unless explicitly <see cref="T:Microsoft.AspNetCore.Authorization.AllowAnonymousAttribute"/>.
+            Adds standard 401, 403, and 500 responses.
+            </summary>
+        </member>
+        <member name="T:MediMind.API.OpenApi.RoleRequiredOperationTransformer">
+            <summary>
+            Adds <c>x-role-required</c> extension to each operation based on <see cref="T:MediMind.API.Attributes.RequireRoleAttribute"/>
+            or <see cref="P:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Policy"/>.
+            </summary>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type)">
+            <summary>
+            Generates a documentation comment ID for a type.
+            Example: T:Namespace.Outer+Inner`1 becomes T:Namespace.Outer.Inner`1
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.PropertyInfo)">
+            <summary>
+            Generates a documentation comment ID for a property.
+            Example: P:Namespace.ContainingType.PropertyName or for an indexer P:Namespace.ContainingType.Item(System.Int32)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Type,System.String)">
+            <summary>
+            Generates a documentation comment ID for a property given its container type and property name.
+            Example: P:Namespace.ContainingType.PropertyName
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.CreateDocumentationId(System.Reflection.MethodInfo)">
+            <summary>
+            Generates a documentation comment ID for a method (or constructor).
+            For example:
+              M:Namespace.ContainingType.MethodName(ParamType1,ParamType2)~ReturnType
+              M:Namespace.ContainingType.#ctor(ParamType)
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.GetTypeDocId(System.Type,System.Boolean,System.Boolean)">
+            <summary>
+            Generates a documentation ID string for a type.
+            This method handles nested types (replacing '+' with '.'),
+            generic types, arrays, pointers, by-ref types, and generic parameters.
+            The <paramref name="includeGenericArguments"/> flag controls whether
+            constructed generic type arguments are emitted, while <paramref name="omitGenericArity"/>
+            controls whether the generic arity marker (e.g. "`1") is appended.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.OpenApi.Generated.DocumentationCommentIdHelper.NormalizeDocId(System.String)">
+            <summary>
+            Normalizes a documentation comment ID to match the compiler-style format.
+            Strips the return type suffix for ordinary methods but retains it for conversion operators.
+            </summary>
+            <param name="docId">The documentation comment ID to normalize.</param>
+            <returns>The normalized documentation comment ID.</returns>
+        </member>
+    </members>
+</doc>

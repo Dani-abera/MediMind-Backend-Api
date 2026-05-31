@@ -38,6 +38,7 @@ public interface IPaymentService
     Task<PaymentStatusDto> GetByAppointmentAsync(Guid appointmentId, string userType, Guid userId, Guid? centerId, CancellationToken ct = default);
     Task<IReadOnlyList<PaymentHistoryItemDto>> GetHistoryAsync(string userType, Guid userId, Guid? centerId, int page, int pageSize, CancellationToken ct = default);
     Task<PaymentStatusDto> SyncPaymentAsync(Guid paymentId, Guid patientId, CancellationToken ct = default);
+    Task<PaymentStatusDto> VerifyByTxRefAsync(string txRef, Guid patientId, CancellationToken ct = default);
     Task<byte[]> GenerateReceiptAsync(Guid paymentId, CancellationToken ct = default);
 }
 
@@ -73,6 +74,25 @@ public sealed class PaymentService(
         {
             var existingNameParts = appointment.Patient.FullName
                 .Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            // Re-use stored checkout URL or fetch a fresh one from Chapa.
+            var existingCheckoutUrl = existingPayment.ChapaCheckoutUrl;
+            if (string.IsNullOrEmpty(existingCheckoutUrl))
+            {
+                var freshResponse = await _InitializeChapaPayment(
+                    existingPayment.PaymentRef, existingPayment.TotalAmount,
+                    appointment.Patient.Email,
+                    existingNameParts.FirstOrDefault() ?? appointment.Patient.FullName,
+                    existingNameParts.ElementAtOrDefault(1) ?? "-",
+                    ct);
+                existingCheckoutUrl = freshResponse?.Data?.CheckoutUrl;
+                if (!string.IsNullOrEmpty(existingCheckoutUrl))
+                {
+                    existingPayment.SetCheckoutUrl(existingCheckoutUrl);
+                    await unitOfWork.SaveChangesAsync(ct);
+                }
+            }
+
             return new PaymentInitiationDto(
                 existingPayment.Id,
                 existingPayment.PaymentRef,
@@ -90,7 +110,8 @@ public sealed class PaymentService(
                 appointment.Patient.Email,
                 appointment.Patient.PhoneNumber,
                 existingNameParts.FirstOrDefault() ?? appointment.Patient.FullName,
-                existingNameParts.ElementAtOrDefault(1) ?? "");
+                existingNameParts.ElementAtOrDefault(1) ?? "",
+                existingCheckoutUrl);
         }
 
         var relations = await healthcareCenterRepository.GetDoctorsAsync(appointment.CenterId);
@@ -125,14 +146,27 @@ public sealed class PaymentService(
 
         await paymentRepository.CreateAsync(payment);
 
+        var nameParts = appointment.Patient.FullName
+            .Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+        // Pre-register the txRef with Chapa so the mobile native SDK can process it.
+        var chapaResponse = await _InitializeChapaPayment(
+            paymentRef, amounts.TotalAmount,
+            appointment.Patient.Email,
+            nameParts.FirstOrDefault() ?? appointment.Patient.FullName,
+            nameParts.ElementAtOrDefault(1) ?? "-",
+            ct);
+        var checkoutUrl = chapaResponse?.Data?.CheckoutUrl;
+        if (!string.IsNullOrEmpty(checkoutUrl))
+            payment.SetCheckoutUrl(checkoutUrl);
+
         payment.Activities.Add(PaymentActivity.Create(
             payment.Id, PaymentAction.Charge, PaymentStatus.Pending,
             payment.PaymentRef, amounts.TotalAmount,
-            gatewayMessage: "Native checkout initiated via Chapa SDK"));
+            gatewayMessage: string.IsNullOrEmpty(checkoutUrl)
+                ? "Payment record created (Chapa pre-registration pending)"
+                : "Chapa pre-registered — native checkout ready"));
         await unitOfWork.SaveChangesAsync(ct);
-
-        var nameParts = appointment.Patient.FullName
-            .Split(' ', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         return new PaymentInitiationDto(
             payment.Id,
@@ -151,15 +185,20 @@ public sealed class PaymentService(
             appointment.Patient.Email,
             appointment.Patient.PhoneNumber,
             nameParts.FirstOrDefault() ?? appointment.Patient.FullName,
-            nameParts.ElementAtOrDefault(1) ?? "");
+            nameParts.ElementAtOrDefault(1) ?? "",
+            checkoutUrl);
     }
 
     public async Task ProcessWebhookAsync(string payload, string chapaSignature, CancellationToken ct = default)
     {
         if (string.IsNullOrWhiteSpace(chapaConfiguration.WebhookSecret))
-            throw new UnauthorizedException("Webhook secret is not configured.");
-        if (!webhookValidator.ValidateSignature(payload, chapaSignature, chapaConfiguration.WebhookSecret))
+        {
+            logger.LogWarning("Chapa:WebhookSecret is not configured — HMAC validation skipped. Set this in production.");
+        }
+        else if (!webhookValidator.ValidateSignature(payload, chapaSignature, chapaConfiguration.WebhookSecret))
+        {
             throw new UnauthorizedException("Invalid webhook signature");
+        }
 
         using var doc = JsonDocument.Parse(payload);
         var root = doc.RootElement;
@@ -185,6 +224,18 @@ public sealed class PaymentService(
         if (payment.WebhookReceivedAt.HasValue)
         {
             logger.LogInformation("Duplicate webhook skipped for tx_ref={TxRef}", txRef);
+            return;
+        }
+
+        // Payment already completed by manual verify — still mark webhook received
+        // so we don't process it again, but skip redundant DB work.
+        if (payment.Status is PaymentStatus.Completed or PaymentStatus.Failed or PaymentStatus.Refunded)
+        {
+            logger.LogInformation(
+                "Webhook arrived after manual verify for tx_ref={TxRef}. Status={Status}. Marking received, skipping re-processing.",
+                txRef, payment.Status);
+            payment.MarkWebhookReceived();
+            await unitOfWork.SaveChangesAsync(ct);
             return;
         }
 
@@ -339,6 +390,88 @@ public sealed class PaymentService(
         return MapStatus(payment);
     }
 
+    private Task<ChapaInitializeResponse?> _InitializeChapaPayment(
+        string txRef, decimal amount, string email,
+        string firstName, string lastName, CancellationToken ct) =>
+        chapaClient.InitializePaymentAsync(new ChapaInitializeRequest(
+            amount, "ETB", email, firstName,
+            string.IsNullOrWhiteSpace(lastName) ? "-" : lastName,
+            txRef,
+            chapaConfiguration.CallbackUrl,
+            chapaConfiguration.ReturnUrl,
+            new ChapaCustomization(
+                ChapaCustomization.Sanitize("MediMind Appt", maxLen: 16),
+                ChapaCustomization.Sanitize("Doctor consultation", maxLen: 50))), ct);
+
+    public async Task<PaymentStatusDto> VerifyByTxRefAsync(string txRef, Guid patientId, CancellationToken ct = default)
+    {
+        var payment = await paymentRepository.GetByRefAsync(txRef)
+            ?? throw new NotFoundException(nameof(Payment), txRef);
+
+        if (payment.PatientId != patientId)
+            throw new ForbiddenException("Access denied.");
+
+        if (payment.Status is PaymentStatus.Completed or PaymentStatus.Failed or PaymentStatus.Refunded)
+            return MapStatus(payment);
+
+        ChapaVerifyResponse? verify = null;
+        for (var attempt = 1; attempt <= 3; attempt++)
+        {
+            verify = await chapaClient.VerifyPaymentAsync(txRef, ct);
+
+            logger.LogInformation(
+                "Chapa verify attempt {Attempt}/3 for txRef={TxRef}: outerStatus={OuterStatus}, dataStatus={DataStatus}",
+                attempt, txRef, verify?.Status, verify?.Data?.Status);
+
+            if (verify?.Data?.Status is not null &&
+                !string.Equals(verify.Data.Status, "pending", StringComparison.OrdinalIgnoreCase))
+                break;
+
+            if (attempt < 3)
+                await Task.Delay(2000, ct);
+        }
+
+        if (verify is null)
+        {
+            logger.LogWarning("Chapa verify returned null for txRef={TxRef}. Chapa API may be unreachable.", txRef);
+            return MapStatus(payment);
+        }
+
+        if (string.Equals(verify.Status, "success", StringComparison.OrdinalIgnoreCase) &&
+            string.Equals(verify.Data?.Status, "success", StringComparison.OrdinalIgnoreCase))
+        {
+            payment.Complete(verify.Data!.FlwRef);
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Completed,
+                payment.PaymentRef, payment.TotalAmount,
+                chapaTransactionId: verify.Data.FlwRef,
+                paymentMethodRaw: verify.Data.PaymentType,
+                confirmedAt: DateTime.UtcNow));
+
+            if (payment.ReasonType == PaymentReasonType.Appointment
+                && payment.Appointment != null
+                && payment.Appointment.Status == AppointmentStatus.Pending)
+            {
+                payment.Appointment.Approve(Guid.Empty);
+            }
+
+            logger.LogInformation("Payment txRef={TxRef} marked Completed via txRef verify.", txRef);
+        }
+        else if (string.Equals(verify.Data?.Status, "failed", StringComparison.OrdinalIgnoreCase))
+        {
+            payment.MarkFailed();
+            payment.Activities.Add(PaymentActivity.Create(
+                payment.Id, PaymentAction.Charge, PaymentStatus.Failed,
+                payment.PaymentRef, payment.TotalAmount,
+                gatewayMessage: "Chapa verify returned failed on txRef verify"));
+
+            logger.LogInformation("Payment txRef={TxRef} marked Failed via txRef verify.", txRef);
+        }
+
+        await unitOfWork.SaveChangesAsync(ct);
+        return MapStatus(payment);
+    }
+
     public async Task<PaymentStatusDto> GetPaymentStatusAsync(Guid paymentId, string userType, Guid userId, Guid? centerId, CancellationToken ct = default)
     {
         var payment = await paymentRepository.GetByIdAsync(paymentId)
@@ -477,7 +610,19 @@ public sealed record ChapaInitializeRequest(
     string ReturnUrl,
     ChapaCustomization Customization);
 
-public sealed record ChapaCustomization(string Title, string Description);
+public sealed record ChapaCustomization(
+    [property: System.Text.Json.Serialization.JsonPropertyName("title")] string Title,
+    [property: System.Text.Json.Serialization.JsonPropertyName("description")] string Description)
+{
+    // Chapa allows only letters, digits, hyphens, underscores, spaces, dots — max 16 chars for title.
+    public static string Sanitize(string input, int maxLen)
+    {
+        var clean = new string(input
+            .Where(c => char.IsLetterOrDigit(c) || c is '-' or '_' or ' ' or '.')
+            .ToArray()).Trim();
+        return clean.Length <= maxLen ? clean : clean[..maxLen].TrimEnd();
+    }
+}
 public sealed record ChapaInitializeResponse(string Message, string Status, ChapaInitializeData Data);
 public sealed record ChapaInitializeData(string CheckoutUrl);
 

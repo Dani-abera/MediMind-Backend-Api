@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MediMind.UnitTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+577703221acb0f077af4887f704fc87166568554")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85029e3e534c45160af8b4e57101d69735ba20a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("MediMind.UnitTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MediMind.UnitTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

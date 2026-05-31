@@ -42,7 +42,7 @@ public class AdminManagementService(
             dto.PhoneNumber,
             dto.FullName,
             DateOnly.FromDateTime(DateTime.UtcNow.AddYears(-30)),
-            Gender.Other,
+            Gender.NotMentioned,
             centerId,
             dto.Role);
         newAdmin.SetPasswordHash(passwordService.HashPassword(tempPassword));

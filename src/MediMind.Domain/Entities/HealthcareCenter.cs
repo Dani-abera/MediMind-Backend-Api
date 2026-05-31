@@ -52,8 +52,14 @@ public class HealthcareCenter : BaseEntity
     public decimal? Latitude { get; private set; }
     public decimal? Longitude { get; private set; }
 
-    /// <summary>Public URL for center logo / cover image (same storage as user profile images).</summary>
+    /// <summary>Public URL for center logo image.</summary>
     public string? ProfileImageUrl { get; private set; }
+
+    /// <summary>Public URL for center cover/banner image.</summary>
+    public string? CoverImageUrl { get; private set; }
+
+    /// <summary>Short public description shown on the center's profile.</summary>
+    public string? Description { get; private set; }
 
     // Navigation
     public ICollection<HealthcareCenterAdmin> Admins { get; private set; } = [];
@@ -238,6 +244,14 @@ public class HealthcareCenter : BaseEntity
     public void SetProfileImageUrl(string? profileImageUrl)
     {
         ProfileImageUrl = profileImageUrl;
+        UpdateTimestamp();
+    }
+
+    public void UpdateBranding(string? logoUrl, string? coverUrl, string? description)
+    {
+        ProfileImageUrl = logoUrl;
+        CoverImageUrl = coverUrl;
+        if (description is not null) Description = description;
         UpdateTimestamp();
     }
 

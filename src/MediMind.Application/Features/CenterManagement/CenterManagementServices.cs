@@ -29,6 +29,7 @@ public interface IHealthcareCenterService
     Task<IEnumerable<DoctorResponseDto>> GetDoctorsAsync(Guid centerId);
     Task<IEnumerable<AdminDoctorRosterItemDto>> GetAdminDoctorRosterAsync(Guid centerId, Guid adminId, CancellationToken ct = default);
     Task<SubscriptionPaymentInitiationDto> InitiateSubscriptionPaymentAsync(Guid centerId, Guid planId, SubscriptionBillingCycle billingCycle, Guid adminId, CancellationToken ct = default);
+    Task UpdateBrandingAsync(Guid centerId, CenterBrandingUpdateDto dto, Guid adminId, CancellationToken ct = default);
 }
 
 public interface IAnalyticsService
@@ -207,6 +208,16 @@ public class HealthcareCenterService(
         return MapAdminConfig(center);
     }
 
+    public async Task UpdateBrandingAsync(Guid centerId, CenterBrandingUpdateDto dto, Guid adminId, CancellationToken ct = default)
+    {
+        await EnsureAdminAuthority(centerId, adminId);
+        var center = await centerRepository.GetByIdAsync(centerId)
+            ?? throw new NotFoundException(nameof(HealthcareCenter), centerId);
+        center.UpdateBranding(dto.LogoUrl, dto.CoverUrl, dto.Description);
+        await centerRepository.UpdateAsync(center);
+        await unitOfWork.SaveChangesAsync(ct);
+    }
+
     public async Task<AdminBookingRulesDto> GetBookingRulesAsync(Guid centerId, Guid adminId)
     {
         await EnsureAdminAuthority(centerId, adminId);
@@ -280,7 +291,8 @@ public class HealthcareCenterService(
     private static AdminCenterConfigDto MapAdminConfig(HealthcareCenter c) =>
         new(c.Id.ToString(), c.CenterName, c.PhoneNumber, c.Email, c.City, c.Region, c.Address,
             c.LicenseNumber, (double?)c.Latitude, (double?)c.Longitude,
-            c.ServicesOffered, c.Specializations, c.ProfileImageUrl);
+            c.ServicesOffered, c.Specializations, c.ProfileImageUrl,
+            CoverUrl: c.CoverImageUrl, Description: c.Description);
 
     private static AdminBookingRulesDto MapBookingRules(HealthcareCenter c, string? warning = null) =>
         new(c.SlotDurationMinutes, c.AdvanceBookingDays, c.CancellationHours,
@@ -364,7 +376,8 @@ public class HealthcareCenterService(
                 doctor.LanguagesSpoken,
                 fee,
                 nextSlot,
-                centers));
+                centers,
+                AvatarUrl: doctor.ProfileImageUrl));
         }
 
         return results;
@@ -434,14 +447,17 @@ public class HealthcareCenterService(
             "ETB",
             admin.Email,
             nameParts.FirstOrDefault() ?? admin.FullName,
-            nameParts.ElementAtOrDefault(1) ?? "",
+            nameParts.ElementAtOrDefault(1) ?? "-",
             paymentRef,
             chapaConfiguration.CallbackUrl,
             chapaConfiguration.ReturnUrl,
-            new ChapaCustomization($"MediMind — {plan.Name} Plan", $"Subscription ({billingCycle}) for {center.CenterName}")), ct);
+            new ChapaCustomization(
+                ChapaCustomization.Sanitize($"MediMind {plan.Name}", maxLen: 16),
+                ChapaCustomization.Sanitize($"Subscription {billingCycle} {center.CenterName}", maxLen: 50))), ct);
 
-        var checkoutUrl = chapaResponse?.Data?.CheckoutUrl
-            ?? throw new DomainException("Chapa payment initialization failed. Please try again.");
+        var checkoutUrl = chapaResponse?.Data?.CheckoutUrl;
+        if (string.IsNullOrEmpty(checkoutUrl))
+            throw new DomainException("Chapa payment initialization failed — no checkout URL returned. Check your Chapa API key and request parameters.");
 
         payment.SetCheckoutUrl(checkoutUrl);
         center.MarkPaymentPending(planId, paymentRef, billingCycle);
@@ -505,7 +521,8 @@ public class HealthcareCenterService(
             distance,
             isOpen,
             Latitude: center.Latitude.HasValue ? Convert.ToDouble(center.Latitude.Value) : null,
-            Longitude: center.Longitude.HasValue ? Convert.ToDouble(center.Longitude.Value) : null);
+            Longitude: center.Longitude.HasValue ? Convert.ToDouble(center.Longitude.Value) : null,
+            LogoUrl: center.ProfileImageUrl);
     }
 
     private static Dictionary<string, string> BuildWorkingHoursDictionary(WorkingHoursDto dto)

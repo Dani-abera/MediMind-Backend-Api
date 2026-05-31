@@ -53,7 +53,8 @@ public sealed record PaymentInitiationDto(
     string PatientEmail,
     string PatientPhone,
     string PatientFirstName,
-    string PatientLastName);
+    string PatientLastName,
+    string? CheckoutUrl = null);
 
 public sealed record PaymentStatusDto(
     Guid PaymentId,
