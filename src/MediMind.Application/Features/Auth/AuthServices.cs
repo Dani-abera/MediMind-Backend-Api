@@ -62,7 +62,8 @@ public record PatientProfileDto(
     string? Address,
     string? MedicalHistory,
     string? Allergies,
-    BloodType? BloodType);
+    BloodType? BloodType,
+    string? ProfileImageUrl);
 
 // ─── Request Records ──────────────────────────────────────────────────────────
 
@@ -321,7 +322,8 @@ public class PatientAuthService(
         var patient = await patientRepository.GetByIdAsync(currentUser.UserId, ct)
             ?? throw new NotFoundException(nameof(Patient), currentUser.UserId);
         return new PatientProfileDto(patient.Id, patient.PhoneNumber, patient.FullName, patient.DateOfBirth,
-            patient.Gender, patient.Address, patient.MedicalHistory, patient.Allergies, patient.BloodType);
+            patient.Gender, patient.Address, patient.MedicalHistory, patient.Allergies, patient.BloodType,
+            patient.ProfileImageUrl);
     }
 
     public async Task UpsertProfileAsync(UpsertPatientProfileRequest request, CancellationToken ct)
