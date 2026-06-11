@@ -1,1 +1,4 @@
 src/MediMind.API/firebase-service-account.json
+
+# Local secrets — never commit
+.env

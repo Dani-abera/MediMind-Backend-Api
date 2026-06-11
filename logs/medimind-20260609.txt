@@ -1,0 +1,235 @@
+2026-06-09 15:31:19.910 +00:00 [ERR] Failed executing DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-06-09 15:31:21.770 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:23.645 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:25.633 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:27.433 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:29.654 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:32.619 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:37.291 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:45.149 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:31:59.399 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:32:26.928 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/uploads' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 155
+2026-06-09 15:32:50.908 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:32:52.282 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:32:53.842 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:32:55.641 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:32:57.717 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:33:00.663 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:33:05.197 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:33:13.036 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:33:27.305 +00:00 [FTL] MediMind API terminated unexpectedly.
+System.UnauthorizedAccessException: Access to the path '/app/storage' is denied.
+ ---> System.IO.IOException: Permission denied
+   --- End of inner exception stack trace ---
+   at System.IO.FileSystem.CreateParentsAndDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.FileSystem.CreateDirectory(String fullPath, UnixFileMode unixCreateMode)
+   at System.IO.Directory.CreateDirectory(String path)
+   at Program.<Main>$(String[] args) in /app/src/MediMind.API/Program.cs:line 168
+2026-06-09 15:33:39.624 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-09 15:33:39.634 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-09 15:33:39.660 +00:00 [WRN] No XML encryptor configured. Key {fa0a0565-b2c8-4547-af6a-8c13d7a92474} may be persisted to storage in unencrypted form.
+2026-06-09 15:33:40.079 +00:00 [INF] ✅ SuperAdmin account seeded: superadmin@medimind.et
+2026-06-09 15:33:40.159 +00:00 [INF] ✅ Seeded 4 subscription plans.
+2026-06-09 15:33:40.160 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-10T00:00:00.0000000Z
+2026-06-09 15:33:40.161 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-09 15:33:40.163 +00:00 [INF] Daily queue generation scheduled for "2026-06-10T06:00:00.0000000" ("2026-06-10T03:00:00.0000000Z" UTC)
+2026-06-09 15:33:40.230 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-09 15:33:40.231 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-09 15:35:47.619 +00:00 [INF] HTTP GET / responded 404 in 54.7672 ms
+2026-06-09 15:35:50.227 +00:00 [INF] HTTP GET /favicon.ico responded 404 in 10.3043 ms
+2026-06-09 15:36:07.233 +00:00 [INF] HTTP GET / responded 404 in 20.2796 ms
+2026-06-09 15:36:15.013 +00:00 [INF] HTTP GET /scalar responded 302 in 9.9330 ms
+2026-06-09 15:36:15.107 +00:00 [INF] HTTP GET /scalar/ responded 200 in 86.0130 ms
+2026-06-09 15:36:15.523 +00:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 7.9713 ms
+2026-06-09 15:36:15.561 +00:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 52.9070 ms
+2026-06-09 15:36:17.135 +00:00 [INF] HTTP GET /scalar/favicon.svg responded 200 in 1.6330 ms
+2026-06-09 15:36:34.319 +00:00 [INF] HTTP GET /scalar/ responded 200 in 17.0784 ms
+2026-06-09 15:36:34.406 +00:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 2.1062 ms
+2026-06-09 15:36:34.407 +00:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 2.7611 ms
+2026-06-09 15:36:42.561 +00:00 [INF] HTTP GET /hangfire responded 401 in 127.6117 ms
+2026-06-09 15:36:50.014 +00:00 [INF] HTTP GET /hangfire responded 401 in 17.5527 ms
+2026-06-09 15:37:20.641 +00:00 [INF] HTTP GET /openapi/v1.json responded 200 in 64832.4664 ms
+2026-06-09 15:37:25.436 +00:00 [INF] HTTP GET /openapi/v1.json responded 200 in 50966.8877 ms
+2026-06-09 16:00:12.528 +00:00 [INF] Running appointment reminder job at "2026-06-09T16:00:12.5256040Z"
+2026-06-09 16:00:12.692 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 16:31:03.447 +00:00 [INF] Running appointment reminder job at "2026-06-09T16:31:03.4441424Z"
+2026-06-09 16:31:03.481 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 17:36:15.246 +00:00 [INF] Running appointment reminder job at "2026-06-09T17:36:15.2433675Z"
+2026-06-09 17:36:15.287 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 18:20:47.115 +00:00 [INF] Running appointment reminder job at "2026-06-09T18:20:47.1150053Z"
+2026-06-09 18:20:47.138 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 18:53:05.355 +00:00 [INF] Running appointment reminder job at "2026-06-09T18:53:05.3545050Z"
+2026-06-09 18:53:05.389 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 19:00:05.509 +00:00 [INF] Running appointment reminder job at "2026-06-09T19:00:05.5071060Z"
+2026-06-09 19:00:05.558 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 19:52:26.754 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-09 19:52:26.764 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-09 19:52:26.775 +00:00 [WRN] No XML encryptor configured. Key {4e3fae0d-874a-4c71-b137-9e497704b53f} may be persisted to storage in unencrypted form.
+2026-06-09 19:52:26.990 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-10T00:00:00.0000000Z
+2026-06-09 19:52:26.991 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-09 19:52:26.993 +00:00 [INF] Daily queue generation scheduled for "2026-06-10T06:00:00.0000000" ("2026-06-10T03:00:00.0000000Z" UTC)
+2026-06-09 19:52:27.058 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-09 19:52:27.058 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-09 20:02:00.461 +00:00 [INF] Running appointment reminder job at "2026-06-09T20:02:00.4609417Z"
+2026-06-09 20:02:00.540 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 20:14:57.518 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-09 20:14:57.528 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-09 20:14:57.537 +00:00 [WRN] No XML encryptor configured. Key {a704de3b-1ed2-4fe3-865e-002d8c1f18f7} may be persisted to storage in unencrypted form.
+2026-06-09 20:14:57.744 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-10T00:00:00.0000000Z
+2026-06-09 20:14:57.746 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-09 20:14:57.748 +00:00 [INF] Daily queue generation scheduled for "2026-06-10T06:00:00.0000000" ("2026-06-10T03:00:00.0000000Z" UTC)
+2026-06-09 20:14:57.811 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-09 20:14:57.812 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-09 20:16:19.718 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-09 20:16:19.726 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-09 20:16:19.733 +00:00 [WRN] No XML encryptor configured. Key {157d77e5-6e3e-4d3e-9e8c-b02ee304512a} may be persisted to storage in unencrypted form.
+2026-06-09 20:16:19.910 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-10T00:00:00.0000000Z
+2026-06-09 20:16:19.911 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-09 20:16:19.913 +00:00 [INF] Daily queue generation scheduled for "2026-06-10T06:00:00.0000000" ("2026-06-10T03:00:00.0000000Z" UTC)
+2026-06-09 20:16:19.965 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-09 20:16:19.966 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-09 20:21:14.740 +00:00 [INF] HTTP GET /scalar/ responded 200 in 214.8264 ms
+2026-06-09 20:21:14.765 +00:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 15.0139 ms
+2026-06-09 20:21:14.779 +00:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 23.3642 ms
+2026-06-09 20:21:36.488 +00:00 [INF] HTTP GET /scalar/ responded 200 in 67.8864 ms
+2026-06-09 20:21:36.556 +00:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 304 in 11.3164 ms
+2026-06-09 20:21:36.557 +00:00 [INF] HTTP GET /scalar/scalar.js responded 304 in 50.1420 ms
+2026-06-09 20:21:42.801 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-09 20:21:42.811 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-09 20:21:42.821 +00:00 [WRN] No XML encryptor configured. Key {1bbdff02-be7d-40b9-878f-78624c6386ae} may be persisted to storage in unencrypted form.
+2026-06-09 20:21:43.027 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-10T00:00:00.0000000Z
+2026-06-09 20:21:43.029 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-09 20:21:43.033 +00:00 [INF] Daily queue generation scheduled for "2026-06-10T06:00:00.0000000" ("2026-06-10T03:00:00.0000000Z" UTC)
+2026-06-09 20:21:43.103 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-09 20:21:43.104 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-09 20:23:15.066 +00:00 [INF] HTTP GET /scalar/ responded 200 in 103.5769 ms
+2026-06-09 20:23:15.091 +00:00 [INF] HTTP GET /scalar/scalar.aspnetcore.js responded 200 in 9.3067 ms
+2026-06-09 20:23:15.102 +00:00 [INF] HTTP GET /scalar/scalar.js responded 200 in 16.1630 ms
+2026-06-09 20:23:44.185 +00:00 [INF] HTTP GET /openapi/v1.json responded 200 in 28982.1564 ms
+2026-06-09 20:30:08.432 +00:00 [INF] Running appointment reminder job at "2026-06-09T20:30:08.4266583Z"
+2026-06-09 20:30:08.810 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 21:23:23.023 +00:00 [INF] Running appointment reminder job at "2026-06-09T21:23:23.0233806Z"
+2026-06-09 21:23:23.037 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 22:30:00.295 +00:00 [INF] Running appointment reminder job at "2026-06-09T22:30:00.2948934Z"
+2026-06-09 22:30:00.307 +00:00 [INF] Appointment reminder job completed.
+2026-06-09 23:50:49.742 +00:00 [INF] Running appointment reminder job at "2026-06-09T23:50:49.7426937Z"
+2026-06-09 23:50:49.762 +00:00 [INF] Appointment reminder job completed.

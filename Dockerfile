@@ -28,11 +28,15 @@ COPY --from=build /app/publish .
 # Bake ONNX models into the image (update by replacing files + rebuilding)
 COPY src/MediMind.API/models/ ./models/
 
-# Non-root user — create after COPYs so we can set ownership on writable dirs
-RUN mkdir -p /app/logs \
- && addgroup --system appgroup \
- && adduser  --system --ingroup appgroup appuser \
- && chown -R appuser:appgroup /app/logs
+# Install missing native lib required by Npgsql (Kerberos/GSSAPI)
+RUN apt-get update && apt-get install -y --no-install-recommends libgssapi-krb5-2 \
+ && rm -rf /var/lib/apt/lists/*
+
+# Non-root user — pre-create all writable dirs so appuser has access
+RUN mkdir -p /app/logs /app/uploads /app/storage/prescriptions \
+ && groupadd --system appgroup \
+ && useradd  --system --gid appgroup appuser \
+ && chown -R appuser:appgroup /app/logs /app/uploads /app/storage
 
 USER appuser
 

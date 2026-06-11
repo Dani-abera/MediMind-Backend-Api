@@ -1,0 +1,20 @@
+2026-06-10 00:00:12.872 +00:00 [INF] Running appointment reminder job at "2026-06-10T00:00:12.8723975Z"
+2026-06-10 00:00:12.905 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 01:36:37.143 +00:00 [INF] Running appointment reminder job at "2026-06-10T01:36:37.1437501Z"
+2026-06-10 01:36:37.172 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 02:19:14.630 +00:00 [INF] Running appointment reminder job at "2026-06-10T02:19:14.6301745Z"
+2026-06-10 02:19:14.642 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 02:43:58.600 +00:00 [INF] Running appointment reminder job at "2026-06-10T02:43:58.6002845Z"
+2026-06-10 02:43:58.617 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 03:19:20.538 +00:00 [INF] Running appointment reminder job at "2026-06-10T03:19:20.5378274Z"
+2026-06-10 03:19:20.546 +00:00 [INF] QueueGenerationJob triggered for date "2026-06-09"
+2026-06-10 03:19:20.554 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 03:19:20.568 +00:00 [INF] Handling GenerateDailyQueuesCommand
+2026-06-10 03:19:20.666 +00:00 [INF] Handled GenerateDailyQueuesCommand in 97ms
+2026-06-10 03:19:20.667 +00:00 [INF] Generated 0 queues for 0 centers.
+2026-06-10 04:04:14.025 +00:00 [INF] Running appointment reminder job at "2026-06-10T04:04:14.0249375Z"
+2026-06-10 04:04:14.041 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 05:09:26.947 +00:00 [INF] Running appointment reminder job at "2026-06-10T05:09:26.9472010Z"
+2026-06-10 05:09:26.966 +00:00 [INF] Appointment reminder job completed.
+2026-06-10 05:30:09.206 +00:00 [INF] Running appointment reminder job at "2026-06-10T05:30:09.2055146Z"
+2026-06-10 05:30:09.235 +00:00 [INF] Appointment reminder job completed.

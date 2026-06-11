@@ -21,7 +21,7 @@ services:
       POSTGRES_PASSWORD: medimind_dev_password
       POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=en_US.UTF-8"
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
@@ -58,21 +58,32 @@ services:
     container_name: medimind_api
     restart: unless-stopped
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: "http://+:8080"
-      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=medimind_db;Username=postgres;Password=medimind_dev_password;"
-      Jwt__SecretKey: "dev-secret-key-change-this-in-production-minimum-32-chars!!"
-      Jwt__Issuer: "MediMind"
-      Jwt__Audience: "MediMindUsers"
-      MlService__ModelDirectory: "models"
-      Chapa__SecretKey: "CHASECK_TEST-your-test-key"
-      GeezSms__ApiKey: "your-geez-sms-key"
       Firebase__ServiceAccountPath: "/run/secrets/firebase_sa"
-      # Cloudinary__CloudName: ""
-      # Cloudinary__ApiKey: ""
-      # Cloudinary__ApiSecret: ""
+
+      # --- DATABASE: uncomment ONE line, or leave both commented to use .env DB_CONNECTION ---
+      # Local postgres container:
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=medimind_db;Username=postgres;Password=medimind_dev_password;"
+      # Render cloud DB (from .env):
+      # ConnectionStrings__DefaultConnection: "${DB_CONNECTION}"
+
+      # Auth & secrets (all values come from .env file)
+      Jwt__SecretKey: "${JWT_SECRET}"
+      Resend__ApiKey: "${RESEND_API_KEY}"
+      Chapa__SecretKey: "${CHAPA_SECRET_KEY}"
+      Chapa__PublicKey: "${CHAPA_PUBLIC_KEY}"
+      Chapa__WebhookSecret: "${CHAPA_WEBHOOK_SECRET}"
+      GeezSms__ApiKey: "${GEEZSMS_API_KEY}"
+      Prescription__HmacSecret: "${PRESCRIPTION_HMAC_SECRET}"
+      Agora__AppId: "${AGORA_APP_ID}"
+      Agora__AppCertificate: "${AGORA_APP_CERTIFICATE}"
+      Cloudinary__CloudName: "${CLOUDINARY_CLOUD_NAME}"
+      Cloudinary__ApiKey: "${CLOUDINARY_API_KEY}"
+      Cloudinary__ApiSecret: "${CLOUDINARY_API_SECRET}"
+      SuperAdmin__Password: "${SUPERADMIN_PASSWORD}"
     ports:
-      - "5000:8080"
+      - "5001:8080"
     depends_on:
       postgres:
         condition: service_healthy
