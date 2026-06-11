@@ -192,7 +192,7 @@ public class HealthcareCenterConfiguration : IEntityTypeConfiguration<Healthcare
         builder.Property(c => c.WorkingHours).IsRequired();
         JsonCollectionMapping.MapStringList(builder.Property(c => c.ServicesOffered), "text");
         builder.Property(c => c.ServicesOffered).IsRequired();
-        JsonCollectionMapping.MapStringList(builder.Property(c => c.Specializations), "text");
+        builder.Property(c => c.Specializations).HasColumnType("text[]");
 
         builder.Property(c => c.SubscriptionStatus).HasConversion<string>().HasMaxLength(30);
         builder.Property(c => c.PendingPaymentRef).HasMaxLength(100);

@@ -458,3 +458,545 @@ System.InvalidOperationException: The LINQ expression 's => @Functions
 2026-06-11 06:27:50.342 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.3328 ms
 2026-06-11 06:27:56.023 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.1995 ms
 2026-06-11 06:27:56.165 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 120.9063 ms
+2026-06-11 06:28:55.263 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.3911 ms
+2026-06-11 06:28:55.297 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 67.7173 ms
+2026-06-11 06:28:55.591 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.0076 ms
+2026-06-11 06:29:14.181 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:29:14.201 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 81.0246 ms
+2026-06-11 06:29:17.783 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:29:17.791 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 17.4539 ms
+2026-06-11 06:29:20.097 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:29:20.108 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 30.2112 ms
+2026-06-11 06:29:55.185 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 69.5663 ms
+2026-06-11 06:29:55.208 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 91.5299 ms
+2026-06-11 06:29:56.988 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.5910 ms
+2026-06-11 06:30:05.890 +00:00 [INF] Running appointment reminder job at "2026-06-11T06:30:05.8888802Z"
+2026-06-11 06:30:05.906 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 06:30:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.8400 ms
+2026-06-11 06:30:55.195 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 90.7613 ms
+2026-06-11 06:31:03.535 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.6423 ms
+2026-06-11 06:31:55.368 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.0994 ms
+2026-06-11 06:31:55.419 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 69.7512 ms
+2026-06-11 06:32:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.5758 ms
+2026-06-11 06:32:55.202 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 83.0194 ms
+2026-06-11 06:33:55.139 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.4999 ms
+2026-06-11 06:33:55.169 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 49.8315 ms
+2026-06-11 06:34:31.770 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.8537 ms
+2026-06-11 06:34:42.339 +00:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 70.0709 ms
+2026-06-11 06:34:42.458 +00:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 93.1428 ms
+2026-06-11 06:34:55.197 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 64.4559 ms
+2026-06-11 06:34:55.227 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 94.4843 ms
+2026-06-11 06:35:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.6704 ms
+2026-06-11 06:35:55.176 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 61.2245 ms
+2026-06-11 06:36:19.459 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.2457 ms
+2026-06-11 06:36:19.502 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 200 in 78.6467 ms
+2026-06-11 06:37:55.150 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 30.4435 ms
+2026-06-11 06:37:55.156 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/cc1ea9f0-3776-440e-a8f9-0ba700ad59cd/dashboard/today responded 401 in 35.3187 ms
+2026-06-11 06:37:55.252 +00:00 [WRN] UnauthorizedException on POST /api/v1/auth/refresh-token: Session expired. Please login.
+2026-06-11 06:37:55.258 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 401 in 33.4648 ms
+2026-06-11 06:37:55.291 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 68.6897 ms
+2026-06-11 06:37:55.408 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.8563 ms
+2026-06-11 06:38:55.120 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.3882 ms
+2026-06-11 06:38:55.145 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.8770 ms
+2026-06-11 06:40:55.144 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 12.9332 ms
+2026-06-11 06:40:55.179 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.7090 ms
+2026-06-11 06:41:55.115 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 3.1418 ms
+2026-06-11 06:41:55.209 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 98.2383 ms
+2026-06-11 06:42:55.129 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/dashboard/today responded 404 in 8.2465 ms
+2026-06-11 06:42:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.0372 ms
+2026-06-11 06:52:55.243 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 108.0654 ms
+2026-06-11 06:52:55.559 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 276.0388 ms
+2026-06-11 06:52:55.575 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.3035 ms
+2026-06-11 06:53:06.566 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 6.6788 ms
+2026-06-11 06:53:06.566 +00:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 401 in 8.7456 ms
+2026-06-11 06:53:06.654 +00:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 401 in 6.4932 ms
+2026-06-11 06:53:06.655 +00:00 [INF] HTTP GET /api/v1/health-records/latest responded 401 in 6.7853 ms
+2026-06-11 06:53:06.678 +00:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 401 in 3.3798 ms
+2026-06-11 06:53:06.691 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 1.2166 ms
+2026-06-11 06:53:06.768 +00:00 [INF] HTTP GET /api/v1/healthcare-centers/nearby responded 200 in 86.7356 ms
+2026-06-11 06:53:06.801 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 32.3148 ms
+2026-06-11 06:53:06.956 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.7700 ms
+2026-06-11 06:53:06.979 +00:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 14.5950 ms
+2026-06-11 06:53:07.040 +00:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 25.5628 ms
+2026-06-11 06:53:07.077 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.2030 ms
+2026-06-11 06:53:07.084 +00:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 204 in 18.7338 ms
+2026-06-11 06:53:07.093 +00:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 34.9265 ms
+2026-06-11 06:53:07.188 +00:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 15.0466 ms
+2026-06-11 06:53:10.345 +00:00 [INF] HTTP GET /api/v1/appointments/upcoming responded 200 in 12.7412 ms
+2026-06-11 06:53:10.416 +00:00 [INF] HTTP GET /api/v1/appointments/past responded 200 in 15.4755 ms
+2026-06-11 06:53:15.653 +00:00 [INF] HTTP GET /api/v1/healthcare-centers responded 200 in 24.5015 ms
+2026-06-11 06:53:18.221 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:18.258 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 86.9850 ms
+2026-06-11 06:53:21.144 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:21.152 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 27.7020 ms
+2026-06-11 06:53:22.475 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:22.480 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 8.9520 ms
+2026-06-11 06:53:24.324 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:24.329 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 14.9437 ms
+2026-06-11 06:53:25.342 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:25.350 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 11.9185 ms
+2026-06-11 06:53:27.195 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:27.203 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 18.5823 ms
+2026-06-11 06:53:28.830 +00:00 [ERR] Unhandled server error on GET /api/v1/healthcare-centers
+System.InvalidOperationException: The LINQ expression 's => @Functions
+    .ILike(
+        matchExpression: s, 
+        pattern: @Format)' could not be translated. Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList', or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitLambda[T](Expression`1 lambdaExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlSqlTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Query.Internal.NpgsqlQueryableMethodTranslatingExpressionVisitor.TranslateWhere(ShapedQueryExpression source, LambdaExpression predicate)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.RelationalQueryableMethodTranslatingExpressionVisitor.VisitMethodCall(MethodCallExpression methodCallExpression)
+   at Microsoft.EntityFrameworkCore.Query.QueryableMethodTranslatingExpressionVisitor.Translate(Expression expression)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutorExpression[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.QueryCompilationContext.CreateQueryExecutor[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Storage.Database.CompileQuery[TResult](Expression query, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.CompileQueryCore[TResult](IDatabase database, Expression query, IModel model, Boolean async)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.<>c__DisplayClass11_0`1.<ExecuteCore>b__0()
+   at Microsoft.EntityFrameworkCore.Query.Internal.CompiledQueryCache.GetOrAddQuery[TResult](Object cacheKey, Func`1 compiler)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteAsync[TResult](Expression query, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, Expression expression, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ExecuteAsync[TSource,TResult](MethodInfo operatorMethodInfo, IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.CountAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at MediMind.Infrastructure.Data.Repositories.HealthcareCenterRepository.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Infrastructure/Data/Repositories/Repositories.cs:line 253
+   at MediMind.Application.Features.CenterManagement.HealthcareCenterService.SearchAsync(CenterSearchDto search) in /app/src/MediMind.Application/Features/CenterManagement/CenterManagementServices.cs:line 101
+   at MediMind.API.Controllers.HealthcareCentersController.Search(String city, String specialization, String name, Nullable`1 availableOnDate, Int32 page, Int32 pageSize, CancellationToken ct) in /app/src/MediMind.API/Controllers/HealthcareCentersController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.TenantValidationMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/TenantValidationMiddleware.cs:line 46
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at MediMind.API.Middleware.ChapaWebhookSecurityMiddleware.InvokeAsync(HttpContext context) in /app/src/MediMind.API/Middleware/ChapaWebhookSecurityMiddleware.cs:line 16
+   at AspNetCoreRateLimit.RateLimitMiddleware`1.Invoke(HttpContext context) in C:\Users\User\Documents\Github\AspNetCoreRateLimit\src\AspNetCoreRateLimit\Middleware\RateLimitMiddleware.cs:line 124
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+2026-06-11 06:53:28.838 +00:00 [ERR] HTTP GET /api/v1/healthcare-centers responded 500 in 17.4184 ms
+2026-06-11 06:53:55.112 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.8135 ms
+2026-06-11 06:54:07.362 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.5817 ms
+2026-06-11 06:54:55.131 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.2782 ms
+2026-06-11 06:55:16.438 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.8445 ms
+2026-06-11 06:55:55.114 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.2719 ms
+2026-06-11 06:56:12.332 +00:00 [INF] HTTP GET /api/v1/health-records responded 200 in 55.1441 ms
+2026-06-11 06:56:12.401 +00:00 [INF] HTTP GET /api/v1/health-records/latest responded 200 in 10.7071 ms
+2026-06-11 06:56:12.463 +00:00 [INF] HTTP GET /api/v1/health-records/count responded 200 in 6.7566 ms
+2026-06-11 06:56:20.084 +00:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 35.2659 ms
+2026-06-11 06:56:20.133 +00:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 204 in 7.6918 ms
+2026-06-11 06:56:20.193 +00:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 4.4020 ms
+2026-06-11 06:56:20.274 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.5151 ms
+2026-06-11 06:56:21.720 +00:00 [INF] HTTP GET /api/v1/medication-reminders responded 200 in 20.9220 ms
+2026-06-11 06:56:55.155 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.3597 ms
+2026-06-11 06:57:20.424 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.1642 ms
+2026-06-11 06:57:55.119 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.1536 ms
+2026-06-11 06:58:28.360 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.9516 ms
+2026-06-11 06:58:43.919 +00:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 17.9670 ms
+2026-06-11 06:58:43.981 +00:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 204 in 13.9846 ms
+2026-06-11 06:58:44.228 +00:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 212.1181 ms
+2026-06-11 06:58:55.132 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.9225 ms
+2026-06-11 06:59:07.133 +00:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 270.7220 ms
+2026-06-11 06:59:10.792 +00:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 12.6049 ms
+2026-06-11 06:59:15.184 +00:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 20.5078 ms
+2026-06-11 06:59:15.891 +00:00 [INF] HTTP GET /api/v1/health-records/trends responded 200 in 7.2408 ms
+2026-06-11 06:59:26.506 +00:00 [INF] HTTP GET /api/v1/health-predictions responded 200 in 39.1940 ms
+2026-06-11 06:59:26.538 +00:00 [INF] HTTP GET /api/v1/health-predictions/latest responded 204 in 5.8806 ms
+2026-06-11 06:59:26.568 +00:00 [INF] HTTP GET /api/v1/health-predictions/status responded 200 in 3.6706 ms
+2026-06-11 06:59:27.853 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.9160 ms
+2026-06-11 06:59:30.037 +00:00 [INF] HTTP GET /api/v1/auth/patient/profile responded 200 in 41.9045 ms
+2026-06-11 06:59:30.124 +00:00 [INF] HTTP POST /api/v1/notifications/device-token responded 204 in 29.6680 ms
+2026-06-11 06:59:55.127 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.1196 ms
+2026-06-11 07:00:13.455 +00:00 [INF] Running appointment reminder job at "2026-06-11T07:00:13.4542174Z"
+2026-06-11 07:00:13.475 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 07:00:27.876 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.1183 ms
+2026-06-11 07:00:55.132 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0418 ms
+2026-06-11 07:01:37.852 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.6334 ms
+2026-06-11 07:01:55.109 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.6567 ms
+2026-06-11 07:02:19.532 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.9227 ms
+2026-06-11 07:03:49.990 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.2130 ms
+2026-06-11 07:03:55.115 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.1185 ms
+2026-06-11 07:04:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.8523 ms
+2026-06-11 07:04:59.324 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.7598 ms
+2026-06-11 07:05:55.130 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.5069 ms
+2026-06-11 07:06:55.135 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.1814 ms
+2026-06-11 07:07:55.122 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 27.8350 ms
+2026-06-11 07:07:55.201 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 60.4885 ms
+2026-06-11 07:07:55.212 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.8511 ms
+2026-06-11 07:08:55.132 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.7088 ms
+2026-06-11 07:09:55.167 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.1180 ms
+2026-06-11 07:10:55.168 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.2366 ms
