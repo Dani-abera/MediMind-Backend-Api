@@ -118,6 +118,25 @@ public class MediMindDbContext(
     public async Task RollbackTransactionAsync(CancellationToken ct = default) =>
         await Database.RollbackTransactionAsync(ct);
 
+    public async Task ExecuteTransactionAsync(Func<Task> action, CancellationToken ct = default)
+    {
+        var strategy = Database.CreateExecutionStrategy();
+        await strategy.ExecuteAsync(async () =>
+        {
+            await using var transaction = await Database.BeginTransactionAsync(ct);
+            try
+            {
+                await action();
+                await transaction.CommitAsync(ct);
+            }
+            catch
+            {
+                await transaction.RollbackAsync(ct);
+                throw;
+            }
+        });
+    }
+
     // ─── Helpers ─────────────────────────────────────────────────────────────
 
     private static string ToSnakeCase(string name)

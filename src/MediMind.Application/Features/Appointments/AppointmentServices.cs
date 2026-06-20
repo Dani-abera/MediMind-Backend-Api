@@ -230,10 +230,10 @@ public class AppointmentService(
     public async Task<AppointmentResponseDto> BookAppointmentAsync(CreateAppointmentDto dto, Guid patientId)
     {
         await bookingValidationService.ValidateBookingAsync(dto, patientId);
-        await unitOfWork.BeginTransactionAsync();
-        Appointment created;
+        Appointment created = null!;
         bool requiresPayment = false;
-        try
+
+        await unitOfWork.ExecuteTransactionAsync(async () =>
         {
             // Concurrency note:
             // Use a pessimistic lock statement in infrastructure DbContext transaction scope:
@@ -268,14 +268,7 @@ public class AppointmentService(
 
             var consultation = VideoConsultation.Create(created.Id);
             await videoConsultationRepository.CreateAsync(consultation);
-
-            await unitOfWork.CommitTransactionAsync();
-        }
-        catch
-        {
-            await unitOfWork.RollbackTransactionAsync();
-            throw;
-        }
+        });
 
         var capturedAppointmentId = created.Id;
         _ = Task.Run(async () =>

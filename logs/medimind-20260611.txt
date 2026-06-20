@@ -1000,3 +1000,258 @@ System.InvalidOperationException: The LINQ expression 's => @Functions
 2026-06-11 07:08:55.132 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.7088 ms
 2026-06-11 07:09:55.167 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 47.1180 ms
 2026-06-11 07:10:55.168 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.2366 ms
+2026-06-11 07:11:55.205 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 68.1879 ms
+2026-06-11 07:12:55.158 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 51.6335 ms
+2026-06-11 07:13:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.7105 ms
+2026-06-11 07:14:55.195 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.7561 ms
+2026-06-11 07:15:55.514 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 12.1286 ms
+2026-06-11 07:16:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.5940 ms
+2026-06-11 07:17:55.183 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 53.8516 ms
+2026-06-11 07:18:55.126 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.9239 ms
+2026-06-11 07:19:55.494 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 15.3254 ms
+2026-06-11 07:20:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.6816 ms
+2026-06-11 07:21:55.167 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.7847 ms
+2026-06-11 07:22:55.188 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 74.0424 ms
+2026-06-11 07:22:55.522 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 300.9841 ms
+2026-06-11 07:22:55.540 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.7945 ms
+2026-06-11 07:23:55.310 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 174.9205 ms
+2026-06-11 07:23:59.416 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 10.7758 ms
+2026-06-11 07:23:59.562 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 111.6169 ms
+2026-06-11 07:23:59.621 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 7.8722 ms
+2026-06-11 07:24:55.176 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.8281 ms
+2026-06-11 07:25:04.436 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.5388 ms
+2026-06-11 07:25:55.136 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.1204 ms
+2026-06-11 07:26:55.143 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.7967 ms
+2026-06-11 07:27:55.136 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 34.4131 ms
+2026-06-11 07:28:55.150 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.2404 ms
+2026-06-11 07:29:55.124 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.5597 ms
+2026-06-11 07:30:12.190 +00:00 [INF] Running appointment reminder job at "2026-06-11T07:30:12.1870101Z"
+2026-06-11 07:30:12.232 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 07:30:55.136 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.4246 ms
+2026-06-11 07:31:55.109 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.8268 ms
+2026-06-11 07:32:55.135 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.2103 ms
+2026-06-11 07:33:55.173 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 45.2439 ms
+2026-06-11 07:34:55.141 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.1872 ms
+2026-06-11 07:35:55.163 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.0771 ms
+2026-06-11 07:36:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.3049 ms
+2026-06-11 07:37:55.150 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 48.1793 ms
+2026-06-11 07:37:55.475 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 234.0782 ms
+2026-06-11 07:37:55.515 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.9882 ms
+2026-06-11 07:38:55.155 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.8443 ms
+2026-06-11 07:39:55.117 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.9519 ms
+2026-06-11 07:40:51.716 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.8495 ms
+2026-06-11 07:40:51.863 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 103.2543 ms
+2026-06-11 07:40:51.924 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.1158 ms
+2026-06-11 07:40:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.5231 ms
+2026-06-11 07:41:55.126 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.9016 ms
+2026-06-11 07:42:55.130 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.6679 ms
+2026-06-11 07:43:55.134 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.2132 ms
+2026-06-11 07:45:55.153 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.8326 ms
+2026-06-11 07:46:55.145 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.8192 ms
+2026-06-11 07:47:55.119 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.5505 ms
+2026-06-11 07:48:55.122 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.6845 ms
+2026-06-11 07:49:55.139 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.0251 ms
+2026-06-11 07:50:55.152 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.7704 ms
+2026-06-11 07:51:55.186 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 41.8431 ms
+2026-06-11 07:52:55.235 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 24.5028 ms
+2026-06-11 07:52:55.528 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 206.6209 ms
+2026-06-11 07:52:55.722 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 10.8902 ms
+2026-06-11 07:53:55.188 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.5085 ms
+2026-06-11 07:54:55.181 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.9548 ms
+2026-06-11 07:55:55.173 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.5441 ms
+2026-06-11 07:56:55.150 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.6830 ms
+2026-06-11 07:57:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.2905 ms
+2026-06-11 07:58:55.155 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.4844 ms
+2026-06-11 07:59:55.160 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.7734 ms
+2026-06-11 08:00:12.778 +00:00 [INF] Running appointment reminder job at "2026-06-11T08:00:12.7746385Z"
+2026-06-11 08:00:12.804 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 08:00:55.144 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.8012 ms
+2026-06-11 08:01:55.133 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.2062 ms
+2026-06-11 08:02:55.245 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.8328 ms
+2026-06-11 08:03:56.816 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 49.5876 ms
+2026-06-11 08:04:55.154 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.7703 ms
+2026-06-11 08:05:55.150 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 44.5757 ms
+2026-06-11 08:06:55.170 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.4918 ms
+2026-06-11 08:07:55.161 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 48.5839 ms
+2026-06-11 08:07:55.924 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 450.6177 ms
+2026-06-11 08:07:56.031 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.3948 ms
+2026-06-11 08:08:55.198 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 97.2120 ms
+2026-06-11 08:09:55.236 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.5133 ms
+2026-06-11 08:10:55.133 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 17.8735 ms
+2026-06-11 08:11:55.125 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.9635 ms
+2026-06-11 08:12:55.154 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.7746 ms
+2026-06-11 08:13:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.6654 ms
+2026-06-11 08:14:55.207 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 50.9660 ms
+2026-06-11 08:15:55.148 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.0194 ms
+2026-06-11 08:16:55.131 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.7131 ms
+2026-06-11 08:17:55.145 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.5160 ms
+2026-06-11 08:18:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.8338 ms
+2026-06-11 08:19:55.168 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.9408 ms
+2026-06-11 08:20:55.126 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.3556 ms
+2026-06-11 08:21:55.184 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.7680 ms
+2026-06-11 08:22:55.231 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 84.9848 ms
+2026-06-11 08:22:55.615 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 290.6075 ms
+2026-06-11 08:22:55.662 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.2141 ms
+2026-06-11 08:23:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 28.9119 ms
+2026-06-11 08:24:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.9327 ms
+2026-06-11 08:25:55.129 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.0338 ms
+2026-06-11 08:26:55.179 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.5528 ms
+2026-06-11 08:27:55.296 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 48.3775 ms
+2026-06-11 08:28:55.158 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.2438 ms
+2026-06-11 08:29:55.151 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 45.6413 ms
+2026-06-11 08:30:13.557 +00:00 [INF] Running appointment reminder job at "2026-06-11T08:30:13.5530437Z"
+2026-06-11 08:30:13.717 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 08:30:55.744 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 8.6430 ms
+2026-06-11 08:31:55.169 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.0796 ms
+2026-06-11 08:32:55.257 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 86.8617 ms
+2026-06-11 08:33:55.129 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.2776 ms
+2026-06-11 08:34:55.276 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 156.5950 ms
+2026-06-11 08:35:55.149 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.8861 ms
+2026-06-11 08:36:55.139 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.0028 ms
+2026-06-11 08:37:55.217 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 102.4415 ms
+2026-06-11 08:37:56.480 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 1095.6180 ms
+2026-06-11 08:37:57.093 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.5146 ms
+2026-06-11 08:38:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.9206 ms
+2026-06-11 08:39:55.135 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.0937 ms
+2026-06-11 08:40:55.152 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 40.6800 ms
+2026-06-11 08:41:55.147 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 29.8104 ms
+2026-06-11 08:42:55.154 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.9950 ms
+2026-06-11 08:43:55.176 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.7835 ms
+2026-06-11 08:44:55.183 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.5299 ms
+2026-06-11 08:45:55.153 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.6958 ms
+2026-06-11 08:46:55.149 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.7854 ms
+2026-06-11 08:47:55.142 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.5641 ms
+2026-06-11 08:48:55.217 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.6163 ms
+2026-06-11 08:49:55.184 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 37.4933 ms
+2026-06-11 08:50:55.178 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 62.3871 ms
+2026-06-11 08:51:55.143 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.1492 ms
+2026-06-11 08:52:55.130 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.2916 ms
+2026-06-11 08:53:55.127 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 32.5112 ms
+2026-06-11 08:53:55.364 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 182.9733 ms
+2026-06-11 08:53:55.394 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.1198 ms
+2026-06-11 08:54:55.141 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.7595 ms
+2026-06-11 08:55:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.2937 ms
+2026-06-11 08:56:55.117 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.0366 ms
+2026-06-11 08:57:55.126 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 32.4408 ms
+2026-06-11 08:58:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 26.4952 ms
+2026-06-11 08:59:55.130 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.7317 ms
+2026-06-11 09:00:14.157 +00:00 [INF] Running appointment reminder job at "2026-06-11T09:00:14.1499115Z"
+2026-06-11 09:00:14.189 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 09:00:55.174 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 39.7546 ms
+2026-06-11 09:01:55.138 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.8724 ms
+2026-06-11 09:02:55.138 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.2926 ms
+2026-06-11 09:03:55.153 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.9722 ms
+2026-06-11 09:04:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 27.4909 ms
+2026-06-11 09:05:55.128 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 20.3744 ms
+2026-06-11 09:06:30.129 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.4553 ms
+2026-06-11 09:06:55.141 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.6586 ms
+2026-06-11 09:07:55.114 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 22.4167 ms
+2026-06-11 09:08:55.143 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 18.4742 ms
+2026-06-11 09:08:55.212 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 42.4699 ms
+2026-06-11 09:08:55.367 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.9960 ms
+2026-06-11 09:09:55.115 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 21.7642 ms
+2026-06-11 09:10:55.156 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.8343 ms
+2026-06-11 09:11:55.818 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.0355 ms
+2026-06-11 09:12:56.190 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 63.6483 ms
+2026-06-11 09:13:59.810 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 63.9251 ms
+2026-06-11 09:14:55.262 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 24.1284 ms
+2026-06-11 09:15:55.180 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 43.9922 ms
+2026-06-11 09:16:55.134 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 25.8777 ms
+2026-06-11 09:17:22.952 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 73.3230 ms
+2026-06-11 09:17:35.516 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 46.2054 ms
+2026-06-11 09:23:55.164 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 69.7319 ms
+2026-06-11 09:23:55.674 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 450.8593 ms
+2026-06-11 09:23:55.922 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.7512 ms
+2026-06-11 09:24:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 40.9640 ms
+2026-06-11 09:25:03.224 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 68.9286 ms
+2026-06-11 09:27:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 30.4620 ms
+2026-06-11 09:28:55.118 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 14.5226 ms
+2026-06-11 09:29:15.510 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 115.7495 ms
+2026-06-11 09:37:38.856 +00:00 [INF] Running appointment reminder job at "2026-06-11T09:37:38.8498667Z"
+2026-06-11 09:37:38.895 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 09:37:55.094 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 6.6227 ms
+2026-06-11 09:38:55.134 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 19.5291 ms
+2026-06-11 09:38:55.308 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 50.1445 ms
+2026-06-11 09:38:55.434 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 2.5878 ms
+2026-06-11 09:39:44.256 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 848.2559 ms
+2026-06-11 09:39:54.026 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 38.9883 ms
+2026-06-11 09:49:55.134 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.5365 ms
+2026-06-11 09:50:55.176 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 9.9405 ms
+2026-06-11 09:51:10.911 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 23.8485 ms
+2026-06-11 09:51:16.633 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.8705 ms
+2026-06-11 09:53:55.161 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 40.5045 ms
+2026-06-11 09:53:55.252 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 69.9644 ms
+2026-06-11 09:53:55.482 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 5.4700 ms
+2026-06-11 09:54:55.144 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 58.7803 ms
+2026-06-11 09:55:55.212 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 31.3905 ms
+2026-06-11 09:56:55.146 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 35.5010 ms
+2026-06-11 09:57:55.140 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 33.6475 ms
+2026-06-11 09:58:55.153 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 46.7251 ms
+2026-06-11 09:59:55.196 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 18.6664 ms
+2026-06-11 10:00:03.756 +00:00 [INF] Running appointment reminder job at "2026-06-11T10:00:03.7535544Z"
+2026-06-11 10:00:03.783 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 10:15:55.137 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 12.4735 ms
+2026-06-11 10:15:55.226 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 49.8461 ms
+2026-06-11 10:15:55.439 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 3.6015 ms
+2026-06-11 10:31:40.144 +00:00 [INF] Running appointment reminder job at "2026-06-11T10:31:40.1438525Z"
+2026-06-11 10:31:40.170 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 10:31:52.242 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 14.6525 ms
+2026-06-11 10:31:52.338 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 52.1229 ms
+2026-06-11 10:31:52.395 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.0716 ms
+2026-06-11 10:31:55.086 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 11.9670 ms
+2026-06-11 10:32:26.572 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 19.9328 ms
+2026-06-11 10:32:29.250 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.7342 ms
+2026-06-11 11:03:37.238 +00:00 [INF] Running appointment reminder job at "2026-06-11T11:03:37.2374715Z"
+2026-06-11 11:03:37.326 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 11:03:56.282 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 401 in 8.3688 ms
+2026-06-11 11:03:56.355 +00:00 [INF] HTTP POST /api/v1/auth/refresh-token responded 200 in 40.0890 ms
+2026-06-11 11:03:56.373 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 4.7606 ms
+2026-06-11 11:04:46.706 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 63.2979 ms
+2026-06-11 11:11:55.126 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 16.1407 ms
+2026-06-11 11:12:55.144 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 36.8664 ms
+2026-06-11 11:13:55.154 +00:00 [INF] HTTP GET /api/v1/notifications/unread-count responded 200 in 42.4523 ms
+2026-06-11 11:33:33.530 +00:00 [INF] Running appointment reminder job at "2026-06-11T11:33:33.5298515Z"
+2026-06-11 11:33:33.567 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 12:00:15.140 +00:00 [INF] Running appointment reminder job at "2026-06-11T12:00:15.1175303Z"
+2026-06-11 12:00:15.247 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 12:29:55.337 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-11 12:29:55.348 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-11 12:29:55.359 +00:00 [WRN] No XML encryptor configured. Key {a326b5a7-216e-4934-9a26-4cc9d92e66d3} may be persisted to storage in unencrypted form.
+2026-06-11 12:29:55.883 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-12T00:00:00.0000000Z
+2026-06-11 12:29:55.894 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-11 12:29:55.898 +00:00 [INF] Daily queue generation scheduled for "2026-06-12T06:00:00.0000000" ("2026-06-12T03:00:00.0000000Z" UTC)
+2026-06-11 12:29:56.157 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-11 12:29:56.159 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-11 12:30:11.269 +00:00 [INF] Running appointment reminder job at "2026-06-11T12:30:11.2693621Z"
+2026-06-11 12:30:11.344 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 12:44:58.755 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-11 12:44:58.773 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-11 12:44:58.790 +00:00 [WRN] No XML encryptor configured. Key {52c3133d-793a-439a-b50a-be9f294e34b5} may be persisted to storage in unencrypted form.
+2026-06-11 12:44:59.099 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-12T00:00:00.0000000Z
+2026-06-11 12:44:59.101 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-11 12:44:59.106 +00:00 [INF] Daily queue generation scheduled for "2026-06-12T06:00:00.0000000" ("2026-06-12T03:00:00.0000000Z" UTC)
+2026-06-11 12:44:59.188 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-11 12:44:59.189 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-11 12:49:10.551 +00:00 [INF] HTTP GET /openapi/v1.json responded 200 in 55243.4823 ms
+2026-06-11 13:00:13.008 +00:00 [INF] Running appointment reminder job at "2026-06-11T13:00:12.9547227Z"
+2026-06-11 13:00:14.642 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 13:06:30.514 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-11 13:06:30.532 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-11 13:06:30.570 +00:00 [WRN] No XML encryptor configured. Key {d4b51b9b-53aa-43f4-854e-d5d0cf269d00} may be persisted to storage in unencrypted form.
+2026-06-11 13:06:30.889 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-12T00:00:00.0000000Z
+2026-06-11 13:06:30.891 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-11 13:06:30.895 +00:00 [INF] Daily queue generation scheduled for "2026-06-12T06:00:00.0000000" ("2026-06-12T03:00:00.0000000Z" UTC)
+2026-06-11 13:06:31.002 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-11 13:06:31.005 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-11 13:30:02.150 +00:00 [INF] Running appointment reminder job at "2026-06-11T13:30:02.1446886Z"
+2026-06-11 13:30:02.427 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 14:00:02.737 +00:00 [INF] Running appointment reminder job at "2026-06-11T14:00:02.7274257Z"
+2026-06-11 14:00:02.847 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 14:30:03.757 +00:00 [INF] Running appointment reminder job at "2026-06-11T14:30:03.7486837Z"
+2026-06-11 14:30:04.116 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 15:00:15.173 +00:00 [INF] Running appointment reminder job at "2026-06-11T15:00:15.1658713Z"
+2026-06-11 15:00:15.293 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 15:43:06.653 +00:00 [INF] Running appointment reminder job at "2026-06-11T15:43:06.6531462Z"
+2026-06-11 15:43:06.695 +00:00 [INF] Appointment reminder job completed.
+2026-06-11 16:00:02.617 +00:00 [INF] Running appointment reminder job at "2026-06-11T16:00:02.6167743Z"
+2026-06-11 16:00:02.650 +00:00 [INF] Appointment reminder job completed.

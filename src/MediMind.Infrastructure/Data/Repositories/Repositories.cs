@@ -1072,8 +1072,7 @@ public class HealthPredictionRepository(MediMindDbContext context)
 
     public async Task<HealthPrediction> CreateAsync(HealthPrediction prediction, IEnumerable<Guid> healthRecordIds)
     {
-        await Db.Database.BeginTransactionAsync();
-        try
+        await Db.ExecuteTransactionAsync(async () =>
         {
             await Db.HealthPredictions.AddAsync(prediction);
             await Db.SaveChangesAsync();
@@ -1085,15 +1084,9 @@ public class HealthPredictionRepository(MediMindDbContext context)
 
             await Db.HealthPredictionRecords.AddRangeAsync(links);
             await Db.SaveChangesAsync();
-            await Db.Database.CommitTransactionAsync();
+        });
 
-            return prediction;
-        }
-        catch
-        {
-            await Db.Database.RollbackTransactionAsync();
-            throw;
-        }
+        return prediction;
     }
 
     public async Task<IEnumerable<HealthPrediction>> GetHistoryAsync(Guid patientId, int count) =>

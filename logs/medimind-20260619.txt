@@ -1,0 +1,38 @@
+2026-06-19 16:08:03.277 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-19 16:08:03.293 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-19 16:08:03.313 +00:00 [WRN] No XML encryptor configured. Key {97c49aa8-7352-4cea-bfd3-d06a5b7f1f9d} may be persisted to storage in unencrypted form.
+2026-06-19 16:08:03.580 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-20T00:00:00.0000000Z
+2026-06-19 16:08:03.584 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-19 16:08:03.585 +00:00 [INF] Daily queue generation scheduled for "2026-06-20T06:00:00.0000000" ("2026-06-20T03:00:00.0000000Z" UTC)
+2026-06-19 16:08:03.679 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-19 16:08:03.680 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-19 16:30:08.246 +00:00 [INF] Running appointment reminder job at "2026-06-19T16:30:08.2387262Z"
+2026-06-19 16:30:08.696 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 17:00:08.909 +00:00 [INF] Running appointment reminder job at "2026-06-19T17:00:08.9007636Z"
+2026-06-19 17:00:08.983 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 17:30:09.426 +00:00 [INF] Running appointment reminder job at "2026-06-19T17:30:09.4230723Z"
+2026-06-19 17:30:09.481 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 18:00:10.091 +00:00 [INF] Running appointment reminder job at "2026-06-19T18:00:10.0875858Z"
+2026-06-19 18:00:10.132 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 18:30:10.965 +00:00 [INF] Running appointment reminder job at "2026-06-19T18:30:10.9622648Z"
+2026-06-19 18:30:11.029 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 19:00:11.565 +00:00 [INF] Running appointment reminder job at "2026-06-19T19:00:11.5571231Z"
+2026-06-19 19:00:11.638 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 19:30:12.313 +00:00 [INF] Running appointment reminder job at "2026-06-19T19:30:12.3064769Z"
+2026-06-19 19:30:12.386 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 20:00:12.877 +00:00 [INF] Running appointment reminder job at "2026-06-19T20:00:12.8710950Z"
+2026-06-19 20:00:12.937 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 20:40:12.147 +00:00 [INF] Running appointment reminder job at "2026-06-19T20:40:12.1393164Z"
+2026-06-19 20:40:12.203 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 21:12:33.958 +00:00 [INF] Running appointment reminder job at "2026-06-19T21:12:33.9584448Z"
+2026-06-19 21:12:33.977 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 21:44:40.322 +00:00 [INF] Running appointment reminder job at "2026-06-19T21:44:40.3225850Z"
+2026-06-19 21:44:40.347 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 22:01:30.975 +00:00 [INF] Running appointment reminder job at "2026-06-19T22:01:30.9747830Z"
+2026-06-19 22:01:30.996 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 22:40:34.134 +00:00 [INF] Running appointment reminder job at "2026-06-19T22:40:34.1331247Z"
+2026-06-19 22:40:34.164 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 23:12:55.762 +00:00 [INF] Running appointment reminder job at "2026-06-19T23:12:55.7617336Z"
+2026-06-19 23:12:55.800 +00:00 [INF] Appointment reminder job completed.
+2026-06-19 23:45:39.032 +00:00 [INF] Running appointment reminder job at "2026-06-19T23:45:39.0313335Z"
+2026-06-19 23:45:39.054 +00:00 [INF] Appointment reminder job completed.

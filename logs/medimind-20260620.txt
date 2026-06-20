@@ -1,0 +1,36 @@
+2026-06-20 00:12:40.621 +00:00 [INF] Running appointment reminder job at "2026-06-20T00:12:40.6190025Z"
+2026-06-20 00:12:40.724 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 00:45:02.324 +00:00 [INF] Running appointment reminder job at "2026-06-20T00:45:02.3245316Z"
+2026-06-20 00:45:02.348 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 01:01:28.169 +00:00 [INF] Running appointment reminder job at "2026-06-20T01:01:28.1696605Z"
+2026-06-20 01:01:28.185 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 01:33:55.135 +00:00 [INF] Running appointment reminder job at "2026-06-20T01:33:55.1347445Z"
+2026-06-20 01:33:55.157 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 02:06:16.914 +00:00 [INF] Running appointment reminder job at "2026-06-20T02:06:16.9137986Z"
+2026-06-20 02:06:16.942 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 02:35:56.654 +00:00 [INF] Running appointment reminder job at "2026-06-20T02:35:56.6546475Z"
+2026-06-20 02:35:56.690 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 03:05:36.567 +00:00 [INF] Running appointment reminder job at "2026-06-20T03:05:36.5673249Z"
+2026-06-20 03:05:36.604 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 03:05:36.635 +00:00 [INF] QueueGenerationJob triggered for date "2026-06-19"
+2026-06-20 03:05:36.732 +00:00 [INF] Handling GenerateDailyQueuesCommand
+2026-06-20 03:05:37.330 +00:00 [INF] Handled GenerateDailyQueuesCommand in 597ms
+2026-06-20 03:05:37.332 +00:00 [INF] Generated 0 queues for 0 centers.
+2026-06-20 06:11:43.870 +00:00 [WRN] Using an in-memory repository. Keys will not be persisted to storage.
+2026-06-20 06:11:43.884 +00:00 [WRN] Neither user profile nor HKLM registry available. Using an ephemeral key repository. Protected data will be unavailable when application exits.
+2026-06-20 06:11:43.906 +00:00 [WRN] No XML encryptor configured. Key {796d83cf-3fa9-4664-b320-9b8d63c1968f} may be persisted to storage in unencrypted form.
+2026-06-20 06:11:44.198 +00:00 [INF] SubscriptionExpiryBackgroundService scheduled. First run at 2026-06-21T00:00:00.0000000Z
+2026-06-20 06:11:44.199 +00:00 [WRN] Overriding HTTP_PORTS '8080' and HTTPS_PORTS ''. Binding to values defined by URLS instead 'http://+:8080'.
+2026-06-20 06:11:44.210 +00:00 [INF] Daily queue generation scheduled for "2026-06-21T06:00:00.0000000" ("2026-06-21T03:00:00.0000000Z" UTC)
+2026-06-20 06:11:44.301 +00:00 [INF] MediMind API listening on http://[::]:8080
+2026-06-20 06:11:44.301 +00:00 [INF] Scalar API reference available at http://[::]:8080/scalar/v1
+2026-06-20 06:30:04.515 +00:00 [INF] Running appointment reminder job at "2026-06-20T06:30:04.5086260Z"
+2026-06-20 06:30:04.899 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 07:00:05.025 +00:00 [INF] Running appointment reminder job at "2026-06-20T07:00:05.0207581Z"
+2026-06-20 07:00:05.052 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 08:49:18.346 +00:00 [INF] Running appointment reminder job at "2026-06-20T08:49:18.3421538Z"
+2026-06-20 08:49:18.377 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 09:26:56.768 +00:00 [INF] Running appointment reminder job at "2026-06-20T09:26:56.7677136Z"
+2026-06-20 09:26:56.777 +00:00 [INF] Appointment reminder job completed.
+2026-06-20 09:33:22.191 +00:00 [INF] Running appointment reminder job at "2026-06-20T09:33:22.1910707Z"
+2026-06-20 09:33:22.214 +00:00 [INF] Appointment reminder job completed.
