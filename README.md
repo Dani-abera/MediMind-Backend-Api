@@ -1,10 +1,9 @@
 # MediMind — AI-Enhanced Hospital Appointment, Queue & Health Monitoring System
 ## Backend API (.NET 10 | Clean Architecture | PostgreSQL | SignalR | Hangfire)
 
-> **Kombolcha Institute of Technology** — Final Year Project  
-> **Team:** Daniel Abera Bogale · Zelalem Getachew · Meragiaw Biset Mekonen  
-> **Advisor:** Tilahun Ayalew
-
+> Part of the **MediMind platform** → [Overview](https://github.com/Dani-abera/MediMind-Platform) · [Patient App](https://github.com/Dani-abera/MediMind_Patient_App) · [Staff Portal](https://github.com/Dani-abera/MediMind_Portal) · [ML Service](https://github.com/Dani-abera/MediMind-Disease-Prediction-ML)
+>
+> 
 ---
 
 ## Architecture Overview
@@ -410,7 +409,7 @@ ASPNETCORE_ENVIRONMENT="Production"
 | Validation | FluentValidation | Pipeline behaviors |
 | ML Client | HttpClient | Calls Python Flask microservice |
 | Payment | Chapa Gateway | ETB payments, HMAC webhooks |
-| SMS | Geez SMS Gateway | OTP, reminders |
+| SMS | SMS Gateway | OTP, reminders |
 | Push | Firebase FCM | Android/iOS notifications |
 | Storage | Cloudinary (optional; local /uploads fallback) | Prescription PDFs, profile images |
 | Logging | Serilog | Console + File + PostgreSQL |
